@@ -486,7 +486,7 @@ def rack_screens():
 
 # ================================================================ shared css + js
 BASE = """
-:root{--navy:#07293b;--teal:#00a79d;--orange:#f05a28;--yellow:#ffcb2a;--teal-d:#006b64;--orange-d:#b93a0c;--ink:#07293b;--muted:#3d5663;--line:#d6e2e4;
+:root{--navy:#07293b;--teal:#00a79d;--orange:#f05a28;--yellow:#ffcb2a;--teal-d:#00615a;--orange-d:#b93a0c;--ink:#07293b;--muted:#3d5663;--line:#d6e2e4;
 --font:"Nunito Sans",Arial,sans-serif;--wrap:1180px;--r:24px;
 /* Tint rule: brand colour mixed with white. Text sits on tints (navy text) or on navy (white text). Full brand colour is for buttons, icons, borders and shapes. */
 --teal-12:#e0f4f3;--teal-25:#bfe9e7;--blue-15:#d9e9f2;--grey-6:#eef1f3;--yellow-20:#fff5d4;--yellow-40:#ffeaaa;--orange-12:#fdebe5;--orange-25:#fbd6c9;--navy-8:#ebeef0}
@@ -755,7 +755,9 @@ body{--bg:#f3f6f7}
 .tline{left:6px;top:68px;width:92px;height:calc(100% - 68px)}.tdeco{width:26px;height:30px}.d-r{left:88px;top:0}.d-l{left:-4px;top:20px}.d-t{left:48px;top:-30px}.d-b{left:0;top:52px}.tcard{padding:14px 16px;min-height:0}.trail{margin-top:48px}}
 .pgs{padding:48px 0 0}
 /* V1.2: Tyga-style solid brand-colour sections with light blocks on top */
-.full [class*="bk-"]{padding:72px 0!important}.full .pgs.bk-yellow{padding:56px 0!important}
+.full .sec,.full [class*="bk-"]{padding-top:76px!important;padding-bottom:76px!important}.full .pgs.bk-yellow{padding-top:60px!important;padding-bottom:60px!important}
+.full .sec:not([class*="bk-"])+.sec:not([class*="bk-"]){padding-top:0!important}
+.full .hero1{padding-bottom:0}.full .hero1 .latest{padding:20px 20px 24px}.full .pg1+.sec:not([class*="bk-"]){padding-top:76px!important}
 .full .bk-yellow{background:var(--yellow);color:var(--navy)}.full .bk-teal{background:var(--teal);color:var(--navy)}.full .bk-orange{background:var(--orange);color:var(--navy)}.full .bk-navy{background:var(--navy);color:#fff}
 .full .bk-navy .eyebrow{color:var(--yellow)}.full :is(.bk-yellow,.bk-teal,.bk-orange) .eyebrow{color:var(--navy)}.full .bk-navy>.wrap>h2,.full .bk-navy>.wrap>.lede{color:#fff}
 .full :is(.bk-teal,.bk-orange,.bk-yellow) .lede-s{color:var(--navy)}
@@ -783,7 +785,7 @@ def horizon_art():
     return f'''<svg class="connect-art" viewBox="0 0 360 190" role="img" aria-label="Illustration: people standing together on a hill under a rising sun">
 <path d="M90 120a90 90 0 0 1 180 0" fill="none" stroke="#ffcb2a" stroke-width="20" stroke-linecap="round"/><path d="M125 120a55 55 0 0 1 110 0" fill="none" stroke="#f05a28" stroke-width="14" stroke-linecap="round"/>
 <circle cx="180" cy="40" r="11" fill="#f05a28"/><circle cx="104" cy="70" r="8" fill="#ffcb2a"/><circle cx="256" cy="70" r="8" fill="#00a79d"/>
-<path d="M0 160c70-30 140-30 200-10s110 10 160-8V190H0z" fill="#00a79d" opacity=".55"/><path d="M0 176c90-18 190-14 260 0s70 4 100-4V190H0z" fill="#006b64" opacity=".6"/>{people}</svg>'''
+<path d="M0 160c70-30 140-30 200-10s110 10 160-8V190H0z" fill="#00a79d" opacity=".55"/><path d="M0 176c90-18 190-14 260 0s70 4 100-4V190H0z" fill="#00615a" opacity=".6"/>{people}</svg>'''
 
 
 def connect_art():
@@ -886,7 +888,7 @@ def blob_icon(name, bg):
 
 
 CSS2 = """
-body{--btn-r:12px;--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#006b64;--foot-line:#bfe3df;--current:#fff1c2;--hover:#f2faf9}
+body{--btn-r:12px;--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#00615a;--foot-line:#bfe3df;--current:#fff1c2;--hover:#f2faf9}
 .mint{background:#eaf7f5}.butter{background:#fff6d8}.peach{background:#fdece4}.sky{background:#eaf5fb}
 .hero2{padding:40px 0 32px;background:#fff}.hero2 .wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
 .hero2 h1{font-size:clamp(2rem,4.2vw,3.3rem)}.hero2 .btn-primary{background:var(--teal-d);border-color:var(--teal-d);color:#fff}.hero2 .btn-primary:hover{background:var(--navy);border-color:var(--navy)}
@@ -998,7 +1000,7 @@ ARROW = '<svg class="arrow" viewBox="0 0 60 90" aria-hidden="true"><path d="M30 
 def deco(name, pos):
     leaf = lambda x, y, r, c: f'<ellipse cx="{x}" cy="{y}" rx="9" ry="20" transform="rotate({r} {x} {y})" fill="{c}"/>'
     art = {
-        "sprig": '<path d="M20 150C50 110 80 70 135 20" fill="none" stroke="#003d38" stroke-width="4" stroke-linecap="round"/>' + leaf(50, 104, -30, "#00a79d") + leaf(70, 118, 60, "#ffcb2a") + leaf(78, 76, -35, "#f05a28") + leaf(100, 86, 55, "#00a79d") + leaf(108, 46, -40, "#ffcb2a") + leaf(128, 52, 50, "#f05a28"),
+        "sprig": '<path d="M20 150C50 110 80 70 135 20" fill="none" stroke="#00615a" stroke-width="4" stroke-linecap="round"/>' + leaf(50, 104, -30, "#00a79d") + leaf(70, 118, 60, "#ffcb2a") + leaf(78, 76, -35, "#f05a28") + leaf(100, 86, 55, "#00a79d") + leaf(108, 46, -40, "#ffcb2a") + leaf(128, 52, 50, "#f05a28"),
         "dots": "".join(f'<circle cx="{10 + c * 22}" cy="{10 + r * 22}" r="5" fill="#f05a28" opacity=".55"/>' for r in range(6) for c in range(6)),
         "arcs": '<path d="M15 140a65 65 0 0 1 130 0" fill="none" stroke="#ffcb2a" stroke-width="16" stroke-linecap="round"/><path d="M42 140a38 38 0 0 1 76 0" fill="none" stroke="#f05a28" stroke-width="12" stroke-linecap="round"/><circle cx="80" cy="50" r="10" fill="#f05a28"/><circle cx="24" cy="80" r="7" fill="#ffcb2a"/><circle cx="136" cy="80" r="7" fill="#00a79d"/>',
         "rings": '<circle cx="80" cy="80" r="70" fill="none" stroke="#ffcb2a" stroke-width="6"/><circle cx="80" cy="80" r="48" fill="none" stroke="#00a79d" stroke-width="5" stroke-dasharray="4 10" stroke-linecap="round"/><circle cx="80" cy="80" r="26" fill="#f05a28" opacity=".85"/>',
@@ -1007,13 +1009,13 @@ def deco(name, pos):
 
 
 CSS3 = """
-body{--btn-r:4px;--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5a0;--hover:#f7ecd6;--deep:#003d38}
+body{--btn-r:4px;--bg:#fbf6ec;--foot:#00615a;--foot-line:rgba(255,255,255,.3);--current:#ffe5a0;--hover:#f7ecd6;--deep:#00615a}
 .hero3{padding:20px 0 0}.h3-box{position:relative;border-radius:40px;overflow:hidden;min-height:620px;display:flex;align-items:flex-end;color:#fff}
-.h3-box>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.h3-box::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,40,36,.55),rgba(0,40,36,.85))}
+.h3-box>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.h3-box::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,97,90,.6),rgba(0,97,90,.9))}
 .h3-box .in{position:relative;z-index:2;padding:48px;max-width:860px}.h3-box h1{font-size:clamp(2.2rem,5.4vw,4.4rem)}.h3-box .btn-ghost{color:#fff;border-color:#fff}.h3-box .btn-ghost:hover{background:#fff;color:var(--deep)}
 .mark{position:relative;white-space:nowrap}.mark .squig{position:absolute;left:0;right:0;bottom:-.25em;width:100%;height:.4em}
 @media(max-width:760px){.h3-box{min-height:520px}.h3-box .in{padding:28px}}
-.h3-box .eyebrow,.pg3 .eyebrow{display:inline-block;background:rgba(0,40,36,.9);padding:.35em .9em;border-radius:99px}
+.h3-box .eyebrow,.pg3 .eyebrow{display:inline-block;background:rgba(0,97,90,.9);padding:.35em .9em;border-radius:99px}
 .hand{font-family:"Caveat",cursive;font-weight:700;color:var(--orange-d);font-size:1.6rem}
 .circles{position:relative;height:440px}.circles img{position:absolute;border-radius:50%;object-fit:cover;border:8px solid #fbf6ec}
 .circles img:nth-of-type(1){width:300px;height:300px;left:0;top:0}.circles img:nth-of-type(2){width:220px;height:220px;right:0;top:40px}.circles img:nth-of-type(3){width:200px;height:200px;left:150px;bottom:0}
@@ -1043,7 +1045,7 @@ body{--btn-r:4px;--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5
 .help a{font-weight:800}
 .arrow{width:46px;height:70px;display:block;margin:10px auto}
 .pg3{padding:20px 0 0}.pg3 .box{position:relative;border-radius:40px;overflow:hidden;min-height:400px;display:flex;align-items:flex-end;color:#fff}
-.pg3 .box>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.pg3 .box::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,40,36,.55),rgba(0,40,36,.85))}
+.pg3 .box>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.pg3 .box::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,97,90,.6),rgba(0,97,90,.9))}
 .pg3 .in{position:relative;z-index:2;padding:40px;max-width:760px}.pg3 .btn-ghost{color:#fff;border-color:#fff}.pg3 .btn-ghost:hover{background:#fff;color:var(--deep)}
 .val{border-radius:28px;padding:28px}.val .ico{width:52px;height:52px;margin-bottom:12px}.val-teal{background:var(--teal-25);color:var(--navy)}.val-yellow{background:var(--yellow-40);color:var(--navy)}.val-orange{background:var(--orange-25);color:var(--navy)}
 .ft-from{background:#fff}.ft-arrow{color:var(--orange-d)}.ft-to{background:var(--yellow-40)}
@@ -1059,12 +1061,12 @@ body{--btn-r:4px;--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5
 .racks li{background:#fff;border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:6px;border-top:10px solid var(--orange)}.racks li:nth-child(2n){border-top-color:var(--yellow)}.racks li:nth-child(3n){border-top-color:var(--teal)}
 .racks .rn{font-family:"Caveat",cursive;font-size:2.6rem;line-height:1;color:var(--orange-d)}.racks h3,.racks p{margin:0}.racks p{color:var(--muted);font-size:.95rem}.racks .rc{margin-top:auto;font-weight:800}
 .warmcard{background:#fff;border-radius:28px;padding:32px}
-.pmap{--land:#fffaf0;--sea:#f6e6c8;--coast:#e2c48d;--river:#9ccfd6;--dot:#f05a28;--hot:#003d38;--lga:#8a7350}
+.pmap{--land:#fffaf0;--sea:#f6e6c8;--coast:#e2c48d;--river:#9ccfd6;--dot:#f05a28;--hot:#00615a;--lga:#8a7350}
 .places button{--chip:#ecd9b4}.places button:hover,.places button[aria-pressed=true]{background:var(--deep);border-color:var(--deep)}
 .site-foot h2{color:var(--yellow)}
 /* V3.2: full-width hero and image sections */
 .full .hero3,.full .pg3{padding:0}.full .hero3>.wrap,.full .pg3>.wrap{max-width:none;padding:0}
-.full .h3-box{border-radius:0;min-height:min(86vh,820px)}.full .h3-box::after,.full .pg3 .box::after{background:linear-gradient(180deg,rgba(0,40,36,.15) 0%,rgba(0,40,36,.35) 40%,rgba(0,40,36,.9) 100%)}.full .pg3 .box{border-radius:0;min-height:520px}
+.full .h3-box{border-radius:0;min-height:min(86vh,820px)}.full .h3-box::after,.full .pg3 .box::after{background:linear-gradient(180deg,rgba(0,97,90,.15) 0%,rgba(0,97,90,.35) 40%,rgba(0,97,90,.9) 100%)}.full .pg3 .box{border-radius:0;min-height:520px}
 .full .h3-box .in,.full .pg3 .in{padding-left:max(20px,calc((100vw - var(--wrap))/2 + 20px));padding-bottom:64px}
 .full .hero3 .d-tr,.full .pg3 .d-tr{top:24px;right:24px}.full .hero3 .d-bl,.full .pg3 .d-bl{bottom:24px;left:auto;right:180px}
 .full .collage{margin:0 calc(50% - 50vw);gap:8px}.full .collage figure{border-radius:0}
