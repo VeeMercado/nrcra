@@ -4,6 +4,6 @@ Three design directions (one per mood board) for the five-page nrcra.org.au webs
 Sample content only. Preview URL: https://client38.veemercado.com/
 
 - `index.html` dashboard linking the three prototypes
-- `v1/` rounded blocks, `v2/` light and fresh (illustrated), `v3/` big visuals (each page is an anchor: `#home`, `#about`, `#partners`, `#network`, `#rack`)
+- `v1/` rounded blocks, `v2/` light and fresh, `v3/` big visuals; `v1.2/` and `v3.2/` are the same with full-width hero and image sections (each page is an anchor: `#home`, `#about`, `#partners`, `#network`, `#rack`)
 - `tools/build.py` regenerates all pages from one content source: `python3 tools/build.py`
 - `assets/img/` photos from nrcra.org.au; brand: Nunito Sans, navy #07293b, teal #00a79d, orange #f05a28, yellow #ffcb2a

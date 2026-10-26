@@ -162,21 +162,35 @@ def screen(id_, label, body, cls=""):
 
 
 def nav():
-    items = "".join(f'<a href="#{k}" data-nav="{k}">{E(t)}</a>' for k, t in PAGES)
+    items = "".join(f'<a href="#{k}" data-nav="{k}">{E(t)}</a>' for k, t in PAGES if k != "rack")
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap head-in">
 <a href="#home" class="brand" aria-label="NRCRA home">{logo()}</a>
 <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
-<nav id="nav" aria-label="Main">{items}<a class="btn btn-cta" href="#network">Join the network</a></nav>
+<nav id="nav" aria-label="Main">{items}<a class="btn btn-cta" href="#rack" data-nav="rack">R.A.C.K</a></nav>
 </div></header>'''
+
+
+# Websites checked 27 Oct 2026. Membership of the Alliance to be confirmed by NRCRA.
+REGION_GROUPS = [
+    ("Resilient Lismore", "Lismore", "https://resilientlismore.org.au"),
+    ("Resilient Uki", "Uki", "https://resilientuki.org"),
+    ("WardellCORE", "Wardell", "https://www.wardellcore.community"),
+    ("Mullumbimby District Neighbourhood Centre", "Mullumbimby", "https://www.mdnc.org.au"),
+    ("Plan C", "Northern Rivers", "https://www.planc.org.au"),
+    ("Coraki and Woodburn community hubs", "Richmond Valley", "https://richmondvalley.nsw.gov.au/community-services/community-directory/general-community-support-services/resilience-recovery-support/"),
+]
 
 
 def footer(white_logo=True):
     return f'''<footer class="site-foot"><div class="wrap foot-in">
 <div><span class="foot-logo">{logo("logo")}</span><p class="tag">Connect. Share. Care.</p></div>
-<div><h2>Contact</h2><p>Network Lead<br><strong>{CONTACT["name"]}</strong><br><a href="mailto:{CONTACT["email"]}">{CONTACT["email"]}</a><br><a href="tel:{CONTACT["tel"]}">{CONTACT["phone"]}</a></p></div>
-<div><h2>Follow</h2><ul class="plain"><li><a href="{LINKS["fb"]}">Facebook</a></li><li><a href="{LINKS["li"]}">LinkedIn</a></li><li><a href="{LINKS["wa"]}">WhatsApp group</a></li><li><a href="{LINKS["news"]}">Resilience Roundup newsletter</a></li></ul></div>
-<p class="ack">{ACK}</p><p class="copy">© 2026 Northern Rivers Community Resilience Alliance. <a href="{LINKS["live"]}">nrcra.org.au</a></p>
+<div><h2>Follow us</h2><ul class="plain"><li><a href="{LINKS["fb"]}">Facebook</a></li><li><a href="{LINKS["li"]}">LinkedIn</a></li></ul>
+<h2 class="fh2">Join the conversation</h2><ul class="plain"><li><a href="{LINKS["wa"]}">WhatsApp group</a></li></ul></div>
+<div><h2>Resilience Roundup</h2><p>Our newsletter for groups across the region.</p><p><a class="foot-btn" href="{LINKS["news"]}">Read the newsletter</a></p></div>
+<div><h2>Quick links</h2><ul class="plain"><li><a href="#about">About</a></li><li><a href="{LINKS["news"]}">News</a></li><li><a href="{LINKS["live"]}">Events</a></li><li><a href="https://www.nrcra.org.au/contact">Contact</a></li></ul></div>
+<div class="foot-net"><h2>Resilience groups in our region</h2><ul>{"".join(f'<li><a href="{u}"><b>{E(n)}</b><span>{t}</span></a></li>' for n, t, u in REGION_GROUPS)}</ul></div>
+<p class="ack">{ACK}</p><p class="copy">© 2026 Northern Rivers Community Resilience Alliance &middot; <a href="https://www.nrcra.org.au/copy-of-terms-conditions">Privacy Policy</a></p>
 </div></footer>'''
 
 
@@ -272,22 +286,16 @@ FEET = ('<svg viewBox="0 0 40 50" aria-hidden="true"><g fill="currentColor">'
 PIN = '<svg class="pin" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 50S4 31 4 19a16 16 0 0 1 32 0c0 12-16 31-16 31z" fill="#f05a28"/><circle cx="20" cy="19" r="6.5" fill="#fff"/></svg>'
 
 
+FLAG = '<svg class="flag" viewBox="0 0 40 48" aria-hidden="true"><path d="M8 4v42" stroke="#07293b" stroke-width="3.5" stroke-linecap="round"/><path d="M9 6h24l-6 8 6 8H9z" fill="#f05a28"/></svg>'
+
+
 def trail():
-    """Our journey as a winding dotted trail: each year is a stop, a dashed path curves to the next one."""
+    """Our journey as a list: year circles on the left joined by a line, text on the right, orange flags along the way."""
     out = '<ol class="trail">'
     n = len(JOURNEY)
     for i, (y, t) in enumerate(JOURNEY):
-        side = "l" if i % 2 == 0 else "r"
-        x1, x2 = (25, 75) if side == "l" else (75, 25)
-        link = "" if i == n - 1 else f'<svg class="tlink" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M{x1} 0C{x1} 55 {x2} 45 {x2} 100" vector-effect="non-scaling-stroke"/></svg>'
-        pin = PIN if i == n - 1 else ""
-        # footprints at two points along the open stretch of the curve (bezier t=0.55 and t=0.8), turned the way the path travels
-        feet = ""
-        if i < n - 1:
-            for fx, fy, rot in ((0.575, 53.4, 105), (0.896, 73.8, 135)):
-                x = x1 + (x2 - x1) * fx
-                feet += f'<span class="feet" style="left:{x:.1f}%;top:calc(50px + {fy}%);transform:translate(-50%,-50%) rotate({rot if side == "l" else -rot}deg)">{FEET}</span>'
-        out += f'<li class="t-{side} t{i % 5}">{link}{feet}<span class="stop">{pin}<b>{y}</b></span><div class="tcard"><p>{E(t)}</p></div></li>'
+        flag = f'<span class="tflag">{FLAG}</span>' if i < n - 1 else ""
+        out += f'<li class="t{i % 5}"><span class="stop"><b>{y}</b></span><div class="tcard"><p>{E(t)}</p></div>{flag}</li>'
     return out + "</ol>"
 
 
@@ -491,7 +499,7 @@ p{margin:0 0 1em}.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}.sec{p
 .logo{height:48px;width:auto}.logo-white{filter:brightness(0) invert(1)}
 #nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 #nav a:not(.btn){padding:.45em .9em;color:var(--navy);text-decoration:none;font-weight:700;border-radius:var(--btn-r,99px)}
-#nav a:not(.btn):hover{background:var(--hover,#eef5f5)}#nav a[aria-current=page]{background:var(--current,#d8f0ee)}
+#nav a:not(.btn):hover{background:var(--hover,#eef5f5)}#nav .btn-cta[aria-current=page]{background:var(--navy);color:#fff;box-shadow:0 0 0 3px var(--yellow)}#nav a[aria-current=page]{background:var(--current,#d8f0ee)}
 .menu-btn{display:none;font:800 1rem var(--font);background:var(--navy);color:#fff;border:0;padding:.7em 1.1em;min-height:44px;border-radius:99px}
 @media(max-width:860px){.menu-btn{display:block}#nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;align-items:stretch;padding:12px 20px 20px;border-bottom:1px solid var(--line)}#nav.open{display:flex}.logo{height:40px}}
 .page{display:none;outline:0}.page.on{display:block}
@@ -554,7 +562,10 @@ select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy
 .site-foot{background:var(--foot,#07293b);color:var(--foot-ink,#fff);padding:52px 0 32px}.site-foot a{color:inherit}
 .site-foot h2{font-size:.9rem;text-transform:uppercase;letter-spacing:.12em;color:var(--foot-h,#ffcb2a)}
 .foot-in{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}.foot-in .ack{grid-column:1/-1;font-size:.9rem;border-top:1px solid var(--foot-line,#35566a);padding-top:20px;margin:0;max-width:90ch}
-.foot-in .copy{grid-column:1/-1;font-size:.85rem;margin:0}.foot-logo{display:inline-block;background:#fff;border-radius:16px;padding:12px 16px}.foot-in .tag{margin-top:12px;font-weight:800;color:var(--foot-h,#ffcb2a)}.site-foot .logo{height:54px}
+.foot-in .copy{grid-column:1/-1;font-size:.85rem;margin:0}.fh2{margin-top:22px}.foot-btn{display:inline-block;border:2px solid currentColor;border-radius:var(--btn-r,99px);padding:.45em 1em;font-weight:800;text-decoration:none}
+.foot-net{grid-column:1/-1;border-top:1px solid var(--foot-line,#35566a);padding-top:22px}.foot-net ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.foot-net a{display:block;text-decoration:none;border:1px solid var(--foot-line,#35566a);border-radius:14px;padding:10px 14px}.foot-net a:hover{background:rgba(255,255,255,.08)}.foot-net b{display:block}.foot-net span{font-size:.85rem;opacity:.85}
+.foot-logo{display:inline-block;background:#fff;border-radius:16px;padding:12px 16px}.foot-in .tag{margin-top:12px;font-weight:800;color:var(--foot-h,#ffcb2a)}.site-foot .logo{height:54px}
 /* R.A.C.K mock (its own look, shared by all prototypes) */
 .rkpage{background:#f7f9fa}.rk{max-width:1100px;margin:0 auto;padding:32px 20px 72px}
 .rk-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;padding:14px 0 18px;border-bottom:1px solid var(--line);margin-bottom:24px}
@@ -585,7 +596,7 @@ body{padding-bottom:72px}.protobar{position:fixed;left:0;right:0;bottom:0;z-inde
 .pb-nav{display:flex;gap:8px;flex-wrap:wrap}.pb-btn,.pb-top{font:700 13px var(--font);color:#fff;background:#2b2b2b;border:1px solid #555;border-radius:99px;padding:.55em 1em;text-decoration:none;cursor:pointer;min-height:36px;display:inline-flex;align-items:center}
 .pb-btn:hover,.pb-top:hover{background:#ffcb2a;color:#111;border-color:#ffcb2a}.pb-top{background:#ffcb2a;color:#111;border-color:#ffcb2a}
 .pb-short{display:none}
-@media(max-width:760px){body{padding-bottom:64px}.pb-in{gap:6px;padding:8px 10px;flex-wrap:nowrap}.pb-label{min-width:0;font-size:11px;line-height:1.25}.pb-cur,.pb-long,.pb-all{display:none}.pb-short{display:inline}.pb-btn,.pb-top{padding:.5em .8em;min-width:40px;justify-content:center}}
+@media(max-width:760px){body{padding-bottom:84px}.pb-in{gap:6px;padding:8px 10px;flex-wrap:nowrap}.pb-label{min-width:0;font-size:11px;line-height:1.25}.pb-cur,.pb-long,.pb-all{display:none}.pb-short{display:inline}.pb-btn,.pb-top{padding:.5em .8em;min-width:40px;justify-content:center}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pmap .dot circle{transition:none}}
 """
 
@@ -617,12 +628,12 @@ document.addEventListener('click',function(e){
 FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">'
 
 
-PROTOS = [("v1", "Prototype 1", "Rounded blocks"), ("v2", "Prototype 2", "Light and fresh"), ("v3", "Prototype 3", "Big visuals")]
+PROTOS = [("v1", "Prototype 1", "Rounded blocks"), ("v1.2", "Prototype 1.2", "Rounded blocks, full-width images"), ("v2", "Prototype 2", "Light and fresh"), ("v3", "Prototype 3", "Big visuals"), ("v3.2", "Prototype 3.2", "Big visuals, full-width images")]
 
 
 def protobar(v):
     # data-proto lets the script point each button at the same page in the other prototype
-    others = "".join(f'<a class="pb-btn" data-proto="{k}" href="../{k}/" aria-label="{n}: {d}"><span class="pb-short" aria-hidden="true">P{k[1]}</span><span class="pb-long">{n}</span></a>' for k, n, d in PROTOS if k != v)
+    others = "".join(f'<a class="pb-btn" data-proto="{k}" href="../{k}/" aria-label="{n}: {d}"><span class="pb-short" aria-hidden="true">P{k[1:]}</span><span class="pb-long">{n}</span></a>' for k, n, d in PROTOS if k != v)
     cur = next(f"{n}: {d}" for k, n, d in PROTOS if k == v)
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {cur}</span></p>
@@ -630,13 +641,13 @@ def protobar(v):
 <button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
 
-def page_shell(title, css, body, v, white_logo=True):
+def page_shell(title, css, body, v, white_logo=True, slug=None, extra=""):
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><meta name="robots" content="noindex">
 <meta name="description" content="Prototype for the Northern Rivers Community Resilience Alliance website. Sample content only.">
-{FONT}<style>{BASE}{css}</style></head><body class="{v}">
-{nav()}<main id="main">{body}</main>{footer(white_logo)}{protobar(v)}<script>{JS}</script></body></html>'''
+{FONT}<style>{BASE}{css}</style></head><body class="{v} {extra}">
+{nav()}<main id="main">{body}</main>{footer(white_logo)}{protobar(slug or v)}<script>{JS}</script></body></html>'''
 
 
 def assemble(home, about, partners, network, rack):
@@ -704,18 +715,25 @@ body{--bg:#f3f6f7}
 .p3-logos ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}.p3-logos li{border:1px solid var(--line);border-radius:16px;display:grid;place-items:center;padding:12px;aspect-ratio:3/2;background:#fff}.p3-logos img{max-height:56px;max-width:100%;object-fit:contain}
 @media(max-width:900px){.p3{grid-template-columns:1fr}.p3-img img{aspect-ratio:16/10}}
 .vp{border-radius:var(--r);padding:28px}.vp-t{background:var(--teal-25)}.vp-y{background:var(--yellow-40)}.vp .connect-art{max-width:300px;margin:0 0 14px}
-.trail{list-style:none;margin:24px 0 0;padding:0}.trail li{position:relative;padding:0 0 44px}.feet{position:absolute;z-index:3;width:46px;height:58px;color:var(--teal-d);opacity:.85}.feet svg{width:100%;height:100%;display:block}.trail li:last-child{padding-bottom:0}
-.tlink{position:absolute;left:0;top:50px;width:100%;height:100%;overflow:visible;z-index:0}.tlink path{fill:none;stroke:var(--navy);stroke-width:5;stroke-linecap:round;stroke-dasharray:1 14;opacity:.55}
-.stop{position:relative;z-index:2;width:100px;height:100px;border-radius:50%;display:grid;place-items:center;text-align:center;background:#fff;border:6px solid var(--teal);font-weight:900;line-height:1.05;padding:8px}
-.stop b{font-size:1.25rem}.t-l .stop{margin-left:calc(25% - 50px)}.t-r .stop{margin-left:calc(75% - 50px)}
-.t1 .stop{border-color:var(--yellow)}.t2 .stop{border-color:var(--orange)}.t3 .stop{border-color:var(--navy)}.t4 .stop{border-color:var(--teal-d)}.t4 .stop b{font-size:1rem}
-.tcard{position:relative;z-index:2;width:44%;margin-top:10px;background:#fff;border-radius:var(--r);padding:18px 22px;box-shadow:0 1px 0 var(--line)}.tcard p{margin:0}
-.t-l .tcard{margin-left:3%}.t-r .tcard{margin-left:53%}
-.pin{position:absolute;width:38px;height:48px;top:-40px;left:50%;transform:translateX(-50%)}
-@media(max-width:760px){.tlink,.feet{display:none}.trail{margin-top:40px}.trail li{padding:0 0 28px 84px;min-height:96px}.trail li:not(:last-child)::before{content:"";position:absolute;left:31px;top:72px;bottom:0;border-left:5px dotted rgba(7,41,59,.45)}
-.stop,.t-l .stop,.t-r .stop{position:absolute;left:0;top:0;margin:0;width:68px;height:68px;border-width:5px;padding:4px}.stop b{font-size:.95rem}.t4 .stop b{font-size:.72rem}.pin{width:30px;height:38px;top:-32px}
-.tcard,.t-l .tcard,.t-r .tcard{width:auto;margin:0}}
-.pgs{padding:48px 0 0}.pgs .lede{max-width:70ch}.narrow{max-width:720px}
+.trail{list-style:none;margin:28px 0 0;padding:0}.trail li{position:relative;padding:0 0 64px 128px;min-height:100px}.trail li:last-child{padding-bottom:0}
+.trail li:not(:last-child)::before{content:"";position:absolute;left:47px;top:96px;bottom:0;border-left:5px dashed rgba(7,41,59,.4)}
+.stop{position:absolute;left:0;top:0;z-index:2;width:100px;height:100px;border-radius:50%;display:grid;place-items:center;text-align:center;background:#fff;border:6px solid var(--teal);font-weight:900;line-height:1.05;padding:8px}
+.stop b{font-size:1.25rem}.t1 .stop{border-color:var(--yellow)}.t2 .stop{border-color:var(--orange)}.t3 .stop{border-color:var(--navy)}.t4 .stop{border-color:var(--teal-d)}.t4 .stop b{font-size:1rem}
+.tcard{position:relative;background:#fff;border-radius:var(--r);padding:20px 24px;box-shadow:0 1px 0 var(--line);min-height:100px;display:flex;align-items:center}.tcard p{margin:0}
+.tflag{position:absolute;left:49px;bottom:10px;width:36px;height:44px;z-index:3}.tflag svg,.tend svg{width:100%;height:100%;display:block}
+.tend{position:absolute;width:40px;height:48px;top:-40px;left:50%;transform:translateX(-30%)}
+@media(max-width:760px){.trail li{padding-left:88px;min-height:72px}.trail li{padding-bottom:52px}.trail li:not(:last-child)::before{left:31px;top:68px}.stop{width:68px;height:68px;border-width:5px;padding:4px}.stop b{font-size:.95rem}.t4 .stop b{font-size:.72rem}
+.tflag{left:33px;bottom:8px;width:30px;height:36px}.tcard{padding:14px 16px;min-height:0}.trail{margin-top:44px}}
+.pgs{padding:48px 0 0}
+/* V1.2: full-width hero and image sections */
+.full .hero1{padding:0 0 8px}.full .hero1>.wrap:first-child{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:660px}
+.full .h1-photo{position:absolute;inset:0;border-radius:0;min-height:0}.full .h1-panel{position:relative;z-index:2;max-width:580px;margin:56px 0 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
+.full .hero1 .latest{margin-top:22px}
+.full .pg1{padding:0}.full .pg1 .wrap{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:480px}
+.full .pg1 .ph{position:absolute;inset:0;border-radius:0;aspect-ratio:auto}.full .pg1 .wrap>div:not(.ph){position:relative;z-index:2;background:var(--navy);color:#fff;border-radius:32px;padding:40px;max-width:620px;margin:56px 20px 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
+.full .pg1 .eyebrow{color:var(--yellow)}.full .pg1 .btn-ghost{color:#fff;border-color:#fff}.full .pg1 .btn-ghost:hover{background:#fff;color:var(--navy)}
+.full .ready{margin:0 calc(50% - 50vw);border-radius:0;padding:120px 24px}
+@media(max-width:860px){.full .hero1>.wrap:first-child,.full .pg1 .wrap{min-height:0}.full .h1-panel,.full .pg1 .wrap>div:not(.ph){margin:220px 16px 24px;padding:28px 22px}}.pgs .lede{max-width:70ch}.narrow{max-width:720px}
 """
 
 
@@ -743,10 +761,10 @@ def v1_partners():
 <div class="p3-logos"><ul>{logos}</ul><p class="btnrow"><a class="btn btn-primary" href="#partners">View all partners</a><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></div>'''
 
 
-def v1():
+def v1(full=False):
     home = f'''<div class="hero1"><div class="wrap"><div class="h1-panel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>When disaster strikes, local people are always first to respond.</h1><p class="lede">{H1}.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#network">Join the Alliance</a><a class="btn btn-ghost" href="#about">What we do</a></p></div>
+<p class="btnrow"><a class="btn btn-primary" href="#rack">Explore the R.A.C.K</a><a class="btn btn-ghost" href="#about">What we do</a></p></div>
 <div class="h1-photo">{img("cheer", eager=True)}</div></div>
 <div class="wrap"><div class="latest"><a href="{LINKS["news"]}"><b>Latest</b>$800,000 HELP Fund grants program announced</a><a href="#home-focus"><b>Upcoming</b>{GATHER[0]}: {GATHER[1]}</a><a href="#partners"><b>Projects</b>Three projects under way</a></div></div></div>
 
@@ -785,6 +803,8 @@ def v1():
 <section class="sec"><div class="wrap"><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>NRMA Insurance's participatory grants program for the region.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap card"><h2>Need help getting in?</h2><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
+    if full:
+        return page_shell("NRCRA prototype 1.2: Rounded blocks, full-width images", CSS1, assemble(home, about, partners, network, rack), "v1", slug="v1.2", extra="full")
     return page_shell("NRCRA prototype 1: Rounded blocks", CSS1, assemble(home, about, partners, network, rack), "v1")
 
 
@@ -878,7 +898,7 @@ body{--btn-r:12px;--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#006b64;-
 
 def v2():
     home = f'''<div class="hero2"><div class="wrap"><div><span class="eyebrow">Northern Rivers Community Resilience Alliance</span><h1>{H1}</h1>
-<p class="lede">{CALLOUT}</p><p class="btnrow"><a class="btn btn-primary" href="#network">Join the network</a><a class="btn btn-ghost" href="#about">What we do</a></p></div>
+<p class="lede">{CALLOUT}</p><p class="btnrow"><a class="btn btn-primary" href="#rack">Explore the R.A.C.K</a><a class="btn btn-ghost" href="#about">What we do</a></p></div>
 {photo_art("cheer", sticker="60+ groups, one network")}</div></div>
 <section class="mint" style="padding:40px 0 56px"><div class="wrap"><ul class="paths">
 <li><a href="#about">{blob_icon("people", "#fff1c2")}<span><b>What we do</b><small>Our focus and purpose</small></span></a></li>
@@ -995,6 +1015,13 @@ body{--btn-r:4px;--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5
 .pmap{--land:#fffaf0;--sea:#f6e6c8;--coast:#e2c48d;--river:#9ccfd6;--dot:#f05a28;--hot:#003d38;--lga:#8a7350}
 .places button{--chip:#ecd9b4}.places button:hover,.places button[aria-pressed=true]{background:var(--deep);border-color:var(--deep)}
 .site-foot h2{color:var(--yellow)}
+/* V3.2: full-width hero and image sections */
+.full .hero3,.full .pg3{padding:0}.full .hero3>.wrap,.full .pg3>.wrap{max-width:none;padding:0}
+.full .h3-box{border-radius:0;min-height:min(86vh,820px)}.full .h3-box::after,.full .pg3 .box::after{background:linear-gradient(180deg,rgba(0,40,36,.15) 0%,rgba(0,40,36,.35) 40%,rgba(0,40,36,.9) 100%)}.full .pg3 .box{border-radius:0;min-height:520px}
+.full .h3-box .in,.full .pg3 .in{padding-left:max(20px,calc((100vw - var(--wrap))/2 + 20px));padding-bottom:64px}
+.full .hero3 .d-tr,.full .pg3 .d-tr{top:24px;right:24px}.full .hero3 .d-bl,.full .pg3 .d-bl{bottom:24px;left:auto;right:180px}
+.full .collage{margin:0 calc(50% - 50vw);gap:8px}.full .collage figure{border-radius:0}
+@media(max-width:760px){.full .h3-box{min-height:560px}.full .h3-box .in,.full .pg3 .in{padding:28px 20px 40px}.full .hero3 .d-bl,.full .pg3 .d-bl{right:20px}}
 .rel{position:relative}.deco{position:absolute;z-index:3;pointer-events:none;width:150px;height:150px}
 .d-tr{top:-34px;right:-6px}.d-tl{top:-30px;left:-6px}.d-bl{bottom:-34px;left:-6px}.d-br{bottom:-30px;right:-6px}
 .deco-dots{width:130px;height:130px;z-index:1}.circles .deco-rings{z-index:0;width:190px;height:190px;left:40%;top:30%}
@@ -1006,10 +1033,10 @@ body{--btn-r:4px;--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5
 """
 
 
-def v3():
+def v3(full=False):
     home = f'''<div class="hero3"><div class="wrap rel">{deco("sprig", "d-tr")}{deco("dots", "d-bl")}<div class="h3-box">{img("cheer", eager=True)}<div class="in"><span class="eyebrow" style="color:var(--yellow)">Northern Rivers Community Resilience Alliance</span>
 <h1>Neighbours looking after neighbours, across the <span class="mark">Northern Rivers{SQUIGGLE}</span></h1><p class="lede">{H1}.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#network">Join the network</a><a class="btn btn-ghost" href="#about">Meet the Alliance</a></p></div></div></div></div>
+<p class="btnrow"><a class="btn btn-primary" href="#rack">Explore the R.A.C.K</a><a class="btn btn-ghost" href="#about">Meet the Alliance</a></p></div></div></div></div>
 
 <section class="sec"><div class="wrap split"><div><p class="hand">Who we are</p><p class="big">The group made up of groups.</p><p>{WHO}</p><p class="btnrow"><a class="btn btn-ghost" href="#about">Our story</a></p></div>
 <div class="circles">{deco("rings", "")}{img("laughing")}{img("talk")}{img("circle")}<span class="blob" aria-hidden="true"></span></div></div></section>
@@ -1056,6 +1083,8 @@ def v3():
 <section class="sec"><div class="wrap"><p class="hand">What's inside</p><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="oblock orange"><span class="shape" aria-hidden="true"></span><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>Participatory grants for local groups.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul>
 <p class="big-b" style="margin-top:28px">Access is for Alliance groups. Need help getting in?</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></div></section>'''
+    if full:
+        return page_shell("NRCRA prototype 3.2: Big visuals, full-width images", CSS3, assemble(home, about, partners, network, rack), "v3", slug="v3.2", extra="full")
     return page_shell("NRCRA prototype 3: Big visuals", CSS3, assemble(home, about, partners, network, rack), "v3")
 
 
@@ -1075,16 +1104,20 @@ SITES = {
 def dashboard():
     cards = [
         ("v1", "Rounded blocks", "Inspired by Milou's drafts and current sites strong colour blocks. Rounded cards in light teal, yellow and orange tints, a navy hero panel beside a big rounded photo, pill buttons.", ["Colour cards with photos inside", "Five pillars as arched columns", "Partner section: photo, story and logos"]),
+        ("v1.2", "Rounded blocks, full-width images", "An experiment on Prototype 1: the same layout, illustrations and content, with full-width hero images, full-width page headers and a full-width closing image.", ["Full-width photo hero with the navy panel over it", "Full-width page headers", "Everything else as Prototype 1"]),
         ("v2", "Light and fresh", "Inspired by the R.A.C.K app and Resilient Lismore. Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents, one illustration and softly rounded buttons.", ["Photo hero with logo-arc accent", "Five pillars as photo-topped columns", "River-style journey timeline"]),
         ("v3", "Big visuals", "Inspired by the people in the photos of NRCRA community: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn illustration decor and crisp buttons.", ["Circle photo cluster and collage", "Illustration decor on big images", "In their own words stories"]),
+        ("v3.2", "Big visuals, full-width images", "An experiment on Prototype 3: the same layout, illustrations and content, with an edge-to-edge hero, edge-to-edge page headers and a full-width photo collage.", ["Edge-to-edge photo hero", "Full-width collage with the sizzle reel", "Everything else as Prototype 3"]),
     ]
     rows = ""
-    for i, (slug, t, d, feats) in enumerate(cards, 1):
-        ins = "".join(f'<figure><img src="assets/inspo/{f}.jpg" alt="Mood board reference: {E(c)}" loading="lazy"><figcaption>{E(c)}</figcaption></figure>' for f, c in INSPO[slug])
+    for slug, t, d, feats in cards:
+        i = slug[1:]
+        base = slug.split(".")[0]
+        ins = "".join(f'<figure><img src="assets/inspo/{f}.jpg" alt="Mood board reference: {E(c)}" loading="lazy"><figcaption>{E(c)}</figcaption></figure>' for f, c in INSPO[base])
         fl = "".join(f"<li>{E(x)}</li>" for x in feats)
-        rows += f'''<article class="row row{i}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
+        rows += f'''<article class="row row{base[1]}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
 <div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><p><a class="btn btn-primary" href="{slug}/">Open prototype {i}</a></p>
-<h3>Inspired by the mood board</h3><div class="ins">{ins}</div><p class="sites">{SITES[slug]}</p></div></article>'''
+<h3>Inspired by the mood board</h3><div class="ins">{ins}</div><p class="sites">{SITES[base]}</p></div></article>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
 .top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}.top .btnrow{{margin-top:16px}}
@@ -1099,7 +1132,7 @@ def dashboard():
 .ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.sites{{font-size:.8rem;color:var(--muted);margin:12px 0 0;line-height:1.45}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
 @media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}}}</style></head>
 <body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>NRCRA.ORG.AU Website prototypes</h1></div>
-<p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. Sample content only. To be built in Wix Classic. Status: draft for direction review.</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a></p></div>
+<p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board, plus two full-width image experiments (1.2 and 3.2). Sample content only. To be built in Wix Classic. Status: draft for direction review.</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a></p></div>
 {rows}</main></body></html>'''
 
 
@@ -1113,6 +1146,8 @@ if __name__ == "__main__":
     write("v1/index.html", v1())
     write("v2/index.html", v2())
     write("v3/index.html", v3())
+    write("v1.2/index.html", v1(True))
+    write("v3.2/index.html", v3(True))
     write("index.html", dashboard())
     write("robots.txt", "User-agent: *\nDisallow: /\n")
     print("built")
