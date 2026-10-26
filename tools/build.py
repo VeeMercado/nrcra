@@ -651,7 +651,7 @@ body{--bg:#f3f6f7}
 @media(max-width:860px){.wfw-grid{grid-template-columns:1fr 1fr}.wfw-mid{grid-column:1/-1;grid-row:1;aspect-ratio:16/10}.wfw-col{gap:24px}}
 .pmap{--land:#ffffff;--sea:#d8f0ee;--coast:#8fcfc9;--river:#7cc0dd}
 .v1 .pc:nth-child(1){background:var(--teal-25)}.v1 .pc:nth-child(2){background:var(--yellow-40)}.v1 .pc:nth-child(3){background:var(--orange-25)}.v1 .pc:nth-child(4){background:var(--blue-15)}.v1 .pc:nth-child(5){background:var(--grey-6)}
-.p3{display:grid;grid-template-columns:.9fr 1.1fr 1fr;gap:36px;align-items:center}.p3-img img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:28px}.p3-txt p{font-size:1.1rem;margin:0}
+.p3{display:grid;grid-template-columns:.9fr 1.1fr 1fr;gap:36px;align-items:start}.p3-img img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:28px}.p3-txt p{font-size:1.1rem;margin:0}
 .p3-logos ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}.p3-logos li{border:1px solid var(--line);border-radius:16px;display:grid;place-items:center;padding:12px;aspect-ratio:3/2;background:#fff}.p3-logos img{max-height:56px;max-width:100%;object-fit:contain}
 @media(max-width:900px){.p3{grid-template-columns:1fr}.p3-img img{aspect-ratio:16/10}}
 .pgs{padding:48px 0 0}.pgs .lede{max-width:70ch}.narrow{max-width:720px}
@@ -1006,12 +1006,12 @@ def dashboard():
         rows += f'''<article class="row row{i}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
 <div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><p><a class="btn btn-primary" href="{slug}/">Open prototype {i}</a></p>
 <h3>Inspired by the mood board</h3><div class="ins">{ins}</div><p class="sites">{SITES[slug]}</p></div></article>'''
-    return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA website prototypes</title><meta name="robots" content="noindex">{FONT}
+    return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
 .top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}
 .flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
 .row{{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:start;background:#fff;border-radius:32px;padding:28px;margin-bottom:28px;border-left:12px solid var(--yellow)}}
-.row2{{border-left-color:var(--teal)}}.row3{{border-left-color:var(--orange)}}
+.row{{position:relative;transition:box-shadow .2s}}.row:hover{{box-shadow:0 16px 40px -24px rgba(7,41,59,.5)}}.info h2 a::after{{content:"";position:absolute;inset:0;border-radius:32px;z-index:1}}.row:focus-within{{outline:3px solid var(--orange-d);outline-offset:3px}}.row2{{border-left-color:var(--teal)}}.row3{{border-left-color:var(--orange)}}
 .shot{{display:block;border-radius:18px;overflow:hidden;box-shadow:0 18px 40px -22px rgba(7,41,59,.55);border:1px solid var(--line);background:#fff}}.shot img{{width:100%;display:block}}.shot:hover{{transform:translateY(-3px)}}
 .bar{{display:flex;gap:6px;padding:9px 12px;background:#eef1f3;border-bottom:1px solid var(--line)}}.bar i{{width:10px;height:10px;border-radius:50%;background:#c9d2d6}}
 .num{{display:inline-block;background:var(--navy-8);border-radius:99px;padding:.2em .9em;font-weight:900;font-size:.85rem}}.info h2{{margin:.35em 0 .3em}}.info h2 a{{color:var(--navy);text-decoration:none}}
@@ -1019,7 +1019,7 @@ def dashboard():
 .pl{{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}}.pl a{{display:block;padding:.4em .9em;border:2px solid var(--navy);border-radius:99px;color:var(--navy);text-decoration:none;font-weight:700}}.pl a:hover{{background:var(--navy);color:#fff}}
 .ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.sites{{font-size:.8rem;color:var(--muted);margin:12px 0 0;line-height:1.45}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
 @media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}}}</style></head>
-<body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>Website prototypes</h1></div>
+<body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>NRCRA.ORG.AU Website prototypes</h1></div>
 <p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. Sample content only. To be built in Wix Classic. Status: draft for direction review.</p></div>
 {rows}</main></body></html>'''
 
