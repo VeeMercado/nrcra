@@ -610,6 +610,24 @@ document.addEventListener('click',function(e){
 })();
 """
 
+# Phone layout rules, appended after each prototype's own CSS so they win:
+# lone images and maps use the full content width; odd-numbered blocks and circle layouts are centred.
+MOBILE = """
+@media(max-width:760px){
+.card:has(.placesblk),.warmcard:has(.placesblk){padding:24px 20px}
+.card:has(.placesblk) .pb-map,.warmcard:has(.placesblk) .pb-map{max-width:none;margin:0 -20px}
+body .cards,body .values,body .kb,body .fcards,body:not(.v1) .racks,body .help,body .stats,body .pgrid,body .lgrid,body .team,body .prow{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+body .cards>*,body .values>*,body .kb>*,body .fcards>*,body:not(.v1) .racks>*,body .help>*,body .stats>*,body .pgrid>*,body .lgrid>*,body .team>*,body .prow>*{flex:0 1 calc(50% - 8px);min-width:0}
+body .strip{justify-content:center}
+body .words{grid-template-columns:1fr;justify-items:center;text-align:center}
+body .tline li{grid-template-columns:1fr;justify-items:center;text-align:center}
+}
+@media(min-width:521px) and (max-width:760px){.placesblk .pb-map,.card:has(.placesblk) .pb-map,.warmcard:has(.placesblk) .pb-map{width:100%;max-width:440px;margin:0 auto}}
+@media(max-width:520px){
+body .cards>*,body .values>*,body .kb>*,body .fcards>*,body:not(.v1) .racks>*,body .help>*,body .stats>*,body .pgrid>*,body .prow>*{flex-basis:100%}
+body .lgrid>*,body .team>*{flex-basis:calc(50% - 8px)}
+}
+"""
 FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">'
 
 
@@ -631,7 +649,7 @@ def page_shell(title, css, body, v, white_logo=True, slug=None, extra=""):
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><meta name="robots" content="noindex">
 <meta name="description" content="Prototype for the Northern Rivers Community Resilience Alliance website. Sample content only.">
-{FONT}<style>{BASE}{css}</style></head><body class="{v} {extra}">
+{FONT}<style>{BASE}{css}{MOBILE}</style></head><body class="{v} {extra}">
 {nav()}<main id="main">{body}</main>{footer(white_logo, boxed=v in ("v1", "v2"))}{protobar(slug or v)}<script>{JS}</script></body></html>'''
 
 

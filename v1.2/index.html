@@ -217,6 +217,21 @@ body{--bg:#f3f6f7}
 .full .pg1 .eyebrow{color:var(--yellow)}.full .pg1 .btn-ghost{color:#fff;border-color:#fff}.full .pg1 .btn-ghost:hover{background:#fff;color:var(--navy)}
 .full .ready{padding:110px 24px}
 @media(max-width:860px){.full .hero1>.wrap:first-child,.full .pg1 .wrap{min-height:0}.full .h1-panel,.full .pg1 .wrap>div:not(.ph){margin:220px 16px 24px;padding:28px 22px}}.pgs .lede{max-width:70ch}.narrow{max-width:720px}
+
+@media(max-width:760px){
+.card:has(.placesblk),.warmcard:has(.placesblk){padding:24px 20px}
+.card:has(.placesblk) .pb-map,.warmcard:has(.placesblk) .pb-map{max-width:none;margin:0 -20px}
+body .cards,body .values,body .kb,body .fcards,body:not(.v1) .racks,body .help,body .stats,body .pgrid,body .lgrid,body .team,body .prow{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+body .cards>*,body .values>*,body .kb>*,body .fcards>*,body:not(.v1) .racks>*,body .help>*,body .stats>*,body .pgrid>*,body .lgrid>*,body .team>*,body .prow>*{flex:0 1 calc(50% - 8px);min-width:0}
+body .strip{justify-content:center}
+body .words{grid-template-columns:1fr;justify-items:center;text-align:center}
+body .tline li{grid-template-columns:1fr;justify-items:center;text-align:center}
+}
+@media(min-width:521px) and (max-width:760px){.placesblk .pb-map,.card:has(.placesblk) .pb-map,.warmcard:has(.placesblk) .pb-map{width:100%;max-width:440px;margin:0 auto}}
+@media(max-width:520px){
+body .cards>*,body .values>*,body .kb>*,body .fcards>*,body:not(.v1) .racks>*,body .help>*,body .stats>*,body .pgrid>*,body .prow>*{flex-basis:100%}
+body .lgrid>*,body .team>*{flex-basis:calc(50% - 8px)}
+}
 </style></head><body class="v1 full">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap head-in">
