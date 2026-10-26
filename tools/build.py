@@ -379,7 +379,9 @@ def rack_screens():
 # ================================================================ shared css + js
 BASE = """
 :root{--navy:#07293b;--teal:#00a79d;--orange:#f05a28;--yellow:#ffcb2a;--teal-d:#006b64;--orange-d:#b93a0c;--ink:#07293b;--muted:#3d5663;--line:#d6e2e4;
---font:"Nunito Sans",Arial,sans-serif;--wrap:1180px;--r:24px}
+--font:"Nunito Sans",Arial,sans-serif;--wrap:1180px;--r:24px;
+/* Tint rule: brand colour mixed with white. Text sits on tints (navy text) or on navy (white text). Full brand colour is for buttons, icons, borders and shapes. */
+--teal-12:#e0f4f3;--teal-25:#bfe9e7;--yellow-20:#fff5d4;--yellow-40:#ffeaaa;--orange-12:#fdebe5;--orange-25:#fbd6c9;--navy-8:#ebeef0}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;font:400 18px/1.6 var(--font);color:var(--ink);background:var(--bg,#fff)}
 img{max-width:100%;display:block}a{color:var(--teal-d)}a:hover{color:var(--navy)}
@@ -462,7 +464,7 @@ select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy
 .rk-tools{display:flex;gap:10px;flex-wrap:wrap}.rk-pill{border:1px solid var(--line);border-radius:99px;padding:.45em 1em;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--navy);background:#fff}
 .rk-share{background:#f5b301;color:var(--navy);border-radius:12px;padding:.5em 1.1em;font-weight:800;text-decoration:none;box-shadow:0 3px 0 #c98f00}
 .rk-tabs{display:flex;gap:10px;flex-wrap:wrap}.rk-tabs a{border-radius:12px;padding:.5em 1em;font-weight:800;text-decoration:none;color:#fff;background:var(--navy)}
-.rk-tabs a:nth-child(2){background:var(--orange-d)}.rk-tabs a:nth-child(3){background:var(--teal-d)}.rk-tabs span{background:rgba(255,255,255,.22);border-radius:99px;padding:0 .5em;margin-left:6px;font-size:.85rem}
+.rk-tabs a:nth-child(2){background:var(--orange-d)}.rk-tabs a:nth-child(3){background:var(--teal-d)}.rk-tabs span{background:rgba(0,0,0,.3);border-radius:99px;padding:0 .5em;margin-left:6px;font-size:.85rem}
 .rk-h1{font-size:clamp(1.7rem,3.4vw,2.4rem);max-width:24ch;margin-top:18px}.rk-lede{color:var(--muted);max-width:64ch}
 .rk-sos{background:#fde2df;border:1px solid #f3b4ac;color:#8c1d12;border-radius:12px;padding:12px 16px;font-weight:800}
 .rk-search{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:14px;margin-bottom:24px}.rk-search input{width:100%}
@@ -476,6 +478,14 @@ select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy
 .ic{display:inline-block;min-width:3.2em;text-align:center;font-size:.7rem;font-weight:800;padding:.15em .4em;border-radius:5px;color:#fff;margin-right:8px}.ic.d{background:#1a56b8}.ic.s{background:#146c2e}.ic.p{background:#b3261e}.ic.f{background:#4a5560}
 .rk-auth{max-width:460px;margin:12px auto 0;background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;box-shadow:0 6px 24px rgba(7,41,59,.08)}
 .rk-auth h1{font-size:1.7rem}.rk-auth form{display:grid;gap:14px}.rk-btn{font:800 1rem var(--font);background:var(--teal-d);color:#fff;border:0;border-radius:12px;padding:.8em;cursor:pointer;min-height:44px}.rk-btn:hover{background:var(--navy)}.rk-alt{margin:16px 0 0;font-size:.95rem}
+/* prototype bar: fixed, deliberately outside the brand so it never reads as part of the design */
+body{padding-bottom:72px}.protobar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:#111;color:#fff;font:600 14px/1.3 var(--font);box-shadow:0 -4px 16px rgba(0,0,0,.25)}
+.pb-in{max-width:var(--wrap);margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pb-label{margin:0;flex:1;min-width:200px}.pb-label b{color:#ffcb2a;letter-spacing:.06em}.pb-cur{color:#ddd}.pb-label a{color:#fff}
+.pb-nav{display:flex;gap:8px;flex-wrap:wrap}.pb-btn,.pb-top{font:700 13px var(--font);color:#fff;background:#2b2b2b;border:1px solid #555;border-radius:99px;padding:.55em 1em;text-decoration:none;cursor:pointer;min-height:36px;display:inline-flex;align-items:center}
+.pb-btn:hover,.pb-top:hover{background:#ffcb2a;color:#111;border-color:#ffcb2a}.pb-top{background:#ffcb2a;color:#111;border-color:#ffcb2a}
+.pb-short{display:none}
+@media(max-width:760px){body{padding-bottom:64px}.pb-in{gap:6px;padding:8px 10px;flex-wrap:nowrap}.pb-label{min-width:0;font-size:11px;line-height:1.25}.pb-cur,.pb-long,.pb-all{display:none}.pb-short{display:inline}.pb-btn,.pb-top{padding:.5em .8em;min-width:40px;justify-content:center}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pmap .dot circle{transition:none}}
 """
 
@@ -488,6 +498,7 @@ S.forEach(function(s){s.classList.toggle('on',s.id===h)});
 var cur=document.getElementById(h);document.title=cur.getAttribute('data-label')+' | NRCRA prototype';window.scrollTo(0,0);if(window.__navd)cur.focus({preventScroll:true});window.__navd=1;
 document.getElementById('nav').classList.remove('open');document.querySelector('.menu-btn').setAttribute('aria-expanded','false')}
 window.addEventListener('hashchange',route);route();
+if(/shot/.test(location.search)){var pb=document.querySelector('.protobar');if(pb)pb.remove();document.body.style.paddingBottom='0'}
 var mb=document.querySelector('.menu-btn');mb.addEventListener('click',function(){var o=document.getElementById('nav').classList.toggle('open');mb.setAttribute('aria-expanded',o)});
 document.addEventListener('click',function(e){
  var v=e.target.closest('[data-video]');if(v&&e.target.closest('.play')){var f=document.createElement('iframe');f.src=v.getAttribute('data-video');f.title='NRCRA sizzle reel';f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;v.innerHTML='';v.appendChild(f);return}
@@ -505,13 +516,25 @@ document.addEventListener('click',function(e){
 FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">'
 
 
+PROTOS = [("v1", "V1 Rounded blocks"), ("v2", "V2 Light and fresh"), ("v3", "V3 People and community")]
+
+
+def protobar(v):
+    others = "".join(f'<a class="pb-btn" href="../{k}/" aria-label="{n}"><span class="pb-short" aria-hidden="true">{k.upper()}</span><span class="pb-long">{n}</span></a>' for k, n in PROTOS if k != v)
+    cur = dict(PROTOS)[v]
+    return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
+<p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {cur}</span></p>
+<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../">All prototypes</a>{others}</nav>
+<button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
+
+
 def page_shell(title, css, body, v, white_logo=True):
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><meta name="robots" content="noindex">
 <meta name="description" content="Prototype for the Northern Rivers Community Resilience Alliance website. Sample content only.">
 {FONT}<style>{BASE}{css}</style></head><body class="{v}">
-{nav()}<main id="main">{body}</main>{footer(white_logo)}<script>{JS}</script></body></html>'''
+{nav()}<main id="main">{body}</main>{footer(white_logo)}{protobar(v)}<script>{JS}</script></body></html>'''
 
 
 def assemble(home, about, partners, network, rack):
@@ -531,26 +554,27 @@ body{--bg:#f3f6f7}
 .latest b{color:var(--orange-d);margin-right:6px}
 .intro1{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}.callout{border:3px solid var(--orange);border-radius:var(--r);padding:28px;font-size:1.2rem;font-weight:800;background:#fff}
 @media(max-width:860px){.intro1{grid-template-columns:1fr}}
-.val{border-radius:var(--r);padding:30px}.val .ico{margin-bottom:18px}.val-teal{background:var(--teal);color:var(--navy)}.val-yellow{background:var(--yellow);color:var(--navy)}.val-orange{background:var(--orange-d);color:#fff}
+.val{border-radius:var(--r);padding:30px}.val .ico{margin-bottom:18px}.val-teal{background:var(--teal-25);color:var(--navy)}.val-yellow{background:var(--yellow-40);color:var(--navy)}.val-orange{background:var(--orange-25);color:var(--navy)}
+.val .ico{width:56px;height:56px;padding:10px;border-radius:50%;background:#fff}.val-teal .ico{color:var(--teal-d)}.val-yellow .ico{color:#7a5a00}.val-orange .ico{color:var(--orange-d)}
 .pills{list-style:none;margin:0;padding:0;display:grid;gap:12px}.pills li{display:flex;align-items:center;gap:18px;border-radius:99px;padding:16px 26px}
 .pills li .ico{flex:none;width:40px;height:40px;background:#fff;border-radius:50%;padding:7px;color:var(--navy)}.pills h3{margin:0;font-size:1.1rem}.pills p{margin:0;font-size:.95rem}
-.pills li:nth-child(1){background:var(--teal)}.pills li:nth-child(2){background:var(--yellow)}.pills li:nth-child(3){background:var(--orange-d);color:#fff}.pills li:nth-child(4){background:var(--navy);color:#fff}.pills li:nth-child(5){background:#fff;border:2px solid var(--navy)}
+.pills li:nth-child(1){background:var(--teal-25)}.pills li:nth-child(2){background:var(--yellow-40)}.pills li:nth-child(3){background:var(--orange-25)}.pills li:nth-child(4){background:var(--navy);color:#fff}.pills li:nth-child(5){background:#fff;border:2px solid var(--navy)}
 .card{background:#fff;border-radius:var(--r);padding:32px;box-shadow:0 1px 0 var(--line)}
 .stat-card{background:#fff;border-radius:var(--r);padding:32px}.stat-card dt{color:var(--teal-d)}
 .kb{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .kb li{border-radius:var(--r);padding:18px 18px 24px}.kb img{border-radius:18px;aspect-ratio:4/3;object-fit:cover;width:100%;margin-bottom:16px}.kb h3{margin:0 0 .3em}.kb p{margin:0}
-.kb li:nth-child(1){background:var(--teal);color:var(--navy)}.kb li:nth-child(2){background:var(--yellow);color:var(--navy)}.kb li:nth-child(3){background:var(--orange-d);color:#fff}.kb a{color:inherit;font-weight:800}
+.kb li:nth-child(1){background:var(--teal-25);color:var(--navy)}.kb li:nth-child(2){background:var(--yellow-40);color:var(--navy)}.kb li:nth-child(3){background:var(--orange-25);color:var(--navy)}.kb a{color:inherit;font-weight:800}
 .ready{position:relative;border-radius:32px;overflow:hidden;color:#fff;text-align:center;padding:96px 24px}.ready>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ready::after{content:"";position:absolute;inset:0;background:rgba(7,41,59,.62)}.ready>div{position:relative;z-index:2;max-width:640px;margin:0 auto}.ready .btn-ghost{color:#fff;border-color:#fff}.ready .btnrow{justify-content:center}
+.ready::after{content:"";position:absolute;inset:0;background:rgba(7,41,59,.72)}.ready>div{position:relative;z-index:2;max-width:640px;margin:0 auto}.ready .btn-ghost{color:#fff;border-color:#fff}.ready .btnrow{justify-content:center}
 .pg1{padding:40px 0 8px}.pg1 .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.pg1 .ph{border-radius:32px;overflow:hidden;aspect-ratio:4/3}.pg1 .ph img{width:100%;height:100%;object-fit:cover}
 @media(max-width:860px){.pg1 .wrap{grid-template-columns:1fr}}
 .arc{border-radius:var(--r);padding:28px;background:#fff;border-top:6px solid var(--teal)}.arc.y{border-top-color:var(--yellow)}.arc.o{border-top-color:var(--orange)}
-.ft-from{background:#fff}.ft-arrow{background:var(--teal);border-radius:var(--r);color:#fff}.ft-to{background:var(--teal);color:var(--navy)}
+.ft-from{background:#fff}.ft-arrow{background:var(--teal-d);border-radius:var(--r);color:#fff}.ft-to{background:var(--teal-25);color:var(--navy)}
 .journey li{background:#fff;border-radius:20px;padding:18px 22px}.journey b{color:var(--teal-d)}
 .pcard{background:#fff}.cards .pcard:nth-child(1){border-top:6px solid var(--teal)}.cards .pcard:nth-child(2){border-top:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-top:6px solid var(--orange)}
 .pgroup h3{font-size:1.4rem}
 .racks{list-style:none;margin:0;padding:0;display:grid;gap:12px}.racks li{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;border-radius:99px;padding:14px 26px 14px 14px;background:#fff;border:1px solid var(--line)}
-.racks .rn{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:900;background:var(--teal);color:var(--navy)}.racks li:nth-child(2) .rn{background:var(--yellow)}.racks li:nth-child(3) .rn{background:var(--orange-d);color:#fff}.racks li:nth-child(4) .rn{background:var(--navy);color:#fff}
+.racks .rn{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:900;background:var(--teal-25);color:var(--navy)}.racks li:nth-child(2) .rn{background:var(--yellow-40)}.racks li:nth-child(3) .rn{background:var(--orange-25)}.racks li:nth-child(4) .rn{background:var(--navy);color:#fff}
 .racks h3{margin:0}.racks p{margin:0;font-size:.95rem;color:var(--muted)}.racks .rc{font-weight:800;font-size:.9rem;background:#eef5f5;border-radius:99px;padding:.3em .8em}
 @media(max-width:600px){.racks li{grid-template-columns:auto 1fr;border-radius:24px}.racks .rc{grid-column:2}}
 .pmap{--land:#ffffff;--sea:#d8f0ee;--coast:#8fcfc9;--river:#7cc0dd}
@@ -586,7 +610,7 @@ def v1():
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our values</h2>{values_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our journey</h2>{journey()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap split"><div class="card"><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning is our learning cycle, with researchers from the University Centre for Rural Health.</p>{meal()}</div><div class="card" style="background:var(--yellow)">{quote()}</div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap split"><div class="card"><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning is our learning cycle, with researchers from the University Centre for Rural Health.</p>{meal()}</div><div class="card" style="background:var(--yellow-40)">{quote()}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap card"><h2>Our structure</h2><p>Steering committee, embedded researchers from UCRH and the Network Lead, {CONTACT["name"]}. Names and roles to be supplied.</p><h3>Common questions</h3>{faq()}</div></section>'''
 
     partners = f'''<div class="pg1"><div class="wrap"><div><span class="eyebrow">Impact</span><h1>The partners who make this work possible</h1><p class="lede">Funders, delivery partners and researchers standing behind community-led resilience.</p></div><div class="ph">{img("speaker", eager=True)}</div></div></div>
@@ -623,6 +647,14 @@ def illus_hero():
 <path d="M0 330C90 270 170 285 260 315s170 10 340-40V460H0z" fill="#bfe7e3"/><path d="M0 370c120-50 230-30 330 0s180 10 270-20V460H0z" fill="#7fd0c9"/>
 <path d="M0 410c160-30 300-10 420 10s140 0 180-10V460H0z" fill="#00a79d"/><path d="M60 460c40-40 130-50 210-55s150-25 170-55" fill="none" stroke="#dff1f6" stroke-width="14" stroke-linecap="round"/>
 {hands}{people}</svg>'''
+
+
+ARC = '<svg class="arc-acc" viewBox="0 0 160 110" aria-hidden="true"><path d="M20 100a60 60 0 0 1 120 0" fill="none" stroke="#ffcb2a" stroke-width="16" stroke-linecap="round"/><path d="M45 100a35 35 0 0 1 70 0" fill="none" stroke="#f05a28" stroke-width="12" stroke-linecap="round"/><circle cx="80" cy="22" r="10" fill="#f05a28"/><circle cx="26" cy="48" r="7" fill="#ffcb2a"/><circle cx="134" cy="48" r="7" fill="#00a79d"/></svg>'
+
+
+def photo_art(key, cls="h2-art", sticker=""):
+    st = f'<span class="sticker">{sticker}</span>' if sticker else ""
+    return f'<div class="{cls}"><div class="ph">{img(key, eager=True)}</div>{ARC}{st}</div>'
 
 
 def blob_icon(name, bg):
@@ -672,6 +704,13 @@ body{--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#006b64;--foot-line:#b
 .racks li:nth-child(5n+1){background:#eaf7f5}.racks li:nth-child(5n+2){background:#fff6d8}.racks li:nth-child(5n+3){background:#fdece4}.racks li:nth-child(5n+4){background:#eaf5fb}.racks li:nth-child(5n){background:#f3f0fb}
 .pillars.ill li{background:#fff;border-radius:28px;padding:24px;box-shadow:0 8px 24px -14px rgba(7,41,59,.35)}.pillars.ill .ico{width:52px;height:52px;padding:9px;border-radius:18px;background:#eaf7f5;color:var(--teal-d)}
 .whitecard{background:#fff;border-radius:28px;padding:32px;box-shadow:0 8px 24px -14px rgba(7,41,59,.35)}
+.h2-art{position:relative;padding:24px 0 0 24px}.h2-art .ph{border-radius:40px 40px 40px 140px;overflow:hidden;aspect-ratio:5/4;box-shadow:0 18px 40px -24px rgba(7,41,59,.5)}
+.h2-art .ph img{width:100%;height:100%;object-fit:cover}.arc-acc{position:absolute;width:140px;left:-16px;top:-26px}
+.sticker{position:absolute;right:16px;bottom:-14px;background:#fff;border-radius:99px;padding:.5em 1.1em;font-weight:900;box-shadow:0 8px 20px -10px rgba(7,41,59,.4)}
+.sphoto{position:relative;width:240px}.sphoto img{width:240px;height:170px;object-fit:cover;border-radius:32px}.sbadge{position:absolute;right:-12px;bottom:-12px;width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 6px 16px -8px rgba(7,41,59,.5);color:var(--teal-d)}.sbadge .ico{width:30px;height:30px}
+.fcards img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.prow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.prow img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px}@media(max-width:700px){.prow{grid-template-columns:1fr 1fr}}
+.r2{border-radius:32px;aspect-ratio:4/5}.pimg{width:calc(100% + 48px);margin:-24px -24px 14px;aspect-ratio:16/10;object-fit:cover}.pillars.ill li{overflow:hidden}
 .pmap{--land:#fbfdf8;--sea:#e3f4f8;--coast:#a9d8d2;--river:#8ccbe3;--dot:#00a79d;--hot:#f05a28}
 .places button{--chip:#d4ece9}.places button:hover,.places button[aria-pressed=true]{background:var(--teal-d);border-color:var(--teal-d)}
 .site-foot .logo-white{filter:none}
@@ -681,7 +720,7 @@ body{--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#006b64;--foot-line:#b
 def v2():
     home = f'''<div class="hero2"><div class="wrap"><div><span class="eyebrow">Northern Rivers Community Resilience Alliance</span><h1>{H1}</h1>
 <p class="lede">{CALLOUT}</p><p class="btnrow"><a class="btn btn-primary" href="#network">Join the network</a><a class="btn btn-ghost" href="#about">What we do</a></p></div>
-<div>{illus_hero()}</div></div></div>
+{photo_art("cheer", sticker="60+ groups, one network")}</div></div>
 <section class="mint" style="padding:40px 0 56px"><div class="wrap"><ul class="paths">
 <li><a href="#about">{blob_icon("people", "#fff1c2")}<span><b>What we do</b><small>Our focus and purpose</small></span></a></li>
 <li><a href="#partners">{blob_icon("seed", "#fde0d4")}<span><b>Projects and HELP Fund</b><small>Who funds this work</small></span></a></li>
@@ -691,40 +730,40 @@ def v2():
 <section class="sec"><div class="wrap">{places_block("The group made up of groups", WHO + " Tap a town to find it on the map.")}</div></section>
 
 <section class="sec mint"><div class="wrap"><span class="eyebrow">Our focus</span><h2>How the Alliance works</h2>
-<ol class="steps">{"".join(f'<li><div class="art">{blob_icon(k, ["#d4f0ec", "#fff1c2", "#fde0d4", "#e3f1fa", "#fff1c2"][i])}</div><span class="num">{i + 1}</span><div class="txt"><h3>{E(t)}</h3><p>{E(d)}</p></div></li>' for i, (t, d, k) in enumerate(PILLARS))}</ol></div></section>
+<ol class="steps">{"".join(f'<li><div class="art"><div class="sphoto">{img(["web", "board", "hug", "meeting", "speaker"][i])}<span class="sbadge">{icon(k)}</span></div></div><span class="num">{i + 1}</span><div class="txt"><h3>{E(t)}</h3><p>{E(d)}</p></div></li>' for i, (t, d, k) in enumerate(PILLARS))}</ol></div></section>
 
 <section class="sec"><div class="wrap split"><div class="statbox peach"><span class="eyebrow">What we have achieved</span>{stats()}</div><div class="vframe">{video("laughing")}</div></div></section>
 
 <section class="sec sky" id="home-focus"><div class="wrap"><span class="eyebrow">In focus</span><h2>Upcoming, projects and the R.A.C.K</h2>
-<ul class="fcards"><li><div class="top"></div><div class="in">{icon("cal")}<h3>{GATHER[0]}: {GATHER[1]}</h3><p>{GATHER[2]}.</p></div></li>
-<li><div class="top"></div><div class="in">{icon("seed")}<h3>Projects</h3><p>Three projects growing the Alliance, funding local ideas and learning together. <a href="#partners">See partners</a></p></div></li>
-<li><div class="top"></div><div class="in">{icon("book")}<h3>The R.A.C.K</h3><p>{RACK_LINE} <a href="#rack">Explore</a></p></div></li></ul></div></section>
+<ul class="fcards"><li>{img("crowd")}<div class="top"></div><div class="in"><h3>{GATHER[0]}: {GATHER[1]}</h3><p>{GATHER[2]}.</p></div></li>
+<li>{img("meeting")}<div class="top"></div><div class="in"><h3>Projects</h3><p>Three projects growing the Alliance, funding local ideas and learning together. <a href="#partners">See partners</a></p></div></li>
+<li>{img("table")}<div class="top"></div><div class="in"><h3>The R.A.C.K</h3><p>{RACK_LINE} <a href="#rack">Explore</a></p></div></li></ul></div></section>
 
 <section class="sec"><div class="wrap"><h2>Thanks to our partners</h2>{partner_strip()}<p class="btnrow"><a class="btn btn-ghost" href="#partners">All partners</a></p></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="bandcta butter"><div><h2>Get involved</h2><p>Local experience. Shared learning. Wider impact.</p>{cta_band()}</div><div>{illus_hero()}</div></div></div></section>'''
 
-    def pg(chip, title, text, extra=""):
-        return f'<div class="pg2"><div class="wrap"><div><span class="chip">{chip}</span><h1>{title}</h1><p class="lede">{text}</p>{extra}</div><div class="art">{illus_hero()}</div></div></div>'
+    def pg(chip, title, text, extra="", pic="group"):
+        return f'<div class="pg2"><div class="wrap"><div><span class="chip">{chip}</span><h1>{title}</h1><p class="lede">{text}</p>{extra}</div>{photo_art(pic)}</div></div>'
 
     about = pg("About us", "Local experience. Shared learning. Wider impact.", WHO) + f'''
 <section class="sec mint"><div class="wrap split" style="align-items:stretch"><div class="whitecard"><h2>Vision</h2><p>{VISION}</p></div><div class="whitecard"><h2>Purpose</h2><p>{PURPOSE}</p></div></div></section>
-<section class="sec"><div class="wrap"><h2>Our values</h2>{values_cards()}</div></section>
+<section class="sec"><div class="wrap"><h2>Our values</h2>{values_cards()}<div class="prow">{img("board")}{img("hug")}{img("line")}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to()}</div></section>
 <section class="sec sky"><div class="wrap"><h2>Our journey</h2>{journey("river")}</div></section>
-<section class="sec"><div class="wrap split"><div><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning, with researchers from the University Centre for Rural Health.</p>{meal()}</div><div class="soft butter">{quote()}</div></div></section>
+<section class="sec"><div class="wrap split"><div><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning, with researchers from the University Centre for Rural Health.</p>{meal()}<div class="soft butter" style="margin-top:24px">{quote()}</div></div>{img("laughing", "photo r2")}</div></section>
 <section class="sec peach"><div class="wrap"><h2>Our structure</h2><p>Steering committee, UCRH embedded researchers and the Network Lead, {CONTACT["name"]}. Names to be supplied.</p><h3>Common questions</h3>{faq()}</div></section>'''
 
-    partners = pg("Impact", "Our partners", "The funders, delivery partners and researchers behind community-led resilience.") + f'''
+    partners = pg("Impact", "Our partners", "The funders, delivery partners and researchers behind community-led resilience.", pic="speaker") + f'''
 <section class="sec mint"><div class="wrap">{partner_groups()}</div></section>
 <section class="sec"><div class="wrap"><h2>Projects they support</h2>{projects_cards()}</div></section>'''
 
-    network = pg("Network", "Groups across the Northern Rivers", "60+ grassroots, place-based groups working across five pillars.") + f'''
+    network = pg("Network", "Groups across the Northern Rivers", "60+ grassroots, place-based groups working across five pillars.", pic="web") + f'''
 <section class="sec mint"><div class="wrap">{map_embed()}</div></section>
 <section class="sec"><div class="wrap">{places_block("Places we connect")}</div></section>
-<section class="sec sky"><div class="wrap"><h2>Five pillars</h2>{pillars_list("pillars ill", True)}</div></section>
+<section class="sec sky"><div class="wrap"><h2>Five pillars</h2><ol class="pillars ill">{"".join(f'<li>{img(["cheer", "board", "hug", "meeting", "speaker"][i], "pimg")}{icon(k)}<h3>{E(t)}</h3><p>{E(d)}</p></li>' for i, (t, d, k) in enumerate(PILLARS))}</ol></div></section>
 <section class="sec"><div class="wrap split" style="align-items:start"><div class="whitecard"><h2>All groups</h2>{directory()}</div><div class="whitecard">{contact_form()}</div></div></section>'''
 
-    rack = pg("Resources", "The R.A.C.K", f"<b>{RACK_NAME}.</b> {RACK_LINE}", rack_buttons()) + f'''
+    rack = pg("Resources", "The R.A.C.K", f"<b>{RACK_NAME}.</b> {RACK_LINE}", rack_buttons(), pic="table") + f'''
 <section class="sec mint"><div class="wrap"><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
 <section class="sec"><div class="wrap"><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>Participatory grants for local groups.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul></div></section>
 <section class="sec butter"><div class="wrap"><h2>Need help getting in?</h2><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
@@ -738,10 +777,11 @@ ARROW = '<svg class="arrow" viewBox="0 0 60 90" aria-hidden="true"><path d="M30 
 CSS3 = """
 body{--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5a0;--hover:#f7ecd6;--deep:#003d38}
 .hero3{padding:20px 0 0}.h3-box{position:relative;border-radius:40px;overflow:hidden;min-height:620px;display:flex;align-items:flex-end;color:#fff}
-.h3-box>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.h3-box::after{content:"";position:absolute;inset:0;background:rgba(0,40,36,.55)}
+.h3-box>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.h3-box::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,40,36,.55),rgba(0,40,36,.85))}
 .h3-box .in{position:relative;z-index:2;padding:48px;max-width:860px}.h3-box h1{font-size:clamp(2.2rem,5.4vw,4.4rem)}.h3-box .btn-ghost{color:#fff;border-color:#fff}.h3-box .btn-ghost:hover{background:#fff;color:var(--deep)}
 .mark{position:relative;white-space:nowrap}.mark .squig{position:absolute;left:0;right:0;bottom:-.25em;width:100%;height:.4em}
 @media(max-width:760px){.h3-box{min-height:520px}.h3-box .in{padding:28px}}
+.h3-box .eyebrow,.pg3 .eyebrow{display:inline-block;background:rgba(0,40,36,.9);padding:.35em .9em;border-radius:99px}
 .hand{font-family:"Caveat",cursive;font-weight:700;color:var(--orange-d);font-size:1.6rem}
 .circles{position:relative;height:440px}.circles img{position:absolute;border-radius:50%;object-fit:cover;border:8px solid #fbf6ec}
 .circles img:nth-child(1){width:300px;height:300px;left:0;top:0}.circles img:nth-child(2){width:220px;height:220px;right:0;top:40px}.circles img:nth-child(3){width:200px;height:200px;left:150px;bottom:0}
@@ -751,9 +791,9 @@ body{--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5a0;--hover:#
 .collage{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}.collage figure{margin:0;position:relative;border-radius:28px;overflow:hidden}
 .collage img{width:100%;height:100%;object-fit:cover}.collage figcaption{position:absolute;left:12px;bottom:12px;background:#fbf6ec;color:var(--navy);border-radius:99px;padding:.25em .8em;font-weight:800;font-size:.85rem}
 .collage .w2{grid-column:span 2}.collage .h2{grid-row:span 2}@media(max-width:760px){.collage{grid-template-columns:1fr 1fr;grid-auto-rows:150px}}
-.orange{background:var(--orange);color:var(--navy)}.yellow{background:var(--yellow);color:var(--navy)}.deep{background:var(--deep);color:#fff}.deep a{color:#fff}
+.orange{background:var(--orange-25);color:var(--navy)}.yellow{background:var(--yellow-40);color:var(--navy)}.yellow a,.orange a:not(.btn){color:var(--navy)}.deep{background:var(--deep);color:#fff}.deep a{color:#fff}
 .oblock{border-radius:40px;padding:56px 48px;position:relative;overflow:hidden}.oblock .stats dt{font-size:clamp(2.6rem,5vw,4rem)}.oblock .stats dd{font-weight:800}
-.oblock .shape{position:absolute;width:220px;height:220px;right:-90px;bottom:-100px;background:var(--yellow);border-radius:58% 42% 62% 38%/45% 55% 45% 55%;opacity:.9}
+.oblock .shape{position:absolute;width:220px;height:220px;right:-90px;bottom:-100px;background:var(--orange);border-radius:58% 42% 62% 38%/45% 55% 45% 55%;opacity:.9}
 .oblock>*{position:relative}.oblock .hand{color:var(--navy);margin:0 0 .4em}.oblock .stats dd,.oblock .big-b{font-size:1.2rem;font-weight:800}.oblock .pcard p{font-weight:600}
 .words{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center}.words .face{width:260px;height:260px;border-radius:50%;overflow:hidden}.words .face img{width:100%;height:100%;object-fit:cover}
 .quote p{font-family:"Caveat",cursive;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.15}@media(max-width:760px){.words{grid-template-columns:1fr}.words .face{width:180px;height:180px}}
@@ -761,23 +801,22 @@ body{--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5a0;--hover:#
 .stories li{background:#fff;border-radius:28px;overflow:hidden}.stories img{aspect-ratio:4/3;object-fit:cover;width:100%}.stories .in{padding:18px 22px}.stories h3{margin:0 0 .3em}.stories p{margin:0;color:var(--muted)}
 .bigv{border-radius:40px;overflow:hidden}.bigv .video{border-radius:40px;aspect-ratio:21/9;min-height:320px}
 .help{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:24px}
-.help li{text-align:center}.help .hico{width:110px;height:110px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);color:var(--navy)}.help .hico .ico{width:56px;height:56px}
-.help li:nth-child(2) .hico{background:var(--orange);}.help li:nth-child(3) .hico{background:var(--teal)}.help li:nth-child(4) .hico{background:#fff;border:3px solid var(--navy)}
+.help li{text-align:center}.help .hico{width:110px;height:110px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--navy);border:4px solid var(--orange)}.help .hico .ico{width:56px;height:56px}
+.help li:nth-child(2) .hico{border-color:var(--teal)}.help li:nth-child(3) .hico{border-color:var(--navy)}.help li:nth-child(4) .hico{border-color:var(--orange-d)}
 .help a{font-weight:800}
 .arrow{width:46px;height:70px;display:block;margin:10px auto}
 .pg3{padding:20px 0 0}.pg3 .box{position:relative;border-radius:40px;overflow:hidden;min-height:400px;display:flex;align-items:flex-end;color:#fff}
-.pg3 .box>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.pg3 .box::after{content:"";position:absolute;inset:0;background:rgba(0,40,36,.55)}
+.pg3 .box>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.pg3 .box::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,40,36,.55),rgba(0,40,36,.85))}
 .pg3 .in{position:relative;z-index:2;padding:40px;max-width:760px}.pg3 .btn-ghost{color:#fff;border-color:#fff}.pg3 .btn-ghost:hover{background:#fff;color:var(--deep)}
-.val{border-radius:28px;padding:28px}.val .ico{width:52px;height:52px;margin-bottom:12px}.val-teal{background:var(--teal);color:var(--navy)}.val-yellow{background:var(--yellow);color:var(--navy)}.val-orange{background:var(--orange);color:var(--navy)}
-.val-orange p,.val-orange h3{font-weight:700}
-.ft-from{background:#fff}.ft-arrow{color:var(--orange-d)}.ft-to{background:var(--yellow)}
+.val{border-radius:28px;padding:28px}.val .ico{width:52px;height:52px;margin-bottom:12px}.val-teal{background:var(--teal-25);color:var(--navy)}.val-yellow{background:var(--yellow-40);color:var(--navy)}.val-orange{background:var(--orange-25);color:var(--navy)}
+.ft-from{background:#fff}.ft-arrow{color:var(--orange-d)}.ft-to{background:var(--yellow-40)}
 .tline{list-style:none;margin:0;padding:0;display:grid;gap:22px}.tline li{display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center}.tline img{border-radius:50%;width:180px;height:180px;object-fit:cover}
 .tline li:nth-child(even) img{border-radius:62% 38% 55% 45%/48% 60% 40% 52%}.tline b{font-size:1.8rem;font-weight:900;color:var(--orange-d)}.tline p{margin:.2em 0 0}
 @media(max-width:700px){.tline li{grid-template-columns:1fr}.tline img{width:140px;height:140px}}
 .team{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:20px;text-align:center}
 .team .av{width:130px;height:130px;border-radius:50%;margin:0 auto 10px;background:#efe3cb;display:grid;place-items:center;color:var(--muted);font-weight:800}
 .pillars.ppl li{background:#fff;border-radius:28px;overflow:hidden;padding:0}.pillars.ppl img{aspect-ratio:1;object-fit:cover;width:100%}.pillars.ppl h3,.pillars.ppl p{padding:0 18px}.pillars.ppl h3{margin:.8em 0 .3em}.pillars.ppl p{padding-bottom:18px}
-.pcard{background:#fff}.cards .pcard:nth-child(2){background:var(--yellow)}.cards .pcard:nth-child(3){background:var(--teal)}.pcard .meta{color:var(--navy)}
+.pcard{background:#fff}.cards .pcard:nth-child(2){background:var(--yellow-40)}.cards .pcard:nth-child(3){background:var(--teal-25)}.pcard .meta{color:var(--navy)}
 .pgroup h3{font-family:"Caveat",cursive;font-size:2.2rem;color:var(--orange-d)}
 .racks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
 .racks li{background:#fff;border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:6px;border-top:10px solid var(--orange)}.racks li:nth-child(2n){border-top-color:var(--yellow)}.racks li:nth-child(3n){border-top-color:var(--teal)}
@@ -831,7 +870,7 @@ def v3():
     partners = pg("Impact", "Thank you to our partners", "The funders, delivery partners and researchers behind community-led resilience.", "speaker") + f'''
 <section class="sec"><div class="wrap">{partner_groups()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Projects they support</h2>{projects_cards()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="oblock yellow"><span class="shape" aria-hidden="true" style="background:var(--orange)"></span><h2>Partner with us</h2><p>Talk to the Network Lead about funding, research or delivery partnerships.</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Email {CONTACT["name"]}</a></p></div></div></section>'''
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="oblock yellow"><span class="shape" aria-hidden="true" style="background:var(--yellow)"></span><h2>Partner with us</h2><p>Talk to the Network Lead about funding, research or delivery partnerships.</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Email {CONTACT["name"]}</a></p></div></div></section>'''
 
     ppics = ["cheer", "board", "hug", "meeting", "speaker"]
     network = pg("Network", "Groups across the Northern Rivers", "60+ grassroots, place-based groups working across five pillars.", "web") + f'''
@@ -848,23 +887,43 @@ def v3():
 
 
 # ================================================================ dashboard
+INSPO = {
+    "v1": [("v1-milou-home", "Milou's NRCRA draft: home"), ("v1-milou-knowledge", "Milou's draft: Knowledge Bank"), ("v1-rack", "The R.A.C.K app")],
+    "v2": [("v2-resilient-lismore", "Resilient Lismore"), ("v2-investing-for-charity", "Investing for Charity"), ("v2-la2050", "LA2050")],
+    "v3": [("v3-farm-africa", "Farm Africa"), ("v3-childrens-society", "The Children's Society"), ("v3-save-the-children", "Save the Children concept")],
+}
+
+
 def dashboard():
     cards = [
-        ("v1", "Prototype 1: Rounded blocks", "Built from Milou's drafts and the R.A.C.K app. Teal, yellow and orange rounded cards, pill rows, a navy hero panel."),
-        ("v2", "Prototype 2: Light and fresh", "White and pastel bands, flat illustrations made from the logo's shapes, no dark blocks."),
-        ("v3", "Prototype 3: People and community", "Big photos of members, circle crops, warm orange and yellow, hand-drawn accents."),
+        ("v1", "Rounded blocks", "Built from Milou's drafts and the R.A.C.K app. Rounded cards in light teal, yellow and orange tints, coloured pill rows, a navy hero panel beside a big rounded photo.", ["Colour cards with photos inside", "Pill rows for the five pillars", "From / To comparison on About"]),
+        ("v2", "Light and fresh", "Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents and one illustration, no dark blocks.", ["Photo hero with logo-arc accent", "Five pillars down a dotted step line", "River-style journey timeline"]),
+        ("v3", "People and community", "People first: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn accents.", ["Circle photo cluster and collage", "In their own words stories", "Four ways to be part of it"]),
     ]
-    out = ""
-    for slug, t, d in cards:
+    rows = ""
+    for i, (slug, t, d, feats) in enumerate(cards, 1):
         links = "".join(f'<li><a href="{slug}/#{k}">{n}</a></li>' for k, n in PAGES)
-        out += f'<article class="c"><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="pl">{links}</ul></article>'
+        ins = "".join(f'<figure><img src="assets/inspo/{f}.jpg" alt="Mood board reference: {E(c)}" loading="lazy"><figcaption>{E(c)}</figcaption></figure>' for f, c in INSPO[slug])
+        fl = "".join(f"<li>{E(x)}</li>" for x in feats)
+        rows += f'''<article class="row row{i}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
+<div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><ul class="pl">{links}</ul>
+<h3>Inspired by the mood board</h3><div class="ins">{ins}</div></div></article>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA website prototypes</title><meta name="robots" content="noindex">{FONT}
-<style>{BASE}body{{background:#eef6f5}}main{{max-width:1100px;margin:0 auto;padding:48px 20px}}.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}}
-.c{{background:#fff;padding:28px;border-radius:24px;border-top:10px solid var(--yellow)}}.c:nth-child(2){{border-color:var(--teal)}}.c:nth-child(3){{border-color:var(--orange)}}.c h2 a{{color:var(--navy);text-decoration:none}}
-.pl{{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}}.pl a{{display:block;padding:.4em .9em;border:2px solid var(--navy);border-radius:99px;color:var(--navy);text-decoration:none;font-weight:700}}.pl a:hover{{background:var(--navy);color:#fff}}</style></head>
-<body><main><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:56px;margin-bottom:24px"><h1>Website prototypes</h1>
-<p>Three directions for the five-page NRCRA website, refined from the mood board. Sample content only. Status: draft, Round 1 direction review.</p><div class="grid">{out}</div>
-<p class="vnote" style="margin-top:32px">Prototype of nrcra.org.au (Home, About, Partners, Network, R.A.C.K). To be built in Wix Classic. Prepared by VeeMercado.com.</p></main></body></html>'''
+<style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
+.top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}
+.flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
+.row{{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:start;background:#fff;border-radius:32px;padding:28px;margin-bottom:28px;border-left:12px solid var(--yellow)}}
+.row2{{border-left-color:var(--teal)}}.row3{{border-left-color:var(--orange)}}
+.shot{{display:block;border-radius:18px;overflow:hidden;box-shadow:0 18px 40px -22px rgba(7,41,59,.55);border:1px solid var(--line);background:#fff}}.shot img{{width:100%;display:block}}.shot:hover{{transform:translateY(-3px)}}
+.bar{{display:flex;gap:6px;padding:9px 12px;background:#eef1f3;border-bottom:1px solid var(--line)}}.bar i{{width:10px;height:10px;border-radius:50%;background:#c9d2d6}}
+.num{{display:inline-block;background:var(--navy-8);border-radius:99px;padding:.2em .9em;font-weight:900;font-size:.85rem}}.info h2{{margin:.35em 0 .3em}}.info h2 a{{color:var(--navy);text-decoration:none}}
+.feats{{margin:0 0 16px;padding-left:1.2em}}.info h3{{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:22px 0 10px}}
+.pl{{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}}.pl a{{display:block;padding:.4em .9em;border:2px solid var(--navy);border-radius:99px;color:var(--navy);text-decoration:none;font-weight:700}}.pl a:hover{{background:var(--navy);color:#fff}}
+.ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
+@media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}}}</style></head>
+<body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>Website prototypes</h1></div>
+<p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. Sample content only. To be built in Wix Classic. Status: draft for direction review.</p></div>
+{rows}</main></body></html>'''
 
 
 def write(path, s):
