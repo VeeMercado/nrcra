@@ -266,6 +266,9 @@ def meal(cls="meal"):
     return f'<ol class="{cls}">' + "".join(f"<li>{icon(MEAL_ICONS[m], 'mico')}{m}</li>" for m in MEAL) + "</ol>"
 
 
+FEET = ('<svg viewBox="0 0 40 50" aria-hidden="true"><g fill="currentColor">'
+        '<ellipse cx="12" cy="34" rx="5" ry="8.5"/><circle cx="8" cy="23" r="1.8"/><circle cx="11.5" cy="22" r="1.8"/><circle cx="15" cy="23" r="1.8"/>'
+        '<ellipse cx="28" cy="18" rx="5" ry="8.5"/><circle cx="24" cy="7" r="1.8"/><circle cx="27.5" cy="6" r="1.8"/><circle cx="31" cy="7" r="1.8"/></g></svg>')
 PIN = '<svg class="pin" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 50S4 31 4 19a16 16 0 0 1 32 0c0 12-16 31-16 31z" fill="#f05a28"/><circle cx="20" cy="19" r="6.5" fill="#fff"/></svg>'
 
 
@@ -278,7 +281,13 @@ def trail():
         x1, x2 = (25, 75) if side == "l" else (75, 25)
         link = "" if i == n - 1 else f'<svg class="tlink" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M{x1} 0C{x1} 55 {x2} 45 {x2} 100" vector-effect="non-scaling-stroke"/></svg>'
         pin = PIN if i == n - 1 else ""
-        out += f'<li class="t-{side} t{i % 5}">{link}<span class="stop">{pin}<b>{y}</b></span><div class="tcard"><p>{E(t)}</p></div></li>'
+        # footprints at two points along the open stretch of the curve (bezier t=0.55 and t=0.8), turned the way the path travels
+        feet = ""
+        if i < n - 1:
+            for fx, fy, rot in ((0.575, 53.4, 105), (0.896, 73.8, 135)):
+                x = x1 + (x2 - x1) * fx
+                feet += f'<span class="feet" style="left:{x:.1f}%;top:calc(50px + {fy}%);transform:translate(-50%,-50%) rotate({rot if side == "l" else -rot}deg)">{FEET}</span>'
+        out += f'<li class="t-{side} t{i % 5}">{link}{feet}<span class="stop">{pin}<b>{y}</b></span><div class="tcard"><p>{E(t)}</p></div></li>'
     return out + "</ol>"
 
 
@@ -695,15 +704,15 @@ body{--bg:#f3f6f7}
 .p3-logos ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}.p3-logos li{border:1px solid var(--line);border-radius:16px;display:grid;place-items:center;padding:12px;aspect-ratio:3/2;background:#fff}.p3-logos img{max-height:56px;max-width:100%;object-fit:contain}
 @media(max-width:900px){.p3{grid-template-columns:1fr}.p3-img img{aspect-ratio:16/10}}
 .vp{border-radius:var(--r);padding:28px}.vp-t{background:var(--teal-25)}.vp-y{background:var(--yellow-40)}.vp .connect-art{max-width:300px;margin:0 0 14px}
-.trail{list-style:none;margin:24px 0 0;padding:0}.trail li{position:relative;padding:0 0 64px}.trail li:last-child{padding-bottom:0}
+.trail{list-style:none;margin:24px 0 0;padding:0}.trail li{position:relative;padding:0 0 44px}.feet{position:absolute;z-index:3;width:46px;height:58px;color:var(--teal-d);opacity:.85}.feet svg{width:100%;height:100%;display:block}.trail li:last-child{padding-bottom:0}
 .tlink{position:absolute;left:0;top:50px;width:100%;height:100%;overflow:visible;z-index:0}.tlink path{fill:none;stroke:var(--navy);stroke-width:5;stroke-linecap:round;stroke-dasharray:1 14;opacity:.55}
 .stop{position:relative;z-index:2;width:100px;height:100px;border-radius:50%;display:grid;place-items:center;text-align:center;background:#fff;border:6px solid var(--teal);font-weight:900;line-height:1.05;padding:8px}
 .stop b{font-size:1.25rem}.t-l .stop{margin-left:calc(25% - 50px)}.t-r .stop{margin-left:calc(75% - 50px)}
 .t1 .stop{border-color:var(--yellow)}.t2 .stop{border-color:var(--orange)}.t3 .stop{border-color:var(--navy)}.t4 .stop{border-color:var(--teal-d)}.t4 .stop b{font-size:1rem}
-.tcard{position:relative;z-index:2;width:44%;margin-top:14px;background:#fff;border-radius:var(--r);padding:18px 22px;box-shadow:0 1px 0 var(--line)}.tcard p{margin:0}
+.tcard{position:relative;z-index:2;width:44%;margin-top:10px;background:#fff;border-radius:var(--r);padding:18px 22px;box-shadow:0 1px 0 var(--line)}.tcard p{margin:0}
 .t-l .tcard{margin-left:3%}.t-r .tcard{margin-left:53%}
 .pin{position:absolute;width:38px;height:48px;top:-40px;left:50%;transform:translateX(-50%)}
-@media(max-width:760px){.tlink{display:none}.trail{margin-top:40px}.trail li{padding:0 0 28px 84px;min-height:96px}.trail li:not(:last-child)::before{content:"";position:absolute;left:31px;top:72px;bottom:0;border-left:5px dotted rgba(7,41,59,.45)}
+@media(max-width:760px){.tlink,.feet{display:none}.trail{margin-top:40px}.trail li{padding:0 0 28px 84px;min-height:96px}.trail li:not(:last-child)::before{content:"";position:absolute;left:31px;top:72px;bottom:0;border-left:5px dotted rgba(7,41,59,.45)}
 .stop,.t-l .stop,.t-r .stop{position:absolute;left:0;top:0;margin:0;width:68px;height:68px;border-width:5px;padding:4px}.stop b{font-size:.95rem}.t4 .stop b{font-size:.72rem}.pin{width:30px;height:38px;top:-32px}
 .tcard,.t-l .tcard,.t-r .tcard{width:auto;margin:0}}
 .pgs{padding:48px 0 0}.pgs .lede{max-width:70ch}.narrow{max-width:720px}
