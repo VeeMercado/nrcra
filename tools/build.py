@@ -149,7 +149,7 @@ def img(key, cls="", eager=False, alt=None):
 
 
 def logo(cls="logo", white=False):
-    return f'<img src="{IMG}logo.png" alt="Northern Rivers Community Resilience Alliance" class="{cls}{" logo-white" if white else ""}" width="260" height="60">'
+    return f'<img src="{IMG}logo.png" alt="Northern Rivers Community Resilience Alliance" class="{cls}{" logo-white" if white else ""}" width="900" height="207">'
 
 
 def screen(id_, label, body, cls=""):
@@ -182,14 +182,16 @@ TAGLINE = '<span class="tagline"><i class="tg1">Connect.</i> <i class="tg2">Shar
 ABORIGINAL_FLAG = '<svg class="ack-flag" viewBox="0 0 60 40" role="img" aria-label="Aboriginal flag"><rect width="60" height="20" fill="#000"/><rect y="20" width="60" height="20" fill="#cc0000"/><circle cx="30" cy="20" r="8" fill="#ffcc00"/></svg>'
 
 
-def footer(white_logo=True):
+def footer(white_logo=True, boxed=False):
     def col(title, items):
         return f'<div class="fcol"><h2>{title}</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in items) + "</ul></div>"
     quick = [("About", "#about"), ("News", LINKS["news"]), ("Events", LINKS["live"]), ("Contact", "https://www.nrcra.org.au/contact")]
     groups = [(n, u) for n, t, u in REGION_GROUPS]
     touch = [("Facebook", LINKS["fb"]), ("LinkedIn", LINKS["li"]), ("WhatsApp group", LINKS["wa"]), ("Resilience Roundup Newsletter", LINKS["news"])]
+    foot_top = ('<div class="foot-top"><span class="foot-logo boxed">' + logo("logo") + '<span class="foot-tag">' + TAGLINE + '</span></span></div>'
+                if boxed else '<div class="foot-top"><span class="foot-logo">' + logo("logo") + '</span><p class="tag">' + TAGLINE + '</p></div>')
     return f'''<footer class="site-foot"><div class="wrap">
-<div class="foot-cols"><div class="foot-top"><span class="foot-logo">{logo("logo")}</span><p class="tag">{TAGLINE}</p></div>{col("Resilience groups in our region", groups)}{col("Stay in touch", touch)}{col("Quick links", quick)}</div>
+<div class="foot-cols">{foot_top}{col("Resilience groups in our region", groups)}{col("Stay in touch", touch)}{col("Quick links", quick)}</div>
 <div class="ack">{ABORIGINAL_FLAG}<p>{ACK}</p></div>
 <p class="copy">© 2026 Northern Rivers Community Resilience Alliance &middot; <a href="https://www.nrcra.org.au/copy-of-terms-conditions">Privacy Policy</a></p>
 </div></footer>'''
@@ -551,19 +553,19 @@ select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy
 .site-foot{background:var(--foot,#07293b);color:var(--foot-ink,#fff);padding:52px 0 32px}.site-foot a{color:inherit}
 .site-foot h2{font-size:.9rem;text-transform:uppercase;letter-spacing:.12em;color:var(--foot-h,#ffcb2a)}
 .foot-top .tag{margin:12px 0 0;font-weight:800;color:var(--foot-h,#ffcb2a)}
-.foot-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px}.foot-top .foot-logo{max-width:100%}.foot-top .logo{max-width:100%;height:auto;max-height:54px}@media(max-width:960px){.foot-cols{grid-template-columns:1fr 1fr}}@media(max-width:560px){.foot-cols{grid-template-columns:1fr;gap:28px}}
+.foot-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px}.foot-top .foot-logo{max-width:100%}.foot-top .logo{display:block;width:100%;max-width:230px;height:auto}@media(max-width:960px){.foot-cols{grid-template-columns:1fr 1fr}}@media(max-width:560px){.foot-cols{grid-template-columns:1fr;gap:28px}}
 .fcol h2{margin:0 0 18px;padding-bottom:12px;position:relative}.fcol h2::after{content:"";position:absolute;left:0;bottom:0;width:44px;height:3px;border-radius:2px;background:currentColor}
 .flist{list-style:none;margin:0;padding:0}.flist li{position:relative;padding-left:22px;margin-bottom:10px;line-height:1.4}.flist li::before{content:"";position:absolute;left:2px;top:.5em;width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.45}
 .flist a{text-decoration:none}.flist a:hover{text-decoration:underline}
-.site-foot .ack{display:flex;gap:18px;align-items:flex-start;border-top:1px solid var(--foot-line,#35566a);margin-top:36px;padding-top:24px;font-size:.9rem}.site-foot .ack p{margin:0}.ack-flag{flex:none;width:60px;height:40px}
+.site-foot .ack{display:flex;gap:18px;align-items:flex-start;border-top:1px solid var(--foot-line,#35566a);margin-top:36px;padding-top:24px;font-size:.9rem}.site-foot .ack p{margin:0}@media(max-width:760px){.site-foot .ack{flex-direction:column;gap:12px}}.ack-flag{flex:none;width:60px;height:40px}
 .site-foot .copy{font-size:.85rem;margin:16px 0 0}
 .foot-in .copy{grid-column:1/-1;font-size:.85rem;margin:0}.fh2{margin-top:22px}.foot-btn{display:inline-block;border:2px solid currentColor;border-radius:var(--btn-r,99px);padding:.45em 1em;font-weight:800;text-decoration:none}
 .foot-net{grid-column:1/-1}.foot-net ul{columns:3 220px;column-gap:32px}.foot-net li{break-inside:avoid;margin-bottom:6px}.foot-net span{font-size:.85rem;opacity:.85}.site-foot .plain li{margin-bottom:6px}
-.foot-logo{display:inline-block;background:#fff;border-radius:16px;padding:12px 16px}.foot-in .tag{margin-top:12px;font-weight:800;color:var(--foot-h,#ffcb2a)}.site-foot .logo{height:54px}
+.foot-logo{display:inline-block;background:#fff;border-radius:16px;padding:12px 16px}.foot-in .tag{margin-top:12px;font-weight:800;color:var(--foot-h,#ffcb2a)}.foot-logo.boxed{display:flex;width:100%;flex-direction:column;gap:10px;align-items:flex-start}.foot-tag{font-size:1rem;line-height:1.2}
 .rk-tag{font-size:.8rem;font-weight:800}
 .tagline i{font-style:normal;font-weight:800}.tagline .tg1{color:#58b0ac}.tagline .tg2{color:#d8b044}.tagline .tg3{color:#e47848}
 /* white brush stroke behind the tagline wherever the background is not white or a light brand tint (Wix: place the stroke SVG behind the text) */
-body:not(.v2) .site-foot .tagline,.ticker .tagline,.full .callcard .tagline{display:inline-block;padding:.5em 1.5em;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2060'%20preserveAspectRatio='none'%3E%3Cpath%20fill='white'%20d='M7%2015C32%208%2082%2011%20142%209C202%208%20252%2010%20291%2012L297%2016L285%2019L299%2023L287%2027L298%2032L285%2036L293%2041C262%2048%20202%2051%20142%2050C92%2051%2042%2050%2011%2047L3%2043L15%2039L2%2034L13%2030L4%2025L14%2021L5%2018Z'/%3E%3Cpath%20fill='white'%20d='M20%205L96%206L98%209L22%209ZM190%2052L270%2051L268%2055L192%2056Z'/%3E%3C/svg%3E") no-repeat center/100% 100%}
+body.v3 .site-foot .tagline,.ticker .tagline,.full .callcard .tagline{display:inline-block;padding:.5em 1.5em;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2060'%20preserveAspectRatio='none'%3E%3Cpath%20fill='white'%20d='M7%2015C32%208%2082%2011%20142%209C202%208%20252%2010%20291%2012L297%2016L285%2019L299%2023L287%2027L298%2032L285%2036L293%2041C262%2048%20202%2051%20142%2050C92%2051%2042%2050%2011%2047L3%2043L15%2039L2%2034L13%2030L4%2025L14%2021L5%2018Z'/%3E%3Cpath%20fill='white'%20d='M20%205L96%206L98%209L22%209ZM190%2052L270%2051L268%2055L192%2056Z'/%3E%3C/svg%3E") no-repeat center/100% 100%}
 .rk-h1{font-size:clamp(1.7rem,3.4vw,2.4rem);max-width:24ch;margin-top:18px}.rk-lede{color:var(--muted);max-width:64ch}
 /* prototype bar: fixed, deliberately outside the brand so it never reads as part of the design */
 body{padding-bottom:72px}.protobar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:#111;color:#fff;font:600 14px/1.3 var(--font);box-shadow:0 -4px 16px rgba(0,0,0,.25)}
@@ -630,7 +632,7 @@ def page_shell(title, css, body, v, white_logo=True, slug=None, extra=""):
 <title>{title}</title><meta name="robots" content="noindex">
 <meta name="description" content="Prototype for the Northern Rivers Community Resilience Alliance website. Sample content only.">
 {FONT}<style>{BASE}{css}</style></head><body class="{v} {extra}">
-{nav()}<main id="main">{body}</main>{footer(white_logo)}{protobar(slug or v)}<script>{JS}</script></body></html>'''
+{nav()}<main id="main">{body}</main>{footer(white_logo, boxed=v in ("v1", "v2"))}{protobar(slug or v)}<script>{JS}</script></body></html>'''
 
 
 def assemble(home, about, partners, network, rack):
