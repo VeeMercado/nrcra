@@ -88,7 +88,13 @@ select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy
 /* footer */
 .site-foot{background:var(--foot,#07293b);color:var(--foot-ink,#fff);padding:52px 0 32px}.site-foot a{color:inherit}
 .site-foot h2{font-size:.9rem;text-transform:uppercase;letter-spacing:.12em;color:var(--foot-h,#ffcb2a)}
-.foot-in{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}.foot-in .ack{grid-column:1/-1;font-size:.9rem;border-top:1px solid var(--foot-line,#35566a);padding-top:20px;margin:0;max-width:90ch}
+.foot-top .tag{margin:12px 0 0;font-weight:800;color:var(--foot-h,#ffcb2a)}
+.foot-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px}.foot-top .foot-logo{max-width:100%}.foot-top .logo{max-width:100%;height:auto;max-height:54px}@media(max-width:960px){.foot-cols{grid-template-columns:1fr 1fr}}@media(max-width:560px){.foot-cols{grid-template-columns:1fr;gap:28px}}
+.fcol h2{margin:0 0 18px;padding-bottom:12px;position:relative}.fcol h2::after{content:"";position:absolute;left:0;bottom:0;width:44px;height:3px;border-radius:2px;background:currentColor}
+.flist{list-style:none;margin:0;padding:0}.flist li{position:relative;padding-left:22px;margin-bottom:10px;line-height:1.4}.flist li::before{content:"";position:absolute;left:2px;top:.5em;width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.45}
+.flist a{text-decoration:none}.flist a:hover{text-decoration:underline}
+.site-foot .ack{display:flex;gap:18px;align-items:flex-start;border-top:1px solid var(--foot-line,#35566a);margin-top:36px;padding-top:24px;font-size:.9rem}.site-foot .ack p{margin:0}.ack-flag{flex:none;width:60px;height:40px}
+.site-foot .copy{font-size:.85rem;margin:16px 0 0}
 .foot-in .copy{grid-column:1/-1;font-size:.85rem;margin:0}.fh2{margin-top:22px}.foot-btn{display:inline-block;border:2px solid currentColor;border-radius:var(--btn-r,99px);padding:.45em 1em;font-weight:800;text-decoration:none}
 .foot-net{grid-column:1/-1}.foot-net ul{columns:3 220px;column-gap:32px}.foot-net li{break-inside:avoid;margin-bottom:6px}.foot-net span{font-size:.85rem;opacity:.85}.site-foot .plain li{margin-bottom:6px}
 .foot-logo{display:inline-block;background:#fff;border-radius:16px;padding:12px 16px}.foot-in .tag{margin-top:12px;font-weight:800;color:var(--foot-h,#ffcb2a)}.site-foot .logo{height:54px}
