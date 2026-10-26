@@ -136,10 +136,15 @@ ALT = dict(
     circle="Members sitting together, smiling, in a bright room.",
     talk="Three members talking closely at a gathering.",
     audience="Members listening in a crowded room.",
+    board2="Members working together at a whiteboard covered in sticky notes.",
+    cards2="Members walking between coloured cards laid out on the ground.",
+    hall="A full hall of members working at tables.",
+    lab="Members talking together in a bright room.",
+    workshop="Members talking around a workshop table.",
 )
 FILE = dict(cheer="group-cheer", group="group-photo", crowd="crowd", laughing="laughing", listening="listening", table="table", speaker="speaker",
             aerial="aerial", line="line", web="web", cards="cards", board="board", hug="hug", meeting="meeting", house="house", pair="pair",
-            circle="circle", talk="talk", audience="audience")
+            circle="circle", talk="talk", audience="audience", board2="board2", cards2="cards2", hall="hall", lab="lab", workshop="workshop")
 
 
 # ================================================================ helpers
@@ -266,6 +271,16 @@ def cta_band():
     return f'<p class="btnrow"><a class="btn btn-primary" href="#network">Find a group near you</a><a class="btn btn-ghost" href="{LINKS["wa"]}">Join the WhatsApp group</a><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Email the Network Lead</a></p>'
 
 
+NET_H1 = "60+ grassroots, place-based groups across the Northern Rivers, working across five pillars."
+
+
+def network_body(card="card", pcls="pcols", sec_alt=""):
+    return f'''<section class="sec"><div class="wrap">{map_embed()}</div></section>
+<section class="sec {sec_alt}"><div class="wrap"><h2>Five pillars</h2><p class="lede">Each pillar, and the groups in the network working on it.</p>{pillar_cols(pcls, groups=True)}</div></section>
+<section class="sec"><div class="wrap"><div class="{card}"><h2>All groups</h2>{directory()}</div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="{card} narrow">{contact_form()}</div></div></section>'''
+
+
 def rack_buttons():
     return '<p class="btnrow"><a class="btn btn-primary" href="#rack-open">Open the R.A.C.K</a><a class="btn btn-ghost" href="#rack-signup">Request access</a><a class="btn btn-ghost" href="#rack-signin">Sign in</a></p>'
 
@@ -274,21 +289,47 @@ def rack_list(cls="racks"):
     return f'<ol class="{cls}">' + "".join(f'<li><span class="rn">{i}</span><div><h3>{E(t)}</h3><p>{E(d)}</p></div><span class="rc">{c} resources</span></li>' for i, (t, c, d) in enumerate(RACKS, 1)) + "</ol>"
 
 
+# Sample groups per pillar (placeholders, real names come from the Alliance member list)
+PILLAR_GROUPS = {
+    "Grow the Alliance": [("Sample group A", "Murwillumbah", "Tweed"), ("Sample group B", "Kyogle", "Kyogle"), ("Sample group C", "Grafton", "Clarence Valley")],
+    "Training and resource sharing": [("Sample group D", "Mullumbimby", "Byron"), ("Sample group E", "Lismore", "Lismore"), ("Sample group F", "Casino", "Richmond Valley")],
+    "Peer support and self care": [("Sample group G", "Wardell", "Ballina"), ("Sample group H", "Uki", "Tweed"), ("Sample group I", "North Lismore", "Lismore")],
+    "Funding and collective projects": [("Sample group J", "Woodburn", "Richmond Valley"), ("Sample group K", "Ballina", "Ballina"), ("Sample group L", "Billinudgel", "Byron")],
+    "Advocacy": [("Sample group M", "Coraki", "Richmond Valley"), ("Sample group N", "South Lismore", "Lismore"), ("Sample group O", "Tumbulgum", "Tweed")],
+}
+
+
+def pillar_cols(cls="pcols", photos=None, groups=False):
+    """The five pillars drawn as pillars: arched columns standing on a shared base."""
+    out = f'<div class="pcwrap"><ol class="{cls}">'
+    for i, (t, d, k) in enumerate(PILLARS):
+        ph = f'<div class="pc-ph">{img(photos[i])}</div>' if photos else ""
+        gr = ""
+        if groups:
+            gr = '<ul class="pc-groups">' + "".join(f'<li><b>{E(n)}</b><span>{a}</span></li>' for n, a, l in PILLAR_GROUPS[t]) + "</ul>"
+        out += f'<li class="pc">{ph}<span class="pc-ico">{icon(k)}</span><span class="pc-n">{i + 1:02d}</span><h3>{E(t)}</h3><p>{E(d)}</p>{gr}</li>'
+    return out + '</ol><div class="pc-base" aria-hidden="true"></div></div>'
+
+
+def logo_grid():
+    tiles = "".join(f'<li><img src="{SL}{f}" alt="{E(n)}" title="{E(n)}" loading="lazy"></li>' for f, n in SAMPLE)
+    return f'<ul class="lgrid">{tiles}</ul><p class="vnote">Placeholder logos borrowed from another site to show the layout. Real partners: {REAL}.</p>'
+
+
 def map_embed():
     return f'''<div class="mapbox"><iframe title="Map of resilience groups across the Northern Rivers" src="{MAP_SRC}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 <p class="vnote">Placeholder map of the region. In the build this is the Alliance's own Google Map, with a pin for each member group.</p>'''
 
 
 def directory():
-    rows = "".join(f'<tr data-lga="{l}" data-pillar="{E(p)}"><th scope="row">{E(n)}</th><td>{l}</td><td>{E(p)}</td></tr>' for n, l, p in DIR)
+    items = "".join(f'<li data-lga="{l}" data-pillar="{E(p)}"><b>{E(n)}</b><span>{a}, {l}</span><em>{E(p)}</em></li>' for p, gs in PILLAR_GROUPS.items() for n, a, l in gs)
     lopts = "".join(f"<option>{l}</option>" for l in LGAS)
     popts = "".join(f"<option>{E(p[0])}</option>" for p in PILLARS)
     return f'''<div class="dir"><div class="filters">
 <label>Location <select data-f="lga"><option value="">All locations</option>{lopts}</select></label>
-<label>Pillar <select data-f="pillar"><option value="">All pillars</option>{popts}</select></label></div>
-<table><caption>Sample directory rows. Real group names come from the Alliance member list.</caption>
-<thead><tr><th scope="col">Group</th><th scope="col">Location</th><th scope="col">Pillar</th></tr></thead><tbody>{rows}</tbody></table>
-<p class="empty" hidden>No groups match those filters.</p></div>'''
+<label>Pillar <select data-f="pillar"><option value="">All pillars</option>{popts}</select></label>
+<label class="dq">Search <input type="search" data-f="q" placeholder="Group name or town"></label></div>
+<ul class="gdir">{items}</ul><p class="empty" hidden>No groups match those filters.</p><p class="vnote">Sample groups. Real names and areas come from the Alliance member list.</p></div>'''
 
 
 def contact_form():
@@ -395,7 +436,7 @@ BASE = """
 :root{--navy:#07293b;--teal:#00a79d;--orange:#f05a28;--yellow:#ffcb2a;--teal-d:#006b64;--orange-d:#b93a0c;--ink:#07293b;--muted:#3d5663;--line:#d6e2e4;
 --font:"Nunito Sans",Arial,sans-serif;--wrap:1180px;--r:24px;
 /* Tint rule: brand colour mixed with white. Text sits on tints (navy text) or on navy (white text). Full brand colour is for buttons, icons, borders and shapes. */
---teal-12:#e0f4f3;--teal-25:#bfe9e7;--yellow-20:#fff5d4;--yellow-40:#ffeaaa;--orange-12:#fdebe5;--orange-25:#fbd6c9;--navy-8:#ebeef0}
+--teal-12:#e0f4f3;--teal-25:#bfe9e7;--blue-15:#d9e9f2;--grey-6:#eef1f3;--yellow-20:#fff5d4;--yellow-40:#ffeaaa;--orange-12:#fdebe5;--orange-25:#fbd6c9;--navy-8:#ebeef0}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;font:400 18px/1.6 var(--font);color:var(--ink);background:var(--bg,#fff)}
 img{max-width:100%;display:block}a{color:var(--teal-d)}a:hover{color:var(--navy)}
@@ -408,7 +449,7 @@ p{margin:0 0 1em}.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}.sec{p
 .eyebrow{display:block;font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;margin-bottom:.8em;color:var(--teal-d)}
 .lede{font-size:1.2rem;max-width:62ch}.lede-s{color:var(--muted)}
 .note{background:#fff8e1;border:2px dashed var(--orange-d);border-radius:14px;padding:10px 14px;font-size:.9rem;margin:0 0 24px;color:var(--navy)}
-.btn{display:inline-flex;align-items:center;justify-content:center;font:800 1rem var(--font);padding:.75em 1.4em;text-decoration:none;border:2px solid var(--navy);border-radius:99px;cursor:pointer;min-height:44px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font:800 1rem var(--font);padding:.75em 1.4em;text-decoration:none;border:2px solid var(--navy);border-radius:var(--btn-r,99px);cursor:pointer;min-height:44px}
 .btn-primary{background:var(--yellow);color:var(--navy);border-color:var(--yellow)}.btn-primary:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .btn-ghost{background:transparent;color:var(--navy)}.btn-ghost:hover{background:var(--navy);color:#fff}
 .btn-cta{background:var(--navy);color:#fff;padding:.5em 1.1em}.btn-cta:hover{background:var(--teal-d);color:#fff;border-color:var(--teal-d)}
@@ -417,7 +458,7 @@ p{margin:0 0 1em}.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}.sec{p
 .head-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:10px;padding-bottom:10px}
 .logo{height:48px;width:auto}.logo-white{filter:brightness(0) invert(1)}
 #nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
-#nav a:not(.btn){padding:.45em .9em;color:var(--navy);text-decoration:none;font-weight:700;border-radius:99px}
+#nav a:not(.btn){padding:.45em .9em;color:var(--navy);text-decoration:none;font-weight:700;border-radius:var(--btn-r,99px)}
 #nav a:not(.btn):hover{background:var(--hover,#eef5f5)}#nav a[aria-current=page]{background:var(--current,#d8f0ee)}
 .menu-btn{display:none;font:800 1rem var(--font);background:var(--navy);color:#fff;border:0;padding:.7em 1.1em;min-height:44px;border-radius:99px}
 @media(max-width:860px){.menu-btn{display:block}#nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;align-items:stretch;padding:12px 20px 20px;border-bottom:1px solid var(--line)}#nav.open{display:flex}.logo{height:40px}}
@@ -451,7 +492,20 @@ ul.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:r
 .dir th,.dir td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}.filters{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
 .filters label,.cform label,.rk-auth label,.rk-search label{display:flex;flex-direction:column;font-weight:700;gap:4px}
 select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy);background:#fff;color:var(--navy);min-height:44px;border-radius:12px}
-.cform{display:grid;gap:14px}
+.cform{display:grid;gap:14px}main{overflow-x:clip}
+.pcwrap{position:relative}.pcols{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:stretch}
+.pc{position:relative;overflow:hidden;border-radius:999px 999px 18px 18px;padding:44px 18px 26px;text-align:center;display:flex;flex-direction:column;align-items:center;min-height:380px;color:var(--navy)}
+.pc-ico{width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;margin-bottom:10px;color:var(--navy)}.pc-ico .ico{width:30px;height:30px}
+.pc-n{font-weight:900;font-size:.85rem;letter-spacing:.1em;opacity:.8}.pc h3{font-size:1.1rem;margin:.3em 0}.pc p{margin:0;font-size:.95rem}
+.pc-ph{width:calc(100% + 36px);margin:-44px -18px 16px;aspect-ratio:1}.pc-ph img{width:100%;height:100%;object-fit:cover}.pc-ph+.pc-ico{margin-top:-44px;position:relative;box-shadow:0 4px 12px -6px rgba(7,41,59,.4)}
+.pc-groups{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;width:100%}.pc-groups li{background:rgba(255,255,255,.75);border-radius:12px;padding:8px 10px;text-align:left;font-size:.9rem}.pc-groups b{display:block}.pc-groups span{color:var(--muted)}
+.pc-base{height:18px;border-radius:12px;margin-top:10px;background:var(--navy-8)}
+@media(max-width:980px){.pcols{grid-template-columns:repeat(3,1fr)}}@media(max-width:640px){.pcols{grid-template-columns:1fr 1fr}.pc{min-height:0;border-radius:160px 160px 16px 16px}}@media(max-width:420px){.pcols{grid-template-columns:1fr}}
+.dq{flex:1;min-width:200px}.dq input{width:100%}
+.gdir{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.gdir li{background:var(--grey-6);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.gdir b{font-size:1rem}.gdir span{color:var(--muted);font-size:.9rem}.gdir em{font-style:normal;font-size:.8rem;font-weight:800;margin-top:6px;color:var(--teal-d)}
+.lgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.lgrid li{background:#fff;border:1px solid var(--line);border-radius:var(--r);aspect-ratio:3/2;display:grid;place-items:center;padding:18px}.lgrid img{max-width:100%;max-height:100%;object-fit:contain}
 /* places */
 .placesblk{display:grid;grid-template-columns:1fr 380px;gap:40px;align-items:start}@media(max-width:900px){.placesblk{grid-template-columns:1fr}.pb-map{max-width:420px}}
 .pmap{margin:0}.pmap svg{width:100%;height:auto;display:block;border-radius:var(--r)}
@@ -522,9 +576,9 @@ document.addEventListener('click',function(e){
   [].forEach.call(blk.querySelectorAll('.dot'),function(d){d.classList.toggle('hot',on&&d.getAttribute('data-place')===b.getAttribute('data-place'))});
   if(on)b.setAttribute('aria-pressed','true')}});
 [].forEach.call(document.querySelectorAll('.places button'),function(b){b.setAttribute('aria-pressed','false')});
-[].forEach.call(document.querySelectorAll('.dir'),function(d){function ap(){var l=d.querySelector('[data-f=lga]').value,p=d.querySelector('[data-f=pillar]').value,n=0;
- [].forEach.call(d.querySelectorAll('tbody tr'),function(r){var ok=(!l||r.dataset.lga===l)&&(!p||r.dataset.pillar===p);r.hidden=!ok;if(ok)n++});d.querySelector('.empty').hidden=n>0}
- [].forEach.call(d.querySelectorAll('select'),function(s){s.addEventListener('change',ap)})});
+[].forEach.call(document.querySelectorAll('.dir'),function(d){function ap(){var l=d.querySelector('[data-f=lga]').value,p=d.querySelector('[data-f=pillar]').value,q=d.querySelector('[data-f=q]').value.trim().toLowerCase(),n=0;
+ [].forEach.call(d.querySelectorAll('.gdir li'),function(r){var ok=(!l||r.dataset.lga===l)&&(!p||r.dataset.pillar===p)&&(!q||r.textContent.toLowerCase().indexOf(q)>-1);r.hidden=!ok;if(ok)n++});d.querySelector('.empty').hidden=n>0}
+ [].forEach.call(d.querySelectorAll('select'),function(s){s.addEventListener('change',ap)});d.querySelector('[data-f=q]').addEventListener('input',ap)});
 })();
 """
 
@@ -603,7 +657,19 @@ body{--bg:#f3f6f7}
 .wfw-line{text-align:center;max-width:70ch;margin:32px auto 0;font-size:1.1rem}.wfw-btns{justify-content:center}
 @media(max-width:860px){.wfw-grid{grid-template-columns:1fr 1fr}.wfw-mid{grid-column:1/-1;grid-row:1;aspect-ratio:16/10}.wfw-col{gap:24px}}
 .pmap{--land:#ffffff;--sea:#d8f0ee;--coast:#8fcfc9;--river:#7cc0dd}
+.v1 .pc:nth-child(1){background:var(--teal-25)}.v1 .pc:nth-child(2){background:var(--yellow-40)}.v1 .pc:nth-child(3){background:var(--orange-25)}.v1 .pc:nth-child(4){background:var(--blue-15)}.v1 .pc:nth-child(5){background:var(--grey-6)}
+.p3{display:grid;grid-template-columns:.9fr 1.1fr 1fr;gap:36px;align-items:center}.p3-img img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:28px}.p3-txt p{font-size:1.1rem;margin:0}
+.p3-logos ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}.p3-logos li{border:1px solid var(--line);border-radius:16px;display:grid;place-items:center;padding:12px;aspect-ratio:3/2;background:#fff}.p3-logos img{max-height:56px;max-width:100%;object-fit:contain}
+@media(max-width:900px){.p3{grid-template-columns:1fr}.p3-img img{aspect-ratio:16/10}}
+.pgs{padding:48px 0 0}.pgs .lede{max-width:70ch}.narrow{max-width:720px}
 """
+
+
+def v1_partners():
+    logos = "".join(f'<li><img src="{SL}{f}" alt="{E(n)} (sample logo)" loading="lazy"></li>' for f, n in SAMPLE[:6])
+    return f'''<div class="p3"><div class="p3-img">{img("hug")}</div><div class="p3-txt"><span class="eyebrow">Thanks to our partners</span><h2>What our partners made possible</h2><p>{PARTNER_LINE}</p></div>
+<div class="p3-logos"><ul>{logos}</ul><p class="btnrow"><a class="btn btn-primary" href="#partners">View all partners</a><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></div>
+<p class="vnote">Placeholder logos to show the layout.</p>'''
 
 
 def v1():
@@ -619,7 +685,7 @@ def v1():
 
 <section class="sec" style="padding-top:0"><div class="wrap split"><div>{video("group")}</div><div class="stat-card"><span class="eyebrow">What we have achieved</span>{stats()}</div></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><span class="eyebrow">Our focus</span><h2>Five pillars</h2><ol class="pills">{"".join(f'<li>{icon(k)}<div><h3>{E(t)}</h3><p>{E(d)}</p></div></li>' for t, d, k in PILLARS)}</ol></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><span class="eyebrow">Our focus</span><h2>Five pillars</h2>{pillar_cols()}</div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card">{places_block()}</div></div></section>
 
@@ -627,10 +693,10 @@ def v1():
 <ul class="kb"><li>{img("crowd")}<h3>{GATHER[0]}: {GATHER[1]}</h3><p>{GATHER[2]}.</p></li><li>{img("meeting")}<h3>Projects</h3><p>Connected and Prepared, Resourcing Community Resilience and Learning Together. <a href="#partners">See partners</a></p></li>
 <li>{img("board")}<h3>The R.A.C.K</h3><p>{RACK_LINE} <a href="#rack">Explore</a></p></li></ul></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card">{wfw_partners()}</div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="card">{v1_partners()}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="ready">{img("aerial", alt="")}<div><h2>Ready to connect?</h2><p class="lede" style="margin:0 auto">Whether you are a community group, a local council, a funder or someone who cares about your community, there is a place for you in this Alliance.</p>{cta_band()}</div></div></div></section>'''
 
-    about = f'''<div class="pg1"><div class="wrap"><div class="ph">{img("group", eager=True)}</div><div><span class="eyebrow">About us</span><h1>We're changing the Northern Rivers' resilience culture</h1><p class="lede">{MORE}</p></div></div></div>
+    about = f'''<div class="pg1"><div class="wrap"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow">About us</span><h1>We're changing the Northern Rivers' resilience culture</h1><p class="lede">{MORE}</p></div></div></div>
 <section class="sec"><div class="wrap"><div class="split" style="align-items:stretch"><div class="arc"><h2>Vision</h2><p>{VISION}</p></div><div class="arc y"><h2>Purpose</h2><p>{PURPOSE}</p></div></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our values</h2>{values_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to()}</div></section>
@@ -638,16 +704,11 @@ def v1():
 <section class="sec" style="padding-top:0"><div class="wrap split"><div class="card"><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning is our learning cycle, with researchers from the University Centre for Rural Health.</p>{meal()}</div><div class="card" style="background:var(--yellow-40)">{quote()}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap card"><h2>Our structure</h2><p>Steering committee, embedded researchers from UCRH and the Network Lead, {CONTACT["name"]}. Names and roles to be supplied.</p><h3>Common questions</h3>{faq()}</div></section>'''
 
-    partners = f'''<div class="pg1"><div class="wrap"><div><span class="eyebrow">Impact</span><h1>The partners who make this work possible</h1><p class="lede">Funders, delivery partners and researchers standing behind community-led resilience.</p></div><div class="ph">{img("speaker", eager=True)}</div></div></div>
-<section class="sec"><div class="wrap">{partner_groups()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2>Projects they support</h2>{projects_cards()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="ready">{img("hug", alt="")}<div><h2>Partner with us</h2><p>Talk to the Network Lead about funding, research or delivery partnerships.</p><p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Email {CONTACT["name"]}</a></p></div></div></div></section>'''
+    partners = f'''<div class="pgs"><div class="wrap"><span class="eyebrow">Impact</span><h1>Our partners</h1><p class="lede">{PARTNER_LINE}</p></div></div>
+<section class="sec" style="padding-top:24px"><div class="wrap">{logo_grid()}<p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></section>'''
 
-    network = f'''<div class="pg1"><div class="wrap"><div><span class="eyebrow">Network</span><h1>60+ place-based groups across the Northern Rivers</h1><p class="lede">Find the resilience groups connected to the Alliance, by place and by focus.</p></div><div class="ph">{img("web", eager=True)}</div></div></div>
-<section class="sec"><div class="wrap">{map_embed()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card">{places_block("Places we connect")}</div></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2>Five pillars</h2><ol class="pills">{"".join(f'<li>{icon(k)}<div><h3>{E(t)}</h3><p>{E(d)}</p></div></li>' for t, d, k in PILLARS)}</ol></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap split" style="align-items:start"><div class="card"><h2>All groups</h2>{directory()}</div><div class="card">{contact_form()}</div></div></section>'''
+    network = f'''<div class="pg1"><div class="wrap"><div><span class="eyebrow">Network</span><h1>{NET_H1}</h1><p class="lede">Find the resilience groups connected to the Alliance, by place and by focus.</p></div><div class="ph">{img("web", eager=True)}</div></div></div>
+{network_body("card")}'''
 
     rack = f'''<div class="pg1"><div class="wrap"><div><span class="eyebrow">Resources</span><h1>The R.A.C.K</h1><p class="lede"><b>{RACK_NAME}.</b> {RACK_LINE} {RACK_INTRO}</p>{rack_buttons()}</div><div class="ph">{img("table", eager=True)}</div></div></div>
 <section class="sec"><div class="wrap"><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
@@ -687,7 +748,7 @@ def blob_icon(name, bg):
 
 
 CSS2 = """
-body{--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#006b64;--foot-line:#bfe3df;--current:#fff1c2;--hover:#f2faf9}
+body{--btn-r:12px;--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#006b64;--foot-line:#bfe3df;--current:#fff1c2;--hover:#f2faf9}
 .mint{background:#eaf7f5}.butter{background:#fff6d8}.peach{background:#fdece4}.sky{background:#eaf5fb}
 .hero2{padding:40px 0 32px;background:#fff}.hero2 .wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
 .hero2 h1{font-size:clamp(2rem,4.2vw,3.3rem)}.hero2 .btn-primary{background:var(--teal-d);border-color:var(--teal-d);color:#fff}.hero2 .btn-primary:hover{background:var(--navy);border-color:var(--navy)}
@@ -739,6 +800,8 @@ body{--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#006b64;--foot-line:#b
 .pmap{--land:#fbfdf8;--sea:#e3f4f8;--coast:#a9d8d2;--river:#8ccbe3;--dot:#00a79d;--hot:#f05a28}
 .places button{--chip:#d4ece9}.places button:hover,.places button[aria-pressed=true]{background:var(--teal-d);border-color:var(--teal-d)}
 .site-foot .logo-white{filter:none}
+.v2 .pc:nth-child(1){background:var(--teal-12)}.v2 .pc:nth-child(2){background:var(--yellow-20)}.v2 .pc:nth-child(3){background:var(--orange-12)}.v2 .pc:nth-child(4){background:#e6f1f8}.v2 .pc:nth-child(5){background:#f1eefa}
+.v2 .pc-base{background:#d4ece9}.plain2 .wrap{grid-template-columns:1fr}.plain2 .lede{max-width:70ch}.narrow{max-width:720px}.v2 .btn-primary{background:var(--teal-d);border-color:var(--teal-d);color:#fff}.v2 .btn-primary:hover{background:var(--navy);border-color:var(--navy)}
 """
 
 
@@ -754,8 +817,8 @@ def v2():
 
 <section class="sec"><div class="wrap">{places_block("The group made up of groups", WHO + " Tap a town to find it on the map.")}</div></section>
 
-<section class="sec mint"><div class="wrap"><span class="eyebrow">Our focus</span><h2>How the Alliance works</h2>
-<ol class="steps">{"".join(f'<li><div class="art"><div class="sphoto">{img(["web", "board", "hug", "meeting", "speaker"][i])}<span class="sbadge">{icon(k)}</span></div></div><span class="num">{i + 1}</span><div class="txt"><h3>{E(t)}</h3><p>{E(d)}</p></div></li>' for i, (t, d, k) in enumerate(PILLARS))}</ol></div></section>
+<section class="sec mint"><div class="wrap"><span class="eyebrow">Our focus</span><h2>Five pillars</h2>
+{pillar_cols(photos=["circle", "board", "hug", "talk", "speaker"])}</div></section>
 
 <section class="sec"><div class="wrap split"><div class="statbox peach"><span class="eyebrow">What we have achieved</span>{stats()}</div><div class="vframe">{video("laughing")}</div></div></section>
 
@@ -772,23 +835,18 @@ def v2():
 
     about = pg("About us", "Local experience. Shared learning. Wider impact.", WHO) + f'''
 <section class="sec mint"><div class="wrap split" style="align-items:stretch"><div class="whitecard"><h2>Vision</h2><p>{VISION}</p></div><div class="whitecard"><h2>Purpose</h2><p>{PURPOSE}</p></div></div></section>
-<section class="sec"><div class="wrap"><h2>Our values</h2>{values_cards()}<div class="prow">{img("board")}{img("hug")}{img("line")}</div></div></section>
+<section class="sec"><div class="wrap"><h2>Our values</h2>{values_cards()}<div class="prow">{img("board2")}{img("cards")}{img("line")}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to()}</div></section>
 <section class="sec sky"><div class="wrap"><h2>Our journey</h2>{journey("river")}</div></section>
-<section class="sec"><div class="wrap split"><div><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning, with researchers from the University Centre for Rural Health.</p>{meal()}<div class="soft butter" style="margin-top:24px">{quote()}</div></div>{img("laughing", "photo r2")}</div></section>
+<section class="sec"><div class="wrap split"><div><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning, with researchers from the University Centre for Rural Health.</p>{meal()}<div class="soft butter" style="margin-top:24px">{quote()}</div></div>{img("listening", "photo r2")}</div></section>
 <section class="sec peach"><div class="wrap"><h2>Our structure</h2><p>Steering committee, UCRH embedded researchers and the Network Lead, {CONTACT["name"]}. Names to be supplied.</p><h3>Common questions</h3>{faq()}</div></section>'''
 
-    partners = pg("Impact", "Our partners", "The funders, delivery partners and researchers behind community-led resilience.", pic="speaker") + f'''
-<section class="sec mint"><div class="wrap">{partner_groups()}</div></section>
-<section class="sec"><div class="wrap"><h2>Projects they support</h2>{projects_cards()}</div></section>'''
+    partners = f'''<div class="pg2 plain2"><div class="wrap"><div><span class="chip">Impact</span><h1>Our partners</h1><p class="lede">{PARTNER_LINE}</p></div></div></div>
+<section class="sec mint"><div class="wrap">{logo_grid()}<p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></section>'''
 
-    network = pg("Network", "Groups across the Northern Rivers", "60+ grassroots, place-based groups working across five pillars.", pic="web") + f'''
-<section class="sec mint"><div class="wrap">{map_embed()}</div></section>
-<section class="sec"><div class="wrap">{places_block("Places we connect")}</div></section>
-<section class="sec sky"><div class="wrap"><h2>Five pillars</h2><ol class="pillars ill">{"".join(f'<li>{img(["cheer", "board", "hug", "meeting", "speaker"][i], "pimg")}{icon(k)}<h3>{E(t)}</h3><p>{E(d)}</p></li>' for i, (t, d, k) in enumerate(PILLARS))}</ol></div></section>
-<section class="sec"><div class="wrap split" style="align-items:start"><div class="whitecard"><h2>All groups</h2>{directory()}</div><div class="whitecard">{contact_form()}</div></div></section>'''
+    network = pg("Network", NET_H1, "Find the resilience groups connected to the Alliance, by place and by focus.", pic="web") + network_body("whitecard", sec_alt="mint")
 
-    rack = pg("Resources", "The R.A.C.K", f"<b>{RACK_NAME}.</b> {RACK_LINE}", rack_buttons(), pic="table") + f'''
+    rack = pg("Resources", "The R.A.C.K", f"<b>{RACK_NAME}.</b> {RACK_LINE}", rack_buttons(), pic="workshop") + f'''
 <section class="sec mint"><div class="wrap"><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
 <section class="sec"><div class="wrap"><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>Participatory grants for local groups.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul></div></section>
 <section class="sec butter"><div class="wrap"><h2>Need help getting in?</h2><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
@@ -799,8 +857,19 @@ def v2():
 SQUIGGLE = '<svg class="squig" viewBox="0 0 300 24" aria-hidden="true"><path d="M4 16c40-12 80-12 120-2s90 8 172-6" fill="none" stroke="#ffcb2a" stroke-width="8" stroke-linecap="round"/></svg>'
 ARROW = '<svg class="arrow" viewBox="0 0 60 90" aria-hidden="true"><path d="M30 4c-8 22 10 40 0 70M14 62l16 22 16-22" fill="none" stroke="#f05a28" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
+def deco(name, pos):
+    leaf = lambda x, y, r, c: f'<ellipse cx="{x}" cy="{y}" rx="9" ry="20" transform="rotate({r} {x} {y})" fill="{c}"/>'
+    art = {
+        "sprig": '<path d="M20 150C50 110 80 70 135 20" fill="none" stroke="#003d38" stroke-width="4" stroke-linecap="round"/>' + leaf(50, 104, -30, "#00a79d") + leaf(70, 118, 60, "#ffcb2a") + leaf(78, 76, -35, "#f05a28") + leaf(100, 86, 55, "#00a79d") + leaf(108, 46, -40, "#ffcb2a") + leaf(128, 52, 50, "#f05a28"),
+        "dots": "".join(f'<circle cx="{10 + c * 22}" cy="{10 + r * 22}" r="5" fill="#f05a28" opacity=".55"/>' for r in range(6) for c in range(6)),
+        "arcs": '<path d="M15 140a65 65 0 0 1 130 0" fill="none" stroke="#ffcb2a" stroke-width="16" stroke-linecap="round"/><path d="M42 140a38 38 0 0 1 76 0" fill="none" stroke="#f05a28" stroke-width="12" stroke-linecap="round"/><circle cx="80" cy="50" r="10" fill="#f05a28"/><circle cx="24" cy="80" r="7" fill="#ffcb2a"/><circle cx="136" cy="80" r="7" fill="#00a79d"/>',
+        "rings": '<circle cx="80" cy="80" r="70" fill="none" stroke="#ffcb2a" stroke-width="6"/><circle cx="80" cy="80" r="48" fill="none" stroke="#00a79d" stroke-width="5" stroke-dasharray="4 10" stroke-linecap="round"/><circle cx="80" cy="80" r="26" fill="#f05a28" opacity=".85"/>',
+    }[name]
+    return f'<svg class="deco deco-{name} {pos}" viewBox="0 0 160 160" aria-hidden="true">{art}</svg>'
+
+
 CSS3 = """
-body{--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5a0;--hover:#f7ecd6;--deep:#003d38}
+body{--btn-r:4px;--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5a0;--hover:#f7ecd6;--deep:#003d38}
 .hero3{padding:20px 0 0}.h3-box{position:relative;border-radius:40px;overflow:hidden;min-height:620px;display:flex;align-items:flex-end;color:#fff}
 .h3-box>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.h3-box::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,40,36,.55),rgba(0,40,36,.85))}
 .h3-box .in{position:relative;z-index:2;padding:48px;max-width:860px}.h3-box h1{font-size:clamp(2.2rem,5.4vw,4.4rem)}.h3-box .btn-ghost{color:#fff;border-color:#fff}.h3-box .btn-ghost:hover{background:#fff;color:var(--deep)}
@@ -850,18 +919,26 @@ body{--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5a0;--hover:#
 .pmap{--land:#fffaf0;--sea:#f6e6c8;--coast:#e2c48d;--river:#9ccfd6;--dot:#f05a28;--hot:#003d38;--lga:#8a7350}
 .places button{--chip:#ecd9b4}.places button:hover,.places button[aria-pressed=true]{background:var(--deep);border-color:var(--deep)}
 .site-foot h2{color:var(--yellow)}
+.rel{position:relative}.deco{position:absolute;z-index:3;pointer-events:none;width:150px;height:150px}
+.d-tr{top:-34px;right:-6px}.d-tl{top:-30px;left:-6px}.d-bl{bottom:-34px;left:-6px}.d-br{bottom:-30px;right:-6px}
+.deco-dots{width:130px;height:130px;z-index:1}.circles .deco-rings{z-index:0;width:190px;height:190px;left:40%;top:30%}
+@media(max-width:760px){.deco{width:96px;height:96px}.d-tr{top:-22px;right:4px}.d-tl{top:-20px;left:4px}.d-bl{bottom:-22px;left:4px}.d-br{bottom:-20px;right:4px}}
+.yellow.rel{overflow:hidden}.yellow .deco{opacity:.5}
+.v3 .pc{background:#fff;border:3px solid var(--yellow)}.v3 .pc:nth-child(2){border-color:var(--orange)}.v3 .pc:nth-child(3){border-color:var(--teal)}.v3 .pc:nth-child(4){border-color:var(--orange-d)}.v3 .pc:nth-child(5){border-color:var(--teal-d)}
+.v3 .pc-ico{background:var(--yellow-40)}.v3 .pc-n{font-family:"Caveat",cursive;font-size:1.8rem;letter-spacing:0;color:var(--orange-d);opacity:1}.v3 .pc-groups li{background:var(--grey-6)}.v3 .pc-base{background:#ecd9b4}
+.pgs3{padding:48px 0 8px}.pgs3 .lede{max-width:70ch}.narrow{max-width:720px}
 """
 
 
 def v3():
-    home = f'''<div class="hero3"><div class="wrap"><div class="h3-box">{img("cheer", eager=True)}<div class="in"><span class="eyebrow" style="color:var(--yellow)">Northern Rivers Community Resilience Alliance</span>
+    home = f'''<div class="hero3"><div class="wrap rel">{deco("sprig", "d-tr")}{deco("dots", "d-bl")}<div class="h3-box">{img("cheer", eager=True)}<div class="in"><span class="eyebrow" style="color:var(--yellow)">Northern Rivers Community Resilience Alliance</span>
 <h1>Neighbours looking after neighbours, across the <span class="mark">Northern Rivers{SQUIGGLE}</span></h1><p class="lede">{H1}.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Join the network</a><a class="btn btn-ghost" href="#about">Meet the Alliance</a></p></div></div></div></div>
 
 <section class="sec"><div class="wrap split"><div><p class="hand">Who we are</p><p class="big">The group made up of groups.</p><p>{WHO}</p><p class="btnrow"><a class="btn btn-ghost" href="#about">Our story</a></p></div>
-<div class="circles">{img("laughing")}{img("talk")}{img("circle")}<span class="blob" aria-hidden="true"></span></div></div></section>
+<div class="circles">{deco("rings", "")}{img("laughing")}{img("talk")}{img("circle")}<span class="blob" aria-hidden="true"></span></div></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="collage">
+<section class="sec" style="padding-top:0"><div class="wrap rel">{deco("arcs", "d-tr")}<div class="collage">
 <figure class="w2 h2">{img("crowd")}<figcaption>Alliance Gathering</figcaption></figure><figure>{img("board")}<figcaption>Planning together</figcaption></figure><figure>{img("hug")}<figcaption>Peer support</figcaption></figure>
 <figure class="w2">{img("web")}<figcaption>Connected</figcaption></figure></div></div></section>
 
@@ -870,20 +947,20 @@ def v3():
 <section class="sec"><div class="wrap"><p class="hand">In their own words</p><div class="words"><div class="face">{img("pair")}</div>{quote()}</div>
 <ul class="stories" style="margin-top:40px"><li>{img("listening")}<div class="in"><h3>Story to come</h3><p>A member group's story, supplied by NRCRA.</p></div></li><li>{img("house")}<div class="in"><h3>Story to come</h3><p>A member group's story, supplied by NRCRA.</p></div></li><li>{img("audience")}<div class="in"><h3>Story to come</h3><p>A member group's story, supplied by NRCRA.</p></div></li></ul></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="bigv">{video("aerial")}</div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap rel">{deco("dots", "d-tl")}{deco("sprig", "d-br")}<div class="bigv">{video("aerial")}</div></div></section>
 
 <section class="sec"><div class="wrap"><div class="warmcard">{places_block("Where we are")}</div></div></section>
 
-<section class="sec yellow" id="home-focus"><div class="wrap"><h2 style="text-align:center">How you can be part of it</h2>{ARROW}
+<section class="sec yellow rel" id="home-focus">{deco("rings", "d-tl")}{deco("arcs", "d-br")}<div class="wrap"><h2 style="text-align:center">How you can be part of it</h2>{ARROW}
 <ul class="help"><li><div class="hico">{icon("people")}</div><h3>Join the network</h3><p>Bring your group into the Alliance.</p><a href="#network">Find out how</a></li>
 <li><div class="hico">{icon("cal")}</div><h3>Come to a gathering</h3><p>{GATHER[0]}: {GATHER[1]}.</p><a href="#home-focus">Upcoming</a></li>
 <li><div class="hico">{icon("share")}</div><h3>Share knowledge</h3><p>Add what works to the R.A.C.K.</p><a href="#rack">The R.A.C.K</a></li>
 <li><div class="hico">{icon("hand")}</div><h3>Partner with us</h3><p>Fund or research community-led resilience.</p><a href="#partners">Our partners</a></li></ul></div></section>'''
 
     def pg(eyebrow, title, text, pic, extra=""):
-        return f'<div class="pg3"><div class="wrap"><div class="box">{img(pic, eager=True)}<div class="in"><span class="eyebrow" style="color:var(--yellow)">{eyebrow}</span><h1>{title}</h1><p class="lede">{text}</p>{extra}</div></div></div></div>'
+        return f'<div class="pg3"><div class="wrap rel">{deco("sprig", "d-tr")}{deco("dots", "d-bl")}<div class="box">{img(pic, eager=True)}<div class="in"><span class="eyebrow" style="color:var(--yellow)">{eyebrow}</span><h1>{title}</h1><p class="lede">{text}</p>{extra}</div></div></div></div>'
 
-    jpics = ["house", "group", "board", "meeting", "line"]
+    jpics = ["board2", "meeting", "hall", "lab", "line"]
     about = pg("About us", "Local experience. Shared learning. Wider impact.", WHO, "group") + f'''
 <section class="sec"><div class="wrap split"><div><p class="hand">Our vision</p><p class="big">{VISION}</p></div><div class="warmcard"><h2>Purpose</h2><p>{PURPOSE}</p></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our values</h2>{values_cards()}</div></section>
@@ -892,17 +969,10 @@ def v3():
 <section class="sec deep"><div class="wrap split"><div><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning, with researchers from the University Centre for Rural Health.</p>{meal()}</div>{quote()}</div></section>
 <section class="sec"><div class="wrap"><h2>Our people</h2><ul class="team">{"".join(f'<li><div class="av">Photo</div><b>Name</b><br><span class="lede-s">{r}</span></li>' for r in ["Network Lead", "Steering committee", "Steering committee", "UCRH researcher", "UCRH researcher"])}</ul><p class="vnote">Names, roles and photos to be supplied.</p><h3 style="margin-top:28px">Common questions</h3>{faq()}</div></section>'''
 
-    partners = pg("Impact", "Thank you to our partners", "The funders, delivery partners and researchers behind community-led resilience.", "speaker") + f'''
-<section class="sec"><div class="wrap">{partner_groups()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2>Projects they support</h2>{projects_cards()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="oblock yellow"><span class="shape" aria-hidden="true" style="background:var(--yellow)"></span><h2>Partner with us</h2><p>Talk to the Network Lead about funding, research or delivery partnerships.</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Email {CONTACT["name"]}</a></p></div></div></section>'''
+    partners = f'''<div class="pgs3"><div class="wrap rel">{deco("arcs", "d-tr")}<p class="hand">Thank you</p><h1>Our partners</h1><p class="lede">{PARTNER_LINE}</p></div></div>
+<section class="sec" style="padding-top:24px"><div class="wrap">{logo_grid()}<p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></section>'''
 
-    ppics = ["cheer", "board", "hug", "meeting", "speaker"]
-    network = pg("Network", "Groups across the Northern Rivers", "60+ grassroots, place-based groups working across five pillars.", "web") + f'''
-<section class="sec"><div class="wrap">{map_embed()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="warmcard">{places_block("Places we connect")}</div></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2>Five pillars</h2><ol class="pillars ppl">{"".join(f'<li>{img(ppics[i])}<h3>{E(t)}</h3><p>{E(d)}</p></li>' for i, (t, d, k) in enumerate(PILLARS))}</ol></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap split" style="align-items:start"><div class="warmcard"><h2>All groups</h2>{directory()}</div><div class="warmcard">{contact_form()}</div></div></section>'''
+    network = pg("Network", NET_H1, "Find the resilience groups connected to the Alliance, by place and by focus.", "cards") + network_body("warmcard")
 
     rack = pg("Resources", "The R.A.C.K", f"<b>{RACK_NAME}.</b> {RACK_LINE}", "table", rack_buttons()) + f'''
 <section class="sec"><div class="wrap"><p class="hand">What's inside</p><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
@@ -921,17 +991,16 @@ INSPO = {
 
 def dashboard():
     cards = [
-        ("v1", "Rounded blocks", "Built from Milou's drafts and Waves for Water. Rounded cards in light teal, yellow and orange tints, coloured pill rows, a navy hero panel beside a big rounded photo.", ["Colour cards with photos inside", "Pill rows for the five pillars", "Waves for Water style partner section"]),
-        ("v2", "Light and fresh", "Built from the R.A.C.K app and Resilient Lismore. Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents and one illustration, no dark blocks.", ["Photo hero with logo-arc accent", "Five pillars down a dotted step line", "River-style journey timeline"]),
-        ("v3", "Big visuals", "People first: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn accents.", ["Circle photo cluster and collage", "In their own words stories", "Four ways to be part of it"]),
+        ("v1", "Rounded blocks", "Built from Milou's drafts and Waves for Water. Rounded cards in light teal, yellow and orange tints, a navy hero panel beside a big rounded photo, pill buttons.", ["Colour cards with photos inside", "Five pillars as arched columns", "Partner section: photo, story and logos"]),
+        ("v2", "Light and fresh", "Built from the R.A.C.K app and Resilient Lismore. Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents, one illustration and softly rounded buttons.", ["Photo hero with logo-arc accent", "Five pillars as photo-topped columns", "River-style journey timeline"]),
+        ("v3", "Big visuals", "People first: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn illustration decor and crisp buttons.", ["Circle photo cluster and collage", "Illustration decor on big images", "In their own words stories"]),
     ]
     rows = ""
     for i, (slug, t, d, feats) in enumerate(cards, 1):
-        links = "".join(f'<li><a href="{slug}/#{k}">{n}</a></li>' for k, n in PAGES)
         ins = "".join(f'<figure><img src="assets/inspo/{f}.jpg" alt="Mood board reference: {E(c)}" loading="lazy"><figcaption>{E(c)}</figcaption></figure>' for f, c in INSPO[slug])
         fl = "".join(f"<li>{E(x)}</li>" for x in feats)
         rows += f'''<article class="row row{i}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
-<div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><ul class="pl">{links}</ul>
+<div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><p><a class="btn btn-primary" href="{slug}/">Open prototype {i}</a></p>
 <h3>Inspired by the mood board</h3><div class="ins">{ins}</div></div></article>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA website prototypes</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
