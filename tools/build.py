@@ -906,7 +906,8 @@ body{--btn-r:12px;--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#00615a;-
 .places button{--chip:#d4ece9}.places button:hover,.places button[aria-pressed=true]{background:var(--teal-d);border-color:var(--teal-d)}
 .site-foot .logo-white{filter:none}
 .v2 .pc:nth-child(1){background:var(--teal-12)}.v2 .pc:nth-child(2){background:var(--yellow-20)}.v2 .pc:nth-child(3){background:var(--orange-12)}.v2 .pc:nth-child(4){background:#e6f1f8}.v2 .pc:nth-child(5){background:#f1eefa}
-.v2 .pc-base{background:#d4ece9}.vpc{overflow:hidden}.vpc img{max-width:none;width:calc(100% + 64px);margin:-32px -32px 22px;aspect-ratio:16/8;object-fit:cover}.plain2 .wrap{grid-template-columns:1fr}.plain2 .lede{max-width:70ch}.narrow{max-width:720px}.v2 .btn-primary{background:var(--teal-d);border-color:var(--teal-d);color:#fff}.v2 .btn-primary:hover{background:var(--navy);border-color:var(--navy)}
+.v2 .pc-base{background:#d4ece9}
+.v2 .pc-ico{color:var(--teal)}.v2 .pc-ico svg{stroke-width:3.5}.v2 .pc:nth-child(2) .pc-ico{color:var(--yellow)}.v2 .pc:nth-child(3) .pc-ico{color:var(--orange)}.v2 .pc:nth-child(4) .pc-ico{color:var(--navy)}.v2 .pc:nth-child(5) .pc-ico{color:#9fb0b8}.vpc{overflow:hidden}.vpc img{max-width:none;width:calc(100% + 64px);margin:-32px -32px 22px;aspect-ratio:16/8;object-fit:cover}.plain2 .wrap{grid-template-columns:1fr}.plain2 .lede{max-width:70ch}.narrow{max-width:720px}.v2 .btn-primary{background:var(--teal-d);border-color:var(--teal-d);color:#fff}.v2 .btn-primary:hover{background:var(--navy);border-color:var(--navy)}
 """
 
 
