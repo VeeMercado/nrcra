@@ -1,23 +1,73 @@
-<!doctype html>
-<html lang="en-AU">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NRCRA project</title>
-<meta name="robots" content="noindex">
+<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA website prototypes</title><meta name="robots" content="noindex"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#FAF7F0;color:#1E1A14;font:18px/1.6 system-ui,sans-serif}
-main{max-width:720px;margin:0 auto;padding:48px 16px}
-h1{font-size:2rem;line-height:1.2;margin:0 0 12px}
-p{color:#4A4036}
-a{color:#8A3E14}
-</style>
-</head>
-<body>
-<main>
-<h1>NRCRA project</h1>
-<p>Project files for the Northern Rivers Community Resilience Alliance website. Coming soon.</p>
-<p>Prepared by <a href="https://veemercado.com">Vee Mercado</a>.</p>
-</main>
-</body>
-</html>
+:root{--navy:#07293b;--teal:#00a79d;--orange:#f05a28;--yellow:#ffcb2a;
+--teal-d:#006b64;--orange-d:#b93a0c;--ink:#07293b;--muted:#3d5663;--paper:#fff;--tint:#eef7f6;--cream:#fff8e1;--line:#cfdde0;
+--font:"Nunito Sans",Arial,sans-serif;--wrap:1180px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:400 18px/1.6 var(--font);color:var(--ink);background:var(--paper)}
+img{max-width:100%;display:block}a{color:var(--teal-d)}a:hover{color:var(--navy)}
+h1,h2,h3{line-height:1.12;margin:0 0 .5em;font-weight:800;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,5vw,3.6rem);font-weight:900}h2{font-size:clamp(1.6rem,3.4vw,2.5rem)}h3{font-size:1.25rem}
+p{margin:0 0 1em}.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+:focus-visible{outline:3px solid var(--orange-d);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--yellow);color:var(--navy);padding:10px 16px;z-index:100;font-weight:800}.skip:focus{left:8px}
+.plain{list-style:none;margin:0;padding:0}.vnote{font-size:.85rem;color:var(--muted)}.vnote a{color:inherit}
+.btn{display:inline-block;font:800 1rem var(--font);padding:.8em 1.4em;text-decoration:none;border:3px solid var(--navy);cursor:pointer;min-height:44px}
+.btn-primary{background:var(--yellow);color:var(--navy)}.btn-primary:hover{background:var(--navy);color:var(--yellow)}
+.btn-ghost{background:transparent;color:var(--navy)}.btn-ghost:hover{background:var(--navy);color:#fff}
+.btn-cta{background:var(--navy);color:#fff;padding:.55em 1.1em}.btn-cta:hover{background:var(--teal-d);color:#fff}
+.btnrow{display:flex;flex-wrap:wrap;gap:12px;margin:1.2em 0 0}
+.site-head{background:#fff;position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line)}
+.head-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:10px;padding-bottom:10px}
+.logo{height:48px;width:auto}.logo-white{filter:brightness(0) invert(1)}
+#nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+#nav a:not(.btn){padding:.5em .9em;color:var(--navy);text-decoration:none;font-weight:700;border-bottom:3px solid transparent}
+#nav a:not(.btn):hover,#nav a[aria-current=page]{border-bottom-color:var(--orange-d)}
+.menu-btn{display:none;font:800 1rem var(--font);background:var(--navy);color:#fff;border:0;padding:.7em 1.1em;min-height:44px}
+@media(max-width:860px){.menu-btn{display:block}#nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;align-items:stretch;padding:12px 20px 20px;border-bottom:1px solid var(--line)}#nav.open{display:flex}.logo{height:40px}}
+.page{display:none;outline:0}.page.on{display:block}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}.chips li{background:#fff;color:var(--navy);border:2px solid var(--navy);padding:.2em .8em;font-weight:700;border-radius:99px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin:0}.stats div{margin:0}
+.stats dt{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:900;line-height:1}.stats dd{margin:.3em 0 0;font-weight:600}
+.pillars{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;counter-reset:p}
+.pillars li{counter-increment:p;padding:20px}.pillars li::before{content:counter(p);display:block;font-weight:900;font-size:2rem;line-height:1;margin-bottom:.4em}
+.pillars h3{margin-bottom:.3em}.pillars p{margin:0}
+.video{position:relative;aspect-ratio:16/9;background:var(--navy);overflow:hidden}.video img,.video iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.play{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;border:4px solid var(--navy);background:var(--yellow);color:var(--navy);font-size:1.8rem;cursor:pointer;display:grid;place-items:center;padding-left:6px}.play:hover{background:#fff}
+.pgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.ptile a{display:flex;flex-direction:column;height:100%;text-decoration:none;color:var(--navy);padding:16px;border:2px solid var(--line);background:#fff}
+.ptile a:hover{border-color:var(--navy)}.plogo{display:grid;place-items:center;text-align:center;height:110px;background:var(--tint);margin-bottom:12px;padding:8px;position:relative}
+.plogo b{font-size:1.05rem}.plogo i{position:absolute;bottom:4px;right:8px;font-size:.7rem;color:var(--muted);font-style:normal}
+.pname{font-weight:800}.pnote{font-size:.95rem;color:var(--muted)}.lede-s{color:var(--muted)}
+.strip a:not(.btn){color:var(--navy) !important}
+.strip{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}.strip a{display:block;padding:.5em 1em;background:#fff;color:var(--navy);font-weight:700;text-decoration:none;border:2px solid var(--line)}.strip a:hover{border-color:var(--navy)}
+.gcard,.pcard,.rcard{list-style:none;padding:22px}.gcard,.pcard{color:var(--navy)}.gdate{font-weight:900;font-size:1.6rem}
+ul.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.meta{font-size:.9rem;color:var(--muted);margin:0}
+.mapbox{aspect-ratio:16/9;min-height:320px;border:3px solid var(--navy);background:var(--tint)}.mapbox iframe{width:100%;height:100%;border:0}
+.dir table{width:100%;border-collapse:collapse}.dir caption{text-align:left;font-size:.85rem;color:var(--muted);padding-bottom:8px}
+.dir th,.dir td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}.filters{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+.filters label,.cform label{display:flex;flex-direction:column;font-weight:700;gap:4px}
+select,input,textarea{font:inherit;padding:.6em;border:2px solid var(--navy);background:#fff;color:var(--navy);min-height:44px}
+.cform{display:grid;gap:14px;max-width:560px}
+.journey{list-style:none;margin:0;padding:0;display:grid;gap:18px}.journey li{display:grid;grid-template-columns:130px 1fr;gap:16px}.journey b{font-size:1.5rem;font-weight:900}.journey p{margin:0}
+@media(max-width:600px){.journey li{grid-template-columns:1fr;gap:2px}}
+.meal{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.meal li{padding:16px;text-align:center;font-weight:800;border:2px solid var(--navy);background:#fff}
+details{border-bottom:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:800}details p{margin:.6em 0 0}
+blockquote{margin:0;font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:700;line-height:1.35}blockquote cite{display:block;font-size:1rem;font-weight:600;font-style:normal;margin-top:.8em}
+.site-foot{background:var(--navy);color:#fff;padding:48px 0 32px;margin-top:0}.site-foot a{color:#fff}.site-foot h2{font-size:1rem;text-transform:uppercase;letter-spacing:.1em;color:var(--yellow)}
+.foot-in{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}.foot-in .ack{grid-column:1/-1;font-size:.85rem;border-top:1px solid #35566a;padding-top:20px;margin:0;color:#d5e3e8}
+.foot-in .tag{margin-top:12px;font-weight:800;color:var(--yellow)}.logo-white{height:54px}
+.eyebrow{font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:.85rem;margin-bottom:.8em;display:block}
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}@media(max-width:860px){.split{grid-template-columns:1fr}}
+.tiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.tiles a{display:block;padding:18px 20px;text-decoration:none;font-weight:800;color:var(--navy)}
+.tiles small{display:block;font-weight:600;margin-top:.2em}
+.photo{width:100%;height:100%;object-fit:cover}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--tint)}main{max-width:1100px;margin:0 auto;padding:48px 20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.c{background:#fff;padding:28px;border-top:8px solid var(--yellow)}.c:nth-child(2){border-color:var(--teal)}.c:nth-child(3){border-color:var(--orange)}.c h2 a{color:var(--navy);text-decoration:none}
+.pl{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}.pl a{display:block;padding:.4em .9em;border:2px solid var(--navy);color:var(--navy);text-decoration:none;font-weight:700}.pl a:hover{background:var(--navy);color:#fff}</style></head>
+<body><main><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:56px;margin-bottom:24px"><h1>Website prototypes</h1>
+<p>Three directions for the five-page NRCRA website, one per mood board. Sample content only. Status: draft, for Round 1 direction review.</p><div class="grid"><article class="c"><h2><a href="v1/">Prototype 1: Colour blocks</a></h2><p>Mood board 1. Bold navy, yellow, teal and orange blocks, big type, flat edges.</p><ul class="pl"><li><a href="v1/#home">Home</a></li><li><a href="v1/#about">About</a></li><li><a href="v1/#partners">Partners</a></li><li><a href="v1/#network">Network</a></li><li><a href="v1/#rack">R.A.C.K</a></li></ul></article><article class="c"><h2><a href="v2/">Prototype 2: Light and rounded</a></h2><p>Mood board 2. Light background, rounded content blocks, soft cards.</p><ul class="pl"><li><a href="v2/#home">Home</a></li><li><a href="v2/#about">About</a></li><li><a href="v2/#partners">Partners</a></li><li><a href="v2/#network">Network</a></li><li><a href="v2/#rack">R.A.C.K</a></li></ul></article><article class="c"><h2><a href="v3/">Prototype 3: Heavy visuals</a></h2><p>Mood board 3. Full-bleed photography, overlays, big video moment.</p><ul class="pl"><li><a href="v3/#home">Home</a></li><li><a href="v3/#about">About</a></li><li><a href="v3/#partners">Partners</a></li><li><a href="v3/#network">Network</a></li><li><a href="v3/#rack">R.A.C.K</a></li></ul></article></div>
+<p class="vnote" style="margin-top:32px">Prototype of nrcra.org.au (Home, About, Partners, Network, R.A.C.K). Prepared by VeeMercado.com. client38.veemercado.com</p></main></body></html>
