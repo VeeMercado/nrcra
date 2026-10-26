@@ -28,6 +28,7 @@
       if (!el.offsetParent && getComputedStyle(el).position !== 'fixed') continue;
       const own = [...el.childNodes].filter((n) => n.nodeType === 3 && n.textContent.trim()).map((n) => n.textContent.trim()).join(' ');
       if (!own) continue;
+      if (el.closest('.pc-n')) continue; // decorative ordinal, hidden from assistive tech (the list is already numbered)
       if (el.closest('.tagline')) continue; // brand lockup: logotype text has no contrast minimum (WCAG 1.4.3)
       const cs = getComputedStyle(el); const fg = parse(cs.color); const bg = bgOf(el);
       if (bg.image) continue;

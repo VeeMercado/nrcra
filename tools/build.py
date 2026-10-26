@@ -326,11 +326,10 @@ def cta_band():
 NET_H1 = "60+ grassroots, place-based groups across the Northern Rivers, working across five pillars."
 
 
-def network_body(card="card", pcls="pcols", sec_alt="", dir_alt=""):
+def network_body(card="card", pcls="pcols", sec_alt="", dir_alt="", plain_nums=False):
     return f'''<section class="sec"><div class="wrap">{map_embed()}</div></section>
-<section class="sec {sec_alt}"><div class="wrap"><h2>Five pillars</h2><p class="lede">Each pillar, and the groups in the network working on it.</p>{pillar_cols(pcls, groups=True)}</div></section>
-<section class="sec {dir_alt}"><div class="wrap"><div class="{card}"><h2>All groups</h2>{directory()}</div></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="{card} narrow">{contact_form()}</div></div></section>'''
+<section class="sec {sec_alt}"><div class="wrap"><h2>Five pillars</h2><p class="lede">Each pillar, and the groups in the network working on it.</p>{pillar_cols(pcls, groups=True, plain_nums=plain_nums)}</div></section>
+<section class="sec {dir_alt}"><div class="wrap"><div class="{card}"><h2>All groups</h2>{directory()}</div></div></section>'''
 
 
 def rack_buttons():
@@ -355,7 +354,7 @@ PILLAR_GROUPS = {
 }
 
 
-def pillar_cols(cls="pcols", photos=None, groups=False):
+def pillar_cols(cls="pcols", photos=None, groups=False, plain_nums=False):
     """The five pillars drawn as pillars: arched columns standing on a shared base."""
     out = f'<div class="pcwrap"><ol class="{cls}">'
     for i, (t, d, k) in enumerate(PILLARS):
@@ -363,7 +362,7 @@ def pillar_cols(cls="pcols", photos=None, groups=False):
         gr = ""
         if groups:
             gr = '<ul class="pc-groups">' + "".join(f'<li><b>{E(n)}</b><span>{a}</span></li>' for n, a, l in PILLAR_GROUPS[t]) + "</ul>"
-        out += f'<li class="pc">{ph}<span class="pc-ico">{icon(k)}</span><span class="pc-n">{i + 1:02d}</span><h3>{E(t)}</h3><p>{E(d)}</p>{gr}</li>'
+        out += f'<li class="pc">{ph}<span class="pc-ico">{icon(k)}</span><span class="pc-n" aria-hidden="true">{i + 1 if plain_nums else format(i + 1, "02d")}</span><h3>{E(t)}</h3><p>{E(d)}</p>{gr}</li>'
     return out + '</ol><div class="pc-base" aria-hidden="true"></div></div>'
 
 
@@ -386,17 +385,6 @@ def directory():
 <label>Pillar <select data-f="pillar"><option value="">All pillars</option>{popts}</select></label>
 <label class="dq">Search <input type="search" data-f="q" placeholder="Group name or town"></label></div>
 <ul class="gdir">{items}</ul><p class="empty" hidden>No groups match those filters.</p><p class="vnote">Sample groups. Real names and areas come from the Alliance member list.</p></div>'''
-
-
-def contact_form():
-    return '''<form class="cform" onsubmit="event.preventDefault();this.querySelector('.sent').hidden=false">
-<h3>Get in touch</h3>
-<label>Name<input required autocomplete="name"></label>
-<label>Email<input type="email" required autocomplete="email"></label>
-<label>Group name (optional)<input></label>
-<label>Message<textarea rows="4" required></textarea></label>
-<button class="btn btn-primary" type="submit">Send</button>
-<p class="sent" role="status" hidden>Prototype only: nothing was sent.</p></form>'''
 
 
 # ---------------------------------------------------------------- places map (drawn, Wix: upload as SVG vector art or use Google Maps pins)
@@ -521,9 +509,9 @@ ul.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:r
 .mapbox{width:100%;height:clamp(320px,48vw,560px);background:#eef5f5;border-radius:var(--r);overflow:hidden}.mapbox iframe{width:100%;height:100%;border:0}
 .dir table{width:100%;border-collapse:collapse}.dir caption{text-align:left;font-size:.85rem;color:var(--muted);padding-bottom:8px}
 .dir th,.dir td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}.filters{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
-.filters label,.cform label,.rk-auth label,.rk-search label{display:flex;flex-direction:column;font-weight:700;gap:4px}
+.filters label{display:flex;flex-direction:column;font-weight:700;gap:4px}
 select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy);background:#fff;color:var(--navy);min-height:44px;border-radius:12px}
-.cform{display:grid;gap:14px}main{overflow-x:clip}
+main{overflow-x:clip}
 .pcwrap{position:relative}.pcols{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:stretch}
 .pc{position:relative;overflow:hidden;border-radius:999px 999px 18px 18px;padding:44px 18px 26px;text-align:center;display:flex;flex-direction:column;align-items:center;min-height:380px;color:var(--navy)}
 .pc-ico{width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;margin-bottom:10px;color:var(--navy)}.pc-ico .ico{width:30px;height:30px}
@@ -1063,8 +1051,9 @@ body{--btn-r:4px;--bg:#fbf6ec;--foot:#00615a;--foot-line:rgba(255,255,255,.3);--
 .deco-dots{width:130px;height:130px;z-index:1}.circles .deco-rings{z-index:0;width:190px;height:190px;left:40%;top:30%}
 @media(max-width:760px){.deco{width:96px;height:96px}.d-tr{top:-22px;right:4px}.d-tl{top:-20px;left:4px}.d-bl{bottom:-22px;left:4px}.d-br{bottom:-20px;right:4px}}
 .yellow.rel{overflow:hidden}.yellow .deco{opacity:.5}
-.v3 .pc{background:#fff;border:3px solid var(--yellow)}.v3 .pc:nth-child(2){border-color:var(--orange)}.v3 .pc:nth-child(3){border-color:var(--teal)}.v3 .pc:nth-child(4){border-color:var(--orange-d)}.v3 .pc:nth-child(5){border-color:var(--teal-d)}
-.v3 .pc-ico{background:var(--yellow-40)}.v3 .pc-n{font-family:"Caveat",cursive;font-size:1.8rem;letter-spacing:0;color:var(--orange-d);opacity:1}.v3 .pc-groups li{background:var(--grey-6)}.v3 .pc-base{background:#ecd9b4}
+.v3 .pc{background:#fff;border:3px solid var(--teal);--pk:var(--teal)}.v3 .pc:nth-child(2){border-color:var(--yellow);--pk:var(--yellow)}.v3 .pc:nth-child(3){border-color:var(--orange);--pk:var(--orange)}.v3 .pc:nth-child(4){border-color:var(--navy);--pk:var(--navy)}.v3 .pc:nth-child(5){border-color:#9fb0b8;--pk:#9fb0b8}
+.v3 .pc-ico{background:none;width:auto;height:auto;border-radius:0;color:var(--pk);margin-bottom:6px}.v3 .pc-ico .ico{width:68px;height:68px;stroke-width:3}
+.v3 .pc-n{font-family:"Caveat",cursive;font-size:2rem;letter-spacing:0;color:var(--pk);opacity:1;line-height:1}.v3 .pc-groups li{background:var(--grey-6)}.v3 .pc-base{background:#ecd9b4}
 .pgs3{padding:48px 0 8px}.pgs3 .lede{max-width:70ch}.narrow{max-width:720px}
 """
 
@@ -1113,7 +1102,7 @@ def v3(full=False):
     partners = f'''<div class="pgs3"><div class="wrap rel">{deco("arcs", "d-tr")}<p class="hand">Thank you</p><h1>Our partners</h1><p class="lede">{PARTNER_LINE}</p></div></div>
 <section class="sec" style="padding-top:24px"><div class="wrap">{logo_grid()}<p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></section>'''
 
-    network = pg("Network", NET_H1, "Find the resilience groups connected to the Alliance, by place and by focus.", "cards") + network_body("warmcard")
+    network = pg("Network", NET_H1, "Find the resilience groups connected to the Alliance, by place and by focus.", "cards") + network_body("warmcard", plain_nums=True)
 
     rack = pg("Resources", "The R.A.C.K", f"<b>{RACK_NAME}.</b> {RACK_LINE}", "table", rack_buttons()) + f'''
 <section class="sec"><div class="wrap"><p class="hand">What's inside</p><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
