@@ -4,7 +4,7 @@ Run from the repo root:  python3 tools/build.py
 
 v1  Rounded blocks          (Milou's drafts + the R.A.C.K app: colour cards, pill rows, navy hero panel)
 v2  Light and fresh         (Investing for Charity, LA2050: white and pastel bands, flat illustrations)
-v3  People and community    (Farm Africa, The Children's Society: big people photos, circle crops, warm blocks)
+v3  Big visuals             (Farm Africa, The Children's Society: big people photos, circle crops, warm blocks)
 """
 import html, os
 
@@ -496,6 +496,7 @@ function route(){var h=(location.hash||'#home').slice(1);if(ids.indexOf(h)<0)ret
 S.forEach(function(s){s.classList.toggle('on',s.id===h)});
 [].forEach.call(document.querySelectorAll('[data-nav]'),function(a){if(a.getAttribute('data-nav')===nk)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
 var cur=document.getElementById(h);document.title=cur.getAttribute('data-label')+' | NRCRA prototype';window.scrollTo(0,0);if(window.__navd)cur.focus({preventScroll:true});window.__navd=1;
+[].forEach.call(document.querySelectorAll('[data-proto]'),function(a){a.href='../'+a.getAttribute('data-proto')+'/#'+h});
 document.getElementById('nav').classList.remove('open');document.querySelector('.menu-btn').setAttribute('aria-expanded','false')}
 window.addEventListener('hashchange',route);route();
 if(/shot/.test(location.search)){var pb=document.querySelector('.protobar');if(pb)pb.remove();document.body.style.paddingBottom='0'}
@@ -516,12 +517,13 @@ document.addEventListener('click',function(e){
 FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">'
 
 
-PROTOS = [("v1", "V1 Rounded blocks"), ("v2", "V2 Light and fresh"), ("v3", "V3 People and community")]
+PROTOS = [("v1", "Prototype 1", "Rounded blocks"), ("v2", "Prototype 2", "Light and fresh"), ("v3", "Prototype 3", "Big visuals")]
 
 
 def protobar(v):
-    others = "".join(f'<a class="pb-btn" href="../{k}/" aria-label="{n}"><span class="pb-short" aria-hidden="true">{k.upper()}</span><span class="pb-long">{n}</span></a>' for k, n in PROTOS if k != v)
-    cur = dict(PROTOS)[v]
+    # data-proto lets the script point each button at the same page in the other prototype
+    others = "".join(f'<a class="pb-btn" data-proto="{k}" href="../{k}/" aria-label="{n}: {d}"><span class="pb-short" aria-hidden="true">P{k[1]}</span><span class="pb-long">{n}</span></a>' for k, n, d in PROTOS if k != v)
+    cur = next(f"{n}: {d}" for k, n, d in PROTOS if k == v)
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {cur}</span></p>
 <nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../">All prototypes</a>{others}</nav>
@@ -770,7 +772,7 @@ def v2():
     return page_shell("NRCRA prototype 2: Light and fresh", CSS2, assemble(home, about, partners, network, rack), "v2", white_logo=False)
 
 
-# ================================================================ V3: People and community
+# ================================================================ V3: Big visuals
 SQUIGGLE = '<svg class="squig" viewBox="0 0 300 24" aria-hidden="true"><path d="M4 16c40-12 80-12 120-2s90 8 172-6" fill="none" stroke="#ffcb2a" stroke-width="8" stroke-linecap="round"/></svg>'
 ARROW = '<svg class="arrow" viewBox="0 0 60 90" aria-hidden="true"><path d="M30 4c-8 22 10 40 0 70M14 62l16 22 16-22" fill="none" stroke="#f05a28" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
@@ -883,7 +885,7 @@ def v3():
 <section class="sec"><div class="wrap"><p class="hand">What's inside</p><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="oblock orange"><span class="shape" aria-hidden="true"></span><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>Participatory grants for local groups.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul>
 <p class="big-b" style="margin-top:28px">Access is for Alliance groups. Need help getting in?</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></div></section>'''
-    return page_shell("NRCRA prototype 3: People and community", CSS3, assemble(home, about, partners, network, rack), "v3")
+    return page_shell("NRCRA prototype 3: Big visuals", CSS3, assemble(home, about, partners, network, rack), "v3")
 
 
 # ================================================================ dashboard
@@ -898,7 +900,7 @@ def dashboard():
     cards = [
         ("v1", "Rounded blocks", "Built from Milou's drafts and the R.A.C.K app. Rounded cards in light teal, yellow and orange tints, coloured pill rows, a navy hero panel beside a big rounded photo.", ["Colour cards with photos inside", "Pill rows for the five pillars", "From / To comparison on About"]),
         ("v2", "Light and fresh", "Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents and one illustration, no dark blocks.", ["Photo hero with logo-arc accent", "Five pillars down a dotted step line", "River-style journey timeline"]),
-        ("v3", "People and community", "People first: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn accents.", ["Circle photo cluster and collage", "In their own words stories", "Four ways to be part of it"]),
+        ("v3", "Big visuals", "People first: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn accents.", ["Circle photo cluster and collage", "In their own words stories", "Four ways to be part of it"]),
     ]
     rows = ""
     for i, (slug, t, d, feats) in enumerate(cards, 1):

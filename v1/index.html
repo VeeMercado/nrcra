@@ -232,8 +232,8 @@ body{--bg:#f3f6f7}
 <div><h2>Follow</h2><ul class="plain"><li><a href="https://www.facebook.com/profile.php?id=61585141283356">Facebook</a></li><li><a href="https://www.linkedin.com/company/northern-rivers-community-resilience-alliance/?viewAsMember=true">LinkedIn</a></li><li><a href="https://chat.whatsapp.com/Im7jik2wja81c3w35m3nvr">WhatsApp group</a></li><li><a href="https://www.nrcra.org.au/news">Resilience Roundup newsletter</a></li></ul></div>
 <p class="ack">The Northern Rivers Community Resilience Alliance acknowledges the Traditional Custodians of the lands and waters on which we live and work: the Bundjalung, Arakwal, Githabul, Yaegl and Gumbaynggirr peoples. We recognise their enduring connection to Country, and their continuing cultures and communities. We pay our respects to Elders past and present.</p><p class="copy">© 2026 Northern Rivers Community Resilience Alliance. <a href="https://www.nrcra.org.au">nrcra.org.au</a></p>
 </div></footer><div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
-<p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing V1 Rounded blocks</span></p>
-<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../">All prototypes</a><a class="pb-btn" href="../v2/" aria-label="V2 Light and fresh"><span class="pb-short" aria-hidden="true">V2</span><span class="pb-long">V2 Light and fresh</span></a><a class="pb-btn" href="../v3/" aria-label="V3 People and community"><span class="pb-short" aria-hidden="true">V3</span><span class="pb-long">V3 People and community</span></a></nav>
+<p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing Prototype 1: Rounded blocks</span></p>
+<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../">All prototypes</a><a class="pb-btn" data-proto="v2" href="../v2/" aria-label="Prototype 2: Light and fresh"><span class="pb-short" aria-hidden="true">P2</span><span class="pb-long">Prototype 2</span></a><a class="pb-btn" data-proto="v3" href="../v3/" aria-label="Prototype 3: Big visuals"><span class="pb-short" aria-hidden="true">P3</span><span class="pb-long">Prototype 3</span></a></nav>
 <button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div><script>
 (function(){
 var S=[].slice.call(document.querySelectorAll('[data-screen]')),ids=S.map(function(s){return s.id});
@@ -241,6 +241,7 @@ function route(){var h=(location.hash||'#home').slice(1);if(ids.indexOf(h)<0)ret
 S.forEach(function(s){s.classList.toggle('on',s.id===h)});
 [].forEach.call(document.querySelectorAll('[data-nav]'),function(a){if(a.getAttribute('data-nav')===nk)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
 var cur=document.getElementById(h);document.title=cur.getAttribute('data-label')+' | NRCRA prototype';window.scrollTo(0,0);if(window.__navd)cur.focus({preventScroll:true});window.__navd=1;
+[].forEach.call(document.querySelectorAll('[data-proto]'),function(a){a.href='../'+a.getAttribute('data-proto')+'/#'+h});
 document.getElementById('nav').classList.remove('open');document.querySelector('.menu-btn').setAttribute('aria-expanded','false')}
 window.addEventListener('hashchange',route);route();
 if(/shot/.test(location.search)){var pb=document.querySelector('.protobar');if(pb)pb.remove();document.body.style.paddingBottom='0'}
