@@ -1068,6 +1068,9 @@ body{--btn-r:4px;--bg:#fbf6ec;--foot:#00615a;--foot-line:rgba(255,255,255,.3);--
 .pmap{--land:#fffaf0;--sea:#f6e6c8;--coast:#e2c48d;--river:#9ccfd6;--dot:#f05a28;--hot:#00615a;--lga:#8a7350}
 .places button{--chip:#ecd9b4}.places button:hover,.places button[aria-pressed=true]{background:var(--deep);border-color:var(--deep)}
 .site-foot h2{color:var(--yellow)}
+/* V3 footer: a dark-blue brand brush stroke behind each footer title (Wix: upload the stroke as an SVG and place it behind each title text) */
+.v3 .site-foot .fcol h2{display:inline-block;color:#fff;padding:.85em 1.6em .85em 1.2em;margin:0 0 18px -.6em;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2060'%20preserveAspectRatio='none'%3E%3Cpath%20fill='%2307293b'%20d='M7%2015C32%208%2082%2011%20142%209C202%208%20252%2010%20291%2012L297%2016L285%2019L299%2023L287%2027L298%2032L285%2036L293%2041C262%2048%20202%2051%20142%2050C92%2051%2042%2050%2011%2047L3%2043L15%2039L2%2034L13%2030L4%2025L14%2021L5%2018Z'/%3E%3Cpath%20fill='%2307293b'%20d='M20%205L96%206L98%209L22%209ZM190%2052L270%2051L268%2055L192%2056Z'/%3E%3C/svg%3E") no-repeat center/100% 100%;line-height:1.25;position:static}
+.v3 .site-foot .fcol h2::after{display:none}
 /* V3.2: full-width hero and image sections */
 .full .hero3,.full .pg3{padding:0}.full .hero3>.wrap,.full .pg3>.wrap{max-width:none;padding:0}
 .full .h3-box{border-radius:0;min-height:min(86vh,820px)}.full .h3-box::after,.full .pg3 .box::after{background:linear-gradient(180deg,rgba(0,97,90,.15) 0%,rgba(0,97,90,.35) 40%,rgba(0,97,90,.9) 100%)}.full .pg3 .box{border-radius:0;min-height:520px}
