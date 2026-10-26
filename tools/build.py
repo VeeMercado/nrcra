@@ -182,6 +182,8 @@ REGION_GROUPS = [
 ]
 
 
+# "Connect. Share. Care." in NRCRA's three tagline colours (sampled from their email signature). Treated as a brand lockup.
+TAGLINE = '<span class="tagline"><i class="tg1">Connect.</i> <i class="tg2">Share.</i> <i class="tg3">Care.</i></span>'
 ABORIGINAL_FLAG = '<svg class="ack-flag" viewBox="0 0 60 40" role="img" aria-label="Aboriginal flag"><rect width="60" height="20" fill="#000"/><rect y="20" width="60" height="20" fill="#cc0000"/><circle cx="30" cy="20" r="8" fill="#ffcc00"/></svg>'
 
 
@@ -192,7 +194,7 @@ def footer(white_logo=True):
     groups = [(n, u) for n, t, u in REGION_GROUPS]
     touch = [("Facebook", LINKS["fb"]), ("LinkedIn", LINKS["li"]), ("WhatsApp group", LINKS["wa"]), ("Resilience Roundup Newsletter", LINKS["news"])]
     return f'''<footer class="site-foot"><div class="wrap">
-<div class="foot-cols"><div class="foot-top"><span class="foot-logo">{logo("logo")}</span><p class="tag">Connect. Share. Care.</p></div>{col("Resilience groups in our region", groups)}{col("Stay in touch", touch)}{col("Quick links", quick)}</div>
+<div class="foot-cols"><div class="foot-top"><span class="foot-logo">{logo("logo")}</span><p class="tag">{TAGLINE}</p></div>{col("Resilience groups in our region", groups)}{col("Stay in touch", touch)}{col("Quick links", quick)}</div>
 <div class="ack">{ABORIGINAL_FLAG}<p>{ACK}</p></div>
 <p class="copy">© 2026 Northern Rivers Community Resilience Alliance &middot; <a href="https://www.nrcra.org.au/copy-of-terms-conditions">Privacy Policy</a></p>
 </div></footer>'''
@@ -458,7 +460,7 @@ def places_block(title="Where we are", intro="Alliance groups work in the towns 
 # ---------------------------------------------------------------- R.A.C.K mock (styled after the real R.A.C.K app)
 def rack_head():
     return f'''<div class="rk-head"><div class="rk-brand"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="9" r="4" fill="#f05a28"/><circle cx="9" cy="15" r="3" fill="#ffcb2a"/><circle cx="31" cy="15" r="3" fill="#00a79d"/><path d="M8 34c3-10 7-16 12-16s9 6 12 16" fill="none" stroke="#f05a28" stroke-width="5" stroke-linecap="round"/></svg>
-<div><b>{RACK_NAME}</b><span class="rk-tag"><i class="t">Connect.</i> <i class="y">Share.</i> <i class="o">Care.</i></span></div><span class="rk-badge">RACK</span></div>
+<div><b>{RACK_NAME}</b><span class="rk-tag">{TAGLINE}</span></div><span class="rk-badge">RACK</span></div>
 <div class="rk-tools"><a class="rk-pill" href="#home">Resilience Alliance site</a><a class="rk-share" href="#rack-signin">Share Knowledge</a></div></div>'''
 
 
@@ -592,7 +594,10 @@ select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy
 .rkpage{background:#f7f9fa}.rk{max-width:1100px;margin:0 auto;padding:32px 20px 72px}
 .rk-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;padding:14px 0 18px;border-bottom:1px solid var(--line);margin-bottom:24px}
 .rk-brand{display:flex;align-items:center;gap:10px}.rk-brand svg{width:40px;height:40px}.rk-brand b{display:block;font-size:1.05rem;line-height:1.2}
-.rk-tag{font-size:.8rem;font-weight:800}.rk-tag i{font-style:normal}.rk-tag .t{color:var(--teal-d)}.rk-tag .y{color:#8a6a00}.rk-tag .o{color:var(--orange-d)}
+.rk-tag{font-size:.8rem;font-weight:800}
+.tagline i{font-style:normal;font-weight:800}.tagline .tg1{color:#58b0ac}.tagline .tg2{color:#d8b044}.tagline .tg3{color:#e47848}
+/* white brush stroke behind the tagline wherever the background is not white or a light brand tint (Wix: place the stroke SVG behind the text) */
+body:not(.v2) .site-foot .tagline,.ticker .tagline{display:inline-block;padding:.5em 1.5em;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2060'%20preserveAspectRatio='none'%3E%3Cpath%20fill='white'%20d='M7%2015C32%208%2082%2011%20142%209C202%208%20252%2010%20291%2012L297%2016L285%2019L299%2023L287%2027L298%2032L285%2036L293%2041C262%2048%20202%2051%20142%2050C92%2051%2042%2050%2011%2047L3%2043L15%2039L2%2034L13%2030L4%2025L14%2021L5%2018Z'/%3E%3Cpath%20fill='white'%20d='M20%205L96%206L98%209L22%209ZM190%2052L270%2051L268%2055L192%2056Z'/%3E%3C/svg%3E") no-repeat center/100% 100%}
 .rk-badge{background:var(--teal-d);color:#fff;font-weight:900;padding:.2em .6em;border-radius:8px;letter-spacing:.06em}
 .rk-tools{display:flex;gap:10px;flex-wrap:wrap}.rk-pill{border:1px solid var(--line);border-radius:99px;padding:.45em 1em;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--navy);background:#fff}
 .rk-share{background:#f5b301;color:var(--navy);border-radius:12px;padding:.5em 1.1em;font-weight:800;text-decoration:none;box-shadow:0 3px 0 #c98f00}
@@ -698,7 +703,7 @@ body{--bg:#f3f6f7}
 .callcard{margin:0;background:var(--yellow-40);border-radius:var(--r);padding:28px 30px 26px;position:relative;overflow:hidden}
 .callcard::after{content:"";position:absolute;right:-50px;top:-50px;width:150px;height:150px;border-radius:50%;background:var(--orange-25)}
 .connect-art{width:100%;height:auto;display:block;position:relative;z-index:1;margin-bottom:10px}.cc-ph{position:relative;z-index:1;border-radius:18px;overflow:hidden;aspect-ratio:16/9;margin-bottom:18px}.cc-ph img{width:100%;height:100%;object-fit:cover}
-.callcard blockquote{margin:0;font-size:1.35rem;font-weight:900;line-height:1.3;position:relative;z-index:1}.callcard figcaption{margin-top:12px;font-weight:800;font-size:.9rem;color:var(--teal-d);position:relative;z-index:1}.callout{border:3px solid var(--orange);border-radius:var(--r);padding:28px;font-size:1.2rem;font-weight:800;background:#fff}
+.callcard blockquote{margin:0;font-size:1.35rem;font-weight:900;line-height:1.3;position:relative;z-index:1}.callcard figcaption{margin-top:12px;font-weight:800;font-size:.9rem;position:relative;z-index:1}.callout{border:3px solid var(--orange);border-radius:var(--r);padding:28px;font-size:1.2rem;font-weight:800;background:#fff}
 @media(max-width:860px){.intro1{grid-template-columns:1fr}}
 .val{border-radius:var(--r);padding:30px}.val .ico{margin-bottom:18px}.val-teal{background:var(--teal-25);color:var(--navy)}.val-yellow{background:var(--yellow-40);color:var(--navy)}.val-orange{background:var(--orange-25);color:var(--navy)}
 .val .ico{width:56px;height:56px;padding:10px;border-radius:50%;background:#fff}.val-teal .ico{color:var(--teal-d)}.val-yellow .ico{color:#7a5a00}.val-orange .ico{color:var(--orange-d)}
@@ -765,7 +770,7 @@ body{--bg:#f3f6f7}
 .full .bk-navy .pc-base,.full .bk-navy .pcwrap::after{background:#2c4a5b}.full .bk-teal .tline path{opacity:.7}.full .bk-teal .t0 .stop{border-color:var(--navy)}.full .bk-teal .val-teal{box-shadow:0 0 0 3px #fff}.full .bk-yellow .callcard{background:#fff}.full .bk-yellow .callcard::after{background:var(--yellow-40)}
 .full .bk-orange .card a:not(.btn){color:var(--teal-d)}.full [class*="bk-"] :is(.card,.stat-card) .eyebrow{color:var(--teal-d)}
 .ticker{display:none}.full .ticker{display:block;overflow:hidden;background:var(--navy);color:var(--yellow);font-weight:900;font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase;padding:12px 0;white-space:nowrap}
-.full .tk-in{display:inline-flex;gap:22px;align-items:center;animation:tk 40s linear infinite}.full .tk-in i{font-style:normal;color:var(--teal);font-size:.7em}
+.full .tk-in{display:inline-flex;gap:22px;align-items:center;animation:tk 40s linear infinite}.full .tk-in .tkd{font-style:normal;color:var(--teal);font-size:.7em}
 @keyframes tk{to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.full .tk-in{animation:none}}
 .full .hero1 .latest{margin:22px auto 0}
 /* V1.2: full-width hero and image sections */
@@ -802,8 +807,8 @@ def connect_art():
 <g stroke="#07293b" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round" opacity=".45">{ring}</g><g stroke="#07293b" stroke-width="3" stroke-linecap="round" opacity=".7">{lines}</g>{dots}</svg>'''
 
 
-TICKER_WORDS = ["Connect", "Share", "Care", "60+ groups", "7 council areas", "One network"]
-TICKER = '<div class="ticker" aria-hidden="true"><div class="tk-in">' + "".join(f'<span>{w}</span><i>&#9679;</i>' for w in TICKER_WORDS * 4) + '</div></div>'
+TICKER_WORDS = [TAGLINE, "60+ groups", "7 council areas", "One network"]
+TICKER = '<div class="ticker" aria-hidden="true"><div class="tk-in">' + "".join(f'<span>{w}</span><b class="tkd">&#9679;</b>' for w in TICKER_WORDS * 4) + '</div></div>'
 
 
 def v1_partners():
@@ -819,7 +824,7 @@ def v1(full=False):
 <div class="h1-photo hvid" data-video="{VIMEO}">{img("speaker", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div></div>
 <div class="wrap"><div class="latest"><a href="{LINKS["news"]}"><b>Latest</b>$800,000 HELP Fund grants program announced</a><a href="#home-focus"><b>Upcoming</b>{GATHER[0]}: {GATHER[1]}</a><a href="#partners"><b>Projects</b>Three projects under way</a></div></div></div>
 
-{TICKER if full else ""}<section class="sec bk-yellow"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard"><div class="cc-ph">{img("circle")}</div><blockquote>{CALLOUT}</blockquote><figcaption>Connect. Share. Care.</figcaption></figure></div></section>
+{TICKER if full else ""}<section class="sec bk-yellow"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard"><div class="cc-ph">{img("circle")}</div><blockquote>{CALLOUT}</blockquote><figcaption>{TAGLINE}</figcaption></figure></div></section>
 
 <section class="sec bk-teal" style="padding-top:0"><div class="wrap"><h2>How we work</h2>{values_cards()}</div></section>
 

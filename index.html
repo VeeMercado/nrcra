@@ -106,7 +106,10 @@ select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy
 .rkpage{background:#f7f9fa}.rk{max-width:1100px;margin:0 auto;padding:32px 20px 72px}
 .rk-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;padding:14px 0 18px;border-bottom:1px solid var(--line);margin-bottom:24px}
 .rk-brand{display:flex;align-items:center;gap:10px}.rk-brand svg{width:40px;height:40px}.rk-brand b{display:block;font-size:1.05rem;line-height:1.2}
-.rk-tag{font-size:.8rem;font-weight:800}.rk-tag i{font-style:normal}.rk-tag .t{color:var(--teal-d)}.rk-tag .y{color:#8a6a00}.rk-tag .o{color:var(--orange-d)}
+.rk-tag{font-size:.8rem;font-weight:800}
+.tagline i{font-style:normal;font-weight:800}.tagline .tg1{color:#58b0ac}.tagline .tg2{color:#d8b044}.tagline .tg3{color:#e47848}
+/* white brush stroke behind the tagline wherever the background is not white or a light brand tint (Wix: place the stroke SVG behind the text) */
+body:not(.v2) .site-foot .tagline,.ticker .tagline{display:inline-block;padding:.5em 1.5em;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2060'%20preserveAspectRatio='none'%3E%3Cpath%20fill='white'%20d='M7%2015C32%208%2082%2011%20142%209C202%208%20252%2010%20291%2012L297%2016L285%2019L299%2023L287%2027L298%2032L285%2036L293%2041C262%2048%20202%2051%20142%2050C92%2051%2042%2050%2011%2047L3%2043L15%2039L2%2034L13%2030L4%2025L14%2021L5%2018Z'/%3E%3Cpath%20fill='white'%20d='M20%205L96%206L98%209L22%209ZM190%2052L270%2051L268%2055L192%2056Z'/%3E%3C/svg%3E") no-repeat center/100% 100%}
 .rk-badge{background:var(--teal-d);color:#fff;font-weight:900;padding:.2em .6em;border-radius:8px;letter-spacing:.06em}
 .rk-tools{display:flex;gap:10px;flex-wrap:wrap}.rk-pill{border:1px solid var(--line);border-radius:99px;padding:.45em 1em;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--navy);background:#fff}
 .rk-share{background:#f5b301;color:var(--navy);border-radius:12px;padding:.5em 1.1em;font-weight:800;text-decoration:none;box-shadow:0 3px 0 #c98f00}

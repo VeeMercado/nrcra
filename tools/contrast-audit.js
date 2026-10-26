@@ -28,6 +28,7 @@
       if (!el.offsetParent && getComputedStyle(el).position !== 'fixed') continue;
       const own = [...el.childNodes].filter((n) => n.nodeType === 3 && n.textContent.trim()).map((n) => n.textContent.trim()).join(' ');
       if (!own) continue;
+      if (el.closest('.tagline')) continue; // brand lockup: logotype text has no contrast minimum (WCAG 1.4.3)
       const cs = getComputedStyle(el); const fg = parse(cs.color); const bg = bgOf(el);
       if (bg.image) continue;
       const f = over(fg, bg.col); const l1 = L(f), l2 = L(bg.col); const ratio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
