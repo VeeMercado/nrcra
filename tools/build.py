@@ -229,7 +229,7 @@ def from_to(art=False):
     f, t = FROM_TO
     fa, ta = (FT_FROM_ART, FT_TO_ART) if art else ("", "")
     return f'''<div class="fromto"><div class="ft-from">{fa}<h3>From</h3><ul>{"".join(f"<li>{x}</li>" for x in f)}</ul></div>
-<div class="ft-arrow" aria-hidden="true">&rarr;</div><div class="ft-to">{ta}<h3>To</h3><ul>{"".join(f"<li>{x}</li>" for x in t)}</ul></div></div>'''
+<div class="ft-arrow" aria-hidden="true"><span>&rarr;</span></div><div class="ft-to">{ta}<h3>To</h3><ul>{"".join(f"<li>{x}</li>" for x in t)}</ul></div></div>'''
 
 
 def partner_tile(file, name):
@@ -264,6 +264,22 @@ MEAL_ICONS = {"Connect": "connect", "Listen": "listen", "Reflect": "reflect", "I
 
 def meal(cls="meal"):
     return f'<ol class="{cls}">' + "".join(f"<li>{icon(MEAL_ICONS[m], 'mico')}{m}</li>" for m in MEAL) + "</ol>"
+
+
+PIN = '<svg class="pin" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 50S4 31 4 19a16 16 0 0 1 32 0c0 12-16 31-16 31z" fill="#f05a28"/><circle cx="20" cy="19" r="6.5" fill="#fff"/></svg>'
+
+
+def trail():
+    """Our journey as a winding dotted trail: each year is a stop, a dashed path curves to the next one."""
+    out = '<ol class="trail">'
+    n = len(JOURNEY)
+    for i, (y, t) in enumerate(JOURNEY):
+        side = "l" if i % 2 == 0 else "r"
+        x1, x2 = (25, 75) if side == "l" else (75, 25)
+        link = "" if i == n - 1 else f'<svg class="tlink" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M{x1} 0C{x1} 55 {x2} 45 {x2} 100" vector-effect="non-scaling-stroke"/></svg>'
+        pin = PIN if i == n - 1 else ""
+        out += f'<li class="t-{side} t{i % 5}">{link}<span class="stop">{pin}<b>{y}</b></span><div class="tcard"><p>{E(t)}</p></div></li>'
+    return out + "</ol>"
 
 
 def faq():
@@ -479,7 +495,7 @@ ul.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:r
 .pillars{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}.pillars h3{margin:.3em 0}.pillars p{margin:0}
 .values{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}.values p{margin:0}
 .fromto{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch}.fromto>div{border-radius:var(--r);padding:28px}.fromto ul{margin:0;padding-left:1.1em}
-.ft-art{width:150px;height:auto;display:block;margin-bottom:12px}.ft-arrow{display:grid;place-items:center;font-size:2.4rem;font-weight:900;padding:0 10px!important}@media(max-width:700px){.fromto{grid-template-columns:1fr}.ft-arrow{transform:rotate(90deg)}}
+.ft-art{width:150px;height:auto;display:block;margin-bottom:12px}.ft-arrow{display:grid;place-items:center;font-size:2.4rem;font-weight:900;padding:0 10px!important}@media(max-width:700px){.fromto{grid-template-columns:1fr}.ft-arrow{padding:0!important;width:48px;height:48px;justify-self:center;border-radius:50%!important;font-size:1.6rem}.ft-arrow span{display:inline-block;transform:rotate(90deg)}}
 .video{position:relative;aspect-ratio:16/9;background:var(--navy);overflow:hidden;border-radius:var(--r)}.video img,.video iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
 .play{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;border:0;background:var(--yellow);color:var(--navy);font-size:1.8rem;cursor:pointer;display:grid;place-items:center;padding-left:6px;box-shadow:0 6px 20px rgba(0,0,0,.25)}.play:hover{background:#fff}
 .pgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
@@ -679,6 +695,17 @@ body{--bg:#f3f6f7}
 .p3-logos ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}.p3-logos li{border:1px solid var(--line);border-radius:16px;display:grid;place-items:center;padding:12px;aspect-ratio:3/2;background:#fff}.p3-logos img{max-height:56px;max-width:100%;object-fit:contain}
 @media(max-width:900px){.p3{grid-template-columns:1fr}.p3-img img{aspect-ratio:16/10}}
 .vp{border-radius:var(--r);padding:28px}.vp-t{background:var(--teal-25)}.vp-y{background:var(--yellow-40)}.vp .connect-art{max-width:300px;margin:0 0 14px}
+.trail{list-style:none;margin:24px 0 0;padding:0}.trail li{position:relative;padding:0 0 64px}.trail li:last-child{padding-bottom:0}
+.tlink{position:absolute;left:0;top:50px;width:100%;height:100%;overflow:visible;z-index:0}.tlink path{fill:none;stroke:var(--navy);stroke-width:5;stroke-linecap:round;stroke-dasharray:1 14;opacity:.55}
+.stop{position:relative;z-index:2;width:100px;height:100px;border-radius:50%;display:grid;place-items:center;text-align:center;background:#fff;border:6px solid var(--teal);font-weight:900;line-height:1.05;padding:8px}
+.stop b{font-size:1.25rem}.t-l .stop{margin-left:calc(25% - 50px)}.t-r .stop{margin-left:calc(75% - 50px)}
+.t1 .stop{border-color:var(--yellow)}.t2 .stop{border-color:var(--orange)}.t3 .stop{border-color:var(--navy)}.t4 .stop{border-color:var(--teal-d)}.t4 .stop b{font-size:1rem}
+.tcard{position:relative;z-index:2;width:44%;margin-top:14px;background:#fff;border-radius:var(--r);padding:18px 22px;box-shadow:0 1px 0 var(--line)}.tcard p{margin:0}
+.t-l .tcard{margin-left:3%}.t-r .tcard{margin-left:53%}
+.pin{position:absolute;width:38px;height:48px;top:-40px;left:50%;transform:translateX(-50%)}
+@media(max-width:760px){.tlink{display:none}.trail{margin-top:40px}.trail li{padding:0 0 28px 84px;min-height:96px}.trail li:not(:last-child)::before{content:"";position:absolute;left:31px;top:72px;bottom:0;border-left:5px dotted rgba(7,41,59,.45)}
+.stop,.t-l .stop,.t-r .stop{position:absolute;left:0;top:0;margin:0;width:68px;height:68px;border-width:5px;padding:4px}.stop b{font-size:.95rem}.t4 .stop b{font-size:.72rem}.pin{width:30px;height:38px;top:-32px}
+.tcard,.t-l .tcard,.t-r .tcard{width:auto;margin:0}}
 .pgs{padding:48px 0 0}.pgs .lede{max-width:70ch}.narrow{max-width:720px}
 """
 
@@ -735,7 +762,7 @@ def v1():
 <section class="sec"><div class="wrap"><div class="split" style="align-items:stretch"><div class="vp vp-t">{horizon_art()}<h2>Vision</h2><p>{VISION}</p></div><div class="vp vp-y">{connect_art()}<h2>Purpose</h2><p>{PURPOSE}</p></div></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our values</h2>{values_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2>Our journey</h2>{journey()}</div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><h2>Our journey</h2>{trail()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap split"><div class="card"><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning is our learning cycle, with researchers from the University Centre for Rural Health.</p>{meal()}</div><div class="card" style="background:var(--yellow-40)">{quote()}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap card"><h2>Our structure</h2><p>Steering committee, embedded researchers from UCRH and the Network Lead, {CONTACT["name"]}. Names and roles to be supplied.</p><h3>Common questions</h3>{faq()}</div></section>'''
 
