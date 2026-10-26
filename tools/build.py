@@ -134,20 +134,33 @@ def pillars_list(cls="pillars"):
     return f'<ol class="{cls}">' + "".join(f"<li><h3>{E(t)}</h3><p>{E(d)}</p></li>" for t, d in PILLARS) + "</ol>"
 
 
-def partner_tile(name, note, url):
-    return f'<li class="ptile"><a href="{url}"><span class="plogo" aria-hidden="true"><b>{E(name)}</b><i>logo to supply</i></span><span class="pname">{E(name)}</span><span class="pnote">{E(note)}</span></a></li>'
+SL = "../assets/sample-logos/"
+# PLACEHOLDER ONLY: logos borrowed from worldnomads.com "Who we fund" to show the layout. Not NRCRA partners. Replace with real partner logos.
+SAMPLE = [
+    ("adventuretravelconservationfund-logo-600x390.png", "Adventure Travel Conservation Fund"), ("wildlifeconservationnetwork-logo-600x390.png", "Wildlife Conservation Network"),
+    ("anza-logo-600x390.png", "Anza"), ("abercrombiekentphilanthropy-logo-600x390.png", "Abercrombie & Kent Philanthropy"),
+    ("plan-logo-600x390-v2.png", "Plan International"), ("seaturtleconservancy-logo-600x390.png", "Sea Turtle Conservancy"),
+    ("surfaid-logo-600x390.png", "SurfAid"), ("fredhollows-logo-600x390.png", "The Fred Hollows Foundation"),
+    ("worldexpeditions-logo-600x390.png", "World Expeditions Foundation"), ("wateraid-primary-logo-600px-390px.png", "WaterAid"),
+    ("savethechildren-logo-600x390.png", "Save the Children"), ("ahf-logo.png", "The Australian Himalayan Foundation"),
+]
+SAMPLE_GROUPS = [("Funders", "Whose funding makes this work possible.", SAMPLE[0:4]), ("Delivery partners", "Who we build and deliver programs with.", SAMPLE[4:8]), ("Research partners", "Who listens, reflects and tracks change alongside us.", SAMPLE[8:12])]
+REAL = "Disaster Ready Fund, FRRR, NRMA Insurance HELP Fund, NSW Government, Northern Rivers Community Foundation, Resilient Lismore, Plan C, University Centre for Rural Health, Monash University"
+
+
+def partner_tile(file, name):
+    return f'<li class="ptile"><a href="#partners"><span class="plogo"><img src="{SL}{file}" alt="{E(name)}" loading="lazy"></span><span class="pname">{E(name)}</span><span class="pnote">Sample partner, placeholder logo</span></a></li>'
 
 
 def partner_groups(cls="pgroups"):
-    out = f'<div class="{cls}">'
-    for title, intro, items in PARTNERS:
+    out = f'<div class="{cls}"><p class="rk-note"><b>Placeholder partners.</b> These logos are borrowed from another site to show the layout. They are not NRCRA partners. Real partners to be shown here: {REAL}.</p>'
+    for title, intro, items in SAMPLE_GROUPS:
         out += f'<section class="pgroup"><h3>{E(title)}</h3><p class="lede-s">{E(intro)}</p><ul class="pgrid">' + "".join(partner_tile(*i) for i in items) + "</ul></section>"
     return out + "</div>"
 
 
 def partner_strip():
-    names = [i[0] for _, _, items in PARTNERS for i in items]
-    return '<ul class="strip">' + "".join(f'<li><a href="#partners">{E(n)}</a></li>' for n in names[:8]) + "</ul>"
+    return '<ul class="strip logos">' + "".join(f'<li><a href="#partners"><img src="{SL}{f}" alt="{E(n)} (sample logo)" loading="lazy"></a></li>' for f, n in SAMPLE[:6]) + "</ul>"
 
 
 def gather_cards():
@@ -195,7 +208,7 @@ def contact_form():
 
 
 def gh_note():
-    return '<p class="vnote">Prototype note: these buttons link to the RACK sign-in, sign-up and platform pages (set up on GitHub per the project schedule). Final links to be supplied.</p>'
+    return '<p class="vnote">Prototype note: the buttons open mock R.A.C.K sign-in, sign-up and workspace pages. Final links to the live platform to be supplied.</p>'
 
 
 def rack_buttons():
@@ -235,6 +248,32 @@ def journey():
 
 def meal():
     return '<ol class="meal">' + "".join(f"<li>{m}</li>" for m in MEAL) + "</ol>"
+
+
+FILES = [
+    ("d", "Community Emergency Hub Guide", "Tools", "Dec 2025"), ("s", "One Calendar (regional shared calendar)", "Tools", "Jan 2026"),
+    ("s", "Resilience Address Book", "Tools", "Jan 2026"), ("d", "FRRR Community Data Tool guide", "Research", "Dec 2025"),
+    ("p", "Connecting for Impact, UCRH report", "Research", "Dec 2025"), ("f", "2026 Participatory Grant Workshops", "Funding", "Dec 2025"),
+    ("d", "Group governance template (sample)", "Templates", "Sample"), ("d", "Volunteer induction pack (sample)", "Training", "Sample"),
+]
+ICONS = {"d": "DOC", "s": "SHEET", "p": "PDF", "f": "FOLDER"}
+
+
+def rack_screens():
+    note = '<p class="rk-note"><b>Prototype mock.</b> This stands in for the real R.A.C.K sign-in, sign-up and workspace until the live links are supplied. Nothing is sent or stored.</p>'
+    cats = ["All files", "Training", "Templates", "Funding", "Tools", "Peer support", "Research"]
+    side = "".join('<li><a href="#rack-open"' + (' aria-current="true"' if i == 0 else "") + f">{c}</a></li>" for i, c in enumerate(cats))
+    rows = "".join(f'<tr><th scope="row"><span class="ic {k}" aria-hidden="true">{ICONS[k]}</span>{E(n)}</th><td>{c}</td><td>{m}</td></tr>' for k, n, c, m in FILES)
+    signin = f'''<div class="rk">{note}<div class="rk-auth"><h1>Sign in to the R.A.C.K</h1><p>For groups in the Resilience Alliance.</p>
+<form onsubmit="event.preventDefault();location.hash='rack-open'"><label>Email<input type="email" required autocomplete="email"></label><label>Password<input type="password" required autocomplete="current-password"></label>
+<button class="btn" type="submit">Sign in</button></form><p class="rk-alt">New to the R.A.C.K? <a href="#rack-signup">Request access</a></p></div></div>'''
+    signup = f'''<div class="rk">{note}<div class="rk-auth"><h1>Request access to the R.A.C.K</h1><p>Access is for Alliance groups. The Network Lead approves new requests.</p>
+<form onsubmit="event.preventDefault();this.querySelector('.sent').hidden=false"><label>Your name<input required autocomplete="name"></label><label>Email<input type="email" required autocomplete="email"></label>
+<label>Group or organisation<input required></label><button class="btn" type="submit">Request access</button><p class="sent" role="status" hidden>Prototype only: nothing was sent. In the build, the Network Lead is notified.</p></form>
+<p class="rk-alt">Already have access? <a href="#rack-signin">Sign in</a></p></div></div>'''
+    hub = f'''<div class="rk">{note}<div class="rk-app"><div class="rk-bar"><b>R.A.C.K</b><input type="search" aria-label="Search the R.A.C.K" placeholder="Search resources"><span class="rk-user">Signed in as a sample group &middot; <a href="#rack-signin">Sign out</a></span></div>
+<div class="rk-body"><nav class="rk-side" aria-label="R.A.C.K folders"><ul>{side}</ul></nav><div class="rk-files"><table><caption class="vnote" style="text-align:left;padding-bottom:8px">Sample file list. Real contents come from the Alliance Google Workspace.</caption><thead><tr><th scope="col">Name</th><th scope="col">Folder</th><th scope="col">Updated</th></tr></thead><tbody>{rows}</tbody></table></div></div></div></div>'''
+    return screen("rack-signin", "R.A.C.K sign in", signin) + screen("rack-signup", "R.A.C.K sign up", signup) + screen("rack-open", "R.A.C.K workspace", hub)
 
 
 def screen(id_, label, body, cls=""):
@@ -279,14 +318,16 @@ p{margin:0 0 1em}.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
 .play{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;border:4px solid var(--navy);background:var(--yellow);color:var(--navy);font-size:1.8rem;cursor:pointer;display:grid;place-items:center;padding-left:6px}.play:hover{background:#fff}
 .pgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
 .ptile a{display:flex;flex-direction:column;height:100%;text-decoration:none;color:var(--navy);padding:16px;border:2px solid var(--line);background:#fff}
-.ptile a:hover{border-color:var(--navy)}.plogo{display:grid;place-items:center;text-align:center;height:110px;background:var(--tint);margin-bottom:12px;padding:8px;position:relative}
+.ptile a:hover{border-color:var(--navy)}.plogo{display:grid;place-items:center;text-align:center;height:130px;background:#fff;border:1px solid var(--line);margin-bottom:12px;padding:8px;position:relative}
 .plogo b{font-size:1.05rem}.plogo i{position:absolute;bottom:4px;right:8px;font-size:.7rem;color:var(--muted);font-style:normal}
 .pname{font-weight:800}.pnote{font-size:.95rem;color:var(--muted)}.lede-s{color:var(--muted)}
 .strip a:not(.btn){color:var(--navy) !important}
+.strip.logos a{padding:6px 10px;display:grid;place-items:center;background:#fff}.strip.logos img{height:64px;width:auto;max-width:150px;object-fit:contain}
+.plogo img{max-height:100%;width:auto;max-width:100%;object-fit:contain}
 .strip{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}.strip a{display:block;padding:.5em 1em;background:#fff;color:var(--navy);font-weight:700;text-decoration:none;border:2px solid var(--line)}.strip a:hover{border-color:var(--navy)}
 .gcard,.pcard,.rcard{list-style:none;padding:22px}.gcard,.pcard{color:var(--navy)}.gdate{font-weight:900;font-size:1.6rem}
 ul.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.meta{font-size:.9rem;color:var(--muted);margin:0}
+.meta{font-size:.9rem;color:var(--muted);margin:0}.pcard .meta,.gcard .meta,.rcard .meta{color:var(--navy) !important}.rcard .meta a{color:inherit !important}
 .mapbox{aspect-ratio:16/9;min-height:320px;border:3px solid var(--navy);background:var(--tint)}.mapbox iframe{width:100%;height:100%;border:0}
 .dir table{width:100%;border-collapse:collapse}.dir caption{text-align:left;font-size:.85rem;color:var(--muted);padding-bottom:8px}
 .dir th,.dir td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}.filters{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
@@ -295,7 +336,18 @@ select,input,textarea{font:inherit;padding:.6em;border:2px solid var(--navy);bac
 .cform{display:grid;gap:14px;max-width:560px}
 .journey{list-style:none;margin:0;padding:0;display:grid;gap:18px}.journey li{display:grid;grid-template-columns:130px 1fr;gap:16px}.journey b{font-size:1.5rem;font-weight:900}.journey p{margin:0}
 @media(max-width:600px){.journey li{grid-template-columns:1fr;gap:2px}}
-.meal{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.meal li{padding:16px;text-align:center;font-weight:800;border:2px solid var(--navy);background:#fff}
+.meal{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}.meal li{padding:16px;text-align:center;font-weight:800;border:2px solid var(--navy);background:#fff;color:var(--navy)}
+.rk{max-width:1100px;margin:0 auto;padding:40px 20px 72px}.rk-note{background:var(--cream);border:2px dashed var(--orange-d);padding:10px 14px;font-size:.9rem;margin-bottom:20px}
+.rk-auth{max-width:440px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:8px;padding:32px;box-shadow:0 2px 10px rgba(7,41,59,.12)}
+.rk-auth h1{font-size:1.7rem}.rk-auth form{display:grid;gap:14px}.rk-auth label{display:flex;flex-direction:column;font-weight:700;gap:4px}
+.rk-auth .btn{border-radius:4px;border-color:var(--teal-d);background:var(--teal-d);color:#fff}.rk-auth .btn:hover{background:var(--navy);border-color:var(--navy)}.rk-alt{margin:16px 0 0;font-size:.95rem}
+.rk-app{border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}.rk-bar{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:12px 16px;border-bottom:1px solid var(--line);background:#f6f8f9}
+.rk-bar b{font-size:1.3rem;letter-spacing:.04em}.rk-bar input[type=search]{flex:1;min-width:180px;border-radius:99px}.rk-user{font-size:.9rem;color:var(--muted)}
+.rk-body{display:grid;grid-template-columns:220px 1fr}.rk-side{padding:16px;border-right:1px solid var(--line);background:#fbfcfc}.rk-side ul{list-style:none;margin:0;padding:0}
+.rk-side li a{display:block;padding:.55em .8em;border-radius:99px;color:var(--navy);text-decoration:none;font-weight:600}.rk-side li a[aria-current]{background:#d8f0ee}.rk-side li a:hover{background:#eef3f4}
+.rk-files{padding:16px 20px;overflow-x:auto}.rk-files table{width:100%;border-collapse:collapse;min-width:420px}.rk-files th,.rk-files td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line);font-size:.95rem}
+.rk-files th{color:var(--muted);font-weight:700}.ic{display:inline-block;min-width:3em;text-align:center;font-size:.7rem;font-weight:800;padding:.15em .4em;border-radius:3px;background:var(--navy);color:#fff;margin-right:8px}.ic.d{background:#1a56b8}.ic.s{background:#146c2e}.ic.p{background:#b3261e}.ic.f{background:#4a5560}
+@media(max-width:700px){.rk-body{grid-template-columns:1fr}.rk-side{border-right:0;border-bottom:1px solid var(--line)}}
 details{border-bottom:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:800}details p{margin:.6em 0 0}
 blockquote{margin:0;font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:700;line-height:1.35}blockquote cite{display:block;font-size:1rem;font-weight:600;font-style:normal;margin-top:.8em}
 .site-foot{background:var(--navy);color:#fff;padding:48px 0 32px;margin-top:0}.site-foot a{color:#fff}.site-foot h2{font-size:1rem;text-transform:uppercase;letter-spacing:.1em;color:var(--yellow)}
@@ -314,9 +366,9 @@ JS = """
 (function(){
 var ids=[].map.call(document.querySelectorAll('[data-screen]'),function(s){return s.id}),
 titles={};[].forEach.call(document.querySelectorAll('[data-screen]'),function(s){titles[s.id]=s.getAttribute('data-label')});
-function route(){var h=(location.hash||'#home').slice(1);if(ids.indexOf(h)<0){if(h.indexOf('rack-')===0){h='rack'}else return}
+function route(){var h=(location.hash||'#home').slice(1);if(ids.indexOf(h)<0)return;var nk=h.indexOf('rack')===0?'rack':h;
 [].forEach.call(document.querySelectorAll('[data-screen]'),function(s){s.classList.toggle('on',s.id===h)});
-[].forEach.call(document.querySelectorAll('[data-nav]'),function(a){if(a.getAttribute('data-nav')===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+[].forEach.call(document.querySelectorAll('[data-nav]'),function(a){if(a.getAttribute('data-nav')===nk)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
 document.title=titles[h]+' | NRCRA prototype';window.scrollTo(0,0);var s=document.getElementById(h);if(s&&window.__navd){s.focus({preventScroll:true})}window.__navd=1;
 document.getElementById('nav').classList.remove('open');var b=document.querySelector('.menu-btn');if(b)b.setAttribute('aria-expanded','false')}
 window.addEventListener('hashchange',route);route();
@@ -410,7 +462,7 @@ def v1():
 <section class="blk blk-navy"><div class="wrap"><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>NRMA Insurance's participatory grants program for the region.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul></div></section>
 <section class="blk blk-teal"><div class="wrap"><h2>Need help getting in?</h2><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
 
-    body = "".join([screen("home", "Home", home), screen("about", "About", about), screen("partners", "Partners", partners), screen("network", "Network", network), screen("rack", "R.A.C.K", rack)])
+    body = "".join([screen("home", "Home", home), screen("about", "About", about), screen("partners", "Partners", partners), screen("network", "Network", network), screen("rack", "R.A.C.K", rack), rack_screens()])
     return page_shell("NRCRA prototype 1: Colour blocks", CSS1, body, "v1")
 
 
@@ -480,7 +532,7 @@ def v2():
 <h2>What you will find inside</h2><ul class="cards">{rack_cards()}</ul>{gh_note()}
 <div class="card dark"><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>Participatory grants for local groups.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul></div></div></section>'''
 
-    body = "".join([screen("home", "Home", home), screen("about", "About", about), screen("partners", "Partners", partners), screen("network", "Network", network), screen("rack", "R.A.C.K", rack)])
+    body = "".join([screen("home", "Home", home), screen("about", "About", about), screen("partners", "Partners", partners), screen("network", "Network", network), screen("rack", "R.A.C.K", rack), rack_screens()])
     return page_shell("NRCRA prototype 2: Light and rounded", CSS2, body, "v2")
 
 
@@ -556,7 +608,7 @@ def v3():
 <section class="full">{img("cards2", ALT["cards"], "bg")}<div class="wrap"><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>Participatory grants for local groups.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul>
 <p style="margin-top:32px">Access is for Alliance groups. Need help getting in?</p><p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
 
-    body = "".join([screen("home", "Home", home), screen("about", "About", about), screen("partners", "Partners", partners), screen("network", "Network", network), screen("rack", "R.A.C.K", rack)])
+    body = "".join([screen("home", "Home", home), screen("about", "About", about), screen("partners", "Partners", partners), screen("network", "Network", network), screen("rack", "R.A.C.K", rack), rack_screens()])
     return page_shell("NRCRA prototype 3: Heavy visuals", CSS3, body, "v3")
 
 
