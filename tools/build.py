@@ -225,13 +225,6 @@ def partner_tile(file, name):
     return f'<li class="ptile"><a href="#partners"><span class="plogo"><img src="{SL}{file}" alt="{E(name)}" loading="lazy"></span><span class="pname">{E(name)}</span><span class="pnote">Sample partner, placeholder logo</span></a></li>'
 
 
-def partner_groups(cls="pgroups"):
-    out = f'<div class="{cls}"><p class="lede" style="margin-bottom:20px">{PARTNER_LINE}</p><p class="note"><b>Placeholder partners.</b> These logos are borrowed from another site to show the layout. They are not NRCRA partners. Real partners to be shown here: {REAL}.</p>'
-    for title, intro, items in SAMPLE_GROUPS:
-        out += f'<section class="pgroup"><h3>{E(title)}</h3><p class="lede-s">{E(intro)}</p><ul class="pgrid">' + "".join(partner_tile(*i) for i in items) + "</ul></section>"
-    return out + "</div>"
-
-
 def wfw_partners():
     def item(i):
         cap, li = WFW[i]
@@ -313,7 +306,7 @@ def pillar_cols(cls="pcols", photos=None, groups=False):
 
 def logo_grid():
     tiles = "".join(f'<li><img src="{SL}{f}" alt="{E(n)}" title="{E(n)}" loading="lazy"></li>' for f, n in SAMPLE)
-    return f'<ul class="lgrid">{tiles}</ul><p class="vnote">Placeholder logos borrowed from another site to show the layout. Real partners: {REAL}.</p>'
+    return f'<ul class="lgrid">{tiles}</ul>'
 
 
 def map_embed():
@@ -570,7 +563,7 @@ window.addEventListener('hashchange',route);route();
 if(/shot/.test(location.search)){var pb=document.querySelector('.protobar');if(pb)pb.remove();document.body.style.paddingBottom='0'}
 var mb=document.querySelector('.menu-btn');mb.addEventListener('click',function(){var o=document.getElementById('nav').classList.toggle('open');mb.setAttribute('aria-expanded',o)});
 document.addEventListener('click',function(e){
- var v=e.target.closest('[data-video]');if(v&&e.target.closest('.play')){var f=document.createElement('iframe');f.src=v.getAttribute('data-video');f.title='NRCRA sizzle reel';f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;v.innerHTML='';v.appendChild(f);return}
+ var v=e.target.closest('[data-video]');if(v&&e.target.closest('.play')){var fg=v.closest('figure');if(fg)fg.classList.add('playing');var f=document.createElement('iframe');f.src=v.getAttribute('data-video');f.title='NRCRA sizzle reel';f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;v.innerHTML='';v.appendChild(f);return}
  var b=e.target.closest('.places button');if(b){var blk=b.closest('.placesblk')||document,on=b.getAttribute('aria-pressed')!=='true';
   [].forEach.call(blk.querySelectorAll('.places button'),function(x){x.setAttribute('aria-pressed','false')});
   [].forEach.call(blk.querySelectorAll('.dot'),function(d){d.classList.toggle('hot',on&&d.getAttribute('data-place')===b.getAttribute('data-place'))});
@@ -668,8 +661,7 @@ body{--bg:#f3f6f7}
 def v1_partners():
     logos = "".join(f'<li><img src="{SL}{f}" alt="{E(n)} (sample logo)" loading="lazy"></li>' for f, n in SAMPLE[:6])
     return f'''<div class="p3"><div class="p3-img">{img("hug")}</div><div class="p3-txt"><span class="eyebrow">Thanks to our partners</span><h2>What our partners made possible</h2><p>{PARTNER_LINE}</p></div>
-<div class="p3-logos"><ul>{logos}</ul><p class="btnrow"><a class="btn btn-primary" href="#partners">View all partners</a><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></div>
-<p class="vnote">Placeholder logos to show the layout.</p>'''
+<div class="p3-logos"><ul>{logos}</ul><p class="btnrow"><a class="btn btn-primary" href="#partners">View all partners</a><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></div>'''
 
 
 def v1():
@@ -878,13 +870,18 @@ body{--btn-r:4px;--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5
 .h3-box .eyebrow,.pg3 .eyebrow{display:inline-block;background:rgba(0,40,36,.9);padding:.35em .9em;border-radius:99px}
 .hand{font-family:"Caveat",cursive;font-weight:700;color:var(--orange-d);font-size:1.6rem}
 .circles{position:relative;height:440px}.circles img{position:absolute;border-radius:50%;object-fit:cover;border:8px solid #fbf6ec}
-.circles img:nth-child(1){width:300px;height:300px;left:0;top:0}.circles img:nth-child(2){width:220px;height:220px;right:0;top:40px}.circles img:nth-child(3){width:200px;height:200px;left:150px;bottom:0}
+.circles img:nth-of-type(1){width:300px;height:300px;left:0;top:0}.circles img:nth-of-type(2){width:220px;height:220px;right:0;top:40px}.circles img:nth-of-type(3){width:200px;height:200px;left:150px;bottom:0}
 .circles .blob{position:absolute;right:30px;bottom:30px;width:150px;height:150px;background:var(--yellow);border-radius:62% 38% 55% 45%/48% 60% 40% 52%}
-@media(max-width:760px){.circles{height:360px}.circles img:nth-child(1){width:220px;height:220px}.circles img:nth-child(2){width:160px;height:160px}.circles img:nth-child(3){width:150px;height:150px;left:90px}}
+@media(max-width:760px){.circles{height:360px}.circles img:nth-of-type(1){width:220px;height:220px}.circles img:nth-of-type(2){width:160px;height:160px}.circles img:nth-of-type(3){width:150px;height:150px;left:90px}}
 .big{font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:900;line-height:1.15;max-width:22ch}
 .collage{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}.collage figure{margin:0;position:relative;border-radius:28px;overflow:hidden}
 .collage img{width:100%;height:100%;object-fit:cover}.collage figcaption{position:absolute;left:12px;bottom:12px;background:#fbf6ec;color:var(--navy);border-radius:99px;padding:.25em .8em;font-weight:800;font-size:.85rem}
-.collage .w2{grid-column:span 2}.collage .h2{grid-row:span 2}@media(max-width:760px){.collage{grid-template-columns:1fr 1fr;grid-auto-rows:150px}}
+.collage .w2{grid-column:span 2}.collage .h2{grid-row:span 2}.collage{grid-auto-rows:250px}
+.collage figcaption{left:12px;right:12px;bottom:12px;border-radius:18px;padding:12px 16px;display:grid;gap:2px;font-weight:600;font-size:.9rem;line-height:1.35;z-index:3}
+.collage figcaption b{font-size:1.05rem;font-weight:900}.collage figcaption a{color:var(--orange-d);font-weight:800;margin-top:4px}
+.cvid .video{position:absolute;inset:0;border-radius:0;aspect-ratio:auto}.cvid .play{z-index:4;top:-60px}.cvid.playing figcaption{display:none}.cvid.playing .video iframe{z-index:5}
+.cvid figcaption{right:auto;max-width:360px}
+@media(max-width:760px){.collage{grid-template-columns:1fr;grid-auto-rows:280px}.collage .w2{grid-column:auto}.collage .h2{grid-row:auto}.cvid .play{top:-80px}}
 .orange{background:var(--orange-25);color:var(--navy)}.yellow{background:var(--yellow-40);color:var(--navy)}.yellow a,.orange a:not(.btn){color:var(--navy)}.deep{background:var(--deep);color:#fff}.deep a{color:#fff}
 .oblock{border-radius:40px;padding:56px 48px;position:relative;overflow:hidden}.oblock .stats dt{font-size:clamp(2.6rem,5vw,4rem)}.oblock .stats dd{font-weight:800}
 .oblock .shape{position:absolute;width:220px;height:220px;right:-90px;bottom:-100px;background:var(--orange);border-radius:58% 42% 62% 38%/45% 55% 45% 55%;opacity:.9}
@@ -938,16 +935,17 @@ def v3():
 <section class="sec"><div class="wrap split"><div><p class="hand">Who we are</p><p class="big">The group made up of groups.</p><p>{WHO}</p><p class="btnrow"><a class="btn btn-ghost" href="#about">Our story</a></p></div>
 <div class="circles">{deco("rings", "")}{img("laughing")}{img("talk")}{img("circle")}<span class="blob" aria-hidden="true"></span></div></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap rel">{deco("arcs", "d-tr")}<div class="collage">
-<figure class="w2 h2">{img("crowd")}<figcaption>Alliance Gathering</figcaption></figure><figure>{img("board")}<figcaption>Planning together</figcaption></figure><figure>{img("hug")}<figcaption>Peer support</figcaption></figure>
-<figure class="w2">{img("web")}<figcaption>Connected</figcaption></figure></div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap rel">{deco("arcs", "d-tr")}{deco("sprig", "d-bl")}<p class="hand">Community in action</p><div class="collage">
+<figure class="w2 h2 cvid"><div class="video" data-video="{VIMEO}">{img("crowd", alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video"><span aria-hidden="true">&#9654;</span></button></div><figcaption><b>Watch the sizzle reel</b><span>See the Alliance in action.</span><a href="{VIMEO_PAGE}">Watch on Vimeo</a></figcaption></figure>
+<figure>{img("board")}<figcaption><b>Planning together</b><span>A look inside a Gathering, where groups plan side by side.</span><a href="#about">Read more</a></figcaption></figure>
+<figure>{img("hug")}<figcaption><b>Peer support</b><span>Looking after the people who look after their communities.</span><a href="#network">Read more</a></figcaption></figure>
+<figure class="w2">{img("web")}<figcaption><b>Connected</b><span>60+ groups across seven council areas, joined into one network.</span><a href="#network">Meet the network</a></figcaption></figure></div></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="oblock orange"><span class="shape" aria-hidden="true"></span><p class="hand">What we have achieved</p>{stats()}<p class="big-b" style="margin:28px 0 6px">Thanks to our partners</p><p class="big-b" style="font-weight:600;max-width:70ch">{PARTNER_LINE}</p>{partner_strip()}</div></div></section>
 
 <section class="sec"><div class="wrap"><p class="hand">In their own words</p><div class="words"><div class="face">{img("pair")}</div>{quote()}</div>
-<ul class="stories" style="margin-top:40px"><li>{img("listening")}<div class="in"><h3>Story to come</h3><p>A member group's story, supplied by NRCRA.</p></div></li><li>{img("house")}<div class="in"><h3>Story to come</h3><p>A member group's story, supplied by NRCRA.</p></div></li><li>{img("audience")}<div class="in"><h3>Story to come</h3><p>A member group's story, supplied by NRCRA.</p></div></li></ul></div></section>
+</div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap rel">{deco("dots", "d-tl")}{deco("sprig", "d-br")}<div class="bigv">{video("aerial")}</div></div></section>
 
 <section class="sec"><div class="wrap"><div class="warmcard">{places_block("Where we are")}</div></div></section>
 
@@ -962,7 +960,8 @@ def v3():
 
     jpics = ["board2", "meeting", "hall", "lab", "line"]
     about = pg("About us", "Local experience. Shared learning. Wider impact.", WHO, "group") + f'''
-<section class="sec"><div class="wrap split"><div><p class="hand">Our vision</p><p class="big">{VISION}</p></div><div class="warmcard"><h2>Purpose</h2><p>{PURPOSE}</p></div></div></section>
+<section class="sec"><div class="wrap split"><div><p class="hand">Our vision</p><p class="big">{VISION}</p><div class="warmcard" style="margin-top:24px"><h2>Purpose</h2><p>{PURPOSE}</p></div></div>
+<div class="circles">{deco("rings", "")}{img("listening")}{img("house")}{img("audience")}<span class="blob" aria-hidden="true"></span></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our values</h2>{values_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our journey</h2><ol class="tline">{"".join(f'<li>{img(jpics[i])}<div><b>{y}</b><p>{E(t)}</p></div></li>' for i, (y, t) in enumerate(JOURNEY))}</ol></div></section>
@@ -983,17 +982,22 @@ def v3():
 
 # ================================================================ dashboard
 INSPO = {
-    "v1": [("v1-milou-home", "Milou's NRCRA draft: home"), ("v1-milou-knowledge", "Milou's draft: Knowledge Bank"), ("v1-waves-for-water", "Waves for Water")],
+    "v1": [("v1-milou-home", "Milou's NRCRA draft: home"), ("v1-childrens-society", "The Children's Society"), ("v1-waves-for-water", "Waves for Water")],
     "v2": [("v2-rack", "The R.A.C.K app"), ("v2-resilient-lismore", "Resilient Lismore"), ("v2-investing-for-charity", "Investing for Charity")],
-    "v3": [("v3-farm-africa", "Farm Africa"), ("v3-childrens-society", "The Children's Society"), ("v3-save-the-children", "Save the Children concept")],
+    "v3": [("v3-farm-africa", "Farm Africa"), ("v3-blue-heart", "Blue Heart, Patagonia"), ("v3-save-the-children", "Save the Children concept")],
+}
+SITES = {
+    "v1": "Mood board 1, visual and colour block sections: nrcra.org.au (current site), Milou's NRCRA drafts, The Children's Society, SAS (Surfers Against Sewage), SolarAid, Waves for Water, Oxfam Australia.",
+    "v2": "Mood board 2, light background and rounded content blocks: the R.A.C.K app, Resilient Lismore, UNICEF Australia, Investing for Charity, LA2050, United Nations.",
+    "v3": "Mood board 3, heavy visuals: Farm Africa, Blue Heart (Patagonia), concepts from Dribbble, and the people in NRCRA's own photos.",
 }
 
 
 def dashboard():
     cards = [
-        ("v1", "Rounded blocks", "Built from Milou's drafts and Waves for Water. Rounded cards in light teal, yellow and orange tints, a navy hero panel beside a big rounded photo, pill buttons.", ["Colour cards with photos inside", "Five pillars as arched columns", "Partner section: photo, story and logos"]),
-        ("v2", "Light and fresh", "Built from the R.A.C.K app and Resilient Lismore. Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents, one illustration and softly rounded buttons.", ["Photo hero with logo-arc accent", "Five pillars as photo-topped columns", "River-style journey timeline"]),
-        ("v3", "Big visuals", "People first: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn illustration decor and crisp buttons.", ["Circle photo cluster and collage", "Illustration decor on big images", "In their own words stories"]),
+        ("v1", "Rounded blocks", "Inspired by Milou's drafts and current sites strong colour blocks. Rounded cards in light teal, yellow and orange tints, a navy hero panel beside a big rounded photo, pill buttons.", ["Colour cards with photos inside", "Five pillars as arched columns", "Partner section: photo, story and logos"]),
+        ("v2", "Light and fresh", "Inspired by the R.A.C.K app and Resilient Lismore. Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents, one illustration and softly rounded buttons.", ["Photo hero with logo-arc accent", "Five pillars as photo-topped columns", "River-style journey timeline"]),
+        ("v3", "Big visuals", "Inspired by the people in the photos of NRCRA community: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn illustration decor and crisp buttons.", ["Circle photo cluster and collage", "Illustration decor on big images", "In their own words stories"]),
     ]
     rows = ""
     for i, (slug, t, d, feats) in enumerate(cards, 1):
@@ -1001,7 +1005,7 @@ def dashboard():
         fl = "".join(f"<li>{E(x)}</li>" for x in feats)
         rows += f'''<article class="row row{i}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
 <div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><p><a class="btn btn-primary" href="{slug}/">Open prototype {i}</a></p>
-<h3>Inspired by the mood board</h3><div class="ins">{ins}</div></div></article>'''
+<h3>Inspired by the mood board</h3><div class="ins">{ins}</div><p class="sites">{SITES[slug]}</p></div></article>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA website prototypes</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
 .top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}
@@ -1013,7 +1017,7 @@ def dashboard():
 .num{{display:inline-block;background:var(--navy-8);border-radius:99px;padding:.2em .9em;font-weight:900;font-size:.85rem}}.info h2{{margin:.35em 0 .3em}}.info h2 a{{color:var(--navy);text-decoration:none}}
 .feats{{margin:0 0 16px;padding-left:1.2em}}.info h3{{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:22px 0 10px}}
 .pl{{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}}.pl a{{display:block;padding:.4em .9em;border:2px solid var(--navy);border-radius:99px;color:var(--navy);text-decoration:none;font-weight:700}}.pl a:hover{{background:var(--navy);color:#fff}}
-.ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
+.ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.sites{{font-size:.8rem;color:var(--muted);margin:12px 0 0;line-height:1.45}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
 @media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}}}</style></head>
 <body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>Website prototypes</h1></div>
 <p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. Sample content only. To be built in Wix Classic. Status: draft for direction review.</p></div>
