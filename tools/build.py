@@ -615,7 +615,11 @@ body{--bg:#f3f6f7}
 @media(max-width:860px){.hero1>.wrap:first-child{grid-template-columns:1fr}.h1-panel{padding:36px 26px}.h1-photo{min-height:280px}}
 .latest{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.latest a{background:#fff;border:1px solid var(--line);border-radius:99px;padding:.45em 1em;font-weight:700;text-decoration:none;color:var(--navy);font-size:.95rem}
 .latest b{color:var(--orange-d);margin-right:6px}
-.intro1{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}.callout{border:3px solid var(--orange);border-radius:var(--r);padding:28px;font-size:1.2rem;font-weight:800;background:#fff}
+.intro1{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.callcard{margin:0;background:var(--yellow-40);border-radius:var(--r);padding:28px 30px 26px;position:relative;overflow:hidden}
+.callcard::after{content:"";position:absolute;right:-50px;top:-50px;width:150px;height:150px;border-radius:50%;background:var(--orange-25)}
+.connect-art{width:100%;height:auto;display:block;position:relative;z-index:1;margin-bottom:10px}
+.callcard blockquote{margin:0;font-size:1.35rem;font-weight:900;line-height:1.3;position:relative;z-index:1}.callcard figcaption{margin-top:12px;font-weight:800;font-size:.9rem;color:var(--teal-d);position:relative;z-index:1}.callout{border:3px solid var(--orange);border-radius:var(--r);padding:28px;font-size:1.2rem;font-weight:800;background:#fff}
 @media(max-width:860px){.intro1{grid-template-columns:1fr}}
 .val{border-radius:var(--r);padding:30px}.val .ico{margin-bottom:18px}.val-teal{background:var(--teal-25);color:var(--navy)}.val-yellow{background:var(--yellow-40);color:var(--navy)}.val-orange{background:var(--orange-25);color:var(--navy)}
 .val .ico{width:56px;height:56px;padding:10px;border-radius:50%;background:#fff}.val-teal .ico{color:var(--teal-d)}.val-yellow .ico{color:#7a5a00}.val-orange .ico{color:var(--orange-d)}
@@ -650,12 +654,28 @@ body{--bg:#f3f6f7}
 .wfw-line{text-align:center;max-width:70ch;margin:32px auto 0;font-size:1.1rem}.wfw-btns{justify-content:center}
 @media(max-width:860px){.wfw-grid{grid-template-columns:1fr 1fr}.wfw-mid{grid-column:1/-1;grid-row:1;aspect-ratio:16/10}.wfw-col{gap:24px}}
 .pmap{--land:#ffffff;--sea:#d8f0ee;--coast:#8fcfc9;--river:#7cc0dd}
+.v1 .pc{border-radius:12px 12px 6px 6px;min-height:0;padding:0 16px 22px;justify-content:flex-start}
+.v1 .pc::before{content:"";display:block;align-self:stretch;height:18px;margin:0 -16px 22px;border-radius:12px 12px 0 0;background:var(--teal)}
+.v1 .pc:nth-child(2)::before{background:var(--yellow)}.v1 .pc:nth-child(3)::before{background:var(--orange)}.v1 .pc:nth-child(4)::before{background:var(--navy)}.v1 .pc:nth-child(5)::before{background:#9fb0b8}
+.v1 .pc-ico{width:52px;height:52px;margin-bottom:8px}.v1 .pc h3{min-height:2.4em;display:flex;align-items:center}
+.v1 .pc-base{height:16px;margin:8px -10px 0;border-radius:8px;background:#cfd8dc}.v1 .pcwrap::after{content:"";display:block;height:10px;margin:0 -20px;border-radius:0 0 10px 10px;background:#e1e7ea}
+@media(max-width:640px){.v1 .pc{border-radius:12px 12px 6px 6px}}
 .v1 .pc:nth-child(1){background:var(--teal-25)}.v1 .pc:nth-child(2){background:var(--yellow-40)}.v1 .pc:nth-child(3){background:var(--orange-25)}.v1 .pc:nth-child(4){background:var(--blue-15)}.v1 .pc:nth-child(5){background:var(--grey-6)}
 .p3{display:grid;grid-template-columns:.9fr 1.1fr 1fr;gap:36px;align-items:start}.p3-img img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:28px}.p3-txt p{font-size:1.1rem;margin:0}
 .p3-logos ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}.p3-logos li{border:1px solid var(--line);border-radius:16px;display:grid;place-items:center;padding:12px;aspect-ratio:3/2;background:#fff}.p3-logos img{max-height:56px;max-width:100%;object-fit:contain}
 @media(max-width:900px){.p3{grid-template-columns:1fr}.p3-img img{aspect-ratio:16/10}}
 .pgs{padding:48px 0 0}.pgs .lede{max-width:70ch}.narrow{max-width:720px}
 """
+
+
+def connect_art():
+    nodes = [(60, 60, "#00a79d"), (150, 36, "#ffcb2a"), (250, 58, "#f05a28"), (320, 120, "#00a79d"), (230, 150, "#07293b"), (120, 150, "#f05a28"), (40, 140, "#ffcb2a"), (180, 96, "#07293b")]
+    hub = 7
+    lines = "".join(f'<line x1="{nodes[hub][0]}" y1="{nodes[hub][1]}" x2="{x}" y2="{y}"/>' for i, (x, y, c) in enumerate(nodes) if i != hub)
+    ring = "".join(f'<line x1="{nodes[i][0]}" y1="{nodes[i][1]}" x2="{nodes[(i + 1) % 7][0]}" y2="{nodes[(i + 1) % 7][1]}"/>' for i in range(7))
+    dots = "".join(f'<g><circle cx="{x}" cy="{y}" r="{22 if i == hub else 15}" fill="{c}"/><circle cx="{x}" cy="{y - 4}" r="{6 if i == hub else 4}" fill="#fff"/><path d="M{x - (9 if i == hub else 6)} {y + (10 if i == hub else 7)}a{9 if i == hub else 6} {8 if i == hub else 5} 0 0 1 {18 if i == hub else 12} 0" fill="#fff"/></g>' for i, (x, y, c) in enumerate(nodes))
+    return f'''<svg class="connect-art" viewBox="0 0 360 190" role="img" aria-label="Illustration: community groups shown as people, joined to each other and to one shared network">
+<g stroke="#07293b" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round" opacity=".45">{ring}</g><g stroke="#07293b" stroke-width="3" stroke-linecap="round" opacity=".7">{lines}</g>{dots}</svg>'''
 
 
 def v1_partners():
@@ -671,7 +691,7 @@ def v1():
 <div class="h1-photo">{img("cheer", eager=True)}</div></div>
 <div class="wrap"><div class="latest"><a href="{LINKS["news"]}"><b>Latest</b>$800,000 HELP Fund grants program announced</a><a href="#home-focus"><b>Upcoming</b>{GATHER[0]}: {GATHER[1]}</a><a href="#partners"><b>Projects</b>Three projects under way</a></div></div></div>
 
-<section class="sec"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><p class="callout">{CALLOUT}</p></div></section>
+<section class="sec"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard">{connect_art()}<blockquote>{CALLOUT}</blockquote><figcaption>Connect. Share. Care.</figcaption></figure></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>How we work</h2>{values_cards()}</div></section>
 
