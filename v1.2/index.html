@@ -170,7 +170,8 @@ body{--bg:#f3f6f7}
 .v1 .pc{border-radius:12px 12px 6px 6px;min-height:0;padding:0 16px 22px;justify-content:flex-start}
 .v1 .pc::before{content:"";display:block;align-self:stretch;height:18px;margin:0 -16px 22px;border-radius:12px 12px 0 0;background:var(--teal)}
 .v1 .pc:nth-child(2)::before{background:var(--yellow)}.v1 .pc:nth-child(3)::before{background:var(--orange)}.v1 .pc:nth-child(4)::before{background:var(--navy)}.v1 .pc:nth-child(5)::before{background:#9fb0b8}
-.v1 .pc-ico{width:52px;height:52px;margin-bottom:8px}.v1 .pc h3{min-height:2.4em;display:flex;align-items:center}
+.v1 .pc-ico{width:52px;height:52px;margin-bottom:8px;color:var(--teal)}.v1 .pc-ico svg{stroke-width:3.5}
+.v1 .pc:nth-child(2) .pc-ico{color:var(--yellow)}.v1 .pc:nth-child(3) .pc-ico{color:var(--orange)}.v1 .pc:nth-child(4) .pc-ico{color:var(--navy)}.v1 .pc:nth-child(5) .pc-ico{color:#9fb0b8}.v1 .pc h3{min-height:2.4em;display:flex;align-items:center}
 .v1 .pc-base{display:none}
 @media(max-width:640px){.v1 .pc{border-radius:12px 12px 6px 6px}}
 .v1 .pc:nth-child(1){background:var(--teal-25)}.v1 .pc:nth-child(2){background:var(--yellow-40)}.v1 .pc:nth-child(3){background:var(--orange-25)}.v1 .pc:nth-child(4){background:var(--blue-15)}.v1 .pc:nth-child(5){background:var(--grey-6)}
@@ -204,7 +205,7 @@ body{--bg:#f3f6f7}
 .full .hero1 .latest{margin:22px auto 0}
 .full .wrap>h2{margin-bottom:44px}.full :is(.card,.vp,.stat-card,.pb-text,.p3-txt,.arc)>h2{margin-bottom:30px}.full .wrap>.eyebrow+h2{margin-bottom:44px}
 /* V1.2: full-width hero and image sections */
-.full .hero1{padding:0 0 8px}.full .hero1>.wrap:first-child{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:660px}
+.full .hero1{padding:0}.full .hero1>.wrap:first-child{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:660px}
 .full .h1-photo{position:absolute;inset:0;border-radius:0;min-height:0}.full .h1-panel{position:relative;z-index:2;max-width:580px;margin:56px 0 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
 .full .hero1 .latest{margin-top:22px}.latest-row{padding:26px 0 8px}.latest-row .latest{margin:0}.full .hvid .play{inset:auto;top:50%;margin:0;left:calc((max(20px,(100% - 1180px)/2 + 20px) + 580px + 100%)/2);transform:translate(-50%,-50%)}.full .hvid .vtag{display:none}
 @media(max-width:860px){.full .hero1>.wrap:first-child{display:block;min-height:0;padding:0 0 250px;position:relative}
