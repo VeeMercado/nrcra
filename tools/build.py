@@ -192,7 +192,7 @@ def footer(white_logo=True):
     groups = [(n, u) for n, t, u in REGION_GROUPS]
     touch = [("Facebook", LINKS["fb"]), ("LinkedIn", LINKS["li"]), ("WhatsApp group", LINKS["wa"]), ("Resilience Roundup Newsletter", LINKS["news"])]
     return f'''<footer class="site-foot"><div class="wrap">
-<div class="foot-cols"><div class="foot-top"><span class="foot-logo">{logo("logo")}</span><p class="tag">Connect. Share. Care.</p></div>{col("Quick links", quick)}{col("Resilience groups in our region", groups)}{col("Stay in touch", touch)}</div>
+<div class="foot-cols"><div class="foot-top"><span class="foot-logo">{logo("logo")}</span><p class="tag">Connect. Share. Care.</p></div>{col("Resilience groups in our region", groups)}{col("Stay in touch", touch)}{col("Quick links", quick)}</div>
 <div class="ack">{ABORIGINAL_FLAG}<p>{ACK}</p></div>
 <p class="copy">© 2026 Northern Rivers Community Resilience Alliance &middot; <a href="https://www.nrcra.org.au/copy-of-terms-conditions">Privacy Policy</a></p>
 </div></footer>'''
