@@ -44,7 +44,11 @@ ul.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:r
 .fromto{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch}.fromto>div{border-radius:var(--r);padding:28px}.fromto ul{margin:0;padding-left:1.1em}
 .ft-art{width:150px;height:auto;display:block;margin-bottom:12px}.ft-arrow{display:grid;place-items:center;font-size:2.4rem;font-weight:900;padding:0 10px!important}@media(max-width:700px){.fromto{grid-template-columns:1fr}.ft-arrow{padding:0!important;width:48px;height:48px;justify-self:center;border-radius:50%!important;font-size:1.6rem}.ft-arrow span{display:inline-block;transform:rotate(90deg)}}
 .video{position:relative;aspect-ratio:16/9;background:var(--navy);overflow:hidden;border-radius:var(--r)}.video img,.video iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
-.play{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;border:0;background:var(--yellow);color:var(--navy);font-size:1.8rem;cursor:pointer;display:grid;place-items:center;padding-left:6px;box-shadow:0 6px 20px rgba(0,0,0,.25)}.play:hover{background:#fff}
+.hvid{position:relative;cursor:pointer}.vtag{position:absolute;left:16px;bottom:16px;z-index:3;background:#fff;color:var(--navy);font-weight:800;font-size:.9rem;border-radius:99px;padding:.35em .9em}
+.vswap img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r);display:block}.vframe.vswap img{border-radius:24px}
+.vmodal{position:fixed;inset:0;z-index:300;background:#000;display:grid;place-items:center}.vmodal iframe{width:100%;height:100%;border:0}
+.vclose{position:absolute;top:14px;right:14px;z-index:2;font:800 1rem var(--font);background:#fff;color:#111;border:0;border-radius:99px;padding:.6em 1.1em;cursor:pointer;min-height:44px}
+.play{position:absolute;inset:0;margin:auto;z-index:2;width:84px;height:84px;border-radius:50%;border:0;background:var(--yellow);color:var(--navy);font-size:1.8rem;cursor:pointer;display:grid;place-items:center;padding-left:6px;box-shadow:0 6px 20px rgba(0,0,0,.25)}.play:hover{background:#fff}
 .pgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
 .ptile a{display:flex;flex-direction:column;height:100%;text-decoration:none;color:var(--navy);padding:14px;border:1px solid var(--line);background:#fff;border-radius:20px}
 .ptile a:hover{border-color:var(--navy)}.plogo{display:grid;place-items:center;height:130px;background:#fff;margin-bottom:10px;border-radius:14px;padding:8px}
@@ -290,6 +294,13 @@ body{--btn-r:4px;--bg:#fbf6ec;--foot:#003d38;--foot-line:#21605a;--current:#ffe5
 <nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../">All prototypes</a><a class="pb-btn" data-proto="v1" href="../v1/" aria-label="Prototype 1: Rounded blocks"><span class="pb-short" aria-hidden="true">P1</span><span class="pb-long">Prototype 1</span></a><a class="pb-btn" data-proto="v1.2" href="../v1.2/" aria-label="Prototype 1.2: Rounded blocks, full-width images"><span class="pb-short" aria-hidden="true">P1.2</span><span class="pb-long">Prototype 1.2</span></a><a class="pb-btn" data-proto="v2" href="../v2/" aria-label="Prototype 2: Light and fresh"><span class="pb-short" aria-hidden="true">P2</span><span class="pb-long">Prototype 2</span></a><a class="pb-btn" data-proto="v3" href="../v3/" aria-label="Prototype 3: Big visuals"><span class="pb-short" aria-hidden="true">P3</span><span class="pb-long">Prototype 3</span></a></nav>
 <button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div><script>
 (function(){
+function openVideo(src,from){var m=document.createElement('div');m.className='vmodal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label','NRCRA sizzle reel');
+ m.innerHTML='<button class="vclose" type="button">Close video</button><iframe title="NRCRA sizzle reel" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';m.querySelector('iframe').src=src;
+ function close(){if(document.fullscreenElement===m&&document.exitFullscreen)document.exitFullscreen();m.remove();document.removeEventListener('keydown',key);if(from&&from.focus)from.focus()}
+ function key(ev){if(ev.key==='Escape')close()}
+ m.querySelector('.vclose').addEventListener('click',close);document.addEventListener('keydown',key);
+ document.addEventListener('fullscreenchange',function fc(){if(!document.fullscreenElement){document.removeEventListener('fullscreenchange',fc);if(m.isConnected)close()}});
+ document.body.appendChild(m);m.querySelector('.vclose').focus();if(m.requestFullscreen){m.requestFullscreen().catch(function(){})}}
 var S=[].slice.call(document.querySelectorAll('[data-screen]')),ids=S.map(function(s){return s.id});
 function route(){var h=(location.hash||'#home').slice(1);if(ids.indexOf(h)<0)return;var nk=h.indexOf('rack')===0?'rack':h;
 S.forEach(function(s){s.classList.toggle('on',s.id===h)});
@@ -301,7 +312,7 @@ window.addEventListener('hashchange',route);route();
 if(/shot/.test(location.search)){var pb=document.querySelector('.protobar');if(pb)pb.remove();document.body.style.paddingBottom='0'}
 var mb=document.querySelector('.menu-btn');mb.addEventListener('click',function(){var o=document.getElementById('nav').classList.toggle('open');mb.setAttribute('aria-expanded',o)});
 document.addEventListener('click',function(e){
- var v=e.target.closest('[data-video]');if(v&&e.target.closest('.play')){var fg=v.closest('figure');if(fg)fg.classList.add('playing');var f=document.createElement('iframe');f.src=v.getAttribute('data-video');f.title='NRCRA sizzle reel';f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;v.innerHTML='';v.appendChild(f);return}
+ var v=e.target.closest('[data-video]');if(v&&(e.target.closest('.play')||v.classList.contains('hvid'))){openVideo(v.getAttribute('data-video'),e.target.closest('.play')||v);return}
  var b=e.target.closest('.places button');if(b){var blk=b.closest('.placesblk')||document,on=b.getAttribute('aria-pressed')!=='true';
   [].forEach.call(blk.querySelectorAll('.places button'),function(x){x.setAttribute('aria-pressed','false')});
   [].forEach.call(blk.querySelectorAll('.dot'),function(d){d.classList.toggle('hot',on&&d.getAttribute('data-place')===b.getAttribute('data-place'))});

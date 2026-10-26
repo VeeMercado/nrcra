@@ -293,13 +293,22 @@ PIN = '<svg class="pin" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 50S4
 FLAG = '<svg class="flag" viewBox="0 0 40 48" aria-hidden="true"><path d="M8 4v42" stroke="#07293b" stroke-width="3.5" stroke-linecap="round"/><path d="M9 6h24l-6 8 6 8H9z" fill="#f05a28"/></svg>'
 
 
+LOGO_DOTS = '<svg class="dots" viewBox="0 0 48 40" aria-hidden="true"><circle cx="24" cy="9" r="8" fill="#f05a28"/><circle cx="9" cy="28" r="6.5" fill="#ffcb2a"/><circle cx="39" cy="28" r="6.5" fill="#00a79d"/></svg>'
+
+
 def trail():
-    """Our journey as a list: year circles on the left joined by a line, text on the right, orange flags along the way."""
+    """Our journey, newest first: year circles joined by a gently curving line, with orange flags and
+    the logo's coloured dots placed around the circles (left, right, top, bottom in turn)."""
     out = '<ol class="trail">'
-    n = len(JOURNEY)
-    for i, (y, t) in enumerate(JOURNEY):
-        flag = f'<span class="tflag">{FLAG}</span>' if i < n - 1 else ""
-        out += f'<li class="t{i % 5}"><span class="stop"><b>{y}</b></span><div class="tcard"><p>{E(t)}</p></div>{flag}</li>'
+    items = list(reversed(JOURNEY))
+    n = len(items)
+    spots = ["r", "l", "t", "b", "r"]
+    for i, (y, t) in enumerate(items):
+        art = FLAG if i % 2 == 0 else LOGO_DOTS
+        deco = f'<span class="tdeco d-{spots[i % 5]}">{art}</span>'
+        bend = "M50 0C90 30 10 70 50 100" if i % 2 == 0 else "M50 0C10 30 90 70 50 100"
+        link = "" if i == n - 1 else f'<svg class="tline" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="{bend}" vector-effect="non-scaling-stroke"/></svg>'
+        out += f'<li class="t{i % 5}">{link}<span class="stop"><b>{y}</b></span>{deco}<div class="tcard"><p>{E(t)}</p></div></li>'
     return out + "</ol>"
 
 
@@ -518,7 +527,11 @@ ul.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:r
 .fromto{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch}.fromto>div{border-radius:var(--r);padding:28px}.fromto ul{margin:0;padding-left:1.1em}
 .ft-art{width:150px;height:auto;display:block;margin-bottom:12px}.ft-arrow{display:grid;place-items:center;font-size:2.4rem;font-weight:900;padding:0 10px!important}@media(max-width:700px){.fromto{grid-template-columns:1fr}.ft-arrow{padding:0!important;width:48px;height:48px;justify-self:center;border-radius:50%!important;font-size:1.6rem}.ft-arrow span{display:inline-block;transform:rotate(90deg)}}
 .video{position:relative;aspect-ratio:16/9;background:var(--navy);overflow:hidden;border-radius:var(--r)}.video img,.video iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
-.play{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;border:0;background:var(--yellow);color:var(--navy);font-size:1.8rem;cursor:pointer;display:grid;place-items:center;padding-left:6px;box-shadow:0 6px 20px rgba(0,0,0,.25)}.play:hover{background:#fff}
+.hvid{position:relative;cursor:pointer}.vtag{position:absolute;left:16px;bottom:16px;z-index:3;background:#fff;color:var(--navy);font-weight:800;font-size:.9rem;border-radius:99px;padding:.35em .9em}
+.vswap img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r);display:block}.vframe.vswap img{border-radius:24px}
+.vmodal{position:fixed;inset:0;z-index:300;background:#000;display:grid;place-items:center}.vmodal iframe{width:100%;height:100%;border:0}
+.vclose{position:absolute;top:14px;right:14px;z-index:2;font:800 1rem var(--font);background:#fff;color:#111;border:0;border-radius:99px;padding:.6em 1.1em;cursor:pointer;min-height:44px}
+.play{position:absolute;inset:0;margin:auto;z-index:2;width:84px;height:84px;border-radius:50%;border:0;background:var(--yellow);color:var(--navy);font-size:1.8rem;cursor:pointer;display:grid;place-items:center;padding-left:6px;box-shadow:0 6px 20px rgba(0,0,0,.25)}.play:hover{background:#fff}
 .pgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
 .ptile a{display:flex;flex-direction:column;height:100%;text-decoration:none;color:var(--navy);padding:14px;border:1px solid var(--line);background:#fff;border-radius:20px}
 .ptile a:hover{border-color:var(--navy)}.plogo{display:grid;place-items:center;height:130px;background:#fff;margin-bottom:10px;border-radius:14px;padding:8px}
@@ -611,6 +624,13 @@ body{padding-bottom:72px}.protobar{position:fixed;left:0;right:0;bottom:0;z-inde
 
 JS = """
 (function(){
+function openVideo(src,from){var m=document.createElement('div');m.className='vmodal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label','NRCRA sizzle reel');
+ m.innerHTML='<button class="vclose" type="button">Close video</button><iframe title="NRCRA sizzle reel" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';m.querySelector('iframe').src=src;
+ function close(){if(document.fullscreenElement===m&&document.exitFullscreen)document.exitFullscreen();m.remove();document.removeEventListener('keydown',key);if(from&&from.focus)from.focus()}
+ function key(ev){if(ev.key==='Escape')close()}
+ m.querySelector('.vclose').addEventListener('click',close);document.addEventListener('keydown',key);
+ document.addEventListener('fullscreenchange',function fc(){if(!document.fullscreenElement){document.removeEventListener('fullscreenchange',fc);if(m.isConnected)close()}});
+ document.body.appendChild(m);m.querySelector('.vclose').focus();if(m.requestFullscreen){m.requestFullscreen().catch(function(){})}}
 var S=[].slice.call(document.querySelectorAll('[data-screen]')),ids=S.map(function(s){return s.id});
 function route(){var h=(location.hash||'#home').slice(1);if(ids.indexOf(h)<0)return;var nk=h.indexOf('rack')===0?'rack':h;
 S.forEach(function(s){s.classList.toggle('on',s.id===h)});
@@ -622,7 +642,7 @@ window.addEventListener('hashchange',route);route();
 if(/shot/.test(location.search)){var pb=document.querySelector('.protobar');if(pb)pb.remove();document.body.style.paddingBottom='0'}
 var mb=document.querySelector('.menu-btn');mb.addEventListener('click',function(){var o=document.getElementById('nav').classList.toggle('open');mb.setAttribute('aria-expanded',o)});
 document.addEventListener('click',function(e){
- var v=e.target.closest('[data-video]');if(v&&e.target.closest('.play')){var fg=v.closest('figure');if(fg)fg.classList.add('playing');var f=document.createElement('iframe');f.src=v.getAttribute('data-video');f.title='NRCRA sizzle reel';f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;v.innerHTML='';v.appendChild(f);return}
+ var v=e.target.closest('[data-video]');if(v&&(e.target.closest('.play')||v.classList.contains('hvid'))){openVideo(v.getAttribute('data-video'),e.target.closest('.play')||v);return}
  var b=e.target.closest('.places button');if(b){var blk=b.closest('.placesblk')||document,on=b.getAttribute('aria-pressed')!=='true';
   [].forEach.call(blk.querySelectorAll('.places button'),function(x){x.setAttribute('aria-pressed','false')});
   [].forEach.call(blk.querySelectorAll('.dot'),function(d){d.classList.toggle('hot',on&&d.getAttribute('data-place')===b.getAttribute('data-place'))});
@@ -724,20 +744,20 @@ body{--bg:#f3f6f7}
 .p3-logos ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}.p3-logos li{border:1px solid var(--line);border-radius:16px;display:grid;place-items:center;padding:12px;aspect-ratio:3/2;background:#fff}.p3-logos img{max-height:56px;max-width:100%;object-fit:contain}
 @media(max-width:900px){.p3{grid-template-columns:1fr}.p3-img img{aspect-ratio:16/10}}
 .vp{border-radius:var(--r);padding:28px}.vp-t{background:var(--teal-25)}.vp-y{background:var(--yellow-40)}.vp .connect-art{max-width:300px;margin:0 0 14px}
-.trail{list-style:none;margin:28px 0 0;padding:0}.trail li{position:relative;padding:0 0 64px 128px;min-height:100px}.trail li:last-child{padding-bottom:0}
-.trail li:not(:last-child)::before{content:"";position:absolute;left:47px;top:96px;bottom:0;border-left:5px dashed rgba(7,41,59,.4)}
-.stop{position:absolute;left:0;top:0;z-index:2;width:100px;height:100px;border-radius:50%;display:grid;place-items:center;text-align:center;background:#fff;border:6px solid var(--teal);font-weight:900;line-height:1.05;padding:8px}
-.stop b{font-size:1.25rem}.t1 .stop{border-color:var(--yellow)}.t2 .stop{border-color:var(--orange)}.t3 .stop{border-color:var(--navy)}.t4 .stop{border-color:var(--teal-d)}.t4 .stop b{font-size:1rem}
+.trail{list-style:none;margin:36px 0 0;padding:0}.trail li{position:relative;padding:0 0 64px 176px;min-height:100px}.trail li:last-child{padding-bottom:0}
+.tline{position:absolute;left:29px;top:100px;width:110px;height:calc(100% - 100px);overflow:visible;z-index:0}.tline path{fill:none;stroke:var(--navy);stroke-width:4;stroke-linecap:round;stroke-dasharray:2 10;opacity:.45}
+.stop{position:absolute;left:34px;top:0;z-index:2;width:100px;height:100px;border-radius:50%;display:grid;place-items:center;text-align:center;background:#fff;border:6px solid var(--teal);font-weight:900;line-height:1.05;padding:8px}
+.stop b{font-size:1.25rem}.t1 .stop{border-color:var(--yellow)}.t2 .stop{border-color:var(--orange)}.t3 .stop{border-color:var(--navy)}.t4 .stop{border-color:var(--teal-d)}.t0 .stop b{font-size:1rem}
 .tcard{position:relative;background:#fff;border-radius:var(--r);padding:20px 24px;box-shadow:0 1px 0 var(--line);min-height:100px;display:flex;align-items:center}.tcard p{margin:0}
-.tflag{position:absolute;left:49px;bottom:10px;width:36px;height:44px;z-index:3}.tflag svg,.tend svg{width:100%;height:100%;display:block}
-.tend{position:absolute;width:40px;height:48px;top:-40px;left:50%;transform:translateX(-30%)}
-@media(max-width:760px){.trail li{padding-left:88px;min-height:72px}.trail li{padding-bottom:52px}.trail li:not(:last-child)::before{left:31px;top:68px}.stop{width:68px;height:68px;border-width:5px;padding:4px}.stop b{font-size:.95rem}.t4 .stop b{font-size:.72rem}
-.tflag{left:33px;bottom:8px;width:30px;height:36px}.tcard{padding:14px 16px;min-height:0}.trail{margin-top:44px}}
+.tdeco{position:absolute;z-index:3;width:34px;height:40px}.tdeco svg{width:100%;height:100%;display:block}.tdeco .dots{width:40px;height:34px}
+.d-r{left:136px;top:4px}.d-l{left:-6px;top:28px}.d-t{left:68px;top:-38px}.d-b{left:4px;top:78px}
+@media(max-width:760px){.trail li{padding:0 0 52px 108px;min-height:72px}.stop{left:22px;width:68px;height:68px;border-width:5px;padding:4px}.stop b{font-size:.95rem}.t0 .stop b{font-size:.72rem}
+.tline{left:6px;top:68px;width:92px;height:calc(100% - 68px)}.tdeco{width:26px;height:30px}.d-r{left:88px;top:0}.d-l{left:-4px;top:20px}.d-t{left:48px;top:-30px}.d-b{left:0;top:52px}.tcard{padding:14px 16px;min-height:0}.trail{margin-top:48px}}
 .pgs{padding:48px 0 0}
 /* V1.2: full-width hero and image sections */
 .full .hero1{padding:0 0 8px}.full .hero1>.wrap:first-child{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:660px}
 .full .h1-photo{position:absolute;inset:0;border-radius:0;min-height:0}.full .h1-panel{position:relative;z-index:2;max-width:580px;margin:56px 0 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
-.full .hero1 .latest{margin-top:22px}
+.full .hero1 .latest{margin-top:22px}.full .hvid .play{left:auto;right:16%}.full .hvid .vtag{display:none}
 .full .pg1{padding:0}.full .pg1 .wrap{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:480px}
 .full .pg1 .ph{position:absolute;inset:0;border-radius:0;aspect-ratio:auto}.full .pg1 .wrap>div:not(.ph){position:relative;z-index:2;background:var(--navy);color:#fff;border-radius:32px;padding:40px;max-width:620px;margin:56px 20px 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
 .full .pg1 .eyebrow{color:var(--yellow)}.full .pg1 .btn-ghost{color:#fff;border-color:#fff}.full .pg1 .btn-ghost:hover{background:#fff;color:var(--navy)}
@@ -774,14 +794,14 @@ def v1(full=False):
     home = f'''<div class="hero1"><div class="wrap"><div class="h1-panel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>When disaster strikes, local people are always first to respond.</h1><p class="lede">{H1}.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#rack">Explore the R.A.C.K</a><a class="btn btn-ghost" href="#about">What we do</a></p></div>
-<div class="h1-photo">{img("cheer", eager=True)}</div></div>
+<div class="h1-photo hvid" data-video="{VIMEO}">{img("group", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div></div>
 <div class="wrap"><div class="latest"><a href="{LINKS["news"]}"><b>Latest</b>$800,000 HELP Fund grants program announced</a><a href="#home-focus"><b>Upcoming</b>{GATHER[0]}: {GATHER[1]}</a><a href="#partners"><b>Projects</b>Three projects under way</a></div></div></div>
 
 <section class="sec"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard"><div class="cc-ph">{img("circle")}</div><blockquote>{CALLOUT}</blockquote><figcaption>Connect. Share. Care.</figcaption></figure></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>How we work</h2>{values_cards()}</div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap split"><div>{video("group")}</div><div class="stat-card"><span class="eyebrow">What we have achieved</span>{stats()}</div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap split"><div class="vswap">{img("cheer")}</div><div class="stat-card"><span class="eyebrow">What we have achieved</span>{stats()}</div></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><span class="eyebrow">Our focus</span><h2>Five pillars</h2>{pillar_cols()}</div></section>
 
@@ -838,8 +858,10 @@ def illus_hero():
 ARC = '<svg class="arc-acc" viewBox="0 0 160 110" aria-hidden="true"><path d="M20 100a60 60 0 0 1 120 0" fill="none" stroke="#ffcb2a" stroke-width="16" stroke-linecap="round"/><path d="M45 100a35 35 0 0 1 70 0" fill="none" stroke="#f05a28" stroke-width="12" stroke-linecap="round"/><circle cx="80" cy="22" r="10" fill="#f05a28"/><circle cx="26" cy="48" r="7" fill="#ffcb2a"/><circle cx="134" cy="48" r="7" fill="#00a79d"/></svg>'
 
 
-def photo_art(key, cls="h2-art", sticker=""):
+def photo_art(key, cls="h2-art", sticker="", video=False):
     st = f'<span class="sticker">{sticker}</span>' if sticker else ""
+    if video:
+        return f'<div class="{cls}"><div class="ph hvid" data-video="{VIMEO}">{img(key, eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div>{ARC}{st}</div>'
     return f'<div class="{cls}"><div class="ph">{img(key, eager=True)}</div>{ARC}{st}</div>'
 
 
@@ -891,7 +913,7 @@ body{--btn-r:12px;--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#006b64;-
 .pillars.ill li{background:#fff;border-radius:28px;padding:24px;box-shadow:0 8px 24px -14px rgba(7,41,59,.35)}.pillars.ill .ico{width:52px;height:52px;padding:9px;border-radius:18px;background:#eaf7f5;color:var(--teal-d)}
 .whitecard{background:#fff;border-radius:28px;padding:32px;box-shadow:0 8px 24px -14px rgba(7,41,59,.35)}
 .h2-art{position:relative;padding:24px 0 0 24px}.h2-art .ph{border-radius:40px 40px 40px 140px;overflow:hidden;aspect-ratio:5/4;box-shadow:0 18px 40px -24px rgba(7,41,59,.5)}
-.h2-art .ph img{width:100%;height:100%;object-fit:cover}.arc-acc{position:absolute;width:140px;left:-16px;top:-26px}
+.h2-art .ph img{width:100%;height:100%;object-fit:cover}.h2-art .vtag{left:auto;right:18px;bottom:auto;top:18px}.arc-acc{position:absolute;width:140px;left:-16px;top:-26px}
 .sticker{position:absolute;right:16px;bottom:-14px;background:#fff;border-radius:99px;padding:.5em 1.1em;font-weight:900;box-shadow:0 8px 20px -10px rgba(7,41,59,.4)}
 .sphoto{position:relative;width:240px}.sphoto img{width:240px;height:170px;object-fit:cover;border-radius:32px}.sbadge{position:absolute;right:-12px;bottom:-12px;width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 6px 16px -8px rgba(7,41,59,.5);color:var(--teal-d)}.sbadge .ico{width:30px;height:30px}
 .fcards img{width:100%;aspect-ratio:16/10;object-fit:cover}
@@ -908,7 +930,7 @@ body{--btn-r:12px;--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#006b64;-
 def v2():
     home = f'''<div class="hero2"><div class="wrap"><div><span class="eyebrow">Northern Rivers Community Resilience Alliance</span><h1>{H1}</h1>
 <p class="lede">{CALLOUT}</p><p class="btnrow"><a class="btn btn-primary" href="#rack">Explore the R.A.C.K</a><a class="btn btn-ghost" href="#about">What we do</a></p></div>
-{photo_art("cheer", sticker="60+ groups, one network")}</div></div>
+{photo_art("laughing", sticker="60+ groups, one network", video=True)}</div></div>
 <section class="mint" style="padding:40px 0 56px"><div class="wrap"><ul class="paths">
 <li><a href="#about">{blob_icon("people", "#fff1c2")}<span><b>What we do</b><small>Our focus and purpose</small></span></a></li>
 <li><a href="#partners">{blob_icon("seed", "#fde0d4")}<span><b>Projects and HELP Fund</b><small>Who funds this work</small></span></a></li>
@@ -920,7 +942,7 @@ def v2():
 <section class="sec mint"><div class="wrap"><span class="eyebrow">Our focus</span><h2>Five pillars</h2>
 {pillar_cols(photos=["circle", "board", "hug", "talk", "speaker"])}</div></section>
 
-<section class="sec"><div class="wrap split"><div class="statbox peach"><span class="eyebrow">What we have achieved</span>{stats()}</div><div class="vframe">{video("laughing")}</div></div></section>
+<section class="sec"><div class="wrap split"><div class="statbox peach"><span class="eyebrow">What we have achieved</span>{stats()}</div><div class="vframe vswap">{img("cheer")}</div></div></section>
 
 <section class="sec sky" id="home-focus"><div class="wrap"><span class="eyebrow">In focus</span><h2>Upcoming, projects and the R.A.C.K</h2>
 <ul class="fcards"><li>{img("crowd")}<div class="top"></div><div class="in"><h3>{GATHER[0]}: {GATHER[1]}</h3><p>{GATHER[2]}.</p></div></li>
