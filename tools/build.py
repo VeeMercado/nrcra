@@ -597,7 +597,7 @@ select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy
 .rk-tag{font-size:.8rem;font-weight:800}
 .tagline i{font-style:normal;font-weight:800}.tagline .tg1{color:#58b0ac}.tagline .tg2{color:#d8b044}.tagline .tg3{color:#e47848}
 /* white brush stroke behind the tagline wherever the background is not white or a light brand tint (Wix: place the stroke SVG behind the text) */
-body:not(.v2) .site-foot .tagline,.ticker .tagline{display:inline-block;padding:.5em 1.5em;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2060'%20preserveAspectRatio='none'%3E%3Cpath%20fill='white'%20d='M7%2015C32%208%2082%2011%20142%209C202%208%20252%2010%20291%2012L297%2016L285%2019L299%2023L287%2027L298%2032L285%2036L293%2041C262%2048%20202%2051%20142%2050C92%2051%2042%2050%2011%2047L3%2043L15%2039L2%2034L13%2030L4%2025L14%2021L5%2018Z'/%3E%3Cpath%20fill='white'%20d='M20%205L96%206L98%209L22%209ZM190%2052L270%2051L268%2055L192%2056Z'/%3E%3C/svg%3E") no-repeat center/100% 100%}
+body:not(.v2) .site-foot .tagline,.ticker .tagline,.full .callcard .tagline{display:inline-block;padding:.5em 1.5em;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2060'%20preserveAspectRatio='none'%3E%3Cpath%20fill='white'%20d='M7%2015C32%208%2082%2011%20142%209C202%208%20252%2010%20291%2012L297%2016L285%2019L299%2023L287%2027L298%2032L285%2036L293%2041C262%2048%20202%2051%20142%2050C92%2051%2042%2050%2011%2047L3%2043L15%2039L2%2034L13%2030L4%2025L14%2021L5%2018Z'/%3E%3Cpath%20fill='white'%20d='M20%205L96%206L98%209L22%209ZM190%2052L270%2051L268%2055L192%2056Z'/%3E%3C/svg%3E") no-repeat center/100% 100%}
 .rk-badge{background:var(--teal-d);color:#fff;font-weight:900;padding:.2em .6em;border-radius:8px;letter-spacing:.06em}
 .rk-tools{display:flex;gap:10px;flex-wrap:wrap}.rk-pill{border:1px solid var(--line);border-radius:99px;padding:.45em 1em;font-weight:700;font-size:.9rem;text-decoration:none;color:var(--navy);background:#fff}
 .rk-share{background:#f5b301;color:var(--navy);border-radius:12px;padding:.5em 1.1em;font-weight:800;text-decoration:none;box-shadow:0 3px 0 #c98f00}
@@ -763,7 +763,7 @@ body{--bg:#f3f6f7}
 .full .sec,.full [class*="bk-"]{padding-top:76px!important;padding-bottom:76px!important}.full .pgs.bk-yellow{padding-top:60px!important;padding-bottom:60px!important}
 .full .sec:not([class*="bk-"])+.sec:not([class*="bk-"]){padding-top:0!important}
 .full .hero1{padding-bottom:0}.full .hero1 .latest{padding:20px 20px 24px}.full .pg1+.sec:not([class*="bk-"]){padding-top:76px!important}
-.full .bk-yellow{background:var(--yellow);color:var(--navy)}.full .bk-teal{background:var(--teal);color:var(--navy)}.full .bk-orange{background:var(--orange);color:var(--navy)}.full .bk-navy{background:var(--navy);color:#fff}
+.full .bk-white{background:#fff;color:var(--navy)}.full .bk-white .callcard{background:var(--yellow)}.full .bk-white .callcard::after{background:var(--orange-25)}.full .bk-yellow{background:var(--yellow);color:var(--navy)}.full .bk-teal{background:var(--teal);color:var(--navy)}.full .bk-orange{background:var(--orange);color:var(--navy)}.full .bk-navy{background:var(--navy);color:#fff}
 .full .bk-navy .eyebrow{color:var(--yellow)}.full :is(.bk-yellow,.bk-teal,.bk-orange) .eyebrow{color:var(--navy)}.full .bk-navy>.wrap>h2,.full .bk-navy>.wrap>.lede{color:#fff}
 .full :is(.bk-teal,.bk-orange,.bk-yellow) .lede-s{color:var(--navy)}
 .full [class*="bk-"] :is(.card,.stat-card,.val,.kb li,.tcard,.vp,.pc,.pcard,.racks li,.callcard){color:var(--navy)}.full [class*="bk-"] :is(.card,.stat-card,.tcard,.pcard,.racks li){background:#fff}
@@ -773,6 +773,7 @@ body{--bg:#f3f6f7}
 .full .tk-in{display:inline-flex;gap:22px;align-items:center;animation:tk 40s linear infinite}.full .tk-in .tkd{font-style:normal;color:var(--teal);font-size:.7em}
 @keyframes tk{to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.full .tk-in{animation:none}}
 .full .hero1 .latest{margin:22px auto 0}
+.full .wrap>h2{margin-bottom:44px}.full :is(.card,.vp,.stat-card,.pb-text,.p3-txt,.arc)>h2{margin-bottom:30px}.full .wrap>.eyebrow+h2{margin-bottom:44px}
 /* V1.2: full-width hero and image sections */
 .full .hero1{padding:0 0 8px}.full .hero1>.wrap:first-child{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:660px}
 .full .h1-photo{position:absolute;inset:0;border-radius:0;min-height:0}.full .h1-panel{position:relative;z-index:2;max-width:580px;margin:56px 0 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
@@ -784,7 +785,7 @@ body{--bg:#f3f6f7}
 .full .pg1{padding:0}.full .pg1 .wrap{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:480px}
 .full .pg1 .ph{position:absolute;inset:0;border-radius:0;aspect-ratio:auto}.full .pg1 .wrap>div:not(.ph){position:relative;z-index:2;background:var(--navy);color:#fff;border-radius:32px;padding:40px;max-width:620px;margin:56px 20px 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
 .full .pg1 .eyebrow{color:var(--yellow)}.full .pg1 .btn-ghost{color:#fff;border-color:#fff}.full .pg1 .btn-ghost:hover{background:#fff;color:var(--navy)}
-.full .ready{margin:0 calc(50% - 50vw);border-radius:0;padding:120px 24px}
+.full .ready{padding:110px 24px}
 @media(max-width:860px){.full .hero1>.wrap:first-child,.full .pg1 .wrap{min-height:0}.full .h1-panel,.full .pg1 .wrap>div:not(.ph){margin:220px 16px 24px;padding:28px 22px}}.pgs .lede{max-width:70ch}.narrow{max-width:720px}
 """
 
@@ -824,11 +825,11 @@ def v1(full=False):
 <div class="h1-photo hvid" data-video="{VIMEO}">{img("speaker", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div></div>
 <div class="wrap"><div class="latest"><a href="{LINKS["news"]}"><b>Latest</b>$800,000 HELP Fund grants program announced</a><a href="#home-focus"><b>Upcoming</b>{GATHER[0]}: {GATHER[1]}</a><a href="#partners"><b>Projects</b>Three projects under way</a></div></div></div>
 
-{TICKER if full else ""}<section class="sec bk-yellow"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard"><div class="cc-ph">{img("circle")}</div><blockquote>{CALLOUT}</blockquote><figcaption>{TAGLINE}</figcaption></figure></div></section>
+{TICKER if full else ""}<section class="sec bk-white"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard"><div class="cc-ph">{img("circle")}</div><blockquote>{CALLOUT}</blockquote><figcaption>{TAGLINE}</figcaption></figure></div></section>
 
-<section class="sec bk-teal" style="padding-top:0"><div class="wrap"><h2>How we work</h2>{values_cards()}</div></section>
+<section class="sec bk-navy" style="padding-top:0"><div class="wrap"><h2>How we work</h2>{values_cards()}</div></section>
 
-<section class="sec bk-navy" style="padding-top:0"><div class="wrap split"><div class="vswap">{img("cheer")}</div><div class="stat-card"><span class="eyebrow">What we have achieved</span>{stats()}</div></div></section>
+<section class="sec bk-teal" style="padding-top:0"><div class="wrap split"><div class="vswap">{img("cheer")}</div><div class="stat-card"><span class="eyebrow">What we have achieved</span>{stats()}</div></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><span class="eyebrow">Our focus</span><h2>Five pillars</h2>{pillar_cols()}</div></section>
 
