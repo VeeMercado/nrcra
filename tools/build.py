@@ -1008,7 +1008,7 @@ def dashboard():
 <h3>Inspired by the mood board</h3><div class="ins">{ins}</div><p class="sites">{SITES[slug]}</p></div></article>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
-.top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}
+.top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}.top .btnrow{{margin-top:16px}}
 .flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
 .row{{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:start;background:#fff;border-radius:32px;padding:28px;margin-bottom:28px;border-left:12px solid var(--yellow)}}
 .row{{position:relative;transition:box-shadow .2s}}.row:hover{{box-shadow:0 16px 40px -24px rgba(7,41,59,.5)}}.info h2 a::after{{content:"";position:absolute;inset:0;border-radius:32px;z-index:1}}.row:focus-within{{outline:3px solid var(--orange-d);outline-offset:3px}}.row2{{border-left-color:var(--teal)}}.row3{{border-left-color:var(--orange)}}
@@ -1020,7 +1020,7 @@ def dashboard():
 .ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.sites{{font-size:.8rem;color:var(--muted);margin:12px 0 0;line-height:1.45}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
 @media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}}}</style></head>
 <body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>NRCRA.ORG.AU Website prototypes</h1></div>
-<p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. Sample content only. To be built in Wix Classic. Status: draft for direction review.</p></div>
+<p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. Sample content only. To be built in Wix Classic. Status: draft for direction review.</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a></p></div>
 {rows}</main></body></html>'''
 
 
