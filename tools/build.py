@@ -619,26 +619,26 @@ body .lgrid>*,body .team>*{flex-basis:calc(50% - 8px)}
 FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">'
 
 
-PROTOS = [("v1", "Prototype 1", "Colour block sections"), ("v1.2", "Prototype 1.2", "Colour block sections, full-width images"), ("v2", "Prototype 2", "Light and fresh"), ("v3", "Prototype 3", "Illustrated visuals")]
+PROTOS = [("v1", "Prototype 1", "Colour block sections"), ("v2", "Prototype 2", "Light and fresh"), ("v3", "Prototype 3", "Illustrated visuals")]
 
 
 def protobar(v):
     # data-proto lets the script point each button at the same page in the other prototype
     others = "".join(f'<a class="pb-btn" data-proto="{k}" href="../{k}/" aria-label="{n}: {d}"><span class="pb-short" aria-hidden="true">P{k[1:]}</span><span class="pb-long">{n}</span></a>' for k, n, d in PROTOS if k != v)
-    cur = next((f"{n}: {d}" for k, n, d in PROTOS if k == v), "Prototype 3.2 (archived)")
+    cur = next((f"{n}: {d}" for k, n, d in PROTOS if k == v), "Archived backup")
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {cur}</span></p>
 <nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../">All prototypes</a>{others}</nav>
 <button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
 
-def page_shell(title, css, body, v, white_logo=True, slug=None, extra=""):
+def page_shell(title, css, body, v, white_logo=True, slug=None, extra="", pre_footer=""):
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title><meta name="robots" content="noindex">
 <meta name="description" content="Prototype for the Northern Rivers Community Resilience Alliance website. Sample content only.">
 {FONT}<style>{BASE}{css}{MOBILE}</style></head><body class="{v} {extra}">
-{nav()}<main id="main">{body}</main>{footer(white_logo, boxed=True)}{protobar(slug or v)}<script>{JS}</script></body></html>'''
+{nav()}<main id="main">{body}</main>{pre_footer}{footer(white_logo, boxed=True)}{protobar(slug or v)}<script>{JS}</script></body></html>'''
 
 
 def assemble(home, about, partners, network, rack):
@@ -727,9 +727,9 @@ body{--bg:#f3f6f7}
 .full [class*="bk-"] :is(.card,.stat-card,.val,.kb li,.tcard,.vp,.pc,.pcard,.racks li,.callcard){color:var(--navy)}.full [class*="bk-"] :is(.card,.stat-card,.tcard,.pcard,.racks li){background:#fff}
 .full .bk-teal .tline path{opacity:.7}.full .bk-teal .t0 .stop{border-color:var(--navy)}.full .bk-teal .val-teal{box-shadow:0 0 0 3px #fff}.full .bk-yellow .callcard{background:#fff}.full .bk-yellow .callcard::after{background:var(--yellow-40)}
 .full .bk-orange .card a:not(.btn){color:var(--teal-d)}.full [class*="bk-"] :is(.card,.stat-card) .eyebrow{color:var(--teal-d)}
-.ticker{display:none}.full .ticker{display:block;overflow:hidden;background:var(--navy);color:var(--yellow);font-weight:900;font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase;padding:12px 0;white-space:nowrap}
-.full .tk-in{display:inline-flex;gap:22px;align-items:center;animation:tk 40s linear infinite}.full .tk-in .tkd{font-style:normal;color:var(--teal);font-size:.7em}
-@keyframes tk{to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.full .tk-in{animation:none}}
+.ticker{display:block;overflow:hidden;background:var(--navy);color:var(--yellow);font-weight:900;font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase;padding:12px 0;white-space:nowrap}
+.tk-in{display:inline-flex;gap:22px;align-items:center;animation:tk 40s linear infinite}.tk-in .tkd{font-style:normal;color:var(--teal);font-size:.7em}
+@keyframes tk{to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.tk-in{animation:none}}
 .full .hero1 .latest{margin:22px auto 0}
 .full .wrap>h2{margin-bottom:44px}.full :is(.card,.vp,.stat-card,.pb-text,.p3-txt,.arc)>h2{margin-bottom:30px}.full .wrap>.eyebrow+h2{margin-bottom:44px}
 /* V1.2: full-width hero and image sections */
@@ -823,7 +823,7 @@ def v1(full=False):
 <section class="sec bk-orange" style="padding-top:0"><div class="wrap card"><h2>Need help getting in?</h2><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
     if full:
         return page_shell("NRCRA prototype 1.2: Colour block sections, full-width images", CSS1, assemble(home, about, partners, network, rack), "v1", slug="v1.2", extra="full")
-    return page_shell("NRCRA prototype 1: Colour block sections", CSS1, assemble(home, about, partners, network, rack), "v1")
+    return page_shell("NRCRA prototype 1: Colour block sections", CSS1, assemble(home, about, partners, network, rack), "v1", pre_footer=TICKER)
 
 
 # ================================================================ V2: Light and fresh, illustrated
@@ -1129,7 +1129,6 @@ SITES = {
 def dashboard():
     cards = [
         ("v1", "Colour block sections", "Inspired by Milou's drafts and current sites strong colour blocks. Rounded cards in light teal, yellow and orange tints, a navy hero panel beside a big rounded photo, pill buttons.", ["Colour cards with photos inside", "Five pillars as arched columns", "Partner section: photo, story and logos"]),
-        ("v1.2", "Colour block sections, full-width images", "An experiment on Prototype 1: the same layout, illustrations and content, with full-width hero images, full-width page headers and a full-width closing image.", ["Full-width photo hero with the navy panel over it", "Full-width page headers", "Everything else as Prototype 1"]),
         ("v2", "Light and fresh", "Inspired by the R.A.C.K app and Resilient Lismore. Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents, one illustration and softly rounded buttons.", ["Photo hero with logo-arc accent", "Five pillars as photo-topped columns", "River-style journey timeline"]),
         ("v3", "Illustrated visuals", "Inspired by the people in the photos of NRCRA community: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn illustration decor and crisp buttons.", ["Circle photo cluster and collage", "Illustration decor on big images", "In their own words stories"]),
     ]
@@ -1156,7 +1155,7 @@ def dashboard():
 .ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.sites{{font-size:.8rem;color:var(--muted);margin:12px 0 0;line-height:1.45}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
 @media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}}}</style></head>
 <body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>NRCRA.ORG.AU Website prototypes</h1></div>
-<p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board, plus a full-width image experiment (1.2). Sample content only. To be built in Wix Classic. Status: draft for direction review.</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a></p></div>
+<p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. Sample content only. To be built in Wix Classic. Status: draft for direction review.</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a></p></div>
 {rows}</main></body></html>'''
 
 
@@ -1170,7 +1169,7 @@ if __name__ == "__main__":
     write("v1/index.html", v1())
     write("v2/index.html", v2())
     write("v3/index.html", v3())
-    write("v1.2/index.html", v1(True))
+    write("v1.2/index.html", v1(True))  # archived: built but not linked from the dashboard or bar
     write("v3.2/index.html", v3(True))  # archived: built but not linked from the dashboard or bar
     write("index.html", dashboard())
     write("robots.txt", "User-agent: *\nDisallow: /\n")
