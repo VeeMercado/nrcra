@@ -11,7 +11,7 @@
       const cs = getComputedStyle(e);
       if (cs.backgroundImage && cs.backgroundImage !== 'none' && !cs.backgroundImage.startsWith('linear-gradient(rgb(255')) return { image: true };
       if (e.querySelector(':scope > img[style], :scope > img') && getComputedStyle(e.querySelector(':scope > img')).position === 'absolute') return { image: true };
-      for (const pseudo of ['::after', '::before']) { const ps = getComputedStyle(e, pseudo); if (ps.content !== 'none' && ps.position === 'absolute') { const c = parse(ps.backgroundColor); if (c && c.a > 0) stack.push(c); } }
+      for (const pseudo of ['::after', '::before']) { const ps = getComputedStyle(e, pseudo); if (ps.content !== 'none' && ps.position === 'absolute' && !(parseFloat(ps.width) < 200)) { const c = parse(ps.backgroundColor); if (c && c.a > 0) stack.push(c); } }
       const c = parse(cs.backgroundColor); if (c && c.a > 0) { stack.push(c); if (c.a >= 1) break; }
     }
     let col = { r: 255, g: 255, b: 255, a: 1 };

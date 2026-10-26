@@ -327,10 +327,10 @@ def cta_band():
 NET_H1 = "60+ grassroots, place-based groups across the Northern Rivers, working across five pillars."
 
 
-def network_body(card="card", pcls="pcols", sec_alt=""):
+def network_body(card="card", pcls="pcols", sec_alt="", dir_alt=""):
     return f'''<section class="sec"><div class="wrap">{map_embed()}</div></section>
 <section class="sec {sec_alt}"><div class="wrap"><h2>Five pillars</h2><p class="lede">Each pillar, and the groups in the network working on it.</p>{pillar_cols(pcls, groups=True)}</div></section>
-<section class="sec"><div class="wrap"><div class="{card}"><h2>All groups</h2>{directory()}</div></div></section>
+<section class="sec {dir_alt}"><div class="wrap"><div class="{card}"><h2>All groups</h2>{directory()}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="{card} narrow">{contact_form()}</div></div></section>'''
 
 
@@ -657,13 +657,13 @@ document.addEventListener('click',function(e){
 FONT = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">'
 
 
-PROTOS = [("v1", "Prototype 1", "Rounded blocks"), ("v1.2", "Prototype 1.2", "Rounded blocks, full-width images"), ("v2", "Prototype 2", "Light and fresh"), ("v3", "Prototype 3", "Big visuals"), ("v3.2", "Prototype 3.2", "Big visuals, full-width images")]
+PROTOS = [("v1", "Prototype 1", "Colour block sections"), ("v1.2", "Prototype 1.2", "Colour block sections, full-width images"), ("v2", "Prototype 2", "Light and fresh"), ("v3", "Prototype 3", "Illustrated visuals")]
 
 
 def protobar(v):
     # data-proto lets the script point each button at the same page in the other prototype
     others = "".join(f'<a class="pb-btn" data-proto="{k}" href="../{k}/" aria-label="{n}: {d}"><span class="pb-short" aria-hidden="true">P{k[1:]}</span><span class="pb-long">{n}</span></a>' for k, n, d in PROTOS if k != v)
-    cur = next(f"{n}: {d}" for k, n, d in PROTOS if k == v)
+    cur = next((f"{n}: {d}" for k, n, d in PROTOS if k == v), "Prototype 3.2 (archived)")
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {cur}</span></p>
 <nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../">All prototypes</a>{others}</nav>
@@ -754,6 +754,18 @@ body{--bg:#f3f6f7}
 @media(max-width:760px){.trail li{padding:0 0 52px 108px;min-height:72px}.stop{left:22px;width:68px;height:68px;border-width:5px;padding:4px}.stop b{font-size:.95rem}.t0 .stop b{font-size:.72rem}
 .tline{left:6px;top:68px;width:92px;height:calc(100% - 68px)}.tdeco{width:26px;height:30px}.d-r{left:88px;top:0}.d-l{left:-4px;top:20px}.d-t{left:48px;top:-30px}.d-b{left:0;top:52px}.tcard{padding:14px 16px;min-height:0}.trail{margin-top:48px}}
 .pgs{padding:48px 0 0}
+/* V1.2: Tyga-style solid brand-colour sections with light blocks on top */
+.full [class*="bk-"]{padding:72px 0!important}.full .pgs.bk-yellow{padding:56px 0!important}
+.full .bk-yellow{background:var(--yellow);color:var(--navy)}.full .bk-teal{background:var(--teal);color:var(--navy)}.full .bk-orange{background:var(--orange);color:var(--navy)}.full .bk-navy{background:var(--navy);color:#fff}
+.full .bk-navy .eyebrow{color:var(--yellow)}.full :is(.bk-yellow,.bk-teal,.bk-orange) .eyebrow{color:var(--navy)}.full .bk-navy>.wrap>h2,.full .bk-navy>.wrap>.lede{color:#fff}
+.full :is(.bk-teal,.bk-orange,.bk-yellow) .lede-s{color:var(--navy)}
+.full [class*="bk-"] :is(.card,.stat-card,.val,.kb li,.tcard,.vp,.pc,.pcard,.racks li,.callcard){color:var(--navy)}.full [class*="bk-"] :is(.card,.stat-card,.tcard,.pcard,.racks li){background:#fff}
+.full .bk-navy .pc-base,.full .bk-navy .pcwrap::after{background:#2c4a5b}.full .bk-teal .tline path{opacity:.7}.full .bk-teal .t0 .stop{border-color:var(--navy)}.full .bk-teal .val-teal{box-shadow:0 0 0 3px #fff}.full .bk-yellow .callcard{background:#fff}.full .bk-yellow .callcard::after{background:var(--yellow-40)}
+.full .bk-orange .card a:not(.btn){color:var(--teal-d)}.full [class*="bk-"] :is(.card,.stat-card) .eyebrow{color:var(--teal-d)}
+.ticker{display:none}.full .ticker{display:block;overflow:hidden;background:var(--navy);color:var(--yellow);font-weight:900;font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase;padding:12px 0;white-space:nowrap}
+.full .tk-in{display:inline-flex;gap:22px;align-items:center;animation:tk 40s linear infinite}.full .tk-in i{font-style:normal;color:var(--teal);font-size:.7em}
+@keyframes tk{to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.full .tk-in{animation:none}}
+.full .hero1 .latest{margin:22px auto 0}
 /* V1.2: full-width hero and image sections */
 .full .hero1{padding:0 0 8px}.full .hero1>.wrap:first-child{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:660px}
 .full .h1-photo{position:absolute;inset:0;border-radius:0;min-height:0}.full .h1-panel{position:relative;z-index:2;max-width:580px;margin:56px 0 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
@@ -784,6 +796,10 @@ def connect_art():
 <g stroke="#07293b" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round" opacity=".45">{ring}</g><g stroke="#07293b" stroke-width="3" stroke-linecap="round" opacity=".7">{lines}</g>{dots}</svg>'''
 
 
+TICKER_WORDS = ["Connect", "Share", "Care", "60+ groups", "7 council areas", "One network"]
+TICKER = '<div class="ticker" aria-hidden="true"><div class="tk-in">' + "".join(f'<span>{w}</span><i>&#9679;</i>' for w in TICKER_WORDS * 4) + '</div></div>'
+
+
 def v1_partners():
     logos = "".join(f'<li><img src="{SL}{f}" alt="{E(n)} (sample logo)" loading="lazy"></li>' for f, n in SAMPLE[:6])
     return f'''<div class="p3"><div class="p3-img">{img("hug")}</div><div class="p3-txt"><span class="eyebrow">Thanks to our partners</span><h2>What our partners made possible</h2><p>{PARTNER_LINE}</p></div>
@@ -794,47 +810,47 @@ def v1(full=False):
     home = f'''<div class="hero1"><div class="wrap"><div class="h1-panel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>When disaster strikes, local people are always first to respond.</h1><p class="lede">{H1}.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#rack">Explore the R.A.C.K</a><a class="btn btn-ghost" href="#about">What we do</a></p></div>
-<div class="h1-photo hvid" data-video="{VIMEO}">{img("group", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div></div>
+<div class="h1-photo hvid" data-video="{VIMEO}">{img("speaker", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div></div>
 <div class="wrap"><div class="latest"><a href="{LINKS["news"]}"><b>Latest</b>$800,000 HELP Fund grants program announced</a><a href="#home-focus"><b>Upcoming</b>{GATHER[0]}: {GATHER[1]}</a><a href="#partners"><b>Projects</b>Three projects under way</a></div></div></div>
 
-<section class="sec"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard"><div class="cc-ph">{img("circle")}</div><blockquote>{CALLOUT}</blockquote><figcaption>Connect. Share. Care.</figcaption></figure></div></section>
+{TICKER if full else ""}<section class="sec bk-yellow"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard"><div class="cc-ph">{img("circle")}</div><blockquote>{CALLOUT}</blockquote><figcaption>Connect. Share. Care.</figcaption></figure></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><h2>How we work</h2>{values_cards()}</div></section>
+<section class="sec bk-teal" style="padding-top:0"><div class="wrap"><h2>How we work</h2>{values_cards()}</div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap split"><div class="vswap">{img("cheer")}</div><div class="stat-card"><span class="eyebrow">What we have achieved</span>{stats()}</div></div></section>
+<section class="sec bk-navy" style="padding-top:0"><div class="wrap split"><div class="vswap">{img("cheer")}</div><div class="stat-card"><span class="eyebrow">What we have achieved</span>{stats()}</div></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><span class="eyebrow">Our focus</span><h2>Five pillars</h2>{pillar_cols()}</div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card">{places_block()}</div></div></section>
+<section class="sec bk-orange" style="padding-top:0"><div class="wrap"><div class="card">{places_block()}</div></div></section>
 
-<section class="sec" style="padding-top:0" id="home-focus"><div class="wrap"><span class="eyebrow">In focus</span><h2>Upcoming, projects and the R.A.C.K</h2>
+<section class="sec bk-navy" style="padding-top:0" id="home-focus"><div class="wrap"><span class="eyebrow">In focus</span><h2>Upcoming, projects and the R.A.C.K</h2>
 <ul class="kb"><li>{img("crowd")}<h3>{GATHER[0]}: {GATHER[1]}</h3><p>{GATHER[2]}.</p></li><li>{img("meeting")}<h3>Projects</h3><p>Connected and Prepared, Resourcing Community Resilience and Learning Together. <a href="#partners">See partners</a></p></li>
 <li>{img("board")}<h3>The R.A.C.K</h3><p>{RACK_LINE} <a href="#rack">Explore</a></p></li></ul></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card">{v1_partners()}</div></div></section>
+<section class="sec bk-teal" style="padding-top:0"><div class="wrap"><div class="card">{v1_partners()}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="ready">{img("aerial", alt="")}<div><h2>Ready to connect?</h2><p class="lede" style="margin:0 auto">Whether you are a community group, a local council, a funder or someone who cares about your community, there is a place for you in this Alliance.</p>{cta_band()}</div></div></div></section>'''
 
     about = f'''<div class="pg1"><div class="wrap"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow">About us</span><h1>We're changing the Northern Rivers' resilience culture</h1><p class="lede">{MORE}</p></div></div></div>
-<section class="sec"><div class="wrap"><div class="split" style="align-items:stretch"><div class="vp vp-t">{horizon_art()}<h2>Vision</h2><p>{VISION}</p></div><div class="vp vp-y">{connect_art()}<h2>Purpose</h2><p>{PURPOSE}</p></div></div></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2>Our values</h2>{values_cards()}</div></section>
+<section class="sec bk-navy"><div class="wrap"><div class="split" style="align-items:stretch"><div class="vp vp-t">{horizon_art()}<h2>Vision</h2><p>{VISION}</p></div><div class="vp vp-y">{connect_art()}<h2>Purpose</h2><p>{PURPOSE}</p></div></div></div></section>
+<section class="sec bk-yellow" style="padding-top:0"><div class="wrap"><h2>Our values</h2>{values_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2>Our journey</h2>{trail()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap split"><div class="card"><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning is our learning cycle, with researchers from the University Centre for Rural Health.</p>{meal()}</div><div class="card" style="background:var(--yellow-40)">{quote()}</div></div></section>
+<section class="sec bk-teal" style="padding-top:0"><div class="wrap"><h2>Our journey</h2>{trail()}</div></section>
+<section class="sec bk-orange" style="padding-top:0"><div class="wrap split"><div class="card"><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning is our learning cycle, with researchers from the University Centre for Rural Health.</p>{meal()}</div><div class="card" style="background:var(--yellow-40)">{quote()}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap card"><h2>Our structure</h2><p>Steering committee, embedded researchers from UCRH and the Network Lead, {CONTACT["name"]}. Names and roles to be supplied.</p><h3>Common questions</h3>{faq()}</div></section>'''
 
-    partners = f'''<div class="pgs"><div class="wrap"><span class="eyebrow">Impact</span><h1>Our partners</h1><p class="lede">{PARTNER_LINE}</p></div></div>
+    partners = f'''<div class="pgs bk-yellow"><div class="wrap"><span class="eyebrow">Impact</span><h1>Our partners</h1><p class="lede">{PARTNER_LINE}</p></div></div>
 <section class="sec" style="padding-top:24px"><div class="wrap">{logo_grid()}<p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></section>'''
 
     network = f'''<div class="pg1"><div class="wrap"><div><span class="eyebrow">Network</span><h1>{NET_H1}</h1><p class="lede">Find the resilience groups connected to the Alliance, by place and by focus.</p></div><div class="ph">{img("web", eager=True)}</div></div></div>
-{network_body("card")}'''
+{network_body("card", sec_alt="bk-navy" if full else "", dir_alt="bk-teal" if full else "")}'''
 
     rack = f'''<div class="pg1"><div class="wrap"><div><span class="eyebrow">Resources</span><h1>The R.A.C.K</h1><p class="lede"><b>{RACK_NAME}.</b> {RACK_LINE} {RACK_INTRO}</p>{rack_buttons()}</div><div class="ph">{img("table", eager=True)}</div></div></div>
-<section class="sec"><div class="wrap"><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>NRMA Insurance's participatory grants program for the region.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap card"><h2>Need help getting in?</h2><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
+<section class="sec bk-yellow"><div class="wrap"><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
+<section class="sec bk-navy" style="padding-top:0"><div class="wrap"><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>NRMA Insurance's participatory grants program for the region.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul></div></section>
+<section class="sec bk-orange" style="padding-top:0"><div class="wrap card"><h2>Need help getting in?</h2><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
     if full:
-        return page_shell("NRCRA prototype 1.2: Rounded blocks, full-width images", CSS1, assemble(home, about, partners, network, rack), "v1", slug="v1.2", extra="full")
-    return page_shell("NRCRA prototype 1: Rounded blocks", CSS1, assemble(home, about, partners, network, rack), "v1")
+        return page_shell("NRCRA prototype 1.2: Colour block sections, full-width images", CSS1, assemble(home, about, partners, network, rack), "v1", slug="v1.2", extra="full")
+    return page_shell("NRCRA prototype 1: Colour block sections", CSS1, assemble(home, about, partners, network, rack), "v1")
 
 
 # ================================================================ V2: Light and fresh, illustrated
@@ -1115,8 +1131,8 @@ def v3(full=False):
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="oblock orange"><span class="shape" aria-hidden="true"></span><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>Participatory grants for local groups.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul>
 <p class="big-b" style="margin-top:28px">Access is for Alliance groups. Need help getting in?</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></div></section>'''
     if full:
-        return page_shell("NRCRA prototype 3.2: Big visuals, full-width images", CSS3, assemble(home, about, partners, network, rack), "v3", slug="v3.2", extra="full")
-    return page_shell("NRCRA prototype 3: Big visuals", CSS3, assemble(home, about, partners, network, rack), "v3")
+        return page_shell("NRCRA prototype 3.2: Illustrated visuals, full-width images", CSS3, assemble(home, about, partners, network, rack), "v3", slug="v3.2", extra="full")
+    return page_shell("NRCRA prototype 3: Illustrated visuals", CSS3, assemble(home, about, partners, network, rack), "v3")
 
 
 # ================================================================ dashboard
@@ -1134,11 +1150,10 @@ SITES = {
 
 def dashboard():
     cards = [
-        ("v1", "Rounded blocks", "Inspired by Milou's drafts and current sites strong colour blocks. Rounded cards in light teal, yellow and orange tints, a navy hero panel beside a big rounded photo, pill buttons.", ["Colour cards with photos inside", "Five pillars as arched columns", "Partner section: photo, story and logos"]),
-        ("v1.2", "Rounded blocks, full-width images", "An experiment on Prototype 1: the same layout, illustrations and content, with full-width hero images, full-width page headers and a full-width closing image.", ["Full-width photo hero with the navy panel over it", "Full-width page headers", "Everything else as Prototype 1"]),
+        ("v1", "Colour block sections", "Inspired by Milou's drafts and current sites strong colour blocks. Rounded cards in light teal, yellow and orange tints, a navy hero panel beside a big rounded photo, pill buttons.", ["Colour cards with photos inside", "Five pillars as arched columns", "Partner section: photo, story and logos"]),
+        ("v1.2", "Colour block sections, full-width images", "An experiment on Prototype 1: the same layout, illustrations and content, with full-width hero images, full-width page headers and a full-width closing image.", ["Full-width photo hero with the navy panel over it", "Full-width page headers", "Everything else as Prototype 1"]),
         ("v2", "Light and fresh", "Inspired by the R.A.C.K app and Resilient Lismore. Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents, one illustration and softly rounded buttons.", ["Photo hero with logo-arc accent", "Five pillars as photo-topped columns", "River-style journey timeline"]),
-        ("v3", "Big visuals", "Inspired by the people in the photos of NRCRA community: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn illustration decor and crisp buttons.", ["Circle photo cluster and collage", "Illustration decor on big images", "In their own words stories"]),
-        ("v3.2", "Big visuals, full-width images", "An experiment on Prototype 3: the same layout, illustrations and content, with an edge-to-edge hero, edge-to-edge page headers and a full-width photo collage.", ["Edge-to-edge photo hero", "Full-width collage with the sizzle reel", "Everything else as Prototype 3"]),
+        ("v3", "Illustrated visuals", "Inspired by the people in the photos of NRCRA community: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn illustration decor and crisp buttons.", ["Circle photo cluster and collage", "Illustration decor on big images", "In their own words stories"]),
     ]
     rows = ""
     for slug, t, d, feats in cards:
@@ -1163,7 +1178,7 @@ def dashboard():
 .ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.sites{{font-size:.8rem;color:var(--muted);margin:12px 0 0;line-height:1.45}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
 @media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}}}</style></head>
 <body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>NRCRA.ORG.AU Website prototypes</h1></div>
-<p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board, plus two full-width image experiments (1.2 and 3.2). Sample content only. To be built in Wix Classic. Status: draft for direction review.</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a></p></div>
+<p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board, plus a full-width image experiment (1.2). Sample content only. To be built in Wix Classic. Status: draft for direction review.</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a></p></div>
 {rows}</main></body></html>'''
 
 
@@ -1178,7 +1193,7 @@ if __name__ == "__main__":
     write("v2/index.html", v2())
     write("v3/index.html", v3())
     write("v1.2/index.html", v1(True))
-    write("v3.2/index.html", v3(True))
+    write("v3.2/index.html", v3(True))  # archived: built but not linked from the dashboard or bar
     write("index.html", dashboard())
     write("robots.txt", "User-agent: *\nDisallow: /\n")
     print("built")
