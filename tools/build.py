@@ -2,8 +2,8 @@
 """Builds the three NRCRA prototypes (v1, v2, v3) and the dashboard from one content source.
 Run from the repo root:  python3 tools/build.py
 
-v1  Rounded blocks          (Milou's drafts + the R.A.C.K app: colour cards, pill rows, navy hero panel)
-v2  Light and fresh         (Investing for Charity, LA2050: white and pastel bands, flat illustrations)
+v1  Rounded blocks          (Milou's drafts + Waves for Water: colour cards, pill rows, navy hero panel)
+v2  Light and fresh         (the R.A.C.K app, Resilient Lismore, Investing for Charity: pastel bands, photos)
 v3  Big visuals             (Farm Africa, The Children's Society: big people photos, circle crops, warm blocks)
 """
 import html, os
@@ -111,6 +111,9 @@ SAMPLE = [
     ("savethechildren-logo-600x390.png", "Save the Children"), ("ahf-logo.png", "The Australian Himalayan Foundation"),
 ]
 SAMPLE_GROUPS = [("Funders", "Whose funding makes this work possible.", SAMPLE[0:4]), ("Delivery partners", "Who we build and deliver programs with.", SAMPLE[4:8]), ("Research partners", "Who listens, reflects and tracks change alongside us.", SAMPLE[8:12])]
+PARTNER_LINE = "Our partners have helped the Alliance grow from one part-time coordinator to a regional team of six, fund Connected and Prepared, bring $800,000 in participatory grants to local groups and keep learning with researchers from the University Centre for Rural Health."
+# Waves for Water style section: what each kind of partner made possible (logos are placeholders)
+WFW = [("Funding for Connected and Prepared, 2026 to 2027", 0), ("Helped establish and grow the Alliance", 1), ("$800,000 for participatory grants over two years", 2), ("Embedded research and Health Checks", 3)]
 REAL = "Disaster Ready Fund, FRRR, NRMA Insurance HELP Fund, NSW Government, Northern Rivers Community Foundation, Resilient Lismore, Plan C, University Centre for Rural Health, Monash University"
 
 ALT = dict(
@@ -218,10 +221,21 @@ def partner_tile(file, name):
 
 
 def partner_groups(cls="pgroups"):
-    out = f'<div class="{cls}"><p class="note"><b>Placeholder partners.</b> These logos are borrowed from another site to show the layout. They are not NRCRA partners. Real partners to be shown here: {REAL}.</p>'
+    out = f'<div class="{cls}"><p class="lede" style="margin-bottom:20px">{PARTNER_LINE}</p><p class="note"><b>Placeholder partners.</b> These logos are borrowed from another site to show the layout. They are not NRCRA partners. Real partners to be shown here: {REAL}.</p>'
     for title, intro, items in SAMPLE_GROUPS:
         out += f'<section class="pgroup"><h3>{E(title)}</h3><p class="lede-s">{E(intro)}</p><ul class="pgrid">' + "".join(partner_tile(*i) for i in items) + "</ul></section>"
     return out + "</div>"
+
+
+def wfw_partners():
+    def item(i):
+        cap, li = WFW[i]
+        f, n = SAMPLE[[0, 4, 9, 10][li]]
+        return f'<li><span class="wn">0{i + 1}</span><img src="{SL}{f}" alt="{E(n)} (sample logo)" loading="lazy"><span class="wbar" aria-hidden="true"></span><p>{E(cap)}</p></li>'
+    return f'''<div class="wfw"><p class="wfw-eye">Thanks to our partners</p><div class="wfw-grid">
+<ul class="wfw-col">{item(0)}{item(1)}</ul><div class="wfw-mid">{img("hug", alt="")}<h2>Our partners</h2></div><ul class="wfw-col">{item(2)}{item(3)}</ul></div>
+<p class="wfw-line">{PARTNER_LINE}</p><p class="btnrow wfw-btns"><a class="btn btn-primary" href="#partners">View all partners</a><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Become a partner</a></p>
+<p class="vnote" style="text-align:center">Placeholder logos. The captions show what NRCRA's real partners have made possible.</p></div>'''
 
 
 def partner_strip():
@@ -579,6 +593,15 @@ body{--bg:#f3f6f7}
 .racks .rn{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:900;background:var(--teal-25);color:var(--navy)}.racks li:nth-child(2) .rn{background:var(--yellow-40)}.racks li:nth-child(3) .rn{background:var(--orange-25)}.racks li:nth-child(4) .rn{background:var(--navy);color:#fff}
 .racks h3{margin:0}.racks p{margin:0;font-size:.95rem;color:var(--muted)}.racks .rc{font-weight:800;font-size:.9rem;background:#eef5f5;border-radius:99px;padding:.3em .8em}
 @media(max-width:600px){.racks li{grid-template-columns:auto 1fr;border-radius:24px}.racks .rc{grid-column:2}}
+.wfw-eye{text-align:center;font-weight:800;color:var(--teal-d);margin:0 0 18px}
+.wfw-grid{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:32px;align-items:center}
+.wfw-col{list-style:none;margin:0;padding:0;display:grid;gap:40px}.wfw-col li{display:grid;gap:10px;justify-items:center;text-align:center}
+.wfw-col .wn{justify-self:start;font-weight:900;color:var(--teal-d)}.wfw-col img{height:70px;width:auto;max-width:170px;object-fit:contain}
+.wbar{width:100%;height:5px;border-radius:99px;background:var(--teal-25)}.wfw-col p{margin:0;font-weight:700}
+.wfw-mid{position:relative;border-radius:32px;overflow:hidden;aspect-ratio:3/4}.wfw-mid img{width:100%;height:100%;object-fit:cover}
+.wfw-mid::after{content:"";position:absolute;inset:0;background:rgba(7,41,59,.45)}.wfw-mid h2{position:absolute;inset:0;display:grid;place-items:center;margin:0;z-index:2;color:#fff;text-transform:uppercase;font-size:clamp(2.2rem,4.4vw,3.6rem);font-weight:900;line-height:.95;text-align:center;padding:16px;letter-spacing:.02em}
+.wfw-line{text-align:center;max-width:70ch;margin:32px auto 0;font-size:1.1rem}.wfw-btns{justify-content:center}
+@media(max-width:860px){.wfw-grid{grid-template-columns:1fr 1fr}.wfw-mid{grid-column:1/-1;grid-row:1;aspect-ratio:16/10}.wfw-col{gap:24px}}
 .pmap{--land:#ffffff;--sea:#d8f0ee;--coast:#8fcfc9;--river:#7cc0dd}
 """
 
@@ -604,7 +627,7 @@ def v1():
 <ul class="kb"><li>{img("crowd")}<h3>{GATHER[0]}: {GATHER[1]}</h3><p>{GATHER[2]}.</p></li><li>{img("meeting")}<h3>Projects</h3><p>Connected and Prepared, Resourcing Community Resilience and Learning Together. <a href="#partners">See partners</a></p></li>
 <li>{img("board")}<h3>The R.A.C.K</h3><p>{RACK_LINE} <a href="#rack">Explore</a></p></li></ul></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card"><h2>Thanks to our partners</h2>{partner_strip()}<p class="btnrow"><a class="btn btn-ghost" href="#partners">All partners</a></p></div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="card">{wfw_partners()}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="ready">{img("aerial", alt="")}<div><h2>Ready to connect?</h2><p class="lede" style="margin:0 auto">Whether you are a community group, a local council, a funder or someone who cares about your community, there is a place for you in this Alliance.</p>{cta_band()}</div></div></div></section>'''
 
     about = f'''<div class="pg1"><div class="wrap"><div class="ph">{img("group", eager=True)}</div><div><span class="eyebrow">About us</span><h1>We're changing the Northern Rivers' resilience culture</h1><p class="lede">{MORE}</p></div></div></div>
@@ -741,7 +764,7 @@ def v2():
 <li>{img("meeting")}<div class="top"></div><div class="in"><h3>Projects</h3><p>Three projects growing the Alliance, funding local ideas and learning together. <a href="#partners">See partners</a></p></div></li>
 <li>{img("table")}<div class="top"></div><div class="in"><h3>The R.A.C.K</h3><p>{RACK_LINE} <a href="#rack">Explore</a></p></div></li></ul></div></section>
 
-<section class="sec"><div class="wrap"><h2>Thanks to our partners</h2>{partner_strip()}<p class="btnrow"><a class="btn btn-ghost" href="#partners">All partners</a></p></div></section>
+<section class="sec"><div class="wrap"><h2>Thanks to our partners</h2><p class="lede">{PARTNER_LINE}</p>{partner_strip()}<p class="btnrow"><a class="btn btn-ghost" href="#partners">All partners</a></p></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="bandcta butter"><div><h2>Get involved</h2><p>Local experience. Shared learning. Wider impact.</p>{cta_band()}</div><div>{illus_hero()}</div></div></div></section>'''
 
     def pg(chip, title, text, extra="", pic="group"):
@@ -842,7 +865,7 @@ def v3():
 <figure class="w2 h2">{img("crowd")}<figcaption>Alliance Gathering</figcaption></figure><figure>{img("board")}<figcaption>Planning together</figcaption></figure><figure>{img("hug")}<figcaption>Peer support</figcaption></figure>
 <figure class="w2">{img("web")}<figcaption>Connected</figcaption></figure></div></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="oblock orange"><span class="shape" aria-hidden="true"></span><p class="hand">What we have achieved</p>{stats()}<p class="big-b" style="margin:28px 0 10px">Thanks to our partners</p>{partner_strip()}</div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="oblock orange"><span class="shape" aria-hidden="true"></span><p class="hand">What we have achieved</p>{stats()}<p class="big-b" style="margin:28px 0 6px">Thanks to our partners</p><p class="big-b" style="font-weight:600;max-width:70ch">{PARTNER_LINE}</p>{partner_strip()}</div></div></section>
 
 <section class="sec"><div class="wrap"><p class="hand">In their own words</p><div class="words"><div class="face">{img("pair")}</div>{quote()}</div>
 <ul class="stories" style="margin-top:40px"><li>{img("listening")}<div class="in"><h3>Story to come</h3><p>A member group's story, supplied by NRCRA.</p></div></li><li>{img("house")}<div class="in"><h3>Story to come</h3><p>A member group's story, supplied by NRCRA.</p></div></li><li>{img("audience")}<div class="in"><h3>Story to come</h3><p>A member group's story, supplied by NRCRA.</p></div></li></ul></div></section>
@@ -890,16 +913,16 @@ def v3():
 
 # ================================================================ dashboard
 INSPO = {
-    "v1": [("v1-milou-home", "Milou's NRCRA draft: home"), ("v1-milou-knowledge", "Milou's draft: Knowledge Bank"), ("v1-rack", "The R.A.C.K app")],
-    "v2": [("v2-resilient-lismore", "Resilient Lismore"), ("v2-investing-for-charity", "Investing for Charity"), ("v2-la2050", "LA2050")],
+    "v1": [("v1-milou-home", "Milou's NRCRA draft: home"), ("v1-milou-knowledge", "Milou's draft: Knowledge Bank"), ("v1-waves-for-water", "Waves for Water")],
+    "v2": [("v2-rack", "The R.A.C.K app"), ("v2-resilient-lismore", "Resilient Lismore"), ("v2-investing-for-charity", "Investing for Charity")],
     "v3": [("v3-farm-africa", "Farm Africa"), ("v3-childrens-society", "The Children's Society"), ("v3-save-the-children", "Save the Children concept")],
 }
 
 
 def dashboard():
     cards = [
-        ("v1", "Rounded blocks", "Built from Milou's drafts and the R.A.C.K app. Rounded cards in light teal, yellow and orange tints, coloured pill rows, a navy hero panel beside a big rounded photo.", ["Colour cards with photos inside", "Pill rows for the five pillars", "From / To comparison on About"]),
-        ("v2", "Light and fresh", "Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents and one illustration, no dark blocks.", ["Photo hero with logo-arc accent", "Five pillars down a dotted step line", "River-style journey timeline"]),
+        ("v1", "Rounded blocks", "Built from Milou's drafts and Waves for Water. Rounded cards in light teal, yellow and orange tints, coloured pill rows, a navy hero panel beside a big rounded photo.", ["Colour cards with photos inside", "Pill rows for the five pillars", "Waves for Water style partner section"]),
+        ("v2", "Light and fresh", "Built from the R.A.C.K app and Resilient Lismore. Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents and one illustration, no dark blocks.", ["Photo hero with logo-arc accent", "Five pillars down a dotted step line", "River-style journey timeline"]),
         ("v3", "Big visuals", "People first: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn accents.", ["Circle photo cluster and collage", "In their own words stories", "Four ways to be part of it"]),
     ]
     rows = ""
