@@ -173,7 +173,7 @@ def nav():
 
 def footer(white_logo=True):
     return f'''<footer class="site-foot"><div class="wrap foot-in">
-<div>{logo("logo", white_logo)}<p class="tag">Connect. Share. Care.</p></div>
+<div><span class="foot-logo">{logo("logo")}</span><p class="tag">Connect. Share. Care.</p></div>
 <div><h2>Contact</h2><p>Network Lead<br><strong>{CONTACT["name"]}</strong><br><a href="mailto:{CONTACT["email"]}">{CONTACT["email"]}</a><br><a href="tel:{CONTACT["tel"]}">{CONTACT["phone"]}</a></p></div>
 <div><h2>Follow</h2><ul class="plain"><li><a href="{LINKS["fb"]}">Facebook</a></li><li><a href="{LINKS["li"]}">LinkedIn</a></li><li><a href="{LINKS["wa"]}">WhatsApp group</a></li><li><a href="{LINKS["news"]}">Resilience Roundup newsletter</a></li></ul></div>
 <p class="ack">{ACK}</p><p class="copy">© 2026 Northern Rivers Community Resilience Alliance. <a href="{LINKS["live"]}">nrcra.org.au</a></p>
@@ -201,6 +201,10 @@ def icon(name, cls="ico"):
         "share": '<circle cx="12" cy="24" r="5"/><circle cx="36" cy="12" r="5"/><circle cx="36" cy="36" r="5"/><path d="M17 22l14-8M17 26l14 8"/>',
         "cal": '<rect x="8" y="12" width="32" height="28" rx="5"/><path d="M8 20h32M16 8v8M32 8v8"/>',
         "hand": '<path d="M14 26V14a3 3 0 0 1 6 0v10M20 22V10a3 3 0 0 1 6 0v12M26 22v-9a3 3 0 0 1 6 0v13c0 8-5 14-12 14-5 0-8-3-10-7l-4-8a3 3 0 0 1 5-3l3 4"/>',
+        "listen": '<path d="M8 12h32v20H22l-8 7v-7H8z"/><path d="M16 20h16M16 26h10"/>',
+        "reflect": '<path d="M38 20a15 15 0 0 0-27-5M10 28a15 15 0 0 0 27 5"/><path d="M11 8v7h7M37 40v-7h-7"/>',
+        "improve": '<path d="M8 36l11-11 7 7 14-14"/><path d="M30 18h10v10"/>',
+        "strengthen": '<path d="M24 6l15 6v10c0 10-7 17-15 20-8-3-15-10-15-20V12z"/><path d="M17 24l5 5 9-10"/>',
         "connect": '<circle cx="24" cy="24" r="6"/><circle cx="10" cy="10" r="4"/><circle cx="38" cy="10" r="4"/><circle cx="10" cy="38" r="4"/><circle cx="38" cy="38" r="4"/><path d="M13 13l7 7M35 13l-7 7M13 35l7-7M35 35l-7-7"/>',
     }[name]
     return f'<svg class="{cls}" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">{p}</svg>'
@@ -215,10 +219,17 @@ def values_cards(cls="values"):
     return f'<ul class="{cls}">' + "".join(f'<li class="val val-{c}">{icon(ic[t])}<h3>{t}</h3><p>{E(d)}</p></li>' for t, d, c in VALUES) + "</ul>"
 
 
-def from_to():
+FT_FROM_ART = '<svg class="ft-art" viewBox="0 0 160 80" aria-hidden="true">' + "".join(f'<circle cx="{x}" cy="{y}" r="9" fill="{c}" opacity=".55"/>' for x, y, c in [(20, 22, "#f05a28"), (62, 58, "#07293b"), (98, 18, "#00a79d"), (140, 50, "#ffcb2a"), (118, 70, "#f05a28")]) + '<path d="M38 22h10M74 40l8-8M112 32l10 8" stroke="#07293b" stroke-width="2.5" stroke-dasharray="2 5" opacity=".35" fill="none"/></svg>'
+FT_TO_ART = ('<svg class="ft-art" viewBox="0 0 160 80" aria-hidden="true"><g stroke="#07293b" stroke-width="3" opacity=".7" stroke-linecap="round">'
+             + "".join(f'<line x1="80" y1="40" x2="{x}" y2="{y}"/>' for x, y in [(24, 18), (24, 62), (136, 18), (136, 62), (80, 8)]) + '</g>'
+             + "".join(f'<circle cx="{x}" cy="{y}" r="{r}" fill="{c}"/>' for x, y, r, c in [(80, 40, 13, "#07293b"), (24, 18, 9, "#f05a28"), (24, 62, 9, "#00a79d"), (136, 18, 9, "#ffcb2a"), (136, 62, 9, "#f05a28"), (80, 8, 7, "#00a79d")]) + '</svg>')
+
+
+def from_to(art=False):
     f, t = FROM_TO
-    return f'''<div class="fromto"><div class="ft-from"><h3>From</h3><ul>{"".join(f"<li>{x}</li>" for x in f)}</ul></div>
-<div class="ft-arrow" aria-hidden="true">&rarr;</div><div class="ft-to"><h3>To</h3><ul>{"".join(f"<li>{x}</li>" for x in t)}</ul></div></div>'''
+    fa, ta = (FT_FROM_ART, FT_TO_ART) if art else ("", "")
+    return f'''<div class="fromto"><div class="ft-from">{fa}<h3>From</h3><ul>{"".join(f"<li>{x}</li>" for x in f)}</ul></div>
+<div class="ft-arrow" aria-hidden="true">&rarr;</div><div class="ft-to">{ta}<h3>To</h3><ul>{"".join(f"<li>{x}</li>" for x in t)}</ul></div></div>'''
 
 
 def partner_tile(file, name):
@@ -248,8 +259,11 @@ def journey(cls="journey"):
     return f'<ol class="{cls}">' + "".join(f"<li><b>{y}</b><p>{E(t)}</p></li>" for y, t in JOURNEY) + "</ol>"
 
 
+MEAL_ICONS = {"Connect": "connect", "Listen": "listen", "Reflect": "reflect", "Improve": "improve", "Share": "share", "Strengthen": "strengthen"}
+
+
 def meal(cls="meal"):
-    return f'<ol class="{cls}">' + "".join(f"<li>{m}</li>" for m in MEAL) + "</ol>"
+    return f'<ol class="{cls}">' + "".join(f"<li>{icon(MEAL_ICONS[m], 'mico')}{m}</li>" for m in MEAL) + "</ol>"
 
 
 def faq():
@@ -465,7 +479,7 @@ ul.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:r
 .pillars{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}.pillars h3{margin:.3em 0}.pillars p{margin:0}
 .values{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}.values p{margin:0}
 .fromto{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch}.fromto>div{border-radius:var(--r);padding:28px}.fromto ul{margin:0;padding-left:1.1em}
-.ft-arrow{display:grid;place-items:center;font-size:2.4rem;font-weight:900;padding:0 10px!important}@media(max-width:700px){.fromto{grid-template-columns:1fr}.ft-arrow{transform:rotate(90deg)}}
+.ft-art{width:150px;height:auto;display:block;margin-bottom:12px}.ft-arrow{display:grid;place-items:center;font-size:2.4rem;font-weight:900;padding:0 10px!important}@media(max-width:700px){.fromto{grid-template-columns:1fr}.ft-arrow{transform:rotate(90deg)}}
 .video{position:relative;aspect-ratio:16/9;background:var(--navy);overflow:hidden;border-radius:var(--r)}.video img,.video iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
 .play{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;border:0;background:var(--yellow);color:var(--navy);font-size:1.8rem;cursor:pointer;display:grid;place-items:center;padding-left:6px;box-shadow:0 6px 20px rgba(0,0,0,.25)}.play:hover{background:#fff}
 .pgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
@@ -477,7 +491,7 @@ ul.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:r
 .pcard,.gcard,.rcard{list-style:none;padding:24px;border-radius:var(--r)}.meta{font-size:.9rem;margin:0;color:var(--muted)}
 .journey{list-style:none;margin:0;padding:0;display:grid;gap:14px}.journey li{display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:start}.journey b{font-size:1.4rem;font-weight:900}.journey p{margin:0}
 @media(max-width:600px){.journey li{grid-template-columns:1fr;gap:2px}}
-.meal{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}.meal li{padding:.55em 1.2em;font-weight:800;border-radius:99px;background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.meal{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}.mico{width:22px;height:22px;flex:none}.meal li{display:inline-flex;align-items:center;gap:8px;padding:.55em 1.2em .55em .9em;font-weight:800;border-radius:99px;background:#fff;color:var(--navy);border:2px solid var(--navy)}
 .faq details{border-bottom:1px solid var(--line);padding:14px 0}.faq summary{cursor:pointer;font-weight:800}.faq details p{margin:.6em 0 0}
 .quote{margin:0}.quote p{font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:800;line-height:1.35;margin:0}.quote cite{display:block;font-style:normal;font-weight:600;margin-top:.8em}
 .mapbox{width:100%;height:clamp(320px,48vw,560px);background:#eef5f5;border-radius:var(--r);overflow:hidden}.mapbox iframe{width:100%;height:100%;border:0}
@@ -493,7 +507,7 @@ select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy
 .pc-ph{width:calc(100% + 36px);margin:-44px -18px 16px;aspect-ratio:1}.pc-ph img{width:100%;height:100%;object-fit:cover}.pc-ph+.pc-ico{margin-top:-44px;position:relative;box-shadow:0 4px 12px -6px rgba(7,41,59,.4)}
 .pc-groups{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;width:100%}.pc-groups li{background:rgba(255,255,255,.75);border-radius:12px;padding:8px 10px;text-align:left;font-size:.9rem}.pc-groups b{display:block}.pc-groups span{color:var(--muted)}
 .pc-base{height:18px;border-radius:12px;margin-top:10px;background:var(--navy-8)}
-@media(max-width:980px){.pcols{grid-template-columns:repeat(3,1fr)}}@media(max-width:640px){.pcols{grid-template-columns:1fr 1fr}.pc{min-height:0;border-radius:160px 160px 16px 16px}}@media(max-width:420px){.pcols{grid-template-columns:1fr}}
+@media(max-width:980px){.pcols{display:flex;flex-wrap:wrap;justify-content:center}.pc{flex:0 1 calc(33.333% - 10px)}}@media(max-width:640px){.pc{flex-basis:calc(50% - 7px);min-height:0;border-radius:160px 160px 16px 16px}}@media(max-width:420px){.pc{flex-basis:100%;max-width:320px}}
 .dq{flex:1;min-width:200px}.dq input{width:100%}
 .gdir{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.gdir li{background:var(--grey-6);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
 .gdir b{font-size:1rem}.gdir span{color:var(--muted);font-size:.9rem}.gdir em{font-style:normal;font-size:.8rem;font-weight:800;margin-top:6px;color:var(--teal-d)}
@@ -515,7 +529,7 @@ select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy
 .site-foot{background:var(--foot,#07293b);color:var(--foot-ink,#fff);padding:52px 0 32px}.site-foot a{color:inherit}
 .site-foot h2{font-size:.9rem;text-transform:uppercase;letter-spacing:.12em;color:var(--foot-h,#ffcb2a)}
 .foot-in{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}.foot-in .ack{grid-column:1/-1;font-size:.9rem;border-top:1px solid var(--foot-line,#35566a);padding-top:20px;margin:0;max-width:90ch}
-.foot-in .copy{grid-column:1/-1;font-size:.85rem;margin:0}.foot-in .tag{margin-top:12px;font-weight:800;color:var(--foot-h,#ffcb2a)}.site-foot .logo{height:54px}
+.foot-in .copy{grid-column:1/-1;font-size:.85rem;margin:0}.foot-logo{display:inline-block;background:#fff;border-radius:16px;padding:12px 16px}.foot-in .tag{margin-top:12px;font-weight:800;color:var(--foot-h,#ffcb2a)}.site-foot .logo{height:54px}
 /* R.A.C.K mock (its own look, shared by all prototypes) */
 .rkpage{background:#f7f9fa}.rk{max-width:1100px;margin:0 auto;padding:32px 20px 72px}
 .rk-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;padding:14px 0 18px;border-bottom:1px solid var(--line);margin-bottom:24px}
@@ -618,7 +632,7 @@ body{--bg:#f3f6f7}
 .intro1{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
 .callcard{margin:0;background:var(--yellow-40);border-radius:var(--r);padding:28px 30px 26px;position:relative;overflow:hidden}
 .callcard::after{content:"";position:absolute;right:-50px;top:-50px;width:150px;height:150px;border-radius:50%;background:var(--orange-25)}
-.connect-art{width:100%;height:auto;display:block;position:relative;z-index:1;margin-bottom:10px}
+.connect-art{width:100%;height:auto;display:block;position:relative;z-index:1;margin-bottom:10px}.cc-ph{position:relative;z-index:1;border-radius:18px;overflow:hidden;aspect-ratio:16/9;margin-bottom:18px}.cc-ph img{width:100%;height:100%;object-fit:cover}
 .callcard blockquote{margin:0;font-size:1.35rem;font-weight:900;line-height:1.3;position:relative;z-index:1}.callcard figcaption{margin-top:12px;font-weight:800;font-size:.9rem;color:var(--teal-d);position:relative;z-index:1}.callout{border:3px solid var(--orange);border-radius:var(--r);padding:28px;font-size:1.2rem;font-weight:800;background:#fff}
 @media(max-width:860px){.intro1{grid-template-columns:1fr}}
 .val{border-radius:var(--r);padding:30px}.val .ico{margin-bottom:18px}.val-teal{background:var(--teal-25);color:var(--navy)}.val-yellow{background:var(--yellow-40);color:var(--navy)}.val-orange{background:var(--orange-25);color:var(--navy)}
@@ -664,8 +678,17 @@ body{--bg:#f3f6f7}
 .p3{display:grid;grid-template-columns:.9fr 1.1fr 1fr;gap:36px;align-items:start}.p3-img img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:28px}.p3-txt p{font-size:1.1rem;margin:0}
 .p3-logos ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}.p3-logos li{border:1px solid var(--line);border-radius:16px;display:grid;place-items:center;padding:12px;aspect-ratio:3/2;background:#fff}.p3-logos img{max-height:56px;max-width:100%;object-fit:contain}
 @media(max-width:900px){.p3{grid-template-columns:1fr}.p3-img img{aspect-ratio:16/10}}
+.vp{border-radius:var(--r);padding:28px}.vp-t{background:var(--teal-25)}.vp-y{background:var(--yellow-40)}.vp .connect-art{max-width:300px;margin:0 0 14px}
 .pgs{padding:48px 0 0}.pgs .lede{max-width:70ch}.narrow{max-width:720px}
 """
+
+
+def horizon_art():
+    people = "".join(f'<g fill="{c}"><circle cx="{x}" cy="{150 - h}" r="9"/><path d="M{x - 12} 152q0-{h - 14} 12-{h - 14}t12 {h - 14}z"/></g>' for x, h, c in [(120, 46, "#f05a28"), (152, 40, "#07293b"), (184, 50, "#00a79d"), (216, 42, "#f05a28"), (248, 46, "#07293b")])
+    return f'''<svg class="connect-art" viewBox="0 0 360 190" role="img" aria-label="Illustration: people standing together on a hill under a rising sun">
+<path d="M90 120a90 90 0 0 1 180 0" fill="none" stroke="#ffcb2a" stroke-width="20" stroke-linecap="round"/><path d="M125 120a55 55 0 0 1 110 0" fill="none" stroke="#f05a28" stroke-width="14" stroke-linecap="round"/>
+<circle cx="180" cy="40" r="11" fill="#f05a28"/><circle cx="104" cy="70" r="8" fill="#ffcb2a"/><circle cx="256" cy="70" r="8" fill="#00a79d"/>
+<path d="M0 160c70-30 140-30 200-10s110 10 160-8V190H0z" fill="#00a79d" opacity=".55"/><path d="M0 176c90-18 190-14 260 0s70 4 100-4V190H0z" fill="#006b64" opacity=".6"/>{people}</svg>'''
 
 
 def connect_art():
@@ -691,7 +714,7 @@ def v1():
 <div class="h1-photo">{img("cheer", eager=True)}</div></div>
 <div class="wrap"><div class="latest"><a href="{LINKS["news"]}"><b>Latest</b>$800,000 HELP Fund grants program announced</a><a href="#home-focus"><b>Upcoming</b>{GATHER[0]}: {GATHER[1]}</a><a href="#partners"><b>Projects</b>Three projects under way</a></div></div></div>
 
-<section class="sec"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard">{connect_art()}<blockquote>{CALLOUT}</blockquote><figcaption>Connect. Share. Care.</figcaption></figure></div></section>
+<section class="sec"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard"><div class="cc-ph">{img("circle")}</div><blockquote>{CALLOUT}</blockquote><figcaption>Connect. Share. Care.</figcaption></figure></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>How we work</h2>{values_cards()}</div></section>
 
@@ -709,7 +732,7 @@ def v1():
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="ready">{img("aerial", alt="")}<div><h2>Ready to connect?</h2><p class="lede" style="margin:0 auto">Whether you are a community group, a local council, a funder or someone who cares about your community, there is a place for you in this Alliance.</p>{cta_band()}</div></div></div></section>'''
 
     about = f'''<div class="pg1"><div class="wrap"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow">About us</span><h1>We're changing the Northern Rivers' resilience culture</h1><p class="lede">{MORE}</p></div></div></div>
-<section class="sec"><div class="wrap"><div class="split" style="align-items:stretch"><div class="arc"><h2>Vision</h2><p>{VISION}</p></div><div class="arc y"><h2>Purpose</h2><p>{PURPOSE}</p></div></div></div></section>
+<section class="sec"><div class="wrap"><div class="split" style="align-items:stretch"><div class="vp vp-t">{horizon_art()}<h2>Vision</h2><p>{VISION}</p></div><div class="vp vp-y">{connect_art()}<h2>Purpose</h2><p>{PURPOSE}</p></div></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our values</h2>{values_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our journey</h2>{journey()}</div></section>
@@ -813,7 +836,7 @@ body{--btn-r:12px;--bg:#fff;--foot:#e6f6f4;--foot-ink:#07293b;--foot-h:#006b64;-
 .places button{--chip:#d4ece9}.places button:hover,.places button[aria-pressed=true]{background:var(--teal-d);border-color:var(--teal-d)}
 .site-foot .logo-white{filter:none}
 .v2 .pc:nth-child(1){background:var(--teal-12)}.v2 .pc:nth-child(2){background:var(--yellow-20)}.v2 .pc:nth-child(3){background:var(--orange-12)}.v2 .pc:nth-child(4){background:#e6f1f8}.v2 .pc:nth-child(5){background:#f1eefa}
-.v2 .pc-base{background:#d4ece9}.plain2 .wrap{grid-template-columns:1fr}.plain2 .lede{max-width:70ch}.narrow{max-width:720px}.v2 .btn-primary{background:var(--teal-d);border-color:var(--teal-d);color:#fff}.v2 .btn-primary:hover{background:var(--navy);border-color:var(--navy)}
+.v2 .pc-base{background:#d4ece9}.vpc{overflow:hidden}.vpc img{max-width:none;width:calc(100% + 64px);margin:-32px -32px 22px;aspect-ratio:16/8;object-fit:cover}.plain2 .wrap{grid-template-columns:1fr}.plain2 .lede{max-width:70ch}.narrow{max-width:720px}.v2 .btn-primary{background:var(--teal-d);border-color:var(--teal-d);color:#fff}.v2 .btn-primary:hover{background:var(--navy);border-color:var(--navy)}
 """
 
 
@@ -845,8 +868,8 @@ def v2():
     def pg(chip, title, text, extra="", pic="group"):
         return f'<div class="pg2"><div class="wrap"><div><span class="chip">{chip}</span><h1>{title}</h1><p class="lede">{text}</p>{extra}</div>{photo_art(pic)}</div></div>'
 
-    about = pg("About us", "Local experience. Shared learning. Wider impact.", WHO) + f'''
-<section class="sec mint"><div class="wrap split" style="align-items:stretch"><div class="whitecard"><h2>Vision</h2><p>{VISION}</p></div><div class="whitecard"><h2>Purpose</h2><p>{PURPOSE}</p></div></div></section>
+    about = pg("About us", "Local experience. Shared learning. Wider impact.", WHO, pic="audience") + f'''
+<section class="sec mint"><div class="wrap split" style="align-items:stretch"><div class="whitecard vpc">{img("aerial")}<h2>Vision</h2><p>{VISION}</p></div><div class="whitecard vpc">{img("hall")}<h2>Purpose</h2><p>{PURPOSE}</p></div></div></section>
 <section class="sec"><div class="wrap"><h2>Our values</h2>{values_cards()}<div class="prow">{img("board2")}{img("cards")}{img("line")}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to()}</div></section>
 <section class="sec sky"><div class="wrap"><h2>Our journey</h2>{journey("river")}</div></section>
@@ -983,7 +1006,7 @@ def v3():
 <section class="sec"><div class="wrap split"><div><p class="hand">Our vision</p><p class="big">{VISION}</p><div class="warmcard" style="margin-top:24px"><h2>Purpose</h2><p>{PURPOSE}</p></div></div>
 <div class="circles">{deco("rings", "")}{img("listening")}{img("house")}{img("audience")}<span class="blob" aria-hidden="true"></span></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our values</h2>{values_cards()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to()}</div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><h2>What we are changing</h2>{from_to(art=True)}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2>Our journey</h2><ol class="tline">{"".join(f'<li>{img(jpics[i])}<div><b>{y}</b><p>{E(t)}</p></div></li>' for i, (y, t) in enumerate(JOURNEY))}</ol></div></section>
 <section class="sec deep"><div class="wrap split"><div><h2>How we learn</h2><p>Monitoring, Evaluation, Accountability and Learning, with researchers from the University Centre for Rural Health.</p>{meal()}</div>{quote()}</div></section>
 <section class="sec"><div class="wrap"><h2>Our people</h2><ul class="team">{"".join(f'<li><div class="av">Photo</div><b>Name</b><br><span class="lede-s">{r}</span></li>' for r in ["Network Lead", "Steering committee", "Steering committee", "UCRH researcher", "UCRH researcher"])}</ul><p class="vnote">Names, roles and photos to be supplied.</p><h3 style="margin-top:28px">Common questions</h3>{faq()}</div></section>'''
