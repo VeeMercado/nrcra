@@ -82,7 +82,7 @@ def team():
 def about_body():
     return f'''<div class="wrap"><div class="splith rev"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow">About us</span><h1>We&rsquo;re changing the Northern Rivers&rsquo; resilience culture</h1><p class="lede">{B.MORE}</p></div></div></div>
 <section class="sec"><div class="wrap"><div class="card vp-wrap surface"><div><span class="script">Our goal</span><h2>Vision</h2><p>{B.VISION}</p><span class="script" style="margin-top:28px">Our why</span><h2>Purpose</h2><p>{B.PURPOSE}</p></div>
-<div class="cluster">{img("circle", "c1", alt="")}{img("house", "c2", alt="")}{img("talk", "c3", alt="")}<i class="b1" aria-hidden="true"></i><i class="b2" aria-hidden="true"></i></div></div></div></section>
+<div class="circles">{B.deco("rings", "")}{img("laughing", alt="")}{img("talk", alt="")}{img("circle", alt="")}<span class="blob" aria-hidden="true"></span></div></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><span class="script">How we take action</span><h2 class="sechead">{hl("We have a MEAL plan")}</h2><p class="lede">Monitoring, Evaluation, Accountability and Learning. A healthy Resilience Alliance isn&rsquo;t just one that delivers projects. It&rsquo;s one where people feel included, power is shared, groups gain real value, and we can learn and adapt together.</p>
 {B.meal()}<ul class="mealgrid">{"".join(f'<li>{icon(k)}<h3>{E(t)}</h3><p>{E(d)}</p></li>' for t, d, k in MEAL6)}</ul></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><span class="script">Progress so far</span><h2 class="sechead">Our journey</h2>{B.journey("river")}</div></div></section>
@@ -133,7 +133,7 @@ body.teal{--bg:#f3f6f7}
 .framed{border-radius:36px;padding:14px;background:var(--fr,var(--teal))}.framed img{border-radius:24px;width:100%;aspect-ratio:4/3;object-fit:cover}
 .pcard2 .p3{align-items:center}
 .partband{padding:56px 0 52px;text-align:center}.partband h2{margin-bottom:24px}
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.steps li{display:grid;justify-items:center;gap:8px}.steps .ci{width:76px;height:76px;border-radius:50%;background:#fff;border:3px solid var(--ci);display:grid;place-items:center;color:var(--navy)}.steps .ci .ico{width:34px;height:34px}.steps a{font-weight:800;color:var(--navy)}.steps p{margin:0;font-size:.95rem}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.steps li{display:grid;justify-items:center;gap:8px}.steps .ci{width:76px;height:76px;border-radius:50%;background:#fff;border:3px solid var(--ci);display:grid;place-items:center;color:var(--navy)}.steps .ci .ico{width:34px;height:34px}.steps a{font-weight:800}.steps p{margin:0;font-size:.95rem}
 .steps li:nth-child(1){--ci:var(--orange)}.steps li:nth-child(2){--ci:var(--navy)}.steps li:nth-child(3){--ci:var(--navy)}.steps li:nth-child(4){--ci:var(--orange)}
 @media(max-width:860px){.wwa,.statrow{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.teal .card{padding:26px 20px}}
 .teal .kb li{border-bottom:10px solid var(--kc)}.kb li:nth-child(1){--kc:var(--teal)}.kb li:nth-child(2){--kc:var(--yellow)}.kb li:nth-child(3){--kc:var(--orange)}
@@ -141,8 +141,11 @@ body.teal{--bg:#f3f6f7}
 @media(max-width:860px){.splith{grid-template-columns:1fr}.splith.rev .ph{order:0}}
 .script{font:700 1.5rem Caveat,cursive;color:var(--orange-d);display:block;margin-bottom:2px}
 .vp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.vp-wrap>*{min-width:0}@media(max-width:860px){.vp-wrap{grid-template-columns:1fr}}
-.cluster{position:relative;aspect-ratio:1;max-width:460px;margin:0 auto;width:100%}.cluster img,.cluster i{position:absolute;border-radius:50%;object-fit:cover}.cluster .c1{width:62%;height:62%;left:0;top:6%;border:6px solid #fff}.cluster .c2{width:42%;height:42%;right:0;top:0;border:6px solid #fff}.cluster .c3{width:38%;height:38%;left:30%;bottom:0;border:6px solid #fff}
-.cluster .b1{width:30%;height:30%;right:4%;bottom:6%;background:var(--teal)}.cluster .b2{width:12%;height:12%;left:58%;top:52%;background:var(--yellow)}
+.circles{position:relative;height:440px}.circles img{position:absolute;border-radius:50%;object-fit:cover;border:8px solid #fff}
+.circles img:nth-of-type(1){width:300px;height:300px;left:0;top:0}.circles img:nth-of-type(2){width:220px;height:220px;right:0;top:40px}.circles img:nth-of-type(3){width:200px;height:200px;left:150px;bottom:0}
+.circles .blob{position:absolute;right:30px;bottom:30px;width:150px;height:150px;background:var(--yellow);border-radius:62% 38% 55% 45%/48% 60% 40% 52%}
+.deco{position:absolute;pointer-events:none;width:150px;height:150px}.circles .deco-rings{z-index:0;width:190px;height:190px;left:40%;top:30%}
+@media(max-width:760px){.circles{height:360px}.circles img:nth-of-type(1){width:220px;height:220px}.circles img:nth-of-type(2){width:160px;height:160px}.circles img:nth-of-type(3){width:150px;height:150px;left:90px}}
 .meal{margin:18px 0 22px}.mealgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.mealgrid li{background:var(--grey-6);border-radius:18px;padding:18px 14px}.mealgrid .ico{width:34px;height:34px;color:var(--navy);margin-bottom:8px}.mealgrid h3{font-size:1rem;margin:0 0 .3em}.mealgrid p{margin:0;font-size:.9rem}
 @media(max-width:1000px){.mealgrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.mealgrid{grid-template-columns:1fr 1fr}}
 .team2{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:24px}.team2 li{width:150px;text-align:center;display:grid;justify-items:center;gap:4px}.team2 .tc{width:96px;height:96px;border-radius:50%;background:var(--teal-25);display:grid;place-items:center;font-weight:800;font-size:.9rem}.team2 li span:not(.tc){font-size:.9rem;color:var(--muted)}
@@ -187,10 +190,10 @@ CSS_B = """
 .btn-ghost{background:#fff;color:var(--navy);border-color:var(--btn-teal)}.btn-ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .ready .btn-primary,.ready .btn-cta{border-color:#fff}.ready .btn-ghost{background:transparent;color:#fff;border-color:#fff}
 body{--current:var(--teal-25);--hover:var(--teal-12)}
-/* menu and links work the same way: hover underlines on the light tint (links also turn navy), active keeps the tint; the menu stays navy */
+/* menu and links work the same way: hover underlines on the paler PDF tint (links also turn navy), active keeps the tint; the menu stays navy */
 a:not(.btn):hover{text-decoration-thickness:3px;text-underline-offset:4px}
-main a:not(.btn):hover{color:var(--navy);background:var(--teal-25)}
-#nav a:not(.btn):hover{background:var(--teal-25);color:var(--navy);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
+#nav a:not(.btn):hover{background:var(--teal-12);color:var(--navy);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
 #nav a:not(.btn):active,main a:not(.btn):active{background:var(--teal-25);color:var(--navy)}
 .btn-primary:active,.btn-cta:active,.btn-ghost:active{background:var(--teal-25);color:var(--navy);border-color:var(--navy)}
 .ready .btn-primary:active,.ready .btn-cta:active,.ready .btn-ghost:active{border-color:#fff}.ready .btn-ghost:hover{background:#fff;color:var(--navy)}
@@ -205,7 +208,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-25)}
 .tb #nav a[aria-current=page]{background:var(--teal-25)}
 .tb .surface{background:#fff;border-bottom:10px solid var(--teal)}.tb .statcard{background:#fff;border-bottom:10px solid var(--teal)}.tb .framed{--fr:var(--teal-25);outline:4px solid var(--teal);outline-offset:-4px}
 .tb .kb li{background:#fff}.tb .kb a{color:var(--teal-d);font-weight:800}
-.tb .partband{background:var(--teal-12);border-bottom:6px solid var(--teal)}
+.tb .partband{background:var(--teal-12);border-bottom:6px solid var(--teal)}.partband a:not(.btn):hover{background:var(--teal-25)}
 .tb .ticker{background:var(--navy);color:var(--teal)}.tb .tk-in .tkd{color:var(--teal-25)}
 .tb .site-foot{--foot-h:var(--teal)}
 .tb .pmap{--land:#fff;--sea:var(--teal-12);--coast:var(--teal);--river:var(--teal)}
