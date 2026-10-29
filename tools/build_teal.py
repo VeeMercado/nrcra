@@ -6,11 +6,12 @@
 White text never sits on teal (2.99:1). Navy text on teal is 5.05:1.
 Imported by build.py, which owns the shared helpers and base CSS.
 """
+import re
 import build as B
 from build import E, img, logo, screen, icon, BASE, MOBILE, JS, FONT, CSS1, VIMEO, CONTACT
 
 SIGN_IN = "https://rack.nrcra.org.au"  # the R.A.C.K address NRCRA gave us (not live yet)
-MENU = [("home", "Home"), ("about", "About"), ("impact", "Impact"), ("network", "Network")]
+MENU = [("home", "Home"), ("network", "Network"), ("about", "About"), ("impact", "Impact")]
 NAMES = {"prototype-a": "Prototype A", "prototype-b": "Prototype B"}
 SHORT = {"prototype-a": "A", "prototype-b": "B"}
 
@@ -36,7 +37,7 @@ def hl(t):
 
 
 def steps():
-    st = [("people", "Join the network", "Bring your group into the Alliance.", "#network", "Find out how"), ("cal", "Come to a gathering", f"{B.GATHER[0]}: {B.GATHER[1]}.", "#home", "Upcoming"),
+    st = [("cal", "Come to a gathering", f"{B.GATHER[0]}: {B.GATHER[1]}.", "#home", "Upcoming"),
           ("share", "Share knowledge", "Add what works to the R.A.C.K.", SIGN_IN, "The R.A.C.K"), ("hand", "Partner with us", "Fund or research community-led resilience.", "#impact", "Impact")]
     return '<ol class="steps">' + "".join(f'<li><span class="ci">{icon(i)}</span><b>{E(t)}</b><p>{E(d)}</p><a href="{h}">{E(l)}</a></li>' for i, t, d, h, l in st) + "</ol>"
 
@@ -73,13 +74,6 @@ MEAL6 = [("Includes Everyone", "People feel respected and able to participate.",
          ("Learns and Adapts", "Feedback leads to practical changes.", "improve"), ("Creates Collective Value", "Groups gain what they couldn’t achieve alone.", "strengthen")]
 
 
-def journey_h():
-    out = '<ol class="htl">'
-    for y, t in B.JOURNEY:
-        out += f'<li><span class="hstop">{E(y)}</span><div class="hcard"><p>{E(t)}</p></div></li>'
-    return out + "</ol>"
-
-
 def team():
     roles = ["Network Lead", "Steering committee", "Steering committee", "UCRH researcher", "UCRH researcher", "UCRH researcher"]
     return '<ul class="team2">' + "".join(f'<li><span class="tc" aria-hidden="true">Photo</span><b>Name</b><span>{r}</span></li>' for r in roles) + '</ul><p class="vnote">Sample placeholders. Names and photos to come.</p>'
@@ -91,7 +85,7 @@ def about_body():
 <div class="cluster">{img("circle", "c1", alt="")}{img("house", "c2", alt="")}{img("talk", "c3", alt="")}<i class="b1" aria-hidden="true"></i><i class="b2" aria-hidden="true"></i></div></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><span class="script">How we take action</span><h2 class="sechead">{hl("We have a MEAL plan")}</h2><p class="lede">Monitoring, Evaluation, Accountability and Learning. A healthy Resilience Alliance isn&rsquo;t just one that delivers projects. It&rsquo;s one where people feel included, power is shared, groups gain real value, and we can learn and adapt together.</p>
 {B.meal()}<ul class="mealgrid">{"".join(f'<li>{icon(k)}<h3>{E(t)}</h3><p>{E(d)}</p></li>' for t, d, k in MEAL6)}</ul></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><span class="script">Progress so far</span><h2 class="sechead">Our journey</h2>{journey_h()}</div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><span class="script">Progress so far</span><h2 class="sechead">Our journey</h2>{B.journey("river")}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Meet the team</h2>{team()}</div></div></section>
 {part_band()}'''
 
@@ -139,7 +133,7 @@ body.teal{--bg:#f3f6f7}
 .framed{border-radius:36px;padding:14px;background:var(--fr,var(--teal))}.framed img{border-radius:24px;width:100%;aspect-ratio:4/3;object-fit:cover}
 .pcard2 .p3{align-items:center}
 .partband{padding:56px 0 52px;text-align:center}.partband h2{margin-bottom:24px}
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.steps li{display:grid;justify-items:center;gap:8px}.steps .ci{width:76px;height:76px;border-radius:50%;background:#fff;border:3px solid var(--ci);display:grid;place-items:center;color:var(--navy)}.steps .ci .ico{width:34px;height:34px}.steps a{font-weight:800;color:var(--navy)}.steps p{margin:0;font-size:.95rem}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.steps li{display:grid;justify-items:center;gap:8px}.steps .ci{width:76px;height:76px;border-radius:50%;background:#fff;border:3px solid var(--ci);display:grid;place-items:center;color:var(--navy)}.steps .ci .ico{width:34px;height:34px}.steps a{font-weight:800;color:var(--navy)}.steps p{margin:0;font-size:.95rem}
 .steps li:nth-child(1){--ci:var(--orange)}.steps li:nth-child(2){--ci:var(--navy)}.steps li:nth-child(3){--ci:var(--navy)}.steps li:nth-child(4){--ci:var(--orange)}
 @media(max-width:860px){.wwa,.statrow{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.teal .card{padding:26px 20px}}
 .teal .kb li{border-top:10px solid var(--kc)}.kb li:nth-child(1){--kc:var(--teal)}.kb li:nth-child(2){--kc:var(--yellow)}.kb li:nth-child(3){--kc:var(--orange)}
@@ -151,17 +145,19 @@ body.teal{--bg:#f3f6f7}
 .cluster .b1{width:30%;height:30%;right:4%;bottom:6%;background:var(--teal)}.cluster .b2{width:12%;height:12%;left:58%;top:52%;background:var(--yellow)}
 .meal{margin:18px 0 22px}.mealgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.mealgrid li{background:var(--grey-6);border-radius:18px;padding:18px 14px}.mealgrid .ico{width:34px;height:34px;color:var(--navy);margin-bottom:8px}.mealgrid h3{font-size:1rem;margin:0 0 .3em}.mealgrid p{margin:0;font-size:.9rem}
 @media(max-width:1000px){.mealgrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.mealgrid{grid-template-columns:1fr 1fr}}
-.htl{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative}.htl::before{content:"";position:absolute;left:10%;right:10%;top:36px;border-top:4px dotted rgba(7,41,59,.55)}
-.htl li{position:relative;display:flex;flex-direction:column;align-items:center;gap:14px}.hstop{position:relative;z-index:2;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:#fff;border:6px solid var(--bc);font-weight:900;text-align:center;font-size:.95rem;line-height:1.05}
-.htl li:nth-child(1){--bc:var(--teal)}.htl li:nth-child(2){--bc:var(--yellow)}.htl li:nth-child(3){--bc:var(--orange)}.htl li:nth-child(4){--bc:var(--navy)}.htl li:nth-child(5){--bc:var(--teal)}
-.hcard{background:#fff;border-radius:18px;padding:16px;width:100%;height:100%}.hcard p{margin:0;font-size:.95rem}
-@media(max-width:1000px){.htl{grid-template-columns:repeat(3,1fr);row-gap:28px}.htl::before{display:none}}@media(max-width:640px){.htl{grid-template-columns:1fr}}
 .team2{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:24px}.team2 li{width:150px;text-align:center;display:grid;justify-items:center;gap:4px}.team2 .tc{width:96px;height:96px;border-radius:50%;background:var(--teal-25);display:grid;place-items:center;font-weight:800;font-size:.9rem}.team2 li span:not(.tc){font-size:.9rem;color:var(--muted)}
 .pillcards{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:16px;justify-content:center}.pillcards li{flex:1 1 200px;max-width:230px;background:#fff;border-radius:18px 18px 22px 22px;padding:0 18px 22px;text-align:center;border-top:14px solid var(--pc)}
 .pillcards li:nth-child(1){--pc:var(--teal)}.pillcards li:nth-child(2){--pc:var(--yellow)}.pillcards li:nth-child(3){--pc:var(--orange)}.pillcards li:nth-child(4){--pc:var(--navy)}.pillcards li:nth-child(5){--pc:#9fb0b8}
 .pillcards .pi{width:52px;height:52px;border-radius:50%;background:var(--grey-6);display:grid;place-items:center;margin:-26px auto 6px;color:var(--navy)}.pillcards .pi .ico{width:28px;height:28px}.pillcards .pn{font-weight:900;font-size:.85rem;letter-spacing:.1em}.pillcards h3{margin:.3em 0}.pillcards p{margin:0;font-size:.95rem}
 .gdir-c{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important;gap:16px!important}.gdir-c li{padding:0 0 16px!important;background:#fff!important;border:1px solid var(--line);border-radius:20px!important;overflow:hidden}.gdir-c .gph{display:block;position:relative;margin-bottom:34px}.gdir-c .gph img{width:100%;height:100px;object-fit:cover}
 .gdir-c .gdot{position:absolute;left:14px;bottom:-24px;width:48px;height:48px;border-radius:50%;background:var(--teal);color:var(--navy);border:3px solid #fff;display:grid;place-items:center;font-weight:900}.gdir-c b,.gdir-c span:not(.gph):not(.gdot),.gdir-c em,.gdir-c small{margin:0 16px}.gdir-c small{color:var(--muted);margin-top:6px}
+
+/* Prototype 2's rounded buttons and river-style journey */
+body{--btn-r:12px}
+ol.river{position:relative;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+ol.river::before{content:"";position:absolute;left:0;right:0;top:26px;height:12px;border-radius:99px;background:#bfe7e3}
+ol.river li{position:relative;padding-top:64px;display:block}ol.river b{position:absolute;top:0;left:0;background:#fff;border:3px solid var(--teal);border-radius:99px;padding:.35em .9em;font-weight:900;color:var(--teal-d);font-size:1rem}
+ol.river p{margin:0;font-size:.95rem}@media(max-width:860px){ol.river{grid-template-columns:1fr}ol.river::before{left:24px;right:auto;width:10px;top:0;bottom:0;height:auto}ol.river li{padding:0 0 0 70px;min-height:60px}ol.river b{left:0}}
 .pg-head{padding:48px 0 40px}.pg-head h1{margin:0}
 /* brand colour dos and don'ts (see brand-contrast): pins keep a 3px white gap from teal lines, solid colours only behind short lines */
 .teal .pmap .dot circle{stroke-width:3}
@@ -195,7 +191,7 @@ def page(v):
 <title>NRCRA teal-led {NAMES[v]}</title><meta name="robots" content="noindex">
 <meta name="description" content="Teal-led exploration of the NRCRA website. Sample content only.">
 {FONT}<style>{BASE}{CSS1}{CSS_T}{css}{MOBILE}</style></head><body class="v1 teal {cls}">
-{nav3()}<main id="main">{body}</main>{B.TICKER}{B.footer(True, boxed=True)}{protobar3(v)}<script>{JS}</script></body></html>'''
+{nav3()}<main id="main">{body}</main>{B.TICKER}{re.sub(r'<span class="foot-tag"><span class="tagline">.*?</span></span>', "", B.footer(True, boxed=True), flags=re.S)}{protobar3(v)}<script>{JS}</script></body></html>'''
 
 
 # prototype-a/index.html is a frozen, hand-kept file (Prototype A). It is not built from build.py, so changes to Round 1 never reach it.
