@@ -53,7 +53,7 @@ def home_body():
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn more</a></p></div>
-<div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg class="pi" viewBox="0 0 24 28" width="24" height="28" aria-hidden="true"><path d="M6 2l18 12L6 26z" fill="currentColor"/></svg><span class="pw" aria-hidden="true">WATCH</span></button></div></div></div>
+<div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M34 30L58 44L34 58Z" fill="currentColor"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>
 
 <section class="sec"><div class="wrap"><div class="card wwa surface"><div><span class="eyebrow">Who we are</span><h2>{hl("The group made up of groups")}</h2><p>{B.WHO}</p><h3>We&rsquo;re a network of 7 Local Government Areas (LGA)</h3><ul class="lgapills">{lgas}</ul>
 <p class="btnrow"><a class="btn btn-ghost" href="#network">Explore our network</a></p></div><div class="wwa-map">{B.places_map()}</div></div></div></section>
@@ -217,7 +217,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .ticker{background:var(--navy);color:var(--teal)}.tb .tk-in .tkd{color:var(--teal-25)}
 .tb .site-foot{--foot-h:var(--teal)}
 .tb .pmap{--land:#fff;--sea:var(--teal-12);--coast:var(--teal);--river:var(--teal)}
-.herobg .play{display:grid;place-content:center;justify-items:center;gap:4px;width:92px;height:92px;padding:0}.herobg .play .pi{display:block;width:24px;height:28px}.herobg .play .pw{font:800 .62rem/1 var(--font);letter-spacing:.1em}
+.herobg .play{display:grid;place-items:center;width:92px;height:92px;padding:0}.herobg .play svg{display:block;width:100%;height:100%;font-family:var(--font)}
 /* button rules, from the teal set. Secondary: white, teal text and outline. Tertiary: navy. On dark: primary hovers white, secondary is white. Hover fills navy (or teal for navy buttons), active takes the light tint. Corners 12px; the play button stays a circle. */
 .btn-ghost{background:#fff;color:#00857c;border-color:#00857c}.btn-ghost:hover{background:#07293b;color:#fff;border-color:#07293b}.btn-ghost:active{background:#beddda;color:#07293b;border-color:#07293b}
 .ready .btn-ghost{background:#fff;color:#07293b;border-color:#fff}.ready .btn-ghost:hover{background:#00857c;color:#fff;border-color:#fff}.ready .btn-ghost:active{background:#beddda;color:#07293b;border-color:#fff}
@@ -235,7 +235,7 @@ def page(v):
 <title>NRCRA teal-led {NAMES[v]}</title><meta name="robots" content="noindex">
 <meta name="description" content="Teal-led exploration of the NRCRA website. Sample content only.">
 {FONT}<style>{BASE}{CSS1}{CSS_T}{css}{MOBILE}</style></head><body class="v1 teal {cls}">
-{nav3()}<main id="main">{body}</main>{B.TICKER}{re.sub(r'<span class="foot-tag"><span class="tagline">.*?</span></span>', "", B.footer(True, boxed=True), flags=re.S)}{protobar3(v)}<script>{JS}</script></body></html>'''
+{nav3()}<main id="main">{body}</main>{B.TICKER}{re.sub(r'<span class="foot-tag"><span class="tagline">.*?</span></span>', "", B.footer(True, boxed=True), flags=re.S)}{protobar3(v)}<script data-cfasync="false">{JS}</script></body></html>'''
 
 
 # prototype-a/index.html is a frozen, hand-kept file (Prototype A). It is not built from build.py, so changes to Round 1 never reach it.

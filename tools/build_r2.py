@@ -82,7 +82,7 @@ def brand_contrast():
 {light_teal()}
 {text_colours()}
 {button_sections()}
-<script>(function(){{var n=document.querySelector(".topnav");function f(){{var h=n.offsetHeight;document.body.style.paddingTop=h+"px";document.documentElement.style.scrollPaddingTop=(h+16)+"px"}}f();addEventListener("resize",f)}})()</script>
+<script data-cfasync="false">(function(){{var n=document.querySelector(".topnav");function f(){{var h=n.offsetHeight;document.body.style.paddingTop=h+"px";document.documentElement.style.scrollPaddingTop=(h+16)+"px"}}f();addEventListener("resize",f)}})()</script>
 </main></body></html>'''
 
 
@@ -198,7 +198,7 @@ def button_sections():
 
 
 def button_sets():
-    return '''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><title>Moved: brand colour contrast</title><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=../brand-contrast/#teal-buttons"><script>location.replace("../brand-contrast/#teal-buttons")</script></head><body style="font-family:sans-serif;padding:24px"><p>The button sets now live on the <a href="../brand-contrast/#teal-buttons">Brand colour contrast</a> page.</p></body></html>'''
+    return '''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><title>Moved: brand colour contrast</title><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=../brand-contrast/#teal-buttons"><script data-cfasync="false">location.replace("../brand-contrast/#teal-buttons")</script></head><body style="font-family:sans-serif;padding:24px"><p>The button sets now live on the <a href="../brand-contrast/#teal-buttons">Brand colour contrast</a> page.</p></body></html>'''
 
 
 def main():

@@ -638,7 +638,7 @@ def page_shell(title, css, body, v, white_logo=True, slug=None, extra="", pre_fo
 <title>{title}</title><meta name="robots" content="noindex">
 <meta name="description" content="Prototype for the Northern Rivers Community Resilience Alliance website. Sample content only.">
 {FONT}<style>{BASE}{css}{MOBILE}</style></head><body class="{v} {extra}">
-{nav()}<main id="main">{body}</main>{pre_footer}{footer(white_logo, boxed=True)}{protobar(slug or v)}<script>{JS}</script></body></html>'''
+{nav()}<main id="main">{body}</main>{pre_footer}{footer(white_logo, boxed=True)}{protobar(slug or v)}<script data-cfasync="false">{JS}</script></body></html>'''
 
 
 def assemble(home, about, partners, network, rack):
@@ -1172,7 +1172,7 @@ def dashboard():
 <div class="tabs" role="tablist" aria-label="Prototype rounds"><button type="button" role="tab" id="tab-round-2" aria-controls="round-2" aria-selected="true">Round 2</button><button type="button" role="tab" id="tab-round-1" aria-controls="round-1" aria-selected="false" tabindex="-1">Round 1</button></div>
 <section id="round-1" role="tabpanel" aria-labelledby="tab-round-1" hidden><p class="r2intro">Three directions for the five-page website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. The client chose Prototype 1.</p>{rows}</section>
 <section id="round-2" role="tabpanel" aria-labelledby="tab-round-2">{r2}</section></main>
-<script>(function(){{var T=[].slice.call(document.querySelectorAll('[role=tab]'));function show(id,f){{T.forEach(function(t){{var on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;if(on&&f)t.focus()}});try{{history.replaceState(null,'','#'+id)}}catch(e){{}}}}
+<script data-cfasync="false">(function(){{var T=[].slice.call(document.querySelectorAll('[role=tab]'));function show(id,f){{T.forEach(function(t){{var on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;if(on&&f)t.focus()}});try{{history.replaceState(null,'','#'+id)}}catch(e){{}}}}
 T.forEach(function(t,i){{t.addEventListener('click',function(){{show(t.getAttribute('aria-controls'))}});t.addEventListener('keydown',function(e){{var n=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(n){{e.preventDefault();show(T[(i+n+T.length)%T.length].getAttribute('aria-controls'),1)}}}})}});
 show(location.hash==='#round-1'?'round-1':'round-2')}})();</script></body></html>'''
 
