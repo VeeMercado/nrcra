@@ -255,33 +255,34 @@ def _row(fg, bg, fgname, bgname):
 
 
 def brand_contrast():
-    NAVY, WHITE, BLACK, RED, YEL = "#07293b", "#ffffff", "#000000", "#f05a28", "#ffcb2a"
+    NAVY, WHITE, BLACK, RED, YEL, TEAL = "#07293b", "#ffffff", "#000000", "#f05a28", "#ffcb2a", "#00a79d"
     def block(name, bg):
         rows = "".join(_row(fg, bg, n, name) for fg, n in [(WHITE, "White text"), (NAVY, "Navy text"), (BLACK, "Black text")])
         rows += "".join(_row(bg, b, name + " text", n) for b, n in [(WHITE, "white")])
         return f'<section class="blk"><h2>Brand {name} <code>{bg.upper()}</code></h2><table><thead><tr><th>Pairing</th><th>Ratio</th><th>Body text (4.5:1)</th><th>Large text (3:1)</th><th>WebAIM</th></tr></thead><tbody>{rows}</tbody></table></section>'
     para = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brand red and yellow contrast</title><meta name="robots" content="noindex">{FONT}
+    return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brand red, yellow and teal contrast</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7}}main{{max-width:980px;margin:0 auto;padding:36px 20px 56px}}
 .flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
 .rule{{background:#fff;border-left:10px solid var(--orange);border-radius:20px;padding:22px 26px;margin:22px 0}}.rule p{{margin:0}}
 .blk,.card2{{background:#fff;border-radius:28px;padding:28px;margin:0 0 22px}}table{{width:100%;border-collapse:collapse;font-size:.95rem}}th,td{{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}}th{{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}}
 .chip{{display:inline-grid;place-items:center;width:44px;height:32px;border-radius:8px;font-weight:900;vertical-align:middle;border:1px solid rgba(7,41,59,.25)}}.pass{{color:#1f6b35;font-weight:800}}.fail{{color:#a3201a;font-weight:800}}code{{font-size:.85em;background:var(--grey-6);padding:.1em .4em;border-radius:6px}}
 .demo{{display:grid;grid-template-columns:1fr 1fr;gap:18px}}.demo>div{{border-radius:20px;padding:22px;border:2px solid var(--line)}}.demo h3{{margin-top:0}}.dont{{border-color:#a3201a!important}}.do{{border-color:#1f6b35!important}}
-.big{{border-radius:16px;padding:18px;margin:0 0 10px}}.by{{background:var(--yellow);color:#fff}}.br{{background:var(--orange);color:#fff}}
+.big{{border-radius:16px;padding:18px;margin:0 0 10px}}.by{{background:var(--yellow);color:#fff}}.br{{background:var(--orange);color:#fff}}.bt{{background:var(--teal);color:#fff}}
 .hl{{background:linear-gradient(transparent 56%,var(--yellow) 56%,var(--yellow) 94%,transparent 94%);padding:0 .12em}}.pill{{display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:1.2rem;border-radius:99px;padding:.3em 1em}}
-.pill2{{display:inline-block;background:var(--navy);color:var(--yellow);font-weight:800;font-size:1.2rem;border-radius:99px;padding:.3em 1em}}.bar{{height:12px;border-radius:99px;background:var(--orange);margin:10px 0 16px;max-width:200px}}.ex>*{{margin-bottom:14px}}
+.pill2{{display:inline-block;background:var(--navy);color:var(--yellow);font-weight:800;font-size:1.2rem;border-radius:99px;padding:.3em 1em}}.pill3{{display:inline-block;background:var(--teal);color:var(--navy);font-weight:800;font-size:1.2rem;border-radius:99px;padding:.3em 1em}}.bar{{height:12px;border-radius:99px;background:var(--orange);margin:10px 0 16px;max-width:200px}}.ex>*{{margin-bottom:14px}}
 @media(max-width:760px){{.demo{{grid-template-columns:1fr}}table{{font-size:.85rem}}}}</style></head>
 <body><main><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span>
-<h1>Using the brand red and yellow</h1>
-<p class="lede">Contrast ratios for the brand red (orange, <code>{RED.upper()}</code>) and yellow (<code>{YEL.upper()}</code>) against white, navy and black text. Ratios use the WCAG formula, the same one the <a href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</a> uses, and each row links to WebAIM with the colours filled in.</p>
-<div class="rule"><p><b>Red &amp; yellow elements.</b> To maintain readability, red and yellow shouldn&rsquo;t be used as background colours for large chunks of text, as standard text colours (white, navy or black) won&rsquo;t pass contrast requirements. They work well for smaller accents, like title backgrounds or buttons (for example yellow paired with navy).</p></div>
-{block("yellow", YEL)}{block("red", RED)}
+<h1>Using the brand red, yellow and teal</h1>
+<p class="lede">Contrast ratios for the brand red (orange, <code>{RED.upper()}</code>) yellow (<code>{YEL.upper()}</code>) and teal (<code>{TEAL.upper()}</code>) against white, navy and black text. Ratios use the WCAG formula, the same one the <a href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</a> uses, and each row links to WebAIM with the colours filled in.</p>
+<div class="rule"><p><b>Red, yellow &amp; teal elements.</b> To maintain readability, red, yellow and teal shouldn&rsquo;t be used as background colours for large chunks of text, as standard text colours (white, navy or black) won&rsquo;t pass contrast requirements. They work well for smaller accents, like title backgrounds or buttons (for example yellow or teal paired with navy).</p></div>
+{block("yellow", YEL)}{block("red", RED)}{block("teal", TEAL)}
 <section class="card2"><h2>What this means</h2><ul><li><b>Yellow:</b> white text fails everywhere ({_ratio(WHITE, YEL):.2f}:1). Navy passes comfortably ({_ratio(NAVY, YEL):.2f}:1), so yellow is safe for buttons and title backgrounds with navy text.</li>
 <li><b>Red:</b> white fails for body text ({_ratio(WHITE, RED):.2f}:1) and only passes as large text. Navy is {_ratio(NAVY, RED):.2f}:1, just under 4.5:1, so it only passes when the text is large (24px, or bold from about 19px). Black does pass ({_ratio(BLACK, RED):.2f}:1) but is off brand.</li>
-<li><b>As text colour:</b> red on white is {_ratio(RED, WHITE):.2f}:1 and yellow on white is {_ratio(YEL, WHITE):.2f}:1, so neither works for words on a white page.</li></ul></section>
-<section class="card2"><h2>Don&rsquo;t and do</h2><div class="demo"><div class="dont"><h3>Don&rsquo;t: large blocks of text</h3><p class="big by">{para}</p><p class="big br">{para}</p></div>
-<div class="do ex"><h3>Do: small accents</h3><p><span class="hl" style="font-weight:900;font-size:1.5rem">Title with a yellow highlight</span></p><p><a class="btn btn-primary" href="#">Yellow button, navy text</a></p><p><span class="pill">Red pill, white bold large text</span></p><p><span class="pill2">Navy background, yellow text</span></p><div class="bar" aria-hidden="true"></div><p style="margin:0">Body copy stays navy on white or on a light tint. Red and yellow stay as the accent.</p></div></div></section>
+<li><b>Teal:</b> white text is {_ratio(WHITE, TEAL):.2f}:1, which fails even as large text (it needs 3:1). Navy is {_ratio(NAVY, TEAL):.2f}:1 and passes for body text. Black passes ({_ratio(BLACK, TEAL):.2f}:1) but is off brand.</li>
+<li><b>As text colour:</b> red on white is {_ratio(RED, WHITE):.2f}:1, yellow on white is {_ratio(YEL, WHITE):.2f}:1 and teal on white is {_ratio(TEAL, WHITE):.2f}:1, so none of them works for words on a white page.</li></ul></section>
+<section class="card2"><h2>Don&rsquo;t and do</h2><div class="demo"><div class="dont"><h3>Don&rsquo;t: large blocks of text</h3><p class="big by">{para}</p><p class="big br">{para}</p><p class="big bt">{para}</p></div>
+<div class="do ex"><h3>Do: small accents</h3><p><span class="hl" style="font-weight:900;font-size:1.5rem">Title with a yellow highlight</span></p><p><a class="btn btn-primary" href="#">Yellow button, navy text</a></p><p><span class="pill">Red pill, white bold large text</span></p><p><span class="pill2">Navy background, yellow text</span></p><p><span class="pill3">Teal pill, navy text</span></p><div class="bar" aria-hidden="true"></div><p style="margin:0">Body copy stays navy on white or on a light tint. Red and yellow stay as the accent.</p></div></div></section>
 </main></body></html>'''
 
 
