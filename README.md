@@ -6,7 +6,8 @@ Prototypes for the nrcra.org.au website. Sample content only. Preview URL: https
 - `v1/` colour block sections, `v2/` light and fresh, `v3/` illustrated visuals; `v1.2/` and `v3.2/` are archived variants (each page is an anchor: `#home`, `#about`, `#partners`, `#network`, `#rack`)
 
 **Round 2**
-- `client/` Prototype 1 duplicated, with only the changes from the client's feedback document applied (Home, Network, About, Impact; Sign In opens the R.A.C.K landing page)
+- `round2/` an exact copy of Prototype 1, the starting point for the client's feedback changes
+- `brand-contrast/` guidance on using the brand red, yellow and teal with accessible text
 
 **Other**
 - `index.html` dashboard with Round 2 and Round 1 tabs

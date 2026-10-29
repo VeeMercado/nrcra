@@ -625,10 +625,10 @@ PROTOS = [("v1", "Prototype 1", "Colour block sections"), ("v2", "Prototype 2", 
 def protobar(v):
     # data-proto lets the script point each button at the same page in the other prototype
     others = "".join(f'<a class="pb-btn" data-proto="{k}" href="../{k}/" aria-label="{n}: {d}"><span class="pb-short" aria-hidden="true">P{k[1:]}</span><span class="pb-long">{n}</span></a>' for k, n, d in PROTOS if k != v)
-    cur = next((f"{n}: {d}" for k, n, d in PROTOS if k == v), "Archived backup")
+    cur = next((f"{n}: {d}" for k, n, d in PROTOS if k == v), "Round 2: copy of Prototype 1" if v == "round2" else "Archived backup")
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {cur}</span></p>
-<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../#round-1">All prototypes</a>{others}</nav>
+<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../#{"round-2" if v == "round2" else "round-1"}">All prototypes</a>{others}</nav>
 <button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
 
@@ -1142,11 +1142,11 @@ def dashboard():
         rows += f'''<article class="row row{base[1]}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
 <div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><p><a class="btn btn-primary" href="{slug}/">Open prototype {i}</a></p>
 <h3>Inspired by the mood board</h3><div class="ins">{ins}</div><p class="sites">{SITES[base]}</p></div></article>'''
-    r2 = f'''<p class="r2intro">The client chose Prototype 1 from Round 1. This is Prototype 1 duplicated, with only the changes requested in the client\u2019s feedback document applied, line by line.</p>
+    r2 = f'''<p class="r2intro">The client chose Prototype 1 from Round 1. Round 2 starts as an exact copy of Prototype 1.</p>
 <div class="r2grid">
-<article class="rc rc1"><a class="shot" href="client/" aria-label="Open the Client request version"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/client.jpg" alt="Screenshot of the Client request home page: a green hero panel beside a gathering photo, with a Connect Share Care colour band underneath" loading="lazy"></a>
-<div class="info"><span class="num">Round 2</span><h2><a href="client/">Client request</a></h2><p>Prototype 1 with the feedback document applied: a green hero with one About button, a Connect Share Care band, Our Focus in full, funders above every header and a brand green footer.</p>
-<p class="btnrow"><a class="btn btn-primary" href="client/">Open client request</a><a class="btn btn-ghost" href="{DOC_URL}">Client feedback (Google Doc)</a></p></div></article></div>'''
+<article class="rc rc1"><a class="shot" href="round2/" aria-label="Open the Round 2 copy of Prototype 1"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/v1.jpg" alt="Screenshot of the Prototype 1 home page, a navy hero panel beside a gathering photo" loading="lazy"></a>
+<div class="info"><span class="num">Round 2</span><h2><a href="round2/">Prototype 1, copy</a></h2><p>An exact copy of Prototype 1, the starting point for the changes in the client\u2019s feedback document. Nothing has been changed yet.</p>
+<p class="btnrow"><a class="btn btn-primary" href="round2/">Open the copy</a><a class="btn btn-ghost" href="{DOC_URL}">Client feedback (Google Doc)</a></p></div></article></div>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
 .top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}.top .btnrow{{margin-top:16px}}
@@ -1189,6 +1189,7 @@ if __name__ == "__main__":
     write("v3.2/index.html", v3(True))  # archived: built but not linked from the dashboard or bar
     import build_r2
     build_r2.main()
+    write("round2/index.html", v1().replace("NRCRA prototype 1: Colour block sections", "NRCRA Round 2: copy of Prototype 1").replace(protobar("v1"), protobar("round2")))
     write("index.html", dashboard())
     write("robots.txt", "User-agent: *\nDisallow: /\n")
     print("built")
