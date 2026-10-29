@@ -51,9 +51,9 @@ def home_body():
     lgas = "".join(f"<li>{E(n)} LGA</li>" for n in ["Tweed", "Byron", "Ballina", "Lismore", "Kyogle", "Clarence", "Richmond"])
     partners = B.v1_partners().replace('href="#partners"', 'href="#impact"')
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
-<h1>When disaster strikes, local people are always first to <span class="mark">respond.{B.SQUIGGLE}</span></h1><p class="lede">{B.H1}.</p>
+<h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn more</a></p></div>
-<div class="h1-photo">{img("cheer", eager=True, alt="")}</div></div></div>
+<div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button></div></div></div>
 
 <section class="sec"><div class="wrap"><div class="card wwa surface"><div><span class="eyebrow">Who we are</span><h2>{hl("The group made up of groups")}</h2><p>{B.WHO}</p><h3>We&rsquo;re a network of 7 Local Government Areas (LGA)</h3><ul class="lgapills">{lgas}</ul>
 <p class="btnrow"><a class="btn btn-ghost" href="#network">Explore our network</a></p></div><div class="wwa-map">{B.places_map()}</div></div></div></section>
@@ -180,7 +180,7 @@ CSS_B = """
 .herobg>.wrap:first-child{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:640px}
 .herobg .h1-photo{position:absolute;inset:0;border-radius:0;min-height:0}
 .herobg .h1-panel{position:relative;z-index:2;max-width:580px;margin:56px 0 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
-@media(max-width:860px){.herobg>.wrap:first-child{display:block;min-height:0;padding:0 0 240px}.herobg .h1-panel{margin:16px 16px 0;max-width:none;padding:28px 22px}}
+.herobg .h1-photo .play{inset:auto;margin:0;z-index:3;top:50%;left:calc((max(20px,(100vw - var(--wrap))/2 + 20px) + 580px + 100%)/2);transform:translate(-50%,-50%)}
 
 /* B: teal as accents and tints only, navy kept for the footer */
 /* button family: teal. Primary: teal with white text and a navy outline (Sign In is primary). Secondary: white with a teal outline. Tertiary: navy. Selected menu item: the lighter teal. */
@@ -203,7 +203,8 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .herobg .h1-panel h1{color:#fff}.tb .herobg .h1-panel .eyebrow,.tb .herobg .h1-panel .lede{color:#fff}
 .tb .herobg .h1-panel .btn-primary{border-color:#fff}
 .mark{position:relative;display:inline-block}.mark .squig{position:absolute;left:0;right:0;bottom:-.25em;width:100%;height:.4em}
-@media(max-width:860px){.tb .herobg>.wrap:first-child{display:flex;align-items:flex-end;min-height:560px;padding:0}.tb .herobg .h1-panel{margin:0;padding:28px 20px 40px;max-width:none}.tb .herobg .h1-photo::after{background:linear-gradient(180deg,rgba(0,97,90,.2) 0%,rgba(0,97,90,.85) 40%,rgba(0,97,90,.92) 100%)}}
+@media(min-width:601px){.herobg .h1-panel{padding:52px 44px}}
+@media(max-width:600px){.tb .herobg>.wrap:first-child{display:flex;align-items:flex-start;min-height:calc(100vh - var(--hh,65px));min-height:calc(100svh - var(--hh,65px));padding:0}.tb .herobg .h1-panel{margin:0;padding:28px 20px 40px;max-width:none}.tb .herobg .h1-photo::after{background:linear-gradient(180deg,rgba(0,97,90,.94) 0%,rgba(0,97,90,.88) 30%,rgba(0,97,90,.5) 48%,rgba(0,97,90,0) 62%)}.herobg .h1-photo .play{inset:auto;left:50%;top:75%;transform:translate(-50%,-50%)}.herobg .h1-panel h1{font-size:1.75rem;line-height:1.15}.herobg .h1-panel .lede{font-size:1rem}.herobg .h1-panel .eyebrow{font-size:.72rem}}
 .tb .h1-panel{background:var(--teal-25);color:var(--navy);border:4px solid var(--teal)}.tb .h1-panel h1,.tb .h1-panel .eyebrow{color:var(--navy)}.tb .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy);background:#fff}.tb .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
 .tb #nav a[aria-current=page]{background:var(--teal-25)}
 .tb .surface{background:#fff;border-bottom:10px solid var(--teal)}.tb .statcard{background:#fff;border-bottom:10px solid var(--teal)}.tb .framed{--fr:var(--teal-25);outline:4px solid var(--teal);outline-offset:-4px}
