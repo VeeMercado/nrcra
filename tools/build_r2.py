@@ -1,5 +1,6 @@
 """Brand red, yellow and teal contrast guidance: one standalone page.
 Imported by build.py, which owns the shared helpers and base CSS."""
+import re
 import build as B
 from build import BASE, FONT
 
@@ -16,13 +17,23 @@ def _ratio(a, b):
     return (max(la, lb) + 0.05) / (min(la, lb) + 0.05)
 
 
+# pairings that pass the ratio but are marked NO: navy on brand teal is hard to tell apart for some people with colour blindness
+CB_NO = {("#07293b", "#00a79d")}
+# pairings shown as "LARGE only": they pass 3:1 but not 4.5:1
+LARGE_ONLY = {("#ffffff", "#f05a28")}
+
+
 def _row(fg, bg, fgname, bgname):
     r = _ratio(fg, bg)
     url = f"https://webaim.org/resources/contrastchecker/?fcolor={fg[1:].upper()}&bcolor={bg[1:].upper()}"
     n = "pass" if r >= 4.5 else "fail"
     l = "pass" if r >= 3 else "fail"
+    nt, lt = n.title(), l.title()
+    if (fg.lower(), bg.lower()) in CB_NO:
+        n = l = "fail"
+        nt = lt = "Not recommended"
     return (f'<tr><td><span class="chip" style="color:{fg};background:{bg}">Aa</span> {fgname} on {bgname}</td><td><b>{r:.2f}:1</b></td>'
-            f'<td class="{n}">{n.title()}</td><td class="{l}">{l.title()}</td><td><a href="{url}">Check in WebAIM</a></td></tr>')
+            f'<td class="{n}">{nt}</td><td class="{l}">{lt}</td><td><a href="{url}">Check in WebAIM</a></td></tr>')
 
 
 def combo(RED, TEAL, NAVY, WHITE, YEL):
@@ -62,11 +73,11 @@ def brand_contrast():
 .hl{{background:linear-gradient(transparent 56%,var(--yellow) 56%,var(--yellow) 94%,transparent 94%);padding:0 .12em}}.pill{{display:inline-block;background:var(--orange);color:#fff;font-weight:800;font-size:1.2rem;border-radius:99px;padding:.3em 1em}}
 .pill2{{display:inline-block;background:var(--navy);color:var(--yellow);font-weight:800;font-size:1.2rem;border-radius:99px;padding:.3em 1em}}.lt{{border-radius:16px;padding:18px;margin:0 0 12px;color:var(--navy);font-weight:600}}.lt span{{display:block}}.lt small{{display:block;margin-top:8px;font-weight:800;font-size:.8rem}}.l-w{{background:#fff;border:2px solid var(--line)}}.l-g{{background:#f3f6f7;border:2px solid var(--line)}}.tint{{border-radius:16px;padding:18px;margin:0 0 12px;color:var(--navy);font-weight:600}}.tint span{{display:block}}.tint small{{display:block;margin-top:8px;font-weight:800;font-size:.8rem;color:var(--navy)}}.t-y{{background:#ffeaaa;border-top:8px solid var(--yellow)}}.t-r{{background:#fbd6c9;border-bottom:8px solid var(--orange)}}.t-t{{background:#beddda;border-top:8px solid var(--teal)}}.opt{{margin:0 0 12px}}.opt small{{display:block;font-weight:800;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}}.hlt{{background:linear-gradient(transparent 56%,var(--teal) 56%,var(--teal) 94%,transparent 94%)}}.hlr{{background:linear-gradient(transparent 56%,var(--orange) 56%,var(--orange) 94%,transparent 94%)}}.pill4{{display:inline-block;background:#00857c;color:#fff;font-weight:800;font-size:1.2rem;border-radius:99px;padding:.3em 1em}}.pill3{{display:inline-block;background:var(--teal);color:var(--navy);font-weight:800;font-size:1.2rem;border-radius:99px;padding:.3em 1em}}.pairs{{display:flex;flex-wrap:wrap;gap:18px}}.pairs figure{{margin:0}}.pair{{display:flex;width:160px;height:70px;border-radius:12px;overflow:hidden}}.pair span{{flex:1}}.pairs figcaption{{font-size:.85rem;margin-top:6px;max-width:160px}}.bar{{height:12px;border-radius:99px;background:var(--orange);margin:10px 0 16px;max-width:200px}}.ex>*{{margin-bottom:14px}}
 {BTN_CSS}
-.topnav .n-b{{border-style:dashed}}.sw{{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:14px 0}}.sw>div{{border-radius:20px;padding:22px;font-weight:800}}.sw b{{display:block;font-size:2rem}}.sw small{{display:block;font-weight:700;margin-top:6px}}.sw code{{background:#fff;color:#07293b}}.vfail{{background:#a3201a;color:#fff;padding:.15em .6em;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}}.vpass{{text-decoration:underline;text-decoration-color:#07293b;text-decoration-thickness:4px;text-underline-offset:5px}}.swatch{{display:inline-block;width:34px;height:24px;border-radius:6px;border:1px solid rgba(7,41,59,.3);vertical-align:middle}}@media(max-width:700px){{.sw{{grid-template-columns:1fr}}}}
+.topnav .n-b{{border-style:dashed}}.sw{{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:14px 0}}.sw>div{{border-radius:20px;padding:22px;font-weight:800}}.sw b{{display:block;font-size:2rem}}.sw small{{display:block;font-weight:700;margin-top:6px}}.sw code{{background:#fff;color:#07293b}}.yn{{display:inline-block;font-size:.68rem;font-weight:900;letter-spacing:.08em;line-height:1;padding:.4em .75em;border-radius:6px;border:1px solid rgba(7,41,59,.3);vertical-align:middle;margin-left:4px}}.warn{{color:#8a5a00;font-weight:800}}.sr{{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}.vfail{{background:#a3201a;color:#fff;padding:.15em .6em;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}}.vpass{{text-decoration:underline;text-decoration-color:#07293b;text-decoration-thickness:4px;text-underline-offset:5px}}.swatch{{display:inline-block;width:34px;height:24px;border-radius:6px;border:1px solid rgba(7,41,59,.3);vertical-align:middle}}@media(max-width:700px){{.sw{{grid-template-columns:1fr}}}}
 @media(max-width:1150px){{.demo{{grid-template-columns:1fr 1fr}}}}@media(max-width:700px){{.demo{{grid-template-columns:1fr}}}}@media(max-width:760px){{table{{font-size:.85rem}}}}</style></head>
 <body><nav class="topnav" aria-label="On this page"><ul><li><a class="n-d" href="#colours">Brand colours</a></li><li><a class="n-t" href="#teal-adjust">Teal adjustment</a></li><li><a class="n-t" href="#teal">Teal</a></li><li><a class="n-d" href="#lightteal">Light teal</a></li><li><a class="n-r" href="#red">Red</a></li><li><a class="n-y" href="#yellow">Yellow</a></li><li><a class="n-d" href="#dos">Do&rsquo;s and Don&rsquo;ts</a></li><li><a class="n-d" href="#text">Text colours</a></li><li><a class="n-t n-b" href="#teal-buttons">Teal buttons</a></li><li><a class="n-y n-b" href="#yellow-buttons">Yellow buttons</a></li><li class="back"><a href="../">&larr; <span class="bl">Back to </span>prototypes</a></li></ul></nav><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="f-grey" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0"/></filter><filter id="f-prot" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0 0.558 0.442 0 0 0 0 0.242 0.758 0 0 0 0 0 1 0"/></filter><filter id="f-deut" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0 0.7 0.3 0 0 0 0 0.3 0.7 0 0 0 0 0 1 0"/></filter><filter id="f-trit" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.95 0.05 0 0 0 0 0.433 0.567 0 0 0 0.475 0.525 0 0 0 0 0 1 0"/></filter></defs></svg><main><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span>
 <h1>Using the brand colours navy, teal, orange, yellow</h1>
-<p class="lede">Contrast ratios for the brand red (orange, <code>{RED.upper()}</code>) yellow (<code>{YEL.upper()}</code>) and teal (<code>{TEAL.upper()}</code>) against white, navy and black text. Ratios use the WCAG formula, the same one the <a href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</a> uses, and each row links to WebAIM with the colours filled in.</p>
+<p class="lede">Contrast ratios for the brand orange (<code>{RED.upper()}</code>), yellow (<code>{YEL.upper()}</code>) and teal (<code>{TEAL.upper()}</code>) against white, navy and black text. Ratios use the WCAG formula, the same one the <a href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</a> uses, and each row links to WebAIM with the colours filled in.</p>
 <div class="rule"><p><b>Red &amp; teal elements.</b> To maintain readability, red and teal shouldn&rsquo;t be used as background colours for large chunks of text, as standard text colours (white, navy or black) won&rsquo;t pass contrast requirements. They work well for smaller accents, like title backgrounds.</p></div>
 {brand_colours()}
 {teal_adjust()}
@@ -75,7 +86,7 @@ def brand_contrast():
 {block("red", RED)}{block("yellow", YEL)}{combo(RED, TEAL, NAVY, WHITE, YEL)}
 <section class="card2"><h2>What this means</h2><ul><li><b>Yellow:</b> white text fails everywhere ({_ratio(WHITE, YEL):.2f}:1). Navy passes comfortably ({_ratio(NAVY, YEL):.2f}:1), so yellow is safe for buttons and title backgrounds with navy text.</li>
 <li><b>Red:</b> white fails for body text ({_ratio(WHITE, RED):.2f}:1) and only passes as large text. Navy is {_ratio(NAVY, RED):.2f}:1, just under 4.5:1, so it only passes when the text is large (24px, or bold from about 19px). Black does pass ({_ratio(BLACK, RED):.2f}:1) but is off brand.</li>
-<li><b>Teal:</b> white text is {_ratio(WHITE, TEAL):.2f}:1, which fails even as large text (it needs 3:1). Navy is {_ratio(NAVY, TEAL):.2f}:1 and passes for body text. Black passes ({_ratio(BLACK, TEAL):.2f}:1) but is off brand.</li>
+<li><b>Teal:</b> white text is {_ratio(WHITE, TEAL):.2f}:1, which fails even as large text (it needs 3:1). Navy is {_ratio(NAVY, TEAL):.2f}:1, which passes the ratio, but it is not recommended: navy and this teal are hard to tell apart for some people with colour blindness. Black passes ({_ratio(BLACK, TEAL):.2f}:1) but is off brand.</li>
 <li><b>As text colour:</b> red on white is {_ratio(RED, WHITE):.2f}:1, yellow on white is {_ratio(YEL, WHITE):.2f}:1 and teal on white is {_ratio(TEAL, WHITE):.2f}:1, so none of them works for words on a white page.</li>
 <li><b>Adjusted teal:</b> because brand teal fails with white text, the prototypes use a slightly darker teal, <code>#00857C</code> (white text {_ratio(WHITE, "#00857c"):.2f}:1), for buttons and any area with white text. Brand teal stays for borders, dots and text on navy. See <a href="#teal-adjust">Recommended colour adjustments</a>.</li></ul></section>
 <section class="card2" id="dos"><h2>Don&rsquo;t and do</h2><div class="demo"><div class="dont"><h3>Don&rsquo;t: large blocks of text</h3><p class="big by">{para}</p><p class="big br">{para}</p><p class="big bt">{para}</p></div>
@@ -173,20 +184,36 @@ def text_colours():
 <table><thead><tr><th>Pairing</th><th>Use</th><th>Ratio</th><th>Body text (4.5:1)</th></tr></thead><tbody>{rows}</tbody></table></section>'''
 
 
+def _tick(fg, bg):
+    r = _ratio(fg, bg)
+    key = (fg.lower(), bg.lower())
+    cb = key in CB_NO
+    large = key in LARGE_ONLY
+    ok = r >= 4.5 and not cb and not large
+    cls = "pass" if ok else "warn" if large else "fail"
+    sym = "&#10003;" if ok else "~" if large else "&#10007;"
+    word = "YES" if ok else "LARGE only" if large else "NO"
+    note = ", passes the ratio but not recommended for colour blindness" if cb else ", passes as large text only (3:1)" if large else ""
+    spoken = "recommended" if ok else "recommended for large text only" if large else "not recommended" + (" for colour blindness" if cb else "")
+    return (f'<td class="{cls}" title="{r:.2f}:1{note}"><span aria-hidden="true">{sym}</span> '
+            f'<span class="yn" style="background:{bg};color:{fg}">{word}</span><span class="sr"> {spoken}, {r:.2f} to 1</span></td>')
+
+
 def _hex_table(rows):
-    body = "".join(f'<tr><td><span class="swatch" style="background:{h}"></span> {n}</td><td><code>{h.upper()}</code></td><td>{u}</td><td>{_ratio(NAVY_, h):.2f}:1</td><td>{_ratio(WHITE_, h):.2f}:1</td></tr>' for n, h, u in rows)
-    return f'<table><thead><tr><th>Colour</th><th>Hex</th><th>Used for</th><th>Navy text</th><th>White text</th></tr></thead><tbody>{body}</tbody></table>'
+    body = "".join(f'<tr><td><span class="swatch" style="background:{h}"></span> {n}</td><td><code>{h.upper()}</code></td><td>{u}</td>{_tick(NAVY_, h)}{_tick(WHITE_, h)}</tr>' for n, h, u in rows)
+    return f'<table><thead><tr><th>Colour</th><th>Hex</th><th>Used for</th><th>Navy text</th><th>White text</th></tr></thead><tbody>{body}</tbody></table><p class="vnote"><b class="pass">&#10003; YES</b> recommended: the text colour shown on this background passes AA for body text (4.5:1 or more). <b class="warn">~ LARGE only</b> passes only for large text (24px, or bold from about 19px; 3:1 or more). <b class="fail">&#10007; NO</b> not recommended: it falls short. Hover a cell for the exact ratio.</p>'
 
 
 def brand_colours():
     main4 = [("Yellow", "#ffcb2a", "Highlights and small accents, with navy text"), ("Navy", NAVY_, "Text, footer, dark backgrounds"),
-             ("Red (orange)", "#f05a28", "Small accents"), ("Teal", "#00a79d", "Borders, dots and accents; text on navy only")]
+             ("Orange", "#f05a28", "Small accents"), ("Teal", "#00a79d", "Borders, dots and accents; text on navy only")]
     others = [("Adjusted teal", "#00857c", "Buttons and any area with white text"), ("Quiet text", GREY_, "Small supporting text on white, light grey and pale teal"),
               ("White", WHITE_, "Cards and page"), ("Light grey", LIGHT_, "Page background"),
               ("Pale teal", "#f3f9f8", "Large pale panels, from the PDFs"), ("Light teal", "#beddda", "Selected menu item, hover, tinted panels, from the PDFs"),
               ("Light yellow", "#ffeaaa", "Tint for large text blocks (guidance examples)"), ("Light red", "#fbd6c9", "Tint for large text blocks (guidance examples)")]
     return f'''<section class="blk" id="colours"><h2>Brand colours</h2>
 <h3>Main 4 brand colours</h3>{_hex_table(main4)}
+<p class="vnote"><b class="fail">&#10007; NO</b> for navy on teal: it reaches {_ratio(NAVY_, "#00a79d"):.2f}:1, but navy and this teal are hard to tell apart for some people with colour blindness, so we do not recommend the pairing.</p>
 <h3 style="margin-top:30px">Adjusted teal, quiet text, white and the light colours</h3>{_hex_table(others)}</section>'''
 
 
@@ -211,6 +238,25 @@ def button_sets():
     return '''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><title>Moved: brand colour contrast</title><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=../brand-contrast/#teal-buttons"><script data-cfasync="false">location.replace("../brand-contrast/#teal-buttons")</script></head><body style="font-family:sans-serif;padding:24px"><p>The button sets now live on the <a href="../brand-contrast/#teal-buttons">Brand colour contrast</a> page.</p></body></html>'''
 
 
+def _orange(html):
+    """Rename the brand red to orange in visible text only (not tags, styles or scripts). Keeps 'red cones' and the red/green chip wording."""
+    keep = [("red cones", "\x00A"), ("red or green chip", "\x00B")]
+    parts = re.split(r"(<style.*?</style>|<script.*?</script>|<[^>]+>)", html, flags=re.S)
+    out = []
+    for part in parts:
+        if part.startswith("<"):
+            out.append(part)
+            continue
+        for a, b in keep:
+            part = part.replace(a, b)
+        part = re.sub(r"\bRed\b", "Orange", part)
+        part = re.sub(r"\bred\b", "orange", part)
+        for a, b in keep:
+            part = part.replace(b, a)
+        out.append(part)
+    return "".join(out)
+
+
 def main():
-    B.write("brand-contrast/index.html", brand_contrast().replace("#6c8590", "#5e747d").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
+    B.write("brand-contrast/index.html", _orange(brand_contrast()).replace("#6c8590", "#5e747d").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
     B.write("button-sets/index.html", button_sets())
