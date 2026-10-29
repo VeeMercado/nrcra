@@ -53,12 +53,12 @@ def home_body():
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>When disaster strikes, local people are always first to <span class="mark">respond.{B.SQUIGGLE}</span></h1><p class="lede">{B.H1}.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn more</a></p></div>
-<div class="h1-photo">{img("speaker", eager=True, alt="")}</div></div></div>
+<div class="h1-photo">{img("cheer", eager=True, alt="")}</div></div></div>
 
 <section class="sec"><div class="wrap"><div class="card wwa surface"><div><span class="eyebrow">Who we are</span><h2>{hl("The group made up of groups")}</h2><p>{B.WHO}</p><h3>We&rsquo;re a network of 7 Local Government Areas (LGA)</h3><ul class="lgapills">{lgas}</ul>
 <p class="btnrow"><a class="btn btn-ghost" href="#network">Explore our network</a></p></div><div class="wwa-map">{B.places_map()}</div></div></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap statrow"><div class="statcard"><span class="eyebrow">What we have achieved</span>{B.stats()}</div><div class="framed">{img("cheer")}</div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="statcard"><span class="eyebrow">What we have achieved</span>{B.stats()}</div></div></section>
 
 <section class="sec" style="padding-top:0" id="focus"><div class="wrap"><span class="eyebrow">In focus</span><h2 class="sechead">{hl("Upcoming, projects and the R.A.C.K")}</h2>
 <ul class="kb"><li>{img("crowd")}<h3>{B.GATHER[0]}: {B.GATHER[1]}</h3><p>{B.GATHER[2]}.</p></li><li>{img("meeting")}<h3>Projects</h3><p>Connected and Prepared, Resourcing Community Resilience and Learning Together. <a href="#impact">Impact</a></p></li>
