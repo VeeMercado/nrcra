@@ -1146,7 +1146,11 @@ def dashboard():
 <div class="r2grid">
 <article class="rc rc1"><a class="shot" href="round2/" aria-label="Open the Round 2 copy of Prototype 1"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/v1.jpg" alt="Screenshot of the Prototype 1 home page, a navy hero panel beside a gathering photo" loading="lazy"></a>
 <div class="info"><span class="num">Round 2</span><h2><a href="round2/">Prototype 1, copy</a></h2><p>An exact copy of Prototype 1, the starting point for the changes in the client\u2019s feedback document. Nothing has been changed yet.</p>
-<p class="btnrow"><a class="btn btn-primary" href="round2/">Open the copy</a><a class="btn btn-ghost" href="{DOC_URL}">Client feedback (Google Doc)</a></p></div></article></div>'''
+<p class="btnrow"><a class="btn btn-primary" href="round2/">Open the copy</a><a class="btn btn-ghost" href="{DOC_URL}">Client feedback (Google Doc)</a></p></div></article>
+<article class="rc rc2"><a class="shot" href="teal-a/" aria-label="Open Teal A"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/teal-a.jpg" alt="Screenshot of Teal A: a solid teal hero panel with navy text beside a gathering photo, on the home page" loading="lazy"></a>
+<div class="info"><span class="num">Teal A</span><h2><a href="teal-a/">Teal leads, solid</a></h2><p>Home, About, Impact (left blank) and Network on the Layout Design wireframe. Solid teal for short lines (hero, header button, strip, footer), light teal panels for paragraphs. Navy text on teal, so it passes AA.</p><p class="btnrow"><a class="btn btn-primary" href="teal-a/">Open Teal A</a></p></div></article>
+<article class="rc rc3"><a class="shot" href="teal-b/" aria-label="Open Teal B"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/teal-b.jpg" alt="Screenshot of Teal B: a light teal hero panel with a teal border beside a gathering photo, on the home page" loading="lazy"></a>
+<div class="info"><span class="num">Teal B</span><h2><a href="teal-b/">Teal as accents</a></h2><p>Same wireframe and pages. White and light grey pages with teal in highlights, buttons, borders and tinted panels. Navy kept for the footer.</p><p class="btnrow"><a class="btn btn-primary" href="teal-b/">Open Teal B</a></p></div></article></div>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
 .top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}.top .btnrow{{margin-top:16px}}
@@ -1162,7 +1166,7 @@ def dashboard():
 .pl{{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}}.pl a{{display:block;padding:.4em .9em;border:2px solid var(--navy);border-radius:99px;color:var(--navy);text-decoration:none;font-weight:700}}.pl a:hover{{background:var(--navy);color:#fff}}
 .ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.sites{{font-size:.8rem;color:var(--muted);margin:12px 0 0;line-height:1.45}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
 .r2intro{{max-width:70ch;margin:0 0 24px}}.r2grid{{display:grid;grid-template-columns:1fr 1fr;gap:24px}}
-.rc{{background:#fff;border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:18px;border-top:10px solid var(--teal)}}.rc2{{border-top-color:var(--orange)}}.rc .shot img{{aspect-ratio:16/10;object-fit:cover;object-position:top}}.rc .info h2{{font-size:1.6rem}}.rc .info p{{margin:0 0 .8em}}.rc .info .btnrow{{margin:1em 0 0}}
+.rc{{background:#fff;border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:18px;border-top:10px solid var(--teal)}}.rc2{{border-top-color:var(--teal)}}.rc3{{border-top-color:var(--teal)}}.rc .shot img{{aspect-ratio:16/10;object-fit:cover;object-position:top}}.rc .info h2{{font-size:1.6rem}}.rc .info p{{margin:0 0 .8em}}.rc .info .btnrow{{margin:1em 0 0}}
 .aanote{{margin:28px 0 0;display:flex;flex-wrap:wrap;gap:14px;align-items:center}}
 @media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}.r2grid{{grid-template-columns:1fr}}}}</style></head>
 <body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>NRCRA.ORG.AU Website prototypes</h1></div>
@@ -1187,8 +1191,9 @@ if __name__ == "__main__":
     write("v3/index.html", v3())
     write("v1.2/index.html", v1(True))  # archived: built but not linked from the dashboard or bar
     write("v3.2/index.html", v3(True))  # archived: built but not linked from the dashboard or bar
-    import build_r2
+    import build_r2, build_teal
     build_r2.main()
+    build_teal.main()
     write("round2/index.html", v1().replace("NRCRA prototype 1: Colour block sections", "NRCRA Round 2: copy of Prototype 1").replace(protobar("v1"), protobar("round2")))
     write("index.html", dashboard())
     write("robots.txt", "User-agent: *\nDisallow: /\n")
