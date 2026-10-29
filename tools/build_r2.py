@@ -21,6 +21,8 @@ def _ratio(a, b):
 CB_NO = {("#07293b", "#00a79d")}
 # pairings shown as "LARGE only": they pass 3:1 but not 4.5:1
 LARGE_ONLY = {("#ffffff", "#f05a28")}
+# pairings that pass the ratio but use black, which is off brand
+OFF_BRAND = {("#000000", "#f05a28")}
 
 
 def _row(fg, bg, fgname, bgname):
@@ -29,10 +31,13 @@ def _row(fg, bg, fgname, bgname):
     n = "pass" if r >= 4.5 else "fail"
     l = "pass" if r >= 3 else "fail"
     nt, lt = n.title(), l.title()
-    if (fg.lower(), bg.lower()) in CB_NO:
+    key = (fg.lower(), bg.lower())
+    extra = ""
+    if key in CB_NO or key in OFF_BRAND:
         n = l = "fail"
         nt = lt = "Not recommended"
-    return (f'<tr><td><span class="chip" style="color:{fg};background:{bg}">Aa</span> {fgname} on {bgname}</td><td><b>{r:.2f}:1</b></td>'
+        extra = "<br><small>off brand</small>" if key in OFF_BRAND else ""
+    return (f'<tr><td><span class="chip" style="color:{fg};background:{bg}">Aa</span> {fgname} on {bgname}</td><td><b>{r:.2f}:1</b>{extra}</td>'
             f'<td class="{n}">{nt}</td><td class="{l}">{lt}</td><td><a href="{url}">Check in WebAIM</a></td></tr>')
 
 
