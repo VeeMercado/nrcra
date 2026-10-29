@@ -6,7 +6,7 @@
 :root{--navy:#07293b;--teal:#00a79d;--orange:#f05a28;--yellow:#ffcb2a;--teal-d:#00615a;--orange-d:#b93a0c;--ink:#07293b;--muted:#3d5663;--line:#d6e2e4;
 --font:"Nunito Sans",Arial,sans-serif;--wrap:1180px;--r:24px;
 /* Tint rule: brand colour mixed with white. Text sits on tints (navy text) or on navy (white text). Full brand colour is for buttons, icons, borders and shapes. */
---teal-12:#e0f4f3;--teal-25:#bfe9e7;--blue-15:#d9e9f2;--grey-6:#eef1f3;--yellow-20:#fff5d4;--yellow-40:#ffeaaa;--orange-12:#fdebe5;--orange-25:#fbd6c9;--navy-8:#ebeef0}
+--teal-12:#f3f9f8;--teal-25:#beddda;--blue-15:#d9e9f2;--grey-6:#eef1f3;--yellow-20:#fff5d4;--yellow-40:#ffeaaa;--orange-12:#fdebe5;--orange-25:#fbd6c9;--navy-8:#ebeef0}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;font:400 18px/1.6 var(--font);color:var(--ink);background:var(--bg,#fff)}
 img{max-width:100%;display:block}a{color:var(--teal-d)}a:hover{color:var(--navy)}
@@ -85,7 +85,7 @@ main{overflow-x:clip}
 .pmap{margin:0}.pmap svg{width:100%;height:auto;display:block;border-radius:var(--r)}
 .pmap .sea{fill:var(--sea,#dff1f6)}.pmap .land{fill:var(--land,#f4f7ef)}.pmap .coast{fill:none;stroke:var(--coast,#9cc9c4);stroke-width:2}
 .pmap .river{fill:none;stroke:var(--river,#7fc4e0);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-.pmap .lga{font:800 11px var(--font);fill:var(--lga,#6c8590);text-transform:uppercase;letter-spacing:.08em}
+.pmap .lga{font:800 11px var(--font);fill:var(--lga,#5e747d);text-transform:uppercase;letter-spacing:.08em}
 .pmap .dot circle{fill:var(--dot,#f05a28);stroke:#fff;stroke-width:2;transition:r .2s}.pmap .lbl{font:700 12px var(--font);fill:var(--navy)}
 .pmap .dot.hot circle{r:10;fill:var(--hot,#07293b)}.pmap .dot.hot .lbl{font-weight:900}
 .places .pl-lga{margin-bottom:12px}.places h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 6px;color:var(--muted)}
@@ -316,7 +316,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .watchbtn{display:none}
 .watchbtn{gap:.55em}.watchbtn svg{flex:none}
 @media(max-width:739px){.herobg .h1-photo .play{display:none}.watchbtn{display:inline-flex}.herobg .h1-panel .watchbtn{background:#fff;color:#00857c;border-color:#00857c}.herobg .h1-panel .watchbtn:hover{background:#07293b;color:#fff;border-color:#07293b}.herobg .h1-panel .watchbtn:active{background:#beddda;color:#07293b;border-color:#07293b}}
-.lgapills{list-style:none;margin:16px 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px}.lgapills li{border:2px solid #f3f6f7;border-radius:99px;padding:.25em .9em;font-weight:700;font-size:.95rem;background:#f3f9f8;color:#6c8590}.subline{margin:.2em 0 0;font-size:1.2rem;font-weight:800;line-height:1.35}
+.lgapills{list-style:none;margin:16px 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px}.lgapills li{border:2px solid #f3f6f7;border-radius:99px;padding:.25em .9em;font-weight:700;font-size:.95rem;background:#f3f9f8;color:#5e747d}.subline{margin:.2em 0 0;font-size:1.2rem;font-weight:800;line-height:1.35}
 /* button rules, from the teal set. Secondary: white, teal text and outline. Tertiary: navy. On dark: primary hovers white, secondary is white. Hover fills navy (or teal for navy buttons), active takes the light tint. Corners 12px; the play button stays a circle. */
 .btn-ghost{background:#fff;color:#00857c;border-color:#00857c}.btn-ghost:hover{background:#07293b;color:#fff;border-color:#07293b}.btn-ghost:active{background:#beddda;color:#07293b;border-color:#07293b}
 .ready .btn-ghost{background:#fff;color:#07293b;border-color:#fff}.ready .btn-ghost:hover{background:#00857c;color:#fff;border-color:#fff}.ready .btn-ghost:active{background:#beddda;color:#07293b;border-color:#fff}

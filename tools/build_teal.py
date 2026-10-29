@@ -128,7 +128,7 @@ body.teal{--bg:#f3f6f7}
 .hl{background:linear-gradient(transparent 56%,var(--teal) 56%,var(--teal) 94%,transparent 94%);padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 .teal .card{border-radius:var(--r);padding:36px}
 .wwa{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}.wwa>*{min-width:0}.wwa-map{max-width:420px;justify-self:center;width:100%}
-.lgapills{list-style:none;margin:16px 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px}.lgapills li{border:2px solid #f3f6f7;border-radius:99px;padding:.25em .9em;font-weight:700;font-size:.95rem;background:#f3f9f8;color:#6c8590}.subline{margin:.2em 0 0;font-size:1.2rem;font-weight:800;line-height:1.35}
+.lgapills{list-style:none;margin:16px 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px}.lgapills li{border:2px solid #f3f6f7;border-radius:99px;padding:.25em .9em;font-weight:700;font-size:.95rem;background:#f3f9f8;color:#5e747d}.subline{margin:.2em 0 0;font-size:1.2rem;font-weight:800;line-height:1.35}
 .statrow{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}.statrow>*{min-width:0}.statcard{border-radius:var(--r);padding:36px}.statcard .stats dt{color:var(--navy)}
 .framed{border-radius:36px;padding:14px;background:var(--fr,var(--teal))}.framed img{border-radius:24px;width:100%;aspect-ratio:4/3;object-fit:cover}
 .pcard2 .p3{align-items:center}
@@ -244,4 +244,4 @@ def page(v):
 
 # prototype-a/index.html is a frozen, hand-kept file (Prototype A). It is not built from build.py, so changes to Round 1 never reach it.
 def main():
-    B.write("prototype-b/index.html", page("prototype-b"))
+    B.write("prototype-b/index.html", page("prototype-b").replace("#6c8590", "#5e747d").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
