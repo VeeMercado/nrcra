@@ -277,8 +277,8 @@ body .lgrid>*,body .team>*{flex-basis:calc(50% - 8px)}
 .herobg .h1-panel{position:relative;z-index:2;max-width:580px;margin:56px 0 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
 @media(max-width:860px){.herobg>.wrap:first-child{display:block;min-height:0;padding:0 0 240px}.herobg .h1-panel{margin:16px 16px 0;max-width:none;padding:28px 22px}}
 
-/* Prototype A: white panel, all content navy */
-.herobg .h1-panel{background:#fff;color:var(--navy)}.herobg .h1-panel h1,.herobg .h1-panel .eyebrow,.herobg .h1-panel .lede{color:var(--navy)}
+/* Prototype A: light translucent panel, navy content, teal bottom border */
+.herobg .h1-panel{background:rgba(244,244,244,.9);color:var(--navy);border-bottom:10px solid var(--teal)}.herobg .h1-panel h1,.herobg .h1-panel .eyebrow,.herobg .h1-panel .lede{color:var(--navy)}
 
 /* Prototype 2's rounded buttons and river-style journey */
 body{--btn-r:12px}
@@ -294,6 +294,13 @@ ol.river p{margin:0;font-size:.95rem}@media(max-width:860px){ol.river{grid-templ
 .btn-ghost{background:#fff;color:var(--navy);border-color:var(--btn-teal)}.btn-ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .ready .btn-primary,.ready .btn-cta{border-color:#fff}.ready .btn-ghost{background:transparent;color:#fff;border-color:#fff}
 body{--current:var(--teal-25);--hover:var(--teal-12)}
+/* menu and links work the same way: hover underlines (links also turn navy), active takes the light tint; the menu stays navy */
+a:not(.btn):hover{text-decoration-thickness:3px;text-underline-offset:4px}
+main a:not(.btn):hover{color:var(--navy)}
+#nav a:not(.btn):hover{background:transparent;color:var(--navy);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+#nav a:not(.btn):active,main a:not(.btn):active{background:var(--teal-25);color:var(--navy)}
+.btn-primary:active,.btn-cta:active,.btn-ghost:active{background:var(--teal-25);color:var(--navy);border-color:var(--navy)}
+.ready .btn-primary:active,.ready .btn-cta:active,.ready .btn-ghost:active{border-color:#fff}.ready .btn-ghost:hover{background:#fff;color:var(--navy)}
 
 /* accent bars sit on the bottom edge, except the five pillars, which keep their top bars */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}

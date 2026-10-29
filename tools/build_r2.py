@@ -79,9 +79,8 @@ def brand_contrast():
 NAVY_, WHITE_, GREY_, LIGHT_ = "#07293b", "#ffffff", "#6c8590", "#f3f6f7"
 FAMILIES = [
     # name, colour, text on colour, light tint (selected menu item), link colour on white, note
-    ("Teal", "#00857c", WHITE_, "#bfe9e7", "#00857c", "The cheat teal. Darker than brand teal (#00a79d) so white text passes."),
+    ("Teal", "#00857c", WHITE_, "#beddda", "#00857c", "The cheat teal. Darker than brand teal (#00a79d) so white text passes."),
     ("Yellow", "#ffcb2a", NAVY_, "#ffeaaa", NAVY_, "Brand yellow. Navy text; yellow itself never carries text on white."),
-    ("Red", "#f05a28", NAVY_, "#fbd6c9", "#b93a0c", "Brand red. Labels must be large and bold to pass; the link uses the dark red already in the system."),
 ]
 
 
@@ -92,34 +91,49 @@ def _chip(fg, bg, big=False):
     return f'<span class="rt {"ok" if ok else "bad"}">{r:.2f}:1 {"pass" if ok else "fail"}{" (large)" if big and ok and r < 4.5 else ""}</span>'
 
 
+def _kinds(name, c, tx, tint, dark):
+    navy, white = NAVY_, "#ffffff"
+    sec_bd = c if name != "Yellow" else navy
+    if not dark:
+        return {"Primary": [(c, tx, navy), (navy, white, navy), (tint, navy, navy)],
+                "Secondary": [(white, c if name == "Teal" else navy, sec_bd), (navy, white, navy), (tint, navy, navy)],
+                "Tertiary": [(navy, white, navy), (c, tx, navy), (tint, navy, navy)]}
+    return {"Primary": [(c, tx, white), (white, navy, white), (tint, navy, white)],
+            "Secondary": [(white, navy, white), (c, tx, white), (tint, navy, white)],
+            "Tertiary": [("transparent", white, white), (white, navy, white), (tint, navy, white)]}
+
+
+def _b(label, trip, state, big):
+    d, h, a = trip
+    st = (f"--bg:{d[0]};--fg:{d[1]};--bd:{d[2]};--hbg:{h[0]};--hfg:{h[1]};--hbd:{h[2]};--abg:{a[0]};--afg:{a[1]};--abd:{a[2]};" + ("font-size:1.2rem;" if big else ""))
+    cls = "mbtn" + (" is-hover" if state == 1 else " is-active" if state == 2 else "")
+    return f'<span class="{cls}" tabindex="0" style="{st}">{label}</span>'
+
+
+def _lk(label, lc, lh, ld, tint, state):
+    cls = "lk" + (" is-hover" if state == 1 else " is-active" if state == 2 else "")
+    return f'<a href="#" onclick="return false" class="{cls}" style="--lc:{lc};--lh:{lh};--ld:{ld};--lt:{tint}">{label}</a>'
+
+
 def _set(name, c, tx, tint, link, note, dark):
     bg = NAVY_ if dark else WHITE_
+    fg = "#fff" if dark else NAVY_
     big = name == "Red"  # red labels only pass as large bold text
-    lab = "font-size:1.2rem;" if big else ""
-    if dark:
-        pri = f'background:{c};color:{tx};border:2px solid #fff;{lab}'
-        sec = f'background:#fff;color:{NAVY_};border:2px solid #fff;{lab}'
-        ter = f'background:transparent;color:#fff;border:2px solid #fff;{lab}'
-        lnk = "#ffffff"
-        pri_chip = _chip(tx, c, big)
-        lnk_chip = _chip(lnk, bg)
-    else:
-        pri = f'background:{c};color:{tx};border:2px solid {NAVY_};{lab}'
-        sec = f'background:#fff;color:{NAVY_};border:2px solid {c if name != "Yellow" else NAVY_};{lab}'
-        ter = f'background:{NAVY_};color:#fff;border:2px solid {NAVY_};{lab}'
-        lnk = link
-        pri_chip = _chip(tx, c, big)
-        lnk_chip = _chip(lnk, bg)
-    ul = f'text-decoration:underline;{"text-decoration-color:%s;text-decoration-thickness:4px;text-underline-offset:4px;" % c if name == "Yellow" and not dark else ""}'
-    nav_cur = f'background:{tint};color:{NAVY_}'
-    nav = (f'<div class="mnav" style="background:{bg};color:{"#fff" if dark else NAVY_}"><span style="{nav_cur if not dark else "background:%s;color:%s" % (tint, NAVY_)}">Home</span><span>Network</span><span>About</span><span>Impact</span>'
-           f'<span class="mbtn" style="{pri}">Sign In</span></div>')
-    return f'''<div class="set {"dark" if dark else "light"}" style="background:{bg}"><h3 style="color:{"#fff" if dark else NAVY_}">{name} on {"navy" if dark else "white"}</h3>
-<p class="row"><span class="mbtn" style="{pri}">Primary</span>{pri_chip}</p>
-<p class="row"><span class="mbtn" style="{sec}">Secondary</span></p>
-<p class="row"><span class="mbtn" style="{ter}">Tertiary</span></p>
-<p class="row"><a href="#" onclick="return false" style="color:{lnk};{ul}font-weight:700">Link text</a>{lnk_chip}</p>
-{nav}</div>'''
+    K = _kinds(name, c, tx, tint, dark)
+    rows = ""
+    for kind in ("Primary", "Secondary", "Tertiary"):
+        chip = _chip(K[kind][0][1], K[kind][0][0], big) if K[kind][0][0] != "transparent" else ""
+        rows += f'<div class="krow"><span class="kl">{kind} {chip}</span><div class="sts">' + "".join(f'<div class="st">{_b(kind, K[kind], i, big)}<small>{n}</small></div>' for i, n in enumerate(("Default", "Hover", "Active"))) + "</div></div>"
+    lc = "#ffffff" if dark else link
+    lh = tint if dark else NAVY_
+    ld = c if (name == "Yellow" and not dark) else "currentColor"
+    rows += f'<div class="krow"><span class="kl">Link {_chip(lc, bg)}</span><div class="sts">' + "".join(f'<div class="st">{_lk("Link text", lc, lh, ld, tint, i)}<small>{n}</small></div>' for i, n in enumerate(("Default", "Hover", "Active"))) + "</div></div>"
+    mfg = "#ffffff" if dark else NAVY_
+    rows += f'<div class="krow"><span class="kl">Menu item {_chip(mfg, bg)}</span><div class="sts">' + "".join(f'<div class="st"><a href="#" onclick="return false" class="mn{" is-hover" if i == 1 else " is-active" if i == 2 else ""}" style="--mc:{mfg};--mt:{tint}">Network</a><small>{n}</small></div>' for i, n in enumerate(("Default", "Hover", "Active"))) + "</div></div>"
+    nav_cur = f"background:{tint};color:{NAVY_}"
+    nav = (f'<div class="mnav" style="background:{bg};color:{fg}"><span style="{nav_cur}">Home</span><span>Network</span><span>About</span><span>Impact</span>'
+           f'<span class="push">{_b("Sign In", K["Primary"], None, big)}</span></div>')
+    return f'''<div class="set {"dark" if dark else "light"}" style="background:{bg};color:{fg}"><h3 style="color:{fg}">{name} on {"navy" if dark else "white"}</h3>{rows}{nav}</div>'''
 
 
 def light_teal():
@@ -152,14 +166,14 @@ def button_sets():
 .flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
 .blk{{background:#fff;border-radius:28px;padding:28px;margin:0 0 22px}}code{{font-size:.85em;background:var(--grey-6);padding:.1em .4em;border-radius:6px}}
 .pair{{display:grid;grid-template-columns:1fr 1fr;gap:18px}}.set{{border-radius:20px;padding:22px;border:2px solid var(--line)}}.set h3{{margin-top:0}}.row{{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px}}
-.mbtn{{display:inline-flex;align-items:center;justify-content:center;font:800 1rem var(--font);padding:.7em 1.3em;border-radius:12px;min-height:44px}}.mnav{{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-radius:14px;padding:8px;margin-top:6px;font-weight:700}}.mnav>span{{padding:.45em .9em;border-radius:12px}}.mnav .mbtn{{margin-left:auto;padding:.45em 1em;min-height:0}}.lt{{border:2px solid var(--line);border-radius:20px;padding:20px;background:#fff}}.lt h3{{margin-top:0}}.ltcard{{border-radius:16px;padding:16px 18px;margin-top:12px;color:{NAVY_}}}
+.mbtn{{display:inline-flex;align-items:center;justify-content:center;font:800 1rem var(--font);padding:.7em 1.3em;border-radius:12px;min-height:44px}}.mbtn{{background:var(--bg);color:var(--fg);border:2px solid var(--bd);cursor:pointer}}.mbtn:hover,.mbtn.is-hover{{background:var(--hbg);color:var(--hfg);border-color:var(--hbd)}}.mbtn:active,.mbtn.is-active{{background:var(--abg);color:var(--afg);border-color:var(--abd)}}.mbtn:focus-visible{{outline:3px solid var(--orange-d);outline-offset:3px}}.krow{{display:grid;gap:6px;margin:0 0 16px}}.kl{{font-weight:800;font-size:.9rem;display:flex;gap:10px;align-items:center;flex-wrap:wrap}}.sts{{display:flex;gap:14px;flex-wrap:wrap}}.st{{display:grid;justify-items:start;gap:4px}}.st small{{font-size:.75rem;font-weight:700;opacity:.85}}.lk{{color:var(--lc);text-decoration:underline;text-decoration-color:var(--ld);text-underline-offset:4px;text-decoration-thickness:2px;font-weight:700;padding:.1em .3em;border-radius:6px}}.lk:hover,.lk.is-hover{{color:var(--lh);text-decoration-thickness:4px}}.lk:active,.lk.is-active{{background:var(--lt);color:{NAVY_}}}.mnav .push{{margin-left:auto;padding:0}}.mn{{color:var(--mc);text-decoration:none;font-weight:700;padding:.45em .9em;border-radius:12px;display:inline-block}}.mn:hover,.mn.is-hover{{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}}.mn:active,.mn.is-active{{background:var(--mt);color:{NAVY_}}}.mnav{{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-radius:14px;padding:8px;margin-top:6px;font-weight:700}}.mnav>span{{padding:.45em .9em;border-radius:12px}}.mnav .mbtn{{padding:.45em 1em;min-height:0}}.lt{{border:2px solid var(--line);border-radius:20px;padding:20px;background:#fff}}.lt h3{{margin-top:0}}.ltcard{{border-radius:16px;padding:16px 18px;margin-top:12px;color:{NAVY_}}}
 .rt{{font-size:.8rem;font-weight:800;border-radius:99px;padding:.15em .7em;background:#fff;border:2px solid}}.rt.ok{{color:#1f6b35;border-color:#1f6b35}}.rt.bad{{color:#a3201a;border-color:#a3201a}}
 table{{width:100%;border-collapse:collapse;font-size:.95rem}}th,td{{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}}th{{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}}.chip{{display:inline-grid;place-items:center;width:44px;height:32px;border-radius:8px;font-weight:900;vertical-align:middle;border:1px solid rgba(7,41,59,.25)}}.pass{{color:#1f6b35;font-weight:800}}.fail{{color:#a3201a;font-weight:800}}
 @media(max-width:760px){{.pair{{grid-template-columns:1fr}}}}</style></head>
-<body><nav class="topnav" aria-label="On this page"><ul><li><a href="#teal">Teal</a></li><li><a href="#yellow">Yellow</a></li><li><a href="#red">Red</a></li><li><a href="#lightteal">Light teal</a></li><li><a href="#text">Text colours</a></li><li class="back"><a href="../">&larr; <span class="bl">Back to </span>prototypes</a></li></ul></nav>
+<body><nav class="topnav" aria-label="On this page"><ul><li><a href="#teal">Teal</a></li><li><a href="#yellow">Yellow</a></li><li><a href="#lightteal">Light teal</a></li><li><a href="#text">Text colours</a></li><li class="back"><a href="../">&larr; <span class="bl">Back to </span>prototypes</a></li></ul></nav>
 <main><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span>
 <h1>Button, link and text colour sets</h1>
-<p class="lede">Primary, secondary, tertiary and link, for teal, yellow and red, each with white and navy. The primary button is the colour with a navy outline, as the Sign In button is in Prototype A and B (teal family). Ratios use the WCAG formula; a red or green chip says whether the text passes AA.</p>
+<p class="lede">Primary, secondary, tertiary and link, for teal and yellow, each with white and navy. The primary button is the colour with a navy outline, as the Sign In button is in Prototype A and B (teal family). Ratios use the WCAG formula; a red or green chip says whether the text passes AA. The menu and links work the same way: hover underlines (links also turn navy, the menu stays navy) and active takes the lighter tint. Each button shows its default, hover and active state: hover fills with navy (or the colour, for navy buttons), active takes the lighter tint with navy text.</p>
 {secs}
 {light_teal()}
 <section class="blk" id="text"><h2>Text colours</h2><p>Navy for text. <code>#6c8590</code> for quiet text on white where it matters. White and <code>#f3f6f7</code> on darker backgrounds.</p>

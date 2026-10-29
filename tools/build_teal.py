@@ -51,8 +51,8 @@ def home_body():
     lgas = "".join(f"<li>{E(n)} LGA</li>" for n in ["Tweed", "Byron", "Ballina", "Lismore", "Kyogle", "Clarence", "Richmond"])
     partners = B.v1_partners().replace('href="#partners"', 'href="#impact"')
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
-<h1>When disaster strikes, local people are always first to respond.</h1><p class="lede">{B.H1}.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#about">About us</a><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact us</a></p></div>
+<h1>When disaster strikes, local people are always first to <span class="mark">respond.{B.SQUIGGLE}</span></h1><p class="lede">{B.H1}.</p>
+<p class="btnrow"><a class="btn btn-primary" href="#about">Learn more</a></p></div>
 <div class="h1-photo">{img("speaker", eager=True, alt="")}</div></div></div>
 
 <section class="sec"><div class="wrap"><div class="card wwa surface"><div><span class="eyebrow">Who we are</span><h2>{hl("The group made up of groups")}</h2><p>{B.WHO}</p><h3>We&rsquo;re a network of 7 Local Government Areas (LGA)</h3><ul class="lgapills">{lgas}</ul>
@@ -187,6 +187,20 @@ CSS_B = """
 .btn-ghost{background:#fff;color:var(--navy);border-color:var(--btn-teal)}.btn-ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .ready .btn-primary,.ready .btn-cta{border-color:#fff}.ready .btn-ghost{background:transparent;color:#fff;border-color:#fff}
 body{--current:var(--teal-25);--hover:var(--teal-12)}
+/* menu and links work the same way: hover underlines (links also turn navy), active takes the light tint; the menu stays navy */
+a:not(.btn):hover{text-decoration-thickness:3px;text-underline-offset:4px}
+main a:not(.btn):hover{color:var(--navy)}
+#nav a:not(.btn):hover{background:transparent;color:var(--navy);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+#nav a:not(.btn):active,main a:not(.btn):active{background:var(--teal-25);color:var(--navy)}
+.btn-primary:active,.btn-cta:active,.btn-ghost:active{background:var(--teal-25);color:var(--navy);border-color:var(--navy)}
+.ready .btn-primary:active,.ready .btn-cta:active,.ready .btn-ghost:active{border-color:#fff}.ready .btn-ghost:hover{background:#fff;color:var(--navy)}
+/* Prototype B header, in the style of Prototype 3: deep teal gradient (left to right) over the photo, white text in a block the size of Prototype A's, yellow squiggle */
+.tb .herobg .h1-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,97,90,.93) 0%,rgba(0,97,90,.88) 52%,rgba(0,97,90,.1) 100%)}
+.tb .herobg .h1-panel{background:transparent;border:0;color:#fff}
+.tb .herobg .h1-panel h1{color:#fff}.tb .herobg .h1-panel .eyebrow,.tb .herobg .h1-panel .lede{color:#fff}
+.tb .herobg .h1-panel .btn-primary{border-color:#fff}
+.mark{position:relative;display:inline-block}.mark .squig{position:absolute;left:0;right:0;bottom:-.25em;width:100%;height:.4em}
+@media(max-width:860px){.tb .herobg>.wrap:first-child{display:flex;align-items:flex-end;min-height:560px;padding:0}.tb .herobg .h1-panel{margin:0;padding:28px 20px 40px;max-width:none}.tb .herobg .h1-photo::after{background:linear-gradient(180deg,rgba(0,97,90,.2) 0%,rgba(0,97,90,.85) 40%,rgba(0,97,90,.92) 100%)}}
 .tb .h1-panel{background:var(--teal-25);color:var(--navy);border:4px solid var(--teal)}.tb .h1-panel h1,.tb .h1-panel .eyebrow{color:var(--navy)}.tb .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy);background:#fff}.tb .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
 .tb #nav a[aria-current=page]{background:var(--teal-25)}
 .tb .surface{background:#fff;border-bottom:10px solid var(--teal)}.tb .statcard{background:#fff;border-bottom:10px solid var(--teal)}.tb .framed{--fr:var(--teal-25);outline:4px solid var(--teal);outline-offset:-4px}
