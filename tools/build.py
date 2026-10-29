@@ -628,7 +628,7 @@ def protobar(v):
     cur = next((f"{n}: {d}" for k, n, d in PROTOS if k == v), "Archived backup")
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {cur}</span></p>
-<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../">All prototypes</a>{others}</nav>
+<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../#round-1">All prototypes</a>{others}</nav>
 <button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
 
@@ -1114,6 +1114,7 @@ def v3(full=False):
 
 
 # ================================================================ dashboard
+DOC_URL = "https://docs.google.com/document/d/1NaC61OZYomUhRGzN3M5WOgimnBq-7E3khqsOiFFaZfQ/edit?usp=sharing"
 INSPO = {
     "v1": [("v1-milou-home", "Milou's NRCRA draft: home"), ("v1-childrens-society", "The Children's Society"), ("v1-waves-for-water", "Waves for Water")],
     "v2": [("v2-rack", "The R.A.C.K app"), ("v2-resilient-lismore", "Resilient Lismore"), ("v2-investing-for-charity", "Investing for Charity")],
@@ -1141,22 +1142,41 @@ def dashboard():
         rows += f'''<article class="row row{base[1]}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
 <div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><p><a class="btn btn-primary" href="{slug}/">Open prototype {i}</a></p>
 <h3>Inspired by the mood board</h3><div class="ins">{ins}</div><p class="sites">{SITES[base]}</p></div></article>'''
+    r2 = f'''<p class="r2intro">The client chose Prototype 1 from Round 1. Round 2 compares two builds of it with each other, not with the Round 1 set: the client\u2019s written feedback applied point by point, and the same content laid out on the audited wireframes in Layout Design.</p>
+<div class="r2grid">
+<article class="rc rc1"><a class="shot" href="client/" aria-label="Open the Client request version"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/client.jpg" alt="Screenshot of the Client request home page: a green hero panel beside a gathering photo, with a Connect Share Care colour band underneath" loading="lazy"></a>
+<div class="info"><span class="num">Version A</span><h2><a href="client/">Client request</a></h2><p>Prototype 1 rebuilt from the client\u2019s feedback document, item by item: a green hero with one About button, a Connect Share Care band, Our Focus in full, funders on every page and a brand green footer.</p>
+<p class="btnrow"><a class="btn btn-primary" href="client/">Open client request</a><a class="btn btn-ghost" href="{DOC_URL}">Client feedback (Google Doc)</a></p></div></article>
+<article class="rc rc2"><a class="shot" href="recommended/" aria-label="Open the Recommended version"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/recommended.jpg" alt="Screenshot of the Recommended home page: the same green hero, then a Connect Share Care row of rounded cards on a pale page" loading="lazy"></a>
+<div class="info"><span class="num">Version B</span><h2><a href="recommended/">Recommended</a></h2><p>The same client content on the designer\u2019s wireframes: rounded cards on a pale page, split heroes, a horizontal journey, photo group cards, a How you can be part of it band and the R.A.C.K landing page.</p>
+<p class="btnrow"><a class="btn btn-primary" href="recommended/">Open recommended</a></p></div></article></div>
+<p class="aanote"><b>Accessibility.</b> <a class="btn btn-ghost" href="accessibility/">AA notes: where the requested design does not meet AA</a></p>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
 .top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}.top .btnrow{{margin-top:16px}}
 .flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
+.tabs{{display:flex;gap:10px;margin:0 0 24px}}.tabs button{{font:800 1.05rem var(--font);padding:.7em 1.6em;border-radius:99px;border:2px solid var(--navy);background:#fff;color:var(--navy);cursor:pointer;min-height:44px}}.tabs button[aria-selected=true]{{background:var(--navy);color:#fff}}
 .row{{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:start;background:#fff;border-radius:32px;padding:28px;margin-bottom:28px;border-left:12px solid var(--yellow)}}
-.row{{position:relative;transition:box-shadow .2s}}.row:hover{{box-shadow:0 16px 40px -24px rgba(7,41,59,.5)}}.info h2 a::after{{content:"";position:absolute;inset:0;border-radius:32px;z-index:1}}.row:focus-within{{outline:3px solid var(--orange-d);outline-offset:3px}}.row2{{border-left-color:var(--teal)}}.row3{{border-left-color:var(--orange)}}
+.row,.rc{{position:relative;transition:box-shadow .2s}}.row:hover,.rc:hover{{box-shadow:0 16px 40px -24px rgba(7,41,59,.5)}}.info h2 a::after{{content:"";position:absolute;inset:0;border-radius:32px;z-index:1}}.row:focus-within,.rc:focus-within{{outline:3px solid var(--orange-d);outline-offset:3px}}.row2{{border-left-color:var(--teal)}}.row3{{border-left-color:var(--orange)}}
+.rc .btnrow{{position:relative;z-index:2}}
 .shot{{display:block;border-radius:18px;overflow:hidden;box-shadow:0 18px 40px -22px rgba(7,41,59,.55);border:1px solid var(--line);background:#fff}}.shot img{{width:100%;display:block}}.shot:hover{{transform:translateY(-3px)}}
 .bar{{display:flex;gap:6px;padding:9px 12px;background:#eef1f3;border-bottom:1px solid var(--line)}}.bar i{{width:10px;height:10px;border-radius:50%;background:#c9d2d6}}
 .num{{display:inline-block;background:var(--navy-8);border-radius:99px;padding:.2em .9em;font-weight:900;font-size:.85rem}}.info h2{{margin:.35em 0 .3em}}.info h2 a{{color:var(--navy);text-decoration:none}}
 .feats{{margin:0 0 16px;padding-left:1.2em}}.info h3{{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:22px 0 10px}}
 .pl{{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}}.pl a{{display:block;padding:.4em .9em;border:2px solid var(--navy);border-radius:99px;color:var(--navy);text-decoration:none;font-weight:700}}.pl a:hover{{background:var(--navy);color:#fff}}
 .ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.sites{{font-size:.8rem;color:var(--muted);margin:12px 0 0;line-height:1.45}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
-@media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}}}</style></head>
+.r2intro{{max-width:70ch;margin:0 0 24px}}.r2grid{{display:grid;grid-template-columns:1fr 1fr;gap:24px}}
+.rc{{background:#fff;border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:18px;border-top:10px solid var(--teal)}}.rc2{{border-top-color:var(--orange)}}.rc .shot img{{aspect-ratio:16/10;object-fit:cover;object-position:top}}.rc .info h2{{font-size:1.6rem}}.rc .info p{{margin:0 0 .8em}}.rc .info .btnrow{{margin:1em 0 0}}
+.aanote{{margin:28px 0 0;display:flex;flex-wrap:wrap;gap:14px;align-items:center}}
+@media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}.r2grid{{grid-template-columns:1fr}}}}</style></head>
 <body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>NRCRA.ORG.AU Website prototypes</h1></div>
-<p>Three directions for the five-page NRCRA website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. Sample content only. To be built in Wix Classic. Status: draft for direction review.</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a></p></div>
-{rows}</main></body></html>'''
+<p>Prototypes for the NRCRA website. Sample content only. To be built in Wix Classic. Status: draft for review.</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a></p></div>
+<div class="tabs" role="tablist" aria-label="Prototype rounds"><button type="button" role="tab" id="tab-round-1" aria-controls="round-1" aria-selected="false" tabindex="-1">Round 1</button><button type="button" role="tab" id="tab-round-2" aria-controls="round-2" aria-selected="true">Round 2</button></div>
+<section id="round-1" role="tabpanel" aria-labelledby="tab-round-1" hidden><p class="r2intro">Three directions for the five-page website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. The client chose Prototype 1.</p>{rows}</section>
+<section id="round-2" role="tabpanel" aria-labelledby="tab-round-2">{r2}</section></main>
+<script>(function(){{var T=[].slice.call(document.querySelectorAll('[role=tab]'));function show(id,f){{T.forEach(function(t){{var on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;if(on&&f)t.focus()}});try{{history.replaceState(null,'','#'+id)}}catch(e){{}}}}
+T.forEach(function(t,i){{t.addEventListener('click',function(){{show(t.getAttribute('aria-controls'))}});t.addEventListener('keydown',function(e){{var n=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(n){{e.preventDefault();show(T[(i+n+T.length)%T.length].getAttribute('aria-controls'),1)}}}})}});
+show(location.hash==='#round-1'?'round-1':'round-2')}})();</script></body></html>'''
 
 
 def write(path, s):
@@ -1171,6 +1191,8 @@ if __name__ == "__main__":
     write("v3/index.html", v3())
     write("v1.2/index.html", v1(True))  # archived: built but not linked from the dashboard or bar
     write("v3.2/index.html", v3(True))  # archived: built but not linked from the dashboard or bar
+    import build_r2
+    build_r2.main()
     write("index.html", dashboard())
     write("robots.txt", "User-agent: *\nDisallow: /\n")
     print("built")
