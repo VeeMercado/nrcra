@@ -6,7 +6,8 @@ Prototypes for the nrcra.org.au website. Sample content only. Preview URL: https
 - `v1/` colour block sections, `v2/` light and fresh, `v3/` illustrated visuals; `v1.2/` and `v3.2/` are archived variants (each page is an anchor: `#home`, `#about`, `#partners`, `#network`, `#rack`)
 
 **Round 2**
-- `round2/` Prototype 1 copy for Round 2 (menu and pages match the teal versions). A separate, hand-kept file: `build.py` does not write it, so Round 1 changes never reach it
+- `prototype-a/` Prototype A, the existing navy style (menu and pages match Prototype B). A separate, hand-kept file: `build.py` does not write it, so Round 1 changes never reach it
+- `prototype-b/` Prototype B, teal as accents and tints
 - `brand-contrast/` guidance on using the brand red, yellow and teal with accessible text
 
 **Other**

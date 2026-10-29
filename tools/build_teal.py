@@ -1,8 +1,7 @@
-"""Teal-led exploration: Home, About, Impact (blank) and Network on the designer's Layout Design wireframe
+"""Teal-led exploration (teal as accents and tints only): Home, About, Impact (blank) and Network on the designer's Layout Design wireframe
 (content and layout only), styled from Prototype 1, with teal as the main driver instead of navy.
 
-  teal-a  solid teal for short lines (hero, header button, strips, footer), light teal for paragraphs
-  teal-b  teal as accents and tints only (highlights, buttons, borders, tinted panels), navy kept for the footer
+  prototype-b  teal as accents and tints only (highlights, buttons, borders, tinted panels), navy kept for the footer
 
 White text never sits on teal (2.99:1). Navy text on teal is 5.05:1.
 Imported by build.py, which owns the shared helpers and base CSS.
@@ -12,8 +11,8 @@ from build import E, img, logo, screen, icon, BASE, MOBILE, JS, FONT, CSS1, VIME
 
 SIGN_IN = "https://rack.nrcra.org.au"  # the R.A.C.K address NRCRA gave us (not live yet)
 MENU = [("home", "Home"), ("about", "About"), ("impact", "Impact"), ("network", "Network")]
-NAMES = {"round2": "Prototype 1 copy", "teal-a": "Teal A", "teal-b": "Teal B"}
-SHORT = {"round2": "P1", "teal-a": "A", "teal-b": "B"}
+NAMES = {"prototype-a": "Prototype A", "prototype-b": "Prototype B"}
+SHORT = {"prototype-a": "A", "prototype-b": "B"}
 
 
 def nav3():
@@ -50,10 +49,10 @@ def part_band():
 def home_body():
     lgas = "".join(f"<li>{E(n)} LGA</li>" for n in ["Tweed", "Byron", "Ballina", "Lismore", "Kyogle", "Clarence", "Richmond"])
     partners = B.v1_partners().replace('href="#partners"', 'href="#impact"')
-    return f'''<div class="hero1"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
+    return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>When disaster strikes, local people are always first to respond.</h1><p class="lede">{B.H1}.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#about">Learn more</a><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact us</a></p></div>
-<div class="h1-photo hvid" data-video="{VIMEO}">{img("speaker", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div></div></div>
+<p class="btnrow"><a class="btn btn-primary" href="#about">About us</a><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact us</a></p></div>
+<div class="h1-photo">{img("speaker", eager=True, alt="")}</div></div></div>
 
 <section class="sec"><div class="wrap"><div class="card wwa surface"><div><span class="eyebrow">Who we are</span><h2>{hl("The group made up of groups")}</h2><p>{B.WHO}</p><h3>We&rsquo;re a network of 7 Local Government Areas (LGA)</h3><ul class="lgapills">{lgas}</ul>
 <p class="btnrow"><a class="btn btn-ghost" href="#network">Explore our network</a></p></div><div class="wwa-map">{B.places_map()}</div></div></div></section>
@@ -168,22 +167,14 @@ body.teal{--bg:#f3f6f7}
 .teal .pmap .dot circle{stroke-width:3}
 """
 
-CSS_A = """
-/* A: solid teal for short lines, light teal for paragraphs */
-.ta .h1-panel{background:var(--teal);color:var(--navy)}.ta .h1-panel h1,.ta .h1-panel .eyebrow{color:var(--navy)}.ta .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy);background:#fff}.ta .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
-.ta .site-head{border-bottom:6px solid var(--teal)}.ta #nav a[aria-current=page]{background:var(--teal-25)}
-.ta :is(.h1-panel,.partband,.ticker,.site-foot) :focus-visible{outline-color:var(--navy)}
-.ta .surface{background:var(--teal-12);border-top:10px solid var(--teal)}.ta .statcard{background:var(--teal-25);border-top:10px solid var(--teal)}.ta .framed{--fr:var(--teal)}
-.ta .kb li{background:var(--teal-12)}.ta .kb li:nth-child(2){background:var(--yellow-20)}.ta .kb li:nth-child(3){background:var(--orange-12)}.ta .kb a{color:var(--navy);font-weight:800}
-.ta .pcard2 .p3-logos li{background:#fff}.ta .mealgrid li{background:#fff}.ta .meal li{background:#fff}
-.ta .partband{background:var(--teal);color:var(--navy)}.ta .steps li{--ci:var(--navy)!important}.ta .h1-panel .btn-primary{border-color:var(--navy)}
-.ta .site-foot .ack{background:var(--teal-12);border-radius:18px;padding:18px 20px;border-top:8px solid var(--navy)}
-.ta .ticker{background:var(--yellow);color:var(--navy)}.ta .tk-in .tkd{color:var(--navy)}
-.ta .site-foot{--foot:var(--teal);--foot-ink:var(--navy);--foot-h:var(--navy);--foot-line:rgba(7,41,59,.4)}.ta .site-foot a{text-decoration:underline}
-.ta .pmap{--land:#fff;--sea:var(--teal-25);--coast:var(--teal);--river:var(--teal)}
-"""
-
 CSS_B = """
+/* hero: the photo is the header background, the panel sits on top (no video) */
+.herobg{padding:0!important}
+.herobg>.wrap:first-child{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:640px}
+.herobg .h1-photo{position:absolute;inset:0;border-radius:0;min-height:0}
+.herobg .h1-panel{position:relative;z-index:2;max-width:580px;margin:56px 0 56px max(20px,calc((100vw - var(--wrap))/2 + 20px))}
+@media(max-width:860px){.herobg>.wrap:first-child{display:block;min-height:0;padding:0 0 240px}.herobg .h1-panel{margin:16px 16px 0;max-width:none;padding:28px 22px}}
+
 /* B: teal as accents and tints only, navy kept for the footer */
 .tb .h1-panel{background:var(--teal-25);color:var(--navy);border:4px solid var(--teal)}.tb .h1-panel h1,.tb .h1-panel .eyebrow{color:var(--navy)}.tb .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy);background:#fff}.tb .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
 .tb #nav a[aria-current=page]{background:var(--teal-25)}
@@ -197,8 +188,7 @@ CSS_B = """
 
 
 def page(v):
-    css = CSS_A if v == "teal-a" else CSS_B
-    cls = "ta" if v == "teal-a" else "tb"
+    css, cls = CSS_B, "tb"
     body = "".join([screen("home", "Home", home_body()), screen("about", "About", about_body()), screen("impact", "Impact", impact_body()), screen("network", "Network", network_body())])
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -208,7 +198,6 @@ def page(v):
 {nav3()}<main id="main">{body}</main>{B.TICKER}{B.footer(True, boxed=True)}{protobar3(v)}<script>{JS}</script></body></html>'''
 
 
-# round2/index.html is a frozen, hand-kept file (Prototype 1 copy for Round 2). It is not built from build.py, so changes to Round 1 never reach it.
+# prototype-a/index.html is a frozen, hand-kept file (Prototype A). It is not built from build.py, so changes to Round 1 never reach it.
 def main():
-    B.write("teal-a/index.html", page("teal-a"))
-    B.write("teal-b/index.html", page("teal-b"))
+    B.write("prototype-b/index.html", page("prototype-b"))
