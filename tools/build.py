@@ -625,10 +625,10 @@ PROTOS = [("v1", "Prototype 1", "Colour block sections"), ("v2", "Prototype 2", 
 def protobar(v):
     # data-proto lets the script point each button at the same page in the other prototype
     others = "".join(f'<a class="pb-btn" data-proto="{k}" href="../{k}/" aria-label="{n}: {d}"><span class="pb-short" aria-hidden="true">P{k[1:]}</span><span class="pb-long">{n}</span></a>' for k, n, d in PROTOS if k != v)
-    cur = next((f"{n}: {d}" for k, n, d in PROTOS if k == v), "Round 2: copy of Prototype 1" if v == "round2" else "Archived backup")
+    cur = next((f"{n}: {d}" for k, n, d in PROTOS if k == v), "Archived backup")
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {cur}</span></p>
-<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../#{"round-2" if v == "round2" else "round-1"}">All prototypes</a>{others}</nav>
+<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../#round-1">All prototypes</a>{others}</nav>
 <button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
 
@@ -1145,7 +1145,7 @@ def dashboard():
     r2 = f'''<p class="r2intro">The client chose Prototype 1 from Round 1. Round 2 starts as an exact copy of Prototype 1.</p>
 <div class="r2grid">
 <article class="rc rc1"><a class="shot" href="round2/" aria-label="Open the Round 2 copy of Prototype 1"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/v1.jpg" alt="Screenshot of the Prototype 1 home page, a navy hero panel beside a gathering photo" loading="lazy"></a>
-<div class="info"><span class="num">Round 2</span><h2><a href="round2/">Prototype 1, copy</a></h2><p>An exact copy of Prototype 1, the starting point for the changes in the client\u2019s feedback document. Nothing has been changed yet.</p>
+<div class="info"><span class="num">Round 2</span><h2><a href="round2/">Prototype 1, copy</a></h2><p>A copy of Prototype 1 in its own navy style, with the same menu and pages as the teal versions: Home, About, Impact (left blank), Network and Sign In.</p>
 <p class="btnrow"><a class="btn btn-primary" href="round2/">Open the copy</a><a class="btn btn-ghost" href="{DOC_URL}">Client feedback (Google Doc)</a></p></div></article>
 <article class="rc rc2"><a class="shot" href="teal-a/" aria-label="Open Teal A"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/teal-a.jpg" alt="Screenshot of Teal A: a solid teal hero panel with navy text beside a gathering photo, on the home page" loading="lazy"></a>
 <div class="info"><span class="num">Teal A</span><h2><a href="teal-a/">Teal leads, solid</a></h2><p>Home, About, Impact (left blank) and Network on the Layout Design wireframe. Solid teal for short lines (hero, header button, strip, footer), light teal panels for paragraphs. Navy text on teal, so it passes AA.</p><p class="btnrow"><a class="btn btn-primary" href="teal-a/">Open Teal A</a></p></div></article>
@@ -1194,7 +1194,6 @@ if __name__ == "__main__":
     import build_r2, build_teal
     build_r2.main()
     build_teal.main()
-    write("round2/index.html", v1().replace("NRCRA prototype 1: Colour block sections", "NRCRA Round 2: copy of Prototype 1").replace(protobar("v1"), protobar("round2")))
     write("index.html", dashboard())
     write("robots.txt", "User-agent: *\nDisallow: /\n")
     print("built")

@@ -12,8 +12,8 @@ from build import E, img, logo, screen, icon, BASE, MOBILE, JS, FONT, CSS1, VIME
 
 SIGN_IN = "https://rack.nrcra.org.au"  # the R.A.C.K address NRCRA gave us (not live yet)
 MENU = [("home", "Home"), ("about", "About"), ("impact", "Impact"), ("network", "Network")]
-OTHER = {"teal-a": "teal-b", "teal-b": "teal-a"}
-NAMES = {"teal-a": "Teal A", "teal-b": "Teal B"}
+NAMES = {"round2": "Prototype 1 copy", "teal-a": "Teal A", "teal-b": "Teal B"}
+SHORT = {"round2": "P1", "teal-a": "A", "teal-b": "B"}
 
 
 def nav3():
@@ -25,10 +25,10 @@ def nav3():
 
 
 def protobar3(cur):
-    o = OTHER[cur]
+    others = "".join(f'<a class="pb-btn" data-proto="{k}" href="../{k}/" aria-label="{NAMES[k]}"><span class="pb-short" aria-hidden="true">{SHORT[k]}</span><span class="pb-long">{NAMES[k]}</span></a>' for k in NAMES if k != cur)
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
-<p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {NAMES[cur]}</span></p>
-<nav class="pb-nav" aria-label="Teal versions"><a class="pb-btn pb-all" href="../#round-2">All prototypes</a><a class="pb-btn" data-proto="{o}" href="../{o}/" aria-label="{NAMES[o]}"><span class="pb-short" aria-hidden="true">{NAMES[o][-1]}</span><span class="pb-long">{NAMES[o]}</span></a><a class="pb-btn" data-proto="v1" href="../v1/" aria-label="Prototype 1, the navy version"><span class="pb-short" aria-hidden="true">P1</span><span class="pb-long">Prototype 1</span></a></nav>
+<p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing Round 2: {NAMES[cur]}</span></p>
+<nav class="pb-nav" aria-label="Round 2 designs"><a class="pb-btn pb-all" href="../#round-2">All prototypes</a>{others}</nav>
 <button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
 
@@ -170,8 +170,7 @@ body.teal{--bg:#f3f6f7}
 
 CSS_A = """
 /* A: solid teal for short lines, light teal for paragraphs */
-.ta .h1-panel{background:var(--teal);color:var(--navy)}.ta .h1-panel h1,.ta .h1-panel .eyebrow{color:var(--navy)}.ta .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy)}.ta .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
-.ta .btn-cta{background:var(--teal);color:var(--navy);border-color:var(--navy)}.ta .btn-cta:hover{background:var(--navy);color:#fff}
+.ta .h1-panel{background:var(--teal);color:var(--navy)}.ta .h1-panel h1,.ta .h1-panel .eyebrow{color:var(--navy)}.ta .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy);background:#fff}.ta .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
 .ta .site-head{border-bottom:6px solid var(--teal)}.ta #nav a[aria-current=page]{background:var(--teal-25)}
 .ta :is(.h1-panel,.partband,.ticker,.site-foot) :focus-visible{outline-color:var(--navy)}
 .ta .surface{background:var(--teal-12);border-top:10px solid var(--teal)}.ta .statcard{background:var(--teal-25);border-top:10px solid var(--teal)}.ta .framed{--fr:var(--teal)}
@@ -186,9 +185,8 @@ CSS_A = """
 
 CSS_B = """
 /* B: teal as accents and tints only, navy kept for the footer */
-.tb .h1-panel{background:var(--teal-25);color:var(--navy);border:4px solid var(--teal)}.tb .h1-panel h1,.tb .h1-panel .eyebrow{color:var(--navy)}.tb .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy)}.tb .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
-.tb .btn-primary,.tb .btn-cta{background:var(--teal);color:var(--navy);border-color:var(--teal)}.tb .btn-primary:hover,.tb .btn-cta:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
-.tb .btn-cta{border-color:var(--navy)}.tb #nav a[aria-current=page]{background:var(--teal-25)}
+.tb .h1-panel{background:var(--teal-25);color:var(--navy);border:4px solid var(--teal)}.tb .h1-panel h1,.tb .h1-panel .eyebrow{color:var(--navy)}.tb .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy);background:#fff}.tb .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
+.tb #nav a[aria-current=page]{background:var(--teal-25)}
 .tb .surface{background:#fff;border-top:10px solid var(--teal)}.tb .statcard{background:#fff;border-left:10px solid var(--teal)}.tb .framed{--fr:var(--teal-25);outline:4px solid var(--teal);outline-offset:-4px}
 .tb .kb li{background:#fff}.tb .kb a{color:var(--teal-d);font-weight:800}
 .tb .partband{background:var(--teal-12);border-top:6px solid var(--teal);border-bottom:6px solid var(--teal)}
@@ -210,6 +208,7 @@ def page(v):
 {nav3()}<main id="main">{body}</main>{B.TICKER}{B.footer(True, boxed=True)}{protobar3(v)}<script>{JS}</script></body></html>'''
 
 
+# round2/index.html is a frozen, hand-kept file (Prototype 1 copy for Round 2). It is not built from build.py, so changes to Round 1 never reach it.
 def main():
     B.write("teal-a/index.html", page("teal-a"))
     B.write("teal-b/index.html", page("teal-b"))
