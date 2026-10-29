@@ -73,5 +73,84 @@ def brand_contrast():
 </main></body></html>'''
 
 
+
+
+# ---------------------------------------------------------------- button, link and text colour sets (review page)
+NAVY_, WHITE_, GREY_, LIGHT_ = "#07293b", "#ffffff", "#6c8590", "#f3f6f7"
+FAMILIES = [
+    # name, colour, text on colour, light tint (selected menu item), link colour on white, note
+    ("Teal", "#00857c", WHITE_, "#bfe9e7", "#00857c", "The cheat teal. Darker than brand teal (#00a79d) so white text passes."),
+    ("Yellow", "#ffcb2a", NAVY_, "#ffeaaa", NAVY_, "Brand yellow. Navy text; yellow itself never carries text on white."),
+    ("Red", "#f05a28", NAVY_, "#fbd6c9", "#b93a0c", "Brand red. Labels must be large and bold to pass; the link uses the dark red already in the system."),
+]
+
+
+def _chip(fg, bg, big=False):
+    r = _ratio(fg, bg)
+    need = 3 if big else 4.5
+    ok = r >= need
+    return f'<span class="rt {"ok" if ok else "bad"}">{r:.2f}:1 {"pass" if ok else "fail"}{" (large)" if big and ok and r < 4.5 else ""}</span>'
+
+
+def _set(name, c, tx, tint, link, note, dark):
+    bg = NAVY_ if dark else WHITE_
+    big = name == "Red"  # red labels only pass as large bold text
+    lab = "font-size:1.2rem;" if big else ""
+    if dark:
+        pri = f'background:{c};color:{tx};border:2px solid #fff;{lab}'
+        sec = f'background:#fff;color:{NAVY_};border:2px solid #fff;{lab}'
+        ter = f'background:transparent;color:#fff;border:2px solid #fff;{lab}'
+        lnk = "#ffffff"
+        pri_chip = _chip(tx, c, big)
+        lnk_chip = _chip(lnk, bg)
+    else:
+        pri = f'background:{c};color:{tx};border:2px solid {NAVY_};{lab}'
+        sec = f'background:#fff;color:{NAVY_};border:2px solid {c if name != "Yellow" else NAVY_};{lab}'
+        ter = f'background:{NAVY_};color:#fff;border:2px solid {NAVY_};{lab}'
+        lnk = link
+        pri_chip = _chip(tx, c, big)
+        lnk_chip = _chip(lnk, bg)
+    ul = f'text-decoration:underline;{"text-decoration-color:%s;text-decoration-thickness:4px;text-underline-offset:4px;" % c if name == "Yellow" and not dark else ""}'
+    nav_cur = f'background:{tint};color:{NAVY_}'
+    nav = (f'<div class="mnav" style="background:{bg};color:{"#fff" if dark else NAVY_}"><span style="{nav_cur if not dark else "background:%s;color:%s" % (tint, NAVY_)}">Home</span><span>Network</span><span>About</span><span>Impact</span>'
+           f'<span class="mbtn" style="{pri}">Sign In</span></div>')
+    return f'''<div class="set {"dark" if dark else "light"}" style="background:{bg}"><h3 style="color:{"#fff" if dark else NAVY_}">{name} on {"navy" if dark else "white"}</h3>
+<p class="row"><span class="mbtn" style="{pri}">Primary</span>{pri_chip}</p>
+<p class="row"><span class="mbtn" style="{sec}">Secondary</span></p>
+<p class="row"><span class="mbtn" style="{ter}">Tertiary</span></p>
+<p class="row"><a href="#" onclick="return false" style="color:{lnk};{ul}font-weight:700">Link text</a>{lnk_chip}</p>
+{nav}</div>'''
+
+
+def button_sets():
+    secs = ""
+    for name, c, tx, tint, link, note in FAMILIES:
+        sid = name.lower()
+        secs += f'<section class="blk" id="{sid}"><h2>{name} <code>{c.upper()}</code></h2><p>{note}</p><div class="pair">{_set(name, c, tx, tint, link, note, False)}{_set(name, c, tx, tint, link, note, True)}</div><p class="vnote">Selected menu item: the lighter version of {name.lower()} (<code>{tint.upper()}</code>) as the background, navy text.</p></section>'
+    texts = [(NAVY_, WHITE_, "Navy on white", "default text"), (GREY_, WHITE_, "#6c8590 on white", "quiet text, where it matters"), (GREY_, LIGHT_, "#6c8590 on #f3f6f7", "quiet text on light grey"),
+             (WHITE_, NAVY_, "White on navy", "text on dark"), (LIGHT_, NAVY_, "#f3f6f7 on navy", "text on dark"), (WHITE_, "#00857c", "White on cheat teal", "text on teal"), (LIGHT_, "#00857c", "#f3f6f7 on cheat teal", "text on teal")]
+    rows = "".join(f'<tr><td><span class="chip" style="color:{f};background:{b}">Aa</span> {l}</td><td>{n}</td><td><b>{_ratio(f, b):.2f}:1</b></td><td class="{"pass" if _ratio(f, b) >= 4.5 else "fail"}">{"Pass" if _ratio(f, b) >= 4.5 else "Fail"}</td></tr>' for f, b, l, n in texts)
+    return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Button, link and text colour sets</title><meta name="robots" content="noindex">{FONT}
+<style>{BASE}html{{scroll-padding-top:84px}}body{{background:#f3f6f7;padding-top:64px}}main{{max-width:1180px;margin:0 auto;padding:30px 20px 56px}}
+.topnav{{position:fixed;top:0;left:0;right:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}}.topnav ul{{list-style:none;margin:0 auto;padding:10px 20px;max-width:1180px;display:flex;flex-wrap:wrap;gap:8px}}.topnav a{{display:inline-flex;align-items:center;min-height:44px;padding:0 1.1em;border:2px solid var(--navy);border-radius:12px;color:var(--navy);font-weight:800;text-decoration:none}}.topnav a:hover{{background:var(--navy);color:#fff}}.topnav .back{{margin-left:auto}}
+.flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
+.blk{{background:#fff;border-radius:28px;padding:28px;margin:0 0 22px}}code{{font-size:.85em;background:var(--grey-6);padding:.1em .4em;border-radius:6px}}
+.pair{{display:grid;grid-template-columns:1fr 1fr;gap:18px}}.set{{border-radius:20px;padding:22px;border:2px solid var(--line)}}.set h3{{margin-top:0}}.row{{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px}}
+.mbtn{{display:inline-flex;align-items:center;justify-content:center;font:800 1rem var(--font);padding:.7em 1.3em;border-radius:12px;min-height:44px}}.mnav{{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-radius:14px;padding:8px;margin-top:6px;font-weight:700}}.mnav>span{{padding:.45em .9em;border-radius:12px}}.mnav .mbtn{{margin-left:auto;padding:.45em 1em;min-height:0}}
+.rt{{font-size:.8rem;font-weight:800;border-radius:99px;padding:.15em .7em;background:#fff;border:2px solid}}.rt.ok{{color:#1f6b35;border-color:#1f6b35}}.rt.bad{{color:#a3201a;border-color:#a3201a}}
+table{{width:100%;border-collapse:collapse;font-size:.95rem}}th,td{{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}}th{{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}}.chip{{display:inline-grid;place-items:center;width:44px;height:32px;border-radius:8px;font-weight:900;vertical-align:middle;border:1px solid rgba(7,41,59,.25)}}.pass{{color:#1f6b35;font-weight:800}}.fail{{color:#a3201a;font-weight:800}}
+@media(max-width:760px){{.pair{{grid-template-columns:1fr}}}}</style></head>
+<body><nav class="topnav" aria-label="On this page"><ul><li><a href="#teal">Teal</a></li><li><a href="#yellow">Yellow</a></li><li><a href="#red">Red</a></li><li><a href="#text">Text colours</a></li><li class="back"><a href="../">&larr; Back to prototypes</a></li></ul></nav>
+<main><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span>
+<h1>Button, link and text colour sets</h1>
+<p class="lede">Primary, secondary, tertiary and link, for teal, yellow and red, each with white and navy. The primary button is the colour with a navy outline, as the yellow Sign In button is now. Ratios use the WCAG formula; a red or green chip says whether the text passes AA.</p>
+{secs}
+<section class="blk" id="text"><h2>Text colours</h2><p>Navy for text. <code>#6c8590</code> for quiet text on white where it matters. White and <code>#f3f6f7</code> on darker backgrounds.</p>
+<table><thead><tr><th>Pairing</th><th>Use</th><th>Ratio</th><th>Body text (4.5:1)</th></tr></thead><tbody>{rows}</tbody></table>
+<p class="vnote">Nothing here is applied to the prototypes yet. Cheat teal <code>#00857C</code> is a new colour, so it needs your yes first.</p></section>
+</main></body></html>'''
+
+
 def main():
     B.write("brand-contrast/index.html", brand_contrast())
+    B.write("button-sets/index.html", button_sets())

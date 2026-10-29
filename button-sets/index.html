@@ -1,0 +1,166 @@
+<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Button, link and text colour sets</title><meta name="robots" content="noindex"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#07293b;--teal:#00a79d;--orange:#f05a28;--yellow:#ffcb2a;--teal-d:#00615a;--orange-d:#b93a0c;--ink:#07293b;--muted:#3d5663;--line:#d6e2e4;
+--font:"Nunito Sans",Arial,sans-serif;--wrap:1180px;--r:24px;
+/* Tint rule: brand colour mixed with white. Text sits on tints (navy text) or on navy (white text). Full brand colour is for buttons, icons, borders and shapes. */
+--teal-12:#e0f4f3;--teal-25:#bfe9e7;--blue-15:#d9e9f2;--grey-6:#eef1f3;--yellow-20:#fff5d4;--yellow-40:#ffeaaa;--orange-12:#fdebe5;--orange-25:#fbd6c9;--navy-8:#ebeef0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:400 18px/1.6 var(--font);color:var(--ink);background:var(--bg,#fff)}
+img{max-width:100%;display:block}a{color:var(--teal-d)}a:hover{color:var(--navy)}
+h1,h2,h3{line-height:1.12;margin:0 0 .5em;font-weight:800;letter-spacing:-.01em}
+h1{font-size:clamp(2rem,4.6vw,3.5rem);font-weight:900}h2{font-size:clamp(1.6rem,3.2vw,2.4rem)}h3{font-size:1.2rem}
+p{margin:0 0 1em}.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}.sec{padding:64px 0}
+:focus-visible{outline:3px solid var(--orange-d);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--yellow);color:var(--navy);padding:10px 16px;z-index:100;font-weight:800}.skip:focus{left:8px}
+.plain{list-style:none;margin:0;padding:0}.vnote{font-size:.85rem;color:var(--muted);margin-top:.6em}.vnote a{color:inherit}
+.eyebrow{display:block;font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;margin-bottom:.8em;color:var(--teal-d)}
+.lede{font-size:1.2rem;max-width:62ch}.lede-s{color:var(--muted)}
+.note{background:#fff8e1;border:2px dashed var(--orange-d);border-radius:14px;padding:10px 14px;font-size:.9rem;margin:0 0 24px;color:var(--navy)}
+.btn{display:inline-flex;align-items:center;justify-content:center;font:800 1rem var(--font);padding:.75em 1.4em;text-decoration:none;border:2px solid var(--navy);border-radius:var(--btn-r,99px);cursor:pointer;min-height:44px}
+.btn-primary{background:var(--yellow);color:var(--navy);border-color:var(--yellow)}.btn-primary:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn-ghost{background:transparent;color:var(--navy)}.btn-ghost:hover{background:var(--navy);color:#fff}
+.btn-cta{background:var(--navy);color:#fff;padding:.5em 1.1em}.btn-cta:hover{background:var(--teal-d);color:#fff;border-color:var(--teal-d)}
+.btnrow{display:flex;flex-wrap:wrap;gap:12px;margin:1.2em 0 0}
+.site-head{background:#fff;position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line)}
+.head-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:10px;padding-bottom:10px}
+.logo{height:48px;width:auto}.logo-white{filter:brightness(0) invert(1)}
+#nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+#nav a:not(.btn){padding:.45em .9em;color:var(--navy);text-decoration:none;font-weight:700;border-radius:var(--btn-r,99px)}
+#nav a:not(.btn):hover{background:var(--hover,#eef5f5)}#nav .btn-cta[aria-current=page]{background:var(--navy);color:#fff;box-shadow:0 0 0 3px var(--yellow)}#nav a[aria-current=page]{background:var(--current,#d8f0ee)}
+.menu-btn{display:none;font:800 1rem var(--font);background:var(--navy);color:#fff;border:0;padding:.7em 1.1em;min-height:44px;border-radius:99px}
+@media(max-width:860px){.menu-btn{display:block}#nav{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;align-items:stretch;padding:12px 20px 20px;border-bottom:1px solid var(--line)}#nav.open{display:flex}.logo{height:40px}}
+.page{display:none;outline:0}.page.on{display:block}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}@media(max-width:860px){.split{grid-template-columns:1fr;gap:28px}}
+.split>*,.placesblk>*,.intro1>*{min-width:0}.dir{overflow-x:auto}.r{border-radius:var(--r);overflow:hidden}.photo{width:100%;height:100%;object-fit:cover;border-radius:var(--r)}
+ul.cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin:0}.stats div{margin:0}
+.stats dt{font-size:clamp(2.2rem,4.6vw,3.3rem);font-weight:900;line-height:1}.stats dd{margin:.35em 0 0;font-weight:600}
+.ico{width:44px;height:44px;display:block}
+.pillars{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}.pillars h3{margin:.3em 0}.pillars p{margin:0}
+.values{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}.values p{margin:0}
+.fromto{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch}.fromto>div{border-radius:var(--r);padding:28px}.fromto ul{margin:0;padding-left:1.1em}
+.ft-art{width:150px;height:auto;display:block;margin-bottom:12px}.ft-arrow{display:grid;place-items:center;font-size:2.4rem;font-weight:900;padding:0 10px!important}@media(max-width:700px){.fromto{grid-template-columns:1fr}.ft-arrow{padding:0!important;width:48px;height:48px;justify-self:center;border-radius:50%!important;font-size:1.6rem}.ft-arrow span{display:inline-block;transform:rotate(90deg)}}
+.video{position:relative;aspect-ratio:16/9;background:var(--navy);overflow:hidden;border-radius:var(--r)}.video img,.video iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.hvid{position:relative;cursor:pointer}.vtag{position:absolute;left:16px;bottom:16px;z-index:3;background:#fff;color:var(--navy);font-weight:800;font-size:.9rem;border-radius:99px;padding:.35em .9em}
+.vswap img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--r);display:block}.vframe.vswap img{border-radius:24px}
+.vmodal{position:fixed;inset:0;z-index:300;background:#000;display:grid;place-items:center}.vmodal iframe{width:100%;height:100%;border:0}
+.vclose{position:absolute;top:14px;right:14px;z-index:2;font:800 1rem var(--font);background:#fff;color:#111;border:0;border-radius:99px;padding:.6em 1.1em;cursor:pointer;min-height:44px}
+.play{position:absolute;inset:0;margin:auto;z-index:2;width:84px;height:84px;border-radius:50%;border:0;background:var(--yellow);color:var(--navy);font-size:1.8rem;cursor:pointer;display:grid;place-items:center;padding-left:6px;box-shadow:0 6px 20px rgba(0,0,0,.25)}.play:hover{background:#fff}
+.pgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.ptile a{display:flex;flex-direction:column;height:100%;text-decoration:none;color:var(--navy);padding:14px;border:1px solid var(--line);background:#fff;border-radius:20px}
+.ptile a:hover{border-color:var(--navy)}.plogo{display:grid;place-items:center;height:130px;background:#fff;margin-bottom:10px;border-radius:14px;padding:8px}
+.plogo img{max-height:100%;width:auto;max-width:100%;object-fit:contain}.pname{font-weight:800}.pnote{font-size:.9rem;color:var(--muted)}.pgroup{margin-bottom:44px}
+.strip{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:12px}.strip a{display:grid;place-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:6px 12px}
+.strip img{height:60px;width:auto;max-width:140px;object-fit:contain}
+.pcard,.gcard,.rcard{list-style:none;padding:24px;border-radius:var(--r)}.meta{font-size:.9rem;margin:0;color:var(--muted)}
+.journey{list-style:none;margin:0;padding:0;display:grid;gap:14px}.journey li{display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:start}.journey b{font-size:1.4rem;font-weight:900}.journey p{margin:0}
+@media(max-width:600px){.journey li{grid-template-columns:1fr;gap:2px}}
+.meal{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}.mico{width:22px;height:22px;flex:none}.meal li{display:inline-flex;align-items:center;gap:8px;padding:.55em 1.2em .55em .9em;font-weight:800;border-radius:99px;background:#fff;color:var(--navy);border:2px solid var(--navy)}
+.faq details{border-bottom:1px solid var(--line);padding:14px 0}.faq summary{cursor:pointer;font-weight:800}.faq details p{margin:.6em 0 0}
+.quote{margin:0}.quote p{font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:800;line-height:1.35;margin:0}.quote cite{display:block;font-style:normal;font-weight:600;margin-top:.8em}
+.mapbox{width:100%;height:clamp(320px,48vw,560px);background:#eef5f5;border-radius:var(--r);overflow:hidden}.mapbox iframe{width:100%;height:100%;border:0}
+.dir table{width:100%;border-collapse:collapse}.dir caption{text-align:left;font-size:.85rem;color:var(--muted);padding-bottom:8px}
+.dir th,.dir td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}.filters{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+.filters label{display:flex;flex-direction:column;font-weight:700;gap:4px}
+select,input,textarea{font:inherit;padding:.6em .8em;border:2px solid var(--navy);background:#fff;color:var(--navy);min-height:44px;border-radius:12px}
+main{overflow-x:clip}
+.pcwrap{position:relative}.pcols{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:stretch}
+.pc{position:relative;overflow:hidden;border-radius:999px 999px 18px 18px;padding:44px 18px 26px;text-align:center;display:flex;flex-direction:column;align-items:center;min-height:380px;color:var(--navy)}
+.pc-ico{width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;margin-bottom:10px;color:var(--navy)}.pc-ico .ico{width:30px;height:30px}
+.pc-n{font-weight:900;font-size:.85rem;letter-spacing:.1em;opacity:.8}.pc h3{font-size:1.1rem;margin:.3em 0}.pc p{margin:0;font-size:.95rem}
+.pc-ph{width:calc(100% + 36px);margin:-44px -18px 16px;aspect-ratio:1}.pc-ph img{width:100%;height:100%;object-fit:cover}.pc-ph+.pc-ico{margin-top:-44px;position:relative;box-shadow:0 4px 12px -6px rgba(7,41,59,.4)}
+.pc-groups{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;width:100%}.pc-groups li{background:rgba(255,255,255,.75);border-radius:12px;padding:8px 10px;text-align:left;font-size:.9rem}.pc-groups b{display:block}.pc-groups span{color:var(--muted)}
+.pc-base{height:18px;border-radius:12px;margin-top:10px;background:var(--navy-8)}
+@media(max-width:980px){.pcols{display:flex;flex-wrap:wrap;justify-content:center}.pc{flex:0 1 calc(33.333% - 10px)}}@media(max-width:640px){.pc{flex-basis:calc(50% - 7px);min-height:0;border-radius:160px 160px 16px 16px}}@media(max-width:420px){.pc{flex-basis:100%;max-width:320px}}
+.dq{flex:1;min-width:200px}.dq input{width:100%}
+.gdir{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}.gdir li{background:var(--grey-6);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.gdir b{font-size:1rem}.gdir span{color:var(--muted);font-size:.9rem}.gdir em{font-style:normal;font-size:.8rem;font-weight:800;margin-top:6px;color:var(--teal-d)}
+.lgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.lgrid li{background:#fff;border:1px solid var(--line);border-radius:var(--r);aspect-ratio:3/2;display:grid;place-items:center;padding:18px}.lgrid img{max-width:100%;max-height:100%;object-fit:contain}
+/* places */
+.placesblk{display:grid;grid-template-columns:1fr 380px;gap:40px;align-items:start}@media(max-width:900px){.placesblk{grid-template-columns:1fr}.pb-map{max-width:420px}}
+.pmap{margin:0}.pmap svg{width:100%;height:auto;display:block;border-radius:var(--r)}
+.pmap .sea{fill:var(--sea,#dff1f6)}.pmap .land{fill:var(--land,#f4f7ef)}.pmap .coast{fill:none;stroke:var(--coast,#9cc9c4);stroke-width:2}
+.pmap .river{fill:none;stroke:var(--river,#7fc4e0);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.pmap .lga{font:800 11px var(--font);fill:var(--lga,#6c8590);text-transform:uppercase;letter-spacing:.08em}
+.pmap .dot circle{fill:var(--dot,#f05a28);stroke:#fff;stroke-width:2;transition:r .2s}.pmap .lbl{font:700 12px var(--font);fill:var(--navy)}
+.pmap .dot.hot circle{r:10;fill:var(--hot,#07293b)}.pmap .dot.hot .lbl{font-weight:900}
+.places .pl-lga{margin-bottom:12px}.places h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;margin:0 0 6px;color:var(--muted)}
+.places ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.places button{font:700 .95rem var(--font);padding:.35em .9em;border-radius:99px;border:2px solid var(--chip,#cfe3e1);background:#fff;color:var(--navy);cursor:pointer;min-height:36px}
+.places button:hover,.places button[aria-pressed=true]{background:var(--navy);border-color:var(--navy);color:#fff}
+/* footer */
+.site-foot{background:var(--foot,#07293b);color:var(--foot-ink,#fff);padding:52px 0 32px}.site-foot a{color:inherit}
+.site-foot h2{font-size:.9rem;text-transform:uppercase;letter-spacing:.12em;color:var(--foot-h,#ffcb2a)}
+.foot-top .tag{margin:12px 0 0;font-weight:800;color:var(--foot-h,#ffcb2a)}
+.foot-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px}.foot-top .foot-logo{max-width:100%}.foot-top .logo{display:block;width:100%;max-width:230px;height:auto}@media(max-width:960px){.foot-cols{grid-template-columns:1fr 1fr}}@media(max-width:560px){.foot-cols{grid-template-columns:1fr;gap:28px}}
+.fcol h2{margin:0 0 18px;padding-bottom:12px;position:relative}.fcol h2::after{content:"";position:absolute;left:0;bottom:0;width:44px;height:3px;border-radius:2px;background:currentColor}
+.flist{list-style:none;margin:0;padding:0}.flist li{position:relative;padding-left:22px;margin-bottom:10px;line-height:1.4}.flist li::before{content:"";position:absolute;left:2px;top:.5em;width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.45}
+.flist a{text-decoration:none}.flist a:hover{text-decoration:underline}
+.site-foot .ack{display:flex;gap:18px;align-items:flex-start;border-top:1px solid var(--foot-line,#35566a);margin-top:36px;padding-top:24px;font-size:.9rem}.site-foot .ack p{margin:0}@media(max-width:760px){.site-foot .ack{flex-direction:column;gap:12px}}.ack-flag{flex:none;width:60px;height:40px}
+.site-foot .copy{font-size:.85rem;margin:16px 0 0}
+.foot-in .copy{grid-column:1/-1;font-size:.85rem;margin:0}.fh2{margin-top:22px}.foot-btn{display:inline-block;border:2px solid currentColor;border-radius:var(--btn-r,99px);padding:.45em 1em;font-weight:800;text-decoration:none}
+.foot-net{grid-column:1/-1}.foot-net ul{columns:3 220px;column-gap:32px}.foot-net li{break-inside:avoid;margin-bottom:6px}.foot-net span{font-size:.85rem;opacity:.85}.site-foot .plain li{margin-bottom:6px}
+.foot-logo{display:inline-block;background:#fff;border-radius:16px;padding:12px 16px}.foot-in .tag{margin-top:12px;font-weight:800;color:var(--foot-h,#ffcb2a)}.foot-logo.boxed{display:flex;width:100%;flex-direction:column;gap:10px;align-items:flex-start}.foot-tag{font-size:1rem;line-height:1.2}
+.rk-tag{font-size:.8rem;font-weight:800}
+.tagline i{font-style:normal;font-weight:800}.tagline .tg1{color:#58b0ac}.tagline .tg2{color:#d8b044}.tagline .tg3{color:#e47848}
+/* white brush stroke behind the tagline wherever the background is not white or a light brand tint (Wix: place the stroke SVG behind the text) */
+.ticker .tagline,.full .callcard .tagline{display:inline-block;padding:.5em 1.5em;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2060'%20preserveAspectRatio='none'%3E%3Cpath%20fill='white'%20d='M7%2015C32%208%2082%2011%20142%209C202%208%20252%2010%20291%2012L297%2016L285%2019L299%2023L287%2027L298%2032L285%2036L293%2041C262%2048%20202%2051%20142%2050C92%2051%2042%2050%2011%2047L3%2043L15%2039L2%2034L13%2030L4%2025L14%2021L5%2018Z'/%3E%3Cpath%20fill='white'%20d='M20%205L96%206L98%209L22%209ZM190%2052L270%2051L268%2055L192%2056Z'/%3E%3C/svg%3E") no-repeat center/100% 100%}
+.rk-h1{font-size:clamp(1.7rem,3.4vw,2.4rem);max-width:24ch;margin-top:18px}.rk-lede{color:var(--muted);max-width:64ch}
+/* prototype bar: fixed, deliberately outside the brand so it never reads as part of the design */
+body{padding-bottom:72px}.protobar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:#111;color:#fff;font:600 14px/1.3 var(--font);box-shadow:0 -4px 16px rgba(0,0,0,.25)}
+.pb-in{max-width:var(--wrap);margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pb-label{margin:0;flex:1;min-width:200px}.pb-label b{color:#ffcb2a;letter-spacing:.06em}.pb-cur{color:#ddd}.pb-label a{color:#fff}
+.pb-nav{display:flex;gap:8px;flex-wrap:wrap}.pb-btn,.pb-top{font:700 13px var(--font);color:#fff;background:#2b2b2b;border:1px solid #555;border-radius:99px;padding:.55em 1em;text-decoration:none;cursor:pointer;min-height:36px;display:inline-flex;align-items:center}
+.pb-btn:hover,.pb-top:hover{background:#ffcb2a;color:#111;border-color:#ffcb2a}.pb-top{background:#ffcb2a;color:#111;border-color:#ffcb2a}
+.pb-short{display:none}
+@media(max-width:760px){body{padding-bottom:84px}.pb-in{gap:6px;padding:8px 10px;flex-wrap:nowrap}.pb-label{min-width:0;font-size:11px;line-height:1.25}.pb-cur,.pb-long,.pb-all{display:none}.pb-short{display:inline}.pb-btn,.pb-top{padding:.5em .8em;min-width:40px;justify-content:center}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pmap .dot circle{transition:none}}
+html{scroll-padding-top:84px}body{background:#f3f6f7;padding-top:64px}main{max-width:1180px;margin:0 auto;padding:30px 20px 56px}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}.topnav ul{list-style:none;margin:0 auto;padding:10px 20px;max-width:1180px;display:flex;flex-wrap:wrap;gap:8px}.topnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 1.1em;border:2px solid var(--navy);border-radius:12px;color:var(--navy);font-weight:800;text-decoration:none}.topnav a:hover{background:var(--navy);color:#fff}.topnav .back{margin-left:auto}
+.flag{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}.flag a{color:#fff}
+.blk{background:#fff;border-radius:28px;padding:28px;margin:0 0 22px}code{font-size:.85em;background:var(--grey-6);padding:.1em .4em;border-radius:6px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}.set{border-radius:20px;padding:22px;border:2px solid var(--line)}.set h3{margin-top:0}.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 14px}
+.mbtn{display:inline-flex;align-items:center;justify-content:center;font:800 1rem var(--font);padding:.7em 1.3em;border-radius:12px;min-height:44px}.mnav{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-radius:14px;padding:8px;margin-top:6px;font-weight:700}.mnav>span{padding:.45em .9em;border-radius:12px}.mnav .mbtn{margin-left:auto;padding:.45em 1em;min-height:0}
+.rt{font-size:.8rem;font-weight:800;border-radius:99px;padding:.15em .7em;background:#fff;border:2px solid}.rt.ok{color:#1f6b35;border-color:#1f6b35}.rt.bad{color:#a3201a;border-color:#a3201a}
+table{width:100%;border-collapse:collapse;font-size:.95rem}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}.chip{display:inline-grid;place-items:center;width:44px;height:32px;border-radius:8px;font-weight:900;vertical-align:middle;border:1px solid rgba(7,41,59,.25)}.pass{color:#1f6b35;font-weight:800}.fail{color:#a3201a;font-weight:800}
+@media(max-width:760px){.pair{grid-template-columns:1fr}}</style></head>
+<body><nav class="topnav" aria-label="On this page"><ul><li><a href="#teal">Teal</a></li><li><a href="#yellow">Yellow</a></li><li><a href="#red">Red</a></li><li><a href="#text">Text colours</a></li><li class="back"><a href="../">&larr; Back to prototypes</a></li></ul></nav>
+<main><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span>
+<h1>Button, link and text colour sets</h1>
+<p class="lede">Primary, secondary, tertiary and link, for teal, yellow and red, each with white and navy. The primary button is the colour with a navy outline, as the yellow Sign In button is now. Ratios use the WCAG formula; a red or green chip says whether the text passes AA.</p>
+<section class="blk" id="teal"><h2>Teal <code>#00857C</code></h2><p>The cheat teal. Darker than brand teal (#00a79d) so white text passes.</p><div class="pair"><div class="set light" style="background:#ffffff"><h3 style="color:#07293b">Teal on white</h3>
+<p class="row"><span class="mbtn" style="background:#00857c;color:#ffffff;border:2px solid #07293b;">Primary</span><span class="rt ok">4.52:1 pass</span></p>
+<p class="row"><span class="mbtn" style="background:#fff;color:#07293b;border:2px solid #00857c;">Secondary</span></p>
+<p class="row"><span class="mbtn" style="background:#07293b;color:#fff;border:2px solid #07293b;">Tertiary</span></p>
+<p class="row"><a href="#" onclick="return false" style="color:#00857c;text-decoration:underline;font-weight:700">Link text</a><span class="rt ok">4.52:1 pass</span></p>
+<div class="mnav" style="background:#ffffff;color:#07293b"><span style="background:#bfe9e7;color:#07293b">Home</span><span>Network</span><span>About</span><span>Impact</span><span class="mbtn" style="background:#00857c;color:#ffffff;border:2px solid #07293b;">Sign In</span></div></div><div class="set dark" style="background:#07293b"><h3 style="color:#fff">Teal on navy</h3>
+<p class="row"><span class="mbtn" style="background:#00857c;color:#ffffff;border:2px solid #fff;">Primary</span><span class="rt ok">4.52:1 pass</span></p>
+<p class="row"><span class="mbtn" style="background:#fff;color:#07293b;border:2px solid #fff;">Secondary</span></p>
+<p class="row"><span class="mbtn" style="background:transparent;color:#fff;border:2px solid #fff;">Tertiary</span></p>
+<p class="row"><a href="#" onclick="return false" style="color:#ffffff;text-decoration:underline;font-weight:700">Link text</a><span class="rt ok">15.11:1 pass</span></p>
+<div class="mnav" style="background:#07293b;color:#fff"><span style="background:#bfe9e7;color:#07293b">Home</span><span>Network</span><span>About</span><span>Impact</span><span class="mbtn" style="background:#00857c;color:#ffffff;border:2px solid #fff;">Sign In</span></div></div></div><p class="vnote">Selected menu item: the lighter version of teal (<code>#BFE9E7</code>) as the background, navy text.</p></section><section class="blk" id="yellow"><h2>Yellow <code>#FFCB2A</code></h2><p>Brand yellow. Navy text; yellow itself never carries text on white.</p><div class="pair"><div class="set light" style="background:#ffffff"><h3 style="color:#07293b">Yellow on white</h3>
+<p class="row"><span class="mbtn" style="background:#ffcb2a;color:#07293b;border:2px solid #07293b;">Primary</span><span class="rt ok">9.95:1 pass</span></p>
+<p class="row"><span class="mbtn" style="background:#fff;color:#07293b;border:2px solid #07293b;">Secondary</span></p>
+<p class="row"><span class="mbtn" style="background:#07293b;color:#fff;border:2px solid #07293b;">Tertiary</span></p>
+<p class="row"><a href="#" onclick="return false" style="color:#07293b;text-decoration:underline;text-decoration-color:#ffcb2a;text-decoration-thickness:4px;text-underline-offset:4px;font-weight:700">Link text</a><span class="rt ok">15.11:1 pass</span></p>
+<div class="mnav" style="background:#ffffff;color:#07293b"><span style="background:#ffeaaa;color:#07293b">Home</span><span>Network</span><span>About</span><span>Impact</span><span class="mbtn" style="background:#ffcb2a;color:#07293b;border:2px solid #07293b;">Sign In</span></div></div><div class="set dark" style="background:#07293b"><h3 style="color:#fff">Yellow on navy</h3>
+<p class="row"><span class="mbtn" style="background:#ffcb2a;color:#07293b;border:2px solid #fff;">Primary</span><span class="rt ok">9.95:1 pass</span></p>
+<p class="row"><span class="mbtn" style="background:#fff;color:#07293b;border:2px solid #fff;">Secondary</span></p>
+<p class="row"><span class="mbtn" style="background:transparent;color:#fff;border:2px solid #fff;">Tertiary</span></p>
+<p class="row"><a href="#" onclick="return false" style="color:#ffffff;text-decoration:underline;font-weight:700">Link text</a><span class="rt ok">15.11:1 pass</span></p>
+<div class="mnav" style="background:#07293b;color:#fff"><span style="background:#ffeaaa;color:#07293b">Home</span><span>Network</span><span>About</span><span>Impact</span><span class="mbtn" style="background:#ffcb2a;color:#07293b;border:2px solid #fff;">Sign In</span></div></div></div><p class="vnote">Selected menu item: the lighter version of yellow (<code>#FFEAAA</code>) as the background, navy text.</p></section><section class="blk" id="red"><h2>Red <code>#F05A28</code></h2><p>Brand red. Labels must be large and bold to pass; the link uses the dark red already in the system.</p><div class="pair"><div class="set light" style="background:#ffffff"><h3 style="color:#07293b">Red on white</h3>
+<p class="row"><span class="mbtn" style="background:#f05a28;color:#07293b;border:2px solid #07293b;font-size:1.2rem;">Primary</span><span class="rt ok">4.46:1 pass (large)</span></p>
+<p class="row"><span class="mbtn" style="background:#fff;color:#07293b;border:2px solid #f05a28;font-size:1.2rem;">Secondary</span></p>
+<p class="row"><span class="mbtn" style="background:#07293b;color:#fff;border:2px solid #07293b;font-size:1.2rem;">Tertiary</span></p>
+<p class="row"><a href="#" onclick="return false" style="color:#b93a0c;text-decoration:underline;font-weight:700">Link text</a><span class="rt ok">5.72:1 pass</span></p>
+<div class="mnav" style="background:#ffffff;color:#07293b"><span style="background:#fbd6c9;color:#07293b">Home</span><span>Network</span><span>About</span><span>Impact</span><span class="mbtn" style="background:#f05a28;color:#07293b;border:2px solid #07293b;font-size:1.2rem;">Sign In</span></div></div><div class="set dark" style="background:#07293b"><h3 style="color:#fff">Red on navy</h3>
+<p class="row"><span class="mbtn" style="background:#f05a28;color:#07293b;border:2px solid #fff;font-size:1.2rem;">Primary</span><span class="rt ok">4.46:1 pass (large)</span></p>
+<p class="row"><span class="mbtn" style="background:#fff;color:#07293b;border:2px solid #fff;font-size:1.2rem;">Secondary</span></p>
+<p class="row"><span class="mbtn" style="background:transparent;color:#fff;border:2px solid #fff;font-size:1.2rem;">Tertiary</span></p>
+<p class="row"><a href="#" onclick="return false" style="color:#ffffff;text-decoration:underline;font-weight:700">Link text</a><span class="rt ok">15.11:1 pass</span></p>
+<div class="mnav" style="background:#07293b;color:#fff"><span style="background:#fbd6c9;color:#07293b">Home</span><span>Network</span><span>About</span><span>Impact</span><span class="mbtn" style="background:#f05a28;color:#07293b;border:2px solid #fff;font-size:1.2rem;">Sign In</span></div></div></div><p class="vnote">Selected menu item: the lighter version of red (<code>#FBD6C9</code>) as the background, navy text.</p></section>
+<section class="blk" id="text"><h2>Text colours</h2><p>Navy for text. <code>#6c8590</code> for quiet text on white where it matters. White and <code>#f3f6f7</code> on darker backgrounds.</p>
+<table><thead><tr><th>Pairing</th><th>Use</th><th>Ratio</th><th>Body text (4.5:1)</th></tr></thead><tbody><tr><td><span class="chip" style="color:#07293b;background:#ffffff">Aa</span> Navy on white</td><td>default text</td><td><b>15.11:1</b></td><td class="pass">Pass</td></tr><tr><td><span class="chip" style="color:#6c8590;background:#ffffff">Aa</span> #6c8590 on white</td><td>quiet text, where it matters</td><td><b>3.89:1</b></td><td class="fail">Fail</td></tr><tr><td><span class="chip" style="color:#6c8590;background:#f3f6f7">Aa</span> #6c8590 on #f3f6f7</td><td>quiet text on light grey</td><td><b>3.58:1</b></td><td class="fail">Fail</td></tr><tr><td><span class="chip" style="color:#ffffff;background:#07293b">Aa</span> White on navy</td><td>text on dark</td><td><b>15.11:1</b></td><td class="pass">Pass</td></tr><tr><td><span class="chip" style="color:#f3f6f7;background:#07293b">Aa</span> #f3f6f7 on navy</td><td>text on dark</td><td><b>13.92:1</b></td><td class="pass">Pass</td></tr><tr><td><span class="chip" style="color:#ffffff;background:#00857c">Aa</span> White on cheat teal</td><td>text on teal</td><td><b>4.52:1</b></td><td class="pass">Pass</td></tr><tr><td><span class="chip" style="color:#f3f6f7;background:#00857c">Aa</span> #f3f6f7 on cheat teal</td><td>text on teal</td><td><b>4.16:1</b></td><td class="fail">Fail</td></tr></tbody></table>
+<p class="vnote">Nothing here is applied to the prototypes yet. Cheat teal <code>#00857C</code> is a new colour, so it needs your yes first.</p></section>
+</main></body></html>
