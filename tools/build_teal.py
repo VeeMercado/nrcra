@@ -56,7 +56,7 @@ def home_body():
 <div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M34 30L58 44L34 58Z" fill="currentColor"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>
 
 <section class="sec"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas (LGA),<br>one region, <span class="mark">one network{B.SQUIGGLE}</span>.</h2><ul class="lgapills">{lgas}</ul><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-map">{B.places_map()}</div></div></div></section>
+<p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{img("laughing", alt="")}{img("talk", alt="")}{img("circle", alt="")}<span class="blob" aria-hidden="true"></span></div></div></div></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="statcard"><span class="eyebrow">What we have achieved</span>{B.stats()}</div></div></section>
 
@@ -81,8 +81,7 @@ def team():
 
 def about_body():
     return f'''<div class="wrap"><div class="splith rev"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow">About us</span><h1>We&rsquo;re changing the Northern Rivers&rsquo; resilience culture</h1><p class="lede">{B.MORE}</p></div></div></div>
-<section class="sec"><div class="wrap"><div class="card vp-wrap surface"><div><span class="script">Our goal</span><h2>Vision</h2><p>{B.VISION}</p><span class="script" style="margin-top:28px">Our why</span><h2>Purpose</h2><p>{B.PURPOSE}</p></div>
-<div class="circles">{B.deco("rings", "")}{img("laughing", alt="")}{img("talk", alt="")}{img("circle", alt="")}<span class="blob" aria-hidden="true"></span></div></div></div></section>
+<section class="sec"><div class="wrap"><div class="card surface"><div class="vp-text"><span class="script">Our goal</span><h2>Vision</h2><p>{B.VISION}</p><span class="script" style="margin-top:28px">Our why</span><h2>Purpose</h2><p>{B.PURPOSE}</p></div></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><span class="script">How we take action</span><h2 class="sechead">{hl("We have a MEAL plan")}</h2><p class="lede">Monitoring, Evaluation, Accountability and Learning. A healthy Resilience Alliance isn&rsquo;t just one that delivers projects. It&rsquo;s one where people feel included, power is shared, groups gain real value, and we can learn and adapt together.</p>
 {B.meal()}<ul class="mealgrid">{"".join(f'<li>{icon(k)}<h3>{E(t)}</h3><p>{E(d)}</p></li>' for t, d, k in MEAL6)}</ul></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><span class="script">Progress so far</span><h2 class="sechead">Our journey</h2>{B.journey("river")}</div></div></section>
@@ -128,7 +127,7 @@ body.teal{--bg:#f3f6f7}
 /* title highlight is off for now; the class stays so it can come back */
 .hl{padding:0}
 .teal .card{border-radius:var(--r);padding:36px}
-.wwa{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}.wwa>*{min-width:0}.wwa-map{max-width:420px;justify-self:center;width:100%}
+.wwa{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}.wwa>*{min-width:0}.wwa-map{max-width:420px;justify-self:center;width:100%}.wwa-cluster{width:100%}.wwa h2 .mark{isolation:isolate}.wwa h2 .mark .squig{z-index:-1}.vp-text{max-width:72ch}
 .lgapills{list-style:none;margin:16px 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px}.lgapills li{border:2px solid #f3f6f7;border-radius:99px;padding:.25em .9em;font-weight:700;font-size:.95rem;background:#f3f9f8;color:#586c74}.subline{margin:40px 0 1em;font-size:1.2rem;font-weight:800;line-height:1.35}
 .statrow{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}.statrow>*{min-width:0}.statcard{border-radius:var(--r);padding:36px}.statcard .stats dt{color:var(--navy)}
 .framed{border-radius:36px;padding:14px;background:var(--fr,var(--teal))}.framed img{border-radius:24px;width:100%;aspect-ratio:4/3;object-fit:cover}
@@ -229,6 +228,9 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .herobg .h1-panel{margin:40px 0}
 .herobg .h1-photo .play{left:calc((var(--pw,580px) + 100%)/2)}
 @media(max-width:739px){.herobg>.wrap:first-child{border-radius:28px;width:calc(100% - 24px)}.herobg .h1-panel{margin:0}.tb .herobg .h1-panel{padding:28px 18px 36px}.herobg .btnrow .btn{padding:.7em 1em}}
+/* Who we are: when the columns stack, the photos come first, above the title */
+@media(max-width:860px){.wwa-cluster{order:-1}}
+@media(min-width:861px) and (max-width:1000px){.wwa-cluster .circles{zoom:.78}}
 /* phones, B: gradient runs left to right and the play circle becomes a normal secondary button beside About */
 .watchbtn{display:none}
 .watchbtn{gap:.55em}.watchbtn svg{flex:none}
