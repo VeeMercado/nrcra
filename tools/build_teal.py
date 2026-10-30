@@ -219,6 +219,12 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .site-foot{--foot-h:var(--teal)}
 .tb .pmap{--land:#fff;--sea:var(--teal-12);--coast:var(--teal);--river:var(--teal)}
 .herobg .play{display:grid;place-items:center;width:92px;height:92px;padding:0}.herobg .play svg{display:block;width:100%;height:100%;font-family:var(--font)}
+/* B header cropped like Prototype 3: a rounded box inside the page width, not edge to edge */
+.herobg{padding:20px 0 0!important}
+.herobg>.wrap:first-child{width:calc(100% - 40px);max-width:calc(var(--wrap) - 40px);margin:0 auto;padding:0;border-radius:40px;overflow:hidden}
+.herobg .h1-panel{margin:40px 0}
+.herobg .h1-photo .play{left:calc((var(--pw,580px) + 100%)/2)}
+@media(max-width:739px){.herobg>.wrap:first-child{border-radius:28px;width:calc(100% - 24px)}.herobg .h1-panel{margin:0}.tb .herobg .h1-panel{padding:28px 18px 36px}.herobg .btnrow .btn{padding:.7em 1em}}
 /* phones, B: gradient runs left to right and the play circle becomes a normal secondary button beside About */
 .watchbtn{display:none}
 .watchbtn{gap:.55em}.watchbtn svg{flex:none}
