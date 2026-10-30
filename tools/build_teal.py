@@ -266,6 +266,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .statcard.impact{position:relative;overflow:hidden;padding-top:54px;border-bottom-color:var(--orange);text-align:center}
 .tb .statcard.impact::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--orange)}
 .statcard.impact .btnrow{justify-content:center;margin:28px 0 0}
+.tb .site-foot .foot-top{display:flex;align-items:flex-start}.tb .site-foot .foot-logo.boxed{display:block;width:fit-content;max-width:100%;padding:10px 14px;line-height:0}.tb .site-foot .foot-logo .logo{width:200px;max-width:100%;display:block}
 /* footer, teal design: adjusted teal background, white text, white brush behind each title with adjusted teal text */
 .tb .site-foot{background:#07293b;color:#fff;border-top:1px solid var(--line);--foot-line:rgba(255,255,255,.4)}
 .tb .site-foot .fcol h2{color:#00857c;background-repeat:no-repeat;background-position:center;background-size:100% 100%;display:inline-block;padding:1.3em 2.6em 1.3em 2.1em;margin:0 0 14px -1.1em;line-height:1.25;position:static}
