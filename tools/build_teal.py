@@ -59,7 +59,7 @@ def home_body():
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn About us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M1 1l12 7-12 7z" fill="currentColor"/></svg>Watch reel</button></p></div>
 <div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M34 30L58 44L34 58Z" fill="currentColor"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>
 
-<section class="sec"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas (LGA),<br>one region, <span class="mark">one network{B.SQUIGGLE}</span>.</h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
+<section class="sec"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas (LGA),<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="statcard"><span class="eyebrow">What we have achieved</span>{B.stats()}</div></div></section>
@@ -131,8 +131,8 @@ body.teal{--bg:#f3f6f7}
 /* title highlight is off for now; the class stays so it can come back */
 .hl{padding:0}
 .teal .card{border-radius:var(--r);padding:36px}
-.wwa{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}.wwa>*{min-width:0}.wwa-map{max-width:420px;justify-self:center;width:100%}.wwa-cluster{width:100%}.mark{isolation:isolate}.mark .squig{z-index:-1}.vp-text{max-width:72ch}
-.lgapills{list-style:none;margin:34px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:16px 14px}.lgapills li{position:relative;isolation:isolate;padding:.55em 1.3em;font-weight:700;font-size:.95rem;color:#586c74}.lgapills li::before{content:"";position:absolute;inset:-5px -9px;z-index:-1;background:url(../assets/brush/brush-1.svg) center/100% 100% no-repeat}.lgapills li:nth-child(3n+2)::before{background:url(../assets/brush/brush-2.svg) center/100% 100% no-repeat}.lgapills li:nth-child(3n)::before{background:url(../assets/brush/brush-3.svg) center/100% 100% no-repeat}
+.wwa{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}.wwa>*{min-width:0}.wwa-map{max-width:420px;justify-self:center;width:100%}.wwa-cluster{width:100%;order:-1}.mark{isolation:isolate}.mark .squig{z-index:-1}.vp-text{max-width:72ch}
+.lgapills{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 6px}.lgapills li{position:relative;isolation:isolate;padding:.25em .85em;font-weight:700;font-size:.88rem;line-height:1.25;color:#586c74}.lgapills li::before{content:"";position:absolute;inset:-4px -7px;z-index:-1;background:url(../assets/brush/brush-1.svg) center/100% 100% no-repeat}.lgapills li:nth-child(3n+2)::before{background:url(../assets/brush/brush-2.svg) center/100% 100% no-repeat}.lgapills li:nth-child(3n)::before{background:url(../assets/brush/brush-3.svg) center/100% 100% no-repeat}
 .statrow{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}.statrow>*{min-width:0}.statcard{border-radius:var(--r);padding:36px}.statcard .stats dt{color:var(--navy)}
 .framed{border-radius:36px;padding:14px;background:var(--fr,var(--teal))}.framed img{border-radius:24px;width:100%;aspect-ratio:4/3;object-fit:cover}
 .pcard2 .p3{align-items:center}
@@ -145,12 +145,13 @@ body.teal{--bg:#f3f6f7}
 @media(max-width:860px){.splith{grid-template-columns:1fr}.splith.rev .ph{order:0}}
 .script{font:700 1.5rem Caveat,cursive;color:var(--orange-d);display:block;margin-bottom:2px}
 .vp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.vp-wrap>*{min-width:0}@media(max-width:860px){.vp-wrap{grid-template-columns:1fr}}
-.circles{position:relative;width:100%;max-width:560px;margin:0 auto;aspect-ratio:1/1.14}.circles img{position:absolute;border-radius:50%;object-fit:cover;border:8px solid #fff;aspect-ratio:1/1;height:auto}
-.circles img:nth-of-type(1){width:66%;left:15%;top:0;z-index:2}.circles img:nth-of-type(2){width:60%;left:22%;bottom:calc(-8% + min(50px,11%));z-index:1}
-.circles .blob{position:absolute;right:3%;bottom:calc(6% + min(50px,11%));width:30%;aspect-ratio:1/1;z-index:3;background:var(--yellow);border-radius:62% 38% 55% 45%/48% 60% 40% 52%}
+.circles{position:relative;width:100%;max-width:560px;margin:0 auto -60px;aspect-ratio:1/1.14;transform:translateX(calc(-6.75% - 6px))}.circles img{position:absolute;border-radius:50%;object-fit:cover;border:8px solid #fff;aspect-ratio:1/1;height:auto}
+.circles img:nth-of-type(1){width:66%;left:15%;top:0;z-index:2}.circles img:nth-of-type(2){width:60%;left:22%;bottom:calc(-8% + min(50px,11%));z-index:1;translate:0 -60px}
+.circles .blob{position:absolute;left:calc(6.5% + 12px);top:calc(-5% + 10px);width:30%;aspect-ratio:1/1;z-index:3;background:var(--yellow);border-radius:62% 38% 55% 45%/48% 60% 40% 52%}
 
-.deco{position:absolute;pointer-events:none;width:150px;height:150px}.circles .deco-rings{z-index:0;width:46%;height:auto;left:-8%;top:30%}
-@media(max-width:760px){.circles img{border-width:6px}.circles .deco-rings{left:0}}
+.deco{position:absolute;pointer-events:none;width:150px;height:150px}.circles .deco-rings{z-index:0;width:46%;height:auto;right:-7%;left:auto;top:26%}
+@media(max-width:560px){.circles{margin-bottom:-36px}.circles img:nth-of-type(2){translate:0 -36px}}
+@media(max-width:760px){.circles img{border-width:6px}}
 .meal{margin:18px 0 22px}.mealgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.mealgrid li{background:var(--grey-6);border-radius:18px;padding:18px 14px}.mealgrid .ico{width:34px;height:34px;color:var(--navy);margin-bottom:8px}.mealgrid h3{font-size:1rem;margin:0 0 .3em}.mealgrid p{margin:0;font-size:.9rem}
 @media(max-width:1000px){.mealgrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.mealgrid{grid-template-columns:1fr 1fr}}
 .team2{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:24px}.team2 li{width:150px;text-align:center;display:grid;justify-items:center;gap:4px}.team2 .tc{width:96px;height:96px;border-radius:50%;background:var(--teal-25);display:grid;place-items:center;font-weight:800;font-size:.9rem}.team2 li span:not(.tc){font-size:.9rem;color:var(--muted)}
@@ -231,6 +232,10 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .wwa{position:relative;overflow:hidden;padding-top:54px}
 .tb .wwa::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--yellow)}
 @media(max-width:860px){.tb .wwa{padding-top:44px}}
+/* phones: the circles spread out in a row across the section, about half the size */
+@media(max-width:739px){.circles{aspect-ratio:2.6/1;margin:0 auto;transform:none}.circles img{border-width:4px}
+.circles img:nth-of-type(1){width:34%;left:12%;top:0;bottom:auto}.circles img:nth-of-type(2){width:31%;left:49%;top:20%;bottom:auto;translate:none}
+.circles .blob{width:16%;left:0;top:34%}.circles .deco-rings{width:23%;right:0;left:auto;top:26%}}
 /* B header cropped like Prototype 3: a rounded box inside the page width, not edge to edge */
 .herobg{padding:20px 0 0!important}
 .herobg>.wrap:first-child{width:calc(100% - 40px);max-width:calc(var(--wrap) - 40px);margin:0 auto;padding:0;border-radius:40px;overflow:hidden;border-bottom:10px solid var(--teal)}
@@ -238,7 +243,6 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .herobg .h1-photo .play{left:calc((var(--pw,580px) + 100%)/2)}
 @media(max-width:739px){.herobg>.wrap:first-child{border-radius:28px;width:calc(100% - 24px)}.herobg .h1-panel{margin:0}.tb .herobg .h1-panel{padding:28px 18px 36px}.herobg .btnrow .btn{padding:.7em 1em}}
 /* Who we are: when the columns stack, the photos come first, above the title */
-@media(max-width:860px){.wwa-cluster{order:-1}}
 /* phones, B: gradient runs left to right and the play circle becomes a normal secondary button beside About */
 .watchbtn{display:none}
 .watchbtn{gap:.55em}.watchbtn svg{flex:none}
