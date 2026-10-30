@@ -129,6 +129,18 @@ def slug(t):
     return re.sub(r"[^a-z]+", "-", t.lower()).strip("-")
 
 
+# Real groups where both the name and a working website are known (checked 30 Oct 2026). Membership of the Alliance to be confirmed by NRCRA.
+REAL = {
+    "Lismore": ("Resilient Lismore", "https://resilientlismore.org.au"),
+    "Uki": ("Resilient Uki", "https://resilientuki.org"),
+    "Wardell": ("WardellCORE", "https://www.wardellcore.community"),
+    "Mullumbimby": ("Mullumbimby District Neighbourhood Centre", "https://www.mdnc.org.au"),
+    "Nimbin": ("Nimbin Disaster Resilience Group", "https://nnic.org.au/pub/index.php/disasters"),
+    "The Channon": ("The Channon Resilience", "https://thechannonhub.org/"),
+    "Rosebank": ("Minyon Resilience Network", "https://minyonresiliencenetwork.com/"),
+}
+
+
 def all_groups():
     rnd = random.Random(58)
     forms = NAME_FORMS[:]
@@ -140,19 +152,29 @@ def all_groups():
     rows.sort(key=lambda r: r[0].lower())
     out = []
     for i, (sub, lga) in enumerate(rows):
-        out.append((forms[i % len(forms)].format(sub), sub, lga, rnd.random() < .7))
+        has_web = rnd.random() < .7
+        if sub in REAL:
+            out.append((REAL[sub][0], sub, lga, REAL[sub][1]))
+        else:
+            out.append((forms[i % len(forms)].format(sub), sub, lga, "#" if has_web else ""))
     return out
 
 
 def group_card(name, sub, lga, web):
-    btn = '<a class="btn btn-ghost btn-sm" href="#" data-sample="1">Visit website</a>' if web else ""
+    if web == "#":
+        btn = '<a class="btn btn-ghost btn-sm" href="#" data-sample="1">Visit website</a>'
+    elif web:
+        btn = f'<a class="btn btn-ghost btn-sm" href="{web}" target="_blank" rel="noopener">Visit website<span class="sr-only"> (opens in a new tab)</span></a>'
+    else:
+        btn = ""
     return f'<li><b>{E(name)}</b><span>{E(sub)}, {E(lga)}</span>{btn}</li>'
 
 
 def lga_select(cur=""):
-    opts = f'<option value="">Choose a Local Government Area</option>' if not cur else '<option value="network">All Local Government Areas</option>'
-    opts += "".join(f'<option value="lga-{slug(l)}"{" selected" if l == cur else ""}>{E(l)}</option>' for l in LGA_ORDER)
-    return f'<label class="lgasel-l">Local Government Area<select class="lgasel" data-cur="{"lga-" + slug(cur) if cur else ""}">{opts}</select></label>'
+    first = "See all Local Government Areas (LGA)"
+    opts = f'<option value="{"network" if cur else ""}">{first}</option>'
+    opts += "".join(f'<option value="lga-{slug(l)}"{" selected" if l == cur else ""}>{E(l)} LGA</option>' for l in LGA_ORDER)
+    return f'<select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="{"lga-" + slug(cur) if cur else ""}">{opts}</select>'
 
 
 def dir_head(title, cur="", tag="h2"):
@@ -177,14 +199,14 @@ def testimonials():
 
 def network_body():
     cards = "".join(group_card(*g) for g in all_groups())
-    return f'''<div class="wrap"><div class="splith net"><div><span class="eyebrow">Network</span><h1>50+ groups, one region, <span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 council areas across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed().split('<p class="vnote">')[0]}</div></div></div>
+    return f'''<div class="wrap"><div class="splith net"><div><span class="eyebrow">Network</span><h1>50+ groups, one region, <span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed().split('<p class="vnote">')[0]}</div></div></div>
 {testimonials()}
 <section class="sec" id="our-network" style="padding-top:0"><div class="wrap">{dir_head("Our Network")}<ul class="gsub">{cards}</ul></div></section>'''
 
 
 def lga_body(lga):
     cards = "".join(group_card(*g) for g in all_groups() if g[2] == lga)
-    return f'<section class="sec"><div class="wrap">{dir_head("Our Network: " + E(lga), lga, "h1")}<ul class="gsub">{cards}</ul></div></section>'
+    return f'<section class="sec"><div class="wrap">{dir_head("Our Network", lga, "h1")}<ul class="gsub">{cards}</ul></div></section>'
 
 
 def impact_body():
@@ -350,6 +372,11 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .sec{padding:0 0 65px!important}.tb .page>.sec:first-child{padding-top:65px!important}
 .tb .hero1.herobg{margin-bottom:65px}.tb .page>.wrap:first-child>.splith{padding-bottom:0}.tb .page>.wrap:first-child{margin-bottom:65px}
 
+/* Network only: double the space (130px) with a yellow divider in the middle */
+.tb #network>.wrap:first-child{margin-bottom:130px}.tb #network>.sec:not(:last-child){padding-bottom:130px!important}
+.tb #network>.wrap:first-child,.tb #network>.sec:not(:last-child)>.wrap{position:relative}
+.tb #network>.wrap:first-child::after,.tb #network>.sec:not(:last-child)>.wrap::after{content:"";position:absolute;left:20px;right:20px;bottom:-67px;height:4px;border-radius:2px;background:var(--yellow)}
+
 /* Network page: map as tall as the text, testimonials, suburb directory */
 .tb .splith.net{align-items:stretch}.tb .splith.net>div:first-child{align-self:center}.tb .splith.net .ph{display:flex}.tb .splith.net .ph .mapbox{height:auto;min-height:320px;flex:1}
 .tb .splith .eyebrow.pill-t,.tb .eyebrow.pill-t{display:inline-block;background:#00857c;color:#fff;padding:.55em 1.5em;border-radius:99px;margin-bottom:28px}
@@ -359,11 +386,13 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tcards .tph .play{inset:auto;top:50%;left:50%;margin:0;transform:translate(-50%,-50%);width:76px;height:76px;padding:0;display:grid;place-items:center}.tcards .tph .play svg{width:100%;height:100%}
 .tcards blockquote{margin:0;padding:24px 24px 20px;display:flex;flex-direction:column;gap:14px;flex:1}.tcards blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:700}
 .tcards blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:.95rem}
-.dirhead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px;margin-bottom:24px}.dirhead .sechead{margin:0}
+.dirhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:16px 24px;margin-bottom:24px}.dirhead .sechead{margin:0}
 .lgasel-l{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.9rem}.lgasel{font:700 1rem var(--font);color:var(--navy);padding:.7em 2.4em .7em 1em;min-height:44px;border:2px solid #00857c;border-radius:12px;background:#fff;min-width:260px;cursor:pointer}
+.dirhead h1.sechead{font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:800}
 .gsub{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
 .gsub li{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
 .gsub b{font-size:1.1rem;line-height:1.25}.gsub span{color:#586c74;font-size:.95rem}.gsub .btn{margin-top:14px}
+.gsub .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .btn-sm{font-size:.9rem;padding:.5em 1.1em;min-height:38px}
 @media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:320px;flex:none}}
 @media(max-width:739px){.lgasel-l,.lgasel{width:100%}}
@@ -387,7 +416,7 @@ def tfooter():
 JSX = JS.replace("var nk=h.indexOf('rack')===0?'rack':h;", "var nk=h.indexOf('rack')===0?'rack':h.indexOf('lga-')===0?'network':h;").replace("'/#'+h}", "'/#'+(h.indexOf('lga-')===0?'network':h)}")
 assert JSX.count("lga-") == 2
 JS2 = """(function(){var sel=[].slice.call(document.querySelectorAll('.lgasel'));
-sel.forEach(function(s){s.addEventListener('change',function(){var v=s.value||'network';location.hash=v;if(v==='network')setTimeout(function(){var t=document.getElementById('our-network');if(t)t.scrollIntoView()},60)})});
+sel.forEach(function(s){s.addEventListener('change',function(){var v=s.value||'network';location.hash=v;if(v==='network')setTimeout(function(){var t=document.getElementById('our-network'),h=document.querySelector('.site-head');if(t)window.scrollTo(0,t.getBoundingClientRect().top+window.scrollY-67-(h?h.offsetHeight:0)-16)},60)})});
 window.addEventListener('hashchange',function(){sel.forEach(function(s){s.value=s.getAttribute('data-cur')})});
 document.addEventListener('click',function(e){var a=e.target.closest('[data-sample]');if(a)e.preventDefault()})})();"""
 
