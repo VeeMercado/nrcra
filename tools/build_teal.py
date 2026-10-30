@@ -222,6 +222,11 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .wwa{border-bottom-color:var(--yellow)}
 .wwa .btn-primary{background:#ffcb2a;color:#07293b;border-color:#07293b}.wwa .btn-primary:hover{background:#07293b;color:#fff;border-color:#07293b}.wwa .btn-primary:active{background:#ffeaaa;color:#07293b;border-color:#07293b}
 .lgapills li{background:#ffeaaa}
+/* solid colour band across the top, like Prototype A's five pillars: teal on the header, yellow on Who we are */
+.herobg>.wrap:first-child::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--teal);z-index:4}
+.tb .wwa{position:relative;overflow:hidden;padding-top:54px}
+.tb .wwa::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--yellow)}
+@media(max-width:860px){.tb .wwa{padding-top:44px}}
 /* B header cropped like Prototype 3: a rounded box inside the page width, not edge to edge */
 .herobg{padding:20px 0 0!important}
 .herobg>.wrap:first-child{width:calc(100% - 40px);max-width:calc(var(--wrap) - 40px);margin:0 auto;padding:0;border-radius:40px;overflow:hidden}
