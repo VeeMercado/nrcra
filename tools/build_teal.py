@@ -225,7 +225,7 @@ def rack_body():
         ph = img(key, alt="") if key else f'<span class="rshare" aria-hidden="true">{icon("share")}</span>'
         cards += f'<li><span class="rph">{ph}</span><h3>{t}</h3><p>{d}</p><a class="btn btn-ghost btn-sm" href="#" data-sample="1">{b}</a></li>'
     return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow">Resources</span><h1>The R.A.C.K.</h1><p class="lede"><b>Resilience Alliance Community Knowledge.</b> One shared place where the whole network can find what already works from years of real community experience across the Northern Rivers.</p><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p>
-<p class="btnrow"><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20access">Request access</a><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20help">Get help</a></p></div>
+<p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20access">Request access</a><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20help">Get help</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a></p></div>
 <div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="A community member using the R.A.C.K. on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
 <section class="sec"><div class="wrap"><div class="card surface"><span class="eyebrow">Resource library</span><h2 class="sechead">What you&rsquo;ll find:</h2><p class="lede">Find templates and guides you can use straight away, and contribute knowledge back in two minutes.</p><ul class="rcards">{cards}</ul></div></div></section>'''
 
@@ -417,7 +417,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tcards .tph .play{inset:auto;top:50%;left:50%;margin:0;transform:translate(-50%,-50%);width:76px;height:76px;padding:0;display:grid;place-items:center}.tcards .tph .play svg{width:100%;height:100%}
 .tcards blockquote{margin:0;padding:0;display:flex;flex-direction:column;gap:14px;flex:1}.tcards blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:700}
 .tcards blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:.95rem}
-.dirhead{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px 24px;margin-bottom:35px}.dirhead .sechead{margin:0;grid-column:2;grid-row:1;text-align:center}.dirhead .lgasel{grid-column:1;grid-row:1;justify-self:start}
+.dirhead{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px 24px;margin-bottom:35px}.dirhead .sechead{margin:0;grid-column:2;grid-row:1;text-align:center}.dirhead .lgasel{grid-column:3;grid-row:1;justify-self:end}
 .lgasel-l{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.9rem}.lgasel{font:700 1rem var(--font);color:var(--navy);padding:.7em 2.4em .7em 1em;min-height:44px;border:2px solid #00857c;border-radius:12px;background:#fff;min-width:260px;cursor:pointer}
 .dirhead h1.sechead{font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:800}
 .gsub{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
