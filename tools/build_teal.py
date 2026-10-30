@@ -248,12 +248,17 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .statcard.impact{position:relative;overflow:hidden;padding-top:54px;border-bottom-color:var(--orange);text-align:center}
 .tb .statcard.impact::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--orange)}
 .statcard.impact .btnrow{justify-content:center;margin:28px 0 0}
-/* footer: adjusted teal, white text, white brush behind each title with adjusted teal text */
-.tb .site-foot{background:#00857c;color:#fff;--foot-line:rgba(255,255,255,.4)}
-.tb .site-foot .fcol h2{color:#00857c;background-repeat:no-repeat;background-position:center;background-size:100% 100%;display:inline-block;padding:1.3em 2.6em 1.3em 2.1em;margin:0 0 14px -1.1em;line-height:1.25;position:static}
+/* footer, Prototype A's design: white background, adjusted teal text, teal brush behind white titles, teal strip on top and border below */
+.tb .site-foot{background:#fff;color:#00857c;position:relative;overflow:hidden;padding-top:56px;border-radius:var(--r) var(--r) 0 0;--foot-line:#07293b}
+.tb .site-foot::before{content:"";position:absolute;left:0;right:0;top:0;height:28px;background:var(--teal)}
+.tb .site-foot .fcol h2{color:#fff;background-repeat:no-repeat;background-position:center;background-size:100% 100%;display:inline-block;padding:1.3em 2.6em 1.3em 2.1em;margin:0 0 14px -1.1em;line-height:1.25;position:static}
 .tb .site-foot .fcol h2::after{display:none}
-.tb .site-foot .fb1{background-image:url(../assets/brush/brush-white-1.svg)}.tb .site-foot .fb2{background-image:url(../assets/brush/brush-white-2.svg)}.tb .site-foot .fb3{background-image:url(../assets/brush/brush-white-3.svg)}
-.tb .site-foot .flist li::before{background:#fff;opacity:.7}
+.tb .site-foot .fb1{background-image:url(../assets/brush/brush-teal-1.svg)}.tb .site-foot .fb2{background-image:url(../assets/brush/brush-teal-2.svg)}.tb .site-foot .fb3{background-image:url(../assets/brush/brush-teal-3.svg)}
+.tb .site-foot .flist li::before{background:#00857c;opacity:.7}.tb .site-foot .foot-logo.boxed{background:transparent;padding:0}
+.tb .site-foot a:hover{color:var(--navy)}
+.tb .site-foot .foot-cols{grid-template-columns:repeat(3,minmax(0,1fr))}.tb .fstack .fcol+.fcol{margin-top:24px}@media(max-width:700px){.tb .site-foot .foot-cols{grid-template-columns:1fr}}
+.tb .site-foot .ack,.tb .site-foot .copy{color:var(--navy)}.tb .site-foot .copy a{color:var(--navy)}
+
 """
 
 
@@ -265,7 +270,7 @@ def tfooter():
     site = [("Alliance Home", "#home"), ("Network", "#network"), ("About", "#about"), ("Impact", "#impact"), ("Sign In", SIGN_IN)]
     top = '<div class="foot-top"><span class="foot-logo boxed">' + logo("logo") + '</span></div>'
     return f'''<footer class="site-foot"><div class="wrap">
-<div class="foot-cols">{top}{col(1, "Contact", contact)}{col(2, "Stay in Touch", touch)}{col(3, "Site map", site)}</div>
+<div class="foot-cols">{top}{col(3, "Site map", site)}<div class="fstack">{col(2, "Stay in Touch", touch)}{col(1, "Contact", contact)}</div></div>
 <div class="ack">{B.ABORIGINAL_FLAG}<p>{B.ACK}</p></div>
 <p class="copy">© 2026 Northern Rivers Community Resilience Alliance &middot; <a href="https://www.nrcra.org.au/copy-of-terms-conditions">Privacy Policy</a></p>
 </div></footer>'''
