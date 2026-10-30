@@ -75,11 +75,30 @@ def team():
     return '<ul class="team2">' + "".join(f'<li><span class="tc" aria-hidden="true">Photo</span><b>Name</b><span>{r}</span></li>' for r in roles) + '</ul><p class="vnote">Sample placeholders. Names and photos to come.</p>'
 
 
+MEAL_RING = [("Connect", "#00857c", "#fff"), ("Listen", "#f05a28", "#fff"), ("Reflect", "#ffcb2a", "#07293b"), ("Improve", "#00857c", "#fff"), ("Share", "#f05a28", "#fff"), ("Strengthen", "#ffcb2a", "#07293b")]
+
+
+def meal_ring():
+    import math
+    dots = ""
+    pts = []
+    for i, (n, bg, fg) in enumerate(MEAL_RING):
+        a = math.radians(-90 + 60 * i)
+        x, y = 50 + 36 * math.cos(a), 50 + 36 * math.sin(a)
+        pts.append(f"{x:.1f},{y:.1f}")
+        dots += f'<li style="left:{x:.1f}%;top:{y:.1f}%;background:{bg};color:{fg}">{n}</li>'
+    return (f'<div class="mealwrap"><div class="mealring"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="{" ".join(pts)}" fill="none" stroke="#beddda" stroke-width="1.2"/></svg><ol>{dots}</ol></div>'
+            '<blockquote class="mealq"><p class="mq">&ldquo;What is your group doing differently as a result of being part of the Alliance?&rdquo;</p>'
+            '<p>Rather than only counting activities, we look for real changes in relationships, knowledge, capability and collective action, gathered through conversations at Gatherings and site visits, and turned into shared stories.</p></blockquote></div>')
+
+
 def about_body():
     return f'''<div class="wrap"><div class="splith rev"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow">About us</span><h1>We&rsquo;re changing the Northern Rivers&rsquo; resilience culture</h1><p class="lede">{B.MORE}</p></div></div></div>
 <section class="sec"><div class="wrap"><div class="card surface"><div class="vp-text"><span class="script">Our goal</span><h2>Vision</h2><p>{B.VISION}</p><span class="script" style="margin-top:28px">Our why</span><h2>Purpose</h2><p>{B.PURPOSE}</p></div></div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">Our values</h2>{B.values_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><span class="script">How we take action</span><h2 class="sechead">{hl("We have a MEAL plan")}</h2><p class="lede">Monitoring, Evaluation, Accountability and Learning. A healthy Resilience Alliance isn&rsquo;t just one that delivers projects. It&rsquo;s one where people feel included, power is shared, groups gain real value, and we can learn and adapt together.</p>
-{B.meal()}<ul class="mealgrid">{"".join(f'<li>{icon(k)}<h3>{E(t)}</h3><p>{E(d)}</p></li>' for t, d, k in MEAL6)}</ul></div></section>
+{meal_ring()}</div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><span class="eyebrow">Our focus</span><h2 class="sechead">{hl("Five pillars")}</h2><p class="lede">{B.CALLOUT} We connect them using these five key pillars.</p>{pillar_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><span class="script">Progress so far</span><h2 class="sechead">Our journey</h2>{B.journey("river")}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Meet the team</h2>{team()}</div></div></section>'''
 
@@ -106,7 +125,6 @@ def group_cards():
 
 def network_body():
     return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow">Network</span><h1>{B.NET_H1}</h1><p class="lede">8 council areas across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed()}</div></div></div>
-<section class="sec"><div class="wrap"><span class="eyebrow">Our focus</span><h2 class="sechead">{hl("Five pillars")}</h2><p class="lede">{B.CALLOUT} We connect them using these five key pillars.</p>{pillar_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">All groups</h2>{group_cards()}</div></div></section>'''
 
 
@@ -256,9 +274,19 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .site-foot .fb1{background-image:url(../assets/brush/brush-teal-1.svg)}.tb .site-foot .fb2{background-image:url(../assets/brush/brush-teal-2.svg)}.tb .site-foot .fb3{background-image:url(../assets/brush/brush-teal-3.svg)}
 .tb .site-foot .flist li::before{background:#00857c;opacity:.7}.tb .site-foot .foot-logo.boxed{background:transparent;padding:0}
 .tb .site-foot a:hover{color:var(--navy)}
+.tb .site-foot .flist a{display:inline-block;padding:.3em .8em;margin-left:-.8em;color:var(--navy);font-weight:400;text-decoration:none;border-radius:var(--btn-r,99px);line-height:1.4}
+.tb .site-foot .flist li{margin-bottom:6px}.tb .site-foot .flist li::before{top:50%;transform:translateY(-50%)}
+.tb .site-foot .flist a:hover{background:var(--teal-12);color:var(--navy);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.tb .site-foot .flist a:active{background:var(--teal-25);color:var(--navy)}
 .tb .site-foot .foot-cols{grid-template-columns:repeat(3,minmax(0,1fr))}.tb .fstack .fcol+.fcol{margin-top:24px}@media(max-width:700px){.tb .site-foot .foot-cols{grid-template-columns:1fr}}
 .tb .site-foot .ack,.tb .site-foot .copy{color:var(--navy)}.tb .site-foot .copy a{color:var(--navy)}
 
+/* MEAL: six circles round a ring, like the Layout Design PDF */
+.mealwrap{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:48px;align-items:center;margin:28px 0 0}
+.mealring{position:relative;width:100%;max-width:440px;aspect-ratio:1/1;margin:0 auto}.mealring svg{position:absolute;inset:0;width:100%;height:100%}
+.mealring ol{list-style:none;margin:0;padding:0}.mealring li{position:absolute;width:30%;aspect-ratio:1/1;translate:-50% -50%;border-radius:50%;display:grid;place-items:center;text-align:center;font-weight:800;font-size:clamp(1.05rem,2.6vw,1.2rem)}
+.mealq{margin:0;border-left:4px solid var(--teal);padding-left:24px}.mealq p{margin:0 0 .6em}.mealq .mq{font-weight:800;font-size:1.25rem;line-height:1.35;color:var(--navy)}
+@media(max-width:860px){.mealwrap{grid-template-columns:1fr;gap:28px}}
 """
 
 
