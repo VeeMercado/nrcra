@@ -7,6 +7,7 @@ White text never sits on teal (2.99:1). Navy text on teal is 5.05:1.
 Imported by build.py, which owns the shared helpers and base CSS.
 """
 import re
+import random
 import build as B
 from build import E, img, logo, screen, icon, BASE, MOBILE, JS, FONT, CSS1, VIMEO, CONTACT
 
@@ -93,7 +94,7 @@ def meal_ring():
 
 
 def about_body():
-    return f'''<div class="wrap"><div class="splith rev"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow">About us</span><h1>We&rsquo;re changing the Northern Rivers&rsquo; resilience culture</h1><p class="lede">{B.MORE}</p></div></div></div>
+    return f'''<div class="wrap"><div class="splith rev"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow pill-t">About us</span><h1>We&rsquo;re changing the Northern Rivers&rsquo; resilience culture</h1><p class="lede">{B.MORE}</p></div></div></div>
 <section class="sec"><div class="wrap"><div class="card surface"><div class="vp-text"><span class="script">Our goal</span><h2>Vision</h2><p>{B.VISION}</p><span class="script" style="margin-top:28px">Our why</span><h2>Purpose</h2><p>{B.PURPOSE}</p></div></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">Our values</h2>{B.values_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><span class="script">How we take action</span><h2 class="sechead">{hl("We have a MEAL plan")}</h2><p class="lede">Monitoring, Evaluation, Accountability and Learning. A healthy Resilience Alliance isn&rsquo;t just one that delivers projects. It&rsquo;s one where people feel included, power is shared, groups gain real value, and we can learn and adapt together.</p>
@@ -108,24 +109,82 @@ def pillar_cards():
     return '<ol class="pillcards">' + "".join(f'<li><span class="pi">{icon(k)}</span><span class="pn">{i:02d}</span><h3>{E(t)}</h3><p>{E(d)}</p></li>' for i, (t, d, k) in enumerate(B.PILLARS, 1)) + "</ol>"
 
 
-def group_cards():
-    ph = ["crowd", "laughing", "listening", "cards", "table", "pair", "talk", "house"]
-    n = 0
-    items = ""
-    for p, gs in B.PILLAR_GROUPS.items():
-        for name, area, lga in gs:
-            items += f'<li data-lga="{lga}" data-pillar="{E(p)}"><span class="gph">{img(ph[n % len(ph)], alt="")}<span class="gdot" aria-hidden="true">{name[-1]}</span></span><b>{E(name)}</b><span>{area}, {lga}</span><em>{E(p)}</em><small>Group description to come.</small></li>'
-            n += 1
-    lopts = "".join(f"<option>{l}</option>" for l in B.LGAS)
-    popts = "".join(f"<option>{E(p[0])}</option>" for p in B.PILLARS)
-    return f'''<div class="dir"><div class="filters"><label>Location <select data-f="lga"><option value="">All locations</option>{lopts}</select></label>
-<label>Pillar <select data-f="pillar"><option value="">All pillars</option>{popts}</select></label><label class="dq">Search <input type="search" data-f="q" placeholder="Group name or town"></label></div>
-<ul class="gdir gdir-c">{items}</ul><p class="empty" hidden>No groups match those filters.</p><p class="vnote">Sample groups. Real names and areas come from the Alliance member list.</p></div>'''
+# 58 suburbs and localities across the 8 LGAs (public locality lists). Group names and websites are random sample content.
+SUBURBS = {
+    "Tweed": ["Banora Point", "Cabarita Beach", "Kingscliff", "Murwillumbah", "Pottsville", "Tumbulgum", "Tweed Heads", "Uki"],
+    "Byron": ["Bangalow", "Billinudgel", "Brunswick Heads", "Byron Bay", "Mullumbimby", "Ocean Shores", "Suffolk Park"],
+    "Ballina": ["Alstonville", "Ballina", "Lennox Head", "Skennars Head", "Wardell", "Wollongbar"],
+    "Lismore": ["Bexhill", "Clunes", "Dunoon", "Goonellabah", "Lismore", "Nimbin", "Rosebank", "The Channon"],
+    "Kyogle": ["Bonalbo", "Kyogle", "Mallanganee", "Tabulam", "Urbenville", "Woodenbong"],
+    "Richmond Valley": ["Broadwater", "Casino", "Coraki", "Evans Head", "Rappville", "Woodburn"],
+    "Tenterfield": ["Drake", "Jennings", "Mingoola", "Tenterfield", "Torrington", "Wallangarra"],
+    "Clarence Valley": ["Brooms Head", "Grafton", "Harwood", "Iluka", "Lawrence", "Maclean", "Nymboida", "South Grafton", "Ulmarra", "Wooli", "Yamba"],
+}
+NAME_FORMS = ["{} Survivors", "{} Resilience Crew", "Rising {}", "Strong {} Collective", "{} Ready Crew", "Brave {} Hearts", "{} Together", "Phoenix {}",
+              "{} Neighbours United", "Tough Mob of {}", "{} Grit and Grace", "{} Rapid Responders", "Rebuild {}", "{} Storm Sisters", "Steady {}", "{} Good Hands"]
+LGA_ORDER = sorted(SUBURBS)
+
+
+def slug(t):
+    return re.sub(r"[^a-z]+", "-", t.lower()).strip("-")
+
+
+def all_groups():
+    rnd = random.Random(58)
+    forms = NAME_FORMS[:]
+    rnd.shuffle(forms)
+    rows = []
+    for lga, subs in SUBURBS.items():
+        for sub in subs:
+            rows.append([sub, lga])
+    rows.sort(key=lambda r: r[0].lower())
+    out = []
+    for i, (sub, lga) in enumerate(rows):
+        out.append((forms[i % len(forms)].format(sub), sub, lga, rnd.random() < .7))
+    return out
+
+
+def group_card(name, sub, lga, web):
+    btn = '<a class="btn btn-ghost btn-sm" href="#" data-sample="1">Visit website</a>' if web else ""
+    return f'<li><b>{E(name)}</b><span>{E(sub)}, {E(lga)}</span>{btn}</li>'
+
+
+def lga_select(cur=""):
+    opts = f'<option value="">Choose a Local Government Area</option>' if not cur else '<option value="network">All Local Government Areas</option>'
+    opts += "".join(f'<option value="lga-{slug(l)}"{" selected" if l == cur else ""}>{E(l)}</option>' for l in LGA_ORDER)
+    return f'<label class="lgasel-l">Local Government Area<select class="lgasel" data-cur="{"lga-" + slug(cur) if cur else ""}">{opts}</select></label>'
+
+
+def dir_head(title, cur="", tag="h2"):
+    return f'<div class="dirhead"><{tag} class="sechead">{title}</{tag}>{lga_select(cur)}</div>'
+
+
+TESTIMONIALS = [
+    ("laughing", "Like a whole region of neighbours in your corner.", "Kingscliff Survivors"),
+    ("hug", "Like finally being heard by people who have been through it too.", "Rising Lismore"),
+]
+
+
+def testimonials():
+    def card(img_html, quote, who):
+        return f'<li><div class="tph">{img_html}</div><blockquote><p>&ldquo;{E(quote)}&rdquo;</p><footer>&mdash; {E(who)}</footer></blockquote></li>'
+    vid = f'<div class="tph vid" data-video="{VIMEO}">{img("circle", alt="")}<button class="play" aria-label="Play the video: The Alliance feels like a family, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg></button></div>'
+    c1 = card(img(TESTIMONIALS[0][0], alt=""), TESTIMONIALS[0][1], TESTIMONIALS[0][2])
+    c2 = f'<li>{vid}<blockquote><p>&ldquo;Like a family we did not know we had.&rdquo;</p><footer>&mdash; Phoenix Casino</footer></blockquote></li>'
+    c3 = card(img(TESTIMONIALS[1][0], alt=""), TESTIMONIALS[1][1], TESTIMONIALS[1][2])
+    return f'<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">The Alliance feels like&hellip;</h2><ul class="tcards">{c1}{c2}{c3}</ul></div></section>'
 
 
 def network_body():
-    return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow">Network</span><h1>{B.NET_H1}</h1><p class="lede">8 council areas across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed()}</div></div></div>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">All groups</h2>{group_cards()}</div></div></section>'''
+    cards = "".join(group_card(*g) for g in all_groups())
+    return f'''<div class="wrap"><div class="splith net"><div><span class="eyebrow">Network</span><h1>50+ groups, one region, <span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 council areas across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed().split('<p class="vnote">')[0]}</div></div></div>
+{testimonials()}
+<section class="sec" id="our-network" style="padding-top:0"><div class="wrap">{dir_head("Our Network")}<ul class="gsub">{cards}</ul></div></section>'''
+
+
+def lga_body(lga):
+    cards = "".join(group_card(*g) for g in all_groups() if g[2] == lga)
+    return f'<section class="sec"><div class="wrap">{dir_head("Our Network: " + E(lga), lga, "h1")}<ul class="gsub">{cards}</ul></div></section>'
 
 
 def impact_body():
@@ -282,6 +341,28 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 @media(max-width:860px){.mealwrap{grid-template-columns:1fr;gap:28px}}
 .btn-tertiary{background:#07293b;color:#fff;border-color:#07293b}.btn-tertiary:hover{background:#00857c;color:#fff;border-color:#07293b}.btn-tertiary:active{background:#beddda;color:#07293b;border-color:#07293b}
 main a.btn-tertiary:hover{background:#00857c;color:#fff}
+/* page titles: Home, Network and About all use the same H1 size */
+.tb .herobg .h1-panel h1{font-size:clamp(2rem,4.6vw,3.5rem);line-height:1.12}
+/* Network breadcrumb: the Home pill, in yellow with navy text */
+.tb .splith .eyebrow{display:inline-block;background:var(--yellow);color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin-bottom:28px}
+
+/* Network page: map as tall as the text, testimonials, suburb directory */
+.tb .splith.net{align-items:stretch}.tb .splith.net>div:first-child{align-self:center}.tb .splith.net .ph{display:flex}.tb .splith.net .ph .mapbox{height:auto;min-height:320px;flex:1}
+.tb .splith .eyebrow.pill-t,.tb .eyebrow.pill-t{display:inline-block;background:#00857c;color:#fff;padding:.55em 1.5em;border-radius:99px;margin-bottom:28px}
+.tcards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.tcards li{background:#fff;border:1px solid var(--line);border-bottom:8px solid var(--yellow);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
+.tcards .tph{position:relative;aspect-ratio:4/3;overflow:hidden}.tcards .tph img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
+.tcards .tph .play{inset:auto;top:50%;left:50%;margin:0;transform:translate(-50%,-50%);width:76px;height:76px;padding:0;display:grid;place-items:center}.tcards .tph .play svg{width:100%;height:100%}
+.tcards blockquote{margin:0;padding:24px 24px 20px;display:flex;flex-direction:column;gap:14px;flex:1}.tcards blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:700}
+.tcards blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:.95rem}
+.dirhead{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px;margin-bottom:24px}.dirhead .sechead{margin:0}
+.lgasel-l{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.9rem}.lgasel{font:700 1rem var(--font);color:var(--navy);padding:.7em 2.4em .7em 1em;min-height:44px;border:2px solid #00857c;border-radius:12px;background:#fff;min-width:260px;cursor:pointer}
+.gsub{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.gsub li{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.gsub b{font-size:1.1rem;line-height:1.25}.gsub span{color:#586c74;font-size:.95rem}.gsub .btn{margin-top:14px}
+.btn-sm{font-size:.9rem;padding:.5em 1.1em;min-height:38px}
+@media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:320px;flex:none}}
+@media(max-width:739px){.lgasel-l,.lgasel{width:100%}}
 """
 
 
@@ -299,15 +380,23 @@ def tfooter():
 </div></footer>'''
 
 
+JSX = JS.replace("var nk=h.indexOf('rack')===0?'rack':h;", "var nk=h.indexOf('rack')===0?'rack':h.indexOf('lga-')===0?'network':h;").replace("'/#'+h}", "'/#'+(h.indexOf('lga-')===0?'network':h)}")
+assert JSX.count("lga-") == 2
+JS2 = """(function(){var sel=[].slice.call(document.querySelectorAll('.lgasel'));
+sel.forEach(function(s){s.addEventListener('change',function(){var v=s.value||'network';location.hash=v;if(v==='network')setTimeout(function(){var t=document.getElementById('our-network');if(t)t.scrollIntoView()},60)})});
+window.addEventListener('hashchange',function(){sel.forEach(function(s){s.value=s.getAttribute('data-cur')})});
+document.addEventListener('click',function(e){var a=e.target.closest('[data-sample]');if(a)e.preventDefault()})})();"""
+
+
 def page(v):
     css, cls = CSS_B, "tb"
-    body = "".join([screen("home", "Home", home_body()), screen("about", "About", about_body()), screen("impact", "Impact", impact_body()), screen("network", "Network", network_body())])
+    body = "".join([screen("home", "Home", home_body()), screen("about", "About", about_body()), screen("impact", "Impact", impact_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NRCRA teal-led {NAMES[v]}</title><meta name="robots" content="noindex">
 <meta name="description" content="Teal-led exploration of the NRCRA website. Sample content only.">
 {FONT}<style>{BASE}{CSS1}{CSS_T}{css}{MOBILE}</style></head><body class="v1 teal {cls}">
-{nav3()}<main id="main">{body}</main>{tfooter()}{protobar3(v)}<script data-cfasync="false">{JS}</script></body></html>'''
+{nav3()}<main id="main">{body}</main>{tfooter()}{protobar3(v)}<script data-cfasync="false">{JSX}</script><script data-cfasync="false">{JS2}</script></body></html>'''
 
 
 # prototype-a/index.html is a frozen, hand-kept file (Prototype A). It is not built from build.py, so changes to Round 1 never reach it.
