@@ -55,10 +55,10 @@ def home_body():
     lgas = "".join(f"<li>{E(n)} LGA</li>" for n in ["Tweed", "Byron", "Kyogle", "Lismore", "Richmond", "Ballina", "Tenterfield", "Clarence Valley"])
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#about">Learn About us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M1 1l12 7-12 7z" fill="currentColor"/></svg>Watch reel</button></p></div>
-<div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M34 30L58 44L34 58Z" fill="currentColor"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>
+<p class="btnrow"><a class="btn btn-primary" href="#about">Learn About us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M3 3l8 5-8 5z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>Watch reel</button></p></div>
+<div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>
 
-<section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Impact</h2>{B.stats()}<p class="btnrow"><a class="btn btn-primary" href="#impact">See Impact</a></p></div></div></section>
+<section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Impact</h2>{B.stats()}<p class="btnrow"><a class="btn btn-tertiary" href="#impact">See Impact</a></p></div></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas (LGA),<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>'''
@@ -225,7 +225,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 @media(max-width:739px){.tb .herobg>.wrap:first-child{display:flex;align-items:flex-start;min-height:0;padding:0}.tb .herobg .h1-panel{margin:0;padding:28px 20px 40px;max-width:none}.tb .herobg .h1-photo::after{background:linear-gradient(180deg,rgba(0,97,90,.94) 0%,rgba(0,97,90,.88) 30%,rgba(0,97,90,.5) 48%,rgba(0,97,90,0) 62%)}.herobg .h1-panel h1{font-size:1.75rem;line-height:1.15}.herobg .h1-panel .lede{font-size:1rem}.herobg .h1-panel .eyebrow{font-size:.72rem}}
 .tb .h1-panel{background:var(--teal-25);color:var(--navy);border:4px solid var(--teal)}.tb .h1-panel h1,.tb .h1-panel .eyebrow{color:var(--navy)}.tb .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy);background:#fff}.tb .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
 .tb #nav a[aria-current=page]{background:var(--teal-25)}
-.tb .surface{background:#fff;border-bottom:10px solid var(--teal)}.tb .statcard{background:#fff;border-bottom:10px solid var(--teal)}.tb .framed{--fr:var(--teal-25);outline:4px solid var(--teal);outline-offset:-4px}
+.tb .surface{background:#fff;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal)}.tb .statcard{background:#fff;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal)}.tb .framed{--fr:var(--teal-25);outline:4px solid var(--teal);outline-offset:-4px}
 .tb .kb li{background:#fff}.tb .kb a{color:var(--teal-d);font-weight:800}
 .tb .partband{background:var(--teal-12);border-bottom:6px solid var(--teal)}.partband a:not(.btn):hover{background:var(--teal-25)}
 .tb .ticker{background:var(--navy);color:var(--teal)}.tb .tk-in .tkd{color:var(--teal-25)}
@@ -233,20 +233,16 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .pmap{--land:#fff;--sea:var(--teal-12);--coast:var(--teal);--river:var(--teal)}
 .herobg .play{display:grid;place-items:center;width:92px;height:92px;padding:0}.herobg .play svg{display:block;width:100%;height:100%;font-family:var(--font)}
 /* Network section (Who we are): the yellow button set, a yellow bottom border and light yellow pills */
-.tb .wwa{border-bottom-color:var(--yellow)}
+.tb .wwa{border-color:var(--yellow)}
 .wwa .btn-primary{background:#ffcb2a;color:#07293b;border-color:#07293b}.wwa .btn-primary:hover{background:#07293b;color:#fff;border-color:#07293b}.wwa .btn-primary:active{background:#ffeaaa;color:#07293b;border-color:#07293b}
 /* solid colour band across the top, like Prototype A's five pillars: teal on the header, yellow on Who we are */
-.herobg>.wrap:first-child::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--teal);z-index:4}
-.tb .wwa{position:relative;overflow:hidden;padding-top:54px}
-.tb .wwa::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--yellow)}
-@media(max-width:860px){.tb .wwa{padding-top:44px}}
 /* whenever the photos stack above the text (860px and under, so phones and iPads), the circles spread out in a row across the section, about half the size */
 @media(max-width:860px){.wwa-cluster{padding-top:0}.circles{aspect-ratio:2/1;margin:0 auto;transform:none}.circles img{border-width:4px}
 .circles img:nth-of-type(1){width:45%;left:7%;top:0;bottom:auto}.circles img:nth-of-type(2){width:41%;left:54%;top:18%;bottom:auto;translate:none}
 .circles .blob{width:16%;left:calc(-1 * min(5%, 12px));top:34%}.circles .deco-rings{width:23%;right:calc(-1 * min(6%, 14px));left:auto;top:26%}}
 /* B header cropped like Prototype 3: a rounded box inside the page width, not edge to edge */
 .herobg{padding:20px 0 0!important}
-.herobg>.wrap:first-child{width:calc(100% - 40px);max-width:calc(var(--wrap) - 40px);margin:0 auto;padding:0;border-radius:40px;overflow:hidden;border-bottom:10px solid var(--teal)}
+.herobg>.wrap:first-child{width:calc(100% - 40px);max-width:calc(var(--wrap) - 40px);margin:0 auto;padding:0;border-radius:40px;overflow:hidden;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal)}
 .herobg .h1-panel{margin:40px 0}
 .herobg .h1-photo .play{left:calc((var(--pw,580px) + 100%)/2)}
 @media(max-width:739px){.herobg>.wrap:first-child{border-radius:28px;width:calc(100% - 24px)}.herobg .h1-panel{margin:0}.tb .herobg .h1-panel{padding:28px 18px 36px}.herobg .btnrow .btn{padding:.7em 1em}}
@@ -263,8 +259,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .menu-btn{background:#00857c;color:#fff;border:2px solid #07293b}.menu-btn:hover{background:#07293b;color:#fff;border-color:#07293b}.menu-btn:active{background:#beddda;color:#07293b;border-color:#07293b}
 .play{background:#fff;color:#00857c;border:2px solid #00857c;border-radius:50%}.play:hover{background:#07293b;color:#fff;border-color:#07293b}.play:active{background:#beddda;color:#07293b;border-color:#07293b}
 /* Our Impact: orange top strip and bottom border, like the other sections */
-.tb .statcard.impact{position:relative;overflow:hidden;padding-top:54px;border-bottom-color:var(--orange);text-align:center}
-.tb .statcard.impact::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--orange)}
+.tb .statcard.impact{border-color:var(--orange);text-align:center}
 .statcard.impact .btnrow{justify-content:center;margin:28px 0 0}
 .tb .site-foot .foot-top{display:flex;align-items:flex-start}.tb .site-foot .foot-logo.boxed{display:block;width:fit-content;max-width:100%;padding:10px 14px;line-height:0}.tb .site-foot .foot-logo .logo{width:200px;max-width:100%;display:block}
 /* footer, teal design: adjusted teal background, white text, white brush behind each title with adjusted teal text */
@@ -285,6 +280,8 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .mealring ol{list-style:none;margin:0;padding:0}.mealring li{position:absolute;width:30%;aspect-ratio:1/1;translate:-50% -50%;border-radius:50%;display:grid;place-items:center;text-align:center;font-weight:800;font-size:clamp(1.05rem,2.6vw,1.2rem)}
 .mealq{margin:0;border-left:4px solid var(--teal);padding-left:24px}.mealq p{margin:0 0 .6em}.mealq .mq{font-weight:800;font-size:1.25rem;line-height:1.35;color:var(--navy)}
 @media(max-width:860px){.mealwrap{grid-template-columns:1fr;gap:28px}}
+.btn-tertiary{background:#07293b;color:#fff;border-color:#07293b}.btn-tertiary:hover{background:#00857c;color:#fff;border-color:#07293b}.btn-tertiary:active{background:#beddda;color:#07293b;border-color:#07293b}
+main a.btn-tertiary:hover{background:#00857c;color:#fff}
 """
 
 
