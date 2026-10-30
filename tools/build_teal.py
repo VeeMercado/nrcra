@@ -12,7 +12,7 @@ import build as B
 from build import E, img, logo, screen, icon, BASE, MOBILE, JS, FONT, CSS1, VIMEO, CONTACT
 
 SIGN_IN = "https://rack.nrcra.org.au"  # the R.A.C.K address NRCRA gave us (not live yet)
-MENU = [("home", "Home"), ("network", "Network"), ("about", "About"), ("impact", "Impact")]
+MENU = [("home", "Home"), ("network", "Network"), ("about", "About"), ("impact", "Impact"), ("rack", "R.A.C.K.")]
 NAMES = {"prototype-a": "Prototype A", "prototype-b": "Prototype B"}
 SHORT = {"prototype-a": "A", "prototype-b": "B"}
 
@@ -171,7 +171,7 @@ def group_card(name, sub, lga, web):
 
 
 def lga_select(cur=""):
-    first = "See all Local Government Areas (LGA)"
+    first = "Browse region"
     opts = f'<option value="{"network" if cur else ""}">{first}</option>'
     opts += "".join(f'<option value="lga-{slug(l)}"{" selected" if l == cur else ""}>{E(l)} LGA</option>' for l in LGA_ORDER)
     return f'<select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="{"lga-" + slug(cur) if cur else ""}">{opts}</select>'
@@ -199,7 +199,7 @@ def testimonials():
 
 def network_body():
     cards = "".join(group_card(*g) for g in all_groups())
-    return f'''<div class="wrap"><div class="splith net"><div><span class="eyebrow">Network</span><h1>50+ groups, one region, <span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed().split('<p class="vnote">')[0]}</div></div></div>
+    return f'''<div class="wrap"><div class="splith net"><div><span class="eyebrow">Network</span><h1>50+ groups,<br>one region,<br><span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed().split('<p class="vnote">')[0]}</div></div></div>
 {testimonials()}
 <section class="sec" id="our-network" style="padding-top:0"><div class="wrap">{dir_head("Our Network")}<ul class="gsub">{cards}</ul></div></section>'''
 
@@ -207,6 +207,27 @@ def network_body():
 def lga_body(lga):
     cards = "".join(group_card(*g) for g in all_groups() if g[2] == lga)
     return f'<section class="sec"><div class="wrap">{dir_head("Our Network", lga, "h1")}<ul class="gsub">{cards}</ul></div></section>'
+
+
+RACK_CARDS = [
+    ("house", "Get Ready", "Plans and checklists for before a disaster.", "Find templates"),
+    ("table", "Volunteers", "Registering, inducting and looking after volunteers.", "Explore resource"),
+    ("circle", "Run Your Group", "Governance, templates and running a healthy group.", "Find templates"),
+    ("aerial", "Emergencies", "What to do and who to call when it happens.", "Get resource"),
+    ("workshop", "Training &amp; Workshops", "Workshops and learning for group leaders.", "Explore resource"),
+    (None, "Share", "Have a favourite template to share? Add it to our resource library.", "Contribute +"),
+]
+
+
+def rack_body():
+    cards = ""
+    for key, t, d, b in RACK_CARDS:
+        ph = img(key, alt="") if key else f'<span class="rshare" aria-hidden="true">{icon("share")}</span>'
+        cards += f'<li><span class="rph">{ph}</span><h3>{t}</h3><p>{d}</p><a class="btn btn-ghost btn-sm" href="#" data-sample="1">{b}</a></li>'
+    return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow">Resources</span><h1>The R.A.C.K.</h1><p class="lede"><b>Resilience Alliance Community Knowledge.</b> One shared place where the whole network can find what already works from years of real community experience across the Northern Rivers.</p><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p>
+<p class="btnrow"><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20access">Request access</a><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20help">Get help</a></p></div>
+<div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="A community member using the R.A.C.K. on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
+<section class="sec"><div class="wrap"><div class="card surface"><span class="eyebrow">Resource library</span><h2 class="sechead">What you&rsquo;ll find:</h2><p class="lede">Find templates and guides you can use straight away, and contribute knowledge back in two minutes.</p><ul class="rcards">{cards}</ul></div></div></section>'''
 
 
 def impact_body():
@@ -368,6 +389,14 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* Network breadcrumb: the Home pill, in yellow with navy text */
 .tb .splith .eyebrow{display:inline-block;background:var(--yellow);color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin-bottom:28px}
 
+/* R.A.C.K. page */
+.tb .splith .rackph img{height:auto;aspect-ratio:1024/799;object-fit:cover}
+.rcards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.rcards li{background:#f3f6f7;border-radius:20px;padding:14px 14px 18px;display:flex;flex-direction:column;gap:4px}
+.rcards .rph{display:block;aspect-ratio:16/9;overflow:hidden;border-radius:14px;margin-bottom:10px;background:#beddda}.rcards .rph img{width:100%;height:100%;object-fit:cover;display:block}
+.rcards .rshare{display:grid;place-items:center;width:100%;height:100%;color:#00857c}.rcards .rshare svg{width:72px;height:72px;stroke-width:2}
+.rcards h3{margin:0}.rcards p{margin:0 0 14px;color:#586c74}.rcards .btn{margin-top:auto;align-self:stretch}
+@media(max-width:860px){.rcards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.rcards{grid-template-columns:1fr}}
 /* one rhythm: 65px between every section on every page */
 .tb .sec{padding:0 0 65px!important}.tb .page>.sec:first-child{padding-top:65px!important}
 .tb .hero1.herobg{margin-bottom:65px}.tb .page>.wrap:first-child>.splith{padding-bottom:0}.tb .page>.wrap:first-child{margin-bottom:65px}
@@ -388,7 +417,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tcards .tph .play{inset:auto;top:50%;left:50%;margin:0;transform:translate(-50%,-50%);width:76px;height:76px;padding:0;display:grid;place-items:center}.tcards .tph .play svg{width:100%;height:100%}
 .tcards blockquote{margin:0;padding:0;display:flex;flex-direction:column;gap:14px;flex:1}.tcards blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:700}
 .tcards blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:.95rem}
-.dirhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:16px 24px;margin-bottom:35px}.dirhead .sechead{margin:0}
+.dirhead{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px 24px;margin-bottom:35px}.dirhead .sechead{margin:0;grid-column:2;grid-row:1;text-align:center}.dirhead .lgasel{grid-column:1;grid-row:1;justify-self:start}
 .lgasel-l{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.9rem}.lgasel{font:700 1rem var(--font);color:var(--navy);padding:.7em 2.4em .7em 1em;min-height:44px;border:2px solid #00857c;border-radius:12px;background:#fff;min-width:260px;cursor:pointer}
 .dirhead h1.sechead{font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:800}
 .gsub{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
@@ -397,7 +426,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .gsub .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .btn-sm{font-size:.9rem;padding:.5em 1.1em;min-height:38px}
 @media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:461px;min-height:0;flex:none}}
-@media(max-width:739px){.lgasel-l,.lgasel{width:100%}}
+@media(max-width:739px){.lgasel-l,.lgasel{width:100%}.dirhead{grid-template-columns:1fr}.dirhead .sechead,.dirhead .lgasel{grid-column:1}.dirhead .sechead{grid-row:1}.dirhead .lgasel{grid-row:2}}
 """
 
 
@@ -406,7 +435,7 @@ def tfooter():
         return f'<div class="fcol"><h2 class="fb{n}">{title}</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in items) + "</ul></div>"
     contact = [("hello@nrcra.org.au", "mailto:hello@nrcra.org.au")]
     touch = [("Facebook", B.LINKS["fb"]), ("LinkedIn", B.LINKS["li"])]
-    site = [("Alliance Home", "#home"), ("Network", "#network"), ("About", "#about"), ("Impact", "#impact"), ("Sign In", SIGN_IN)]
+    site = [("Alliance Home", "#home"), ("Network", "#network"), ("About", "#about"), ("Impact", "#impact"), ("R.A.C.K.", "#rack"), ("Sign In", SIGN_IN)]
     top = '<div class="foot-top"><span class="foot-logo boxed">' + logo("logo") + '</span></div>'
     return f'''<footer class="site-foot"><div class="wrap">
 <div class="foot-cols">{top}{col(3, "Site map", site)}<div class="fstack">{col(2, "Stay in Touch", touch)}{col(1, "Contact", contact)}</div></div>
@@ -415,7 +444,7 @@ def tfooter():
 </div></footer>'''
 
 
-JSX = JS.replace("var nk=h.indexOf('rack')===0?'rack':h;", "var nk=h.indexOf('rack')===0?'rack':h.indexOf('lga-')===0?'network':h;").replace("'/#'+h}", "'/#'+(h.indexOf('lga-')===0?'network':h)}")
+JSX = JS.replace("var nk=h.indexOf('rack')===0?'rack':h;", "var nk=h.indexOf('rack')===0?'rack':h.indexOf('lga-')===0?'network':h;").replace("'/#'+h}", "'/#'+(h.indexOf('lga-')===0?'network':h==='rack'?'home':h)}")
 assert JSX.count("lga-") == 2
 JS2 = """(function(){var sel=[].slice.call(document.querySelectorAll('.lgasel'));
 sel.forEach(function(s){s.addEventListener('change',function(){var v=s.value||'network';location.hash=v;if(v==='network')setTimeout(function(){var t=document.getElementById('our-network'),h=document.querySelector('.site-head');if(t)window.scrollTo(0,t.getBoundingClientRect().top+window.scrollY-(h?h.offsetHeight:0)-24)},60)})});
@@ -425,7 +454,7 @@ document.addEventListener('click',function(e){var a=e.target.closest('[data-samp
 
 def page(v):
     css, cls = CSS_B, "tb"
-    body = "".join([screen("home", "Home", home_body()), screen("about", "About", about_body()), screen("impact", "Impact", impact_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
+    body = "".join([screen("home", "Home", home_body()), screen("about", "About", about_body()), screen("impact", "Impact", impact_body()), screen("rack", "R.A.C.K.", rack_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NRCRA teal-led {NAMES[v]}</title><meta name="robots" content="noindex">
