@@ -266,20 +266,17 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .statcard.impact{position:relative;overflow:hidden;padding-top:54px;border-bottom-color:var(--orange);text-align:center}
 .tb .statcard.impact::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--orange)}
 .statcard.impact .btnrow{justify-content:center;margin:28px 0 0}
-/* footer, Prototype A's design: white background, adjusted teal text, teal brush behind white titles, teal strip on top and border below */
-.tb .site-foot{background:#fff;color:#00857c;position:relative;overflow:hidden;padding-top:56px;border-radius:var(--r) var(--r) 0 0;--foot-line:#07293b}
-.tb .site-foot::before{content:"";position:absolute;left:0;right:0;top:0;height:28px;background:var(--teal)}
-.tb .site-foot .fcol h2{color:#fff;background-repeat:no-repeat;background-position:center;background-size:100% 100%;display:inline-block;padding:1.3em 2.6em 1.3em 2.1em;margin:0 0 14px -1.1em;line-height:1.25;position:static}
+/* footer, teal design: adjusted teal background, white text, white brush behind each title with adjusted teal text */
+.tb .site-foot{background:#00857c;color:#fff;--foot-line:rgba(255,255,255,.4)}
+.tb .site-foot .fcol h2{color:#00857c;background-repeat:no-repeat;background-position:center;background-size:100% 100%;display:inline-block;padding:1.3em 2.6em 1.3em 2.1em;margin:0 0 14px -1.1em;line-height:1.25;position:static}
 .tb .site-foot .fcol h2::after{display:none}
-.tb .site-foot .fb1{background-image:url(../assets/brush/brush-teal-1.svg)}.tb .site-foot .fb2{background-image:url(../assets/brush/brush-teal-2.svg)}.tb .site-foot .fb3{background-image:url(../assets/brush/brush-teal-3.svg)}
-.tb .site-foot .flist li::before{background:#00857c;opacity:.7}.tb .site-foot .foot-logo.boxed{background:transparent;padding:0}
-.tb .site-foot a:hover{color:var(--navy)}
-.tb .site-foot .flist a{display:inline-block;padding:.3em .8em;margin-left:-.8em;color:var(--navy);font-weight:400;text-decoration:none;border-radius:var(--btn-r,99px);line-height:1.4}
-.tb .site-foot .flist li{margin-bottom:6px}.tb .site-foot .flist li::before{top:50%;transform:translateY(-50%)}
-.tb .site-foot .flist a:hover{background:var(--teal-12);color:var(--navy);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
-.tb .site-foot .flist a:active{background:var(--teal-25);color:var(--navy)}
+.tb .site-foot .fb1{background-image:url(../assets/brush/brush-white-1.svg)}.tb .site-foot .fb2{background-image:url(../assets/brush/brush-white-2.svg)}.tb .site-foot .fb3{background-image:url(../assets/brush/brush-white-3.svg)}
+.tb .site-foot .flist li::before{background:#fff;opacity:.7;top:50%;transform:translateY(-50%)}
+.tb .site-foot .flist a{display:inline-block;padding:.3em .8em;margin-left:-.8em;color:#fff;font-weight:400;text-decoration:none;border-radius:var(--btn-r,99px);line-height:1.4}
+.tb .site-foot .flist li{margin-bottom:6px}
+.tb .site-foot .flist a:hover{background:#f3f9f8;color:var(--navy);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.tb .site-foot .flist a:active{background:#beddda;color:var(--navy)}
 .tb .site-foot .foot-cols{grid-template-columns:repeat(3,minmax(0,1fr))}.tb .fstack .fcol+.fcol{margin-top:24px}@media(max-width:700px){.tb .site-foot .foot-cols{grid-template-columns:1fr}}
-.tb .site-foot .ack,.tb .site-foot .copy{color:var(--navy)}.tb .site-foot .copy a{color:var(--navy)}
 
 /* MEAL: six circles round a ring, like the Layout Design PDF */
 .mealwrap{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:48px;align-items:center;margin:28px 0 0}
