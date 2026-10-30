@@ -53,23 +53,15 @@ def part_band():
 # ---------------------------------------------------------------- Home
 def home_body():
     lgas = "".join(f"<li>{E(n)} LGA</li>" for n in ["Tweed", "Byron", "Kyogle", "Lismore", "Richmond", "Ballina", "Tenterfield", "Clarence Valley"])
-    partners = B.v1_partners().replace('href="#partners"', 'href="#impact"')
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn About us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M1 1l12 7-12 7z" fill="currentColor"/></svg>Watch reel</button></p></div>
 <div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M34 30L58 44L34 58Z" fill="currentColor"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>
 
-<section class="sec"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas (LGA),<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
+<section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Impact</h2>{B.stats()}<p class="btnrow"><a class="btn btn-primary" href="#impact">See Impact</a></p></div></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="statcard"><span class="eyebrow">What we have achieved</span>{B.stats()}</div></div></section>
-
-<section class="sec" style="padding-top:0" id="focus"><div class="wrap"><span class="eyebrow">In focus</span><h2 class="sechead">{hl("Upcoming, projects and the R.A.C.K")}</h2>
-<ul class="kb"><li>{img("crowd")}<h3>{B.GATHER[0]}: {B.GATHER[1]}</h3><p>{B.GATHER[2]}.</p></li><li>{img("meeting")}<h3>Projects</h3><p>Connected and Prepared, Resourcing Community Resilience and Learning Together. <a href="#impact">Impact</a></p></li>
-<li>{img("board")}<h3>The R.A.C.K</h3><p>{B.RACK_LINE} <a href="{SIGN_IN}">Sign In</a></p></li></ul></div></section>
-
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card pcard2 surface">{partners}</div></div></section>
-{part_band()}'''
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas (LGA),<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
+<p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>'''
 
 
 # ---------------------------------------------------------------- About
@@ -89,8 +81,7 @@ def about_body():
 <section class="sec" style="padding-top:0"><div class="wrap"><span class="script">How we take action</span><h2 class="sechead">{hl("We have a MEAL plan")}</h2><p class="lede">Monitoring, Evaluation, Accountability and Learning. A healthy Resilience Alliance isn&rsquo;t just one that delivers projects. It&rsquo;s one where people feel included, power is shared, groups gain real value, and we can learn and adapt together.</p>
 {B.meal()}<ul class="mealgrid">{"".join(f'<li>{icon(k)}<h3>{E(t)}</h3><p>{E(d)}</p></li>' for t, d, k in MEAL6)}</ul></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><span class="script">Progress so far</span><h2 class="sechead">Our journey</h2>{B.journey("river")}</div></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Meet the team</h2>{team()}</div></div></section>
-{part_band()}'''
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Meet the team</h2>{team()}</div></div></section>'''
 
 
 # ---------------------------------------------------------------- Network
@@ -116,8 +107,7 @@ def group_cards():
 def network_body():
     return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow">Network</span><h1>{B.NET_H1}</h1><p class="lede">8 council areas across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed()}</div></div></div>
 <section class="sec"><div class="wrap"><span class="eyebrow">Our focus</span><h2 class="sechead">{hl("Five pillars")}</h2><p class="lede">{B.CALLOUT} We connect them using these five key pillars.</p>{pillar_cards()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">All groups</h2>{group_cards()}</div></div></section>
-{part_band()}'''
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">All groups</h2>{group_cards()}</div></div></section>'''
 
 
 def impact_body():
@@ -254,7 +244,31 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .ready .btn-primary:hover,.ready .btn-cta:hover,.tb .herobg .h1-panel .btn-primary:hover{background:#fff;color:#07293b;border-color:#fff}.tb .herobg .h1-panel .btn-primary:active{background:#beddda;color:#07293b;border-color:#fff}
 .menu-btn{background:#00857c;color:#fff;border:2px solid #07293b}.menu-btn:hover{background:#07293b;color:#fff;border-color:#07293b}.menu-btn:active{background:#beddda;color:#07293b;border-color:#07293b}
 .play{background:#fff;color:#00857c;border:2px solid #00857c;border-radius:50%}.play:hover{background:#07293b;color:#fff;border-color:#07293b}.play:active{background:#beddda;color:#07293b;border-color:#07293b}
+/* Our Impact: orange top strip and bottom border, like the other sections */
+.tb .statcard.impact{position:relative;overflow:hidden;padding-top:54px;border-bottom-color:var(--orange);text-align:center}
+.tb .statcard.impact::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--orange)}
+.statcard.impact .btnrow{justify-content:center;margin:28px 0 0}
+/* footer: adjusted teal, white text, white brush behind each title with adjusted teal text */
+.tb .site-foot{background:#00857c;color:#fff;--foot-line:rgba(255,255,255,.4)}
+.tb .site-foot .fcol h2{color:#00857c;background-repeat:no-repeat;background-position:center;background-size:100% 100%;display:inline-block;padding:1.3em 2.6em 1.3em 2.1em;margin:0 0 14px -1.1em;line-height:1.25;position:static}
+.tb .site-foot .fcol h2::after{display:none}
+.tb .site-foot .fb1{background-image:url(../assets/brush/brush-white-1.svg)}.tb .site-foot .fb2{background-image:url(../assets/brush/brush-white-2.svg)}.tb .site-foot .fb3{background-image:url(../assets/brush/brush-white-3.svg)}
+.tb .site-foot .flist li::before{background:#fff;opacity:.7}
 """
+
+
+def tfooter():
+    def col(n, title, items):
+        return f'<div class="fcol"><h2 class="fb{n}">{title}</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in items) + "</ul></div>"
+    contact = [("hello@nrcra.org.au", "mailto:hello@nrcra.org.au")]
+    touch = [("Facebook", B.LINKS["fb"]), ("LinkedIn", B.LINKS["li"])]
+    site = [("Alliance Home", "#home"), ("Network", "#network"), ("About", "#about"), ("Impact", "#impact"), ("Sign In", SIGN_IN)]
+    top = '<div class="foot-top"><span class="foot-logo boxed">' + logo("logo") + '</span></div>'
+    return f'''<footer class="site-foot"><div class="wrap">
+<div class="foot-cols">{top}{col(1, "Contact", contact)}{col(2, "Stay in Touch", touch)}{col(3, "Site map", site)}</div>
+<div class="ack">{B.ABORIGINAL_FLAG}<p>{B.ACK}</p></div>
+<p class="copy">© 2026 Northern Rivers Community Resilience Alliance &middot; <a href="https://www.nrcra.org.au/copy-of-terms-conditions">Privacy Policy</a></p>
+</div></footer>'''
 
 
 def page(v):
@@ -265,9 +279,9 @@ def page(v):
 <title>NRCRA teal-led {NAMES[v]}</title><meta name="robots" content="noindex">
 <meta name="description" content="Teal-led exploration of the NRCRA website. Sample content only.">
 {FONT}<style>{BASE}{CSS1}{CSS_T}{css}{MOBILE}</style></head><body class="v1 teal {cls}">
-{nav3()}<main id="main">{body}</main>{B.TICKER}{re.sub(r'<span class="foot-tag"><span class="tagline">.*?</span></span>', "", B.footer(True, boxed=True), flags=re.S)}{protobar3(v)}<script data-cfasync="false">{JS}</script></body></html>'''
+{nav3()}<main id="main">{body}</main>{tfooter()}{protobar3(v)}<script data-cfasync="false">{JS}</script></body></html>'''
 
 
 # prototype-a/index.html is a frozen, hand-kept file (Prototype A). It is not built from build.py, so changes to Round 1 never reach it.
 def main():
-    B.write("prototype-b/index.html", page("prototype-b").replace("7 council areas", "8 council areas").replace("<dt>7</dt><dd>local government areas", "<dt>8</dt><dd>local government areas").replace("#6c8590", "#586c74").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
+    B.write("prototype-b/index.html", re.sub(r"(?<![0-9])60\+", "50+", page("prototype-b")).replace("7 council areas", "8 council areas").replace("<dt>7</dt><dd>local government areas", "<dt>8</dt><dd>local government areas").replace("#6c8590", "#586c74").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
