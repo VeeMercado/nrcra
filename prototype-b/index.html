@@ -223,7 +223,7 @@ body.teal{--bg:#f3f6f7}
 /* title highlight is off for now; the class stays so it can come back */
 .hl{padding:0}
 .teal .card{border-radius:var(--r);padding:36px}
-.wwa{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}.wwa>*{min-width:0}.wwa-map{max-width:420px;justify-self:center;width:100%}.wwa-cluster{width:100%;order:-1}.mark{isolation:isolate}.mark .squig{z-index:-1}.vp-text{max-width:72ch}
+.wwa{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center}.wwa>*{min-width:0}.wwa-map{max-width:420px;justify-self:center;width:100%}.wwa-cluster{width:100%;order:-1;padding-top:calc(5.7% - 10px)}.mark{isolation:isolate}.mark .squig{z-index:-1}.vp-text{max-width:72ch}
 .lgapills{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 6px}.lgapills li{position:relative;isolation:isolate;padding:.25em .85em;font-weight:700;font-size:.88rem;line-height:1.25;color:#586c74}.lgapills li::before{content:"";position:absolute;inset:-4px -7px;z-index:-1;background:url(../assets/brush/brush-1.svg) center/100% 100% no-repeat}.lgapills li:nth-child(3n+2)::before{background:url(../assets/brush/brush-2.svg) center/100% 100% no-repeat}.lgapills li:nth-child(3n)::before{background:url(../assets/brush/brush-3.svg) center/100% 100% no-repeat}
 .statrow{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}.statrow>*{min-width:0}.statcard{border-radius:var(--r);padding:36px}.statcard .stats dt{color:var(--navy)}
 .framed{border-radius:36px;padding:14px;background:var(--fr,var(--teal))}.framed img{border-radius:24px;width:100%;aspect-ratio:4/3;object-fit:cover}
@@ -322,9 +322,9 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .wwa{position:relative;overflow:hidden;padding-top:54px}
 .tb .wwa::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--yellow)}
 @media(max-width:860px){.tb .wwa{padding-top:44px}}
-/* phones: the circles spread out in a row across the section, about half the size */
-@media(max-width:739px){.circles{aspect-ratio:2.6/1;margin:0 auto;transform:none}.circles img{border-width:4px}
-.circles img:nth-of-type(1){width:34%;left:12%;top:0;bottom:auto}.circles img:nth-of-type(2){width:31%;left:49%;top:20%;bottom:auto;translate:none}
+/* whenever the photos stack above the text (860px and under, so phones and iPads), the circles spread out in a row across the section, about half the size */
+@media(max-width:860px){.wwa-cluster{padding-top:0}.circles{aspect-ratio:2.2/1;margin:0 auto;transform:none}.circles img{border-width:4px}
+.circles img:nth-of-type(1){width:39.1%;left:11%;top:0;bottom:auto}.circles img:nth-of-type(2){width:35.65%;left:52%;top:20%;bottom:auto;translate:none}
 .circles .blob{width:16%;left:0;top:34%}.circles .deco-rings{width:23%;right:0;left:auto;top:26%}}
 /* B header cropped like Prototype 3: a rounded box inside the page width, not edge to edge */
 .herobg{padding:20px 0 0!important}
