@@ -53,7 +53,7 @@ def part_band():
 
 # ---------------------------------------------------------------- Home
 def home_body():
-    lgas = "".join(f"<li>{E(n)} LGA</li>" for n in ["Tweed", "Byron", "Kyogle", "Lismore", "Richmond", "Ballina", "Tenterfield", "Clarence Valley"])
+    lgas = "".join(f'<li><a href="#lga-{slug(n)}">{E(n)} LGA</a></li>' for n in ["Tweed", "Byron", "Kyogle", "Lismore", "Richmond Valley", "Ballina", "Tenterfield", "Clarence Valley"])
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn About us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M3 3l8 5-8 5z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>Watch reel</button></p></div>
@@ -389,6 +389,8 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* Network breadcrumb: the Home pill, in yellow with navy text */
 .tb .splith .eyebrow{display:inline-block;background:var(--yellow);color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin-bottom:28px}
 
+/* Home: LGA pills are navy links to the filtered Network pages */
+.tb .lgapills li a{color:var(--navy);text-decoration:none;font-weight:700}.tb .lgapills li a:hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
 /* R.A.C.K. page */
 .tb .splith .rackph img{height:auto;aspect-ratio:1024/799;object-fit:cover}
 .rcards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
