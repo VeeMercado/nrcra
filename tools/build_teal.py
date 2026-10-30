@@ -20,7 +20,7 @@ def nav3():
     links = "".join(f'<a href="#{k}" data-nav="{k}">{t}</a>' for k, t in MENU)
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap head-in"><a href="#home" class="brand" aria-label="NRCRA home">{logo()}</a>
-<button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+<button class="menu-btn" aria-expanded="false" aria-controls="nav"><svg class="hb" viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" focusable="false"><path d="M1.5 1.5h17M1.5 7h17M1.5 12.5h17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Menu</button>
 <nav id="nav" aria-label="Main">{links}<a class="btn btn-cta" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a></nav></div></header>'''
 
 
@@ -233,9 +233,9 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .wwa::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;background:var(--yellow)}
 @media(max-width:860px){.tb .wwa{padding-top:44px}}
 /* whenever the photos stack above the text (860px and under, so phones and iPads), the circles spread out in a row across the section, about half the size */
-@media(max-width:860px){.wwa-cluster{padding-top:0}.circles{aspect-ratio:2.2/1;margin:0 auto;transform:none}.circles img{border-width:4px}
-.circles img:nth-of-type(1){width:39.1%;left:11%;top:0;bottom:auto}.circles img:nth-of-type(2){width:35.65%;left:52%;top:20%;bottom:auto;translate:none}
-.circles .blob{width:16%;left:0;top:34%}.circles .deco-rings{width:23%;right:0;left:auto;top:26%}}
+@media(max-width:860px){.wwa-cluster{padding-top:0}.circles{aspect-ratio:2/1;margin:0 auto;transform:none}.circles img{border-width:4px}
+.circles img:nth-of-type(1){width:45%;left:7%;top:0;bottom:auto}.circles img:nth-of-type(2){width:41%;left:54%;top:18%;bottom:auto;translate:none}
+.circles .blob{width:16%;left:calc(-1 * min(5%, 12px));top:34%}.circles .deco-rings{width:23%;right:calc(-1 * min(6%, 14px));left:auto;top:26%}}
 /* B header cropped like Prototype 3: a rounded box inside the page width, not edge to edge */
 .herobg{padding:20px 0 0!important}
 .herobg>.wrap:first-child{width:calc(100% - 40px);max-width:calc(var(--wrap) - 40px);margin:0 auto;padding:0;border-radius:40px;overflow:hidden;border-bottom:10px solid var(--teal)}
@@ -247,6 +247,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .watchbtn{display:none}
 .watchbtn{gap:.55em}.watchbtn svg{flex:none}
 @media(max-width:739px){.tb .herobg .h1-photo .play{display:none}.watchbtn{display:inline-flex}.tb .herobg .watchbtn{background:#fff;color:#07293b;border-color:#fff}.tb .herobg .watchbtn:hover{background:#00857c;color:#fff;border-color:#fff}.tb .herobg .watchbtn:active{background:#beddda;color:#07293b;border-color:#fff}.tb .herobg .h1-photo::after{background:linear-gradient(90deg,rgba(0,97,90,.94) 0%,rgba(0,97,90,.9) 62%,rgba(0,97,90,.62) 100%)}}
+@media(max-width:739px){.menu-btn{display:inline-flex;align-items:center;gap:.6em}.menu-btn .hb{flex:none}}
 /* button rules, from the teal set. Secondary: white, teal text and outline. Tertiary: navy. On dark: primary hovers white, secondary is white. Hover fills navy (or teal for navy buttons), active takes the light tint. Corners 12px; the play button stays a circle. */
 .btn-ghost{background:#fff;color:#00857c;border-color:#00857c}.btn-ghost:hover{background:#07293b;color:#fff;border-color:#07293b}.btn-ghost:active{background:#beddda;color:#07293b;border-color:#07293b}
 .ready .btn-ghost{background:#fff;color:#07293b;border-color:#fff}.ready .btn-ghost:hover{background:#00857c;color:#fff;border-color:#fff}.ready .btn-ghost:active{background:#beddda;color:#07293b;border-color:#fff}
