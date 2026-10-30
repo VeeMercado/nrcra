@@ -83,7 +83,7 @@ def brand_contrast():
 <body><nav class="topnav" aria-label="On this page"><ul><li><a class="n-d" href="#colours">Brand colours</a></li><li><a class="n-t" href="#teal-adjust">Teal adjustment</a></li><li><a class="n-t" href="#teal">Teal</a></li><li><a class="n-d" href="#lightteal">Light teal</a></li><li><a class="n-r" href="#red">Red</a></li><li><a class="n-y" href="#yellow">Yellow</a></li><li><a class="n-d" href="#dos">Do&rsquo;s and Don&rsquo;ts</a></li><li><a class="n-d" href="#text">Text colours</a></li><li><a class="n-t n-b" href="#teal-buttons">Teal buttons</a></li><li><a class="n-y n-b" href="#yellow-buttons">Yellow buttons</a></li><li class="back"><a href="../">&larr; <span class="bl">Back to </span>prototypes</a></li></ul></nav><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="f-grey" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0"/></filter><filter id="f-prot" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0 0.558 0.442 0 0 0 0 0.242 0.758 0 0 0 0 0 1 0"/></filter><filter id="f-deut" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0 0.7 0.3 0 0 0 0 0.3 0.7 0 0 0 0 0 1 0"/></filter><filter id="f-trit" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.95 0.05 0 0 0 0 0.433 0.567 0 0 0 0.475 0.525 0 0 0 0 0 1 0"/></filter></defs></svg><main><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span>
 <h1>Using the brand colours navy, teal, orange, yellow</h1>
 <p class="lede">Contrast ratios for the brand orange (<code>{RED.upper()}</code>), yellow (<code>{YEL.upper()}</code>) and teal (<code>{TEAL.upper()}</code>) against white, navy and black text. Ratios use the WCAG formula, the same one the <a href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</a> uses, and each row links to WebAIM with the colours filled in.</p>
-<div class="rule"><p><b>Red &amp; teal elements.</b> To maintain readability, red and teal shouldn&rsquo;t be used as background colours for large chunks of text, as standard text colours (white, navy or black) won&rsquo;t pass contrast requirements. They work well for smaller accents, like title backgrounds.</p></div>
+<div class="rule"><p><b>Red &amp; teal elements.</b> To maintain readability, red and teal shouldn&rsquo;t be used as background colours for large chunks of text, as standard text colours (white, navy or black) won&rsquo;t pass contrast requirements. They work well for smaller accents, like title backgrounds. For teal backgrounds, <a href="#teal-adjust">see the recommended colour adjustments</a>.</p></div>
 {brand_colours()}
 {teal_adjust()}
 {block("teal", TEAL)}
@@ -243,6 +243,33 @@ def button_sets():
     return '''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><title>Moved: brand colour contrast</title><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=../brand-contrast/#teal-buttons"><script data-cfasync="false">location.replace("../brand-contrast/#teal-buttons")</script></head><body style="font-family:sans-serif;padding:24px"><p>The button sets now live on the <a href="../brand-contrast/#teal-buttons">Brand colour contrast</a> page.</p></body></html>'''
 
 
+HR_URL = "https://humanrights.gov.au/resource-hub/by-resource-type/guidelines-and-standards/guides-and-standards-disability-rights/chapter-3-standards-and-guidelines-digital-accessibility"
+WCAG_URL = "https://www.wcag.com/"
+
+
+def _link_terms(html):
+    """Link the words that mean accessibility, standards and readability to the digital accessibility guide, and WCAG to wcag.com.
+    Visible text only: skips existing links, buttons, code, the menu, headings and the head."""
+    skip_open = ("a", "button", "code", "nav", "head", "style", "script", "title", "h1", "h2", "h3")
+    hr = re.compile(r"\b(contrast requirements|readability|readable|accessibility|accessible|AA)\b")
+    wc = re.compile(r"\bWCAG\b")
+    def link(url, text):
+        return f'<a href="{url}" target="_blank" rel="noopener noreferrer">{text}<span class="sr"> (opens in a new tab)</span></a>'
+    out, depth = [], 0
+    for part in re.split(r"(<[^>]+>)", html):
+        if part.startswith("<"):
+            m = re.match(r"<(/?)([a-zA-Z0-9]+)", part)
+            if m and m.group(2).lower() in skip_open and not part.endswith("/>"):
+                depth = depth + 1 if not m.group(1) else max(0, depth - 1)
+            out.append(part)
+            continue
+        if depth == 0 and part.strip():
+            part = hr.sub(lambda m: link(HR_URL, m.group(1)), part)
+            part = wc.sub(lambda m: link(WCAG_URL, m.group(0)), part)
+        out.append(part)
+    return "".join(out)
+
+
 def _orange(html):
     """Rename the brand red to orange in visible text only (not tags, styles or scripts). Keeps 'red cones' and the red/green chip wording."""
     keep = [("red cones", "\x00A"), ("red or green chip", "\x00B")]
@@ -263,5 +290,5 @@ def _orange(html):
 
 
 def main():
-    B.write("brand-contrast/index.html", _orange(brand_contrast()).replace("#6c8590", "#5e747d").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
+    B.write("brand-contrast/index.html", _link_terms(_orange(brand_contrast())).replace("#6c8590", "#5e747d").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
     B.write("button-sets/index.html", button_sets())
