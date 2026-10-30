@@ -224,10 +224,10 @@ def rack_body():
     for key, t, d, b in RACK_CARDS:
         ph = img(key, alt="") if key else f'<span class="rshare" aria-hidden="true">{icon("share")}</span>'
         cards += f'<li><span class="rph">{ph}</span><h3>{t}</h3><p>{d}</p><a class="btn btn-ghost btn-sm" href="#" data-sample="1">{b}</a></li>'
-    return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow">Resources</span><h1>The R.A.C.K.</h1><p class="lede"><b>Resilience Alliance Community Knowledge.</b> One shared place where the whole network can find what already works from years of real community experience across the Northern Rivers.</p><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p>
+    return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge.</span><h1>The R.A.C.K.</h1><p class="lede">One shared place where the whole network can find what already works from years of real community experience across the Northern Rivers.</p><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p>
 <p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20access">Request access</a><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20help">Get help</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a></p></div>
 <div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="A community member using the R.A.C.K. on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
-<section class="sec"><div class="wrap"><div class="card surface"><span class="eyebrow">Resource library</span><h2 class="sechead">What you&rsquo;ll find:</h2><p class="lede">Find templates and guides you can use straight away, and contribute knowledge back in two minutes.</p><ul class="rcards">{cards}</ul></div></div></section>'''
+<section class="sec"><div class="wrap"><span class="eyebrow">Resource library</span><h2 class="sechead">What you&rsquo;ll find:</h2><p class="lede">Find templates and guides you can use straight away, and contribute knowledge back in two minutes.</p><ul class="rcards">{cards}</ul></div></section>'''
 
 
 def impact_body():
@@ -392,8 +392,8 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* R.A.C.K. page */
 .tb .splith .rackph img{height:auto;aspect-ratio:1024/799;object-fit:cover}
 .rcards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.rcards li{background:#f3f6f7;border-radius:20px;padding:14px 14px 18px;display:flex;flex-direction:column;gap:4px}
-.rcards .rph{display:block;aspect-ratio:16/9;overflow:hidden;border-radius:14px;margin-bottom:10px;background:#beddda}.rcards .rph img{width:100%;height:100%;object-fit:cover;display:block}
+.rcards li{background:#fff;border:1px solid var(--line);border-bottom:10px solid var(--teal);border-radius:20px;padding:18px 18px 24px;display:flex;flex-direction:column;gap:4px}
+.rcards .rph{display:block;aspect-ratio:4/3;overflow:hidden;border-radius:18px;margin-bottom:16px;background:#beddda}.rcards .rph img{width:100%;height:100%;object-fit:cover;display:block}
 .rcards .rshare{display:grid;place-items:center;width:100%;height:100%;color:#00857c}.rcards .rshare svg{width:72px;height:72px;stroke-width:2}
 .rcards h3{margin:0}.rcards p{margin:0 0 14px;color:#586c74}.rcards .btn{margin-top:auto;align-self:stretch}
 @media(max-width:860px){.rcards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.rcards{grid-template-columns:1fr}}
