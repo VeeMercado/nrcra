@@ -171,7 +171,7 @@ def group_card(name, sub, lga, web):
 
 
 def lga_select(cur=""):
-    first = "Browse region"
+    first = "Browse the region"
     opts = f'<option value="{"network" if cur else ""}">{first}</option>'
     opts += "".join(f'<option value="lga-{slug(l)}"{" selected" if l == cur else ""}>{E(l)} LGA</option>' for l in LGA_ORDER)
     return f'<select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="{"lga-" + slug(cur) if cur else ""}">{opts}</select>'
@@ -389,6 +389,10 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* Network breadcrumb: the Home pill, in yellow with navy text */
 .tb .splith .eyebrow{display:inline-block;background:var(--yellow);color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin-bottom:28px}
 
+/* iPad: six menu items now, so tighten the nav to keep it on one line */
+@media(min-width:740px) and (max-width:860px){.tb #nav{flex-wrap:nowrap;white-space:nowrap;gap:0}.tb #nav a:not(.btn){padding:.5em .55em;font-size:.95rem}.tb #nav .btn{padding:.55em 1em;margin-left:6px;font-size:.95rem}.tb .logo{height:40px}}
+/* phone and iPad: the two photo circles sit closer together, just touching in the middle */
+@media(max-width:860px){.circles img:nth-of-type(1){left:10%}.circles img:nth-of-type(2){left:51%}}
 /* Home: LGA pills are navy links to the filtered Network pages */
 .tb .lgapills li a{color:var(--navy);text-decoration:none;font-weight:700}.tb .lgapills li a:hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
 /* R.A.C.K. page */
