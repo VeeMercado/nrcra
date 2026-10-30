@@ -194,7 +194,7 @@ def testimonials():
     c1 = card(img(TESTIMONIALS[0][0], alt=""), TESTIMONIALS[0][1], TESTIMONIALS[0][2])
     c2 = f'<li>{vid}<blockquote><p>&ldquo;Like a family we did not know we had.&rdquo;</p><footer>&mdash; Phoenix Casino</footer></blockquote></li>'
     c3 = card(img(TESTIMONIALS[1][0], alt=""), TESTIMONIALS[1][1], TESTIMONIALS[1][2])
-    return f'<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">The Alliance feels like&hellip;</h2><ul class="tcards">{c1}{c2}{c3}</ul></div></section>'
+    return f'<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">Stories from the Alliance</h2><ul class="tcards">{c1}{c2}{c3}</ul></div></section>'
 
 
 def network_body():
@@ -372,21 +372,23 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .sec{padding:0 0 65px!important}.tb .page>.sec:first-child{padding-top:65px!important}
 .tb .hero1.herobg{margin-bottom:65px}.tb .page>.wrap:first-child>.splith{padding-bottom:0}.tb .page>.wrap:first-child{margin-bottom:65px}
 
-/* Network only: double the space (130px) with a yellow divider in the middle */
+/* Network only: double the space (130px) between sections */
 .tb #network>.wrap:first-child{margin-bottom:130px}.tb #network>.sec:not(:last-child){padding-bottom:130px!important}
-.tb #network>.wrap:first-child,.tb #network>.sec:not(:last-child)>.wrap{position:relative}
-.tb #network>.wrap:first-child::after,.tb #network>.sec:not(:last-child)>.wrap::after{content:"";position:absolute;left:20px;right:20px;bottom:-67px;height:4px;border-radius:2px;background:var(--yellow)}
+/* Stories from the Alliance: the text above is centred against the tall map, so it looks 79px more open above; give the space below the same */
+.tb #network>section.sec:first-of-type{padding-bottom:209px!important}
+/* Our Network directory (Network and every LGA page): double the space under the cards */
+.tb #network>.sec:last-child,.tb [id^="lga-"]>.sec:last-child{padding-bottom:130px!important}
 
 /* Network page: map as tall as the text, testimonials, suburb directory */
-.tb .splith.net{align-items:stretch}.tb .splith.net>div:first-child{align-self:center}.tb .splith.net .ph{display:flex}.tb .splith.net .ph .mapbox{height:auto;min-height:320px;flex:1}
+.tb .splith.net{align-items:stretch}.tb .splith.net>div:first-child{align-self:center}.tb .splith.net .ph{display:flex}.tb .splith.net .ph .mapbox{height:auto;min-height:517px;flex:1}
 .tb .splith .eyebrow.pill-t,.tb .eyebrow.pill-t{display:inline-block;background:#00857c;color:#fff;padding:.55em 1.5em;border-radius:99px;margin-bottom:28px}
 .tcards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.tcards li{background:#fff;border:1px solid var(--line);border-bottom:8px solid var(--yellow);border-radius:20px;overflow:hidden;display:flex;flex-direction:column}
-.tcards .tph{position:relative;aspect-ratio:4/3;overflow:hidden}.tcards .tph img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
+.tcards li{background:#fff;border:1px solid var(--line);border-bottom:10px solid var(--yellow);border-radius:20px;padding:18px 18px 24px;display:flex;flex-direction:column}
+.tcards .tph{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:18px;margin-bottom:16px}.tcards .tph img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
 .tcards .tph .play{inset:auto;top:50%;left:50%;margin:0;transform:translate(-50%,-50%);width:76px;height:76px;padding:0;display:grid;place-items:center}.tcards .tph .play svg{width:100%;height:100%}
-.tcards blockquote{margin:0;padding:24px 24px 20px;display:flex;flex-direction:column;gap:14px;flex:1}.tcards blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:700}
+.tcards blockquote{margin:0;padding:0;display:flex;flex-direction:column;gap:14px;flex:1}.tcards blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:700}
 .tcards blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:.95rem}
-.dirhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:16px 24px;margin-bottom:24px}.dirhead .sechead{margin:0}
+.dirhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:16px 24px;margin-bottom:35px}.dirhead .sechead{margin:0}
 .lgasel-l{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.9rem}.lgasel{font:700 1rem var(--font);color:var(--navy);padding:.7em 2.4em .7em 1em;min-height:44px;border:2px solid #00857c;border-radius:12px;background:#fff;min-width:260px;cursor:pointer}
 .dirhead h1.sechead{font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:800}
 .gsub{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
@@ -394,7 +396,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .gsub b{font-size:1.1rem;line-height:1.25}.gsub span{color:#586c74;font-size:.95rem}.gsub .btn{margin-top:14px}
 .gsub .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .btn-sm{font-size:.9rem;padding:.5em 1.1em;min-height:38px}
-@media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:320px;flex:none}}
+@media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:461px;min-height:0;flex:none}}
 @media(max-width:739px){.lgasel-l,.lgasel{width:100%}}
 """
 
@@ -416,7 +418,7 @@ def tfooter():
 JSX = JS.replace("var nk=h.indexOf('rack')===0?'rack':h;", "var nk=h.indexOf('rack')===0?'rack':h.indexOf('lga-')===0?'network':h;").replace("'/#'+h}", "'/#'+(h.indexOf('lga-')===0?'network':h)}")
 assert JSX.count("lga-") == 2
 JS2 = """(function(){var sel=[].slice.call(document.querySelectorAll('.lgasel'));
-sel.forEach(function(s){s.addEventListener('change',function(){var v=s.value||'network';location.hash=v;if(v==='network')setTimeout(function(){var t=document.getElementById('our-network'),h=document.querySelector('.site-head');if(t)window.scrollTo(0,t.getBoundingClientRect().top+window.scrollY-67-(h?h.offsetHeight:0)-16)},60)})});
+sel.forEach(function(s){s.addEventListener('change',function(){var v=s.value||'network';location.hash=v;if(v==='network')setTimeout(function(){var t=document.getElementById('our-network'),h=document.querySelector('.site-head');if(t)window.scrollTo(0,t.getBoundingClientRect().top+window.scrollY-(h?h.offsetHeight:0)-24)},60)})});
 window.addEventListener('hashchange',function(){sel.forEach(function(s){s.value=s.getAttribute('data-cur')})});
 document.addEventListener('click',function(e){var a=e.target.closest('[data-sample]');if(a)e.preventDefault()})})();"""
 
