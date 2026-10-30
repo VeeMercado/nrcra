@@ -129,7 +129,7 @@ body.teal{--bg:#f3f6f7}
 .hl{padding:0}
 .teal .card{border-radius:var(--r);padding:36px}
 .wwa{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}.wwa>*{min-width:0}.wwa-map{max-width:420px;justify-self:center;width:100%}
-.lgapills{list-style:none;margin:16px 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px}.lgapills li{border:2px solid #f3f6f7;border-radius:99px;padding:.25em .9em;font-weight:700;font-size:.95rem;background:#f3f9f8;color:#5e747d}.subline{margin:40px 0 1em;font-size:1.2rem;font-weight:800;line-height:1.35}
+.lgapills{list-style:none;margin:16px 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px}.lgapills li{border:2px solid #f3f6f7;border-radius:99px;padding:.25em .9em;font-weight:700;font-size:.95rem;background:#f3f9f8;color:#586c74}.subline{margin:40px 0 1em;font-size:1.2rem;font-weight:800;line-height:1.35}
 .statrow{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}.statrow>*{min-width:0}.statcard{border-radius:var(--r);padding:36px}.statcard .stats dt{color:var(--navy)}
 .framed{border-radius:36px;padding:14px;background:var(--fr,var(--teal))}.framed img{border-radius:24px;width:100%;aspect-ratio:4/3;object-fit:cover}
 .pcard2 .p3{align-items:center}
@@ -219,6 +219,10 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .site-foot{--foot-h:var(--teal)}
 .tb .pmap{--land:#fff;--sea:var(--teal-12);--coast:var(--teal);--river:var(--teal)}
 .herobg .play{display:grid;place-items:center;width:92px;height:92px;padding:0}.herobg .play svg{display:block;width:100%;height:100%;font-family:var(--font)}
+/* Network section (Who we are): the yellow button set, a yellow bottom border and light yellow pills */
+.tb .wwa{border-bottom-color:var(--yellow)}
+.wwa .btn-primary{background:#ffcb2a;color:#07293b;border-color:#07293b}.wwa .btn-primary:hover{background:#07293b;color:#fff;border-color:#07293b}.wwa .btn-primary:active{background:#ffeaaa;color:#07293b;border-color:#07293b}
+.lgapills li{background:#ffeaaa}
 /* B header cropped like Prototype 3: a rounded box inside the page width, not edge to edge */
 .herobg{padding:20px 0 0!important}
 .herobg>.wrap:first-child{width:calc(100% - 40px);max-width:calc(var(--wrap) - 40px);margin:0 auto;padding:0;border-radius:40px;overflow:hidden}
@@ -251,4 +255,4 @@ def page(v):
 
 # prototype-a/index.html is a frozen, hand-kept file (Prototype A). It is not built from build.py, so changes to Round 1 never reach it.
 def main():
-    B.write("prototype-b/index.html", page("prototype-b").replace("7 council areas", "8 council areas").replace("<dt>7</dt><dd>local government areas", "<dt>8</dt><dd>local government areas").replace("#6c8590", "#5e747d").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
+    B.write("prototype-b/index.html", page("prototype-b").replace("7 council areas", "8 council areas").replace("<dt>7</dt><dd>local government areas", "<dt>8</dt><dd>local government areas").replace("#6c8590", "#586c74").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))

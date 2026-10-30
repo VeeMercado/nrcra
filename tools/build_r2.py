@@ -115,7 +115,7 @@ document.addEventListener("keydown",function(e){{if(e.key==="Escape"){{var o=dds
 
 
 # ---------------------------------------------------------------- button, link and text colour sets (review page)
-NAVY_, WHITE_, GREY_, LIGHT_ = "#07293b", "#ffffff", "#5e747d", "#f3f6f7"
+NAVY_, WHITE_, GREY_, LIGHT_ = "#07293b", "#ffffff", "#586c74", "#f3f6f7"
 FAMILIES = [
     # name, colour, text on colour, light tint (selected menu item), link colour on white, note
     ("Teal", "#00857c", WHITE_, "#beddda", "#00857c", "The adjusted teal. Darker than brand teal (#00a79d) so white text passes."),
@@ -190,10 +190,10 @@ def light_teal():
 
 
 def text_colours():
-    texts = [(NAVY_, WHITE_, "Navy on white", "default text"), (GREY_, WHITE_, "#5e747d on white", "quiet text, where it matters"), (GREY_, LIGHT_, "#5e747d on #f3f6f7", "quiet text on light grey"),
+    texts = [(NAVY_, WHITE_, "Navy on white", "default text"), (GREY_, WHITE_, "#586c74 on white", "quiet text, where it matters"), (GREY_, LIGHT_, "#586c74 on #f3f6f7", "quiet text on light grey"),
              (WHITE_, NAVY_, "White on navy", "text on dark"), (LIGHT_, NAVY_, "#f3f6f7 on navy", "text on dark"), (WHITE_, "#00857c", "White on adjusted teal", "text on teal"), (LIGHT_, "#00857c", "#f3f6f7 on adjusted teal", "text on teal")]
     rows = "".join(f'<tr><td><span class="chip" style="color:{f};background:{b}">Aa</span> {l}</td><td>{n}</td><td><b>{_ratio(f, b):.2f}:1</b></td><td class="{"pass" if _ratio(f, b) >= 4.5 else "fail"}">{"Pass" if _ratio(f, b) >= 4.5 else "Fail"}</td></tr>' for f, b, l, n in texts)
-    return f'''<section class="blk" id="text"><h2>Text colours</h2><p>Navy for text. <code>#5e747d</code> for quiet text on white where it matters. White and <code>#f3f6f7</code> on darker backgrounds.</p>
+    return f'''<section class="blk" id="text"><h2>Text colours</h2><p>Navy for text. <code>#586c74</code> for quiet text on white where it matters. White and <code>#f3f6f7</code> on darker backgrounds.</p>
 <table><thead><tr><th>Pairing</th><th>Use</th><th>Ratio</th><th>Body text (4.5:1)</th></tr></thead><tbody>{rows}</tbody></table></section>'''
 
 
@@ -220,7 +220,7 @@ def _hex_table(rows):
 def brand_colours():
     main4 = [("Yellow", "#ffcb2a", "Highlights and small accents, with navy text"), ("Navy", NAVY_, "Text, footer, dark backgrounds"),
              ("Orange", "#f05a28", "Small accents"), ("Teal", "#00a79d", "Borders, dots and accents; text on navy only")]
-    others = [("Adjusted teal", "#00857c", "Buttons and any area with white text"), ("Quiet text", GREY_, "Small supporting text on white, light grey and pale teal"),
+    others = [("Adjusted teal", "#00857c", "Buttons and any area with white text"), ("Quiet text", GREY_, "Small supporting text on white, light grey, pale teal and light yellow"),
               ("White", WHITE_, "Cards and page"), ("Light grey", LIGHT_, "Page background"),
               ("Pale teal", "#f3f9f8", "Large pale panels, from the PDFs"), ("Light teal", "#beddda", "Selected menu item, hover, tinted panels, from the PDFs"),
               ("Light yellow", "#ffeaaa", "Tint for large text blocks (guidance examples)"), ("Light red", "#fbd6c9", "Tint for large text blocks (guidance examples)")]
@@ -298,5 +298,5 @@ def _orange(html):
 
 
 def main():
-    B.write("brand-contrast/index.html", _link_terms(_orange(brand_contrast())).replace("#6c8590", "#5e747d").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
+    B.write("brand-contrast/index.html", _link_terms(_orange(brand_contrast())).replace("#6c8590", "#586c74").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
     B.write("button-sets/index.html", button_sets())
