@@ -209,25 +209,21 @@ def lga_body(lga):
     return f'<section class="sec"><div class="wrap">{dir_head("Our Network", lga, "h1")}<ul class="gsub">{cards}</ul></div></section>'
 
 
-RACK_CARDS = [
-    ("house", "Get Ready", "Plans and checklists for before a disaster.", "Find templates"),
-    ("table", "Volunteers", "Registering, inducting and looking after volunteers.", "Explore resource"),
-    ("circle", "Run Your Group", "Governance, templates and running a healthy group.", "Find templates"),
-    ("aerial", "Emergencies", "What to do and who to call when it happens.", "Get resource"),
-    ("workshop", "Training &amp; Workshops", "Workshops and learning for group leaders.", "Explore resource"),
-    (None, "Share", "Have a favourite template to share? Add it to our resource library.", "Contribute +"),
+RACK_CATS = [
+    ("Get Ready", "Plans and checklists for before a disaster."),
+    ("Volunteers", "Registering, inducting and looking after volunteers."),
+    ("Run Your Group", "Governance, templates and running a healthy group."),
+    ("Emergencies", "What to do and who to call when it happens."),
+    ("Training &amp; Workshops", "Workshops and learning for group leaders."),
 ]
 
 
 def rack_body():
-    cards = ""
-    for key, t, d, b in RACK_CARDS:
-        ph = img(key, alt="") if key else f'<span class="rshare" aria-hidden="true">{icon("share")}</span>'
-        cards += f'<li><span class="rph">{ph}</span><h3>{t}</h3><p>{d}</p><a class="btn btn-ghost btn-sm" href="#" data-sample="1">{b}</a></li>'
+    cards = "".join(f'<li><span class="pn">{i:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(RACK_CATS, 1))
     return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge.</span><h1>The R.A.C.K.</h1><p class="lede">One shared place where the whole network can find what already works from years of real community experience across the Northern Rivers.</p><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p>
 <p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20access">Request access</a><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20help">Get help</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a></p></div>
 <div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="A community member using the R.A.C.K. on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
-<section class="sec"><div class="wrap"><h2 class="sechead">In this resource library</h2><p class="lede">You&rsquo;ll find templates and guides you can use straight away, and contribute knowledge back in two minutes.</p><ul class="rcards">{cards}</ul></div></section>'''
+<section class="sec"><div class="wrap rackhead"><h2 class="sechead">In this resource library</h2><p class="lede">You&rsquo;ll find templates and guides you can use straight away, and contribute knowledge back in two minutes.</p><ol class="pillcards rackcats">{cards}</ol></div></section>'''
 
 
 def impact_body():
@@ -397,12 +393,10 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .lgapills li a{color:var(--navy);text-decoration:none;font-weight:700}.tb .lgapills li a:hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
 /* R.A.C.K. page */
 .tb .splith .rackph img{height:auto;aspect-ratio:1024/799;object-fit:cover}
-.rcards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.rcards li{background:#fff;border:1px solid var(--line);border-bottom:10px solid var(--teal);border-radius:20px;padding:18px 18px 24px;display:flex;flex-direction:column;gap:4px}
-.rcards .rph{display:block;aspect-ratio:4/3;overflow:hidden;border-radius:18px;margin-bottom:16px;background:#beddda}.rcards .rph img{width:100%;height:100%;object-fit:cover;display:block}
-.rcards .rshare{display:grid;place-items:center;width:100%;height:100%;color:#00857c}.rcards .rshare svg{width:72px;height:72px;stroke-width:2}
-.rcards h3{margin:0}.rcards p{margin:0 0 14px;color:#586c74}.rcards .btn{margin-top:auto;align-self:stretch}
-@media(max-width:860px){.rcards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.rcards{grid-template-columns:1fr}}
+.rackhead{text-align:center}.rackhead .lede{max-width:62ch;margin-left:auto;margin-right:auto}
+.tb .rackcats li:nth-child(1){--pc:var(--teal)}.tb .rackcats li:nth-child(2){--pc:var(--orange)}.tb .rackcats li:nth-child(3){--pc:var(--yellow)}.tb .rackcats li:nth-child(4){--pc:var(--navy)}.tb .rackcats li:nth-child(5){--pc:#9fb0b8}
+.tb .rackcats li{border:1px solid var(--line);border-bottom:14px solid var(--pc)}
+@media(min-width:861px){.tb .rackcats{flex-wrap:nowrap}.tb .rackcats li{flex:1 1 0;max-width:none;min-width:0}}
 /* one rhythm: 65px between every section on every page */
 .tb .sec{padding:0 0 65px!important}.tb .page>.sec:first-child{padding-top:65px!important}
 .tb .hero1.herobg{margin-bottom:65px}.tb .page>.wrap:first-child>.splith{padding-bottom:0}.tb .page>.wrap:first-child{margin-bottom:65px}
@@ -429,7 +423,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .gsub{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
 .gsub li{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
 .gsub b{font-size:1.1rem;line-height:1.25}.gsub span{color:#586c74;font-size:.95rem}.gsub .btn{margin-top:14px}
-.gsub .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.gsub .sr-only,.rcards .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .btn-sm{font-size:.9rem;padding:.5em 1.1em;min-height:38px}
 @media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:461px;min-height:0;flex:none}}
 @media(max-width:739px){.lgasel-l,.lgasel{width:100%}.dirhead{grid-template-columns:1fr}.dirhead .sechead,.dirhead .lgasel{grid-column:1}.dirhead .sechead{grid-row:1}.dirhead .lgasel{grid-row:2}}
