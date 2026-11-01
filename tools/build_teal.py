@@ -61,7 +61,7 @@ def home_body():
 
 <section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Impact</h2>{B.stats()}<p class="btnrow"><a class="btn btn-tertiary" href="#impact">See Impact</a></p></div></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas (LGA),<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>'''
 
 
@@ -94,18 +94,48 @@ def meal_ring():
 
 
 def about_body():
-    return f'''<div class="wrap"><div class="splith rev"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow pill-t">About us</span><h1>We&rsquo;re changing the Northern Rivers&rsquo; resilience culture</h1><p class="lede">{B.MORE}</p></div></div></div>
+    return f'''<div class="wrap"><div class="splith rev"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow pill-t">About us</span><h1>We know communities are stronger when they&rsquo;ve built trusted relationships together.</h1><p class="lede">{B.MORE}</p></div></div></div>
 <section class="sec"><div class="wrap"><div class="card surface"><div class="vp-text"><span class="script">Our goal</span><h2>Vision</h2><p>{B.VISION}</p><span class="script" style="margin-top:28px">Our why</span><h2>Purpose</h2><p>{B.PURPOSE}</p></div></div></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">Our values</h2>{B.values_cards()}</div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">How we work</h2><p class="lede">Through regular gatherings, deep conversations and shared experiences, the Resilience Alliance is building a community-led network focused on collective care, preparedness and regional strength.</p>{how_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><span class="script">How we take action</span><h2 class="sechead">{hl("We have a MEAL plan")}</h2><p class="lede">Monitoring, Evaluation, Accountability and Learning. A healthy Resilience Alliance isn&rsquo;t just one that delivers projects. It&rsquo;s one where people feel included, power is shared, groups gain real value, and we can learn and adapt together.</p>
 {meal_ring()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><span class="eyebrow">Our focus</span><h2 class="sechead">{hl("Five pillars")}</h2><p class="lede">{B.CALLOUT} We connect them using these five key pillars.</p>{pillar_cards()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><span class="script">Progress so far</span><h2 class="sechead">Our journey</h2>{B.journey("river")}</div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">{hl("Our Focus")}</h2><p class="lede">{B.CALLOUT} We connect them using these five key pillars.</p>{pillar_cards(True)}</div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Our journey</h2>{journey_b()}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Meet the team</h2>{team()}</div></div></section>'''
 
 
 # ---------------------------------------------------------------- Network
-def pillar_cards():
+HOW = [("Connect", "50+ grassroots, community-led groups are connected together across the region so they can build trusting relationships with each other so they know who to contact when the next climate disaster hits.", "teal"),
+       ("Share", "Sharing knowledge, experience, practical tools and resources across the network so everyone can benefit from what others have learned.", "yellow"),
+       ("Care", "Peer to peer support, reducing the load, removing duplication and placing a real value on the efforts of all.", "orange")]
+
+
+def how_cards():
+    return '<ul class="howcards">' + "".join(f'<li class="hw-{c}"><h3><span>{t}.</span></h3><p>{d}</p></li>' for t, d, c in HOW) + "</ul>"
+
+
+FUND = lambda t: f'<p class="fund">{t}</p>'
+JOURNEY_B = [
+    ("2022", [("Floods &amp; disaster:", "Communities respond to the floods, showing local leadership and the need for stronger regional collaboration.", "")]),
+    ("2023", [("Building connections:", "A Sydney Environment Institute &amp; UCRH study documents community self organisation after the floods &mdash; the evidence base that leads participants to call for a regional alliance.", "")]),
+    ("2024", [("Resilience Alliance established:", "The inaugural regional gathering with 96 participants from 40+ groups across the Northern Rivers formally establishes the Resilience Alliance.", ""),
+              ("Co-designing the future:", "Groups develop the Resilience Alliance&rsquo;s distributed governance model and strategic priorities.", "Funded by the University of Centre of Rural Health.")]),
+    ("2025", [("Capability in action:", "The Resilience Alliance trains 20 groups on spontaneous volunteer management systems, supporting groups post Cyclone Alfred.", "Funded by the NSW Government&rsquo;s Spontaneous Volunteering Program and Foundation for Regional and Rural Renewal.")]),
+    ("2026", [("Connected, Prepared Communities:", "Disaster Ready Fund 3 investment supports the next stage of capability and resilience-building with 60 groups throughout the Northern Rivers.", "Funded by the Australian Government and NSW Government."),
+              ("Participatory granting project:", "17 groups receive up to $10,000 in funding as part of the first round of a newly developed participation funding process.", "Funding by The NRMA Help Fund, Monash University and Northern Rivers Community Foundation.")]),
+    ("2027", [("Onwards:", B.JOURNEY[-1][1], "")]),
+]
+
+
+def journey_b():
+    return '<ol class="river">' + "".join(
+        f'<li><b>{y}</b><div class="jt">' + "".join(f'<h3>{h}</h3><p>{t}</p>' + (f'<p class="fund">{f}</p>' if f else "") for h, t, f in es) + '</div></li>'
+        for y, es in JOURNEY_B) + "</ol>"
+
+
+def pillar_cards(nums=False):
+    if nums:
+        return '<ol class="pillcards">' + "".join(f'<li><span class="pi pnum">{i:02d}</span><h3>{E(t)}</h3><p>{E(d)}</p></li>' for i, (t, d, k) in enumerate(B.PILLARS, 1)) + "</ol>"
     return '<ol class="pillcards">' + "".join(f'<li><span class="pi">{icon(k)}</span><span class="pn">{i:02d}</span><h3>{E(t)}</h3><p>{E(d)}</p></li>' for i, (t, d, k) in enumerate(B.PILLARS, 1)) + "</ol>"
 
 
@@ -194,7 +224,7 @@ def testimonials():
     c1 = card(img(TESTIMONIALS[0][0], alt=""), TESTIMONIALS[0][1], TESTIMONIALS[0][2])
     c2 = f'<li>{vid}<blockquote><p>&ldquo;Like a family we did not know we had.&rdquo;</p><footer>&mdash; Phoenix Casino</footer></blockquote></li>'
     c3 = card(img(TESTIMONIALS[1][0], alt=""), TESTIMONIALS[1][1], TESTIMONIALS[1][2])
-    return f'<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">Stories from the Alliance</h2><ul class="tcards">{c1}{c2}{c3}</ul></div></section>'
+    return f'<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">Our Stories</h2><ul class="tcards">{c1}{c2}{c3}</ul></div></section>'
 
 
 def network_body():
@@ -269,11 +299,16 @@ body.teal{--bg:#f3f6f7}
 
 /* Prototype 2's rounded buttons and river-style journey */
 body{--btn-r:12px}
-ol.river{position:relative;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-ol.river::before{content:"";position:absolute;left:0;right:0;top:26px;height:12px;border-radius:99px;background:var(--teal-25)}
-ol.river li{position:relative;padding-top:64px;display:block}ol.river b{position:absolute;top:0;left:0;background:#fff;border:3px solid var(--teal);border-radius:99px;padding:.35em .9em;font-weight:900;color:var(--teal-d);font-size:1rem}
-ol.river p{margin:0;font-size:.95rem}@media(max-width:860px){ol.river{grid-template-columns:1fr}ol.river::before{left:24px;right:auto;width:10px;top:0;bottom:0;height:auto}ol.river li{padding:0 0 0 70px;min-height:60px}ol.river b{left:0}}
-
+ol.river{position:relative;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+ol.river::before{content:"";position:absolute;left:0;right:0;top:16px;height:12px;border-radius:99px;background:var(--teal-25)}
+ol.river li{position:relative;padding-top:64px;display:block}
+ol.river b{position:absolute;top:0;left:0;box-sizing:border-box;height:44px;display:flex;align-items:center;background:#fff;border:3px solid var(--teal);border-radius:99px;padding:0 1.1em;font-weight:900;color:var(--teal-d);font-size:1rem;line-height:1}
+ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size:.95rem}ol.river .jt>*:last-child{margin-bottom:0}ol.river .fund{font-style:italic;font-size:.82rem;color:var(--muted);margin-top:-.5em}
+@media(max-width:860px){ol.river{grid-template-columns:1fr;gap:28px}ol.river::before{left:42px;right:auto;width:12px;margin-left:-6px;top:0;bottom:0;height:auto}ol.river li{padding:0 0 0 118px;min-height:44px}ol.river b{left:0;width:84px;justify-content:center;padding:0}}
+.tb .howcards{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:16px;justify-content:center}.tb .howcards li{flex:1 1 260px;max-width:380px;background:var(--bg);color:var(--navy);border:1px solid var(--line);border-radius:22px;padding:24px 22px 28px;border-bottom:14px solid var(--pc);text-align:left}
+.tb .howcards li p{margin:0;color:var(--navy)}.tb .howcards h3{margin:0 0 16px}.tb .howcards h3 span{text-align:center;display:block;width:100%;box-sizing:border-box;border-radius:99px;padding:.45em 1em;font-weight:900}
+.tb .hw-teal{--pc:var(--teal);--bg:var(--teal-25)}.tb .hw-teal h3 span{background:#00857c;color:#fff}.tb .hw-yellow{--pc:var(--yellow);--bg:var(--yellow-40)}.tb .hw-yellow h3 span{background:var(--yellow);color:var(--navy)}.tb .hw-orange{--pc:var(--orange);--bg:var(--orange-25)}.tb .hw-orange h3 span{background:var(--orange);color:#fff}
+.pillcards .pnum{font-weight:900;font-size:1.05rem;letter-spacing:.04em}
 /* accent bars sit on the bottom edge, not the top */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}
 .cards .pcard{border-top:0}.cards .pcard:nth-child(1){border-bottom:6px solid var(--teal)}.cards .pcard:nth-child(2){border-bottom:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-bottom:6px solid var(--orange)}
