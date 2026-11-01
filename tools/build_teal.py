@@ -123,7 +123,7 @@ JOURNEY_B = [
     ("2025", [("Capability in action:", "The Resilience Alliance trains 20 groups on spontaneous volunteer management systems, supporting groups post Cyclone Alfred.", "Funded by the NSW Government&rsquo;s Spontaneous Volunteering Program and Foundation for Regional and Rural Renewal.")]),
     ("2026", [("Connected, Prepared Communities:", "Disaster Ready Fund 3 investment supports the next stage of capability and resilience-building with 60 groups throughout the Northern Rivers.", "Funded by the Australian Government and NSW Government."),
               ("Participatory granting project:", "17 groups receive up to $10,000 in funding as part of the first round of a newly developed participation funding process.", "Funding by The NRMA Help Fund, Monash University and Northern Rivers Community Foundation.")]),
-    ("2027", [("Onwards:", B.JOURNEY[-1][1], "")]),
+    ("2027+", [("Onwards:", "Our research and MEAL process continues alongside the Alliance as it supports and resources groups in the network.", "Monitoring, Evaluation, Accountability and Learning")]),
 ]
 
 
