@@ -15,8 +15,9 @@ from build import E, img, logo, screen, icon, BASE, MOBILE, JS, FONT, CSS1, VIME
 
 SIGN_IN = "https://rack.nrcra.org.au"  # the R.A.C.K address NRCRA gave us (not live yet)
 MENU = [("home", "Home"), ("network", "Network"), ("about", "About"), ("impact", "Impact"), ("rack", "R.A.C.K.")]
-NAMES = {"prototype-a": "Prototype A", "prototype-b": "Prototype B"}
-SHORT = {"prototype-a": "A", "prototype-b": "B"}
+# Only Prototype C is published. A (two cards) and B (one green card) are archived: their headers stay available as hero variants below, and snapshots are kept in the git-ignored _archive-* folders.
+NAMES = {"prototype-c": "Prototype Round 2"}
+SHORT = {"prototype-c": "C"}
 
 
 # Funder strip directly under the menu bar on every page. Logos we hold: FRRR, HELP Fund (NRMA Insurance) and UCRH; NSW Government and Australian Government logos supplied by NRCRA. The Australian Government logo contains the Commonwealth Coat of Arms, so NRCRA must confirm its funding agreement allows it before this goes live.
@@ -77,17 +78,47 @@ def part_band():
 
 
 # ---------------------------------------------------------------- Home
-def home_body():
-    lgas = "".join(f'<li><a href="#lga-{slug(n)}">{E(n)} LGA</a></li>' for n in ["Tweed", "Byron", "Kyogle", "Lismore", "Richmond Valley", "Ballina", "Tenterfield", "Clarence Valley"])
+def hero_card(square=False, cover=False):
+    """Two separate cards side by side (A), nearly square video (C), or one green card with the tag above both the title and the video (B)."""
+    tag = '<span class="eyebrow">Northern Rivers Community Resilience Alliance</span>'
+    tag_top = tag.replace('class="eyebrow"', 'class="eyebrow hsplit-tag"') if cover else ""
+    tag_in = "" if cover else tag
+    return f'''<div class="hsplit{" hsplit-sq" if square else ""}{" hsplit-bg" if cover else ""}"><div class="wrap"><div class="hsplit-in">{tag_top}<div class="hsolid-text hsplit-l">{tag_in}
+<h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
+<p class="btnrow"><a class="btn btn-primary" href="#about">Learn About us</a></p></div>
+<div class="hsplit-r" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div></div>'''
+
+
+def hero_photo():
+    """Prototype B: full-width photo with the teal gradient and white text."""
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn About us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M3 3l8 5-8 5z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>Watch reel</button></p></div>
-<div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>
+<div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>'''
+
+
+def hero_green():
+    """Prototype B: a copy of C's header, but one green card covers the back of the video (the video sits on the green)."""
+    return hero_card(square=True, cover=True)
+
+
+def hero_solid():
+    """Prototype C: A's header, but the video card is always almost square (a little wider than tall) and sits in the middle of the text card's height."""
+    return hero_card(square=True)
+
+
+HEROES = {"card": hero_card, "photo": hero_photo, "solid": hero_solid, "green": hero_green}
+HERO_FOR = {"prototype-a": "card", "prototype-b": "green", "prototype-c": "solid"}  # a and b are archived (not built)
+
+
+def home_body(hero="photo"):
+    lgas = "".join(f'<li><a href="#lga-{slug(n)}">{E(n)} LGA</a></li>' for n in ["Tweed", "Byron", "Kyogle", "Lismore", "Richmond Valley", "Ballina", "Tenterfield", "Clarence Valley"])
+    return f'''{HEROES[hero]()}
 <section class="sec hwrow" style="padding-top:0"><div class="wrap hwbg"><span class="hwd hwd-blob" aria-hidden="true"></span>{B.deco("rings", "hwd-rings")}<span class="hwd hwd-dot hwd-dt" aria-hidden="true"></span><span class="hwd hwd-dot hwd-do" aria-hidden="true"></span><ul class="hwpills" aria-label="How we work"><li><a class="hp-teal" href="#about" data-jump="ab-how" data-page="about">Connect.</a></li><li><a class="hp-yellow" href="#about" data-jump="ab-how" data-page="about">Share.</a></li><li><a class="hp-orange" href="#about" data-jump="ab-how" data-page="about">Care.</a></li></ul></div></section>
-<section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Impact</h2>{B.stats()}<p class="btnrow"><a class="btn btn-tertiary" href="#impact">See Impact</a></p></div></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>'''
+<p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
+<section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Impact</h2>{B.stats()}<p class="btnrow"><a class="btn btn-tertiary" href="#impact">See Impact</a></p></div></div></section>'''
 
 
 # ---------------------------------------------------------------- About
@@ -504,7 +535,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 /* Home: Connect / Share / Care in their own row between the hero and Our Impact: no pill, text in the three theme colours (deeper yellow and orange so they read on the light page),
    same size as the About titles. Each opens How we work. Hover adds only a 1px white border. */
 .tb .hwpills{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:fit-content;max-width:100%}
-.tb .hwpills a{display:block;box-sizing:border-box;border:1px solid transparent;border-radius:99px;padding:.4em .8em;text-align:center;font-weight:900;font-size:clamp(1.35rem,2.4vw,1.6rem);line-height:1.2;text-decoration:none!important;background:transparent}
+.tb .hwpills a{display:block;box-sizing:border-box;border:1px solid transparent;border-radius:var(--btn-r,12px);padding:.4em .8em;text-align:center;font-weight:900;font-size:clamp(1.35rem,2.4vw,1.6rem);line-height:1.2;text-decoration:none!important;background:transparent}
 .tb .hwpills a.hp-teal,.tb .hwpills a.hp-teal:hover,.tb .hwpills a.hp-teal:active{color:#00857c;background:transparent}
 .tb .hwpills a.hp-yellow,.tb .hwpills a.hp-yellow:hover,.tb .hwpills a.hp-yellow:active{color:#D9A400;background:transparent}
 .tb .hwpills a.hp-orange,.tb .hwpills a.hp-orange:hover,.tb .hwpills a.hp-orange:active{color:#d9481a;background:transparent}
@@ -540,6 +571,28 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 /* Footer layout: logo, Contact and Stay in Touch stacked on the left; Quick Links in the middle; R.A.C.K. links and Privacy Policy on the right; copyright line centred */
 .tb .site-foot .fquick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px;min-width:0}.tb .site-foot .fhide{visibility:hidden}
 .tb .site-foot .copy{text-align:center}
+/* Prototypes A and C header: two separate cards. Left: dark green text card. Right: the video card (full height in A; always almost square and centred in C).
+   Desktop (1000px and up): text 60%, video 40%. iPad: half and half.  Phone: stacked. Text card padding: desktop 60.36px top and bottom; iPad and phone 10% more than the original 28px / 36px. */
+.tb .hsplit{--pw:min(580px,calc(100vw - 200px));padding:36px 0 0;margin-bottom:65px}
+.tb .hsplit-in{width:calc(100% - 40px);max-width:calc(var(--wrap) - 40px);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;min-height:640px}
+.tb .hsplit-l{border-radius:40px;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal)}
+.tb .hsplit-r{position:relative;border-radius:40px;overflow:hidden;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal);min-width:0;background:#fff}
+.tb .hsplit-r img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;display:block}
+.tb .hsplit-r,.tb .tph.vid,.tb .h1-photo{cursor:pointer}.tb .hsplit-r .play{position:absolute;inset:0;margin:auto;width:92px;height:92px;padding:0;display:grid;place-items:center}.tb .hsplit-r .play svg{display:block;width:100%;height:100%;font-family:var(--font)}
+.tb .hsolid-text{background:rgb(0 97 90);color:#fff;padding:60.36px 44px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.tb .hsolid-text .eyebrow{display:inline-block;align-self:flex-start;background:#fff;color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin-bottom:48px}
+.tb .hsolid-text h1{color:#fff;line-height:1.12}.tb .hsolid-text .lede{color:#fff}
+.tb .hsolid-text .btn-primary{border-color:#fff}.tb .hsolid-text .btn-primary:hover{background:#fff;color:#07293b;border-color:#fff}.tb .hsolid-text .btn-primary:active{background:#beddda;color:#07293b;border-color:#fff}
+@media(min-width:741px) and (max-width:999px){.tb .hsplit-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;min-height:0}.tb .hsplit .hsolid-text{padding:30.8px 28px 39.6px}.tb .hsplit .hsolid-text .eyebrow{font-size:.72rem;margin-bottom:28px;padding:.55em 1.2em}.tb .hsplit .hsolid-text h1{font-size:2.1rem}}
+@media(max-width:740px){.tb .hsplit-in{grid-template-columns:minmax(0,1fr);min-height:0;gap:16px;width:calc(100% - 24px)}.tb .hsplit .hsolid-text{padding:30.8px 18px 39.6px}.tb .hsplit .hsolid-text .eyebrow{font-size:.72rem;margin-bottom:24px}.tb .hsplit-l{border-radius:28px}.tb .hsplit-r{border-radius:28px;aspect-ratio:4/3}}
+.tb .hsplit.hsplit-sq .hsplit-r{align-self:center;aspect-ratio:11/10}
+/* Prototype B: one green card behind everything. The tag sits above both the title and the video; below it the text takes exactly half and the video exactly the other half */
+.tb .hsplit-bg .hsplit-in{background:rgb(0 97 90);border-radius:40px;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal);overflow:hidden;gap:0;align-items:stretch;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto 1fr}
+.tb .hsplit-bg .hsplit-tag{grid-column:1/-1;justify-self:start;display:inline-block;background:#fff;color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin:60.36px 44px 0}
+.tb .hsplit-bg .hsplit-l{background:transparent;border:0;border-radius:0;padding:36px 44px 60.36px}
+.tb .hsplit-bg .hsplit-r{border:0;border-radius:28px 0 0 28px;background:transparent;margin:0;align-self:center}
+@media(min-width:741px) and (max-width:999px){.tb .hsplit-bg .hsplit-tag{margin:30.8px 28px 0;font-size:.72rem;padding:.55em 1.2em}.tb .hsplit-bg .hsplit-l{padding:24px 28px 39.6px}}
+@media(max-width:740px){.tb .hsplit-bg .hsplit-in{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;border-radius:28px}.tb .hsplit-bg .hsplit-tag{margin:30.8px 18px 0;font-size:.72rem}.tb .hsplit-bg .hsplit-l{padding:24px 18px 39.6px}.tb .hsplit-bg .hsplit-r{margin:0 18px 30px;border-radius:20px;align-self:stretch}}
 /* accent bars sit on the bottom edge, not the top */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}
 .cards .pcard{border-top:0}.cards .pcard:nth-child(1){border-bottom:6px solid var(--teal)}.cards .pcard:nth-child(2){border-bottom:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-bottom:6px solid var(--orange)}
@@ -579,14 +632,14 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .btn-primary:active,.btn-cta:active,.btn-ghost:active{background:var(--teal-25);color:var(--navy);border-color:var(--navy)}
 .ready .btn-primary:active,.ready .btn-cta:active,.ready .btn-ghost:active{border-color:#fff}.ready .btn-ghost:hover{background:#fff;color:var(--navy)}
 /* Prototype B header, in the style of Prototype 3: deep teal gradient (left to right) over the photo, white text in a block the size of Prototype A's, yellow squiggle */
-.tb .herobg .h1-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,97,90,.93) 0%,rgba(0,97,90,.88) 52%,rgba(0,97,90,.1) 100%)}
+.tb .herobg .h1-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(0 97 90/.93) 0%,rgb(0 97 90/.88) 52%,rgb(0 97 90/.1) 100%)}
 .tb .herobg .h1-panel{background:transparent;border:0;color:#fff}
 .tb .herobg .h1-panel h1{color:#fff}.tb .herobg .h1-panel .eyebrow,.tb .herobg .h1-panel .lede{color:#fff}
 .tb .herobg .h1-panel .btn-primary{border-color:#fff}
 .tb .herobg .h1-panel .eyebrow{display:inline-block;align-self:flex-start;background:#fff;color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin-bottom:48px}
 .mark{position:relative;display:inline-block}.mark .squig{position:absolute;left:0;right:0;bottom:-.02em;width:100%;height:.4em}
-@media(min-width:740px){.herobg .h1-panel{padding:52px 44px}}
-@media(max-width:739px){.tb .herobg>.wrap:first-child{display:flex;align-items:flex-start;min-height:0;padding:0}.tb .herobg .h1-panel{margin:0;padding:28px 20px 40px;max-width:none}.tb .herobg .h1-photo::after{background:linear-gradient(180deg,rgba(0,97,90,.94) 0%,rgba(0,97,90,.88) 30%,rgba(0,97,90,.5) 48%,rgba(0,97,90,0) 62%)}.herobg .h1-panel h1{font-size:1.75rem;line-height:1.15}.herobg .h1-panel .lede{font-size:1rem}.herobg .h1-panel .eyebrow{font-size:.72rem}}
+@media(min-width:740px){.herobg .h1-panel{padding:46.8px 44px}}
+@media(max-width:739px){.tb .herobg>.wrap:first-child{display:flex;align-items:flex-start;min-height:0;padding:0}.tb .herobg .h1-panel{margin:0;padding:25.2px 20px 36px;max-width:none}.tb .herobg .h1-photo::after{background:linear-gradient(180deg,rgb(0 97 90/.94) 0%,rgb(0 97 90/.88) 30%,rgb(0 97 90/.5) 48%,rgb(0 97 90/0) 62%)}.herobg .h1-panel h1{font-size:1.75rem;line-height:1.15}.herobg .h1-panel .lede{font-size:1rem}.herobg .h1-panel .eyebrow{font-size:.72rem}}
 .tb .h1-panel{background:var(--teal-25);color:var(--navy);border:4px solid var(--teal)}.tb .h1-panel h1,.tb .h1-panel .eyebrow{color:var(--navy)}.tb .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy);background:#fff}.tb .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
 .tb #nav a[aria-current=page]{background:var(--teal-25)}
 .tb .surface{background:#fff;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal)}.tb .statcard{background:#fff;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal)}.tb .framed{--fr:var(--teal-25);outline:4px solid var(--teal);outline-offset:-4px}
@@ -607,14 +660,14 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 /* B header cropped like Prototype 3: a rounded box inside the page width, not edge to edge */
 .herobg{padding:36px 0 0!important}
 .herobg>.wrap:first-child{width:calc(100% - 40px);max-width:calc(var(--wrap) - 40px);margin:0 auto;padding:0;border-radius:40px;overflow:hidden;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal)}
-.herobg .h1-panel{margin:40px 0}
+.herobg .h1-panel{margin:36px 0}
 .herobg .h1-photo .play{left:calc((var(--pw,580px) + 100%)/2)}
-@media(max-width:739px){.herobg>.wrap:first-child{border-radius:28px;width:calc(100% - 24px)}.herobg .h1-panel{margin:0}.tb .herobg .h1-panel{padding:28px 18px 36px}.herobg .btnrow .btn{padding:.7em 1em}}
+@media(max-width:739px){.herobg>.wrap:first-child{border-radius:28px;width:calc(100% - 24px)}.herobg .h1-panel{margin:0}.tb .herobg .h1-panel{padding:25.2px 18px 32.4px}.herobg .btnrow .btn{padding:.7em 1em}}
 /* Who we are: when the columns stack, the photos come first, above the title */
 /* phones, B: gradient runs left to right and the play circle becomes a normal secondary button beside About */
 .watchbtn{display:none}
 .watchbtn{gap:.55em}.watchbtn svg{flex:none}
-@media(max-width:739px){.tb .herobg .h1-photo .play{display:none}.watchbtn{display:inline-flex}.tb .herobg .watchbtn{background:#fff;color:#07293b;border-color:#fff}.tb .herobg .watchbtn:hover{background:#00857c;color:#fff;border-color:#fff}.tb .herobg .watchbtn:active{background:#beddda;color:#07293b;border-color:#fff}.tb .herobg .h1-photo::after{background:linear-gradient(90deg,rgba(0,97,90,.94) 0%,rgba(0,97,90,.9) 62%,rgba(0,97,90,.62) 100%)}}
+@media(max-width:739px){.tb .herobg .h1-photo .play{display:none}.watchbtn{display:inline-flex}.tb .herobg .watchbtn{background:#fff;color:#07293b;border-color:#fff}.tb .herobg .watchbtn:hover{background:#00857c;color:#fff;border-color:#fff}.tb .herobg .watchbtn:active{background:#beddda;color:#07293b;border-color:#fff}.tb .herobg .h1-photo::after{background:linear-gradient(90deg,rgb(0 97 90/.94) 0%,rgb(0 97 90/.9) 62%,rgb(0 97 90/.62) 100%)}}
 @media(max-width:739px){.menu-btn{display:inline-flex;align-items:center;gap:.6em}.menu-btn .hb{flex:none}}
 /* button rules, from the teal set. Secondary: white, teal text and outline. Tertiary: navy. On dark: primary hovers white, secondary is white. Hover fills navy (or teal for navy buttons), active takes the light tint. Corners 12px; the play button stays a circle. */
 .btn-ghost{background:#fff;color:#00857c;border-color:#00857c}.btn-ghost:hover{background:#07293b;color:#fff;border-color:#07293b}.btn-ghost:active{background:#beddda;color:#07293b;border-color:#07293b}
@@ -641,8 +694,8 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 @media(max-width:700px){.tb .site-foot .foot-cols{grid-template-columns:minmax(0,1fr);gap:28px}.tb .site-foot .fquick{grid-template-columns:minmax(0,1fr);gap:0}.tb .site-foot .fcol h2.fhide{display:none}}
 /* border line above the copyright line, so the Acknowledgement of Country sits between two lines */
 .tb .site-foot .copyrow{margin:24px 0 0;padding-top:24px;border-top:1px solid var(--foot-line);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 20px}.tb .site-foot .copy{margin:0;padding:0;border:0;text-align:center}
-.tb .site-foot .totop{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.6);border-radius:99px;padding:.35em .95em;font:800 .85rem var(--font);cursor:pointer;line-height:1.3}
-.tb .site-foot .totop:hover{background:#f3f9f8;color:var(--navy);border-color:#f3f9f8}.tb .site-foot .totop:active{background:#beddda;color:var(--navy);border-color:#beddda}.tb .site-foot .totop:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.tb .site-foot .totop{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:#fff;border:2px solid #fff;border-radius:var(--btn-r,12px);padding:.5em 1.1em;min-height:38px;font:800 .9rem var(--font);cursor:pointer;line-height:1.3}
+.tb .site-foot .totop:hover{background:#f3f9f8;color:var(--navy);border-color:#fff}.tb .site-foot .totop:active{background:#beddda;color:var(--navy);border-color:#beddda}.tb .site-foot .totop:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 /* MEAL: six circles round a ring, like the Layout Design PDF */
 .mealwrap{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:48px;align-items:center;margin:28px 0 0}
@@ -714,7 +767,7 @@ def tfooter():
     touch = [("Facebook", B.LINKS["fb"]), ("LinkedIn", B.LINKS["li"])]
     social = '<div class="fcol"><h2 class="fb1">Get in touch</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in contact) + '</ul><ul class="flist social">' + "".join(f'<li><a class="soc" href="{u}" target="_blank" rel="noopener" aria-label="{n} (opens in a new tab)">{SOC_ICONS[n]}</a></li>' for n, u in touch) + "</ul></div>"
     site = [("Alliance Home", "#home"), ("Our Network", "#network"), ("About us", "#about"), ("Our Impact", "#impact")]
-    rackcol = [("Resilience Alliance Community Knowledge", "#rack"), ("R.A.C.K. Sign In", SIGN_IN), ("Privacy Policy", "#privacy")]
+    rackcol = [("What is R.A.C.K?", "#rack"), ("R.A.C.K. Sign In", SIGN_IN), ("Privacy Policy", "#privacy")]
     untitled = '<div class="fcol"><h2 class="fb2 fhide" aria-hidden="true">Quick Links</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in rackcol) + "</ul></div>"
     top = '<div class="foot-top"><span class="foot-logo boxed">' + blogo("logo") + '</span></div>'
     return f'''<footer class="site-foot"><div class="wrap">
@@ -743,7 +796,7 @@ var pg=a.getAttribute('data-page');if(location.hash==='#'+pg){document.getElemen
 
 def page(v):
     css, cls = CSS_B, "tb"
-    body = "".join([screen("home", "Home", home_body()), screen("about", "About", about_body()), screen("impact", "Impact", impact_body()), screen("rack", "R.A.C.K.", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
+    body = "".join([screen("home", "Home", home_body(HERO_FOR[v])), screen("about", "About", about_body()), screen("impact", "Impact", impact_body()), screen("rack", "R.A.C.K.", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NRCRA teal-led {NAMES[v]}</title><meta name="robots" content="noindex">
@@ -752,6 +805,18 @@ def page(v):
 {nav3()}<main id="main">{body}</main>{tfooter()}{protobar3(v)}<script data-cfasync="false">{JSX}</script><script data-cfasync="false">{JS2}</script></body></html>'''
 
 
-# prototype-a/index.html is a frozen, hand-kept file (Prototype A). It is not built from build.py, so changes to Round 1 never reach it.
+# Prototypes A, B and C are the same site; they differ only in the Home hero (card, photo, solid). The old hand-kept Prototype A is archived in prototype-a-archive/.
+def adjusted_teal(html):
+    """Every teal border, background and text in A, B and C is the adjusted teal #00857C (the light tints stay as tints)."""
+    html = re.sub(r"#00a79d|#00615a", "#00857c", html, flags=re.I)
+    return re.sub(r"rgba\(\s*0\s*,\s*(?:97\s*,\s*90|167\s*,\s*157)\s*,", "rgba(0,133,124,", html)
+
+
+def finish(v):
+    html = re.sub(r"(?<![0-9])60\+", "50+", page(v)).replace("7 council areas", "8 council areas").replace("<dt>7</dt><dd>local government areas", "<dt>8</dt><dd>local government areas").replace("#6c8590", "#586c74").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda")
+    return adjusted_teal(html)
+
+
 def main():
-    B.write("prototype-b/index.html", re.sub(r"(?<![0-9])60\+", "50+", page("prototype-b")).replace("7 council areas", "8 council areas").replace("<dt>7</dt><dd>local government areas", "<dt>8</dt><dd>local government areas").replace("#6c8590", "#586c74").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda"))
+    for v in ("prototype-c",):
+        B.write(v + "/index.html", finish(v))

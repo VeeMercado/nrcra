@@ -182,7 +182,7 @@ def light_teal():
         a, l, sat = colorsys.rgb_to_hls(r, g, b)
         return f"hue {round(a * 360)}, saturation {round(sat * 100)}%"
     pale, mid = "#f3f9f8", "#beddda"
-    demo = f'''<div class="lteal"><h3>In Prototype A and B</h3>
+    demo = f'''<div class="lteal"><h3>In Prototype Round 2</h3>
 <div class="mnav" style="background:#fff;color:{NAVY_}"><span style="background:{mid};color:{NAVY_}">Home</span><span>Network</span><span>About</span><span>Impact</span></div>
 <div class="ltcard" style="background:{pale};border-bottom:10px solid #00a79d"><b>Pale teal <code>{pale.upper()}</code></b><br>{hue(pale)}. Navy text {_ratio(NAVY_, pale):.2f}:1</div>
 <div class="ltcard" style="background:{mid};border-bottom:10px solid #00a79d"><b>Light teal <code>{mid.upper()}</code></b><br>{hue(mid)}. Navy text {_ratio(NAVY_, mid):.2f}:1</div></div>'''
@@ -242,7 +242,7 @@ def button_sections():
         sid = name.lower() + "-buttons"
         intro = ""
         if name == "Teal":
-            intro = "<p>Primary, secondary, tertiary, link and menu item, for teal and yellow, each on white and on navy. The primary button is the colour with a navy outline, as the Sign In button is in Prototype A and B. A red or green chip says whether the text passes AA. Each shows default, hover and active: hover fills with navy (or the colour, for navy buttons), active takes the lighter tint with navy text. Menu and links work the same way: hover underlines on pale teal #F3F9F8 (links also turn navy, the menu stays navy), and active takes light teal #BEDDDA.</p>"
+            intro = "<p>Primary, secondary, tertiary, link and menu item, for teal and yellow, each on white and on navy. The primary button is the colour with a navy outline, as the Sign In button is in Prototype C. A red or green chip says whether the text passes AA. Each shows default, hover and active: hover fills with navy (or the colour, for navy buttons), active takes the lighter tint with navy text. Menu and links work the same way: hover underlines on pale teal #F3F9F8 (links also turn navy, the menu stays navy), and active takes light teal #BEDDDA.</p>"
         secs += f'<section class="blk" id="{sid}"><h2>{name} buttons <code>{c.upper()}</code></h2>{intro}<p>{note}</p><div class="bpair">{_set(name, c, tx, tint, link, note, False)}{_set(name, c, tx, tint, link, note, True)}</div><p class="vnote">Selected menu item: the lighter version of {name.lower()} (<code>{tint.upper()}</code>) as the background, navy text.</p></section>'
     return secs
 

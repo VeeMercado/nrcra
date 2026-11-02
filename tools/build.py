@@ -586,7 +586,7 @@ window.addEventListener('hashchange',route);route();
 if(/shot/.test(location.search)){var pb=document.querySelector('.protobar');if(pb)pb.remove();document.body.style.paddingBottom='0'}
 var mb=document.querySelector('.menu-btn');mb.addEventListener('click',function(){var o=document.getElementById('nav').classList.toggle('open');mb.setAttribute('aria-expanded',o)});
 document.addEventListener('click',function(e){
- var v=e.target.closest('[data-video]');if(v&&(e.target.closest('.play')||v.classList.contains('hvid'))){openVideo(v.getAttribute('data-video'),e.target.closest('.play')||v);return}
+ var v=e.target.closest('[data-video]');if(v&&(e.target.closest('.play')||v.classList.contains('hvid')||v.matches('.hsplit-r,.h1-photo,.tph'))){openVideo(v.getAttribute('data-video'),v.querySelector('.play')||v);return}
  var b=e.target.closest('.places button');if(b){var blk=b.closest('.placesblk')||document,on=b.getAttribute('aria-pressed')!=='true';
   [].forEach.call(blk.querySelectorAll('.places button'),function(x){x.setAttribute('aria-pressed','false')});
   [].forEach.call(blk.querySelectorAll('.dot'),function(d){d.classList.toggle('hot',on&&d.getAttribute('data-place')===b.getAttribute('data-place'))});
@@ -1115,6 +1115,7 @@ def v3(full=False):
 
 # ================================================================ dashboard
 DOC_URL = "https://docs.google.com/document/d/1NaC61OZYomUhRGzN3M5WOgimnBq-7E3khqsOiFFaZfQ/edit?usp=sharing"
+SCOPE_URL = "https://docs.google.com/document/d/1rTmuH27yYQL5mTzqqGh88uoFc0Sn601FIs0GPdLNIGc/edit"
 INSPO = {
     "v1": [("v1-milou-home", "Milou's NRCRA draft: home"), ("v1-childrens-society", "The Children's Society"), ("v1-waves-for-water", "Waves for Water")],
     "v2": [("v2-rack", "The R.A.C.K app"), ("v2-resilient-lismore", "Resilient Lismore"), ("v2-investing-for-charity", "Investing for Charity")],
@@ -1133,28 +1134,28 @@ def dashboard():
         ("v2", "Light and fresh", "Inspired by the R.A.C.K app and Resilient Lismore. Airy white and pastel bands with photos front and centre. Soft rounded photo shapes, small logo-arc accents, one illustration and softly rounded buttons.", ["Photo hero with logo-arc accent", "Five pillars as photo-topped columns", "River-style journey timeline"]),
         ("v3", "Illustrated visuals", "Inspired by the people in the photos of NRCRA community: a big rounded photo hero, circle and blob photo crops, a photo collage, warm cream, orange and yellow tints, hand-drawn illustration decor and crisp buttons.", ["Circle photo cluster and collage", "Illustration decor on big images", "In their own words stories"]),
     ]
-    rows = ""
+    rows_by = {}
     for slug, t, d, feats in cards:
         i = slug[1:]
         base = slug.split(".")[0]
         ins = "".join(f'<figure><img src="assets/inspo/{f}.jpg" alt="Mood board reference: {E(c)}" loading="lazy"><figcaption>{E(c)}</figcaption></figure>' for f, c in INSPO[base])
         fl = "".join(f"<li>{E(x)}</li>" for x in feats)
-        rows += f'''<article class="row row{base[1]}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
+        rows_by[slug] = f'''<article class="row row{base[1]}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
 <div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><p><a class="btn btn-primary" href="{slug}/">Open prototype {i}</a></p>
 <h3>Inspired by the mood board</h3><div class="ins">{ins}</div><p class="sites">{SITES[base]}</p></div></article>'''
-    r2 = f'''<p class="r2intro">Round 2 works on two prototypes: A, the existing navy style, and B, teal as accents.</p>
-<div class="r2grid">
-<article class="rc rc1"><a class="shot" href="prototype-a/" aria-label="Open Prototype A"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/prototype-a.jpg" alt="Screenshot of Prototype A: a white panel on top of a full-width gathering photo, with About us button" loading="lazy"></a>
-<div class="info"><span class="num">Prototype A</span><h2><a href="prototype-a/">Teal Accents</a></h2><p>Prototype 1 in its own navy style, with the same menu and pages as Prototype B: Home, About, Impact (left blank), Network and Sign In. The photo is the header background behind a white panel.</p>
-<p class="btnrow"><a class="btn btn-primary" href="prototype-a/">Open Prototype A</a><a class="btn btn-ghost" href="{DOC_URL}">Client feedback (Google Doc)</a></p></div></article>
-<article class="rc rc3"><a class="shot" href="prototype-b/" aria-label="Open Prototype B"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/prototype-b.jpg" alt="Screenshot of Prototype B: a light teal panel with a teal border on top of a full-width gathering photo" loading="lazy"></a>
-<div class="info"><span class="num">Prototype B</span><h2><a href="prototype-b/">Teal hero</a></h2><p>Home, About, Impact (left blank) and Network on the Layout Design wireframe. White and light grey pages with teal in highlights, borders and tinted panels. Navy kept for the footer.</p><p class="btnrow"><a class="btn btn-primary" href="prototype-b/">Open Prototype B</a></p></div></article></div>'''
+    r2 = f'''<div class="r2grid">
+<article class="rc rc2"><a class="shot" href="prototype-c/" aria-label="Open Prototype Round 2"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/prototype-c.jpg?v=r2k" alt="Screenshot of Prototype Round 2: a dark green card with white text on the left and a nearly square gathering photo card with a play button, centred beside it" loading="lazy"></a>
+<div class="info"><span class="num">Prototype Round 2</span><h2><a href="prototype-c/">Round 2 prototype</a></h2><p>Round 2 design and content updated based on <a href="{DOC_URL}">Client feedback (Google Doc)</a>.</p>
+<p><b>Feedback needed:</b> Round 2 is for finalising the content. Please check the wording, photos, logos, links, group details and the new Privacy Policy page, and tell us what needs to change. All content stays sample content until it is confirmed.</p>
+<p>Impact is left blank as it is not in the <a href="{SCOPE_URL}">project scope</a>.</p>
+<p class="btnrow"><a class="btn btn-primary" href="prototype-c/">Open Prototype Round 2</a><a class="btn btn-ghost" href="{DOC_URL}">Client feedback (Google Doc)</a></p></div></article></div>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
 .top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}.top .btnrow{{margin-top:16px;max-width:none;flex-basis:100%;gap:8px}}.top .btnrow .btn{{padding:.6em 1.05em;font-size:.95rem}}
 .flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
 .tabs{{display:flex;gap:10px;margin:0 0 24px}}:root{{--btn-r:12px}}.tabs button{{font:800 1.05rem var(--font);padding:.7em 1.6em;border-radius:12px;border:2px solid var(--navy);background:#fff;color:var(--navy);cursor:pointer;min-height:44px}}.tabs button[aria-selected=true]{{background:var(--navy);color:#fff}}
 .row{{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:start;background:#fff;border-radius:32px;padding:28px;margin-bottom:28px;border-left:12px solid var(--yellow)}}
+.grp{{font-size:1rem;font-weight:900;letter-spacing:.14em;margin:0 0 18px;color:var(--navy)}}.grp{{display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;padding:.55em 1.1em;border-radius:12px;font-size:1.15rem}}.grp span{{font-size:.85rem;font-weight:700;letter-spacing:0;text-transform:none}}.grp-chosen{{background:var(--navy);color:#fff}}.grp-archive{{background:#e3e6e8;color:#5b6770}}.archive{{filter:grayscale(1);opacity:.75}}.archive:hover{{opacity:1}}.grpline{{border:0;border-top:2px solid var(--navy);margin:44px 0 30px}}
 .row,.rc{{position:relative;transition:box-shadow .2s}}.row:hover,.rc:hover{{box-shadow:0 16px 40px -24px rgba(7,41,59,.5)}}.info h2 a::after{{content:"";position:absolute;inset:0;border-radius:32px;z-index:1}}.row:focus-within,.rc:focus-within{{outline:3px solid var(--orange-d);outline-offset:3px}}.row2{{border-left-color:var(--teal)}}.row3{{border-left-color:var(--orange)}}
 .rc .btnrow{{position:relative;z-index:2}}
 .shot{{display:block;border-radius:18px;overflow:hidden;box-shadow:0 18px 40px -22px rgba(7,41,59,.55);border:1px solid var(--line);background:#fff}}.shot img{{width:100%;display:block}}.shot:hover{{transform:translateY(-3px)}}
@@ -1163,14 +1164,16 @@ def dashboard():
 .feats{{margin:0 0 16px;padding-left:1.2em}}.info h3{{font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:22px 0 10px}}
 .pl{{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}}.pl a{{display:block;padding:.4em .9em;border:2px solid var(--navy);border-radius:99px;color:var(--navy);text-decoration:none;font-weight:700}}.pl a:hover{{background:var(--navy);color:#fff}}
 .ins{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}}.ins figure{{margin:0}}.ins img{{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}}.sites{{font-size:.8rem;color:var(--muted);margin:12px 0 0;line-height:1.45}}.ins figcaption{{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.3}}
-.r2intro{{max-width:70ch;margin:0 0 24px}}.r2grid{{display:grid;grid-template-columns:1fr 1fr;gap:24px}}
-.rc{{background:#fff;border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:18px;border-bottom:10px solid var(--teal)}}.rc2{{border-bottom-color:var(--teal)}}.rc3{{border-bottom-color:var(--teal)}}.rc .shot img{{aspect-ratio:16/10;object-fit:cover;object-position:top}}.rc .info h2{{font-size:1.6rem}}.rc .info p{{margin:0 0 .8em}}.rc .info .btnrow{{margin:1em 0 0}}
+.r2intro{{max-width:70ch;margin:0 0 24px}}.r2grid{{display:grid;grid-template-columns:1fr;gap:24px}}@media(max-width:1100px){{.r2grid{{grid-template-columns:1fr}}}}
+.rc{{background:#fff;border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:18px;border-bottom:10px solid var(--teal)}}.rc2{{border-bottom-color:var(--teal)}}.rc2{{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:center;padding:28px}}@media(max-width:900px){{.rc2{{grid-template-columns:1fr;padding:20px;gap:18px}}}}.rc3{{border-bottom-color:var(--teal)}}.rc .shot img{{aspect-ratio:16/10;object-fit:cover;object-position:top}}.rc .info h2{{font-size:1.6rem}}.rc .info p{{margin:0 0 .8em}}.rc .info .btnrow{{margin:1em 0 0}}
 .aanote{{margin:28px 0 0;display:flex;flex-wrap:wrap;gap:14px;align-items:center}}
 @media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}.r2grid{{grid-template-columns:1fr}}}}</style></head>
 <body><main><div class="top"><div><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span><br><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:6px 0 12px"><h1>NRCRA.ORG.AU Website prototypes</h1></div>
-<p>Prototypes for the NRCRA website. Sample content only. To be built in Wix Classic. Status: draft for review.</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a><a class="btn btn-ghost" href="brand-contrast/">Brand colour contrast</a><a class="btn btn-ghost" href="brand-contrast/#teal-buttons">Button sets</a></p></div>
+<p><b>Scope</b> includes Home, Network, About, R.A.C.K. and Partner logos. <b>Recommendation:</b> Privacy Policy was added as required for compliance.</p><p>Prototypes for the NRCRA website. Sample content only. To be built in Wix Classic. Status: Round 2 Content Review</p><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design file (Figma)</a><a class="btn btn-ghost" href="brand-contrast/">Brand colour contrast</a></p></div>
 <div class="tabs" role="tablist" aria-label="Prototype rounds"><button type="button" role="tab" id="tab-round-2" aria-controls="round-2" aria-selected="true">Round 2</button><button type="button" role="tab" id="tab-round-1" aria-controls="round-1" aria-selected="false" tabindex="-1">Round 1</button></div>
-<section id="round-1" role="tabpanel" aria-labelledby="tab-round-1" hidden><p class="r2intro">Three directions for the five-page website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. The client chose Prototype 1.</p>{rows}</section>
+<section id="round-1" role="tabpanel" aria-labelledby="tab-round-1" hidden><p class="r2intro">Three directions for the five-page website (Home, About, Partners, Network, R.A.C.K), each drawn from a different part of the mood board. The client chose Prototype 1.</p>
+<h2 class="grp grp-chosen">CHOSEN <span>Final direction, used for Round 2</span></h2>{rows_by["v1"]}
+<hr class="grpline"><h2 class="grp grp-archive">ARCHIVE <span>Not chosen, kept for reference only</span></h2><div class="archive">{rows_by["v2"]}{rows_by["v3"]}</div></section>
 <section id="round-2" role="tabpanel" aria-labelledby="tab-round-2">{r2}</section></main>
 <script data-cfasync="false">(function(){{var T=[].slice.call(document.querySelectorAll('[role=tab]'));function show(id,f){{T.forEach(function(t){{var on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on;if(on&&f)t.focus()}});try{{history.replaceState(null,'','#'+id)}}catch(e){{}}}}
 T.forEach(function(t,i){{t.addEventListener('click',function(){{show(t.getAttribute('aria-controls'))}});t.addEventListener('keydown',function(e){{var n=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(n){{e.preventDefault();show(T[(i+n+T.length)%T.length].getAttribute('aria-controls'),1)}}}})}});
