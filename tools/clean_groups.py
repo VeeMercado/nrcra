@@ -34,6 +34,19 @@ DROP_WEB = {26}
 EXTRA_WEB = {"Nimbin Disaster Resilience Group": "https://nnic.org.au/pub/index.php/disasters"}
 
 
+# Full name first, acronym in brackets (CRT = Community Resilience Team). Applied after links are matched and duplicates removed.
+def full_name(n):
+    special = {
+        "ICOPE (Iluka Community Organisation Planning for Emergencies)": "Iluka Community Organisation Planning for Emergencies (ICOPE)",
+        "Wardell CORE (Wardell Community Organised Resilience Effort)": "Wardell Community Organised Resilience Effort (CORE)",
+        "Larnook CRT (Community-led Resilience Team)": "Larnook Community-led Resilience Team (CRT)",
+        "Hinterland CRT / Federal, Eureka and Goonengerry Community Resilience Team": "Hinterland Community Resilience Team (CRT) / Federal, Eureka and Goonengerry Community Resilience Team",
+    }
+    if n in special:
+        return special[n]
+    return re.sub(r"\bCRT$", "Community Resilience Team (CRT)", n)
+
+
 def url(t):
     t = tidy(t if t not in (None, "None") else "")
     if not t or "@" in t:
@@ -74,12 +87,16 @@ def main(path):
                 seen[key][0] = name
             continue
         seen[key] = [name, loc, lga_name, country]
+    for r in seen.values():
+        old = r[0]
+        r[0] = full_name(old)
+        links[r[0]] = links.get(old, ["", ""])
     rows = sorted(seen.values(), key=lambda r: (r[2].lower(), r[0].lower()))
     with open(OUT, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["ID", "Group Name", "Location", "LGA", "Aboriginal Country", "Website", "Facebook"])
         for n, r in enumerate(rows, 1):
-            w.writerow([f"grp-{n:03d}"] + r + links.get(r[0], ["", ""]))
+            w.writerow([n] + r + links.get(r[0], ["", ""]))
     print(len(rows), "groups written; excluded:", skipped)
 
 
