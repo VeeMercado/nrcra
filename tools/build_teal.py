@@ -83,7 +83,7 @@ def home_body():
 <h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn About us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M3 3l8 5-8 5z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>Watch reel</button></p></div>
 <div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>
-
+<section class="sec hwrow" style="padding-top:0"><div class="wrap hwbg"><span class="hwd hwd-blob" aria-hidden="true"></span>{B.deco("rings", "hwd-rings")}<span class="hwd hwd-dot hwd-dt" aria-hidden="true"></span><span class="hwd hwd-dot hwd-do" aria-hidden="true"></span><ul class="hwpills" aria-label="How we work"><li><a class="hp-teal" href="#about" data-jump="ab-how" data-page="about">Connect.</a></li><li><a class="hp-yellow" href="#about" data-jump="ab-how" data-page="about">Share.</a></li><li><a class="hp-orange" href="#about" data-jump="ab-how" data-page="about">Care.</a></li></ul></div></section>
 <section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Impact</h2>{B.stats()}<p class="btnrow"><a class="btn btn-tertiary" href="#impact">See Impact</a></p></div></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
@@ -310,9 +310,53 @@ RACK_CATS = [
 def rack_body():
     cards = "".join(f'<li><span class="pn">{i:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(RACK_CATS, 1))
     return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge.</span><h1>The R.A.C.K.</h1><p class="lede">One shared place where the whole network can find what already works from years of real community experience across the Northern Rivers.</p><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p>
-<p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20access">Request access</a><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20help">Get help</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a></p></div>
+<p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20access">Request access</a><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=R.A.C.K.%20help">Get help</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a></p>
+<p class="rackrev"><a href="#privacy">Review Privacy Policy</a></p></div>
 <div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="A community member using the R.A.C.K. on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
 <section class="sec"><div class="wrap rackhead"><h2 class="sechead">In this resource library</h2><p class="lede">You&rsquo;ll find templates and guides you can use straight away, and contribute knowledge back in two minutes.</p><ol class="pillcards rackcats">{cards}</ol></div></section>'''
+
+
+FLAG_ICON = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false"><path d="M6 21V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M6 5h11.5l-2.8 4.2 2.8 4.2H6z" fill="currentColor"/></svg>'
+
+
+# Privacy Policy page: simple numbered items. "have" = text already on NRCRA's current Privacy Policy page (or site footer); "add" = consider adding.
+PP = [
+    ("have", "A legal disclaimer", "Says the page is only a general explanation, is not legal advice, and recommends getting legal advice.", "Template text from the website builder. Replace it with NRCRA's own wording."),
+    ("have", "Privacy Policy: the basics", "Explains what a privacy policy is: a statement of how a website collects, uses and manages visitors' information and protects their privacy.", "Template text from the website builder. Replace it with NRCRA's own wording."),
+    ("have", "What to include in a Privacy Policy", "Lists the topics a policy usually covers: what is collected and how, why, sharing with others, how people use their rights, and information about minors.", "Advice for the website owner, not a policy for visitors. The items below cover these topics."),
+    ("add", "Who we are", "The Northern Rivers Community Resilience Alliance (NRCRA) is a community-led network of local resilience groups across the Northern Rivers of New South Wales.", ""),
+    ("add", "What personal information we collect", "Names, email addresses and phone numbers, your group and role, event registrations, messages you send us, and basic details about your visit to our website.", ""),
+    ("add", "How we collect it", "From you directly (forms, emails and events), from your group when it nominates you, and automatically through cookies and website analytics.", ""),
+    ("add", "Why we collect and use it", "To run the network and events, answer questions, send updates you ask for, manage R.A.C.K. access, report to funders in summary form, and meet legal obligations.", ""),
+    ("add", "Who we share it with", "We do not sell personal information. We share it only with providers who help run our website, email, events and the R.A.C.K., with partners when you agree, or when the law requires it.", "To confirm: which providers, and whether any store information outside Australia."),
+    ("add", "Storage and security", "We keep personal information in secure systems with limited access, and delete it or remove identifying details when we no longer need it.", ""),
+    ("add", "R.A.C.K. sign-in", "Signing in to the R.A.C.K. is part of NRCRA's compliance process. When you sign in, the NRCRA Terms and Conditions and this Privacy Policy apply. We collect your name, email, group, role and sign-in dates and times to manage access and keep the R.A.C.K. secure.", "Needs both documents: this policy and the Terms and Conditions below."),
+    ("add", "Terms and Conditions for R.A.C.K. sign-in", "The rules for using the R.A.C.K. that people agree to when they sign in.", "No Terms and Conditions page exists on the current website. NRCRA needs to supply one."),
+    ("add", "Cookies and website analytics", "Our website uses cookies to work and to understand how people use it. You can refuse cookies in your browser settings.", ""),
+    ("add", "Children and young people", "Whether and how NRCRA handles information about minors.", "The template text mentions minors' information. NRCRA to decide the wording and age."),
+    ("add", "Access and correction", "You can ask to see the personal information we hold about you and ask us to correct it.", ""),
+    ("add", "Complaints", "Tell us if you think we have handled your information badly. You can also contact the Office of the Australian Information Commissioner at oaic.gov.au.", ""),
+    ("add", "Changes to this policy", "We may update this policy and will show the date it was last changed.", ""),
+    ("have", "Contact us", "Email hello@nrcra.org.au or contact the Network Lead, Kathie Heyman, on 0417 683 546.", "The Network Lead's details are already in the current website footer."),
+]
+CHECK_ICON = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+FLAG_SMALL = FLAG_ICON.replace('width="26" height="26"', 'width="14" height="14"')
+
+
+def pp_item(i, kind, title, text, note):
+    tag = (f'<span class="pptag tag-have">{CHECK_ICON}Already on the site</span>' if kind == "have"
+           else f'<span class="pptag tag-add">{FLAG_SMALL}Consider adding</span>')
+    note_html = f'<p class="ppnote">{note}</p>' if note else ""
+    return f'<li class="ppitem"><span class="ppnum">{i:02d}</span><div><div class="pprow">{tag}<h2>{title}</h2></div><p>{text}</p>{note_html}</div></li>'
+
+
+def privacy_body():
+    items = "".join(pp_item(i, *row) for i, row in enumerate(PP, 1))
+    have = f'<span class="pptag tag-have">{CHECK_ICON}Already on the site</span>'
+    add = f'<span class="pptag tag-add">{FLAG_SMALL}Consider adding</span>'
+    return f'''<div class="wrap"><div class="pg-head pphead"><span class="eyebrow pill-t">Legal</span><h1>Privacy Policy</h1><p class="lede">How NRCRA collects, uses and protects your personal information.</p>
+<p class="pplegend">{have} is on NRCRA&rsquo;s current Privacy Policy page or website footer. {add} is new draft wording for NRCRA and its legal adviser to review before anything goes live.</p></div></div>
+<section class="sec" style="padding-top:0"><div class="wrap"><ol class="pplist2">{items}</ol></div></section>'''
 
 
 def impact_body():
@@ -390,7 +434,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .tb .steergrid .steer{grid-template-columns:repeat(3,minmax(0,160px));justify-content:center}@media(max-width:860px){.tb .steergrid{grid-template-columns:1fr;gap:0}.tb .steergrid .steer{margin-top:20px}}@media(max-width:560px){.tb .steergrid .steer{gap:8px}.tb .steergrid .steer a{padding:4px 3px;gap:4px;border-radius:12px;min-height:0}.tb .steergrid .slogo{height:32px;flex:none}.tb .steergrid .slogo img{max-width:100%;max-height:32px}.tb .steergrid .sname{font-size:.6rem;line-height:1.15}}.tb .steerlist>.lede{text-align:center}
 .tb .cen{text-align:center}.tb h2.teamhead{margin-bottom:56px}.tb .team2 li.brk{display:block;flex-basis:100%;width:100%;height:0;margin:-24px 0 0;padding:0}@media(min-width:861px){.tb .team2 li.brk{display:none}.tb .team2 li{flex:1 1 0;width:auto;max-width:220px;min-width:0;grid-template-columns:minmax(0,1fr)}.tb .team2 .tc{width:100%;max-width:190px}}.tb .team2 b{font-size:1.2rem;font-weight:800;line-height:1.12}@media(max-width:1060px){.tb .team2 b{min-height:2.24em}}@media(max-width:739px){.tb .team2 li{width:min(150px,calc(50% - 12px))}.tb .team2 .tc{width:100%;max-width:150px}}
 .tb .focuscards li{flex:1 1 300px;max-width:360px;padding:24px 22px}
-.tb .focuscards .pi{width:76px;height:76px;margin:0 auto 10px}.tb .focuscards .pnum{font-size:1.6rem;font-style:italic;font-weight:400;letter-spacing:.02em}.tb .focuscards li:nth-child(1) .pi{color:#00857c}.tb .focuscards li:nth-child(2) .pi{color:#9a7200}.tb .focuscards li:nth-child(3) .pi{color:#d9481a}.tb .focuscards li:nth-child(4) .pi{color:var(--navy)}.tb .focuscards li:nth-child(5) .pi{color:#6b7f88}.tb .focuscards p{text-align:left;font-size:.97rem}
+.tb .focuscards .pi{width:76px;height:76px;margin:0 auto 10px}.tb .focuscards .pnum{font-size:1.6rem;font-style:italic;font-weight:400;letter-spacing:.02em}.tb .focuscards li:nth-child(1) .pi{color:#00857c}.tb .focuscards li:nth-child(2) .pi{color:#D9A400}.tb .focuscards li:nth-child(3) .pi{color:#d9481a}.tb .focuscards li:nth-child(4) .pi{color:var(--navy)}.tb .focuscards li:nth-child(5) .pi{color:#6b7f88}.tb .focuscards p{text-align:left;font-size:.97rem}
 /* Steering tiles: top 65% is the logo, bottom 35% is the name */
 .tb .steergrid .steer a{display:grid;grid-template-rows:minmax(0,65fr) minmax(0,35fr);gap:0;padding:4px 10px 2px;justify-content:stretch;align-content:stretch}.tb .steergrid .slogo{align-self:center;height:auto;min-height:0;max-height:100%}.tb .steergrid .sname{align-self:start;padding-top:0;line-height:1.2}
 @media(max-width:560px){.tb .steergrid .steer a{padding:3px;grid-template-rows:minmax(0,1fr) minmax(0,1fr)}.tb .steergrid .slogo{height:auto;max-height:100%;flex:none}.tb .steergrid .sname{padding-top:2px}}
@@ -423,7 +467,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .tb #about>.sec.steersec,.tb #about>.sec.teamsec{padding-bottom:100px!important}
 /* Our Focus numbers: white on the card theme colour at 60% transparent */
 .tb .focuscards li .fph .pi{color:#fff;text-shadow:0 1px 8px rgba(7,41,59,.55)}
-.tb .focuscards li:nth-child(1) .fph .pi{background:rgba(0,133,124,.4);color:#fff}.tb .focuscards li:nth-child(2) .fph .pi{background:rgba(154,114,0,.4);color:#fff}.tb .focuscards li:nth-child(3) .fph .pi{background:rgba(217,72,26,.4);color:#fff}.tb .focuscards li:nth-child(4) .fph .pi{background:rgba(7,41,59,.4);color:#fff}.tb .focuscards li:nth-child(5) .fph .pi{background:rgba(107,127,136,.4);color:#fff}
+.tb .focuscards li:nth-child(1) .fph .pi{background:rgba(0,133,124,.4);color:#fff}.tb .focuscards li:nth-child(2) .fph .pi{background:rgba(217,164,0,.4);color:#fff}.tb .focuscards li:nth-child(3) .fph .pi{background:rgba(217,72,26,.4);color:#fff}.tb .focuscards li:nth-child(4) .fph .pi{background:rgba(7,41,59,.4);color:#fff}.tb .focuscards li:nth-child(5) .fph .pi{background:rgba(107,127,136,.4);color:#fff}
 /* Funder pills: Federal and State get extra left padding; phone sizes scale smoothly with screen width so the strip stays within two rows */
 .tb .funders li:nth-child(-n+2) a{padding-left:1.35em}
 @media(max-width:1100px){.tb .funders li:nth-child(-n+2) a{padding-left:1.1em}}
@@ -450,6 +494,52 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 @media(min-width:861px){.tb .splith.ab{grid-template-columns:1fr 1.2fr;column-gap:20px}.tb .splith.ab>div:not(.ph){padding-left:20px}}
 /* so the photo ends exactly where the heading text ends */
 .tb .splith.ab h1{margin-bottom:0}
+/* Heading scale that stays proportionate on phone, iPad and desktop: page title > section header > card title.
+   Section headers also size the Our Focus numbers, which match the Our Focus heading. */
+.tb .page h1{font-size:clamp(2.3rem,5vw,3.5rem)}
+.tb .page .dirhead h1.sechead{font-size:clamp(2.1rem,4.4vw,2.6rem)}
+.tb .page h2.sechead,.tb .page .statcard h2{font-size:clamp(1.9rem,4vw,2.4rem)}.tb .page .wwa h2{font-size:clamp(1.7rem,4vw,2.4rem)}
+.tb .page .card.abt h2,.tb .page .vpc h2,.tb .page .howcards h3,.tb .page .focuscards .fbody h3{font-size:clamp(1.35rem,2.4vw,1.6rem)}
+.tb .focuscards .fph .pnum{font-size:clamp(1.9rem,4vw,2.4rem)}
+/* Home: Connect / Share / Care in their own row between the hero and Our Impact: no pill, text in the three theme colours (deeper yellow and orange so they read on the light page),
+   same size as the About titles. Each opens How we work. Hover adds only a 1px white border. */
+.tb .hwpills{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:fit-content;max-width:100%}
+.tb .hwpills a{display:block;box-sizing:border-box;border:1px solid transparent;border-radius:99px;padding:.4em .8em;text-align:center;font-weight:900;font-size:clamp(1.35rem,2.4vw,1.6rem);line-height:1.2;text-decoration:none!important;background:transparent}
+.tb .hwpills a.hp-teal,.tb .hwpills a.hp-teal:hover,.tb .hwpills a.hp-teal:active{color:#00857c;background:transparent}
+.tb .hwpills a.hp-yellow,.tb .hwpills a.hp-yellow:hover,.tb .hwpills a.hp-yellow:active{color:#D9A400;background:transparent}
+.tb .hwpills a.hp-orange,.tb .hwpills a.hp-orange:hover,.tb .hwpills a.hp-orange:active{color:#d9481a;background:transparent}
+.tb .hwpills a:hover,.tb .hwpills a:active{border-color:#fff}
+.tb .hwpills a:focus-visible{outline:2px solid var(--teal-d);outline-offset:3px}
+@media(max-width:560px){.tb .hwpills{gap:4px}.tb .hwpills a{padding:.4em .65em}}
+@media(max-width:430px){.tb .hwpills a{font-size:1.25rem;padding:.4em .5em}}@media(max-width:380px){.tb .hwpills a{font-size:1.15rem;padding:.4em .45em}}@media(max-width:345px){.tb .hwpills a{font-size:1.05rem;padding:.4em .4em}}
+/* Home: small, light versions of the decorative circles from the "50+ groups" section, as the background of the Connect / Share / Care row */
+.tb .hwrow{position:relative;overflow-x:clip}.tb .hwbg{position:relative}.tb .hwbg .hwpills{position:relative;z-index:1}
+.tb .hwd{position:absolute;pointer-events:none;z-index:0}
+.tb .hwd-blob{width:70px;aspect-ratio:1/1;background:var(--yellow);opacity:.4;border-radius:62% 38% 55% 45%/48% 60% 40% 52%;left:calc(50% - 330px);top:-14px}
+.tb .hwbg .hwd-rings{position:absolute;z-index:0;width:96px;height:96px;opacity:.5;right:calc(50% - 345px);left:auto;top:-22px}
+.tb .hwd-dot{border-radius:50%}.tb .hwd-dt{width:30px;height:30px;background:var(--teal);opacity:.3;left:calc(50% - 292px);top:44px}.tb .hwd-do{width:20px;height:20px;background:var(--orange);opacity:.35;right:calc(50% - 290px);top:46px}
+@media(max-width:560px){.tb .hwd-blob{width:54px;left:-16px;top:-16px}.tb .hwbg .hwd-rings{width:70px;height:70px;right:-24px;top:-10px}.tb .hwd-dt{left:calc(50% - 176px);top:34px}.tb .hwd-do{right:calc(50% - 178px);top:36px}}
+/* Footer: no bullets, social icons as round buttons */
+.tb .site-foot .flist li{padding-left:0}.tb .site-foot .flist li::before{display:none}
+.tb .site-foot .flist.social{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}.tb .site-foot .flist.social li{margin:0}
+.tb .site-foot .flist a.soc{display:grid;place-items:center;width:44px;height:44px;padding:0;margin:0;border-radius:50%;background:#fff;color:#07293b;text-decoration:none!important;transition:background .15s}
+.tb .site-foot .flist a.soc:hover,.tb .site-foot .flist a.soc:focus-visible{background:#beddda;color:#07293b}
+.tb .site-foot .flist a.soc:focus-visible{outline:2px solid #fff;outline-offset:3px}
+/* Privacy Policy page; small review link on the R.A.C.K. page */
+.tb .rackrev{margin:14px 0 0;font-size:.92rem}.tb .rackrev a{color:var(--teal-d);font-weight:700;text-decoration:underline;text-underline-offset:3px}.tb .rackrev a:hover{text-decoration-thickness:2px}
+.tb .pphead{padding-bottom:28px}.tb .pphead .lede{margin:14px 0 0;max-width:62ch}.tb .ppdate{margin:10px 0 22px;color:var(--muted);font-size:.95rem}
+.tb .pplist2{list-style:none;margin:0;padding:8px 32px;background:#fff;border-radius:22px;border-bottom:10px solid var(--teal)}
+.tb .ppitem{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;padding:22px 0;border-top:1px solid var(--line)}.tb .ppitem:first-child{border-top:0}
+.tb .ppnum{font-size:clamp(1.35rem,2.4vw,1.6rem);font-weight:800;font-style:italic;color:var(--teal-d);line-height:1.3}
+.tb .pprow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:.4em}.tb .ppitem h2{font-size:clamp(1.2rem,2.2vw,1.4rem);margin:0}
+.tb .ppitem p{margin:0;max-width:70ch}.tb .ppitem p+p{margin-top:.5em}.tb .ppnote{font-size:.92rem;color:var(--muted)}
+.tb .pptag{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:.2em .8em .2em .65em;font-size:.82rem;font-weight:800;line-height:1.3;white-space:nowrap;vertical-align:middle}
+.tb .tag-have{background:#00857c;color:#fff}.tb .tag-add{background:var(--yellow);color:var(--navy)}
+.tb .pplegend{max-width:72ch;margin:18px 0 0;line-height:2}
+@media(max-width:739px){.tb .pplist2{padding:4px 18px}.tb .ppitem{grid-template-columns:40px minmax(0,1fr);gap:10px}}
+/* Footer layout: logo, Contact and Stay in Touch stacked on the left; Quick Links in the middle; R.A.C.K. links and Privacy Policy on the right; copyright line centred */
+.tb .site-foot .fquick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px;min-width:0}.tb .site-foot .fhide{visibility:hidden}
+.tb .site-foot .copy{text-align:center}
 /* accent bars sit on the bottom edge, not the top */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}
 .cards .pcard{border-top:0}.cards .pcard:nth-child(1){border-bottom:6px solid var(--teal)}.cards .pcard:nth-child(2){border-bottom:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-bottom:6px solid var(--orange)}
@@ -546,7 +636,13 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .site-foot .flist li{margin-bottom:6px}
 .tb .site-foot .flist a:hover{background:#f3f9f8;color:var(--navy);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
 .tb .site-foot .flist a:active{background:#beddda;color:var(--navy)}
-.tb .site-foot .foot-cols{grid-template-columns:repeat(3,minmax(0,1fr))}.tb .fstack .fcol+.fcol{margin-top:24px}@media(max-width:700px){.tb .site-foot .foot-cols{grid-template-columns:1fr}}
+.tb .site-foot .foot-cols{grid-template-columns:minmax(0,1.1fr) minmax(0,2.1fr) minmax(0,1fr);gap:40px}.tb .fstack .fcol+.fcol{margin-top:24px}.tb .site-foot .fcol h2{white-space:nowrap}
+@media(min-width:701px) and (max-width:999px){.tb .site-foot .foot-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.tb .site-foot .fquick{order:1;grid-column:1/-1}.tb .site-foot .foot-top{order:2}.tb .site-foot .fstack{order:3}}
+@media(max-width:700px){.tb .site-foot .foot-cols{grid-template-columns:minmax(0,1fr);gap:28px}.tb .site-foot .fquick{grid-template-columns:minmax(0,1fr);gap:0}.tb .site-foot .fcol h2.fhide{display:none}}
+/* border line above the copyright line, so the Acknowledgement of Country sits between two lines */
+.tb .site-foot .copyrow{margin:24px 0 0;padding-top:24px;border-top:1px solid var(--foot-line);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 20px}.tb .site-foot .copy{margin:0;padding:0;border:0;text-align:center}
+.tb .site-foot .totop{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.6);border-radius:99px;padding:.35em .95em;font:800 .85rem var(--font);cursor:pointer;line-height:1.3}
+.tb .site-foot .totop:hover{background:#f3f9f8;color:var(--navy);border-color:#f3f9f8}.tb .site-foot .totop:active{background:#beddda;color:var(--navy);border-color:#beddda}.tb .site-foot .totop:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 /* MEAL: six circles round a ring, like the Layout Design PDF */
 .mealwrap{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:48px;align-items:center;margin:28px 0 0}
@@ -557,7 +653,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .btn-tertiary{background:#07293b;color:#fff;border-color:#07293b}.btn-tertiary:hover{background:#00857c;color:#fff;border-color:#07293b}.btn-tertiary:active{background:#beddda;color:#07293b;border-color:#07293b}
 main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* page titles: Home, Network and About all use the same H1 size */
-.tb .herobg .h1-panel h1{font-size:clamp(2rem,4.6vw,3.5rem);line-height:1.12}
+.tb .herobg .h1-panel h1{font-size:clamp(2.3rem,5vw,3.5rem);line-height:1.12}
 /* Network breadcrumb: the Home pill, in yellow with navy text */
 .tb .splith .eyebrow{display:inline-block;background:var(--yellow);color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin-bottom:28px}
 
@@ -605,17 +701,26 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 """
 
 
+SOC_ICONS = {
+    "Facebook": '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.6 21v-8.2h2.8l.5-3.3h-3.3V7.4c0-.9.4-1.7 1.8-1.7h1.6V2.9c-.3 0-1.4-.2-2.6-.2-2.6 0-4.4 1.6-4.4 4.5v2.3H7v3.3h3v8.2h3.6z"/></svg>',
+    "LinkedIn": '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.9 9.3H3.5V20h3.4V9.3zM5.2 3.9c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM20.5 13.7c0-3.2-1.7-4.7-4-4.7-1.8 0-2.6 1-3 1.7V9.3H10V20h3.4v-6c0-1.6.3-3.1 2.3-3.1s2 1.9 2 3.2V20h3.4v-6.3z"/></svg>',
+}
+
+
 def tfooter():
     def col(n, title, items):
         return f'<div class="fcol"><h2 class="fb{n}">{title}</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in items) + "</ul></div>"
     contact = [("hello@nrcra.org.au", "mailto:hello@nrcra.org.au")]
     touch = [("Facebook", B.LINKS["fb"]), ("LinkedIn", B.LINKS["li"])]
-    site = [("Alliance Home", "#home"), ("Our Network", "#network"), ("About us", "#about"), ("Our Impact", "#impact"), ("Resilience Alliance Community Knowledge", "#rack"), ("R.A.C.K. Sign In", SIGN_IN)]
+    social = '<div class="fcol"><h2 class="fb1">Get in touch</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in contact) + '</ul><ul class="flist social">' + "".join(f'<li><a class="soc" href="{u}" target="_blank" rel="noopener" aria-label="{n} (opens in a new tab)">{SOC_ICONS[n]}</a></li>' for n, u in touch) + "</ul></div>"
+    site = [("Alliance Home", "#home"), ("Our Network", "#network"), ("About us", "#about"), ("Our Impact", "#impact")]
+    rackcol = [("Resilience Alliance Community Knowledge", "#rack"), ("R.A.C.K. Sign In", SIGN_IN), ("Privacy Policy", "#privacy")]
+    untitled = '<div class="fcol"><h2 class="fb2 fhide" aria-hidden="true">Quick Links</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in rackcol) + "</ul></div>"
     top = '<div class="foot-top"><span class="foot-logo boxed">' + blogo("logo") + '</span></div>'
     return f'''<footer class="site-foot"><div class="wrap">
-<div class="foot-cols">{top}{col(3, "Site map", site)}<div class="fstack">{col(2, "Stay in Touch", touch)}{col(1, "Contact", contact)}</div></div>
+<div class="foot-cols">{top}<div class="fquick">{col(2, "Quick Links", site)}{untitled}</div><div class="fstack">{social}</div></div>
 <div class="ack">{B.ABORIGINAL_FLAG}<p>{B.ACK}</p></div>
-<p class="copy">© 2026 Northern Rivers Community Resilience Alliance &middot; <a href="https://www.nrcra.org.au/copy-of-terms-conditions">Privacy Policy</a></p>
+<div class="copyrow"><p class="copy">© 2026 Northern Rivers Community Resilience Alliance &middot; <a href="#privacy">Privacy Policy</a></p><button type="button" class="totop"><svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1.5 6.5L6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to top</button></div>
 </div></footer>'''
 
 
@@ -625,6 +730,7 @@ JS2 = """(function(){var sel=[].slice.call(document.querySelectorAll('.lgasel'))
 sel.forEach(function(s){s.addEventListener('change',function(){var v=s.value||'network';location.hash=v;if(v==='network')setTimeout(function(){var t=document.getElementById('our-network'),h=document.querySelector('.site-head');if(t)window.scrollTo(0,t.getBoundingClientRect().top+window.scrollY-(h?h.offsetHeight:0)-24)},60)})});
 window.addEventListener('hashchange',function(){sel.forEach(function(s){s.value=s.getAttribute('data-cur')})});
 document.addEventListener('click',function(e){var a=e.target.closest('[data-sample]');if(a)e.preventDefault()});
+[].slice.call(document.querySelectorAll('.totop')).forEach(function(b){b.addEventListener('click',function(){window.scrollTo(0,0)})});
 var nd=[].slice.call(document.querySelectorAll('.navdrop'));
 function closeDD(){nd.forEach(function(n){n.classList.remove('open');var b=n.querySelector('.dd-btn');if(b)b.setAttribute('aria-expanded','false')})}
 nd.forEach(function(n){var b=n.querySelector('.dd-btn');b.addEventListener('click',function(e){e.stopPropagation();var o=!n.classList.contains('open');closeDD();n.classList.toggle('open',o);b.setAttribute('aria-expanded',o)})});
@@ -637,7 +743,7 @@ var pg=a.getAttribute('data-page');if(location.hash==='#'+pg){document.getElemen
 
 def page(v):
     css, cls = CSS_B, "tb"
-    body = "".join([screen("home", "Home", home_body()), screen("about", "About", about_body()), screen("impact", "Impact", impact_body()), screen("rack", "R.A.C.K.", rack_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
+    body = "".join([screen("home", "Home", home_body()), screen("about", "About", about_body()), screen("impact", "Impact", impact_body()), screen("rack", "R.A.C.K.", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NRCRA teal-led {NAMES[v]}</title><meta name="robots" content="noindex">
