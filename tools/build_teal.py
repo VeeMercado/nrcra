@@ -19,12 +19,27 @@ NAMES = {"prototype-a": "Prototype A", "prototype-b": "Prototype B"}
 SHORT = {"prototype-a": "A", "prototype-b": "B"}
 
 
+# Funder strip directly under the menu bar on every page. Logos we hold: FRRR, HELP Fund (NRMA Insurance) and UCRH; NSW Government logo supplied by NRCRA; the Federal Government pill is text-only until an approved logo is supplied.
+FUNDERS = [("Federal Government", "", "https://www.nema.gov.au"), ("State Government", "nsw.png", "https://www.nsw.gov.au"),
+           ("HELP Fund", "help.png", "https://www.nrma.com.au/help-fund"), ("FRRR", "frrr.png", "https://frrr.org.au"),
+           ("UCRH", "ucrh-trim.png", "https://ucrh.edu.au")]
+
+
+def funder_strip():
+    def pill(n, f, url):
+        logo_html = '<img src="../assets/funders/' + f + '" alt="" loading="lazy">' if f else ""
+        return f'<li><a href="{url}" target="_blank" rel="noopener">{logo_html}<span>{E(n)}</span></a></li>'
+    pills = "".join(pill(*f) for f in FUNDERS)
+    return f'<aside class="funders" aria-label="Our funders"><div class="wrap"><p>Thanks to our funders</p><ul>{pills}</ul></div></aside>'
+
+
 def nav3():
     links = "".join(f'<a href="#{k}" data-nav="{k}">{t}</a>' for k, t in MENU)
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap head-in"><a href="#home" class="brand" aria-label="NRCRA home">{blogo()}</a>
 <button class="menu-btn" aria-expanded="false" aria-controls="nav"><svg class="hb" viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" focusable="false"><path d="M1.5 1.5h17M1.5 7h17M1.5 12.5h17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Menu</button>
-<nav id="nav" aria-label="Main">{links}<a class="btn btn-cta" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a></nav></div></header>'''
+<nav id="nav" aria-label="Main">{links}<a class="btn btn-cta" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a></nav></div></header>
+{funder_strip()}'''
 
 
 def protobar3(cur):
@@ -360,6 +375,14 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .tb .tcards .tph .play{background:var(--yellow);color:var(--navy);border:0;box-shadow:0 6px 20px rgba(0,0,0,.25)}.tb .tcards .tph .play:hover{background:#fff;color:var(--navy)}.tb .tcards .tph .play:active{background:#ffe38a;color:var(--navy)}.tb #network>.wrap:first-child{margin-bottom:100px}.tb .sec.stories{padding-bottom:100px!important}.tb .sbar-top{margin:0 auto 100px}.tb .sbar-bot{margin:100px auto 0}.tb #network #our-network{padding-top:80px!important}.tb #network #our-network,.tb [id^="lga-"]>.sec{background:#fff}.tb #our-network .gsub li,.tb [id^="lga-"] .gsub li,.tb #our-network .lgasel,.tb [id^="lga-"] .lgasel{background-color:var(--bg)}
 /* Brand logo always keeps its true ratio (the footer logo was squashed at iPad width) */
 .tb .logo{width:auto;max-width:100%}.tb .site-foot .foot-logo .logo{height:auto!important;width:200px;max-width:100%}
+/* Funder strip above the header: label at the "Who we are" label size (not bold, not capitals), thin white pills like Prototype A's Projects pill */
+.tb .funders{background:var(--bg);border-bottom:1px solid var(--line)}.tb .funders .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 16px;padding:10px 20px}
+.tb .funders p{margin:0;font-size:.8rem;font-weight:400;color:var(--navy)}.tb .funders ul{list-style:none;margin:0;padding:0;display:contents}
+.tb .funders li a{text-decoration:none;transition:background .15s,border-color .15s;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:99px;box-sizing:border-box;height:32px;padding:0 .95em 0 .55em;font-weight:400;font-size:.8rem;color:var(--navy);line-height:1}.tb .funders li a:not(:has(img)){padding-left:.95em}.tb .funders img{height:22px;width:auto;display:block;flex:none}.tb .funders li a:hover,.tb .funders li a:focus-visible{background:#e8edf0;border-color:#c3ccd1}.tb .funders li a:focus-visible{outline:2px solid var(--teal-d);outline-offset:2px}
+@media(max-width:1100px){.tb .funders .wrap{padding:6px 10px;gap:5px 6px}.tb .funders li a{gap:5px;height:28px;padding:0 .6em 0 .4em}.tb .funders li a:not(:has(img)){padding-left:.6em}.tb .funders img{height:16px}}
+@media(max-width:560px){.tb .funders .wrap{padding:5px 8px;gap:4px 5px}.tb .funders p{font-size:.72rem}.tb .funders li a{height:26px;gap:4px;padding:0 .5em 0 .35em;font-size:.72rem}.tb .funders li a:not(:has(img)){padding-left:.5em}.tb .funders img{height:15px}}
+@media(max-width:400px){.tb .funders .wrap{padding:4px 6px;gap:3px 4px}.tb .funders p{font-size:.66rem}.tb .funders li a{height:24px;gap:3px;padding:0 .4em 0 .3em;font-size:.66rem}.tb .funders li a:not(:has(img)){padding-left:.4em}.tb .funders img{height:14px}}
+@media(max-width:345px){.tb .funders .wrap{padding:4px 4px;gap:3px 3px}.tb .funders p{font-size:.6rem}.tb .funders li a{height:22px;gap:3px;padding:0 .35em 0 .25em;font-size:.6rem}.tb .funders li a:not(:has(img)){padding-left:.35em}.tb .funders img{height:12px}}
 /* accent bars sit on the bottom edge, not the top */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}
 .cards .pcard{border-top:0}.cards .pcard:nth-child(1){border-bottom:6px solid var(--teal)}.cards .pcard:nth-child(2){border-bottom:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-bottom:6px solid var(--orange)}
@@ -508,7 +531,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .gsub{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
 .gsub li{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
 .gsub .ctry{font-size:.85rem;font-weight:700;color:var(--teal-d);margin-top:8px}.gsub .ctry+.btn{margin-top:6px}.gsub b{font-size:1.1rem;line-height:1.25}.gsub span{color:#586c74;font-size:.95rem}.gsub .btn{margin-top:14px}
-.gsub .sr-only,.rcards .sr-only,.steer .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.gsub .sr-only,.rcards .sr-only,.steer .sr-only,.funders .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .btn-sm{font-size:.9rem;padding:.5em 1.1em;min-height:38px}
 @media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:461px;min-height:0;flex:none}}
 @media(max-width:739px){.lgasel-l,.lgasel{width:100%}.dirhead{grid-template-columns:1fr}.dirhead .sechead,.dirhead .lgasel{grid-column:1}.dirhead .sechead{grid-row:1}.dirhead .lgasel{grid-row:2}}
