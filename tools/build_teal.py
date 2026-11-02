@@ -123,8 +123,12 @@ FOCUS = [("Growing the Alliance", "We are strengthening our network by clarifyin
          ("Advocacy", "We believe our collective voice is stronger than any single group&rsquo;s. By understanding our own network, identifying key stakeholders and building advocacy skills among members, we are developing a collaborative approach to advocating for resilient communities across the region.")]
 
 
+FOCUS_PHOTOS = ["group", "workshop", "pair", "table", "speaker"]  # sample photos from the existing set
+
+
 def focus_cards():
-    return '<ol class="pillcards focuscards">' + "".join(f'<li><span class="pi pnum">{i:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(FOCUS, 1)) + "</ol>"
+    cards = "".join(f'<li><div class="fph">{img(FOCUS_PHOTOS[i - 1], alt="")}<span class="pi pnum">{i:02d}</span></div><div class="fbody"><h3>{t}</h3><p>{d}</p></div></li>' for i, (t, d) in enumerate(FOCUS, 1))
+    return '<ol class="pillcards focuscards">' + cards + "</ol>"
 
 
 MEAL_RING = [("Connect", "#00857c", "#fff"), ("Listen", "#f05a28", "#fff"), ("Reflect", "#ffcb2a", "#07293b"), ("Improve", "#00857c", "#fff"), ("Share", "#f05a28", "#fff"), ("Strengthen", "#ffcb2a", "#07293b")]
@@ -146,12 +150,12 @@ def meal_ring():
 
 def about_body():
     return f'''    <div class="wrap"><div class="splith ab"><div><span class="eyebrow pill-t">About us</span><h1>We know communities are stronger when they&rsquo;ve built trusted relationships <span class="mark">together.{B.SQUIGGLE}</span></h1></div><div class="ph">{img("line", eager=True)}</div></div></div>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="aboutgrid"><div class="card abt"><h2><span class="hlx hlx-y">The Resilience Alliance</span></h2><p>Established in November 2023. Its roots lie in a run of compounding disasters: the 2017 floods, the 2019&ndash;20 bushfires, and the catastrophic floods and landslides of 2022. In each, local community organisers played a vital role in response, recovery and adaptation. Research in the years that followed found that these grassroots groups wanted stronger connections with each other for peer-to-peer support. That showed the need for regional collaboration in disaster resilience.</p><p>We support a network of place-based resilience groups to develop their own local approaches to risk reduction, preparedness and recovery, for fire, flood, landslides and whatever comes next.</p><p>The Resilience Alliance helps government agencies, councils and emergency services deliver on the commitments of the NSW State Emergency Management Plan, State Disaster Mitigation Plan and regional resilience priorities by connecting formal systems with trusted, community-led action.</p><div class="bar bar-y" aria-hidden="true"></div></div>
-<div class="vpcol"><div class="card vpc"><h2><span class="hlx hlx-t">Vision</span></h2><p>Connected, collaborative Northern Rivers communities that are empowered to care for themselves and each other before, during and after disasters.</p><div class="bar bar-t" aria-hidden="true"></div></div>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="aboutgrid"><div class="card abt"><h2><span class="hlx hlx-t">The Resilience Alliance</span></h2><p>Established in November 2023. Its roots lie in a run of compounding disasters: the 2017 floods, the 2019&ndash;20 bushfires, and the catastrophic floods and landslides of 2022. In each, local community organisers played a vital role in response, recovery and adaptation. Research in the years that followed found that these grassroots groups wanted stronger connections with each other for peer-to-peer support. That showed the need for regional collaboration in disaster resilience.</p><p>We support a network of place-based resilience groups to develop their own local approaches to risk reduction, preparedness and recovery, for fire, flood, landslides and whatever comes next.</p><p>The Resilience Alliance helps government agencies, councils and emergency services deliver on the commitments of the NSW State Emergency Management Plan, State Disaster Mitigation Plan and regional resilience priorities by connecting formal systems with trusted, community-led action.</p><div class="bar bar-t" aria-hidden="true"></div></div>
+<div class="vpcol"><div class="card vpc"><h2><span class="hlx hlx-y">Vision</span></h2><p>Connected, collaborative Northern Rivers communities that are empowered to care for themselves and each other before, during and after disasters.</p><div class="bar bar-y" aria-hidden="true"></div></div>
 <div class="card vpc"><h2><span class="hlx hlx-o">Purpose</span></h2><p>To develop a self-sustaining, trusted Alliance of place-based, community-led resilience groups and organisations. The Alliance shares knowledge and resources, provides mutual support and wellbeing, takes collective action and advocates for identified community needs.</p><div class="bar bar-o" aria-hidden="true"></div></div></div></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">How we work</h2><p class="lede">Through regular gatherings, deep conversations and shared experiences, the Resilience Alliance is building a community-led network focused on collective care, preparedness and regional strength.</p>{how_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Our journey</h2>{journey_b()}</div></div></section>
+<section class="sec journey"><div class="wrap"><h2 class="sechead">Our journey</h2>{journey_b()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="steergrid"><div class="steertxt"><h2 class="sechead">The Steering Committee:</h2><p class="lede">Is the coordinating body for the Resilience Alliance. It is made up of representatives from resilience-related groups and organisations across the region, and operates by agreement among groups and organisations rather than by reporting to a separate incorporated parent body. The steering committee actively aims to maintain a network that reflects the geographic and community diversity of the region.</p></div><div class="steerlist"><p class="lede">The Steering Committee comprises the following groups and organisations.</p>{steer_tiles()}</div></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead cen teamhead">Resilience Alliance Team:</h2>{team()}</div></section>'''
 
@@ -175,6 +179,11 @@ JOURNEY_B = [
     ("2025", [("Capability in action:", "The Resilience Alliance trains 20 groups on spontaneous volunteer management systems, supporting groups post Cyclone Alfred.", "Funded by the NSW Government&rsquo;s Spontaneous Volunteering Program and Foundation for Regional and Rural Renewal.")]),
     ("2026", [("Connected, Prepared Communities:", "Disaster Ready Fund 3 investment supports the next stage of capability and resilience-building with 60 groups throughout the Northern Rivers.", "Funded by the Australian Government and NSW Government."),
               ("Participatory granting project:", "17 groups receive up to $10,000 in funding as part of the first round of a newly developed participation funding process.", "Funding by The NRMA Help Fund, Monash University and Northern Rivers Community Foundation.")]),
+]
+
+
+# Archived for now (not shown on the site): the 2027+ timeline entry.
+JOURNEY_ARCHIVE = [
     ("2027+", [("Onwards:", 'Our research and MEAL process<span class="fund-i">Monitoring, Evaluation, Accountability and Learning</span>continues alongside the Alliance as it supports and resources groups in the network.', "")]),
 ]
 
@@ -334,7 +343,7 @@ body.teal{--bg:#f3f6f7}
 
 /* Prototype 2's rounded buttons and river-style journey */
 body{--btn-r:12px}
-ol.river{position:relative;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+ol.river{position:relative;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
 ol.river::before{content:"";position:absolute;left:0;right:0;top:16px;height:12px;border-radius:99px;background:var(--teal-25)}
 ol.river li{position:relative;padding-top:64px;display:block}
 ol.river b{position:absolute;top:0;left:0;box-sizing:border-box;height:44px;display:flex;align-items:center;background:#fff;border:3px solid var(--teal);border-radius:99px;padding:0 1.1em;font-weight:900;color:var(--teal-d);font-size:1rem;line-height:1}
@@ -383,6 +392,21 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 @media(max-width:560px){.tb .funders .wrap{padding:5px 8px;gap:4px 5px}.tb .funders p{font-size:.72rem}.tb .funders li a{height:26px;gap:4px;padding:0 .5em 0 .35em;font-size:.72rem}.tb .funders li a:not(:has(img)){padding-left:.5em}.tb .funders img{height:15px}}
 @media(max-width:400px){.tb .funders .wrap{padding:4px 6px;gap:3px 4px}.tb .funders p{font-size:.66rem}.tb .funders li a{height:24px;gap:3px;padding:0 .4em 0 .3em;font-size:.66rem}.tb .funders li a:not(:has(img)){padding-left:.4em}.tb .funders img{height:14px}}
 @media(max-width:345px){.tb .funders .wrap{padding:4px 4px;gap:3px 3px}.tb .funders p{font-size:.6rem}.tb .funders li a{height:22px;gap:3px;padding:0 .35em 0 .25em;font-size:.6rem}.tb .funders li a:not(:has(img)){padding-left:.35em}.tb .funders img{height:12px}}
+/* Our Focus: full-width cards, photo 40% on the left with the grey number circle centred on it, content on the right */
+.tb ol.focuscards{display:flex;flex-direction:column;flex-wrap:nowrap;gap:24px;justify-content:flex-start}
+.tb ol.focuscards li{flex:none;max-width:none;width:100%;display:grid;grid-template-columns:40% minmax(0,1fr);padding:0;overflow:hidden;text-align:left}
+.tb .focuscards .fph{position:relative;min-height:280px}.tb .focuscards .fph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
+.tb .focuscards .fph .pi{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);margin:0;width:88px;height:88px;box-shadow:0 4px 18px rgba(7,41,59,.25)}
+.tb .focuscards .fbody{align-self:center;padding:32px 40px}.tb .focuscards .fbody h3{margin:0 0 .5em}.tb .focuscards .fbody p{margin:0;max-width:62ch;font-size:1.05rem;line-height:1.6}
+@media(max-width:739px){.tb ol.focuscards li{grid-template-columns:1fr}.tb .focuscards .fph{min-height:0;height:220px}.tb .focuscards .fbody{padding:24px 22px 28px}}
+/* About: How we work cards go full width below iPad; Our Focus titles match the Connect/Share/Care titles; number circle 50% see-through and 30% bigger; Our Journey is a white band like Our Network */
+.tb .howcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;justify-content:stretch}.tb .howcards li{max-width:none;min-width:0}
+@media(max-width:860px){.tb .howcards{grid-template-columns:1fr}}
+.tb .focuscards .fbody h3{font-size:1.6rem}
+.tb .focuscards .fph .pi{width:114px;height:114px;background:rgba(238,241,243,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:none}.tb .focuscards .fph .pnum{font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:800;font-style:italic}
+.tb #about>.sec.journey{background:#fff;padding-top:80px!important;padding-bottom:80px!important}.tb #about>.sec.journey+.sec{padding-top:80px!important}
+/* Our Journey: timeline items stay transparent so the line shows behind and between the year pills */
+.tb ol.river>li{background:transparent;border:0;border-radius:0;box-shadow:none}
 /* accent bars sit on the bottom edge, not the top */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}
 .cards .pcard{border-top:0}.cards .pcard:nth-child(1){border-bottom:6px solid var(--teal)}.cards .pcard:nth-child(2){border-bottom:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-bottom:6px solid var(--orange)}
