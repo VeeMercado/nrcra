@@ -218,27 +218,35 @@ def dir_head(title, cur="", tag="h2"):
     return f'<div class="dirhead"><{tag} class="sechead">{title}</{tag}>{lga_select(cur)}</div>'
 
 
-TESTIMONIALS = [
-    ("laughing", "Like a whole region of neighbours in your corner.", "Kingscliff Survivors"),
-    ("hug", "Like finally being heard by people who have been through it too.", "Rising Lismore"),
+# Quotes are sample content. Names are real Alliance groups from the network list; the 2nd and 6th stories are videos (both the sizzle reel for now).
+STORIES = [
+    ("laughing", "Like a whole region of neighbours in your corner.", "Resilient Lismore Inc", False),
+    ("circle", "Like a family we did not know we had.", "Together Pottsville Inc", True),
+    ("hug", "Like finally being heard by people who have been through it too.", "Wardell Community Organised Resilience Effort (CORE)", False),
+    ("listening", "We learned more in one afternoon than in a year on our own.", "Resilient Uki", False),
+    ("talk", "We went from a few people on a phone tree to a whole street that checks in.", "Main Arm Disaster Recovery Inc", False),
+    ("crowd", "Seeing what other groups had done gave us the courage to start.", "Nimbin Disaster Resilience Group", True),
 ]
 
 
 def testimonials():
-    def card(img_html, quote, who):
-        return f'<li><div class="tph">{img_html}</div><blockquote><p>&ldquo;{E(quote)}&rdquo;</p><footer>&mdash; {E(who)}</footer></blockquote></li>'
-    vid = f'<div class="tph vid" data-video="{VIMEO}">{img("circle", alt="")}<button class="play" aria-label="Play the video: The Alliance feels like a family, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg></button></div>'
-    c1 = card(img(TESTIMONIALS[0][0], alt=""), TESTIMONIALS[0][1], TESTIMONIALS[0][2])
-    c2 = f'<li>{vid}<blockquote><p>&ldquo;Like a family we did not know we had.&rdquo;</p><footer>&mdash; Phoenix Casino</footer></blockquote></li>'
-    c3 = card(img(TESTIMONIALS[1][0], alt=""), TESTIMONIALS[1][1], TESTIMONIALS[1][2])
-    return f'<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead cen">Our Stories</h2><ul class="tcards">{c1}{c2}{c3}</ul></div></section>'
+    play = '<svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg>'
+
+    def card(key, quote, who, video):
+        if video:
+            ph = f'<div class="tph vid" data-video="{VIMEO}">{img(key, alt="")}<button class="play" aria-label="Play the video: {E(who)}, full screen">{play}</button></div>'
+        else:
+            ph = f'<div class="tph">{img(key, alt="")}</div>'
+        return f'<li>{ph}<blockquote><p>&ldquo;{E(quote)}&rdquo;</p><footer>&mdash; {E(who)}</footer></blockquote></li>'
+    cards = "".join(card(*st) for st in STORIES)
+    return f'<section class="sec stories" style="padding-top:0"><div class="wrap"><div class="bar bar-y sbar-top" aria-hidden="true"></div><h2 class="sechead cen">Our Stories</h2><ul class="tcards">{cards}</ul><div class="bar bar-y sbar-bot" aria-hidden="true"></div></div></section>'
 
 
 def network_body():
     cards = "".join(group_card(*g) for g in all_groups())
     return f'''<div class="wrap"><div class="splith net"><div><span class="eyebrow">Network</span><h1>50+ groups,<br>one region,<br><span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed().split('<p class="vnote">')[0]}</div></div></div>
 {testimonials()}
-<section class="sec" id="our-network" style="padding-top:0"><div class="wrap">{dir_head("Our Network")}<ul class="gsub">{cards}</ul></div></section>'''
+<section class="sec" id="our-network"><div class="wrap">{dir_head("Our Network")}<ul class="gsub">{cards}</ul></div></section>'''
 
 
 def lga_body(lga):
@@ -343,6 +351,8 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .tb .steergrid .steer a{display:grid;grid-template-rows:minmax(0,65fr) minmax(0,35fr);gap:0;padding:4px 10px 2px;justify-content:stretch;align-content:stretch}.tb .steergrid .slogo{align-self:center;height:auto;min-height:0;max-height:100%}.tb .steergrid .sname{align-self:start;padding-top:0;line-height:1.2}
 @media(max-width:560px){.tb .steergrid .steer a{padding:3px;grid-template-rows:minmax(0,1fr) minmax(0,1fr)}.tb .steergrid .slogo{height:auto;max-height:100%;flex:none}.tb .steergrid .sname{padding-top:2px}}
 @media(min-width:861px) and (max-width:1000px){.tb .steergrid{grid-template-columns:1fr 2fr}}
+/* Our Stories: yellow play button; yellow bars sit exactly midway (100px each side) above Our Stories and between the last row and Our Network */
+.tb .tcards .tph .play{background:var(--yellow);color:var(--navy);border:0;box-shadow:0 6px 20px rgba(0,0,0,.25)}.tb .tcards .tph .play:hover{background:#fff;color:var(--navy)}.tb .tcards .tph .play:active{background:#ffe38a;color:var(--navy)}.tb #network>.wrap:first-child{margin-bottom:100px}.tb .sec.stories{padding-bottom:100px!important}.tb .sbar-top{margin:0 auto 100px}.tb .sbar-bot{margin:100px auto 0}.tb #network #our-network{padding-top:80px!important}.tb #network #our-network,.tb [id^="lga-"]>.sec{background:#fff}.tb #our-network .gsub li,.tb [id^="lga-"] .gsub li,.tb #our-network .lgasel,.tb [id^="lga-"] .lgasel{background-color:var(--bg)}
 /* accent bars sit on the bottom edge, not the top */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}
 .cards .pcard{border-top:0}.cards .pcard:nth-child(1){border-bottom:6px solid var(--teal)}.cards .pcard:nth-child(2){border-bottom:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-bottom:6px solid var(--orange)}
@@ -470,10 +480,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .sec{padding:0 0 65px!important}.tb .page>.sec:first-child{padding-top:65px!important}
 .tb .hero1.herobg{margin-bottom:65px}.tb .page>.wrap:first-child>.splith{padding-bottom:0}.tb .page>.wrap:first-child{margin-bottom:65px}
 
-/* Network only: double the space (130px) between sections */
-.tb #network>.wrap:first-child{margin-bottom:130px}.tb #network>.sec:not(:last-child){padding-bottom:130px!important}
-/* Stories from the Alliance: the text above is centred against the tall map, so it looks 79px more open above; give the space below the same */
-.tb #network>section.sec:first-of-type{padding-bottom:209px!important}
+/* Network only: spacing around Our Stories is set with its two yellow bars (100px each side, the lower one to the top edge of the white Our Network band), see the Our Stories rules */
 /* Our Network directory (Network and every LGA page): double the space under the cards */
 .tb #network>.sec:last-child,.tb [id^="lga-"]>.sec:last-child{padding-bottom:130px!important}
 /* About: same 130px rhythm as Network */
@@ -486,7 +493,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tcards li{background:#fff;border:1px solid var(--line);border-bottom:10px solid var(--yellow);border-radius:20px;padding:18px 18px 24px;display:flex;flex-direction:column}
 .tcards .tph{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:18px;margin-bottom:16px}.tcards .tph img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
 .tcards .tph .play{inset:auto;top:50%;left:50%;margin:0;transform:translate(-50%,-50%);width:76px;height:76px;padding:0;display:grid;place-items:center}.tcards .tph .play svg{width:100%;height:100%}
-.tcards blockquote{margin:0;padding:0;display:flex;flex-direction:column;gap:14px;flex:1}.tcards blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:700}
+.tcards blockquote{margin:0;padding:0;display:flex;flex-direction:column;gap:14px;flex:1}.tcards blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:400;font-style:italic}
 .tcards blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:.95rem}
 .dirhead{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px 24px;margin-bottom:35px}.dirhead .sechead{margin:0;grid-column:2;grid-row:1;text-align:center}.dirhead .lgasel{grid-column:3;grid-row:1;justify-self:end}
 .lgasel-l{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.9rem}.lgasel{font:700 1rem var(--font);color:var(--navy);padding:.7em 2.4em .7em 1em;min-height:44px;border:2px solid #00857c;border-radius:12px;background:#fff;min-width:260px;cursor:pointer}
