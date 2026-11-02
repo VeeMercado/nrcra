@@ -259,12 +259,12 @@ def testimonials():
     c1 = card(img(TESTIMONIALS[0][0], alt=""), TESTIMONIALS[0][1], TESTIMONIALS[0][2])
     c2 = f'<li>{vid}<blockquote><p>&ldquo;Like a family we did not know we had.&rdquo;</p><footer>&mdash; Phoenix Casino</footer></blockquote></li>'
     c3 = card(img(TESTIMONIALS[1][0], alt=""), TESTIMONIALS[1][1], TESTIMONIALS[1][2])
-    return f'<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">Our Stories</h2><ul class="tcards">{c1}{c2}{c3}</ul></div></section>'
+    return f'<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead cen">Our Stories</h2><ul class="tcards">{c1}{c2}{c3}</ul></div></section>'
 
 
 def network_body():
     cards = "".join(group_card(*g) for g in all_groups())
-    return f'''<div class="wrap"><div class="splith net rev"><div><span class="eyebrow">Network</span><h1>50+ groups,<br>one region,<br><span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed().split('<p class="vnote">')[0]}</div></div></div>
+    return f'''<div class="wrap"><div class="splith net"><div><span class="eyebrow">Network</span><h1>50+ groups,<br>one region,<br><span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed().split('<p class="vnote">')[0]}</div></div></div>
 {testimonials()}
 <section class="sec" id="our-network" style="padding-top:0"><div class="wrap">{dir_head("Our Network")}<ul class="gsub">{cards}</ul></div></section>'''
 
