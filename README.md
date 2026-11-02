@@ -8,7 +8,7 @@ Prototypes for the nrcra.org.au website. Sample content only. Preview URL: https
 **Round 2**
 - `prototype-c/` Prototype C, the only published Round 2 prototype. Built by `tools/build_teal.py`. Feedback needed is for finalising the content
 - Prototypes A (two cards) and B (one green card) are archived: not built or published. Their Home headers are kept as variants in `build_teal.py` (`HEROES`), and snapshots (plus the original A and B) are in the git-ignored `_archive-*` folders on the working machine. The original A and B are also in git history
-- `brand-contrast/` guidance on using the brand red, yellow and teal with accessible text
+- `brand-contrast/` brand guidelines: colours, type, spacing and corner rules, and contrast with accessible text
 
 **Other**
 - `index.html` dashboard with Round 2 and Round 1 tabs (Round 1 has CHOSEN above an ARCHIVE line)
