@@ -76,7 +76,8 @@ TEAM = [("Kathie Heyman", "Network Lead"), ("Milou Muiser", "Communications, Eve
 
 
 def team():
-    return '<ul class="team2">' + "".join(f'<li><span class="tc" aria-hidden="true">{"".join(w[0] for w in n.split()[:2])}</span><b>{n}</b><span>{r}</span></li>' for n, r in TEAM) + '</ul>'
+    lis = [f'<li><span class="tc" aria-hidden="true">{"".join(w[0] for w in n.split()[:2])}</span><b>{n}</b><span>{r}</span></li>' for n, r in TEAM]
+    return '<ul class="team2">' + "".join(lis[:2]) + '<li class="brk" aria-hidden="true"></li>' + "".join(lis[2:]) + '</ul>'
 
 
 STEER = [("Together Pottsville", "https://www.togetherpottsville.org", "together-pottsville.png", ""),
@@ -106,7 +107,7 @@ FOCUS = [("Growing the Alliance", "We are strengthening our network by clarifyin
 
 
 def focus_cards():
-    return '<ol class="focus">' + "".join(f'<li><span class="fn">{i:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(FOCUS, 1)) + "</ol>"
+    return '<ol class="pillcards focuscards">' + "".join(f'<li><span class="pi pnum">{i:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(FOCUS, 1)) + "</ol>"
 
 
 MEAL_RING = [("Connect", "#00857c", "#fff"), ("Listen", "#f05a28", "#fff"), ("Reflect", "#ffcb2a", "#07293b"), ("Improve", "#00857c", "#fff"), ("Share", "#f05a28", "#fff"), ("Strengthen", "#ffcb2a", "#07293b")]
@@ -135,7 +136,7 @@ def about_body():
 <section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Our journey</h2>{journey_b()}</div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="steergrid"><div class="steertxt"><h2 class="sechead">The Steering Committee:</h2><p class="lede">Is the coordinating body for the Resilience Alliance. It is made up of representatives from resilience-related groups and organisations across the region, and operates by agreement among groups and organisations rather than by reporting to a separate incorporated parent body. The steering committee actively aims to maintain a network that reflects the geographic and community diversity of the region.</p></div><div class="steerlist"><p class="lede">The Steering Committee comprises the following groups and organisations.</p>{steer_tiles()}</div></div></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Resilience Alliance Team:</h2>{team()}</div></div></section>'''
+<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead cen">Resilience Alliance Team:</h2>{team()}</div></section>'''
 
 
 # ---------------------------------------------------------------- Network
@@ -362,7 +363,9 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 @media(min-width:861px){.tb .splith.ab{align-items:stretch}.tb .splith.ab>div:first-child{align-self:center}.tb .splith.ab .ph{display:flex}.tb .splith.ab .ph img{aspect-ratio:auto;height:auto;min-height:100%;flex:1;object-fit:cover}}
 .tb .steergrid{display:grid;grid-template-columns:2fr 3fr;gap:40px;align-items:start}.tb .steergrid>*{min-width:0}.tb .steertxt .sechead{margin-top:0}.tb .steerlist>.lede{margin-top:0}
 .tb .steergrid .steer{margin-top:16px;gap:12px}.tb .steergrid .steer a{aspect-ratio:1/1;height:auto;justify-content:center;padding:12px 10px;gap:10px;border-radius:16px}.tb .steergrid .slogo{display:flex;align-items:center;justify-content:center;overflow:hidden;width:100%;height:50px;padding:0}.tb .steergrid .slogo img{flex:0 1 auto;width:auto;height:auto;max-width:100px;max-height:50px;object-fit:contain}.tb .steergrid .sname{font-size:.82rem;font-weight:800;color:var(--teal-d);line-height:1.25}
-@media(min-width:861px){.tb .steergrid .steer{grid-template-columns:repeat(3,160px);justify-content:center}}@media(max-width:860px){.tb .steergrid{grid-template-columns:1fr;gap:0}.tb .steergrid .steer{margin-top:20px}}@media(max-width:480px){.tb .steergrid .steer{grid-template-columns:repeat(2,1fr);gap:10px}.tb .steergrid .slogo{height:50px}.tb .steergrid .sname{font-size:.75rem}}
+@media(min-width:740px){.tb .steergrid .steer{grid-template-columns:repeat(3,160px);justify-content:center}}@media(max-width:860px){.tb .steergrid{grid-template-columns:1fr;gap:0}.tb .steergrid .steer{margin-top:20px}}@media(max-width:739px){.tb .steergrid .steer{grid-template-columns:repeat(3,1fr);gap:8px}.tb .steergrid .steer a{padding:4px 3px;gap:4px;border-radius:12px;min-height:0}.tb .steergrid .slogo{height:32px;flex:none}.tb .steergrid .slogo img{max-width:100%;max-height:32px}.tb .steergrid .sname{font-size:.6rem;line-height:1.15}}.tb .steerlist>.lede{text-align:center}
+.tb .cen{text-align:center}.tb .team2 li.brk{display:block;flex-basis:100%;width:100%;height:0;margin:-24px 0 0;padding:0}@media(min-width:861px){.tb .team2 li.brk{display:none}.tb .team2 li{flex:1 1 0;width:auto;max-width:190px;min-width:0}}@media(max-width:739px){.tb .team2 li{width:150px}}
+.tb .focuscards li{flex:1 1 300px;max-width:360px;padding:24px 22px}.tb .focuscards p{text-align:left;font-size:.97rem}
 /* accent bars sit on the bottom edge, not the top */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}
 .cards .pcard{border-top:0}.cards .pcard:nth-child(1){border-bottom:6px solid var(--teal)}.cards .pcard:nth-child(2){border-bottom:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-bottom:6px solid var(--orange)}
@@ -496,6 +499,8 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb #network>section.sec:first-of-type{padding-bottom:209px!important}
 /* Our Network directory (Network and every LGA page): double the space under the cards */
 .tb #network>.sec:last-child,.tb [id^="lga-"]>.sec:last-child{padding-bottom:130px!important}
+/* About: same 130px rhythm as Network */
+.tb #about>.wrap:first-child{margin-bottom:130px}.tb #about>.sec{padding-bottom:130px!important}
 
 /* Network page: map as tall as the text, testimonials, suburb directory */
 .tb .splith.net{align-items:stretch}.tb .splith.net>div:first-child{align-self:center}.tb .splith.net .ph{display:flex}.tb .splith.net .ph .mapbox{height:auto;min-height:517px;flex:1}
