@@ -71,9 +71,42 @@ MEAL6 = [("Includes Everyone", "People feel respected and able to participate.",
          ("Learns and Adapts", "Feedback leads to practical changes.", "improve"), ("Creates Collective Value", "Groups gain what they couldn’t achieve alone.", "strengthen")]
 
 
+TEAM = [("Kathie Heyman", "Network Lead"), ("Milou Muiser", "Communications, Events and Engagement"),
+        ("Marlena Sue Basser", "Capacity Building Coordinator"), ("Claire McLisky", "Capacity Building Coordinator"), ("Barbara Winters", "Capacity Building Coordinator")]
+
+
 def team():
-    roles = ["Network Lead", "Steering committee", "Steering committee", "UCRH researcher", "UCRH researcher", "UCRH researcher"]
-    return '<ul class="team2">' + "".join(f'<li><span class="tc" aria-hidden="true">Photo</span><b>Name</b><span>{r}</span></li>' for r in roles) + '</ul><p class="vnote">Sample placeholders. Names and photos to come.</p>'
+    return '<ul class="team2">' + "".join(f'<li><span class="tc" aria-hidden="true">{"".join(w[0] for w in n.split()[:2])}</span><b>{n}</b><span>{r}</span></li>' for n, r in TEAM) + '</ul>'
+
+
+STEER = [("Together Pottsville", "https://www.togetherpottsville.org", "together-pottsville.png", ""),
+         ("Murwillumbah CORE", "https://www.mcore2484.org", "murwillumbah-core.webp", ""),
+         ("Resilient Uki", "https://resilientuki.org", "resilient-uki.png", ""),
+         ("South Golden Beach, New Brighton, Ocean Shores", "https://www.byron.nsw.gov.au/Environment-Resilience/Emergency-Recovery/Byron-Shire-Community-Resilience-Network", "", "SG"),
+         ("Main Arm Disaster Response", "https://www.byron.nsw.gov.au/Environment-Resilience/Emergency-Recovery/Byron-Shire-Community-Resilience-Network", "", "MA"),
+         ("Resilient Lismore", "https://resilientlismore.org.au", "resilient-lismore.png", ""),
+         ("Northern Rivers Community Foundation", "https://nrcf.org.au", "nrcf.png", ""),
+         ("Plan C", "https://www.planc.org.au", "plan-c.webp", "dark"),
+         ("University Centre for Rural Health", "https://ucrh.edu.au", "ucrh.svg", "")]
+
+
+def steer_tiles():
+    out = ""
+    for n, u, f, x in STEER:
+        box = f'<img src="../assets/img/steer/{f}" alt="" loading="lazy">' if f else f'<span class="sinit" aria-hidden="true">{x}</span>'
+        out += f'<li><a href="{u}" target="_blank" rel="noopener"><span class="slogo{" dark" if x == "dark" else ""}">{box}</span><span class="sname">{n}</span><span class="sr-only"> (opens in a new tab)</span></a></li>'
+    return '<ul class="steer">' + out + '</ul>'
+
+
+FOCUS = [("Growing the Alliance", "We are strengthening our network by clarifying who we are, why we come together and how we work. Through regular gatherings we are building a clearer picture of who is involved and how we connect."),
+         ("Training and Resource Sharing", "We are making knowledge, practical tools and training easier to find through our Resilience Alliance Community Knowledge Hub. Our training is led by experienced locals, with the aim of strengthening our network from within the community."),
+         ("Peer Support and Self Care", "Resilience work asks a lot of the people who do it, so we are committed to balanced wellbeing and collective care across our region. We are mapping the support already available, identifying good practice, with the aim to develop an adaptable wellbeing framework that groups can use to look after themselves and each other."),
+         ("Funding and Collaborative Projects", "We are working towards a more sustainable and collaborative approach to funding for resilience work across the region. Identifying shared opportunities we aim to reduce competition and increase collective impact."),
+         ("Advocacy", "We believe our collective voice is stronger than any single group&rsquo;s. By understanding our own network, identifying key stakeholders and building advocacy skills among members, we are developing a collaborative approach to advocating for resilient communities across the region.")]
+
+
+def focus_cards():
+    return '<ol class="focus">' + "".join(f'<li><span class="fn">{i:02d}</span><h3>{t}</h3><p>{d}</p></li>' for i, (t, d) in enumerate(FOCUS, 1)) + "</ol>"
 
 
 MEAL_RING = [("Connect", "#00857c", "#fff"), ("Listen", "#f05a28", "#fff"), ("Reflect", "#ffcb2a", "#07293b"), ("Improve", "#00857c", "#fff"), ("Share", "#f05a28", "#fff"), ("Strengthen", "#ffcb2a", "#07293b")]
@@ -94,14 +127,15 @@ def meal_ring():
 
 
 def about_body():
-    return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">About us</span><h1>We know communities are stronger when they&rsquo;ve built trusted relationships <span class="mark">together.{B.SQUIGGLE}</span></h1></div><div class="ph">{img("line", eager=True)}</div></div></div>
-<section class="sec"><div class="wrap"><div class="card surface"><div class="vp-text"><span class="script">Our goal</span><h2>Vision</h2><p>{B.VISION}</p><span class="script" style="margin-top:28px">Our why</span><h2>Purpose</h2><p>{B.PURPOSE}</p></div></div></div></section>
+    return f'''    <div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">About us</span><h1>We know communities are stronger when they&rsquo;ve built trusted relationships <span class="mark">together.{B.SQUIGGLE}</span></h1></div><div class="ph">{img("line", eager=True)}</div></div></div>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="aboutgrid"><div class="card abt"><h2>The Resilience Alliance</h2><p>Established in November 2023. Its roots lie in a run of compounding disasters: the 2017 floods, the 2019&ndash;20 bushfires, and the catastrophic floods and landslides of 2022. In each, local community organisers played a vital role in response, recovery and adaptation. Research in the years that followed found that these grassroots groups wanted stronger connections with each other for peer-to-peer support. That showed the need for regional collaboration in disaster resilience.</p><p>We support a network of place-based resilience groups to develop their own local approaches to risk reduction, preparedness and recovery, for fire, flood, landslides and whatever comes next.</p><p>The Resilience Alliance helps government agencies, councils and emergency services deliver on the commitments of the NSW State Emergency Management Plan, State Disaster Mitigation Plan and regional resilience priorities by connecting formal systems with trusted, community-led action.</p></div>
+<div class="vpcol"><div class="card vpc"><h2><span class="hlx hlx-t">Vision</span></h2><div class="bar bar-t" aria-hidden="true"></div><p>Connected, collaborative Northern Rivers communities that are empowered to care for themselves and each other before, during and after disasters.</p></div>
+<div class="card vpc"><h2><span class="hlx hlx-o">Purpose</span></h2><div class="bar bar-o" aria-hidden="true"></div><p>To develop a self-sustaining, trusted Alliance of place-based, community-led resilience groups and organisations. The Alliance shares knowledge and resources, provides mutual support and wellbeing, takes collective action and advocates for identified community needs.</p></div></div></div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">The Steering Committee:</h2><p class="lede">Is the coordinating body for the Resilience Alliance. It is made up of representatives from resilience-related groups and organisations across the region, and operates by agreement among groups and organisations rather than by reporting to a separate incorporated parent body. The steering committee actively aims to maintain a network that reflects the geographic and community diversity of the region.</p><p class="lede">The Steering Committee comprises the following groups and organisations.</p>{steer_tiles()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">How we work</h2><p class="lede">Through regular gatherings, deep conversations and shared experiences, the Resilience Alliance is building a community-led network focused on collective care, preparedness and regional strength.</p>{how_cards()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><span class="script">How we take action</span><h2 class="sechead">{hl("We have a MEAL plan")}</h2><p class="lede">Monitoring, Evaluation, Accountability and Learning. A healthy Resilience Alliance isn&rsquo;t just one that delivers projects. It&rsquo;s one where people feel included, power is shared, groups gain real value, and we can learn and adapt together.</p>
-{meal_ring()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">{hl("Our Focus")}</h2><p class="lede">{B.CALLOUT} We connect them using these five key pillars.</p>{pillar_cards(True)}</div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Our journey</h2>{journey_b()}</div></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Meet the team</h2>{team()}</div></div></section>'''
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="card surface"><h2 class="sechead">Resilience Alliance Team:</h2>{team()}</div></div></section>'''
 
 
 # ---------------------------------------------------------------- Network
@@ -309,6 +343,22 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .tb .howcards li p{margin:0;color:var(--navy)}.tb .howcards h3{margin:0 0 16px}.tb .howcards h3 span{text-align:center;display:block;width:100%;box-sizing:border-box;border-radius:99px;padding:.45em 1em;font-weight:900}
 .tb .hw-teal{--pc:var(--teal);--bg:var(--teal-25)}.tb .hw-teal h3 span{background:#00857c;color:#fff}.tb .hw-yellow{--pc:var(--yellow);--bg:var(--yellow-40)}.tb .hw-yellow h3 span{background:var(--yellow);color:var(--navy)}.tb .hw-orange{--pc:var(--orange);--bg:var(--orange-25)}.tb .hw-orange h3 span{background:var(--orange);color:#fff}
 .pillcards .pnum{font-weight:900;font-size:1.05rem;letter-spacing:.04em}
+
+.tb .aboutgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:stretch}.tb .aboutgrid>*{min-width:0}
+.tb .abt{background:#fff;border:1px solid var(--line)}.tb .abt h2{margin:0 0 .5em}.tb .abt p{margin:0 0 1em}.tb .abt p:last-child{margin:0}
+.tb .vpcol{display:grid;gap:20px}.tb .vpc{background:#fff;border:1px solid var(--line)}.tb .vpc h2{margin:0;font-size:1.6rem}.tb .vpc p{margin:0}
+.hlx{padding:0 .12em;display:inline-block;line-height:1.15}.hlx-t{background:linear-gradient(transparent 56%,var(--teal) 56%,var(--teal) 88%,transparent 88%)}.hlx-o{background:linear-gradient(transparent 56%,var(--orange) 56%,var(--orange) 88%,transparent 88%)}
+.tb .bar{height:8px;border-radius:99px;margin:12px 0 16px;max-width:200px}.tb .bar-t{background:var(--teal)}.tb .bar-o{background:var(--orange)}
+@media(max-width:860px){.tb .aboutgrid{grid-template-columns:1fr}}
+.tb .steer{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.tb .steer a{display:flex;flex-direction:column;align-items:center;gap:12px;text-decoration:none;color:var(--navy);height:100%}
+.tb .slogo{display:grid;place-items:center;width:100%;height:160px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-sizing:border-box}.tb .slogo.dark{background:var(--navy)}.tb .slogo img{width:auto;height:auto;max-width:100%;max-height:128px;object-fit:contain}
+.tb .sinit{width:72px;height:72px;border-radius:50%;background:var(--teal-25);display:grid;place-items:center;font-weight:900;font-size:1.4rem;color:var(--navy)}
+.tb .sname{font-weight:800;text-align:center}.tb .steer a:hover .sname,.tb .steer a:focus-visible .sname{text-decoration:underline}.tb .steer a:hover .slogo{border-color:var(--teal)}
+@media(max-width:860px){.tb .steer{grid-template-columns:repeat(2,1fr)}}@media(max-width:480px){.tb .steer{grid-template-columns:1fr}}
+.tb .focus{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:18px;justify-content:center}.tb .focus li{flex:1 1 300px;max-width:360px;background:var(--fb);border-radius:170px 170px 22px 22px;padding:44px 26px 30px;text-align:left}
+.tb .focus .fn{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--fc);color:var(--ft);font-weight:900;font-size:1.1rem;margin:0 auto 12px}.tb .focus h3{text-align:center;margin:0 0 .6em}.tb .focus p{margin:0;font-size:.97rem}
+.tb .focus li:nth-child(1){--fb:var(--teal-25);--fc:#00857c;--ft:#fff}.tb .focus li:nth-child(2){--fb:var(--yellow-40);--fc:var(--yellow);--ft:var(--navy)}.tb .focus li:nth-child(3){--fb:var(--orange-25);--fc:var(--orange);--ft:#fff}.tb .focus li:nth-child(4){--fb:var(--blue-15);--fc:var(--navy);--ft:#fff}.tb .focus li:nth-child(5){--fb:var(--grey-6);--fc:#9fb0b8;--ft:var(--navy)}
+.tb .team2 li{width:190px}.tb .team2 b{margin-top:6px}.tb .team2 .tc{font-weight:900;font-size:1.3rem;color:var(--navy)}
 /* accent bars sit on the bottom edge, not the top */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}
 .cards .pcard{border-top:0}.cards .pcard:nth-child(1){border-bottom:6px solid var(--teal)}.cards .pcard:nth-child(2){border-bottom:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-bottom:6px solid var(--orange)}
@@ -458,7 +508,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .gsub{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
 .gsub li{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
 .gsub b{font-size:1.1rem;line-height:1.25}.gsub span{color:#586c74;font-size:.95rem}.gsub .btn{margin-top:14px}
-.gsub .sr-only,.rcards .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.gsub .sr-only,.rcards .sr-only,.steer .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .btn-sm{font-size:.9rem;padding:.5em 1.1em;min-height:38px}
 @media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:461px;min-height:0;flex:none}}
 @media(max-width:739px){.lgasel-l,.lgasel{width:100%}.dirhead{grid-template-columns:1fr}.dirhead .sechead,.dirhead .lgasel{grid-column:1}.dirhead .sechead{grid-row:1}.dirhead .lgasel{grid-row:2}}
