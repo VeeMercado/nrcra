@@ -6,6 +6,8 @@
 White text never sits on teal (2.99:1). Navy text on teal is 5.05:1.
 Imported by build.py, which owns the shared helpers and base CSS.
 """
+import csv
+import os
 import re
 import random
 import build as B
@@ -174,65 +176,35 @@ def pillar_cards(nums=False):
     return '<ol class="pillcards">' + "".join(f'<li><span class="pi">{icon(k)}</span><span class="pn">{i:02d}</span><h3>{E(t)}</h3><p>{E(d)}</p></li>' for i, (t, d, k) in enumerate(B.PILLARS, 1)) + "</ol>"
 
 
-# 58 suburbs and localities across the 8 LGAs (public locality lists). Group names and websites are random sample content.
-SUBURBS = {
-    "Tweed": ["Banora Point", "Cabarita Beach", "Kingscliff", "Murwillumbah", "Pottsville", "Tumbulgum", "Tweed Heads", "Uki"],
-    "Byron": ["Bangalow", "Billinudgel", "Brunswick Heads", "Byron Bay", "Mullumbimby", "Ocean Shores", "Suffolk Park"],
-    "Ballina": ["Alstonville", "Ballina", "Lennox Head", "Skennars Head", "Wardell", "Wollongbar"],
-    "Lismore": ["Bexhill", "Clunes", "Dunoon", "Goonellabah", "Lismore", "Nimbin", "Rosebank", "The Channon"],
-    "Kyogle": ["Bonalbo", "Kyogle", "Mallanganee", "Tabulam", "Urbenville", "Woodenbong"],
-    "Richmond Valley": ["Broadwater", "Casino", "Coraki", "Evans Head", "Rappville", "Woodburn"],
-    "Tenterfield": ["Drake", "Jennings", "Mingoola", "Tenterfield", "Torrington", "Wallangarra"],
-    "Clarence Valley": ["Brooms Head", "Grafton", "Harwood", "Iluka", "Lawrence", "Maclean", "Nymboida", "South Grafton", "Ulmarra", "Wooli", "Yamba"],
-}
-NAME_FORMS = ["{} Survivors", "{} Resilience Crew", "Rising {}", "Strong {} Collective", "{} Ready Crew", "Brave {} Hearts", "{} Together", "Phoenix {}",
-              "{} Neighbours United", "Tough Mob of {}", "{} Grit and Grace", "{} Rapid Responders", "Rebuild {}", "{} Storm Sisters", "Steady {}", "{} Good Hands"]
-LGA_ORDER = sorted(SUBURBS)
+# Real group list from the Alliance spreadsheet, cleaned by tools/clean_groups.py (visible rows, duplicates removed, LGA and Aboriginal Country split,
+# links matched to groups). Membership of the Alliance to be confirmed by NRCRA. A group links to its website, or to Facebook when it has no website.
+
+
+def short_lga(official):
+    return re.sub(r"\s+(Shire|Council|City)$", "", official)
 
 
 def slug(t):
     return re.sub(r"[^a-z]+", "-", t.lower()).strip("-")
 
 
-# Real groups where both the name and a working website are known (checked 30 Oct 2026). Membership of the Alliance to be confirmed by NRCRA.
-REAL = {
-    "Lismore": ("Resilient Lismore", "https://resilientlismore.org.au"),
-    "Uki": ("Resilient Uki", "https://resilientuki.org"),
-    "Wardell": ("WardellCORE", "https://www.wardellcore.community"),
-    "Mullumbimby": ("Mullumbimby District Neighbourhood Centre", "https://www.mdnc.org.au"),
-    "Nimbin": ("Nimbin Disaster Resilience Group", "https://nnic.org.au/pub/index.php/disasters"),
-    "The Channon": ("The Channon Resilience", "https://thechannonhub.org/"),
-    "Rosebank": ("Minyon Resilience Network", "https://minyonresiliencenetwork.com/"),
-}
-
-
 def all_groups():
-    rnd = random.Random(58)
-    forms = NAME_FORMS[:]
-    rnd.shuffle(forms)
-    rows = []
-    for lga, subs in SUBURBS.items():
-        for sub in subs:
-            rows.append([sub, lga])
-    rows.sort(key=lambda r: r[0].lower())
     out = []
-    for i, (sub, lga) in enumerate(rows):
-        has_web = rnd.random() < .7
-        if sub in REAL:
-            out.append((REAL[sub][0], sub, lga, REAL[sub][1]))
-        else:
-            out.append((forms[i % len(forms)].format(sub), sub, lga, "#" if has_web else ""))
-    return out
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "network_groups.csv"), newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            out.append((r["Group Name"], r["Location"], short_lga(r["LGA"]), r["LGA"], r["Aboriginal Country"], r["Website"], r["Facebook"]))
+    return sorted(out, key=lambda g: g[0].lower())
 
 
-def group_card(name, sub, lga, web):
-    if web == "#":
-        btn = '<a class="btn btn-ghost btn-sm" href="#" data-sample="1">Visit website</a>'
-    elif web:
-        btn = f'<a class="btn btn-ghost btn-sm" href="{web}" target="_blank" rel="noopener">Visit website<span class="sr-only"> (opens in a new tab)</span></a>'
-    else:
-        btn = ""
-    return f'<li><b>{E(name)}</b><span>{E(sub)}, {E(lga)}</span>{btn}</li>'
+LGA_ORDER = sorted({g[2] for g in all_groups()})
+
+
+def group_card(name, loc, key, lga, country, web, fb):
+    place = f"{loc}, {lga}" if loc else lga
+    ctry = f'<span class="ctry">{E(country)}</span>' if country else ""
+    url = web or fb
+    btn = f'<a class="btn btn-ghost btn-sm" href="{E(url)}" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a>' if url else ""
+    return f'<li><b>{E(name)}</b><span>{E(place)}</span>{ctry}{btn}</li>'
 
 
 def lga_select(cur=""):
@@ -517,7 +489,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .dirhead h1.sechead{font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:800}
 .gsub{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
 .gsub li{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
-.gsub b{font-size:1.1rem;line-height:1.25}.gsub span{color:#586c74;font-size:.95rem}.gsub .btn{margin-top:14px}
+.gsub .ctry{font-size:.85rem;font-weight:700;color:var(--teal-d);margin-top:8px}.gsub .ctry+.btn{margin-top:6px}.gsub b{font-size:1.1rem;line-height:1.25}.gsub span{color:#586c74;font-size:.95rem}.gsub .btn{margin-top:14px}
 .gsub .sr-only,.rcards .sr-only,.steer .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .btn-sm{font-size:.9rem;padding:.5em 1.1em;min-height:38px}
 @media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:461px;min-height:0;flex:none}}
