@@ -150,8 +150,8 @@ def how_cards():
 
 FUND = lambda t: f'<p class="fund">{t}</p>'
 JOURNEY_B = [
-    ("2022", [("Floods &amp; disaster:", "Communities respond to the floods, showing local leadership and the need for stronger regional collaboration.", "")]),
-    ("2023", [("Building connections:", "A Sydney Environment Institute &amp; UCRH study documents community self organisation after the floods &mdash; the evidence base that leads participants to call for a regional alliance.", "")]),
+    ("2022", [("Floods &amp; disaster:", "Communities responded to the floods, showing local leadership and the need for stronger regional collaboration.", "")]),
+    ("2023", [("Building connections:", "A Sydney Environment Institute &amp; UCRH study documents community self organisation after the floods &mdash; the evidence base that leads participants to call for <strong><em>a regional alliance.</em></strong>", "")]),
     ("2024", [("Resilience Alliance established:", "The inaugural regional gathering with 96 participants from 40+ groups across the Northern Rivers formally establishes the Resilience Alliance.", ""),
               ("Co-designing the future:", "Groups develop the Resilience Alliance&rsquo;s distributed governance model and strategic priorities.", "Funded by the University of Centre of Rural Health.")]),
     ("2025", [("Capability in action:", "The Resilience Alliance trains 20 groups on spontaneous volunteer management systems, supporting groups post Cyclone Alfred.", "Funded by the NSW Government&rsquo;s Spontaneous Volunteering Program and Foundation for Regional and Rural Renewal.")]),
