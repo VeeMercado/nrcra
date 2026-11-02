@@ -543,7 +543,7 @@ def tfooter():
         return f'<div class="fcol"><h2 class="fb{n}">{title}</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in items) + "</ul></div>"
     contact = [("hello@nrcra.org.au", "mailto:hello@nrcra.org.au")]
     touch = [("Facebook", B.LINKS["fb"]), ("LinkedIn", B.LINKS["li"])]
-    site = [("Alliance Home", "#home"), ("Network", "#network"), ("About", "#about"), ("Impact", "#impact"), ("R.A.C.K.", "#rack"), ("Sign In", SIGN_IN)]
+    site = [("Alliance Home", "#home"), ("Our Network", "#network"), ("About us", "#about"), ("Our Impact", "#impact"), ("Resilience Alliance Community Knowledge", "#rack"), ("R.A.C.K. Sign In", SIGN_IN)]
     top = '<div class="foot-top"><span class="foot-logo boxed">' + blogo("logo") + '</span></div>'
     return f'''<footer class="site-foot"><div class="wrap">
 <div class="foot-cols">{top}{col(3, "Site map", site)}<div class="fstack">{col(2, "Stay in Touch", touch)}{col(1, "Contact", contact)}</div></div>
