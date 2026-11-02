@@ -547,7 +547,7 @@ body.teal{font-size:16px}
 .tb .lede,.tb .pillcards h3{font-size:1.25rem}.tb .lede{font-weight:400}.tb .pillcards h3{font-weight:800}
 .tb b,.tb strong{font-weight:800}
 .tb .eyebrow,.tb .hsplit .hsolid-text .eyebrow,.tb .hsolid-text .eyebrow,.tb .hsplit-tag{font-size:.6875rem!important}
-.tb .btnrow,.tb .hwpills{gap:16px}
+.tb .btnrow,.tb .hwpills,.tb .stats{gap:16px}
 /* About, How we work: white pills, text colours as the Connect. Share. Care. links on Home */
 .tb .howcards h3 span{background:#fff!important;border:1px solid var(--line)}
 .tb .howcards .hw-teal h3 span{color:#00857c!important}.tb .howcards .hw-yellow h3 span{color:#D9A400!important}.tb .howcards .hw-orange h3 span{color:#d9481a!important}
