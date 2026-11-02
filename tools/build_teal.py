@@ -352,9 +352,9 @@ FLAG_ICON = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" 
 
 # Privacy Policy page: simple numbered items. "have" = text already on NRCRA's current Privacy Policy page (or site footer); "add" = consider adding.
 PP = [
-    ("have", "A legal disclaimer", "Says the page is only a general explanation, is not legal advice, and recommends getting legal advice.", "Template text from the website builder. Replace it with NRCRA's own wording."),
-    ("have", "Privacy Policy: the basics", "Explains what a privacy policy is: a statement of how a website collects, uses and manages visitors' information and protects their privacy.", "Template text from the website builder. Replace it with NRCRA's own wording."),
-    ("have", "What to include in a Privacy Policy", "Lists the topics a policy usually covers: what is collected and how, why, sharing with others, how people use their rights, and information about minors.", "Advice for the website owner, not a policy for visitors. The items below cover these topics."),
+    ("add", "A legal disclaimer", "Says the page is only a general explanation, is not legal advice, and recommends getting legal advice.", "Template text from the website builder. Replace it with NRCRA's own wording."),
+    ("add", "Privacy Policy: the basics", "Explains what a privacy policy is: a statement of how a website collects, uses and manages visitors' information and protects their privacy.", "Template text from the website builder. Replace it with NRCRA's own wording."),
+    ("add", "What to include in a Privacy Policy", "Lists the topics a policy usually covers: what is collected and how, why, sharing with others, how people use their rights, and information about minors.", "Advice for the website owner, not a policy for visitors. The items below cover these topics."),
     ("add", "Who we are", "The Northern Rivers Community Resilience Alliance (NRCRA) is a community-led network of local resilience groups across the Northern Rivers of New South Wales.", ""),
     ("add", "What personal information we collect", "Names, email addresses and phone numbers, your group and role, event registrations, messages you send us, and basic details about your visit to our website.", ""),
     ("add", "How we collect it", "From you directly (forms, emails and events), from your group when it nominates you, and automatically through cookies and website analytics.", ""),
@@ -386,7 +386,7 @@ def privacy_body():
     have = f'<span class="pptag tag-have">{CHECK_ICON}Already on the site</span>'
     add = f'<span class="pptag tag-add">{FLAG_SMALL}Not on the site: recommend adding</span>'
     return f'''<div class="wrap"><div class="pg-head pphead"><span class="eyebrow pill-t">Legal</span><h1>Privacy Policy</h1><p class="lede">How NRCRA collects, uses and protects your personal information.</p>
-<p class="pplegend">{have} is on NRCRA&rsquo;s current Privacy Policy page or website footer. Where that wording is only template text, we recommend updating it. {add} means NRCRA does not have this yet, so we recommend adding it. It is new draft wording for NRCRA and its legal adviser to review before anything goes live.</p></div></div>
+<p class="pplegend">{have} is on NRCRA&rsquo;s current Privacy Policy page or website footer. {add} means NRCRA does not have this yet, so we recommend adding it. It is new draft wording for NRCRA and its legal adviser to review before anything goes live.</p></div></div>
 <section class="sec" style="padding-top:0"><div class="wrap"><ol class="pplist2">{items}</ol></div></section>'''
 
 
