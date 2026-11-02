@@ -1,7 +1,7 @@
 """Clean the Alliance group list from Groups.xlsx (visible rows of the Location sheet only) into the CSV the site and Wix use.
 
 Usage: python3 tools/clean_groups.py /path/to/Groups.xlsx
-Needs openpyxl. Writes tools/network_groups.csv (Wix import: ID, Group Name, Location, LGA, Aboriginal Country, Website, Facebook, Group Type, Preferred Contact, Contact Email, Also Listed As).
+Needs openpyxl. Writes tools/network_groups.csv (Wix import: ID, Group Name, Location, LGA, Aboriginal Country, Website, Facebook, Group Type, Preferred Contact).
 """
 import csv
 import re
@@ -124,9 +124,9 @@ def main(path):
     rows = sorted(seen.values(), key=lambda r: (r[2].lower(), r[0].lower()))
     with open(OUT, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["ID", "Group Name", "Location", "LGA", "Aboriginal Country", "Website", "Facebook", "Group Type", "Preferred Contact", "Contact Email", "Also Listed As"])
+        w.writerow(["ID", "Group Name", "Location", "LGA", "Aboriginal Country", "Website", "Facebook", "Group Type", "Preferred Contact"])
         for n, r in enumerate(rows, 1):
-            w.writerow([n] + r[:4] + links.get(r[0], ["", ""]) + extra[r[0]])
+            w.writerow([n] + r[:4] + links.get(r[0], ["", ""]) + extra[r[0]][:2])
     print(len(rows), "groups written; excluded:", skipped)
 
 
