@@ -22,7 +22,7 @@ SHORT = {"prototype-a": "A", "prototype-b": "B"}
 def nav3():
     links = "".join(f'<a href="#{k}" data-nav="{k}">{t}</a>' for k, t in MENU)
     return f'''<a class="skip" href="#main">Skip to content</a>
-<header class="site-head"><div class="wrap head-in"><a href="#home" class="brand" aria-label="NRCRA home">{logo()}</a>
+<header class="site-head"><div class="wrap head-in"><a href="#home" class="brand" aria-label="NRCRA home">{blogo()}</a>
 <button class="menu-btn" aria-expanded="false" aria-controls="nav"><svg class="hb" viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" focusable="false"><path d="M1.5 1.5h17M1.5 7h17M1.5 12.5h17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Menu</button>
 <nav id="nav" aria-label="Main">{links}<a class="btn btn-cta" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a></nav></div></header>'''
 
@@ -182,6 +182,11 @@ def pillar_cards(nums=False):
 
 def short_lga(official):
     return re.sub(r"\s+(Shire|Council|City)$", "", official)
+
+
+def blogo(cls="logo"):
+    """Brand logo (horizontal, supplied artwork). Width and height attributes keep the true 1000x230 ratio."""
+    return f'<img src="{B.IMG}logo-brand.png" alt="Northern Rivers Community Resilience Alliance" class="{cls}" width="1000" height="230">'
 
 
 def slug(t):
@@ -353,6 +358,8 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 @media(min-width:861px) and (max-width:1000px){.tb .steergrid{grid-template-columns:1fr 2fr}}
 /* Our Stories: yellow play button; yellow bars sit exactly midway (100px each side) above Our Stories and between the last row and Our Network */
 .tb .tcards .tph .play{background:var(--yellow);color:var(--navy);border:0;box-shadow:0 6px 20px rgba(0,0,0,.25)}.tb .tcards .tph .play:hover{background:#fff;color:var(--navy)}.tb .tcards .tph .play:active{background:#ffe38a;color:var(--navy)}.tb #network>.wrap:first-child{margin-bottom:100px}.tb .sec.stories{padding-bottom:100px!important}.tb .sbar-top{margin:0 auto 100px}.tb .sbar-bot{margin:100px auto 0}.tb #network #our-network{padding-top:80px!important}.tb #network #our-network,.tb [id^="lga-"]>.sec{background:#fff}.tb #our-network .gsub li,.tb [id^="lga-"] .gsub li,.tb #our-network .lgasel,.tb [id^="lga-"] .lgasel{background-color:var(--bg)}
+/* Brand logo always keeps its true ratio (the footer logo was squashed at iPad width) */
+.tb .logo{width:auto;max-width:100%}.tb .site-foot .foot-logo .logo{height:auto!important;width:200px;max-width:100%}
 /* accent bars sit on the bottom edge, not the top */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}
 .cards .pcard{border-top:0}.cards .pcard:nth-child(1){border-bottom:6px solid var(--teal)}.cards .pcard:nth-child(2){border-bottom:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-bottom:6px solid var(--orange)}
@@ -514,7 +521,7 @@ def tfooter():
     contact = [("hello@nrcra.org.au", "mailto:hello@nrcra.org.au")]
     touch = [("Facebook", B.LINKS["fb"]), ("LinkedIn", B.LINKS["li"])]
     site = [("Alliance Home", "#home"), ("Network", "#network"), ("About", "#about"), ("Impact", "#impact"), ("R.A.C.K.", "#rack"), ("Sign In", SIGN_IN)]
-    top = '<div class="foot-top"><span class="foot-logo boxed">' + logo("logo") + '</span></div>'
+    top = '<div class="foot-top"><span class="foot-logo boxed">' + blogo("logo") + '</span></div>'
     return f'''<footer class="site-foot"><div class="wrap">
 <div class="foot-cols">{top}{col(3, "Site map", site)}<div class="fstack">{col(2, "Stay in Touch", touch)}{col(1, "Contact", contact)}</div></div>
 <div class="ack">{B.ABORIGINAL_FLAG}<p>{B.ACK}</p></div>
