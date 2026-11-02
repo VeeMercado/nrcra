@@ -376,7 +376,7 @@ FLAG_SMALL = FLAG_ICON.replace('width="26" height="26"', 'width="14" height="14"
 
 def pp_item(i, kind, title, text, note):
     tag = (f'<span class="pptag tag-have">{CHECK_ICON}Already on the site</span>' if kind == "have"
-           else f'<span class="pptag tag-add">{FLAG_SMALL}Consider adding</span>')
+           else f'<span class="pptag tag-add">{FLAG_SMALL}Not on the site: recommend adding</span>')
     note_html = f'<p class="ppnote">{note}</p>' if note else ""
     return f'<li class="ppitem"><span class="ppnum">{i:02d}</span><div><div class="pprow">{tag}<h2>{title}</h2></div><p>{text}</p>{note_html}</div></li>'
 
@@ -384,9 +384,9 @@ def pp_item(i, kind, title, text, note):
 def privacy_body():
     items = "".join(pp_item(i, *row) for i, row in enumerate(PP, 1))
     have = f'<span class="pptag tag-have">{CHECK_ICON}Already on the site</span>'
-    add = f'<span class="pptag tag-add">{FLAG_SMALL}Consider adding</span>'
+    add = f'<span class="pptag tag-add">{FLAG_SMALL}Not on the site: recommend adding</span>'
     return f'''<div class="wrap"><div class="pg-head pphead"><span class="eyebrow pill-t">Legal</span><h1>Privacy Policy</h1><p class="lede">How NRCRA collects, uses and protects your personal information.</p>
-<p class="pplegend">{have} is on NRCRA&rsquo;s current Privacy Policy page or website footer. {add} is new draft wording for NRCRA and its legal adviser to review before anything goes live.</p></div></div>
+<p class="pplegend">{have} is on NRCRA&rsquo;s current Privacy Policy page or website footer. Where that wording is only template text, we recommend updating it. {add} means NRCRA does not have this yet, so we recommend adding it. It is new draft wording for NRCRA and its legal adviser to review before anything goes live.</p></div></div>
 <section class="sec" style="padding-top:0"><div class="wrap"><ol class="pplist2">{items}</ol></div></section>'''
 
 
