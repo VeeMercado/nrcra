@@ -1,7 +1,7 @@
 """Clean the Alliance group list from Groups.xlsx (visible rows of the Location sheet only) into the CSV the site and Wix use.
 
 Usage: python3 tools/clean_groups.py /path/to/Groups.xlsx
-Needs openpyxl. Writes tools/network_groups.csv (Wix import: ID, Group Name, Location, LGA, Aboriginal Country, Website, Facebook).
+Needs openpyxl. Writes tools/network_groups.csv (Wix import: ID, Group Name, Location, LGA, Aboriginal Country, Website, Facebook, Group Type, Preferred Contact, Contact Email, Also Listed As).
 """
 import csv
 import re
@@ -59,6 +59,14 @@ def tidy(t):
     return re.sub(r"\s+", " ", (t or "").strip())
 
 
+def key_of(n):
+    return re.sub(r"[^a-z0-9]", "", n.split("(")[0].lower())
+
+
+# One email address in the links block belongs to Broken Head Society (the links block is out of step with the names).
+EMAILS = {"Broken Head Society": "brokenheadsociety@gmail.com"}
+
+
 def main(path):
     wb = openpyxl.load_workbook(path)
     ws = wb["Location"]
@@ -68,6 +76,15 @@ def main(path):
         web = "" if row in DROP_WEB else url(cs.cell(row, 4).value)
         fb = "" if row in DROP_FB else url(cs.cell(row, 5).value)
         links[grp] = [EXTRA_WEB.get(grp, web), fb]
+    # Volunteer communication ticks sit beside the group names on the Comms assets tab (columns A to C)
+    comm = {}
+    for r in cs.iter_rows(min_row=2, values_only=True):
+        if r[0] and r[2]:
+            comm.setdefault(key_of(tidy(r[0])), [])
+            for t in str(r[2]).split(";"):
+                t = tidy(t)
+                if t and t not in comm[key_of(tidy(r[0]))]:
+                    comm[key_of(tidy(r[0]))].append(t)
     hidden = {k for k, v in ws.row_dimensions.items() if v.hidden}
     seen = {}
     skipped = []
@@ -80,23 +97,36 @@ def main(path):
             continue
         lga_name, _, country = (p.strip() for p in lga.partition("—"))
         key = re.sub(r"[^a-z0-9]", "", name.split("(")[0].lower())
+        gtype = tidy(r[1])
         if key in seen:
             if not seen[key][1] and loc:
                 seen[key][1] = loc
+            if not seen[key][4] and gtype:
+                seen[key][4] = gtype
+            if name not in seen[key][5]:
+                seen[key][5].append(name)
             if len(name) > len(seen[key][0]):
                 seen[key][0] = name
             continue
-        seen[key] = [name, loc, lga_name, country]
-    for r in seen.values():
+        seen[key] = [name, loc, lga_name, country, gtype, [name]]
+    extra = {}
+    for k, r in seen.items():
         old = r[0]
         r[0] = full_name(old)
         links[r[0]] = links.get(old, ["", ""])
+        ticks = []
+        for nm in r[5]:
+            for t in comm.get(key_of(nm), []):
+                if t not in ticks:
+                    ticks.append(t)
+        also = [nm for nm in r[5] if nm != old and tidy(nm) != tidy(r[0])]
+        extra[r[0]] = [r[4], ", ".join(ticks), EMAILS.get(old, ""), "; ".join(also)]
     rows = sorted(seen.values(), key=lambda r: (r[2].lower(), r[0].lower()))
     with open(OUT, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["ID", "Group Name", "Location", "LGA", "Aboriginal Country", "Website", "Facebook"])
+        w.writerow(["ID", "Group Name", "Location", "LGA", "Aboriginal Country", "Website", "Facebook", "Group Type", "Preferred Contact", "Contact Email", "Also Listed As"])
         for n, r in enumerate(rows, 1):
-            w.writerow([n] + r + links.get(r[0], ["", ""]))
+            w.writerow([n] + r[:4] + links.get(r[0], ["", ""]) + extra[r[0]])
     print(len(rows), "groups written; excluded:", skipped)
 
 
