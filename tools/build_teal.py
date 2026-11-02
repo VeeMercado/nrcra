@@ -34,7 +34,15 @@ def funder_strip():
 
 
 def nav3():
-    links = "".join(f'<a href="#{k}" data-nav="{k}">{t}</a>' for k, t in MENU)
+    chev = '<svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1.5 1.5L6 6l4.5-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+
+    def item(k, t):
+        if k not in DROPS:
+            return f'<a href="#{k}" data-nav="{k}">{t}</a>'
+        sub = "".join(f'<li><a href="#{k}" data-jump="{i}" data-page="{k}">{lbl}</a></li>' for i, lbl in DROPS[k])
+        return (f'<div class="navdrop"><a href="#{k}" data-nav="{k}">{t}</a><button type="button" class="dd-btn" aria-expanded="false" aria-controls="{k}-menu" aria-label="{t} page sections">{chev}</button>'
+                f'<ul id="{k}-menu" class="ddmenu" aria-label="{t} page sections">{sub}</ul></div>')
+    links = "".join(item(k, t) for k, t in MENU)
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap head-in"><a href="#home" class="brand" aria-label="NRCRA home">{blogo()}</a>
 <button class="menu-btn" aria-expanded="false" aria-controls="nav"><svg class="hb" viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" focusable="false"><path d="M1.5 1.5h17M1.5 7h17M1.5 12.5h17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Menu</button>
@@ -148,16 +156,23 @@ def meal_ring():
             '<p>Rather than only counting activities, we look for real changes in relationships, knowledge, capability and collective action, gathered through conversations at Gatherings and site visits, and turned into shared stories.</p></blockquote></div>')
 
 
+ABOUT_JUMP = [("ab-vision", "Vision &amp; Mission"), ("ab-how", "How we work"), ("ab-focus", "Our focus"), ("ab-journey", "Our journey"), ("ab-steering", "Steering committee"), ("ab-team", "Meet the team")]
+
+
+NETWORK_JUMP = [("nw-map", "Region map"), ("nw-stories", "Our stories"), ("our-network", "Explore our network")]
+DROPS = {"about": ABOUT_JUMP, "network": NETWORK_JUMP}
+
+
 def about_body():
     return f'''    <div class="wrap"><div class="splith ab rev"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow pill-t">About us</span><h1>We know communities are stronger when they&rsquo;ve built trusted relationships <span class="mark">together.{B.SQUIGGLE}</span></h1></div></div></div>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="aboutgrid"><div class="card abt"><h2><span class="hlx hlx-t">The Resilience Alliance</span></h2><p>Established in November 2023. Its roots lie in a run of compounding disasters: the 2017 floods, the 2019&ndash;20 bushfires, and the catastrophic floods and landslides of 2022. In each, local community organisers played a vital role in response, recovery and adaptation. Research in the years that followed found that these grassroots groups wanted stronger connections with each other for peer-to-peer support. That showed the need for regional collaboration in disaster resilience.</p><p>We support a network of place-based resilience groups to develop their own local approaches to risk reduction, preparedness and recovery, for fire, flood, landslides and whatever comes next.</p><p>The Resilience Alliance helps government agencies, councils and emergency services deliver on the commitments of the NSW State Emergency Management Plan, State Disaster Mitigation Plan and regional resilience priorities by connecting formal systems with trusted, community-led action.</p><div class="bar bar-t" aria-hidden="true"></div></div>
+<section class="sec" id="ab-vision" style="padding-top:0"><div class="wrap"><div class="aboutgrid"><div class="card abt"><h2><span class="hlx hlx-t">The Resilience Alliance</span></h2><p>Established in November 2023. Its roots lie in a run of compounding disasters: the 2017 floods, the 2019&ndash;20 bushfires, and the catastrophic floods and landslides of 2022. In each, local community organisers played a vital role in response, recovery and adaptation. Research in the years that followed found that these grassroots groups wanted stronger connections with each other for peer-to-peer support. That showed the need for regional collaboration in disaster resilience.</p><p>We support a network of place-based resilience groups to develop their own local approaches to risk reduction, preparedness and recovery, for fire, flood, landslides and whatever comes next.</p><p>The Resilience Alliance helps government agencies, councils and emergency services deliver on the commitments of the NSW State Emergency Management Plan, State Disaster Mitigation Plan and regional resilience priorities by connecting formal systems with trusted, community-led action.</p><div class="bar bar-t" aria-hidden="true"></div></div>
 <div class="vpcol"><div class="card vpc"><h2><span class="hlx hlx-y">Vision</span></h2><p>Connected, collaborative Northern Rivers communities that are empowered to care for themselves and each other before, during and after disasters.</p><div class="bar bar-y" aria-hidden="true"></div></div>
 <div class="card vpc"><h2><span class="hlx hlx-o">Purpose</span></h2><p>To develop a self-sustaining, trusted Alliance of place-based, community-led resilience groups and organisations. The Alliance shares knowledge and resources, provides mutual support and wellbeing, takes collective action and advocates for identified community needs.</p><div class="bar bar-o" aria-hidden="true"></div></div></div></div></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">How we work</h2><p class="lede">Through regular gatherings, deep conversations and shared experiences, the Resilience Alliance is building a community-led network focused on collective care, preparedness and regional strength.</p>{how_cards()}</div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></section>
-<section class="sec journey"><div class="wrap"><h2 class="sechead">Our journey</h2>{journey_b()}</div></section>
-<section class="sec steersec" style="padding-top:0"><div class="wrap"><div class="steergrid"><div class="steertxt"><h2 class="sechead">The Steering Committee:</h2><p class="lede">Is the coordinating body for the Resilience Alliance. It is made up of representatives from resilience-related groups and organisations across the region, and operates by agreement among groups and organisations rather than by reporting to a separate incorporated parent body. The steering committee actively aims to maintain a network that reflects the geographic and community diversity of the region.</p></div><div class="steerlist"><p class="lede">The Steering Committee comprises the following groups and organisations.</p>{steer_tiles()}</div></div></div></section>
-<section class="sec teamsec" style="padding-top:0"><div class="wrap"><div class="bar bar-t sbar-top" aria-hidden="true"></div><h2 class="sechead cen teamhead">Resilience Alliance Team:</h2>{team()}<div class="bar bar-t sbar-bot" aria-hidden="true"></div></div></section>'''
+<section class="sec" id="ab-how" style="padding-top:0"><div class="wrap"><h2 class="sechead">How we work</h2><p class="lede">Through regular gatherings, deep conversations and shared experiences, the Resilience Alliance is building a community-led network focused on collective care, preparedness and regional strength.</p>{how_cards()}</div></section>
+<section class="sec" id="ab-focus" style="padding-top:0"><div class="wrap"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></section>
+<section class="sec journey" id="ab-journey"><div class="wrap"><h2 class="sechead">Our journey</h2>{journey_b()}</div></section>
+<section class="sec steersec" id="ab-steering" style="padding-top:0"><div class="wrap"><div class="steergrid"><div class="steertxt"><h2 class="sechead">The Steering Committee:</h2><p class="lede">Is the coordinating body for the Resilience Alliance. It is made up of representatives from resilience-related groups and organisations across the region, and operates by agreement among groups and organisations rather than by reporting to a separate incorporated parent body. The steering committee actively aims to maintain a network that reflects the geographic and community diversity of the region.</p></div><div class="steerlist"><p class="lede">The Steering Committee comprises the following groups and organisations.</p>{steer_tiles()}</div></div></div></section>
+<section class="sec teamsec" id="ab-team" style="padding-top:0"><div class="wrap"><div class="bar bar-t sbar-top" aria-hidden="true"></div><h2 class="sechead cen teamhead">Resilience Alliance Team:</h2>{team()}<div class="bar bar-t sbar-bot" aria-hidden="true"></div></div></section>'''
 
 
 # ---------------------------------------------------------------- Network
@@ -268,12 +283,12 @@ def testimonials():
             ph = f'<div class="tph">{img(key, alt="")}</div>'
         return f'<li>{ph}<blockquote><p>&ldquo;{E(quote)}&rdquo;</p><footer>&mdash; {E(who)}</footer></blockquote></li>'
     cards = "".join(card(*st) for st in STORIES)
-    return f'<section class="sec stories" style="padding-top:0"><div class="wrap"><div class="bar bar-y sbar-top" aria-hidden="true"></div><h2 class="sechead cen">Our Stories</h2><ul class="tcards">{cards}</ul><div class="bar bar-y sbar-bot" aria-hidden="true"></div></div></section>'
+    return f'<section class="sec stories" id="nw-stories" style="padding-top:0"><div class="wrap"><div class="bar bar-y sbar-top" aria-hidden="true"></div><h2 class="sechead cen">Our Stories</h2><ul class="tcards">{cards}</ul><div class="bar bar-y sbar-bot" aria-hidden="true"></div></div></section>'
 
 
 def network_body():
     cards = "".join(group_card(*g) for g in all_groups())
-    return f'''<div class="wrap"><div class="splith net"><div><span class="eyebrow">Network</span><h1>50+ groups,<br>one region,<br><span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed().split('<p class="vnote">')[0]}</div></div></div>
+    return f'''<div class="wrap" id="nw-map"><div class="splith net"><div><span class="eyebrow">Network</span><h1>50+ groups,<br>one region,<br><span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{B.map_embed().split('<p class="vnote">')[0]}</div></div></div>
 {testimonials()}
 <section class="sec" id="our-network"><div class="wrap">{dir_head("Our Network")}<ul class="gsub">{cards}</ul></div></section>'''
 
@@ -413,6 +428,28 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .tb .funders li:nth-child(-n+2) a{padding-left:1.35em}
 @media(max-width:1100px){.tb .funders li:nth-child(-n+2) a{padding-left:1.1em}}
 @media(max-width:560px){.tb .funders .wrap{padding:5px 4px;gap:4px 3px}.tb .funders ul{gap:0}.tb .funders p{font-size:clamp(.5rem,2.45vw,.72rem);margin-right:2px}.tb .funders li a{font-size:clamp(.5rem,2.45vw,.72rem);height:2.5em;gap:.3em;padding:0 .4em 0 .5em}.tb .funders li:nth-child(-n+2) a{padding-left:.75em}.tb .funders img{height:1.35em}}
+/* Every page starts 36px below the funders strip (Home hero, About, Network, R.A.C.K., Impact, and the heading on each LGA page) */
+.tb .page[id^="lga-"]>.sec:first-child{padding-top:36px!important}
+/* About sections are reachable from the About menu dropdown; leave room under the sticky header when scrolling to them */
+#ab-vision,#ab-how,#ab-focus,#ab-journey,#ab-steering,#ab-team,#nw-map,#nw-stories,#our-network{scroll-margin-top:90px}
+/* Main menu: About has a dropdown of its page sections. Hover on desktop, arrow button on touch and the phone menu. */
+.tb .navdrop{position:relative;display:flex;align-items:center}
+.tb .navdrop .dd-btn{display:grid;place-items:center;background:transparent;border:0;color:var(--navy);cursor:pointer;min-height:36px;min-width:26px;padding:0 .4em 0 0;margin-left:-6px;border-radius:99px}
+.tb .navdrop .dd-btn svg{transition:transform .15s}.tb .navdrop.open .dd-btn svg{transform:rotate(180deg)}
+.tb .navdrop .dd-btn:focus-visible{outline:2px solid var(--teal-d);outline-offset:2px}
+.tb .ddmenu{list-style:none;margin:0;padding:8px;position:absolute;top:100%;left:0;min-width:230px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 32px rgba(7,41,59,.14);display:none;z-index:60}
+.tb .ddmenu::before{content:"";position:absolute;left:0;right:0;top:-8px;height:8px}
+.tb .navdrop.open .ddmenu{display:block}
+@media(hover:hover) and (min-width:740px){.tb .navdrop:hover .ddmenu{display:block}.tb .navdrop:hover .dd-btn svg{transform:rotate(180deg)}}
+.tb #nav .ddmenu a{display:block;padding:.6em .9em;font-weight:700;border-radius:10px;white-space:nowrap;text-decoration:none;font-size:1rem}
+.tb #nav .ddmenu a:hover,.tb #nav .ddmenu a:focus-visible{background:var(--teal-12);text-decoration:none}
+@media(max-width:739px){.tb .navdrop{flex-wrap:wrap}.tb .navdrop>a{flex:1}.tb .navdrop .dd-btn{min-width:44px;min-height:44px;margin-left:0;padding:0}.tb .ddmenu{position:static;width:100%;min-width:0;border:0;box-shadow:none;padding:0 0 4px 14px;border-radius:0}.tb .ddmenu::before{display:none}.tb #nav .ddmenu a{white-space:normal}}
+@media(min-width:740px) and (max-width:860px){.tb .navdrop .dd-btn{min-width:22px;padding:0 .2em 0 0;margin-left:-4px}}
+@media(min-width:861px) and (max-width:960px){.tb #nav a:not(.btn){padding:.5em .6em;font-size:.95rem}.tb #nav .btn{padding:.55em 1em;margin-left:4px;font-size:.95rem}.tb .navdrop .dd-btn{min-width:22px;padding:0 .2em 0 0;margin-left:-4px}.tb #nav{gap:2px}}
+/* About header columns match the cards below: photo as wide as Vision, text as wide as The Resilience Alliance (cards are 1 : 1.2 with a 20px gap) */
+@media(min-width:861px){.tb .splith.ab{grid-template-columns:1fr 1.2fr;column-gap:20px}.tb .splith.ab>div:not(.ph){padding-left:20px}}
+/* so the photo ends exactly where the heading text ends */
+.tb .splith.ab h1{margin-bottom:0}
 /* accent bars sit on the bottom edge, not the top */
 .arc{border-top:0;border-bottom:6px solid var(--teal)}.arc.y{border-bottom-color:var(--yellow)}.arc.o{border-bottom-color:var(--orange)}
 .cards .pcard{border-top:0}.cards .pcard:nth-child(1){border-bottom:6px solid var(--teal)}.cards .pcard:nth-child(2){border-bottom:6px solid var(--yellow)}.cards .pcard:nth-child(3){border-bottom:6px solid var(--orange)}
@@ -420,7 +457,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .v1 .pc::after{content:"";display:block;align-self:stretch;height:18px;margin:auto -16px 0;border-radius:0 0 6px 6px;background:var(--teal)}
 .v1 .pc:nth-child(2)::after{background:var(--yellow)}.v1 .pc:nth-child(3)::after{background:var(--orange)}.v1 .pc:nth-child(4)::after{background:var(--navy)}.v1 .pc:nth-child(5)::after{background:#9fb0b8}
 .pillcards li{border-top:0;border-bottom:14px solid var(--pc);padding:22px 18px}
-.pg-head{padding:48px 0 40px}.pg-head h1{margin:0}
+.pg-head{padding:36px 0 40px}.pg-head h1{margin:0}
 /* brand colour dos and don'ts (see brand-contrast): pins keep a 3px white gap from teal lines, solid colours only behind short lines */
 .teal .pmap .dot circle{stroke-width:3}
 """
@@ -478,7 +515,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .circles img:nth-of-type(1){width:45%;left:7%;top:0;bottom:auto}.circles img:nth-of-type(2){width:41%;left:54%;top:18%;bottom:auto;translate:none}
 .circles .blob{width:16%;left:calc(-1 * min(5%, 12px));top:34%}.circles .deco-rings{width:23%;right:calc(-1 * min(6%, 14px));left:auto;top:26%}}
 /* B header cropped like Prototype 3: a rounded box inside the page width, not edge to edge */
-.herobg{padding:20px 0 0!important}
+.herobg{padding:36px 0 0!important}
 .herobg>.wrap:first-child{width:calc(100% - 40px);max-width:calc(var(--wrap) - 40px);margin:0 auto;padding:0;border-radius:40px;overflow:hidden;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal)}
 .herobg .h1-panel{margin:40px 0}
 .herobg .h1-photo .play{left:calc((var(--pw,580px) + 100%)/2)}
@@ -544,7 +581,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* Our Network directory (Network and every LGA page): double the space under the cards */
 .tb #network>.sec:last-child,.tb [id^="lga-"]>.sec:last-child{padding-bottom:130px!important}
 /* About: same 130px rhythm as Network */
-.tb #about>.wrap:first-child{margin-bottom:130px}.tb #about>.sec{padding-bottom:130px!important}
+.tb #about>.wrap:first-child{margin-bottom:36px}.tb #about>.sec{padding-bottom:130px!important}
 
 /* Network page: map as tall as the text, testimonials, suburb directory */
 .tb .splith.net{align-items:stretch}.tb .splith.net>div:first-child{align-self:center}.tb .splith.net .ph{display:flex}.tb .splith.net .ph .mapbox{height:auto;min-height:517px;flex:1}
@@ -587,7 +624,15 @@ assert JSX.count("lga-") == 2
 JS2 = """(function(){var sel=[].slice.call(document.querySelectorAll('.lgasel'));
 sel.forEach(function(s){s.addEventListener('change',function(){var v=s.value||'network';location.hash=v;if(v==='network')setTimeout(function(){var t=document.getElementById('our-network'),h=document.querySelector('.site-head');if(t)window.scrollTo(0,t.getBoundingClientRect().top+window.scrollY-(h?h.offsetHeight:0)-24)},60)})});
 window.addEventListener('hashchange',function(){sel.forEach(function(s){s.value=s.getAttribute('data-cur')})});
-document.addEventListener('click',function(e){var a=e.target.closest('[data-sample]');if(a)e.preventDefault()})})();"""
+document.addEventListener('click',function(e){var a=e.target.closest('[data-sample]');if(a)e.preventDefault()});
+var nd=[].slice.call(document.querySelectorAll('.navdrop'));
+function closeDD(){nd.forEach(function(n){n.classList.remove('open');var b=n.querySelector('.dd-btn');if(b)b.setAttribute('aria-expanded','false')})}
+nd.forEach(function(n){var b=n.querySelector('.dd-btn');b.addEventListener('click',function(e){e.stopPropagation();var o=!n.classList.contains('open');closeDD();n.classList.toggle('open',o);b.setAttribute('aria-expanded',o)})});
+document.addEventListener('click',function(e){if(!e.target.closest('.navdrop'))closeDD()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDD()});
+[].slice.call(document.querySelectorAll('[data-jump]')).forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();closeDD();var id=a.getAttribute('data-jump');
+function go(){var t=document.getElementById(id),h=document.querySelector('.site-head');if(t)window.scrollTo(0,t.getBoundingClientRect().top+window.scrollY-(h?h.offsetHeight:0)-16)}
+var pg=a.getAttribute('data-page');if(location.hash==='#'+pg){document.getElementById('nav').classList.remove('open');var mb=document.querySelector('.menu-btn');if(mb)mb.setAttribute('aria-expanded','false');go()}else{location.hash=pg;setTimeout(go,200)}})})})();"""
 
 
 def page(v):
