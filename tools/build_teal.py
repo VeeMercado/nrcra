@@ -403,9 +403,15 @@ PROG_VIZ = {
 }
 
 
+FLOURISH_TYPE = {"operational-maturity.png": "pictogram", "active-groups.svg": "bubble-chart", "relationship-emergency-services.png": "pictogram"}
+
+
 def viz(name, cls=""):
+    """Eunice's Flourish chart: the embed div makes it interactive; the supplied image is the fallback (and the swap-in if the embed fails to load)."""
     w, h, fid, alt = PROG_VIZ[name]
-    return f'<figure class="viz {cls}" data-flourish="{fid}"><img src="../assets/progress/{name}" alt="{E(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async"></figure>'
+    kind = FLOURISH_TYPE.get(name, "chart")
+    img = f'<img src="../assets/progress/{name}" alt="{E(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async">'
+    return f'<figure class="viz {cls}" data-flourish="{fid}"><div class="flourish-embed flourish-{kind}" data-src="visualisation/{fid}"><noscript>{img}</noscript></div></figure>'
 
 
 def pquote(text, who, cls=""):
@@ -447,15 +453,15 @@ def aspire_item(i, row):
 
 def progress_body():
     asp = "".join(aspire_item(i, r) for i, r in enumerate(ASPIRE, 1))
-    return f'''<div class="wrap"><div class="pg-head prghead"><span class="eyebrow pill-t">Progress</span><h1>DRAFT</h1><p class="lede">Since early 2024, community groups across the Northern Rivers have joined together as the Resilience Alliance. Today, we&rsquo;ve grown to 58 community resilience groups and counting. Over the past few months, we&rsquo;ve been taking stock: where we are now, and where we&rsquo;d like to be.</p></div></div>
+    return f'''<div class="wrap"><div class="prgsplit"><div class="pg-head prghead"><span class="eyebrow pill-t">Progress</span><h1>DRAFT</h1><p class="lede">Since early 2024, community groups across the Northern Rivers have joined together as the Resilience Alliance. Today, we&rsquo;ve grown to 58 community resilience groups and counting. Over the past few months, we&rsquo;ve been taking stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="prgph" role="img" aria-label="Placeholder for hero graphic">Placeholder for graphic</div></div></div>
 <section class="sec" id="pr-who"><div class="wrap">{prg_head("Who we are", "Many groups, shared purpose", "We are a diverse alliance of community-led groups and organisations: skilled by experience, varied by structure, united in making our communities disaster-ready.")}
-<div class="vizgrid">{viz("operational-maturity.png", "wide")}{viz("active-groups.svg")}{viz("skills.svg")}</div></div></section>
+<div class="vizgrid">{viz("operational-maturity.png", "wide")}{viz("active-groups.svg", "wide")}{viz("skills.svg", "wide")}</div></div></section>
 <section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap">{prg_head("What we&rsquo;ve faced", "We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}
-<div class="vizgrid">{viz("disaster-experience.svg")}{pquote("Alfred taught us that we need to have systems in place and keep tabs on the weather and forecasts, and that having a proactive President with good social networks can make things happen, even in difficult circumstances.", "Bangalow Resilience Network", "tall")}</div></div></section>
+<div class="vizgrid">{viz("disaster-experience.svg")}{pquote("Alfred taught us that we need to have systems in place and keep tabs on the weather and forecasts, and that having a proactive President with good social networks can make things happen, even in difficult circumstances.", "Bangalow Resilience Network", "tall yel")}</div></div></section>
 <section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap">{prg_head("How we connect", "We value social connection", "Groups make efforts to have good connections within their groups, the local community, other groups, emergency services and local council.")}
 <div class="vizgrid">{viz("connectedness.png", "wide")}{viz("relationship-council.svg")}{viz("relationship-emergency-services.png")}</div></div></section>
 <section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap">{prg_head("Our aspirations", "We want to be ready for the next disaster", "Taking stock also showed us where we want to grow. Seven aspirations stood out. Each one is a gap that groups told us they want help to close, so we can look after our communities and each other for the long haul.")}
-<ol class="asplist">{asp}</ol></div></section>'''
+<ol class="asplist">{asp}</ol></div></section><script src="https://public.flourish.studio/resources/embed.js" async></script>'''
 
 
 # ---------------------------------------------------------------- CSS
@@ -813,14 +819,16 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* Our Network directory (Network and every LGA page): double the space under the cards */
 .tb #network>.sec:last-child,.tb [id^="lga-"]>.sec:last-child{padding-bottom:128px!important}
 /* Progress page: Flourish chart placeholders sit in white cards (Eunice's SVG/PNG files); aspirations are a numbered list of cards */
-.tb .prghead{padding-bottom:0}.tb .prghead .lede{max-width:820px}
-.tb .prghd{max-width:820px;margin-bottom:32px}.tb .prghd .sechead{margin-bottom:16px}.tb .prghd .lede{margin:0}
+.tb .prgsplit{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:center}.tb .prgsplit>*{min-width:0}.tb .prghead{padding-bottom:0}
+.tb .prgph{min-height:340px;box-sizing:border-box;border:3px dashed var(--navy);border-radius:var(--r);display:grid;place-items:center;text-align:center;padding:24px;font-weight:800;color:var(--navy)}
+.tb .prghd{margin-bottom:32px}.tb .prghd .sechead{margin-bottom:16px}.tb .prghd .lede{margin:0}
 .tb .vizgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.tb .viz{margin:0;background:#fff;border-radius:var(--r);padding:32px;display:grid;place-items:center}.tb .viz.wide{grid-column:1/-1}.tb .viz img{display:block;width:100%;height:auto;max-width:100%}
+.tb .viz{margin:0;background:#fff;border-radius:var(--r);padding:32px;display:grid;place-items:center}.tb .viz.wide{grid-column:1/-1}.tb .viz img{display:block;width:100%;height:auto;max-width:100%}.tb .viz .flourish-embed{width:100%;min-height:200px}
 .tb .viz.flat{padding:0;background:transparent}
 .tb .pq{margin:0;background:var(--teal-25);border-radius:var(--r);padding:32px;display:flex;flex-direction:column;justify-content:center;gap:16px}
 .tb .pq blockquote{margin:0}.tb .pq p{margin:0;font-size:1.5rem;line-height:1.4;font-style:italic;font-weight:400;color:var(--navy)}
 .tb .pq figcaption{font-size:1rem;font-weight:800;color:var(--navy)}
+.tb .pq.yel{background:var(--yellow-40);border-top:8px solid var(--yellow);border-bottom:8px solid var(--yellow)}.tb .pq.yel p{font-style:normal;font-weight:800;font-size:1.25rem}
 .tb .pq.inl{margin-top:24px;padding:24px;gap:12px}.tb .pq.inl p{font-size:1rem;line-height:1.5}
 .tb .asplist{list-style:none;margin:0;padding:0;display:grid;gap:16px}
 .tb .asp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;background:#fff;border-radius:var(--r);padding:32px}
@@ -829,7 +837,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .asp-r{min-width:0}.tb .asp-r .pq.tall{height:100%}
 .tb .dotviz{display:grid;gap:16px}.tb .dotbig{margin:0;font-size:2.375rem;font-weight:900;line-height:1;color:var(--navy)}.tb .dotbig span{font-size:1rem;font-weight:800}
 .tb .dotgrid{display:flex;flex-wrap:wrap;gap:8px}.tb .dotgrid i{width:20px;height:20px;border-radius:50%;background:#d3e5e3}.tb .dotgrid i.on{background:var(--teal)}
-@media(max-width:900px){.tb .asp{grid-template-columns:1fr;gap:24px}}
+@media(max-width:900px){.tb .asp{grid-template-columns:1fr;gap:24px}.tb .prgsplit{grid-template-columns:1fr;gap:24px}.tb .prgph{min-height:200px}}
 @media(max-width:700px){.tb .vizgrid{grid-template-columns:1fr}.tb .viz,.tb .pq{padding:20px}.tb .asp{padding:24px}.tb .dotgrid{gap:6px}.tb .dotgrid i{width:16px;height:16px}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:128px!important}.tb #about>.sec:last-child{padding-bottom:128px!important}.tb #progress>.sec:last-child{padding-bottom:128px!important}
