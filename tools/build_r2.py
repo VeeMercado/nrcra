@@ -258,7 +258,7 @@ def guidelines():
     space_rows = [
         ("Between sections", "60px", "Top and bottom of every band, on every page. Same as the Home header text card padding."),
         ("Large bands", "96px", "White bands on About and Network that need more air"),
-        ("End of a page", "128px", "Space above the footer on About, Network and the group pages"),
+        ("Large spacing", "130px", "The big gap used around the green divider lines on About (above and below each line), between sections on About, and above the footer on About, Network and the group pages. Use this whenever a large space is needed."),
         ("Card padding", "32px (26px top and bottom, 20px sides on phones)", "All cards"),
         ("Gap between cards, tiles and buttons", "16px", "Always 16px: grids and lists of cards, tiles and rows of buttons"),
         ("Gap between text and picture", "48px", "Two column rows"),
