@@ -24,7 +24,7 @@ SHORT = {"prototype-c": "C"}
 
 # Funder strip directly under the menu bar on every page. Logos we hold: FRRR, HELP Fund (NRMA Insurance) and UCRH; NSW Government and Australian Government logos supplied by NRCRA. The Australian Government logo contains the Commonwealth Coat of Arms, so NRCRA must confirm its funding agreement allows it before this goes live.
 FUNDERS = [("Federal Government", "aus-gov.png", "https://www.nema.gov.au"), ("State Government", "nsw.png", "https://www.nsw.gov.au"),
-           ("HELP Fund", "help.png", "https://www.nrma.com.au/help-fund"), ("FRRR", "frrr.png", "https://frrr.org.au"),
+           ("HELP Fund", "help.png", "https://www.nrma.com.au/help-fund"), ("FRRR", "frrr-transparent.png", "https://frrr.org.au"),
            ("UCRH", "ucrh-trim.png", "https://ucrh.edu.au")]
 
 
@@ -113,6 +113,25 @@ HEROES = {"card": hero_card, "photo": hero_photo, "solid": hero_solid, "green": 
 HERO_FOR = {"prototype-a": "card", "prototype-b": "green", "prototype-c": "solid"}  # a and b are archived (not built)
 
 
+def _flogo(f, alt, cls=""):
+    return f'<img class="{cls}" src="../assets/funders/{f}" alt="{E(alt)}" loading="lazy">'
+
+
+def _pick(*names):
+    base = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "funders")
+    return next((n for n in names if os.path.exists(os.path.join(base, n))), names[-1])
+
+
+def partners_section():
+    nema = "nema.png"
+    nsw = "nsw.png"
+    return f'''<section class="sec partners" id="partners-home"><div class="wrap"><h3 class="ptitle">Thanks to our partners</h3><div class="pgrid">
+<div class="pcol ptl"><p>Supported by:</p><a class="plg" href="https://www.nema.gov.au">{_flogo(nema, "National Emergency Management Agency, Australian Government")}</a></div>
+<div class="pcol ptc"><p>Proudly co-funded by:</p><a class="plg" href="https://www.nsw.gov.au">{_flogo(nsw, "NSW Government")}</a></div>
+<div class="pcol ptr"><p>2024 - 2025 Funding Partners:</p><div class="pstack"><a class="plg" href="https://frrr.org.au">{_flogo("frrr-transparent.png", "Foundation for Rural and Regional Renewal")}</a><a class="plg" href="https://ucrh.edu.au">{_flogo("ucrh-trim.png", "University Centre for Rural Health")}</a></div></div>
+</div></div></section>'''
+
+
 def home_body(hero="photo"):
     lgas = "".join(f'<li><a href="#lga-{slug(n)}">{E(n)} LGA</a></li>' for n in ["Tweed", "Byron", "Kyogle", "Lismore", "Richmond Valley", "Ballina", "Tenterfield", "Clarence Valley"])
     return f'''{HEROES[hero]()}
@@ -121,7 +140,8 @@ def home_body(hero="photo"):
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
 <section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Journey</h2><dl class="stats">{"".join(f"<div><dt>{n}</dt><dd>{t}</dd></div>" for n, t in PROG_STATS)}</dl><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See Journey</a></p></div></div></section>
-<section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></div></section>'''
+<section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></div></section>
+{partners_section()}'''
 
 
 # ---------------------------------------------------------------- About
@@ -244,7 +264,7 @@ JOURNEY_B = [
 
 # Funder logos under each timeline entry, in the order the "Funded by" line names them: (name, file in assets/funders, website)
 LOGO = {"ucrh": ("University Centre for Rural Health", "ucrh-trim.png", "https://ucrh.edu.au"), "nsw": ("NSW Government", "nsw.png", "https://www.nsw.gov.au"),
-        "frrr": ("Foundation for Rural and Regional Renewal", "frrr.png", "https://frrr.org.au"), "aus": ("Australian Government", "aus-gov.png", "https://www.nema.gov.au"),
+        "frrr": ("Foundation for Rural and Regional Renewal", "frrr-transparent.png", "https://frrr.org.au"), "aus": ("Australian Government", "aus-gov.png", "https://www.nema.gov.au"),
         "help": ("NRMA Insurance HELP Fund", "help.png", "https://www.nrma.com.au/help-fund"), "monash": ("Monash University", "monash.png" if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "funders", "monash.png")) else "", "https://www.monash.edu"),  # save the logo as assets/funders/monash.png and it is used automatically; text link until then
        
         "nrcf": ("Northern Rivers Community Foundation", "nrcf.png", "https://nrcf.org.au")}
@@ -950,6 +970,16 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .site-foot .foot-cols,.tb .site-foot .fquick{align-items:start}
 .tb .site-foot .foot-top,.tb .site-foot .fcol,.tb .site-foot .fstack{height:auto;min-height:0;align-self:start}
 @media(min-width:701px) and (max-width:999px){.tb .site-foot .foot-cols{row-gap:24px}}
+/* Home: Thanks to our partners (no card, no logo borders). Left logo is half a focus circle high, NSW matches it, the right pair is 40% */
+.tb .page>.sec.partners,.tb .page>.sec.partners:last-child{padding-top:120px!important;padding-bottom:180px!important}.tb .partners .ptitle{text-align:center;margin:0 0 56px;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800;color:var(--navy)}
+.tb .pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 32px;align-items:start}
+.tb .pcol{container-type:inline-size;display:flex;flex-direction:column;gap:32px;--lh:min(calc(clamp(88px,16vw,168px)/2),calc(100cqw*407/2268))}
+.tb .pcol p{margin:0;font-size:1rem;line-height:1.5;color:var(--navy);max-width:34ch}
+.tb .pcol{align-items:center;text-align:center}
+.tb .plg{display:flex;border:0;background:none;text-decoration:none}.tb .plg img{display:block;border:0;width:auto;height:auto;max-width:100%}
+.tb .ptl .plg img{height:var(--lh)}.tb .ptc .plg img{height:var(--lh);width:auto}
+.tb .pstack{display:flex;flex-direction:column;align-items:center;gap:16px}.tb .pstack .plg img{height:calc(var(--lh)*.45);width:auto}
+@media(max-width:860px){.tb .pgrid{grid-template-columns:1fr;gap:56px}.tb .page>.sec.partners,.tb .page>.sec.partners:last-child{padding-top:60px!important;padding-bottom:120px!important}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:128px!important}.tb #about>.sec:last-child{padding-bottom:128px!important}.tb #journey>.sec:last-child{padding-bottom:128px!important}
 /* About: same 128px rhythm as Network */
