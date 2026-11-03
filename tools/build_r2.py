@@ -222,14 +222,14 @@ def _hex_table(rows):
 def brand_colours():
     main4 = [("Yellow", "#ffcb2a", "Highlights and small accents, with navy text"), ("Navy", NAVY_, "Text, footer, dark backgrounds"),
              ("Orange", "#f05a28", "Small accents"), ("Teal", "#00a79d", "Borders, dots and accents; text on navy only")]
-    others = [("Adjusted teal", "#00857c", "Buttons and any area with white text"), ("Quiet text", GREY_, "Small supporting text on white, light grey, pale teal and light yellow"),
+    others = [("Adjusted teal", "#00857c", "Buttons and any area with white text"), ("Darker yellow", "#D9A400", "The word Share on Home and the yellow circles in the MEAL cycle. Use where brand yellow is too light to read on a light background"), ("Quiet text", GREY_, "Small supporting text on white, light grey, pale teal and light yellow"),
               ("White", WHITE_, "Cards and page"), ("Light grey", LIGHT_, "Page background"),
               ("Pale teal", "#f3f9f8", "Large pale panels, from the PDFs"), ("Light teal", "#beddda", "Selected menu item, hover, tinted panels, from the PDFs"),
               ("Light yellow", "#ffeaaa", "Tint for large text blocks (guidance examples)"), ("Light red", "#fbd6c9", "Tint for large text blocks (guidance examples)")]
     return f'''<section class="blk" id="colours"><h2>Brand colours</h2>
 <h3>Main 4 brand colours</h3>{_hex_table(main4)}
 <p class="vnote"><b class="fail">&#10007; NO</b> for navy on teal: it reaches {_ratio(NAVY_, "#00a79d"):.2f}:1, but navy and this teal are hard to tell apart for some people with colour blindness, so we do not recommend the pairing.</p>
-<h3 style="margin-top:30px">Adjusted teal, quiet text, white and the light colours</h3>{_hex_table(others)}</section>'''
+<h3 style="margin-top:30px">Adjusted teal, darker yellow, quiet text, white and the light colours</h3>{_hex_table(others)}</section>'''
 
 
 def _gl_table(head, rows):
@@ -260,6 +260,7 @@ def guidelines():
         ("Between sections", "60px", "Top and bottom of every band, on every page. Same as the Home header text card padding."),
         ("Large bands", "96px", "White bands on About and Network that need more air"),
         ("Large spacing", "130px", "The big gap used around the green divider lines on About (above and below each line), between sections on About, and above the footer on About, Network and the group pages. Use this whenever a large space is needed."),
+        ("Diagram arrows", "#586C74 (Quiet text)", "The hand-drawn arrows in the About MEAL cycle use the Quiet text colour."),
         ("Card padding", "32px (26px top and bottom, 20px sides on phones)", "All cards"),
         ("Gap between cards, tiles and buttons", "16px", "Always 16px: grids and lists of cards, tiles and rows of buttons"),
         ("Gap between text and picture", "48px", "Two column rows"),
