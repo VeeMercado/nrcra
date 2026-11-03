@@ -628,8 +628,8 @@ def protobar(v):
     cur = next((f"{n}: {d}" for k, n, d in PROTOS if k == v), "Archived backup")
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {cur}</span></p>
-<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../#round-1">All prototypes</a>{others}</nav>
-<button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
+<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../#round-1">All Prototypes</a>{others}</nav>
+<button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to Top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
 
 def page_shell(title, css, body, v, white_logo=True, slug=None, extra="", pre_footer=""):
@@ -1141,7 +1141,7 @@ def dashboard():
         ins = "".join(f'<figure><img src="assets/inspo/{f}.jpg" alt="Mood board reference: {E(c)}" loading="lazy"><figcaption>{E(c)}</figcaption></figure>' for f, c in INSPO[base])
         fl = "".join(f"<li>{E(x)}</li>" for x in feats)
         rows_by[slug] = f'''<article class="row row{base[1]}"><a class="shot" href="{slug}/" aria-label="Open prototype {i}: {t}"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/{slug}.jpg" alt="Screenshot of prototype {i} home page, {t}" loading="lazy"></a>
-<div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><p><a class="btn btn-primary" href="{slug}/">Open prototype {i}</a></p>
+<div class="info"><span class="num">Prototype {i}</span><h2><a href="{slug}/">{t}</a></h2><p>{d}</p><ul class="feats">{fl}</ul><p><a class="btn btn-primary" href="{slug}/">Open Prototype {i}</a></p>
 <h3>Inspired by the mood board</h3><div class="ins">{ins}</div><p class="sites">{SITES[base]}</p></div></article>'''
     r2 = f'''<div class="r2grid">
 <article class="rc rc2"><a class="shot" href="prototype-c/" aria-label="Open NRCRA Prototype"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/prototype-c.jpg?v=r3a" alt="Screenshot of the NRCRA Prototype home page: a dark green card with white text on the left and a nearly square gathering photo card with a play button, centred beside it" loading="lazy"></a>

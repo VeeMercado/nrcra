@@ -57,8 +57,8 @@ def protobar3(cur):
     others = "".join(f'<a class="pb-btn" data-proto="{k}" href="../{k}/" aria-label="{NAMES[k]}"><span class="pb-short" aria-hidden="true">{SHORT[k]}</span><span class="pb-long">{NAMES[k]}</span></a>' for k in NAMES if k != cur)
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {NAMES[cur]}</span></p>
-<nav class="pb-nav" aria-label="Prototype pages"><a class="pb-btn pb-all" href="../#round-2">All prototypes</a>{others}</nav>
-<button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
+<nav class="pb-nav" aria-label="Prototype pages"><a class="pb-btn pb-all" href="../#round-2">All Prototypes</a>{others}</nav>
+<button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to Top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
 
 def vimg(name):
@@ -255,18 +255,18 @@ RESEARCHERS = ["Sheriden", "Rebecca", "Jo"]
 
 def researchers():
     lis = "".join(f'<li><span class="tc" aria-hidden="true">{n[0]}</span><b>{n}</b></li>' for n in RESEARCHERS)
-    return f'<h3 class="rsch-h">Our researchers</h3><ul class="team2 rsch">{lis}</ul>'
+    return f'<h3 class="rsch-h">Meet our researchers</h3><ul class="team2 rsch">{lis}</ul>'
 
 
 def meal_section():
     return f'''<section class="sec mealsec" id="ab-meal" style="padding-top:0"><div class="wrap learnwrap"><h2 class="sechead cen">Listening, reflecting and adapting as we grow</h2><div class="learngrid"><div class="mealfig">{meal_svg()}</div>
-<div class="mealtxt"><h3>MEAL: Monitoring, Evaluation, Accountability and Learning Together</h3><p>Since the Alliance formed in 2024, embedded researchers from the University Centre for Rural Health have worked alongside us to track how a new kind of regional collaboration takes shape. Through Health Checks, Outcomes Harvesting and ongoing feedback, our MEAL approach turns what groups tell us into practical changes.</p><p>One example is more informal Gatherings, with staff now visiting groups directly.</p><p class="btnrow"><a class="btn btn-primary" href="https://drive.google.com/file/d/10Afb2-siINfdw66cvs3j0E5cTjttVRsL/view?usp=drive_link">Learn more</a></p></div></div>{researchers()}</div></section>'''
+<div class="mealtxt"><h3>MEAL: Monitoring, Evaluation, Accountability and Learning Together</h3><p>Since the Alliance formed in 2024, embedded researchers from the University Centre for Rural Health have worked alongside us to track how a new kind of regional collaboration takes shape. Through Health Checks, Outcomes Harvesting and ongoing feedback, our MEAL approach turns what groups tell us into practical changes.</p><p>One example is more informal Gatherings, with staff now visiting groups directly.</p><p class="btnrow"><a class="btn btn-primary" href="https://drive.google.com/file/d/10Afb2-siINfdw66cvs3j0E5cTjttVRsL/view?usp=drive_link">Learn More</a></p></div></div>{researchers()}{funding_inner()}</div></section>'''
 
 
-def funding_section():
-    return f'''<section class="sec fundsec" id="ab-funding" style="padding-top:0"><div class="wrap"><div class="fundgrid">
-<div class="card abt fcard"><h2 class="sechead">Resourcing Community Resilience -<br>The Help Fund</h2><p class="lede">Community-led decisions about where funding goes</p><div class="bar bar-y" aria-hidden="true"></div><p>Groups told us that access to resources was a major barrier to keeping going, and that competitive grants can work against the collaboration resilience depends on. With support from the NRMA Help Fund, and in partnership with the Northern Rivers Community Foundation and Monash University&rsquo;s Fire to Flourish, Alliance groups co-designed a participatory grantmaking approach. Establishment Grants of $3,000 and Resilience Action Grants of up to $10,000 are now funding radio networks, community hubs, disaster plans, preparedness training and wellbeing events.</p><ul class="flogos"><li><a href="https://www.nrma.com.au/help-fund"><img src="../assets/funders/help.png" alt="NRMA Insurance HELP Fund" loading="lazy"></a></li><li><a href="https://nrcf.org.au"><img src="../assets/funders/nrcf.png" alt="Northern Rivers Community Foundation" loading="lazy"></a></li><li><a href="https://www.monash.edu"><img src="../assets/funders/fire-to-flourish.png" alt="Monash University&rsquo;s Fire to Flourish" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/1_y26o8MOgzDUdzV7PjHfpiDluUjU-FFf/view?usp=drive_link">Find out more</a></p></div>
-<div class="card abt fcard"><h2 class="sechead">Disaster Ready Three -<br>Connected and Prepared</h2><p class="lede">Enabling regional readiness across the Northern Rivers</p><div class="bar bar-o" aria-hidden="true"></div><p>Connected and Prepared is helping the Resilience Alliance scale a proven, place-based model of community-led resilience. Over the life of the project (2026&ndash;2028), at least 60 grassroots resilience groups will receive tailored governance support, shared digital tools, capacity building and peer learning. That support is delivered by a regional team of six that reaches every LGA in the Northern Rivers.</p><p class="fsup">Supported by the Australian Government through the Disaster Ready Fund.</p><ul class="flogos"><li><a href="https://www.nema.gov.au"><img src="../assets/funders/aus-gov.png" alt="Australian Government" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/16oFTpO9T-kX2tXsOEn5Yb8iwjJk9tjry/view?usp=drive_link">Read project overview</a></p></div></div></div></section>'''
+def funding_inner():
+    return f'''<div class="fundgrid" id="ab-funding">
+<div class="card abt fcard"><h2 class="sechead">Resourcing Community Resilience -<br>The Help Fund</h2><p class="lede">Community-led decisions about where funding goes</p><div class="bar bar-y" aria-hidden="true"></div><p>Groups told us that access to resources was a major barrier to keeping going, and that competitive grants can work against the collaboration resilience depends on. With support from the NRMA Help Fund, and in partnership with the Northern Rivers Community Foundation and Monash University&rsquo;s Fire to Flourish, Alliance groups co-designed a participatory grantmaking approach. Establishment Grants of $3,000 and Resilience Action Grants of up to $10,000 are now funding radio networks, community hubs, disaster plans, preparedness training and wellbeing events.</p><ul class="flogos"><li><a href="https://www.nrma.com.au/help-fund"><img src="../assets/funders/help.png" alt="NRMA Insurance HELP Fund" loading="lazy"></a></li><li><a href="https://nrcf.org.au"><img src="../assets/funders/nrcf.png" alt="Northern Rivers Community Foundation" loading="lazy"></a></li><li><a href="https://www.monash.edu"><img src="../assets/funders/fire-to-flourish.png" alt="Monash University&rsquo;s Fire to Flourish" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/1_y26o8MOgzDUdzV7PjHfpiDluUjU-FFf/view?usp=drive_link">Find Out More</a></p></div>
+<div class="card abt fcard"><h2 class="sechead">Disaster Ready Three -<br>Connected and Prepared</h2><p class="lede">Enabling regional readiness across the Northern Rivers</p><div class="bar bar-o" aria-hidden="true"></div><p>Connected and Prepared is helping the Resilience Alliance scale a proven, place-based model of community-led resilience. Over the life of the project (2026&ndash;2028), at least 60 grassroots resilience groups will receive tailored governance support, shared digital tools, capacity building and peer learning. That support is delivered by a regional team of six that reaches every LGA in the Northern Rivers.</p><p class="fsup">Supported by the Australian Government through the Disaster Ready Fund.</p><ul class="flogos"><li><a href="https://www.nema.gov.au"><img src="../assets/funders/aus-gov.png" alt="Australian Government" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/16oFTpO9T-kX2tXsOEn5Yb8iwjJk9tjry/view?usp=drive_link">Read Project Overview</a></p></div></div>'''
 
 
 def about_body():
@@ -278,7 +278,6 @@ def about_body():
 <section class="sec journey" id="ab-journey"><div class="wrap"><h2 class="sechead">Our timeline</h2>{journey_b()}</div></section>
 {meal_section()}
 <section class="sec steersec" id="ab-steering" style="padding-top:0"><div class="wrap"><div class="bar bar-t sbar-top" aria-hidden="true"></div><div class="steergrid"><div class="steertxt"><h2 class="sechead">The Steering Committee:</h2><p class="lede">Is the coordinating body for the Resilience Alliance. It is made up of representatives from resilience-related groups and organisations across the region, and operates by agreement among groups and organisations rather than by reporting to a separate incorporated parent body. The steering committee actively aims to maintain a network that reflects the geographic and community diversity of the region.</p></div><div class="steerlist"><p class="lede">The Steering Committee comprises the following groups and organisations.</p>{steer_tiles()}</div></div></div></section>
-{funding_section()}
 <section class="sec teamsec" id="ab-team" style="padding-top:0"><div class="wrap"><div class="bar bar-t sbar-top" aria-hidden="true"></div><h2 class="sechead cen teamhead">Resilience Alliance Team:</h2>{team()}</div></section>'''
 
 
@@ -436,7 +435,7 @@ function build(){
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
  var icon=L.divIcon({className:'nrpin',html:'<span></span>',iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-12]}),b=[];
  pts.forEach(function(g){
-  var link=g.u?'<a href="'+esc(g.u)+'" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a>':'';
+  var link=g.u?'<a href="'+esc(g.u)+'" target="_blank" rel="noopener">Visit Page<span class="sr-only"> (opens in a new tab)</span></a>':'';
   L.marker([g.lat,g.lon],{icon:icon,title:g.n,alt:g.n}).addTo(map).bindPopup('<b>'+esc(g.n)+'</b><br>'+esc(g.p)+(link?'<br>'+link:''));
   b.push([g.lat,g.lon]);
  });
@@ -1035,8 +1034,10 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .fcard .fsup{font-style:italic;font-size:.9rem;color:var(--muted);margin-bottom:.5em}
 .tb .fcard .flogos{list-style:none;margin:0 0 1em;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}.tb .fcard .flogos li{margin:0;padding:0;display:block}.tb .fcard .flogos a{display:block;line-height:0}
 .tb .fcard .flogos img{display:block;height:auto;width:auto;max-height:var(--logo-small);max-width:120px;object-fit:contain}.tb .fcard .btnrow{margin:auto 0 0}
-.tb #about>.sec.mealsec,.tb #about>.sec.fundsec{padding-bottom:var(--space-large)!important}.tb #about>.sec.steersec{padding-bottom:32px!important}
+.tb #about>.sec.mealsec,.tb #about>.sec.fundsec{padding-bottom:var(--space-large)!important}.tb .learnwrap .fundgrid{margin-top:var(--space-large)}.tb #about>.sec.steersec{padding-bottom:var(--space-large)!important}
 @media(max-width:860px){.tb .learnwrap{--mc:calc(min(460px,100cqw)*336/1420)}.tb .learngrid,.tb .fundgrid{grid-template-columns:1fr}.tb .learngrid{gap:24px}.tb .rsch-h{margin-top:24px}}
+/* About header photo: 40px taller above and 40px taller below, page spacing kept the same around it */
+@media(min-width:861px){.tb .page>.wrap:first-child>.splith.ab{padding-top:72px;padding-bottom:40px}.tb .splith.ab .ph{margin:-40px 0}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
@@ -1083,7 +1084,7 @@ def tfooter():
     return f'''<footer class="site-foot"><div class="wrap">
 <div class="foot-cols">{top}<div class="fquick">{col(2, "Quick Links", site)}{untitled}</div><div class="fstack">{social}</div></div>
 <div class="ack">{B.ABORIGINAL_FLAG}<p>{B.ACK}</p></div>
-<div class="copyrow"><p class="copy">© 2026 Northern Rivers Community Resilience Alliance &middot; <a href="#privacy">Privacy Policy</a></p><button type="button" class="totop"><svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1.5 6.5L6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to top</button></div>
+<div class="copyrow"><p class="copy">© 2026 Northern Rivers Community Resilience Alliance &middot; <a href="#privacy">Privacy Policy</a></p><button type="button" class="totop"><svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1.5 6.5L6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to Top</button></div>
 </div></footer>'''
 
 
