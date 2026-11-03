@@ -70,7 +70,7 @@ def brand_contrast():
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brand guidelines</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}html{{scroll-padding-top:84px}}body{{background:#f3f6f7;padding-top:64px}}.topnav{{position:fixed;top:0;left:0;right:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}}.topnav>ul{{list-style:none;margin:0 auto;padding:10px 20px;max-width:1240px;display:flex;flex-wrap:wrap;gap:8px}}:root{{--btn-r:12px}}.topnav>ul>li>a,.topnav .cat{{display:inline-flex;align-items:center;gap:.45em;min-height:44px;padding:0 1.1em;border:2px solid var(--navy);border-radius:12px;color:var(--navy);font:inherit;font-weight:800;text-decoration:none;cursor:pointer;background:#fff}}.topnav>ul>li>a:hover,.topnav .cat:hover{{background:var(--navy);color:#fff}}.topnav .cat:focus-visible,.topnav .menu a:focus-visible{{outline:3px solid #07293b;outline-offset:2px}}.topnav .n-y{{background:var(--yellow)}}.topnav .n-r{{background:var(--orange);color:#fff;font-size:1.2rem}}.topnav .n-t{{background:#00857c;color:#fff}}.topnav .n-d{{background:var(--navy);color:#fff}}.topnav .n-y:hover,.topnav .n-r:hover,.topnav .n-t:hover,.topnav .n-d:hover{{background:#fff;color:var(--navy)}}.topnav .back{{margin-left:auto}}@media(max-width:900px){{.topnav>ul>li>a,.topnav .cat{{min-height:40px;padding:0 .8em;font-size:.9rem}}.topnav .bl{{display:none}}}}@media(max-width:560px){{body{{padding-top:112px}}html{{scroll-padding-top:132px}}}}main{{max-width:1240px;margin:0 auto;padding:36px 20px 56px}}
 .flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
-#colours table{{table-layout:fixed}}#colours th:nth-child(1){{width:21%}}#colours th:nth-child(2){{width:13%}}#colours th:nth-child(4),#colours th:nth-child(5){{width:13%}}#colours th:nth-child(3){{width:auto}}.csrow{{display:flex;flex-wrap:wrap;gap:18px;margin:18px 0 0}}.cs{{display:grid;gap:8px;justify-items:center;font-size:.85rem}}.cs span{{display:block;width:84px;height:84px;background:var(--teal);border-radius:12px}}.pagesec{{font-size:clamp(1.9rem,4vw,2.4rem);margin:40px 0 12px}}.rule{{background:#fff;border-left:10px solid var(--orange);border-radius:20px;padding:22px 26px;margin:22px 0}}.rule p{{margin:0}}
+#colours table{{table-layout:fixed}}#colours th:nth-child(1){{width:21%}}#colours th:nth-child(2){{width:13%}}#colours th:nth-child(4),#colours th:nth-child(5){{width:13%}}#colours th:nth-child(3){{width:auto}}.logodemo{{display:flex;flex-wrap:wrap;align-items:flex-end;gap:18px 32px;margin:18px 0 0}}.logodemo .cs small,.csrow .cs small{{font-size:.8rem;color:var(--muted)}}.csrow{{display:flex;flex-wrap:wrap;gap:18px;margin:18px 0 0}}.cs{{display:grid;gap:8px;justify-items:center;font-size:.85rem}}.cs span{{display:block;width:84px;height:84px;background:var(--teal);border-radius:12px}}.pagesec{{font-size:clamp(1.9rem,4vw,2.4rem);margin:40px 0 12px}}.rule{{background:#fff;border-left:10px solid var(--orange);border-radius:20px;padding:22px 26px;margin:22px 0}}.rule p{{margin:0}}
 .blk,.card2{{background:#fff;border-radius:28px;padding:28px;margin:0 0 22px}}.blk{{overflow-x:auto;position:relative}}table{{width:100%;border-collapse:collapse;font-size:.95rem}}th,td{{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}}th{{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em}}
 .chip{{display:inline-grid;place-items:center;width:44px;height:32px;border-radius:8px;font-weight:900;vertical-align:middle;border:1px solid rgba(7,41,59,.25)}}.pass{{color:#1f6b35;font-weight:800}}.fail{{color:#a3201a;font-weight:800}}code{{font-size:.85em;background:var(--grey-6);padding:.1em .4em;border-radius:6px}}
 .demo{{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}}.demo>div{{border-radius:20px;padding:22px;border:2px solid var(--line)}}.demo h3{{margin-top:0}}.dont{{border-color:#a3201a!important}}.do{{border-color:#1f6b35!important}}
@@ -184,7 +184,7 @@ def light_teal():
         a, l, sat = colorsys.rgb_to_hls(r, g, b)
         return f"hue {round(a * 360)}, saturation {round(sat * 100)}%"
     pale, mid = "#f3f9f8", "#beddda"
-    demo = f'''<div class="lteal"><h3>In Prototype Round 2</h3>
+    demo = f'''<div class="lteal"><h3>In the NRCRA Prototype</h3>
 <div class="mnav" style="background:#fff;color:{NAVY_}"><span style="background:{mid};color:{NAVY_}">Home</span><span>Network</span><span>About</span><span>Journey</span></div>
 <div class="ltcard" style="background:{pale};border-bottom:10px solid #00a79d"><b>Pale teal <code>{pale.upper()}</code></b><br>{hue(pale)}. Navy text {_ratio(NAVY_, pale):.2f}:1</div>
 <div class="ltcard" style="background:{mid};border-bottom:10px solid #00a79d"><b>Light teal <code>{mid.upper()}</code></b><br>{hue(mid)}. Navy text {_ratio(NAVY_, mid):.2f}:1</div></div>'''
@@ -264,12 +264,32 @@ def guidelines():
         ("Gap between text and picture", "48px", "Two column rows"),
         ("Home header text card", "60px (31px top, 40px bottom on tablet and phone)", "Same 60px as the gap between sections"),
     ]
+    circle_rows = [
+        ("Mini", "56", "56", "Initial circle for a committee group or a number badge when there is no logo or photo"),
+        ("Small", "88", "72", "Our Focus photos on phones and narrow tablets (fluid between Small and Medium: 16% of the screen width)"),
+        ("Medium", "168", "150", "Our Focus photos on desktop, and Meet the team photos and initials"),
+        ("Extra large", "370", "300", "Home header photo circles (they overlap, so the real size follows the card width up to this limit)"),
+    ]
+    logo_rows = [
+        ("Mini", "20", "Funder chips in the strip under the menu (14px on phones)"),
+        ("Small", "20", "Funder logos under each timeline entry on About. Same height as Mini."),
+        ("Medium", "50", "Steering committee tiles (also limited to 100px wide)"),
+        ("Large", "84", "Lead partner logos on Home (NEMA, NSW). Half of a Medium circle. Shrinks only when the column is too narrow for the logo."),
+    ]
+    circle_demo = "".join(f'<div class="cs"><span style="border-radius:50%;width:{round(d*.4)}px;height:{round(d*.4)}px"></span><b>{n}</b><small>{d}px</small></div>' for n, d in [("Mini", 56), ("Small", 88), ("Medium", 168), ("Extra large", 370)])
+    logo_demo = "".join(f'<div class="cs"><img src="../assets/funders/nsw.png" alt="" style="height:{h}px;width:auto"><b>{n}</b><small>{h}px</small></div>' for n, h in [("Mini", 20), ("Small", 20), ("Medium", 50), ("Large", 84)])
     swatches = "".join(f'<div class="cs"><span style="border-radius:{r}"></span><b>{n}</b></div>' for n, r in [("12px", "12px"), ("16px", "16px"), ("28px", "28px"), ("Pill", "99px")])
     return f'''<section class="blk" id="guidelines"><h2>Type, spacing and corner rules</h2>
 <p class="vnote">Use these values when setting the site up in Wix. Sizes are in px with the rem value in brackets. Desktop is 1000px and wider; phone is 390px. Only two font weights are used: 400 and 800.</p>
 <h3 id="gl-type">Title and text sizes</h3>{_gl_table(["Style", "Desktop (px)", "Phone (px)", "Weight", "Fluid rule", "Use"], type_rows)}
 <h3 id="gl-corners" style="margin-top:30px">Corner rules</h3>{_gl_table(["Element", "Corner radius", "Use"], corner_rows)}<div class="csrow">{swatches}</div>
-<h3 id="gl-space" style="margin-top:30px">Spacing rules</h3>{_gl_table(["Where", "Value", "Use"], space_rows)}</section>'''
+<h3 id="gl-space" style="margin-top:30px">Spacing rules</h3>{_gl_table(["Where", "Value", "Use"], space_rows)}
+<h3 id="gl-circles" style="margin-top:30px">Circle photo sizes</h3>
+<p class="vnote">Round photos and initial circles use one of four sizes. The diameter is the same on both axes, the photo is cropped to fill the circle (centre crop unless a focal point is set), and there is no border. Pick the size by name; do not invent in-between sizes.</p>
+{_gl_table(["Size", "Desktop (px)", "Phone (px)", "Used for"], circle_rows)}<p class="vnote">Shown at 40% of real size.</p><div class="csrow" style="align-items:flex-end">{circle_demo}</div>
+<h3 id="gl-logos" style="margin-top:30px">Logo sizes</h3>
+<p class="vnote">Partner, funder and committee logos use one of four sizes, set by height, with the width following the logo&rsquo;s own shape (never stretched or cropped). Logos have no border and no background box. Pick the size by name.</p>
+{_gl_table(["Size", "Height (px)", "Used for"], logo_rows)}<div class="logodemo">{logo_demo}</div></section>'''
 
 
 def teal_adjust():
