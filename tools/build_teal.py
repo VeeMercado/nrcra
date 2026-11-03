@@ -451,13 +451,24 @@ if(window.ResizeObserver)new ResizeObserver(function(){if(map&&el.offsetWidth){v
 })();"""
 
 
-def map_block():
+# ARCHIVED: the original Network map (Leaflet + OpenStreetMap, one teal pin per group from network_geo.json).
+# Not used at the moment. To bring it back, in network_body() swap {map_block()} for {map_block_leaflet()}.
+# Its CSS (.nrmapwrap, .nrmap, popups) stays in CSS_T below.
+def map_block_leaflet():
     return ('<div class="nrmapwrap"><div id="nrmap" class="nrmap" role="region" aria-label="Map of resilience groups across the Northern Rivers. Each pin is a group; select one for its name, place and web page."></div>'
             '<p class="mapnote">Select a pin for the group&rsquo;s name and page. Groups without a listed town sit at the centre of their council area.</p></div>'
             f'<script type="application/json" id="nrmap-data">{json.dumps(map_points())}</script>'
             '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">'
             '<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>'
             f'<script>{MAP_JS}</script>')
+
+
+GMAP_URL = "https://www.google.com/maps/d/embed?mid=1KTtTtCTzO9IvlprDHbXwylLWKAU7dw4&hl=en&ehbc=2E312F"
+
+
+def map_block():
+    """The Network page map: the client's Google My Maps embed."""
+    return (f'<div class="gmap"><iframe src="{GMAP_URL}" width="640" height="480" title="Map of Northern Rivers community resilience groups" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>')
 
 
 def network_body():
@@ -1038,6 +1049,11 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .wwa .subline{font-size:1.25rem;line-height:1.6}
 /* Home, desktop: the bottom photo sits over the top photo, and the yellow circle sits behind both */
 @media(min-width:861px){.circles img:nth-of-type(1){z-index:1}.circles img:nth-of-type(2){z-index:2}.circles .blob{z-index:0}}
+/* About header, desktop: 40px of space to the left of the photo, so the photo is a little narrower */
+@media(min-width:861px){.tb .splith.ab .ph{margin-left:40px}}
+/* Network header map: Google My Maps embed fills the same box the old map used */
+.tb .gmap{width:100%;display:flex}.tb .gmap iframe{display:block;width:100%;height:auto;min-height:517px;flex:1;border:0;border-radius:var(--r);background:#e9efef}
+@media(max-width:860px){.tb .gmap iframe{height:461px;min-height:0;flex:none}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
