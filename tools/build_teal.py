@@ -230,8 +230,8 @@ DROPS = {"about": ABOUT_JUMP, "network": NETWORK_JUMP}
 def meal_svg():
     """The MEAL cycle: six circles in a ring, joined by hand-drawn style clockwise arrows."""
     r = 168
-    nodes = [("Connect", 733, 245, "#00857c", "#fff"), ("Listen", 1184, 477, "#f05a28", "#fff"), ("Reflect", 1139, 931, "#D9A400", "#fff"),
-             ("Improve", 733, 1184, "#00857c", "#fff"), ("Share", 328, 954, "#f05a28", "#fff"), ("Strengthen", 328, 477, "#D9A400", "#fff")]
+    nodes = [("Connect", 733, 245, "#00857c", "#fff"), ("Listen", 1184, 477, "#f05a28", "#fff"), ("Reflect", 1139, 931, "#B38C00", "#fff"),
+             ("Improve", 733, 1184, "#00857c", "#fff"), ("Share", 328, 954, "#f05a28", "#fff"), ("Strengthen", 328, 477, "#B38C00", "#fff")]
     parts = []
     for i, (_, x1, y1, _, _) in enumerate(nodes):
         _, x2, y2, _, _ = nodes[(i + 1) % 6]
@@ -676,7 +676,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .tb .steergrid .steer{grid-template-columns:repeat(3,minmax(0,160px));justify-content:center}@media(max-width:860px){.tb .steergrid{grid-template-columns:1fr;gap:0}.tb .steergrid .steer{margin-top:20px}}@media(max-width:560px){.tb .steergrid .steer{gap:8px}.tb .steergrid .steer a{padding:4px 3px;gap:4px;border-radius:12px;min-height:0}.tb .steergrid .slogo{height:32px;flex:none}.tb .steergrid .slogo img{max-width:100%;max-height:32px}.tb .steergrid .sname{font-size:.6rem;line-height:1.15}}.tb .steerlist>.lede{text-align:center}
 .tb .cen{text-align:center}.tb h2.teamhead{margin-bottom:56px}.tb .team2 li.brk{display:block;flex-basis:100%;width:100%;height:0;margin:-24px 0 0;padding:0}@media(min-width:861px){.tb .team2 li.brk{display:none}.tb .team2 li{flex:1 1 0;width:auto;max-width:220px;min-width:0;grid-template-columns:minmax(0,1fr)}.tb .team2 .tc{width:100%;max-width:190px}}.tb .team2 b{font-size:1.2rem;font-weight:800;line-height:1.12}@media(max-width:1060px){.tb .team2 b{min-height:2.24em}}@media(max-width:739px){.tb .team2 li{width:min(150px,calc(50% - 12px))}.tb .team2 .tc{width:100%;max-width:150px}}
 .tb .focuscards li{flex:1 1 300px;max-width:360px;padding:24px 22px}
-.tb .focuscards .pi{width:76px;height:76px;margin:0 auto 10px}.tb .focuscards .pnum{font-size:1.6rem;font-style:italic;font-weight:400;letter-spacing:.02em}.tb .focuscards li:nth-child(1) .pi{color:#00857c}.tb .focuscards li:nth-child(2) .pi{color:#D9A400}.tb .focuscards li:nth-child(3) .pi{color:#d9481a}.tb .focuscards li:nth-child(4) .pi{color:var(--navy)}.tb .focuscards li:nth-child(5) .pi{color:#6b7f88}.tb .focuscards p{text-align:left;font-size:.97rem}
+.tb .focuscards .pi{width:76px;height:76px;margin:0 auto 10px}.tb .focuscards .pnum{font-size:1.6rem;font-style:italic;font-weight:400;letter-spacing:.02em}.tb .focuscards li:nth-child(1) .pi{color:#00857c}.tb .focuscards li:nth-child(2) .pi{color:#B38C00}.tb .focuscards li:nth-child(3) .pi{color:#d9481a}.tb .focuscards li:nth-child(4) .pi{color:var(--navy)}.tb .focuscards li:nth-child(5) .pi{color:#6b7f88}.tb .focuscards p{text-align:left;font-size:.97rem}
 /* Steering tiles: top 65% is the logo, bottom 35% is the name */
 .tb .steergrid .steer a{display:grid;grid-template-rows:minmax(0,65fr) minmax(0,35fr);gap:0;padding:4px 10px 2px;justify-content:stretch;align-content:stretch}.tb .steergrid .slogo{align-self:center;height:auto;min-height:0;max-height:100%}.tb .steergrid .sname{align-self:start;padding-top:0;line-height:1.2}
 @media(max-width:560px){.tb .steergrid .steer a{padding:3px;grid-template-rows:minmax(0,1fr) minmax(0,1fr)}.tb .steergrid .slogo{height:auto;max-height:100%;flex:none}.tb .steergrid .sname{padding-top:2px}}
@@ -748,7 +748,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .tb .hwpills{list-style:none;margin:0 auto;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:fit-content;max-width:100%}
 .tb .hwpills a{display:block;box-sizing:border-box;border:1px solid transparent;border-radius:var(--btn-r,12px);padding:.4em .8em;text-align:center;font-weight:900;font-size:clamp(1.375rem,2.4vw,1.5rem);line-height:1.2;text-decoration:none!important;background:transparent}
 .tb .hwpills a.hp-teal,.tb .hwpills a.hp-teal:hover,.tb .hwpills a.hp-teal:active{color:#00857c;background:transparent}
-.tb .hwpills a.hp-yellow,.tb .hwpills a.hp-yellow:hover,.tb .hwpills a.hp-yellow:active{color:#D9A400;background:transparent}
+.tb .hwpills a.hp-yellow,.tb .hwpills a.hp-yellow:hover,.tb .hwpills a.hp-yellow:active{color:#B38C00;background:transparent}
 .tb .hwpills a.hp-orange,.tb .hwpills a.hp-orange:hover,.tb .hwpills a.hp-orange:active{color:#d9481a;background:transparent}
 .tb .hwpills a:hover,.tb .hwpills a:active{border-color:#fff}
 .tb .hwpills a:focus-visible{outline:2px solid var(--teal-d);outline-offset:3px}
@@ -760,7 +760,7 @@ body.teal{font-size:16px}
 .tb .btnrow,.tb .hwpills,.tb .stats{gap:16px}
 /* About, How we work: white pills, text colours as the Connect. Share. Care. links on Home */
 .tb .howcards h3 span{background:#fff!important;border:1px solid var(--line)}
-.tb .howcards .hw-teal h3 span{color:#00857c!important}.tb .howcards .hw-yellow h3 span{color:#D9A400!important}.tb .howcards .hw-orange h3 span{color:#d9481a!important}
+.tb .howcards .hw-teal h3 span{color:#00857c!important}.tb .howcards .hw-yellow h3 span{color:#B38C00!important}.tb .howcards .hw-orange h3 span{color:#d9481a!important}
 @media(max-width:560px){.tb .hwpills{gap:4px}.tb .hwpills a{padding:.4em .65em}}
 @media(max-width:430px){.tb .hwpills a{font-size:1.25rem;padding:.4em .5em}}@media(max-width:380px){.tb .hwpills a{font-size:1.15rem;padding:.4em .45em}}@media(max-width:345px){.tb .hwpills a{font-size:1.05rem;padding:.4em .4em}}
 /* Home: small, light versions of the decorative circles from the "50+ groups" section, as the background of the Connect / Share / Care row */

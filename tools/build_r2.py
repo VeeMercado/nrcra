@@ -222,7 +222,7 @@ def _hex_table(rows):
 def brand_colours():
     main4 = [("Yellow", "#ffcb2a", "Highlights and small accents, with navy text"), ("Navy", NAVY_, "Text, footer, dark backgrounds"),
              ("Orange", "#f05a28", "Small accents"), ("Teal", "#00a79d", "Borders, dots and accents; text on navy only")]
-    others = [("Adjusted teal", "#00857c", "Buttons and any area with white text"), ("Darker yellow", "#D9A400", "The word Share on Home and the yellow circles in the MEAL cycle. Use where brand yellow is too light to read on a light background"), ("Quiet text", GREY_, "Small supporting text on white, light grey, pale teal and light yellow"),
+    others = [("Adjusted teal", "#00857c", "Buttons and any area with white text"), ("Darker yellow", "#B38C00", "The word Share on Home and the yellow circles in the MEAL cycle. Use where brand yellow is too light to read on a light background"), ("Quiet text", GREY_, "Small supporting text on white, light grey, pale teal and light yellow"),
               ("White", WHITE_, "Cards and page"), ("Light grey", LIGHT_, "Page background"),
               ("Pale teal", "#f3f9f8", "Large pale panels, from the PDFs"), ("Light teal", "#beddda", "Selected menu item, hover, tinted panels, from the PDFs"),
               ("Light yellow", "#ffeaaa", "Tint for large text blocks (guidance examples)"), ("Light red", "#fbd6c9", "Tint for large text blocks (guidance examples)")]
