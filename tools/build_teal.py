@@ -463,7 +463,7 @@ def map_block_leaflet():
             f'<script>{MAP_JS}</script>')
 
 
-GMAP_URL = "https://www.google.com/maps/d/embed?mid=1KTtTtCTzO9IvlprDHbXwylLWKAU7dw4&hl=en&ehbc=2E312F"
+GMAP_URL = "https://www.google.com/maps/d/u/0/embed?mid=1KTtTtCTzO9IvlprDHbXwylLWKAU7dw4&ehbc=2E312F&noprof=1"
 
 
 def map_block():
@@ -473,7 +473,7 @@ def map_block():
 
 def network_body():
     cards = "".join(group_card(*g) for g in all_groups())
-    return f'''<div class="wrap" id="nw-map"><div class="splith net"><div><span class="eyebrow">Network</span><h1>60+ groups,<br>one region,<br><span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p></div><div class="ph">{map_block()}</div></div></div>
+    return f'''<div class="wrap" id="nw-map"><div class="splith net"><div><span class="eyebrow">Network</span><h1>60+ groups,<br>one region,<br><span class="mark">one network.{B.SQUIGGLE}</span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p><p class="mapnote">Select a yellow ring <svg class="ringico" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7" fill="none" stroke="#ffcb2a" stroke-width="3.5"/></svg> on the map to see a group&rsquo;s details.</p></div><div class="ph">{map_block()}</div></div></div>
 {testimonials()}
 <section class="sec" id="our-network"><div class="wrap">{dir_head("Our Network")}<ul class="gsub">{cards}</ul></div></section>'''
 
@@ -1052,8 +1052,9 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* About header, desktop: 40px of space to the left of the photo, so the photo is a little narrower */
 @media(min-width:861px){.tb .splith.ab .ph{margin-left:40px}}
 /* Network header map: Google My Maps embed fills the same box the old map used */
-.tb .gmap{width:100%;display:flex}.tb .gmap iframe{display:block;width:100%;height:auto;min-height:517px;flex:1;border:0;border-radius:var(--r);background:#e9efef}
+.tb .gmap{width:100%;display:flex;flex-direction:column;gap:12px}.tb .gmap iframe{display:block;width:100%;height:auto;min-height:517px;flex:1;border:0;border-radius:var(--r);background:#e9efef}.tb .splith.net .mapnote{margin:16px 0 0;font-size:1rem;line-height:1.6;color:var(--navy)}
 @media(max-width:860px){.tb .gmap iframe{height:461px;min-height:0;flex:none}}
+.tb .splith.net .mapnote .ringico{display:inline-block;vertical-align:-3px;margin:0 2px}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
