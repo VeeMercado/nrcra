@@ -172,7 +172,7 @@ def _set(name, c, tx, tint, link, note, dark):
     mfg = "#ffffff" if dark else NAVY_
     rows += f'<div class="krow"><span class="kl">Menu item {_chip(mfg, bg)}</span><div class="sts">' + "".join(f'<div class="st"><a href="#" onclick="return false" class="mn{" is-hover" if i == 1 else " is-active" if i == 2 else ""}" style="--mc:{mfg};--mt:{tint}">Network</a><small>{n}</small></div>' for i, n in enumerate(("Default", "Hover", "Active"))) + "</div></div>"
     nav_cur = f"background:{tint};color:{NAVY_}"
-    nav = (f'<div class="mnav" style="background:{bg};color:{fg}"><span style="{nav_cur}">Home</span><span>Network</span><span>About</span><span>Progress</span>'
+    nav = (f'<div class="mnav" style="background:{bg};color:{fg}"><span style="{nav_cur}">Home</span><span>Network</span><span>About</span><span>Journey</span>'
            f'<span class="push">{_b("Sign In", K["Primary"], None, big)}</span></div>')
     return f'''<div class="set {"dark" if dark else "light"}" style="background:{bg};color:{fg}"><h3 style="color:{fg}">{name} on {"navy" if dark else "white"}</h3>{rows}{nav}</div>'''
 
@@ -185,7 +185,7 @@ def light_teal():
         return f"hue {round(a * 360)}, saturation {round(sat * 100)}%"
     pale, mid = "#f3f9f8", "#beddda"
     demo = f'''<div class="lteal"><h3>In Prototype Round 2</h3>
-<div class="mnav" style="background:#fff;color:{NAVY_}"><span style="background:{mid};color:{NAVY_}">Home</span><span>Network</span><span>About</span><span>Progress</span></div>
+<div class="mnav" style="background:#fff;color:{NAVY_}"><span style="background:{mid};color:{NAVY_}">Home</span><span>Network</span><span>About</span><span>Journey</span></div>
 <div class="ltcard" style="background:{pale};border-bottom:10px solid #00a79d"><b>Pale teal <code>{pale.upper()}</code></b><br>{hue(pale)}. Navy text {_ratio(NAVY_, pale):.2f}:1</div>
 <div class="ltcard" style="background:{mid};border-bottom:10px solid #00a79d"><b>Light teal <code>{mid.upper()}</code></b><br>{hue(mid)}. Navy text {_ratio(NAVY_, mid):.2f}:1</div></div>'''
     return f'''<section class="blk" id="lightteal"><h2>Light teal and pale teal</h2><p>The three project PDFs use two light teals. <b>Pale teal</b>, <code>#F3F9F8</code>, is for large pale panels and for hover on the menu and links. <b>Light teal</b>, <code>#BEDDDA</code>, is for the selected menu item, pressed buttons and tinted panels. Both are soft, slightly grey greens, so they sit comfortably next to yellow and red.</p>{demo}</section>'''
@@ -243,7 +243,7 @@ def guidelines():
         ("Page title (H1)", "56 (3.5rem)", "38 (2.375rem)", "800", "clamp(2.375rem, 5vw, 3.5rem)", "One per page, under the pill above it"),
         ("Section title (H2)", "38 (2.375rem)", "30 (1.875rem)", "800", "clamp(1.875rem, 4vw, 2.375rem)", "Opens each band of a page"),
         ("Card title and list item title (H3)", "24 (1.5rem)", "22 (1.375rem)", "800", "clamp(1.375rem, 2.4vw, 1.5rem)", "Titles inside cards and in long lists, such as the Privacy Policy"),
-        ("Small title", "20 (1.25rem)", "20 (1.25rem)", "800", "fixed", "R.A.C.K. cards, small tiles. Same size as the lead paragraph, but bold."),
+        ("Small title", "20 (1.25rem)", "20 (1.25rem)", "800", "fixed", "RACK cards, small tiles. Same size as the lead paragraph, but bold."),
         ("Lead paragraph", "20 (1.25rem)", "20 (1.25rem)", "400", "fixed", "Under a page title. Not bold."),
         ("Body text", "16 (1rem)", "16 (1rem)", "400", "fixed", "All paragraphs. Same size as button text."),
         ("Button text", "16 (1rem)", "16 (1rem)", "800", "fixed", "Buttons, menu items"),
