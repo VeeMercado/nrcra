@@ -121,7 +121,7 @@ def home_body(hero="photo"):
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
 <section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Journey</h2><dl class="stats">{"".join(f"<div><dt>{n}</dt><dd>{t}</dd></div>" for n, t in PROG_STATS)}</dl><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See Journey</a></p></div></div></section>
-<section class="sec" id="focus"><div class="wrap"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></section>'''
+<section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></div></section>'''
 
 
 # ---------------------------------------------------------------- About
@@ -167,12 +167,21 @@ FOCUS = [("Growing the Resilience Alliance", "We are strengthening our network b
          ("Advocacy", "We believe our collective voice is stronger than any single group&rsquo;s. By understanding our own network, identifying key stakeholders and building advocacy skills among groups and organisations, we are developing a collaborative approach to advocating for resilient communities across the region.")]
 
 
-FOCUS_PHOTOS = ["group", "workshop", "pair", "table", "speaker"]  # sample photos from the existing set
+FOCUS_PHOTOS = [None, "focus-2", "focus-3", "focus-4", "focus-5"]  # 01 is the group photo; 02 to 05 are NRCRA's own photos (Drive, Website folder)
+FOCUS_POS = {"focus-5": "75% 55%"}
 
 
 def focus_cards():
-    cards = "".join(f'<li><div class="fph">{img(FOCUS_PHOTOS[i - 1], alt="")}</div><div class="fbody"><h3>{i:02d} {t}</h3><p>{d}</p></div></li>' for i, (t, d) in enumerate(FOCUS, 1))
-    return '<ol class="pillcards focuscards">' + cards + "</ol>"
+    rows = ""
+    for i, (t, d) in enumerate(FOCUS, 1):
+        key = FOCUS_PHOTOS[i - 1]
+        if key:
+            pos = f' style="object-position:{FOCUS_POS[key]}"' if key in FOCUS_POS else ""
+            pic = f'<img src="../assets/img/{key}.jpg" alt=""{pos} loading="lazy" decoding="async">'
+        else:
+            pic = img("group", alt="")
+        rows += f'<li><span class="fcirc">{pic}</span><div class="fbody"><h3>{i:02d} {t}</h3><p>{d}</p></div></li>'
+    return '<ol class="focusrows">' + rows + "</ol>"
 
 
 MEAL_RING = [("Connect", "#00857c", "#fff"), ("Listen", "#f05a28", "#fff"), ("Reflect", "#ffcb2a", "#07293b"), ("Improve", "#00857c", "#fff"), ("Share", "#f05a28", "#fff"), ("Strengthen", "#ffcb2a", "#07293b")]
@@ -233,9 +242,30 @@ JOURNEY_B = [
 ]
 
 
+# Funder logos under each timeline entry, in the order the "Funded by" line names them: (name, file in assets/funders, website)
+LOGO = {"ucrh": ("University Centre for Rural Health", "ucrh-trim.png", "https://ucrh.edu.au"), "nsw": ("NSW Government", "nsw.png", "https://www.nsw.gov.au"),
+        "frrr": ("Foundation for Rural and Regional Renewal", "frrr.png", "https://frrr.org.au"), "aus": ("Australian Government", "aus-gov.png", "https://www.nema.gov.au"),
+        "help": ("NRMA Insurance HELP Fund", "help.png", "https://www.nrma.com.au/help-fund"), "monash": ("Monash University", "monash.png" if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "funders", "monash.png")) else "", "https://www.monash.edu"),  # save the logo as assets/funders/monash.png and it is used automatically; text link until then
+       
+        "nrcf": ("Northern Rivers Community Foundation", "nrcf.png", "https://nrcf.org.au")}
+FUND_LOGOS = {"Co-designing the future:": ["ucrh"], "Capability in action:": ["nsw", "frrr"], "Connected, Prepared Communities:": ["aus", "nsw"], "Participatory granting project:": ["help", "monash", "nrcf"]}
+
+
+def fund_logos(head):
+    keys = FUND_LOGOS.get(head)
+    if not keys:
+        return ""
+    def one(k):
+        name, f, url = LOGO[k]
+        face = f'<img src="../assets/funders/{f}" alt="{E(name)}" loading="lazy">' if f else f'<span class="flogo-t">{E(name)}</span>'
+        return f'<li><a href="{url}" target="_blank" rel="noopener">{face}<span class="sr-only"> (opens in a new tab)</span></a></li>'
+    lis = "".join(one(k) for k in keys)
+    return f'<ul class="flogos" aria-label="Funders">{lis}</ul>'
+
+
 def journey_b():
     return '<ol class="river">' + "".join(
-        f'<li><b>{y}</b><div class="jt">' + "".join(f'<h3>{h}</h3><p>{t}</p>' + (f'<p class="fund">{f}</p>' if f else "") for h, t, f in es) + '</div></li>'
+        f'<li><b>{y}</b><div class="jt">' + "".join(f'<h3>{h}</h3><p>{t}</p>' + (f'<p class="fund">{f}</p>{fund_logos(h)}' if f else "") for h, t, f in es) + '</div></li>'
         for y, es in JOURNEY_B) + "</ol>"
 
 
@@ -498,8 +528,7 @@ def aspire_item(i, row):
 
 def progress_body():
     asp = "".join(aspire_item(i, r) for i, r in enumerate(ASPIRE, 1))
-    return f'''<div class="jcover" role="note"><div class="jcover-in"><p>Draft only pending Variation Contract confirmation</p></div></div>
-<div class="wrap"><div class="prgsplit"><div class="pg-head prghead"><span class="eyebrow pill-t">Journey</span><h1>DRAFT</h1><p class="lede">Since early 2024, community groups across the Northern Rivers have joined together as the Resilience Alliance. Today, we&rsquo;ve grown to 58 community resilience groups and counting. Over the past few months, we&rsquo;ve been taking stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="prgph" role="img" aria-label="Placeholder for hero graphic">Placeholder for graphic</div></div></div>
+    return f'''<div class="wrap"><div class="prgsplit"><div class="pg-head prghead"><span class="eyebrow pill-t">Journey</span><h1>Our Journey</h1><p class="lede">Since early 2024, community groups across the Northern Rivers have joined together as the Resilience Alliance. Today, we&rsquo;ve grown to 58 community resilience groups and counting. Over the past few months, we&rsquo;ve been taking stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="prgph"><img src="../assets/img/hall.jpg" alt="Groups from across the Northern Rivers gathered together in a large hall." loading="eager" decoding="async"></div></div></div>
 <section class="sec" id="pr-who"><div class="wrap">{prg_head("Who we are", "Many groups, shared purpose", "We are a diverse alliance of community-led groups and organisations: skilled by experience, varied by structure, united in making our communities disaster-ready.")}
 <div class="vizgrid">{viz("operational-maturity.png", "wide")}{viz("active-groups.svg", "wide")}{viz("skills.svg", "wide")}</div></div></section>
 <section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap">{prg_head("What we&rsquo;ve faced", "We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}
@@ -866,7 +895,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb #network>.sec:last-child,.tb [id^="lga-"]>.sec:last-child{padding-bottom:128px!important}
 /* Progress page: Flourish chart placeholders sit in white cards (Eunice's SVG/PNG files); aspirations are a numbered list of cards */
 .tb .prgsplit{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:center}.tb .prgsplit>*{min-width:0}.tb .prghead{padding-bottom:0}
-.tb .prgph{min-height:340px;box-sizing:border-box;border:3px dashed var(--navy);border-radius:var(--r);display:grid;place-items:center;text-align:center;padding:24px;font-weight:800;color:var(--navy)}
+.tb .prgph{position:relative;min-height:340px;border-radius:var(--r);overflow:hidden;background:var(--teal-25)}.tb .prgph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .tb .prghd{margin-bottom:32px}.tb .prghd .sechead{margin-bottom:16px}.tb .prghd .lede{margin:0}
 .tb .vizgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .tb .viz{margin:0;background:#fff;border-radius:var(--r);padding:32px;display:grid;place-items:center}.tb .viz.wide{grid-column:1/-1}.tb .viz img{display:block;width:100%;height:auto;max-width:100%}.tb .viz .flourish-embed{width:100%;min-height:200px}
@@ -890,21 +919,37 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* Our timeline: the section and the river run the full browser width, six columns with 2027+ */
 .tb #ab-journey>.wrap{max-width:none;width:calc(100% - 2*clamp(20px,4vw,56px))}
 .tb ol.river{grid-template-columns:repeat(6,minmax(0,1fr))}
-@media(max-width:1439px){.tb ol.river{grid-template-columns:1fr;gap:16px}.tb ol.river::before{left:42px;right:auto;width:12px;margin-left:-6px;top:0;bottom:0;height:auto}.tb ol.river li{padding:0 0 0 118px;min-height:44px}.tb ol.river b{left:0;width:84px;justify-content:center;padding:0}.tb ol.river .jt{max-width:70ch}}
+@media(max-width:1439px){.tb ol.river{grid-template-columns:1fr;gap:16px}.tb ol.river::before{left:42px;right:auto;width:12px;margin-left:-6px;top:0;bottom:0;height:auto}.tb ol.river li{padding:0 0 0 118px;min-height:44px}.tb ol.river b{left:0;width:84px;justify-content:center;padding:0}.tb ol.river .jt{max-width:70ch}.tb #ab-journey>.wrap{max-width:860px;margin-left:auto;margin-right:auto}}
 /* Network page map (Leaflet + OpenStreetMap): a round teal pin for each group */
 .tb .nrmapwrap{display:flex;flex-direction:column;gap:12px;width:100%}
-.tb .nrmap{width:100%;height:520px;border-radius:var(--r);overflow:hidden;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal);background:#e9efef;z-index:0}
+.tb .nrmap{width:100%;height:520px;border-radius:var(--r);overflow:hidden;background:#e9efef;z-index:0}
 .tb .mapnote{margin:0;font-size:.875rem;color:var(--muted)}
 .nrpin span{display:block;width:26px;height:26px;box-sizing:border-box;border-radius:50%;background:#00857c;border:3px solid #fff;box-shadow:0 1px 5px rgba(7,41,59,.45)}
 .nrpin:focus-visible span,.nrpin:hover span{background:#07293b}
 .nrmap .leaflet-popup-content{font-family:var(--font);font-size:1rem;line-height:1.4;margin:14px 18px}.nrmap .leaflet-popup-content a{font-weight:800;color:#00857c}
 .nrmap .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 @media(max-width:700px){.tb .nrmap{height:380px}}
-/* Journey page: white cover with a draft notice (content stays underneath, so removing the cover brings the page back) */
-.tb #journey{position:relative}
-.tb .jcover{position:absolute;inset:0;z-index:20;background:rgb(255 255 255/.5)}
-.tb .jcover-in{position:sticky;top:0;height:100vh;box-sizing:border-box;padding:130px 32px 32px;display:grid;place-items:center;text-align:center}
-.tb .jcover p{margin:0;max-width:16ch;font-size:clamp(3rem,9vw,7.5rem);font-weight:800;line-height:1.05;color:var(--navy);text-wrap:balance}
+/* Home: Our Focus in one white card (teal top and bottom), title centred, circle photo left and text right */
+.tb .focuscard .sechead{text-align:center;margin-bottom:40px}
+.tb .focusrows{list-style:none;margin:0;padding:0;display:grid;gap:40px}
+.tb .focusrows li{display:grid;grid-template-columns:clamp(88px,16vw,168px) minmax(0,62ch);justify-content:center;gap:clamp(20px,4vw,40px);align-items:center;text-align:left}
+@media(min-width:741px){.tb #focus .focuscard{width:80%;margin-left:auto;margin-right:auto}}
+.tb .fcirc{display:block;width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;background:var(--teal-25)}
+.tb .fcirc img{display:block;width:100%;height:100%;object-fit:cover;border-radius:0}
+.tb .focusrows .fbody h3{margin:0 0 .5em;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800;color:var(--navy)}
+.tb .focusrows .fbody p{margin:0;max-width:62ch;font-size:1.05rem;line-height:1.6;color:var(--navy)}
+@media(max-width:560px){.tb .focuscard{padding:32px 20px}.tb .focusrows{gap:32px}.tb .focusrows li{grid-template-columns:72px minmax(0,1fr);gap:14px;align-items:start}}
+/* Timeline: funder logos under each "Funded by" line, 25px tall at most, each linking to the funder's site */
+.tb ol.river .flogos{list-style:none;margin:10px 0 .9em;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.tb ol.river .flogos li{margin:0;padding:0;display:block}
+.tb ol.river .flogos a{display:block;line-height:0}
+.tb ol.river .flogos .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}.tb ol.river .flogos li{position:relative}
+.tb ol.river .flogo-t{display:inline-block;font-size:.875rem;font-weight:800;line-height:25px;color:var(--navy);text-decoration:underline}
+.tb ol.river .flogos img{display:block;height:auto;width:auto;max-height:25px;max-width:120px;object-fit:contain}
+/* Footer: columns are only as tall as their content (no stretching to match each other) and a tighter gap between rows on iPad */
+.tb .site-foot .foot-cols,.tb .site-foot .fquick{align-items:start}
+.tb .site-foot .foot-top,.tb .site-foot .fcol,.tb .site-foot .fstack{height:auto;min-height:0;align-self:start}
+@media(min-width:701px) and (max-width:999px){.tb .site-foot .foot-cols{row-gap:24px}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:128px!important}.tb #about>.sec:last-child{padding-bottom:128px!important}.tb #journey>.sec:last-child{padding-bottom:128px!important}
 /* About: same 128px rhythm as Network */
