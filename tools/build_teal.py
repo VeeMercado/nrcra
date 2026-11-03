@@ -125,7 +125,7 @@ def _pick(*names):
 def partners_section():
     nema = "nema.png"
     nsw = "nsw.png"
-    return f'''<section class="sec partners" id="partners-home"><div class="wrap"><h3 class="ptitle">Thanks to our partners</h3><div class="pgrid">
+    return f'''<section class="sec partners" id="partners-home"><div class="wrap"><h3 class="ptitle">Thanks to our funders</h3><div class="pgrid">
 <div class="pcol ptl"><p>Supported by:</p><a class="plg" href="https://www.nema.gov.au">{_flogo(nema, "National Emergency Management Agency, Australian Government")}</a></div>
 <div class="pcol ptc"><p>Proudly co-funded by:</p><a class="plg" href="https://www.nsw.gov.au">{_flogo(nsw, "NSW Government")}</a></div>
 <div class="pcol ptr"><p>2024 - 2025 Funding Partners:</p><div class="pstack"><a class="plg" href="https://frrr.org.au">{_flogo("frrr-transparent.png", "Foundation for Rural and Regional Renewal")}</a><a class="plg" href="https://ucrh.edu.au">{_flogo("ucrh-trim.png", "University Centre for Rural Health")}</a></div></div>
