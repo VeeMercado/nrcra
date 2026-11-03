@@ -88,7 +88,7 @@ def hero_card(square=False, cover=False):
     return f'''<div class="hsplit{" hsplit-sq" if square else ""}{" hsplit-bg" if cover else ""}"><div class="wrap"><div class="hsplit-in">{tag_top}<div class="hsolid-text hsplit-l">{tag_in}
 <h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn About Us</a></p></div>
-<div class="hsplit-r" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div></div>'''
+<div class="hsplit-r" data-video="{VIMEO}">{img("sizzle", eager=True, alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div></div>'''
 
 
 def hero_photo():
@@ -96,7 +96,7 @@ def hero_photo():
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn About Us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M3 3l8 5-8 5z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>Watch reel</button></p></div>
-<div class="h1-photo" data-video="{VIMEO}">{img("cheer", eager=True, alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>'''
+<div class="h1-photo" data-video="{VIMEO}">{img("sizzle", eager=True, alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>'''
 
 
 def hero_green():
@@ -137,7 +137,7 @@ def home_body(hero="photo"):
 <section class="sec hwrow" style="padding-top:0"><div class="wrap hwbg"><span class="hwd hwd-blob" aria-hidden="true"></span>{B.deco("rings", "hwd-rings")}<span class="hwd hwd-dot hwd-dt" aria-hidden="true"></span><span class="hwd hwd-dot hwd-do" aria-hidden="true"></span><ul class="hwpills" aria-label="How we work"><li><a class="hp-teal" href="#about" data-jump="ab-how" data-page="about">Connect.</a></li><li><a class="hp-yellow" href="#about" data-jump="ab-how" data-page="about">Share.</a></li><li><a class="hp-orange" href="#about" data-jump="ab-how" data-page="about">Care.</a></li></ul></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
+<p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("home-circle-top")}{vimg("home-circle-bottom")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
 <section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Journey</h2><dl class="stats">{"".join(f"<div><dt>{n}</dt><dd>{t}</dd></div>" for n, t in PROG_STATS)}</dl><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See Journey</a></p></div></div></section>
 <section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></div></section>
 {partners_section()}'''
@@ -274,7 +274,7 @@ def funding_inner():
 
 
 def about_body():
-    return f'''    <div class="wrap"><div class="splith ab rev"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow pill-t">About us</span><h1>We know communities are stronger when they&rsquo;ve built trusted relationships <span class="mark">together.{B.SQUIGGLE}</span></h1></div></div></div>
+    return f'''    <div class="wrap"><div class="splith ab rev"><div class="ph">{img("yarn", eager=True)}</div><div><span class="eyebrow pill-t">About us</span><h1>We know communities are stronger when they&rsquo;ve built trusted relationships <span class="mark">together.{B.SQUIGGLE}</span></h1></div></div></div>
 <section class="sec" id="ab-vision" style="padding-top:0"><div class="wrap"><div class="aboutgrid"><div class="card abt"><h2>The Resilience Alliance</h2><p>Established in November 2023. Its roots lie in a run of compounding disasters: the 2017 floods, the 2019 bushfires, and the catastrophic floods and landslides of 2022. In each, local community organisers played a vital role in response, recovery and adaptation. Research in the years that followed found that these grassroots groups wanted stronger connections with each other for peer-to-peer support. That showed the need for regional collaboration in disaster resilience.</p><p>We support a network of place-based resilience groups to develop their own local approaches to risk reduction, preparedness and recovery, for fire, flood, landslides and whatever comes next.</p><p>The Resilience Alliance helps government agencies, councils and emergency services deliver on the commitments of the NSW State Emergency Management Plan, State Disaster Mitigation Plan and regional resilience priorities by connecting formal systems with trusted, community-led action.</p><div class="bar bar-t" aria-hidden="true"></div></div>
 <div class="vpcol"><div class="card vpc"><h2>Vision</h2><p>Connected, collaborative Northern Rivers communities that are empowered to care for themselves and each other before, during and after disasters.</p><div class="bar bar-y" aria-hidden="true"></div></div>
 <div class="card vpc"><h2>Purpose</h2><p>To develop a self-sustaining, trusted Resilience Alliance of place-based, community-led resilience groups and organisations. The Resilience Alliance shares knowledge and resources, provides mutual support and wellbeing, takes collective action and advocates for identified community needs.</p><div class="bar bar-o" aria-hidden="true"></div></div></div></div></div></section>
@@ -483,7 +483,7 @@ RACK_CATS = [
 
 def rack_body():
     cards = "".join(f'<li><h3>{t}</h3><p>{d}</p></li>' for t, d in RACK_CATS)
-    return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge.</span><h1>RACK</h1><p class="lede">One shared place to find what you need and what is already working in resilience communities across the Northern Rivers.</p>
+    return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge</span><h1>RACK</h1><p class="lede">One shared place to find what you need and what is already working in resilience communities across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=RACK%20access">Request Access</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a><a class="rackrev" href="#privacy">Privacy Policy</a></p></div>
 <div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="Someone using the RACK on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
 <section class="sec"><div class="wrap rackhead"><p class="lede">Find templates and guides for your group, and share your own with the network.</p><ol class="pillcards rackcats">{cards}</ol></div></section>'''
@@ -556,52 +556,44 @@ def viz(name, cls=""):
 
 
 def pquote(text, who, cls=""):
-    return f'<figure class="pq {cls}"><blockquote><p>&ldquo;{E(text)}&rdquo;</p></blockquote><figcaption>{E(who)}</figcaption></figure>'
+    """Journey quotes use the Network story card: white card, yellow base, italic quote, name below."""
+    return f'<figure class="sqc {cls}"><blockquote><p>&ldquo;{E(text)}&rdquo;</p><footer>&mdash; {E(who)}</footer></blockquote></figure>'
 
 
-def prg_head(tag, title, lede):
-    return f'<div class="prghd"><span class="eyebrow pill-t">{tag}</span><h2 class="sechead">{title}</h2><p class="lede">{lede}</p></div>'
+def prg_head(title, lede):
+    return f'<div class="prghd"><h2 class="sechead">{title}</h2><p class="lede">{lede}</p></div>'
 
 
 PROG_STATS = [("60+", "grassroots groups and organisations"), ("43", "groups have experienced disaster as a team"), ("35", "groups have strong relationships with their local council"), ("$2M+", "funding since inception")]
 
-# (title, text, number of groups out of 58, big label, quote, who, visual)
+# (title, text with the lead phrase in bold, quote, who, chart)
 ASPIRE = [
-    ("Create or update an action plan", "Only 13/58 groups say they have an up to date action plan for resilience.", 13, "13 of 58", "[We want] to get some direction on how to move forward in developing our preparedness program", "Woodburn CRT", None),
-    ("Reduce key-people dependency", "38 groups noted that leadership/succession planning is a key priority for them.", 38, "38 of 58", "Young blood [makes a big difference]. A couple of more really engaged people in the core group.", "Evans Area Resilience Network", None),
-    ("Maintain engagement between disasters", "Community engagement, morale and the drive to stay prepared fade outside of disasters. Groups see this as a big gap.", None, "", "People come out during a disaster but not in peacetime. How do we leverage that?", "Mount Burrell Community Resilience Neighbourhood", None),
-    ("Improve our knowledge of vulnerable residents", "About half of our groups told us they need help identifying vulnerable people in their community.", None, "", "", "", "vulnerable-people.png"),
-    ("Grow our capacity to meet demands", "Groups lack time, people and steady money leading to volunteer burn out and good projects stalling before they finish.", None, "", "[We need] recurrent baseline funding to cover ongoing costs of running the hall, insurance, internet, radio/repeater maintenance and to hold some events to connect the community.", "Minyon Resilience Network", None),
-    ("Improve our backup communication systems", "At least 10 groups have specifically called this out as a gap. Without a backup, a community may be unable to communicate and coordinate during a disaster.", 10, "10+ of 58", "[We have] difficulty engaging more community members with radios.", "Larnook CRT", None),
-    ("Manage our volunteer surges", "30 groups do not have volunteer policy, procedures, risk documentation or templates.", 30, "30 of 58", "[What would make a big difference is] for people to realise that they can't just turn up when a disaster happens. They need training, police checks, induction etc", "Iluka Community Organisation Planning for Emergencies (ICOPE)", None),
+    ("Create or update an action plan", "Only <strong>13/58 groups</strong> say they have an up to date action plan for resilience.", "[We want] to get some direction on how to move forward in developing our preparedness program", "Woodburn CRT", None),
+    ("Reduce key-people dependency", "<strong>38 groups</strong> noted that leadership/succession planning is a key priority for them.", "Young blood [makes a big difference]. A couple of more really engaged people in the core group.", "Evans Area Resilience Network", None),
+    ("Maintain engagement between disasters", "Community engagement, morale and the drive to stay prepared fade outside of disasters. Groups see this as a big gap.", "People come out during a disaster but not in peacetime. How do we leverage that?", "Mount Burrell Community Resilience Neighbourhood", None),
+    ("Improve our knowledge of vulnerable residents", "<strong>About half of our groups</strong> told us they need help identifying vulnerable people in their community.", "", "", "vulnerable-people.png"),
+    ("Grow our capacity to meet demands", "Groups lack time, people and steady money leading to volunteer burn out and good projects stalling before they finish.", "[We need] recurrent baseline funding to cover ongoing costs of running the hall, insurance, internet, radio/repeater maintenance and to hold some events to connect the community.", "Minyon Resilience Network", None),
+    ("Improve our backup communication systems", "<strong>At least 10 groups</strong> have specifically called this out as a gap. Without a backup, a community may be unable to communicate and coordinate during a disaster.", "[We have] difficulty engaging more community members with radios.", "Larnook CRT", None),
+    ("Manage our volunteer surges", "<strong>30 groups</strong> do not have volunteer policy, procedures, risk documentation or templates.", "[What would make a big difference is] for people to realise that they can't just turn up when a disaster happens. They need training, police checks, induction etc", "Iluka Community Organisation Planning for Emergencies (ICOPE)", None),
 ]
 
 
 def aspire_item(i, row):
-    title, text, n, big, quote, who, vis = row
-    tint = ("t", "y", "o")[(i - 1) % 3]
-    left = f'<span class="aspn asp-{tint}">{i:02d}</span><h3>{title}</h3><p>{text}</p>'
-    if vis:
-        right = viz(vis, "flat")
-    elif n:
-        dots = "".join(f'<i class="{"on" if k < n else ""}"></i>' for k in range(58))
-        right = f'<div class="dotviz" role="img" aria-label="{n} of 58 groups"><p class="dotbig">{big}<span> groups</span></p><div class="dotgrid" aria-hidden="true">{dots}</div></div>'
-        left += pquote(quote, who, "inl")
-    else:
-        right = pquote(quote, who, "tall")
-    return f'<li class="asp"><div class="asp-l">{left}</div><div class="asp-r">{right}</div></li>'
+    title, text, quote, who, vis = row
+    right = f'<p>{text}</p>' + (viz(vis, "flat") if vis else pquote(quote, who))
+    return f'<li class="asp"><div class="asp-l"><span class="aspn">{i:02d}</span><h3>{title}</h3></div><div class="asp-r">{right}</div></li>'
 
 
 def progress_body():
     asp = "".join(aspire_item(i, r) for i, r in enumerate(ASPIRE, 1))
-    return f'''<div class="wrap"><div class="prgsplit"><div class="pg-head prghead"><span class="eyebrow pill-t">Journey</span><h1>Our Journey</h1><p class="lede">Since early 2024, community groups across the Northern Rivers have joined together as the Resilience Alliance. Today, we&rsquo;ve grown to 58 community resilience groups and counting. Over the past few months, we&rsquo;ve been taking stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="prgph"><img src="../assets/img/hall.jpg" alt="Groups from across the Northern Rivers gathered together in a large hall." loading="eager" decoding="async"></div></div></div>
-<section class="sec" id="pr-who"><div class="wrap">{prg_head("Who we are", "Many groups, shared purpose", "We are a diverse alliance of community-led groups and organisations: skilled by experience, varied by structure, united in making our communities disaster-ready.")}
+    return f'''<div class="wrap"><div class="splith net jrn"><div><span class="eyebrow">Journey</span><h1>Our journey so far</h1><p class="lede">Our story started in the 2022 floods, when local people led the response in their own communities. Since then, those groups have come together as the Northern Rivers Community Resilience Alliance. Today we are 60+ groups and growing. Between June and October 2026 we have spoken with 58 of those groups to take stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="ph"><img src="../assets/img/hall.jpg" alt="Groups from across the Northern Rivers gathered together in a large hall." loading="eager" decoding="async"></div></div></div>
+<section class="sec" id="pr-who"><div class="wrap">{prg_head("Many groups, shared purpose", "We are a diverse alliance of community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.")}
 <div class="vizgrid">{viz("operational-maturity.png", "wide")}{viz("active-groups.svg", "wide")}{viz("skills.svg", "wide")}</div></div></section>
-<section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap">{prg_head("What we&rsquo;ve faced", "We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}
-<div class="vizgrid">{viz("disaster-experience.svg")}{pquote("Alfred taught us that we need to have systems in place and keep tabs on the weather and forecasts, and that having a proactive President with good social networks can make things happen, even in difficult circumstances.", "Bangalow Resilience Network", "tall yel")}</div></div></section>
-<section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap">{prg_head("How we connect", "We value social connection", "Groups make efforts to have good connections within their groups, the local community, other groups, emergency services and local council.")}
+<section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap">{prg_head("We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}
+<div class="vizgrid d32">{viz("disaster-experience.svg")}{pquote("[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it's so diverse.", "Chinderah and Surrounds Peoples Hub")}</div></div></section>
+<section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap">{prg_head("We value social connection", "Connection is at the heart of what we do. Our groups build relationships in their own teams, across their community, with other groups in the alliance, and with emergency services and government agencies, so when disaster hits, people already know who to call.")}
 <div class="vizgrid">{viz("connectedness.png", "wide")}{viz("relationship-council.svg")}{viz("relationship-emergency-services.png")}</div></div></section>
-<section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap">{prg_head("Our aspirations", "We want to be ready for the next disaster", "Taking stock also showed us where we want to grow. Seven aspirations stood out. Each one is a gap that groups told us they want help to close, so we can look after our communities and each other for the long haul.")}
+<section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap">{prg_head("We want to be ready for the next disaster", "Taking stock also showed us where we want to grow. Seven aspirations stood out. Each one is something our groups told us they want support with, so we can look after our communities and each other for the long haul.")}
 <ol class="asplist">{asp}</ol></div></section><script src="https://public.flourish.studio/resources/embed.js" async></script>'''
 
 
@@ -966,20 +958,20 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .vizgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .tb .viz{margin:0;background:#fff;border-radius:var(--r);padding:32px;display:grid;place-items:center}.tb .viz.wide{grid-column:1/-1}.tb .viz img{display:block;width:100%;height:auto;max-width:100%}.tb .viz .flourish-embed{width:100%;min-height:200px}
 .tb .viz.flat{padding:0;background:transparent}
-.tb .pq{margin:0;background:var(--teal-25);border-radius:var(--r);padding:32px;display:flex;flex-direction:column;justify-content:center;gap:16px}
-.tb .pq blockquote{margin:0}.tb .pq p{margin:0;font-size:1.5rem;line-height:1.4;font-style:italic;font-weight:400;color:var(--navy)}
-.tb .pq figcaption{font-size:1rem;font-weight:800;color:var(--navy)}
-.tb .pq.yel{background:var(--yellow-40);border-top:8px solid var(--yellow);border-bottom:8px solid var(--yellow)}.tb .pq.yel p{font-style:normal;font-weight:800;font-size:1.25rem}
-.tb .pq.inl{margin-top:24px;padding:24px;gap:12px}.tb .pq.inl p{font-size:1rem;line-height:1.5}
-.tb .asplist{list-style:none;margin:0;padding:0;display:grid;gap:16px}
-.tb .asp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;background:#fff;border-radius:var(--r);padding:32px}
-.tb .asp h3{margin:16px 0 12px;font-size:clamp(1.375rem,2.4vw,1.5rem)}.tb .asp-l>p{margin:0}
-.tb .aspn{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;font-weight:900;color:var(--navy);background:#BEDDDA}.tb .aspn.asp-y{background:#FFEAAA}.tb .aspn.asp-o{background:#FBD6C9}
-.tb .asp-r{min-width:0}.tb .asp-r .pq.tall{height:100%}
-.tb .dotviz{display:grid;gap:16px}.tb .dotbig{margin:0;font-size:2.375rem;font-weight:900;line-height:1;color:var(--navy)}.tb .dotbig span{font-size:1rem;font-weight:800}
-.tb .dotgrid{display:flex;flex-wrap:wrap;gap:8px}.tb .dotgrid i{width:20px;height:20px;border-radius:50%;background:#d3e5e3}.tb .dotgrid i.on{background:var(--teal)}
-@media(max-width:900px){.tb .asp{grid-template-columns:1fr;gap:24px}.tb .prgsplit{grid-template-columns:1fr;gap:24px}.tb .prgph{min-height:200px}}
-@media(max-width:700px){.tb .vizgrid{grid-template-columns:1fr}.tb .viz,.tb .pq{padding:20px}.tb .asp{padding:24px}.tb .dotgrid{gap:6px}.tb .dotgrid i{width:16px;height:16px}}
+/* Journey quotes: the same card as the Network stories (white, yellow base, italic quote, name below), without a photo */
+.sqc{margin:0;background:#fff;border:1px solid var(--line);border-bottom:10px solid var(--yellow);border-radius:28px;padding:24px 22px;display:flex;flex-direction:column}
+.sqc blockquote{margin:0;padding:0;display:flex;flex-direction:column;gap:14px;flex:1}.sqc blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:400;font-style:italic}
+.sqc blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:.95rem}
+.tb .vizgrid.d32{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+.tb .splith.jrn .ph img{aspect-ratio:auto;height:auto;min-height:517px;flex:1;object-fit:cover}
+.tb .vizgrid.d32 .sqc{align-self:center}
+.tb .asplist{list-style:none;margin:0;padding:0;display:grid}
+.tb .asp{display:grid;grid-template-columns:minmax(200px,260px) minmax(0,1fr);gap:48px;align-items:start;border-top:2px solid #d3e5e3;padding:48px 0}
+.tb .aspn{display:block;font-size:4rem;line-height:1;font-weight:800;letter-spacing:-.03em;color:var(--teal)}
+.tb .asp h3{margin:12px 0 0;font-size:clamp(1.375rem,2.4vw,1.5rem);line-height:1.2}
+.tb .asp-r{min-width:0;display:flex;flex-direction:column;gap:24px}.tb .asp-r>p{margin:0;max-width:68ch;font-size:1.1875rem;line-height:1.6}.tb .asp-r .viz{margin:0}
+@media(max-width:900px){.tb .asp{grid-template-columns:1fr;gap:24px;padding:40px 0}.tb .prgsplit{grid-template-columns:1fr;gap:24px}.tb .prgph{min-height:200px}.tb .vizgrid.d32{grid-template-columns:1fr}}
+@media(max-width:700px){.tb .vizgrid{grid-template-columns:1fr}.tb .viz,.sqc{padding:20px}}
 /* Footer headings: plain white bold h3 (no paint strip) */
 .tb .site-foot .fcol h3{color:#fff;background:none;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800;line-height:1.25;margin:0 0 14px;padding:0;white-space:nowrap}
 /* Our timeline: the section and the river run the full browser width, six columns with 2027+ */
@@ -1041,7 +1033,11 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb #about>.sec.mealsec,.tb #about>.sec.fundsec{padding-bottom:var(--space-large)!important}.tb .learnwrap .fundgrid{margin-top:var(--space-large)}.tb #about>.sec.steersec{padding-bottom:var(--space-large)!important}
 @media(max-width:860px){.tb .learnwrap{--mc:calc(min(460px,100cqw)*336/1420)}.tb .learngrid,.tb .fundgrid{grid-template-columns:1fr}.tb .learngrid{gap:24px}}
 /* About header photo: 40px taller above and 40px taller below, page spacing kept the same around it */
-@media(min-width:861px){.tb .page>.wrap:first-child>.splith.ab{padding-top:72px;padding-bottom:40px}.tb .splith.ab .ph{margin:-40px 0}}
+@media(min-width:861px){.tb .page>.wrap:first-child>.splith.ab{padding-top:112px;padding-bottom:80px}.tb .splith.ab .ph{margin:-80px 0}}
+/* Home: the line under 60+ groups is the same size as the header text (lede) */
+.tb .wwa .subline{font-size:1.25rem;line-height:1.6}
+/* Home, desktop: the bottom photo sits over the top photo, and the yellow circle sits behind both */
+@media(min-width:861px){.circles img:nth-of-type(1){z-index:1}.circles img:nth-of-type(2){z-index:2}.circles .blob{z-index:0}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */

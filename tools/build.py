@@ -113,6 +113,8 @@ REAL = "Disaster Ready Fund, FRRR, NRMA Insurance HELP Fund, NSW Government, Nor
 
 ALT = dict(
     cheer="Alliance members cheering with raised arms in front of a school building.",
+    sizzle="Alliance members gathered and laughing together under paperbark trees.",
+    yarn="Members standing in a ring on the lawn, holding balls of wool and a web of coloured yarn stretched between them.",
     group="A large group of Alliance members posing together on the lawn.",
     crowd="People gathered outdoors listening beneath trees at a gathering.",
     laughing="Members laughing together around a workshop table.",
@@ -137,7 +139,7 @@ ALT = dict(
     lab="Members talking together in a bright room.",
     workshop="Members talking around a workshop table.",
 )
-FILE = dict(cheer="group-cheer", group="group-photo", crowd="crowd", laughing="laughing", listening="listening", table="table", speaker="speaker",
+FILE = dict(yarn="about-yarn", sizzle="sizzle-poster", cheer="group-cheer", group="group-photo", crowd="crowd", laughing="laughing", listening="listening", table="table", speaker="speaker",
             aerial="aerial", line="line", web="web", cards="cards", board="board", hug="hug", meeting="meeting", house="house", pair="pair",
             circle="circle", talk="talk", audience="audience", board2="board2", cards2="cards2", hall="hall", lab="lab", workshop="workshop")
 
