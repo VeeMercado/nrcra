@@ -1147,7 +1147,7 @@ def dashboard():
 <article class="rc rc2"><a class="shot" href="prototype-c/" aria-label="Open Prototype Round 2"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/prototype-c.jpg?v=r2l" alt="Screenshot of Prototype Round 2: a dark green card with white text on the left and a nearly square gathering photo card with a play button, centred beside it" loading="lazy"></a>
 <div class="info"><span class="num">Prototype Round 2</span><h2><a href="prototype-c/">Round 2 prototype</a></h2><p>Round 2 design and content updated based on <a href="{DOC_URL}">Client Feedback (Google Doc)</a>.</p>
 <p><b>Feedback needed:</b> Round 2 is for finalising the content. Please check the wording, photos, logos, links, group details and the new Privacy Policy page, and tell us what needs to change. All content stays sample content until it is confirmed.</p>
-<p>Impact is left blank as it is not in the <a href="{SCOPE_URL}">project scope</a>.</p>
+<p>Progress is built from the supplied charts. Flourish embeds go in on the live site.</p>
 <p class="btnrow"><a class="btn btn-primary" href="prototype-c/">Open Prototype Round 2</a><a class="btn btn-ghost" href="{DOC_URL}">Client Feedback (Google Doc)</a></p></div></article></div>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}

@@ -1,4 +1,4 @@
-"""Teal-led exploration (teal as accents and tints only): Home, About, Impact (blank) and Network on the designer's Layout Design wireframe
+"""Teal-led exploration (teal as accents and tints only): Home, About, Progress and Network on the designer's Layout Design wireframe
 (content and layout only), styled from Prototype 1, with teal as the main driver instead of navy.
 
   prototype-b  teal as accents and tints only (highlights, buttons, borders, tinted panels), navy kept for the footer
@@ -14,7 +14,7 @@ import build as B
 from build import E, img, logo, screen, icon, BASE, MOBILE, JS, FONT, CSS1, VIMEO, CONTACT
 
 SIGN_IN = "https://rack.nrcra.org.au"  # the R.A.C.K address NRCRA gave us (not live yet)
-MENU = [("home", "Home"), ("network", "Network"), ("about", "About"), ("impact", "Impact"), ("rack", "R.A.C.K.")]
+MENU = [("home", "Home"), ("network", "Network"), ("about", "About"), ("progress", "Progress"), ("rack", "R.A.C.K.")]
 # Only Prototype C is published. A (two cards) and B (one green card) are archived: their headers stay available as hero variants below, and snapshots are kept in the git-ignored _archive-* folders.
 NAMES = {"prototype-c": "Prototype Round 2"}
 SHORT = {"prototype-c": "C"}
@@ -69,7 +69,7 @@ def hl(t):
 
 def steps():
     st = [("cal", "Come to a gathering", f"{B.GATHER[0]}: {B.GATHER[1]}.", "#home", "Upcoming"),
-          ("share", "Share knowledge", "Add what works to the R.A.C.K.", SIGN_IN, "The R.A.C.K"), ("hand", "Partner with us", "Fund or research community-led resilience.", "#impact", "Impact")]
+          ("share", "Share knowledge", "Add what works to the R.A.C.K.", SIGN_IN, "The R.A.C.K"), ("hand", "Partner with us", "Fund or research community-led resilience.", "#progress", "Progress")]
     return '<ol class="steps">' + "".join(f'<li><span class="ci">{icon(i)}</span><b>{E(t)}</b><p>{E(d)}</p><a href="{h}">{E(l)}</a></li>' for i, t, d, h, l in st) + "</ol>"
 
 
@@ -118,7 +118,7 @@ def home_body(hero="photo"):
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups in 8 Local Government Areas,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("group-3")}{vimg("group-2")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
-<section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Impact</h2>{B.stats()}<p class="btnrow"><a class="btn btn-tertiary" href="#impact">See Impact</a></p></div></div></section>'''
+<section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Progress</h2><dl class="stats">{"".join(f"<div><dt>{n}</dt><dd>{t}</dd></div>" for n, t in PROG_STATS)}</dl><p class="btnrow"><a class="btn btn-tertiary" href="#progress">See Progress</a></p></div></div></section>'''
 
 
 # ---------------------------------------------------------------- About
@@ -391,8 +391,71 @@ def privacy_body():
 <section class="sec" style="padding-top:0"><div class="wrap"><ol class="pplist2">{items}</ol></div></section>'''
 
 
-def impact_body():
-    return '<div class="wrap"><div class="pg-head"><h1>Impact</h1></div></div>'
+PROG_VIZ = {
+    'operational-maturity.png': (1588, 762, '30769372', 'Bar chart of operational maturity, number of groups that: have an online presence 49, are incorporated 40, have a document hub 27, have volunteer policies 16, have a steering committee 8.'),
+    'active-groups.svg': (794, 426, '30730526', 'Bubble chart of active volunteers per group. 33 groups run on a core team of 10 or fewer, 5 groups on 11 to 20, 1 group on 20 to 30 and 3 groups on more than 30.'),
+    'skills.svg': (756, 518, '30730890', 'Bar chart of skills held across Alliance members, by number of groups: admin and committee experience 48, trained first aid 46, grant writing 44, coordination and logistics 38, SES, RFS or fire trained 36, trades and practical skills 35, mental health first aid 30, local language and cultural skills 14.'),
+    'disaster-experience.svg': (756, 540, '30731208', 'Donut chart: 43 groups have joint disaster experience and 15 groups did not answer.'),
+    'connectedness.png': (1588, 592, '30743797', 'Bar chart of self-rated connection, 1 to 5, within each group and to the wider community. Within their own group: 11 groups rate 5, 26 rate 4, 1 rates 3.5, 8 rate 3 and 1 rates 1. To the wider community: 4 rate 5, 14 rate 4, 1 rates 3.5, 15 rate 3, 2 rate 2.5, 8 rate 2 and 3 rate 1.'),
+    'relationship-council.svg': (794, 540, '30744442', 'Donut chart of relationship with local council: 35 groups have a strong relationship, 10 have some contact and 3 have little to no contact.'),
+    'relationship-emergency-services.png': (1588, 1068, '30744547', 'Dot chart of groups that have a relationship to emergency services: RFS 24 groups, SES 23 groups, Police 3 groups.'),
+    'vulnerable-people.png': (1588, 600, '30767737', 'Bar chart of how groups rate their knowledge of vulnerable community members, from 1 to 5: 7 groups rate themselves 5, 12 rate 4, 10 rate 3, 8 rate 2 and 6 rate 1. 24 groups rate themselves 3 or lower.'),
+}
+
+
+def viz(name, cls=""):
+    w, h, fid, alt = PROG_VIZ[name]
+    return f'<figure class="viz {cls}" data-flourish="{fid}"><img src="../assets/progress/{name}" alt="{E(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async"></figure>'
+
+
+def pquote(text, who, cls=""):
+    return f'<figure class="pq {cls}"><blockquote><p>&ldquo;{E(text)}&rdquo;</p></blockquote><figcaption>{E(who)}</figcaption></figure>'
+
+
+def prg_head(tag, title, lede):
+    return f'<div class="prghd"><span class="eyebrow pill-t">{tag}</span><h2 class="sechead">{title}</h2><p class="lede">{lede}</p></div>'
+
+
+PROG_STATS = [("58", "community resilience groups and counting"), ("43", "groups with joint disaster experience"), ("46", "groups with first aid trained members"), ("35", "groups with a strong relationship with their council")]
+
+# (title, text, number of groups out of 58, big label, quote, who, visual)
+ASPIRE = [
+    ("Create or update an action plan", "Only 13/58 groups say they have an up to date action plan for resilience.", 13, "13 of 58", "[We want] to get some direction on how to move forward in developing our preparedness program", "Woodburn CRT", None),
+    ("Reduce key-people dependency", "38 groups noted that leadership/succession planning is a key priority for them.", 38, "38 of 58", "Young blood [makes a big difference]. A couple of more really engaged people in the core group.", "Evans Area Resilience Network", None),
+    ("Maintain engagement between disasters", "Community engagement, morale and the drive to stay prepared fade outside of disasters. Groups see this as a big gap.", None, "", "People come out during a disaster but not in peacetime. How do we leverage that?", "Mount Burrell Community Resilience Neighbourhood", None),
+    ("Improve our knowledge of vulnerable residents", "About half of our groups told us they need help identifying vulnerable people in their community.", None, "", "", "", "vulnerable-people.png"),
+    ("Grow our capacity to meet demands", "Groups lack time, people and steady money leading to volunteer burn out and good projects stalling before they finish.", None, "", "[We need] recurrent baseline funding to cover ongoing costs of running the hall, insurance, internet, radio/repeater maintenance and to hold some events to connect the community.", "Minyon Resilience Network", None),
+    ("Improve our backup communication systems", "At least 10 groups have specifically called this out as a gap. Without a backup, a community may be unable to communicate and coordinate during a disaster.", 10, "10+ of 58", "[We have] difficulty engaging more community members with radios.", "Larnook CRT", None),
+    ("Manage our volunteer surges", "30 groups do not have volunteer policy, procedures, risk documentation or templates.", 30, "30 of 58", "[What would make a big difference is] for people to realise that they can't just turn up when a disaster happens. They need training, police checks, induction etc", "Iluka Community Organisation Planning for Emergencies (ICOPE)", None),
+]
+
+
+def aspire_item(i, row):
+    title, text, n, big, quote, who, vis = row
+    tint = ("t", "y", "o")[(i - 1) % 3]
+    left = f'<span class="aspn asp-{tint}">{i:02d}</span><h3>{title}</h3><p>{text}</p>'
+    if vis:
+        right = viz(vis, "flat")
+    elif n:
+        dots = "".join(f'<i class="{"on" if k < n else ""}"></i>' for k in range(58))
+        right = f'<div class="dotviz" role="img" aria-label="{n} of 58 groups"><p class="dotbig">{big}<span> groups</span></p><div class="dotgrid" aria-hidden="true">{dots}</div></div>'
+        left += pquote(quote, who, "inl")
+    else:
+        right = pquote(quote, who, "tall")
+    return f'<li class="asp"><div class="asp-l">{left}</div><div class="asp-r">{right}</div></li>'
+
+
+def progress_body():
+    asp = "".join(aspire_item(i, r) for i, r in enumerate(ASPIRE, 1))
+    return f'''<div class="wrap"><div class="pg-head prghead"><span class="eyebrow pill-t">Progress</span><h1>DRAFT</h1><p class="lede">Since early 2024, community groups across the Northern Rivers have joined together as the Resilience Alliance. Today, we&rsquo;ve grown to 58 community resilience groups and counting. Over the past few months, we&rsquo;ve been taking stock: where we are now, and where we&rsquo;d like to be.</p></div></div>
+<section class="sec" id="pr-who"><div class="wrap">{prg_head("Who we are", "Many groups, shared purpose", "We are a diverse alliance of community-led groups and organisations: skilled by experience, varied by structure, united in making our communities disaster-ready.")}
+<div class="vizgrid">{viz("operational-maturity.png", "wide")}{viz("active-groups.svg")}{viz("skills.svg")}</div></div></section>
+<section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap">{prg_head("What we&rsquo;ve faced", "We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}
+<div class="vizgrid">{viz("disaster-experience.svg")}{pquote("Alfred taught us that we need to have systems in place and keep tabs on the weather and forecasts, and that having a proactive President with good social networks can make things happen, even in difficult circumstances.", "Bangalow Resilience Network", "tall")}</div></div></section>
+<section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap">{prg_head("How we connect", "We value social connection", "Groups make efforts to have good connections within their groups, the local community, other groups, emergency services and local council.")}
+<div class="vizgrid">{viz("connectedness.png", "wide")}{viz("relationship-council.svg")}{viz("relationship-emergency-services.png")}</div></div></section>
+<section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap">{prg_head("Our aspirations", "We want to be ready for the next disaster", "Taking stock also showed us where we want to grow. Seven aspirations stood out. Each one is a gap that groups told us they want help to close, so we can look after our communities and each other for the long haul.")}
+<ol class="asplist">{asp}</ol></div></section>'''
 
 
 # ---------------------------------------------------------------- CSS
@@ -710,7 +773,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .site-foot .flist a:hover{background:#f3f9f8;color:var(--navy);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
 .tb .site-foot .flist a:active{background:#beddda;color:var(--navy)}
 .tb .site-foot .foot-cols{grid-template-columns:minmax(0,1fr) minmax(0,1.7fr) minmax(max-content,1.3fr);gap:48px}.tb .fstack a[href^="mailto"]{white-space:nowrap}.tb .fstack .fcol+.fcol{margin-top:24px}.tb .site-foot .fcol h2{white-space:nowrap}
-@media(min-width:701px) and (max-width:999px){.tb .site-foot .foot-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.tb .site-foot .fquick{order:1;grid-column:1/-1}.tb .site-foot .foot-top{order:2}.tb .site-foot .fstack{order:3}}
+@media(min-width:701px) and (max-width:999px){.tb .site-foot .foot-cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.tb .site-foot .fquick{display:contents}.tb .site-foot .foot-top{order:1}.tb .site-foot .fquick>:nth-child(1){order:2}.tb .site-foot .fstack{order:3}.tb .site-foot .fquick>:nth-child(2){order:4}}
 @media(max-width:700px){.tb .site-foot .foot-cols{grid-template-columns:minmax(0,1fr);gap:16px}.tb .site-foot .fquick{grid-template-columns:minmax(0,1fr);gap:0}.tb .site-foot .fcol h2.fhide{display:none}}
 /* border line above the copyright line, so the Acknowledgement of Country sits between two lines */
 .tb .site-foot .copyrow{margin:24px 0 0;padding-top:24px;border-top:1px solid var(--foot-line);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px 20px}.tb .site-foot .copy{margin:0;padding:0;border:0;text-align:center}
@@ -749,8 +812,27 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* Network only: spacing around Our Stories is set with its two yellow bars (100px each side, the lower one to the top edge of the white Our Network band), see the Our Stories rules */
 /* Our Network directory (Network and every LGA page): double the space under the cards */
 .tb #network>.sec:last-child,.tb [id^="lga-"]>.sec:last-child{padding-bottom:128px!important}
+/* Progress page: Flourish chart placeholders sit in white cards (Eunice's SVG/PNG files); aspirations are a numbered list of cards */
+.tb .prghead{padding-bottom:0}.tb .prghead .lede{max-width:820px}
+.tb .prghd{max-width:820px;margin-bottom:32px}.tb .prghd .sechead{margin-bottom:16px}.tb .prghd .lede{margin:0}
+.tb .vizgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.tb .viz{margin:0;background:#fff;border-radius:var(--r);padding:32px;display:grid;place-items:center}.tb .viz.wide{grid-column:1/-1}.tb .viz img{display:block;width:100%;height:auto;max-width:100%}
+.tb .viz.flat{padding:0;background:transparent}
+.tb .pq{margin:0;background:var(--teal-25);border-radius:var(--r);padding:32px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.tb .pq blockquote{margin:0}.tb .pq p{margin:0;font-size:1.5rem;line-height:1.4;font-style:italic;font-weight:400;color:var(--navy)}
+.tb .pq figcaption{font-size:1rem;font-weight:800;color:var(--navy)}
+.tb .pq.inl{margin-top:24px;padding:24px;gap:12px}.tb .pq.inl p{font-size:1rem;line-height:1.5}
+.tb .asplist{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.tb .asp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;background:#fff;border-radius:var(--r);padding:32px}
+.tb .asp h3{margin:16px 0 12px;font-size:clamp(1.375rem,2.4vw,1.5rem)}.tb .asp-l>p{margin:0}
+.tb .aspn{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;font-weight:900;color:var(--navy);background:#BEDDDA}.tb .aspn.asp-y{background:#FFEAAA}.tb .aspn.asp-o{background:#FBD6C9}
+.tb .asp-r{min-width:0}.tb .asp-r .pq.tall{height:100%}
+.tb .dotviz{display:grid;gap:16px}.tb .dotbig{margin:0;font-size:2.375rem;font-weight:900;line-height:1;color:var(--navy)}.tb .dotbig span{font-size:1rem;font-weight:800}
+.tb .dotgrid{display:flex;flex-wrap:wrap;gap:8px}.tb .dotgrid i{width:20px;height:20px;border-radius:50%;background:#d3e5e3}.tb .dotgrid i.on{background:var(--teal)}
+@media(max-width:900px){.tb .asp{grid-template-columns:1fr;gap:24px}}
+@media(max-width:700px){.tb .vizgrid{grid-template-columns:1fr}.tb .viz,.tb .pq{padding:20px}.tb .asp{padding:24px}.tb .dotgrid{gap:6px}.tb .dotgrid i{width:16px;height:16px}}
 /* every page ends with the same 128px above the footer */
-.tb .page>.sec:last-child{padding-bottom:128px!important}.tb #about>.sec:last-child{padding-bottom:128px!important}.tb #impact>.wrap:first-child{margin-bottom:128px}
+.tb .page>.sec:last-child{padding-bottom:128px!important}.tb #about>.sec:last-child{padding-bottom:128px!important}.tb #progress>.sec:last-child{padding-bottom:128px!important}
 /* About: same 128px rhythm as Network */
 .tb #about>.wrap:first-child{margin-bottom:32px}.tb #privacy>.wrap:first-child{margin-bottom:32px}.tb #about>.sec{padding-bottom:128px!important}
 
@@ -788,7 +870,7 @@ def tfooter():
     contact = [("hello@nrcra.org.au", "mailto:hello@nrcra.org.au")]
     touch = [("Facebook", B.LINKS["fb"]), ("LinkedIn", B.LINKS["li"])]
     social = '<div class="fcol"><h2 class="fb1">Get in touch</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in contact) + '</ul><ul class="flist social">' + "".join(f'<li><a class="soc" href="{u}" target="_blank" rel="noopener" aria-label="{n} (opens in a new tab)">{SOC_ICONS[n]}</a></li>' for n, u in touch) + "</ul></div>"
-    site = [("Alliance Home", "#home"), ("Our Network", "#network"), ("About us", "#about"), ("Our Impact", "#impact")]
+    site = [("Alliance Home", "#home"), ("Our Network", "#network"), ("About us", "#about"), ("Our Progress", "#progress")]
     rackcol = [("What is R.A.C.K?", "#rack"), ("R.A.C.K. Sign In", SIGN_IN), ("Privacy Policy", "#privacy")]
     untitled = '<div class="fcol"><h2 class="fb2 fhide" aria-hidden="true">Quick Links</h2><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in rackcol) + "</ul></div>"
     top = '<div class="foot-top"><span class="foot-logo boxed">' + blogo("logo") + '</span></div>'
@@ -818,7 +900,7 @@ var pg=a.getAttribute('data-page');if(location.hash==='#'+pg){document.getElemen
 
 def page(v):
     css, cls = CSS_B, "tb"
-    body = "".join([screen("home", "Home", home_body(HERO_FOR[v])), screen("about", "About", about_body()), screen("impact", "Impact", impact_body()), screen("rack", "R.A.C.K.", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
+    body = "".join([screen("home", "Home", home_body(HERO_FOR[v])), screen("about", "About", about_body()), screen("progress", "Progress", progress_body()), screen("rack", "R.A.C.K.", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NRCRA teal-led {NAMES[v]}</title><meta name="robots" content="noindex">
