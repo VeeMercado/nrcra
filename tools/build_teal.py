@@ -498,7 +498,8 @@ def aspire_item(i, row):
 
 def progress_body():
     asp = "".join(aspire_item(i, r) for i, r in enumerate(ASPIRE, 1))
-    return f'''<div class="wrap"><div class="prgsplit"><div class="pg-head prghead"><span class="eyebrow pill-t">Journey</span><h1>DRAFT</h1><p class="lede">Since early 2024, community groups across the Northern Rivers have joined together as the Resilience Alliance. Today, we&rsquo;ve grown to 58 community resilience groups and counting. Over the past few months, we&rsquo;ve been taking stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="prgph" role="img" aria-label="Placeholder for hero graphic">Placeholder for graphic</div></div></div>
+    return f'''<div class="jcover" role="note"><div class="jcover-in"><p>Draft only pending Variation Contract confirmation</p></div></div>
+<div class="wrap"><div class="prgsplit"><div class="pg-head prghead"><span class="eyebrow pill-t">Journey</span><h1>DRAFT</h1><p class="lede">Since early 2024, community groups across the Northern Rivers have joined together as the Resilience Alliance. Today, we&rsquo;ve grown to 58 community resilience groups and counting. Over the past few months, we&rsquo;ve been taking stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="prgph" role="img" aria-label="Placeholder for hero graphic">Placeholder for graphic</div></div></div>
 <section class="sec" id="pr-who"><div class="wrap">{prg_head("Who we are", "Many groups, shared purpose", "We are a diverse alliance of community-led groups and organisations: skilled by experience, varied by structure, united in making our communities disaster-ready.")}
 <div class="vizgrid">{viz("operational-maturity.png", "wide")}{viz("active-groups.svg", "wide")}{viz("skills.svg", "wide")}</div></div></section>
 <section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap">{prg_head("What we&rsquo;ve faced", "We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}
@@ -899,6 +900,11 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .nrmap .leaflet-popup-content{font-family:var(--font);font-size:1rem;line-height:1.4;margin:14px 18px}.nrmap .leaflet-popup-content a{font-weight:800;color:#00857c}
 .nrmap .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 @media(max-width:700px){.tb .nrmap{height:380px}}
+/* Journey page: white cover with a draft notice (content stays underneath, so removing the cover brings the page back) */
+.tb #journey{position:relative}
+.tb .jcover{position:absolute;inset:0;z-index:20;background:rgb(255 255 255/.5)}
+.tb .jcover-in{position:sticky;top:0;height:100vh;box-sizing:border-box;padding:130px 32px 32px;display:grid;place-items:center;text-align:center}
+.tb .jcover p{margin:0;max-width:16ch;font-size:clamp(3rem,9vw,7.5rem);font-weight:800;line-height:1.05;color:var(--navy);text-wrap:balance}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:128px!important}.tb #about>.sec:last-child{padding-bottom:128px!important}.tb #journey>.sec:last-child{padding-bottom:128px!important}
 /* About: same 128px rhythm as Network */
