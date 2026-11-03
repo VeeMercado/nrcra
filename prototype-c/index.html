@@ -595,6 +595,10 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb #ab-journey>.wrap{max-width:none;width:calc(100% - 2*clamp(20px,4vw,56px))}
 .tb ol.river{grid-template-columns:repeat(6,minmax(0,1fr))}
 @media(max-width:860px){.tb ol.river{grid-template-columns:1fr}}
+@media(min-width:861px) and (max-width:1439px){.tb ol.river{grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 16px}.tb ol.river::before{display:none}
+.tb ol.river li::after{content:"";position:absolute;top:16px;left:0;right:-16px;height:12px;background:var(--teal-25)}
+.tb ol.river li:nth-child(3n+1)::after{border-radius:99px 0 0 99px}.tb ol.river li:nth-child(3n)::after{right:0;border-radius:0 99px 99px 0}.tb ol.river li:nth-child(3n+1):nth-last-child(1)::after{border-radius:99px}
+.tb ol.river li b{z-index:1}}
 /* Network page map (Leaflet + OpenStreetMap): a round teal pin for each group */
 .tb .nrmapwrap{display:flex;flex-direction:column;gap:12px;width:100%}
 .tb .nrmap{width:100%;height:520px;border-radius:var(--r);overflow:hidden;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal);background:#e9efef;z-index:0}
