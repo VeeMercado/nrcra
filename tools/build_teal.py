@@ -1018,7 +1018,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(min-width:701px) and (max-width:999px){.tb .site-foot .foot-cols{row-gap:24px}}
 /* Home: Thanks to our partners (no card, no logo borders). Left logo is half a focus circle high, NSW matches it, the right pair is 40% */
 .tb .page>.sec#focus{padding-bottom:96px!important}.tb .page>.sec.partners,.tb .page>.sec.partners:last-child{background:#fff;padding-top:96px!important;padding-bottom:115px!important}.tb .partners .ptitle{text-align:center;margin:0 0 56px;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800;color:var(--navy)}
-.tb .pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 32px;align-items:center}
+.tb .pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 32px;align-items:start}
 .tb .pcol{container-type:inline-size;display:flex;flex-direction:column;gap:32px;--lh:min(var(--logo-large),calc(100cqw*407/2268))}
 .tb .pcol p{margin:0;font-size:1rem;line-height:1.5;color:var(--navy);max-width:34ch}
 .tb .pcol{align-items:center;text-align:center}
