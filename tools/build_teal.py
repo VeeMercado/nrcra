@@ -228,7 +228,7 @@ DROPS = {"about": ABOUT_JUMP, "network": NETWORK_JUMP}
 
 
 def meal_svg():
-    """The MEAL cycle: six circles in a ring, joined by dotted clockwise arrows."""
+    """The MEAL cycle: six circles in a ring, joined by hand-drawn style clockwise arrows."""
     r = 168
     nodes = [("Connect", 733, 245, "#00857c", "#fff"), ("Listen", 1184, 477, "#f05a28", "#fff"), ("Reflect", 1139, 931, "#D9A400", "#fff"),
              ("Improve", 733, 1184, "#00857c", "#fff"), ("Share", 328, 954, "#f05a28", "#fff"), ("Strengthen", 328, 477, "#D9A400", "#fff")]
@@ -239,11 +239,15 @@ def meal_svg():
         d = math.hypot(dx, dy)
         ux, uy = dx / d, dy / d
         sx, sy, ex, ey = x1 + ux * (r + 22), y1 + uy * (r + 22), x2 - ux * (r + 34), y2 - uy * (r + 34)
-        tip = (ex, ey)
-        base = (ex - ux * 34, ey - uy * 34)
-        px, py = -uy * 17, ux * 17
-        parts.append(f'<line x1="{sx:.0f}" y1="{sy:.0f}" x2="{base[0]:.0f}" y2="{base[1]:.0f}" stroke="#07293b" stroke-opacity=".55" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 22"/>'
-                     f'<path d="M{tip[0]:.0f} {tip[1]:.0f}L{base[0] + px:.0f} {base[1] + py:.0f}L{base[0] - px:.0f} {base[1] - py:.0f}Z" fill="#07293b"/>')
+        px, py = -uy, ux
+        ln = math.hypot(ex - sx, ey - sy)
+        w = ln * .2
+        c1 = (sx + (ex - sx) / 3 + px * w, sy + (ey - sy) / 3 + py * w)
+        c2 = (sx + (ex - sx) * 2 / 3 - px * w, sy + (ey - sy) * 2 / 3 - py * w)
+        w1 = (ex - ux * 40 + px * 26, ey - uy * 40 + py * 26)
+        w2 = (ex - ux * 40 - px * 26, ey - uy * 40 - py * 26)
+        # hand-drawn style: wavy rounded shaft and an open two-stroke head (as the arrow in Prototype 3)
+        parts.append(f'<path d="M{sx:.0f} {sy:.0f}C{c1[0]:.0f} {c1[1]:.0f} {c2[0]:.0f} {c2[1]:.0f} {ex:.0f} {ey:.0f}M{w1[0]:.0f} {w1[1]:.0f}L{ex:.0f} {ey:.0f}L{w2[0]:.0f} {w2[1]:.0f}" fill="none" stroke="#07293b" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>')
     for n, x, y, f, t in nodes:
         parts.append(f'<circle cx="{x}" cy="{y}" r="{r}" fill="{f}"/><text x="{x}" y="{y + 20}" text-anchor="middle" font-size="58" font-weight="800" fill="{t}">{n}</text>')
     return ('<svg class="mealsvg" viewBox="0 0 1420 1430" role="img" aria-labelledby="meal-t"><title id="meal-t">The MEAL cycle: Connect, Listen, Reflect, Improve, Share, Strengthen, and back to Connect.</title>'
@@ -1026,7 +1030,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .learnwrap{container-type:inline-size;--mc:calc(min(460px,(100cqw - 48px)/2)*336/1420)}
 .tb .learngrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:28px}.tb .mealsvg{display:block;width:100%;max-width:460px;height:auto;margin:0 auto}
 .tb .mealtxt h3{margin:0 0 .6em;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800;line-height:1.2}.tb .mealtxt p{margin:0 0 1em}
-.tb .rsch-h{text-align:center;margin:32px 0 24px;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800}
+.tb .rsch-h{text-align:center;margin:60px 0 24px;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800}
 .tb .team2.rsch{justify-content:center;gap:24px 40px}.tb .team2.rsch li{display:flex;flex:none;width:auto;max-width:none;align-items:center;gap:16px}
 .tb .team2.rsch .tc{width:var(--mc);max-width:none;height:var(--mc);aspect-ratio:auto;flex:none;font-size:1.5rem}.tb .team2.rsch b{margin:0;min-height:0;font-size:1.2rem;font-weight:800;line-height:1.12}
 .tb .fundgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
@@ -1034,8 +1038,8 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .fcard .fsup{font-style:italic;font-size:.9rem;color:var(--muted);margin-bottom:.5em}
 .tb .fcard .flogos{list-style:none;margin:0 0 1em;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}.tb .fcard .flogos li{margin:0;padding:0;display:block}.tb .fcard .flogos a{display:block;line-height:0}
 .tb .fcard .flogos img{display:block;height:auto;width:auto;max-height:var(--logo-small);max-width:120px;object-fit:contain}.tb .fcard .btnrow{margin:auto 0 0}
-.tb #about>.sec.mealsec,.tb #about>.sec.fundsec{padding-bottom:var(--space-large)!important}.tb .learnwrap .fundgrid{margin-top:var(--space-large)}.tb #about>.sec.steersec{padding-bottom:var(--space-large)!important}
-@media(max-width:860px){.tb .learnwrap{--mc:calc(min(460px,100cqw)*336/1420)}.tb .learngrid,.tb .fundgrid{grid-template-columns:1fr}.tb .learngrid{gap:24px}.tb .rsch-h{margin-top:24px}}
+.tb #about>.sec.mealsec,.tb #about>.sec.fundsec{padding-bottom:var(--space-large)!important}.tb .learnwrap .fundgrid{margin-top:60px}.tb #about>.sec.steersec{padding-bottom:var(--space-large)!important}
+@media(max-width:860px){.tb .learnwrap{--mc:calc(min(460px,100cqw)*336/1420)}.tb .learngrid,.tb .fundgrid{grid-template-columns:1fr}.tb .learngrid{gap:24px}}
 /* About header photo: 40px taller above and 40px taller below, page spacing kept the same around it */
 @media(min-width:861px){.tb .page>.wrap:first-child>.splith.ab{padding-top:72px;padding-bottom:40px}.tb .splith.ab .ph{margin:-40px 0}}
 /* every page ends with the same 128px above the footer */
