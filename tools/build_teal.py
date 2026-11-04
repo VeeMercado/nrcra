@@ -1256,6 +1256,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(min-width:741px){.tb .hsplit-r{height:545px;align-self:center}}
 @media(min-width:741px){.tb .hsplit.hsplit-sq .hsplit-r{width:100%;height:auto;aspect-ratio:11/10;align-self:center}}
 .tb .funders p,.tb .funders li a{font-size:.75rem!important}
+.tb .site-foot .copy,.tb .site-foot .copy a,.tb .site-foot .totop{font-size:.6875rem!important}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */

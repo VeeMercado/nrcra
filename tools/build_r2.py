@@ -255,7 +255,8 @@ def guidelines():
         ("Lead paragraph", "20 (1.25rem)", "20 (1.25rem)", "400", "1.6", "normal", "fixed", "Under a page title. Not bold."),
         ("Body text", "16 (1rem)", "16 (1rem)", "400", "1.6", "normal", "fixed", "All paragraphs. Same size as button text."),
         ("Button text", "16 (1rem)", "16 (1rem)", "800", "normal (about 1.4)", "normal", "fixed", "Buttons, menu items and links styled as buttons, everywhere on the site. Title Case: capital first letter on every word except a, and, the, to and that. Examples: Learn About Us, Find Out More, Back to Top. The only exception is the small buttons inside charts (View score, View rating), which follow the chart."),
-        ("Pill tag above titles (smallest text)", "12 (0.75rem)", "12 (0.75rem)", "800", "1.3", "normal", "fixed, uppercase", "The only text below 16px, also used for the Thanks to our funders line and the funder chip names. Capitals on the pills, no extra letter spacing, always centred in the pill. The Draft tags on the Privacy Policy stay at 16px."),
+        ("Pill tag above titles (smallest text)", "12 (0.75rem)", "12 (0.75rem)", "800", "1.3", "normal", "fixed, uppercase", "The only text between 12 and 16px, also used for the Thanks to our funders line and the funder chip names. Capitals on the pills, no extra letter spacing, always centred in the pill. The Draft tags on the Privacy Policy stay at 16px."),
+        ("Footer base line", "11 (0.6875rem)", "11 (0.6875rem)", "400 (Back to Top 800)", "1.6", "normal", "fixed", "The copyright and Privacy Policy line and the Back to Top button at the very bottom of the footer. The smallest text on the site."),
     ]
     pad_rows = [
         ("Section (band)", "0 top, 60px bottom (96px on Network and Home partners, 130px on About and the pages above the footer)", "Same", "Space below a band is its bottom padding. Content sits on the 1100px wide column."),
