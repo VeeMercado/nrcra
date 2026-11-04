@@ -196,7 +196,7 @@ def focus_cards():
         key = FOCUS_PHOTOS[i - 1]
         if key:
             pos = f' style="object-position:{FOCUS_POS[key]}"' if key in FOCUS_POS else ""
-            pic = f'<img src="../assets/img/{key}.jpg" alt=""{pos} loading="lazy" decoding="async">'
+            pic = f'<img src="../assets/img/{key}.jpg?v=2" alt=""{pos} loading="lazy" decoding="async">'
         else:
             pic = img("group", alt="")
         rows += f'<li><span class="fcirc">{pic}</span><div class="fbody"><h3>{i:02d} {t}</h3><p>{d}</p></div></li>'
