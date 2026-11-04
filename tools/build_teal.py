@@ -691,7 +691,7 @@ def progress_body_b():
     hero = progress_body().split('<section class="sec" id="pr-who">')[0]
     asp = "".join(aspire_item_b(i, r) for i, r in enumerate(ASPIRE, 1))
     bubble = bfig(None, None, bubble_svg(), "Bubble chart of active volunteers per group. 33 groups run on a core team of 10 or fewer, 5 groups on 11 to 20, 1 group on 20 to 30 and 3 groups on more than 30.", "card",
-                  after='<h3 class="bafter">Small teams do the heavy lifting</h3><p class="bsub">Most of us run on a core team of 10 or less active volunteers</p><p class="bsub">A heavy load on just a few people is unsustainable. Spreading the work ensures our groups and our people survive disasters and the time between them.</p>')
+                  after='<h3 class="bafter">Small teams do the heavy lifting</h3><p class="bsub">Most of us run on a core team of 10 or less active volunteers</p><p class="bsub">This weighs heavily on our groups, who would welcome more hands to prepare for, and recover from, disasters.</p>')
     maturity = bfig("We&rsquo;re at different stages", "Some of us are more established while others are emerging", maturity_graphic(),
                     "Pictogram of operational maturity, number of groups that: have an online presence 49, are incorporated 40, have a document hub 27, have volunteer policies 16, have a steering committee 8.", "card ctr")
     skills = bfig("We have the skills between us", "Across our groups, we hold a wide range of the skills community organisations need.", skills_graphic(),
