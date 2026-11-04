@@ -222,7 +222,7 @@ def _hex_table(rows):
 def brand_colours():
     main4 = [("Yellow", "#ffcb2a", "Highlights and small accents, with navy text"), ("Navy", NAVY_, "Text, footer, dark backgrounds"),
              ("Orange", "#f05a28", "Small accents"), ("Teal", "#00a79d", "Borders, dots and accents; text on navy only")]
-    others = [("Adjusted teal", "#00857c", "Buttons and any area with white text"), ("Darker yellow", "#B38C00", "The word Share on Home and the yellow circles in the MEAL cycle. Use where brand yellow is too light to read on a light background"), ("Quiet text", GREY_, "Small supporting text on white, light grey, pale teal and light yellow"),
+    others = [("Adjusted teal", "#00857c", "Buttons and any area with white text"), ("Darker yellow", "#B38C00", "The word Share on Home and the yellow circles in the MEAL cycle. Use where brand yellow is too light to read on a light background"), ("Quiet text", GREY_, "Small supporting text on white, light grey, pale teal and light yellow. Also the arrows in the MEAL cycle."),
               ("White", WHITE_, "Cards and page"), ("Light grey", LIGHT_, "Page background"),
               ("Pale teal", "#f3f9f8", "Large pale panels, from the PDFs"), ("Light teal", "#beddda", "Selected menu item, hover, tinted panels, from the PDFs"),
               ("Light yellow", "#ffeaaa", "Tint for large text blocks (guidance examples)"), ("Light red", "#fbd6c9", "Tint for large text blocks (guidance examples)")]
@@ -240,58 +240,110 @@ def _gl_table(head, rows):
 
 def guidelines():
     type_rows = [
-        ("Page title (H1)", "56 (3.5rem)", "38 (2.375rem)", "800", "clamp(2.375rem, 5vw, 3.5rem)", "One per page, under the pill above it"),
-        ("Section title (H2)", "38 (2.375rem)", "30 (1.875rem)", "800", "clamp(1.875rem, 4vw, 2.375rem)", "Opens each band of a page"),
-        ("Card title and list item title (H3)", "24 (1.5rem)", "22 (1.375rem)", "800", "clamp(1.375rem, 2.4vw, 1.5rem)", "Titles inside cards and in long lists, such as the Privacy Policy"),
-        ("Small title", "20 (1.25rem)", "20 (1.25rem)", "800", "fixed", "RACK cards, small tiles. Same size as the lead paragraph, but bold."),
-        ("Lead paragraph", "20 (1.25rem)", "20 (1.25rem)", "400", "fixed", "Under a page title. Not bold."),
-        ("Body text", "16 (1rem)", "16 (1rem)", "400", "fixed", "All paragraphs. Same size as button text."),
-        ("Button text", "16 (1rem)", "16 (1rem)", "800", "fixed", "Buttons, menu items"),
-        ("Button label wording", "Title Case", "Title Case", "800", "fixed", "Capital first letter on every word except a, and, the, to and that. Examples: Learn About Us, Find Out More, Back to Top."),
-        ("Pill tag above titles", "11 (0.6875rem)", "11 (0.6875rem)", "800", "uppercase, letter-spacing 0.12em", "Always centred in the pill"),
+        ("Page title (H1)", "56 (3.5rem)", "38 (2.375rem)", "800", "1.12", "-0.01em", "clamp(2.375rem, 5vw, 3.5rem)", "One per page, under the pill above it"),
+        ("Section title (H2)", "38 (2.375rem)", "30 (1.875rem)", "800", "1.12", "-0.01em", "clamp(1.875rem, 4vw, 2.375rem)", "Opens each band of a page"),
+        ("Card title and list item title (H3)", "24 (1.5rem)", "22 (1.375rem)", "800", "1.12", "-0.01em", "clamp(1.375rem, 2.4vw, 1.5rem)", "Titles inside cards and in long lists, such as the Privacy Policy"),
+        ("Small title", "20 (1.25rem)", "20 (1.25rem)", "800", "1.3", "none", "fixed", "RACK cards, small tiles. Same size as the lead paragraph, but bold."),
+        ("Lead paragraph", "20 (1.25rem)", "20 (1.25rem)", "400", "1.6", "none", "fixed", "Under a page title. Not bold."),
+        ("Body text", "16 (1rem)", "16 (1rem)", "400", "1.6", "none", "fixed", "All paragraphs. Same size as button text."),
+        ("Button text", "16 (1rem)", "16 (1rem)", "800", "normal (about 1.4)", "none", "fixed", "Buttons, menu items and links styled as buttons, everywhere on the site. Title Case: capital first letter on every word except a, and, the, to and that. Examples: Learn About Us, Find Out More, Back to Top. The only exception is the small buttons inside charts (View score, View rating), which follow the chart."),
+        ("Pill tag above titles (smallest text)", "12 (0.75rem)", "12 (0.75rem)", "800", "1.3", "none", "fixed, uppercase", "The only text below 16px, also used for the Thanks to our funders line and the funder chip names. Capitals on the pills, no extra letter spacing, always centred in the pill. The Draft tags on the Privacy Policy stay at 16px."),
+    ]
+    pad_rows = [
+        ("Section (band)", "0 top, 60px bottom (96px on Network and Home partners, 130px on About and the pages above the footer)", "Same", "Space below a band is its bottom padding. Content sits on the 1100px wide column."),
+        ("Content card (cards, chart cards, tiles)", "26px top and bottom, 20px left and right", "Same", "28px corners. About story cards 18px sides, 24px bottom."),
+        ("Home header text card", "60px", "31px top, 40px bottom", "Matches the section gap"),
+        ("Square card (steering committee)", "20px", "20px", "16px corners"),
+        ("Button", "8px top and bottom, 17.6px left and right", "Same", "12px corners, 16px text"),
+        ("Pill tag", "3.2px top and bottom, 12.8px right, 10.4px left", "Same", "Fully round, 12px uppercase text"),
+        ("Header menu bar", "0 (height set by the 50px logo and the buttons)", "Same", "Sticks to the top"),
+        ("Footer", "52px top, 32px bottom", "Same", "Teal band"),
+    ]
+    margin_rows = [
+        ("Page title (H1) to text below", "19px bottom", "19px bottom", "Fluid with the title size"),
+        ("Section title (H2) to text below", "15px bottom", "15px bottom", ""),
+        ("Card title (H3) to text below", "11px bottom", "11px bottom", ""),
+        ("Paragraph to next paragraph", "20px bottom (lead), 14px top (Privacy Policy)", "Same", "Body paragraphs are spaced by this bottom margin, not by empty lines"),
+        ("Note under the map or intro", "16px top", "16px top", "Same as the card gap"),
+        ("Gap between cards, tiles and buttons", "16px (a gap, not a margin)", "16px", "Set on the grid or row, never on each card"),
+        ("Gap between text and picture", "48px (a gap)", "stacked, 16px", "Two column rows"),
+    ]
+    special_rows = [
+        ("Line spacing", "Titles 1.12, lead and body 1.6, small titles 1.3", "Set as a multiple of the font size, never as px"),
+        ("Letter spacing", "Page, section and card titles are tightened by 0.01em (-0.38px at H1). Everything else is normal. Uppercase pill tags have none.", "No extra spacing on capitals"),
+        ("Quotes", "Italic, 400, 20px", "Italic is used only for quotes. Quote marks are curly: &ldquo; and &rdquo;"),
+        ("Apostrophes and dashes", "Curly apostrophe (&rsquo;). No long dashes: use a full stop, comma or the word to.", "Applies to all copy"),
+        ("Special characters", "Arrow in buttons and menus is a drawn icon (12 x 8), not a typed character. Bullets are drawn dots. The up arrow on Back to Top is a drawn icon.", "Do not type arrow or bullet characters"),
+        ("Numbers and dates", "Dates written 28 November 2026. Percentages with the % sign and no space: 75%.", "Australian English"),
     ]
     corner_rows = [
-        ("Buttons, menu items, social icon buttons", "12px", "Every clickable control is a rounded square. The menu highlight covers the label and its arrow."),
-        ("Hero cards, cards, tiles and photos", "28px", "One shared radius for every large surface, on desktop, tablet and phone"),
-        ("Pictures inside a padded card, dropdown menus", "16px", "Smaller surfaces nested inside a card"),
-        ("Pills", "Fully round (99px)", "Only the tag above a page title and the funder chips. Never for buttons."),
+        ("Buttons, menu items, drop-downs, social icon buttons", "12px", "Every clickable control is a rounded square. The menu highlight covers the label and its arrow."),
+        ("Hero cards, cards, chart cards, tiles, header photos, the map and the Draft policy box", "28px", "One shared radius for every large surface, on desktop, tablet and phone"),
+        ("Pictures inside a padded card, steering committee tiles, the footer logo box, dropdown menus", "16px", "Smaller surfaces nested inside a card or on the page"),
+        ("Funder logo chips under the timeline entries", "20px", "Small white boxes, 44px high, one logo each"),
+        ("Pills", "Fully round (99px)", "Only the tag above a page title, the Draft tags and the colour bars. Never for buttons."),
+        ("Round photos and initial circles", "50%", "See Circle photo sizes"),
+        ("Chart bars and squares", "4px", "Inside charts only. The chart's View score and View rating button group has 6px corners."),
     ]
     space_rows = [
         ("Between sections", "60px", "Top and bottom of every band, on every page. Same as the Home header text card padding."),
-        ("Large bands", "96px", "White bands on About and Network that need more air"),
-        ("Large spacing", "130px", "The big gap used around the green divider lines on About (above and below each line), between sections on About, and above the footer on About, Network and the group pages. Use this whenever a large space is needed."),
-        ("Diagram arrows", "#586C74 (Quiet text)", "The hand-drawn arrows in the About MEAL cycle use the Quiet text colour."),
-        ("Card padding", "32px (26px top and bottom, 20px sides on phones)", "All cards"),
-        ("Gap between cards, tiles and buttons", "16px", "Always 16px: grids and lists of cards, tiles and rows of buttons"),
+        ("Large bands", "96px", "White bands on About and Network, and the space under Our Focus on Home"),
+        ("Partners band on Home", "96px above, 115px below", "The Thanks to our funders band"),
+        ("Large spacing", "130px", "The big gap used around the green divider lines on About, between sections on About, above the footer on About, Network, RACK, Journey and the group pages, and on Journey above each section title and between the header and the white band. Use this whenever a large space is needed."),
+        ("Card padding", "32px (26px top and bottom, 20px sides on phones)", "All cards, including chart cards (20px on phones)"),
+        ("Gap between cards, tiles and buttons", "16px", "Always 16px: grids and lists of cards, tiles and rows of buttons, and the chart cards on Journey"),
         ("Gap between text and picture", "48px", "Two column rows"),
+        ("Gap between rows in a list", "40px", "Our Focus rows on Home and the team rows on About (24px between wrapped team rows)"),
+        ("Gap inside a chart", "6px to 18px", "Between dots, squares, bars and labels. Set inside each chart."),
         ("Home header text card", "60px (31px top, 40px bottom on tablet and phone)", "Same 60px as the gap between sections"),
     ]
     circle_rows = [
         ("Mini", "56", "56", "Initial circle for a committee group or a number badge when there is no logo or photo"),
-        ("Small", "88", "72", "Our Focus photos on phones and narrow tablets (fluid between Small and Medium: 16% of the screen width)"),
-        ("Medium", "168", "150", "Our Focus photos on desktop, and Meet the team photos and initials"),
-        ("Extra large", "370", "300", "Home header photo circles (they overlap, so the real size follows the card width up to this limit)"),
+        ("Small", "160", "85", "Our Focus photos on Home and the Meet our researchers circles on About"),
+        ("Medium", "190", "150", "Meet the team initials and photos on About"),
+        ("Extra large", "370", "300", "Home header photo circles (they overlap, so the real size follows the card width up to this limit: 305 and 278 at 1280px wide)"),
     ]
     logo_rows = [
-        ("Mini", "20", "Funder chips in the strip under the menu (14px on phones)"),
-        ("Small", "20", "Funder logos under each timeline entry on About. Same height as Mini."),
-        ("Medium", "50", "Steering committee tiles (also limited to 100px wide)"),
-        ("Large", "84", "Lead partner logos on Home (NEMA, NSW). Half of a Medium circle. Shrinks only when the column is too narrow for the logo."),
+        ("Small", "20", "Funder chips in the strip under the menu (14px on phones), funder logos under each timeline entry on About, and funder logos in the two funding cards on About"),
+        ("Medium", "50", "The logo in the header menu and the logo in the footer. Also the steering committee tiles (limited to 100px wide)."),
+        ("Large", "84", "Lead partner logo on Home (NEMA). Shrinks only when the column is too narrow for the logo: 64px at 1280px wide. FRRR and UCRH beside it are 45% of that height (29px). The NSW Proudly funded by logo is taller, up to 135px."),
     ]
-    circle_demo = "".join(f'<div class="cs"><span style="border-radius:50%;width:{round(d*.4)}px;height:{round(d*.4)}px"></span><b>{n}</b><small>{d}px</small></div>' for n, d in [("Mini", 56), ("Small", 88), ("Medium", 168), ("Extra large", 370)])
-    logo_demo = "".join(f'<div class="cs"><img src="../assets/funders/nsw.png" alt="" style="height:{h}px;width:auto"><b>{n}</b><small>{h}px</small></div>' for n, h in [("Mini", 20), ("Small", 20), ("Medium", 50), ("Large", 84)])
-    swatches = "".join(f'<div class="cs"><span style="border-radius:{r}"></span><b>{n}</b></div>' for n, r in [("12px", "12px"), ("16px", "16px"), ("28px", "28px"), ("Pill", "99px")])
+    header_photo_rows = [
+        ("Size 1: Network (map), Journey, RACK", "546 x 517", "350 x 461", "Cropped to fill. The Google map on Network is the same size."),
+        ("Size 2: About and Home", "469 wide", "350 x 263", "About is 469 x 529 and sticks out 80px above and below the text beside it. The Home video card is the same 469px width but keeps its near-square shape (11 : 10, 469 x 426)."),
+        ("Privacy Policy", "none", "none", "Text only"),
+    ]
+    image_rows = [
+        ("Story photos (Network)", "331 x 248", "312 x 234", "Shape 4 : 3, 16px corners, inside a 28px card"),
+        ("Steering committee tiles (About)", "160 x 160", "111 x 111", "16px corners, logo 50px high"),
+        ("Acknowledgement flag (footer)", "60 x 40", "60 x 40", "A picture, not an icon"),
+    ]
+    icon_rows = [
+        ("Small", "16", "16", "Menu arrows, the Draft flag in each Draft tag, the yellow ring in the Network note"),
+        ("Default", "22", "22", "Menu (hamburger) icon on phones and the social icons in the footer"),
+        ("Large", "44", "44", "The tap area for icon buttons: social icon buttons in the footer (12px corners) and the menu arrow button on phones"),
+        ("Giant", "92", "92", "Watch (play) button on the Home video and on the Network story photos"),
+    ]
+    circle_demo = "".join(f'<div class="cs"><span style="border-radius:50%;width:{round(d*.4)}px;height:{round(d*.4)}px"></span><b>{n}</b><small>{d}px</small></div>' for n, d in [("Mini", 56), ("Small", 160), ("Medium", 190), ("Extra large", 370)])
+    logo_demo = "".join(f'<div class="cs"><img src="../assets/funders/nsw.png" alt="" style="height:{h}px;width:auto"><b>{n}</b><small>{h}px</small></div>' for n, h in [("Small", 20), ("Medium", 50), ("Large", 84)])
+    swatches = "".join(f'<div class="cs"><span style="border-radius:{r}"></span><b>{n}</b></div>' for n, r in [("12px", "12px"), ("16px", "16px"), ("20px", "20px"), ("28px", "28px"), ("Pill", "99px")])
     return f'''<section class="blk" id="guidelines"><h2>Type, spacing and corner rules</h2>
-<p class="vnote">Use these values when setting the site up in Wix. Sizes are in px with the rem value in brackets. Desktop is 1000px and wider; phone is 390px. Only two font weights are used: 400 and 800.</p>
-<h3 id="gl-type">Title and text sizes</h3>{_gl_table(["Style", "Desktop (px)", "Phone (px)", "Weight", "Fluid rule", "Use"], type_rows)}
+<p class="vnote">Use these values when setting the site up in Wix. Sizes are in px with the rem value in brackets. Desktop is 1000px and wider; phone is 390px. Only two font weights are used: 400 and 800. Checked against the NRCRA prototype on 4 November 2026, at 1280px wide and 390px wide.</p>
+<h3 id="gl-type">Title and text sizes</h3>{_gl_table(["Style", "Desktop (px)", "Phone (px)", "Weight", "Line spacing", "Letter spacing", "Fluid rule", "Use"], type_rows)}
+<h3 id="gl-pad" style="margin-top:30px">Padding (space inside an element)</h3><p class="vnote">Padding is the space between an element&rsquo;s edge and what is inside it, such as the edge of a card and its text. The background colour fills the padding.</p>{_gl_table(["Element", "Desktop", "Phone", "Notes"], pad_rows)}
+<h3 id="gl-margin" style="margin-top:30px">Margin and gap (space outside an element)</h3><p class="vnote">Margin and gap are the empty space between elements. Nothing is painted in it.</p>{_gl_table(["Between", "Desktop", "Phone", "Notes"], margin_rows)}
+<h3 id="gl-special" style="margin-top:30px">Line spacing, letter spacing and special characters</h3>{_gl_table(["Rule", "Value", "Notes"], special_rows)}
 <h3 id="gl-corners" style="margin-top:30px">Corner rules</h3>{_gl_table(["Element", "Corner radius", "Use"], corner_rows)}<div class="csrow">{swatches}</div>
-<h3 id="gl-space" style="margin-top:30px">Spacing rules</h3>{_gl_table(["Where", "Value", "Use"], space_rows)}
+<h3 id="gl-space" style="margin-top:30px">Spacing rules (sections and gaps)</h3>{_gl_table(["Where", "Value", "Use"], space_rows)}
 <h3 id="gl-circles" style="margin-top:30px">Circle photo sizes</h3>
-<p class="vnote">Round photos and initial circles use one of four sizes. The diameter is the same on both axes, the photo is cropped to fill the circle (centre crop unless a focal point is set), and there is no border. Pick the size by name; do not invent in-between sizes.</p>
+<p class="vnote">Round photos and initial circles use one of four named sizes. The diameter is the same on both axes, the photo is cropped to fill the circle (centre crop unless a focal point is set), and there is no border. Pick the size by name; do not invent in-between sizes.</p>
 {_gl_table(["Size", "Desktop (px)", "Phone (px)", "Used for"], circle_rows)}<p class="vnote">Shown at 40% of real size.</p><div class="csrow" style="align-items:flex-end">{circle_demo}</div>
 <h3 id="gl-logos" style="margin-top:30px">Logo sizes</h3>
-<p class="vnote">Partner, funder and committee logos use one of four sizes, set by height, with the width following the logo&rsquo;s own shape (never stretched or cropped). Logos have no border and no background box. Pick the size by name.</p>
-{_gl_table(["Size", "Height (px)", "Used for"], logo_rows)}<div class="logodemo">{logo_demo}</div></section>'''
+<p class="vnote">Header, footer, partner, funder and committee logos use one of three sizes (Small, Medium and Large), set by height, with the width following the logo&rsquo;s own shape (never stretched or cropped). Logos have no border and no background box. Pick the size by name.</p>
+{_gl_table(["Size", "Height (px)", "Used for"], logo_rows)}<div class="logodemo">{logo_demo}</div>
+<h3 id="gl-header" style="margin-top:30px">Header photo sizes</h3><p class="vnote">There are only two header photo sizes. Header photos have 28px corners, sit beside the page title on desktop, and go full width under the title on phones.</p>{_gl_table(["Page", "Desktop (px)", "Phone (px)", "Notes"], header_photo_rows)}
+<h3 id="gl-images" style="margin-top:30px">Other picture sizes</h3>{_gl_table(["Picture", "Desktop (px)", "Phone (px)", "Notes"], image_rows)}
+<h3 id="gl-icons" style="margin-top:30px">Icon sizes</h3><p class="vnote">Four icon sizes, set by height and width together, used across the whole site. Charts and infographics keep their own sizes. The Acknowledgement flag in the footer (60 x 40) is a picture, not an icon.</p>{_gl_table(["Size", "Desktop (px)", "Phone (px)", "Used for"], icon_rows)}</section>'''
 
 
 def teal_adjust():

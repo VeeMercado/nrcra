@@ -37,7 +37,7 @@ def funder_strip():
 
 
 def nav3():
-    chev = '<svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1.5 1.5L6 6l4.5-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    chev = '<svg viewBox="0 0 12 8" width="16" height="11" aria-hidden="true" focusable="false"><path d="M1.5 1.5L6 6l4.5-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
     def item(k, t):
         if k not in DROPS:
@@ -48,7 +48,7 @@ def nav3():
     links = "".join(item(k, t) for k, t in MENU)
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap head-in"><a href="#home" class="brand" aria-label="NRCRA home">{blogo()}</a>
-<button class="menu-btn" aria-expanded="false" aria-controls="nav"><svg class="hb" viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" focusable="false"><path d="M1.5 1.5h17M1.5 7h17M1.5 12.5h17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Menu</button>
+<button class="menu-btn" aria-expanded="false" aria-controls="nav"><svg class="hb" viewBox="0 0 20 14" width="22" height="15" aria-hidden="true" focusable="false"><path d="M1.5 1.5h17M1.5 7h17M1.5 12.5h17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Menu</button>
 <nav id="nav" aria-label="Main">{links}<a class="btn btn-cta" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a></nav></div></header>
 {funder_strip()}'''
 
@@ -524,7 +524,7 @@ PP = [
     ("Changes to this policy", "We may update this policy from time to time. When we do, we will change the date at the top of this page."),
     ("Contact us", "Email hello@nrcra.org.au."),
 ]
-FLAG_SMALL = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M6 21V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M6 5h11.5l-2.8 4.2 2.8 4.2H6z" fill="currentColor"/></svg>'
+FLAG_SMALL = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M6 21V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M6 5h11.5l-2.8 4.2 2.8 4.2H6z" fill="currentColor"/></svg>'
 
 
 def pp_item(i, title, text):
@@ -807,7 +807,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .tb .steergrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}.tb .steergrid>*{min-width:0}.tb .steertxt .sechead{margin-top:0}.tb .steerlist>.lede{margin-top:0}
 .tb .steergrid .steer{margin-top:16px;gap:16px}.tb .steergrid .steer a{aspect-ratio:1/1;height:auto;justify-content:center;padding:12px 10px;gap:8px;border-radius:16px}.tb .steergrid .slogo{display:flex;align-items:center;justify-content:center;overflow:hidden;width:100%;height:50px;padding:0}.tb .steergrid .slogo img{flex:0 1 auto;width:auto;height:auto;max-width:100px;max-height:var(--logo-medium);object-fit:contain}.tb .steergrid .sname{font-size:.9rem;font-weight:400;color:var(--muted);line-height:1.3}
 .tb .steergrid .steer{grid-template-columns:repeat(3,minmax(0,160px));justify-content:center}@media(max-width:860px){.tb .steergrid{grid-template-columns:1fr;gap:0}.tb .steergrid .steer{margin-top:20px}}@media(max-width:560px){.tb .steergrid .steer{gap:8px}.tb .steergrid .steer a{padding:4px 3px;gap:4px;border-radius:12px;min-height:0}.tb .steergrid .slogo{height:32px;flex:none}.tb .steergrid .slogo img{max-width:100%;max-height:32px}.tb .steergrid .sname{font-size:.6rem;line-height:1.15}}.tb .steerlist>.lede{text-align:center}
-.tb .cen{text-align:center}.tb h2.teamhead{margin-bottom:56px}.tb .team2 li.brk{display:block;flex-basis:100%;width:100%;height:0;margin:-24px 0 0;padding:0}@media(min-width:861px){.tb .team2 li.brk{display:none}.tb .team2 li{flex:1 1 0;width:auto;max-width:220px;min-width:0;grid-template-columns:minmax(0,1fr)}.tb .team2 .tc{width:100%;max-width:190px}}.tb .team2 b{font-size:1.2rem;font-weight:800;line-height:1.12}@media(max-width:1060px){.tb .team2 b{min-height:2.24em}}@media(max-width:739px){.tb .team2 li{width:min(150px,calc(50% - 12px))}.tb .team2 .tc{width:100%;max-width:150px}}
+.tb .cen{text-align:center}.tb h2.teamhead{margin-bottom:56px}.tb .team2 li.brk{display:block;flex-basis:100%;width:100%;height:0;margin:-24px 0 0;padding:0}@media(min-width:861px){.tb .team2 li.brk{display:none}.tb .team2 li{flex:1 1 0;width:auto;max-width:220px;min-width:0;grid-template-columns:minmax(0,1fr)}.tb .team2 .tc{width:100%;max-width:var(--circle-medium)}}.tb .team2 b{font-size:1.2rem;font-weight:800;line-height:1.12}@media(max-width:1060px){.tb .team2 b{min-height:2.24em}}@media(max-width:739px){.tb .team2 li{width:min(150px,calc(50% - 12px))}.tb .team2 .tc{width:100%;max-width:150px}}
 .tb .focuscards li{flex:1 1 300px;max-width:360px;padding:24px 22px}
 .tb .focuscards .pi{width:76px;height:76px;margin:0 auto 10px}.tb .focuscards .pnum{font-size:1.6rem;font-style:italic;font-weight:400;letter-spacing:.02em}.tb .focuscards li:nth-child(1) .pi{color:#00857c}.tb .focuscards li:nth-child(2) .pi{color:#B38C00}.tb .focuscards li:nth-child(3) .pi{color:#d9481a}.tb .focuscards li:nth-child(4) .pi{color:var(--navy)}.tb .focuscards li:nth-child(5) .pi{color:#6b7f88}.tb .focuscards p{text-align:left;font-size:.97rem}
 /* Steering tiles: top 65% is the logo, bottom 35% is the name */
@@ -817,12 +817,12 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 /* Our Stories: yellow play button; yellow bars sit exactly midway (100px each side) above Our Stories and between the last row and Our Network */
 .tb .tcards .tph .play{background:var(--yellow);color:var(--navy);border:0;box-shadow:0 6px 20px rgba(0,0,0,.25)}.tb .tcards .tph .play:hover{background:#fff;color:var(--navy)}.tb .tcards .tph .play:active{background:#ffe38a;color:var(--navy)}.tb #network>.wrap:first-child{margin-bottom:100px}.tb .sec.stories{padding-bottom:96px!important}.tb .sbar-top{margin:0 auto var(--space-large)}.tb .sbar-bot{margin:100px auto 0}.tb #network #our-network{padding-top:96px!important}.tb #network #our-network,.tb [id^="lga-"]>.sec{background:#fff}.tb #our-network .gsub li,.tb [id^="lga-"] .gsub li,.tb #our-network .lgasel,.tb [id^="lga-"] .lgasel{background-color:var(--bg)}
 /* Brand logo always keeps its true ratio (the footer logo was squashed at iPad width) */
-.tb .logo{width:auto;max-width:100%}.tb .site-foot .foot-logo .logo{height:auto!important;width:200px;max-width:100%}
+.tb .logo{width:auto;max-width:100%}.tb .site-foot .foot-logo .logo{height:var(--logo-medium)!important;width:auto;max-width:100%}
 /* Funder strip above the header: label at the "Who we are" label size (not bold, not capitals), thin white pills like Prototype A's Projects pill */
 .tb .funders{background:var(--bg);border-bottom:1px solid var(--line)}.tb .funders .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 16px;padding:10px 20px}
-.tb .funders p{margin:0;font-size:.8rem;font-weight:400;color:var(--navy)}.tb .funders ul{list-style:none;margin:0;padding:0;display:contents}
-.tb .funders li a{text-decoration:none;transition:background .15s,border-color .15s;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:99px;box-sizing:border-box;height:32px;padding:0 1.05em 0 1em;font-weight:400;font-size:.8rem;color:var(--navy);line-height:1}.tb .funders li a:not(:has(img)){padding-left:.95em}.tb .funders img{height:var(--logo-mini);width:auto;display:block;flex:none}.tb .funders li a:hover,.tb .funders li a:focus-visible{background:#e8edf0;border-color:#c3ccd1}.tb .funders li a:focus-visible{outline:2px solid var(--teal-d);outline-offset:2px}
-@media(max-width:1100px){.tb .funders .wrap{padding:6px 10px;gap:5px 6px}.tb .funders li a{gap:5px;height:28px;padding:0 .7em 0 .8em}.tb .funders li a:not(:has(img)){padding-left:.6em}.tb .funders img{height:14.4px}}
+.tb .funders p{margin:0;font-size:1rem;font-weight:400;color:var(--navy)}.tb .funders ul{list-style:none;margin:0;padding:0;display:contents}
+.tb .funders li a{text-decoration:none;transition:background .15s,border-color .15s;display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:99px;box-sizing:border-box;height:40px;padding:0 1.05em 0 1em;font-weight:400;font-size:1rem;color:var(--navy);line-height:1}.tb .funders li a:not(:has(img)){padding-left:.95em}.tb .funders img{height:var(--logo-small);width:auto;display:block;flex:none}.tb .funders li a:hover,.tb .funders li a:focus-visible{background:#e8edf0;border-color:#c3ccd1}.tb .funders li a:focus-visible{outline:2px solid var(--teal-d);outline-offset:2px}
+@media(max-width:1100px){.tb .funders .wrap{padding:6px 10px;gap:5px 6px}.tb .funders li a{gap:5px;height:36px;padding:0 .7em 0 .8em}.tb .funders li a:not(:has(img)){padding-left:.6em}.tb .funders img{height:14.4px}}
 /* Our Focus: full-width cards, photo 40% on the left with the grey number circle centred on it, content on the right */
 .tb ol.focuscards{display:flex;flex-direction:column;flex-wrap:nowrap;gap:16px;justify-content:flex-start}
 .tb ol.focuscards li{flex:none;max-width:none;width:100%;display:grid;grid-template-columns:40% minmax(0,1fr);padding:0;overflow:hidden;text-align:left}
@@ -846,7 +846,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 /* Funder pills: Federal and State get extra left padding; phone sizes scale smoothly with screen width so the strip stays within two rows */
 .tb .funders li:nth-child(-n+2) a{padding-left:1.35em}
 @media(max-width:1100px){.tb .funders li:nth-child(-n+2) a{padding-left:1.1em}}
-@media(max-width:560px){.tb .funders .wrap{padding:5px 4px;gap:4px 3px}.tb .funders ul{gap:0}.tb .funders p{font-size:clamp(.5rem,2.45vw,.72rem);margin-right:2px}.tb .funders li a{font-size:clamp(.5rem,2.45vw,.72rem);height:2.5em;gap:.3em;padding:0 .4em 0 .5em}.tb .funders li:nth-child(-n+2) a{padding-left:.75em}.tb .funders img{height:1.35em}}
+@media(max-width:560px){.tb .funders .wrap{padding:5px 4px;gap:4px 3px}.tb .funders ul{gap:0}.tb .funders p{font-size:1rem;margin-right:2px}.tb .funders li a{font-size:1rem;height:36px;gap:.3em;padding:0 .4em 0 .5em}.tb .funders li:nth-child(-n+2) a{padding-left:.75em}.tb .funders img{height:14.4px}}
 /* Every page starts 36px below the funders strip (Home hero, About, Network, RACK, Impact, and the heading on each LGA page) */
 .tb .page[id^="lga-"]>.sec:first-child{padding-top:32px!important}
 /* About sections are reachable from the About menu dropdown; leave room under the sticky header when scrolling to them */
@@ -864,7 +864,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 .tb #nav .ddmenu a:hover,.tb #nav .ddmenu a:focus-visible{background:var(--teal-12);text-decoration:none}
 @media(max-width:739px){.tb .navdrop{flex-wrap:wrap}.tb .navdrop>a{flex:1}.tb .navdrop .dd-btn{min-width:44px;min-height:44px;margin-left:0;padding:0}.tb .ddmenu{position:static;width:100%;min-width:0;border:0;box-shadow:none;padding:0 0 4px 14px;border-radius:0}.tb .ddmenu::before{display:none}.tb #nav .ddmenu a{white-space:normal}}
 @media(min-width:740px) and (max-width:860px){.tb .navdrop .dd-btn{min-width:22px;padding:0 .2em 0 0;margin-left:-4px}}
-@media(min-width:861px) and (max-width:960px){.tb #nav a:not(.btn){padding:.5em .6em;font-size:.95rem}.tb #nav .btn{padding:.55em 1em;margin-left:4px;font-size:.95rem}.tb .navdrop .dd-btn{min-width:22px;padding:0 .2em 0 0;margin-left:-4px}.tb #nav{gap:2px}}
+@media(min-width:861px) and (max-width:960px){.tb #nav a:not(.btn){padding:.5em .6em;font-size:1rem}.tb #nav .btn{padding:.55em 1em;margin-left:4px;font-size:1rem}.tb .navdrop .dd-btn{min-width:22px;padding:0 .2em 0 0;margin-left:-4px}.tb #nav{gap:2px}}
 /* About header columns match the cards below: photo as wide as Vision, text as wide as The Resilience Alliance (cards are 1 : 1.2 with a 20px gap) */
 @media(min-width:861px){.tb .splith.ab{grid-template-columns:1fr 1.2fr;column-gap:20px}.tb .splith.ab>div:not(.ph){padding-left:20px}}
 /* so the photo ends exactly where the heading text ends */
@@ -889,7 +889,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 body.teal{font-size:16px}
 .tb .lede,.tb .pillcards h3{font-size:1.25rem}.tb .lede{font-weight:400}.tb .pillcards h3{font-weight:800}
 .tb b,.tb strong{font-weight:800}
-.tb .eyebrow,.tb .hsplit .hsolid-text .eyebrow,.tb .hsolid-text .eyebrow,.tb .hsplit-tag{font-size:.6875rem!important}
+.tb .eyebrow,.tb .hsplit .hsolid-text .eyebrow,.tb .hsolid-text .eyebrow,.tb .hsplit-tag{font-size:.75rem!important;letter-spacing:0!important}
 .tb .btnrow,.tb .hwpills,.tb .stats{gap:16px}
 /* About, How we work: white pills, text colours as the Connect. Share. Care. links on Home */
 .tb .howcards h3 span{background:#fff!important;border:1px solid var(--line)}
@@ -910,7 +910,7 @@ body.teal{font-size:16px}
 .tb .site-foot .flist a.soc:hover,.tb .site-foot .flist a.soc:focus-visible{background:#beddda;color:#07293b}
 .tb .site-foot .flist a.soc:focus-visible{outline:2px solid #fff;outline-offset:3px}
 /* Privacy Policy page; small review link on RACK page */
-.tb .rackrev{align-self:center;margin:0 0 0 6px;font-size:.95rem}.tb .rackrev{color:var(--teal-d);font-weight:700;text-decoration:underline;text-underline-offset:3px}.tb .rackrev:hover{text-decoration-thickness:2px}
+.tb .rackrev{align-self:center;margin:0 0 0 6px;font-size:1rem}.tb .rackrev{color:var(--teal-d);font-weight:700;text-decoration:underline;text-underline-offset:3px}.tb .rackrev:hover{text-decoration-thickness:2px}
 .tb .pphead{padding-bottom:28px}.tb .pphead .lede{margin:14px 0 0;max-width:62ch}.tb .ppdate{margin:10px 0 22px;color:var(--muted);font-size:.95rem}
 .tb .pplist2{list-style:none;margin:0;padding:8px 32px;background:#fff;border-radius:28px;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal)}
 .tb .ppitem{padding:22px 0;border-top:1px solid var(--line)}.tb .ppitem:first-child{border-top:0}
@@ -934,8 +934,8 @@ body.teal{font-size:16px}
 .tb .hsolid-text .eyebrow{display:inline-block;align-self:flex-start;background:#fff;color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin-bottom:48px}
 .tb .hsolid-text h1{color:#fff;line-height:1.12}.tb .hsolid-text .lede{color:#fff}
 .tb .hsolid-text .btn-primary{border-color:#fff}.tb .hsolid-text .btn-primary:hover{background:#fff;color:#07293b;border-color:#fff}.tb .hsolid-text .btn-primary:active{background:#beddda;color:#07293b;border-color:#fff}
-@media(min-width:741px) and (max-width:999px){.tb .hsplit-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;min-height:0}.tb .hsplit .hsolid-text{padding:31px 28px 40px}.tb .hsplit .hsolid-text .eyebrow{font-size:.72rem;margin-bottom:28px;padding:.55em 1.2em}.tb .hsplit .hsolid-text h1{font-size:2.1rem}}
-@media(max-width:740px){.tb .hsplit-in{grid-template-columns:minmax(0,1fr);min-height:0;gap:16px;width:calc(100% - 24px)}.tb .hsplit .hsolid-text{padding:31px 18px 40px}.tb .hsplit .hsolid-text .eyebrow{font-size:.72rem;margin-bottom:24px}.tb .hsplit-l{border-radius:28px}.tb .hsplit-r{border-radius:28px;aspect-ratio:4/3}}
+@media(min-width:741px) and (max-width:999px){.tb .hsplit-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;min-height:0}.tb .hsplit .hsolid-text{padding:31px 28px 40px}.tb .hsplit .hsolid-text .eyebrow{font-size:1rem;margin-bottom:28px;padding:.55em 1.2em}.tb .hsplit .hsolid-text h1{font-size:2.1rem}}
+@media(max-width:740px){.tb .hsplit-in{grid-template-columns:minmax(0,1fr);min-height:0;gap:16px;width:calc(100% - 40px)}.tb .hsplit .hsolid-text{padding:31px 18px 40px}.tb .hsplit .hsolid-text .eyebrow{font-size:1rem;margin-bottom:24px}.tb .hsplit-l{border-radius:28px}.tb .hsplit-r{border-radius:28px;aspect-ratio:auto;height:279px}}
 .tb .hsplit.hsplit-sq .hsplit-r{align-self:center;aspect-ratio:11/10}
 /* Prototype B: one green card behind everything. The tag sits above both the title and the video; below it the text takes exactly half and the video exactly the other half */
 .tb .hsplit-bg .hsplit-in{background:rgb(0 97 90);border-radius:28px;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal);overflow:hidden;gap:0;align-items:stretch;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto 1fr}
@@ -960,7 +960,7 @@ CSS_B = """
 /* hero: the photo is the header background, the panel sits on top (no video) */
 .menu-btn{border-radius:var(--btn-r,12px)}
 .herobg{--pw:min(580px,calc(100vw - 200px))}
-@media(min-width:740px) and (max-width:860px){.menu-btn{display:none}#nav,#nav.open{display:flex;position:static;flex-direction:row;align-items:center;padding:0;border:0;background:transparent}.logo{height:48px}}
+@media(min-width:740px) and (max-width:860px){.menu-btn{display:none}#nav,#nav.open{display:flex;position:static;flex-direction:row;align-items:center;padding:0;border:0;background:transparent}.logo{height:var(--logo-medium)}}
 .herobg{padding:0!important}
 .herobg>.wrap:first-child{display:flex;align-items:center;max-width:none;padding:0;position:relative;min-height:640px}
 .herobg .h1-photo{position:absolute;inset:0;border-radius:0;min-height:0}
@@ -969,7 +969,7 @@ CSS_B = """
 
 /* B: teal as accents and tints only, navy kept for the footer */
 /* button family: teal. Primary: teal with white text and a navy outline (Sign In is primary). Secondary: white with a teal outline. Tertiary: navy. Selected menu item: the lighter teal. */
-:root{--btn-teal:#00857c;--teal-12:#f3f9f8;--teal-25:#beddda;--circle-mini:56px;--circle-small:88px;--circle-medium:168px;--circle-xl:370px;--logo-mini:20px;--logo-small:20px;--logo-medium:50px;--logo-large:84px;--space-large:130px}@media(max-width:560px){:root{--circle-small:72px;--circle-medium:150px;--circle-xl:300px}}
+:root{--btn-teal:#00857c;--teal-12:#f3f9f8;--teal-25:#beddda;--circle-mini:56px;--circle-small:160px;--circle-medium:190px;--circle-xl:370px;--logo-small:20px;--logo-medium:50px;--logo-large:84px;--space-large:130px}@media(max-width:560px){:root{--circle-small:85px;--circle-medium:150px;--circle-xl:300px}}
 .btn-primary,.btn-cta{background:var(--btn-teal);color:#fff;border-color:var(--navy)}
 .btn-primary:hover,.btn-cta:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .btn-ghost{background:#fff;color:var(--navy);border-color:var(--btn-teal)}.btn-ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
@@ -990,7 +990,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .herobg .h1-panel .eyebrow{display:inline-block;align-self:flex-start;background:#fff;color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin-bottom:48px}
 .mark{position:relative;display:inline-block}.mark .squig{position:absolute;left:0;right:0;bottom:-.02em;width:100%;height:.4em}
 @media(min-width:740px){.herobg .h1-panel{padding:46.8px 44px}}
-@media(max-width:739px){.tb .herobg>.wrap:first-child{display:flex;align-items:flex-start;min-height:0;padding:0}.tb .herobg .h1-panel{margin:0;padding:25.2px 20px 32px;max-width:none}.tb .herobg .h1-photo::after{background:linear-gradient(180deg,rgb(0 97 90/.94) 0%,rgb(0 97 90/.88) 30%,rgb(0 97 90/.5) 48%,rgb(0 97 90/0) 62%)}.herobg .h1-panel h1{font-size:1.75rem;line-height:1.15}.herobg .h1-panel .lede{font-size:1rem}.herobg .h1-panel .eyebrow{font-size:.72rem}}
+@media(max-width:739px){.tb .herobg>.wrap:first-child{display:flex;align-items:flex-start;min-height:0;padding:0}.tb .herobg .h1-panel{margin:0;padding:25.2px 20px 32px;max-width:none}.tb .herobg .h1-photo::after{background:linear-gradient(180deg,rgb(0 97 90/.94) 0%,rgb(0 97 90/.88) 30%,rgb(0 97 90/.5) 48%,rgb(0 97 90/0) 62%)}.herobg .h1-panel h1{font-size:1.75rem;line-height:1.15}.herobg .h1-panel .lede{font-size:1rem}.herobg .h1-panel .eyebrow{font-size:1rem}}
 .tb .h1-panel{background:var(--teal-25);color:var(--navy);border:4px solid var(--teal)}.tb .h1-panel h1,.tb .h1-panel .eyebrow{color:var(--navy)}.tb .h1-panel .btn-ghost{color:var(--navy);border-color:var(--navy);background:#fff}.tb .h1-panel .btn-ghost:hover{background:var(--navy);color:#fff}
 .tb #nav a[aria-current=page]{background:var(--teal-25)}
 /* Menu items with a dropdown: hover and the current page highlight the label and the arrow together */
@@ -1040,7 +1040,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 .tb .statcard.impact{border-color:var(--orange);text-align:center}
 .statcard.impact .btnrow{justify-content:center;margin:28px 0 0}
 
-.tb .site-foot .foot-top{display:flex;align-items:flex-start}.tb .site-foot .foot-logo.boxed{display:block;width:fit-content;max-width:100%;padding:10px 14px;line-height:0}.tb .site-foot .foot-logo .logo{width:200px;max-width:100%;display:block}
+.tb .site-foot .foot-top{display:flex;align-items:flex-start}.tb .site-foot .foot-logo.boxed{display:block;width:fit-content;max-width:100%;padding:10px 14px;line-height:0}.tb .site-foot .foot-logo .logo{width:auto;max-width:100%;display:block}
 /* footer, teal design: adjusted teal background, white text, white brush behind each title with adjusted teal text */
 .tb .site-foot{background:#07293b;color:#fff;border-top:1px solid var(--line);--foot-line:rgba(255,255,255,.4)}
 .tb .site-foot .fcol h2{color:#00857c;background-repeat:no-repeat;background-position:center;background-size:100% 100%;display:inline-block;padding:1.3em 2.6em 1.3em 2.1em;margin:0 0 14px -1.1em;line-height:1.25;position:static}
@@ -1056,7 +1056,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 @media(max-width:700px){.tb .site-foot .foot-cols{grid-template-columns:minmax(0,1fr);gap:16px}.tb .site-foot .fquick{grid-template-columns:minmax(0,1fr);gap:0}.tb .site-foot .fcol h3.fhide{display:none}}
 /* border line above the copyright line, so the Acknowledgement of Country sits between two lines */
 .tb .site-foot .copyrow{margin:24px 0 0;padding-top:24px;border-top:1px solid var(--foot-line);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px 20px}.tb .site-foot .copy{margin:0;padding:0;border:0;text-align:center}
-.tb .site-foot .totop{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:#fff;border:2px solid #fff;border-radius:var(--btn-r,12px);padding:.5em 1.1em;min-height:38px;font:800 .9rem var(--font);cursor:pointer;line-height:1.3}
+.tb .site-foot .totop{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:#fff;border:2px solid #fff;border-radius:var(--btn-r,12px);padding:.5em 1.1em;min-height:38px;font:800 1rem var(--font);cursor:pointer;line-height:1.3}
 .tb .site-foot .totop:hover{background:#f3f9f8;color:var(--navy);border-color:#fff}.tb .site-foot .totop:active{background:#beddda;color:var(--navy);border-color:#beddda}.tb .site-foot .totop:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 /* MEAL: six circles round a ring, like the Layout Design PDF */
@@ -1073,13 +1073,14 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .splith .eyebrow{display:inline-block;background:var(--yellow);color:var(--navy);padding:.55em 1.5em;border-radius:99px;margin-bottom:28px}
 
 /* iPad: six menu items now, so tighten the nav to keep it on one line */
-@media(min-width:740px) and (max-width:860px){.tb #nav{flex-wrap:nowrap;white-space:nowrap;gap:0}.tb #nav a:not(.btn){padding:.5em .55em;font-size:.95rem}.tb #nav .btn{padding:.55em 1em;margin-left:6px;font-size:.95rem}.tb .logo{height:40px}}
+@media(min-width:740px) and (max-width:860px){.tb #nav{flex-wrap:nowrap;white-space:nowrap;gap:0}.tb #nav a:not(.btn){padding:.5em .55em;font-size:1rem}.tb #nav .btn{padding:.55em 1em;margin-left:6px;font-size:1rem}}
 /* phone and iPad: the two photo circles sit closer together, just touching in the middle */
 @media(max-width:860px){.circles img:nth-of-type(1){left:10%}.circles img:nth-of-type(2){left:51%}}
 /* Home: LGA pills are navy links to the filtered Network pages */
 .tb .lgapills li a{color:var(--navy);text-decoration:none;font-weight:700}.tb .lgapills li a:hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px}
 /* RACK page */
-.tb .splith .rackph img{height:auto;aspect-ratio:1024/799;object-fit:cover}
+.tb .splith .rackph img{height:517px;aspect-ratio:auto;object-fit:cover}
+@media(max-width:860px){.tb .splith .rackph img{height:461px}}
 .rackhead{text-align:center}.rackhead .lede{max-width:62ch;margin-left:auto;margin-right:auto}
 .tb .rackcats li:nth-child(1){--pc:var(--teal)}.tb .rackcats li:nth-child(2){--pc:var(--orange)}.tb .rackcats li:nth-child(3){--pc:var(--yellow)}.tb .rackcats li:nth-child(4){--pc:var(--navy)}.tb .rackcats li:nth-child(5){--pc:#9fb0b8}
 .tb .rackcats li{border:1px solid var(--line);border-bottom:14px solid var(--pc)}
@@ -1100,11 +1101,12 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .viz.flat{padding:32px;background:#fff;overflow:hidden}
 /* Journey quotes: the same card as the Network stories (white, yellow base, italic quote, name below), without a photo */
 .sqc{margin:0;background:#fff;border:1px solid var(--line);border-bottom:10px solid var(--yellow);border-radius:28px;padding:24px 22px;display:flex;flex-direction:column}
-.sqc blockquote{margin:0;padding:0;display:flex;flex-direction:column;gap:14px;flex:1}.sqc blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:400;font-style:italic}
-.sqc blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:.95rem}
+.sqc blockquote{margin:0;padding:0;display:flex;flex-direction:column;gap:14px;flex:1}.sqc blockquote p{margin:0;font-size:1.25rem;line-height:1.4;font-weight:400;font-style:italic}
+.sqc blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:1rem}
 .tb .vizgrid.d32{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch}.tb .vizgrid.d32>.viz{width:80%;justify-self:center}.tb .vizgrid.d32 .dcol{min-width:0}
 .tb .vizgrid.d32 .viz{position:relative;padding:0}.tb .vizgrid.d32 .viz .flourish-embed{position:absolute;top:20px;left:20px;right:20px;height:calc(100% - 60px);width:auto;min-height:0}.tb .vizgrid.d32 .viz iframe{height:100%!important}.tb .vizgrid.d32 .prghd{margin-bottom:24px}
 .tb .splith.jrn .ph img{aspect-ratio:auto;height:auto;min-height:517px;flex:1;object-fit:cover}
+@media(max-width:860px){.tb .splith.jrn .ph img{min-height:0;height:461px;aspect-ratio:auto;flex:none}}
 
 .tb .asplist{list-style:none;margin:0;padding:0;display:grid}
 .tb .asp{display:grid;grid-template-columns:minmax(0,40%) minmax(0,60%);gap:0;align-items:start;border-top:2px solid #d3e5e3;padding:48px 0}
@@ -1132,7 +1134,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* Home: Our Focus in one white card (teal top and bottom), title centred, circle photo left and text right */
 .tb .focuscard .sechead{text-align:center;margin-bottom:40px}
 .tb .focusrows{list-style:none;margin:0;padding:0;display:grid;gap:40px}
-.tb .focusrows li{display:grid;grid-template-columns:clamp(var(--circle-small),16vw,var(--circle-medium)) minmax(0,62ch);justify-content:center;gap:clamp(20px,4vw,40px);align-items:center;text-align:left}
+.tb .focusrows li{display:grid;grid-template-columns:var(--circle-small) minmax(0,62ch);justify-content:center;gap:clamp(20px,4vw,40px);align-items:center;text-align:left}
 @media(min-width:741px){.tb #focus .focuscard{width:80%;margin-left:auto;margin-right:auto}}
 .tb .fcirc{display:block;width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;background:var(--teal-25)}
 .tb .fcirc img{display:block;width:100%;height:100%;object-fit:cover;border-radius:0}
@@ -1166,7 +1168,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .mealtxt h3{margin:0 0 .6em;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800;line-height:1.2}.tb .mealtxt p{margin:0 0 1em}
 .tb .rsch-h{text-align:center;margin:var(--space-large) 0 24px;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800}
 .tb .team2.rsch{justify-content:center;gap:24px 40px}.tb .team2.rsch li{display:flex;flex:none;width:auto;max-width:none;align-items:center;gap:16px}
-.tb .team2.rsch .tc{width:var(--mc);max-width:none;height:var(--mc);aspect-ratio:auto;flex:none;font-size:1.5rem}.tb .team2.rsch b{margin:0;min-height:0;font-size:1.2rem;font-weight:800;line-height:1.12}
+.tb .team2.rsch .tc{width:var(--circle-small);max-width:none;height:var(--circle-small);aspect-ratio:auto;flex:none;font-size:1.5rem}.tb .team2.rsch b{margin:0;min-height:0;font-size:1.2rem;font-weight:800;line-height:1.12}
 .tb .fundgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
 .tb .fcard{display:flex;flex-direction:column}.tb .fcard h2{margin:0 0 .5em}.tb .fcard .lede{margin:0}.tb .fcard .bar{flex:none;margin:20px 0 24px}
 .tb .fcard .fsup{font-style:italic;font-size:.9rem;color:var(--muted);margin-bottom:.5em}
@@ -1238,6 +1240,22 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(max-width:700px){.tb .bchart.card{padding:20px}}
 /* We want to be ready for the next disaster: the section content is 80% of the standard content width, centred as a block (text stays left aligned); rows are 40% text, 60% content */
 @media(min-width:901px){.tb #pr-aspire>.wrap>*{width:80%;margin-left:auto;margin-right:auto}}
+/* TYPE SCALE: every text size on the site is one of the standard styles on the brand guidelines page (Title and text sizes).
+   Body 16px, Lead and small title 20px, Card title 24px (22px phone), Section title 38px (30px phone), Page title 56px (38px phone). */
+.tb .funders p,.tb .funders li a,.site-foot .copy,.foot-in .copy,.site-foot .ack,.site-foot .ack p,.pillcards .pn,.pillcards p,.pillcards .pnum,.racks p,.racks .rc,.gsub b,.gsub span,.gsub .ctry,.tb .ppdate,.tb .ppnote,.lgapills li,.tcards blockquote footer,.sqc blockquote footer,.tb .focus p,.tb .focuscards p,.tb .focuscards .fbody p,.tb .focusrows .fbody p,.tb .focus .fn,.tb .sinit,ol.river .fund,ol.river .fund-i,.tb ol.river .flogo-t,.tb ol.river li p,.tb .steergrid .sname,.tb .fcard .fsup,.team2 li span:not(.tc),.tb .mapnote,.tb .bleg,.tb .bleg2 b,.tb .bfil button,.tb .bfil>span,.tb .bbar,.tb .baxis,.tb .bcaxis,.tb .bslab,.tb .bclab,.tb .bblab,.tb .baxt,.tb .bmn,.tb .bmlab,.tb .bdlab{font-size:1rem!important}
+.tb .pptag{font-size:1rem!important;text-transform:uppercase;letter-spacing:0}
+.tb .asp-l>p,.tcards blockquote p,.sqc blockquote p,.tb .team2 b,.tb .team2.rsch b{font-size:1.25rem!important}
+.tb .page .wwa h2,.tb .page .dirhead h1.sechead,.tb .team2 .tc{font-size:clamp(1.875rem,4vw,2.375rem)!important}
+.tb .vpc h2,.tb .focuscards .fbody h3,.tb .focuscards .pnum,.tb .focuscards .fph .pnum{font-size:clamp(1.375rem,2.4vw,1.5rem)!important}
+.tb .team2.rsch .tc{font-size:clamp(1.375rem,2.4vw,1.5rem)!important}
+@media(min-width:741px) and (max-width:999px){.tb .hsplit .hsolid-text h1{font-size:clamp(2.375rem,5vw,3.5rem)!important}}
+@media(max-width:430px){.tb .hwpills a{font-size:1.25rem!important}}
+/* Header and footer logos use the Medium logo size; the header photos use two sizes (tall: Network map, Journey, RACK; wide: Home, About) */
+.tb .site-head .logo,.tb .logo{height:var(--logo-medium)!important;width:auto}
+@media(min-width:1000px){.tb .hsplit-in{grid-template-columns:minmax(0,1fr) 469px}}
+@media(min-width:741px){.tb .hsplit-r{height:545px;align-self:center}}
+@media(min-width:741px){.tb .hsplit.hsplit-sq .hsplit-r{width:100%;height:auto;aspect-ratio:11/10;align-self:center}}
+.tb .funders p,.tb .funders li a{font-size:.75rem!important}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
@@ -1249,7 +1267,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tcards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .tcards li{background:#fff;border:1px solid var(--line);border-bottom:10px solid var(--yellow);border-radius:28px;padding:18px 18px 24px;display:flex;flex-direction:column}
 .tcards .tph{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:16px;margin-bottom:16px}.tcards .tph img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
-.tcards .tph .play{inset:auto;top:50%;left:50%;margin:0;transform:translate(-50%,-50%);width:76px;height:76px;padding:0;display:grid;place-items:center}.tcards .tph .play svg{width:100%;height:100%}
+.tcards .tph .play{inset:auto;top:50%;left:50%;margin:0;transform:translate(-50%,-50%);width:92px;height:92px;padding:0;display:grid;place-items:center}.tcards .tph .play svg{width:100%;height:100%}
 .tcards blockquote{margin:0;padding:0;display:flex;flex-direction:column;gap:14px;flex:1}.tcards blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:400;font-style:italic}
 .tcards blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:.95rem}
 .dirhead{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px 24px;margin-bottom:35px}.dirhead .sechead{margin:0;grid-column:2;grid-row:1;text-align:center}.dirhead .lgasel{grid-column:3;grid-row:1;justify-self:end}
@@ -1259,7 +1277,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .gsub li{background:#fff;border:1px solid var(--line);border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
 .gsub .ctry{font-size:.85rem;font-weight:700;color:var(--teal-d);margin-top:8px}.gsub .ctry+.btn{margin-top:6px}.gsub b{font-size:1.1rem;line-height:1.25}.gsub span{color:#586c74;font-size:.95rem}.gsub .btn{margin-top:14px}
 .gsub .sr-only,.rcards .sr-only,.steer .sr-only,.funders .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.btn-sm{font-size:.9rem;padding:.5em 1.1em;min-height:38px}
+.btn-sm{font-size:1rem;padding:.5em 1.1em;min-height:38px}
 @media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:461px;min-height:0;flex:none}}
 @media(max-width:739px){.lgasel-l,.lgasel{width:100%}.dirhead{grid-template-columns:1fr}.dirhead .sechead,.dirhead .lgasel{grid-column:1}.dirhead .sechead{grid-row:1}.dirhead .lgasel{grid-row:2}}
 """
