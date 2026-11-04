@@ -55,8 +55,9 @@ def nav3():
 
 def protobar3(cur):
     others = "".join(f'<a class="pb-btn" data-proto="{k}" href="../{k}/" aria-label="{NAMES[k]}"><span class="pb-short" aria-hidden="true">{SHORT[k]}</span><span class="pb-long">{NAMES[k]}</span></a>' for k in NAMES if k != cur)
+    curname = NAMES.get(cur) or EXTRA_NAMES[cur]
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
-<p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {NAMES[cur]}</span></p>
+<p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {curname}</span></p>
 <nav class="pb-nav" aria-label="Prototype pages"><a class="pb-btn pb-all" href="../#round-2">All Prototypes</a>{others}</nav>
 <button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to Top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
@@ -138,7 +139,7 @@ def home_body(hero="photo"):
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("home-circle-top")}{vimg("home-circle-bottom")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
-<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30793680"><noscript><img src="https://public.flourish.studio/visualisation/30793680/thumbnail" width="100%" alt="Pictogram of our journey in numbers: groups, funding and disaster experience."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See Journey</a></p></div></div></section>
+<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30793680"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/30793680/thumbnail" width="100%" alt="Pictogram of our journey in numbers: groups, funding and disaster experience."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">Review Our Progress</a></p></div></div></section>
 <section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></div></section>
 {partners_section()}'''
 
@@ -600,6 +601,143 @@ def progress_body():
 <ol class="asplist">{asp}</ol></div></section><script src="https://public.flourish.studio/resources/embed.js" async></script>'''
 
 
+
+# ---------------------------------------------------------------- Prototype B: the Journey page only, with the charts redrawn in plain HTML and SVG (visual study)
+EXTRA_NAMES = {"prototype-b": "Prototype B: Journey Page With Flourish Charts"}
+C_NAVY, C_ORANGE, C_TEAL, C_YELLOW, C_GREY, C_MIST, C_PALE = "#07293b", "#f05a28", "#00a79d", "#ffcb2a", "#586c74", "#9fb0b8", "#d3dce3"
+
+
+def bfig(title, sub, graphic, label, cls="", after=""):
+    """One chart: h3 title, normal-size text under it, then the graphic. The graphic carries the screen reader description."""
+    h = f"<h3>{title}</h3>" if title else ""
+    t = f'<p class="bsub">{sub}</p>' if sub else ""
+    return f'<figure class="bchart {cls}">{h}{t}<div class="bgraph" role="img" aria-label="{E(label)}">{graphic}</div>{after}</figure>'
+
+
+def blegend(items):
+    return '<ul class="bleg" aria-hidden="true">' + "".join(f'<li style="--c:{c}">{n}</li>' for n, c in items) + "</ul>"
+
+
+def bubble_svg():
+    """Same bubble arrangement as the NRCRA prototype chart (positions and sizes from the Flourish original)."""
+    b = [("&le;10", 310.7, 152.2, 119.5, C_YELLOW, 30), ("11-20", 212.1, 289.2, 46.5, "#cecfd1", 15), ("20-30", 194.3, 68.9, 20.8, "#cecfd1", 8.5), ("&gt;30", 294.9, 309.7, 36, "#cecfd1", 14)]
+    parts = "".join(f'<circle cx="{x}" cy="{y}" r="{r}" fill="{c}"/><text x="{x}" y="{y}" text-anchor="middle" dominant-baseline="central" font-size="{fs}" font-weight="800" fill="{C_NAVY}">{n}</text>' for n, x, y, r, c, fs in b)
+    return f'<svg class="bsvg bbub" viewBox="165 25 275 330" aria-hidden="true" focusable="false">{parts}</svg>'
+
+
+def donut_svg():
+    circ = 2 * 3.14159265 * 80
+    teal = circ * 43 / 58
+    return (f'<svg class="bsvg" viewBox="0 0 480 230" aria-hidden="true" focusable="false"><g transform="rotate(-90 240 115)" fill="none" stroke-width="44">'
+            f'<circle cx="240" cy="115" r="80" stroke="#d9d9d9"/><circle cx="240" cy="115" r="80" stroke="{C_TEAL}" stroke-dasharray="{teal:.1f} {circ:.1f}"/></g>'
+            f'<text x="128" y="122" text-anchor="end" font-size="20" font-weight="800" fill="{C_NAVY}">43 groups</text>'
+            f'<text x="352" y="70" font-size="20" font-weight="800" fill="{C_GREY}">15 groups</text></svg>')
+
+
+def maturity_graphic():
+    rows = [(49, "Have an online presence", C_NAVY), (40, "Are incorporated", C_ORANGE), (27, "Have a document hub", C_TEAL), (16, "Have volunteer policies", C_YELLOW), (8, "Have a steering committee", C_GREY)]
+    out = ""
+    for n, lab, c in rows:
+        out += (f'<div class="bmrow" style="--c:{c}"><div class="bmleft"><b class="bmn">{n} groups</b><span class="bmsq" style="--cols:{(n + 1) // 2}">' + "<i></i>" * n + f'</span></div><span class="bmlab">{lab}</span></div>')
+    return f'<div class="bmat">{out}</div>'
+
+
+def skills_graphic():
+    rows = [("Admin / committee experience", 48), ("Trained first aid members", 46), ("Grant writing experience", 44), ("Coordination / logistics experience", 38), ("SES / RFS / fire trained members", 36), ("Trades / practical skills", 35), ("Mental health first aid", 30), ("Local language / cultural skills", 14)]
+    return '<div class="bbars">' + "".join(f'<div class="bbrow"><span class="bblab">{l}</span><span class="bbar" style="--v:{v}">{v} groups</span></div>' for l, v in rows) + "</div>"
+
+
+def stack_axis(maxv, step):
+    return '<div class="baxis">' + "".join(f"<span>{i}</span>" for i in range(0, maxv + 1, step)) + "</div>"
+
+
+def bfilter(label, keys):
+    return (f'<div class="bfil" role="group" aria-label="{label}"><span>{label}</span><div>' + '<button type="button" class="on" data-k="all" aria-pressed="true">All</button>'
+            + "".join(f'<button type="button" data-k="{k}" aria-pressed="false">{k}</button>' for k in keys) + "</div></div>")
+
+
+def connected_graphic():
+    cols = [("5/5", C_NAVY), ("4/5", C_ORANGE), ("3.5/5", C_TEAL), ("3/5", C_YELLOW), ("2.5/5", C_GREY), ("2/5", "#adb9c6"), ("1/5", "#d6dde5")]
+    cmap = dict(cols)
+    rows = [("Connections within their group", [("5/5", 11), ("4/5", 26), ("3.5/5", 1), ("3/5", 8), ("1/5", 1)]),
+            ("Connections with the wider community", [("5/5", 4), ("4/5", 14), ("3.5/5", 1), ("3/5", 15), ("2.5/5", 2), ("2/5", 8), ("1/5", 3)])]
+    rws = "".join(f'<div class="bcrow"><span class="bclab">{lab}</span><span class="bctrack"><span class="bstack">' + "".join(f'<i data-k="{k}" style="--v:{v};--c:{cmap[k]}" title="{k}: {v} groups"></i>' for k, v in segs) + "</span></span></div>" for lab, segs in rows)
+    ticks = "".join(f'<span style="left:{i * 10}%">{i * 5}</span>' for i in range(0, 11))
+    return f'{bfilter("View score", [k for k, c in cols])}<div class="bcn">{rws}<div class="bcrow"><span></span><span class="bcaxis" aria-hidden="true">{ticks}</span></div></div>'
+
+
+def vulnerable_graphic():
+    cols = [("5", C_NAVY, 7), ("4", C_ORANGE, 12), ("3", C_TEAL, 10), ("2", C_YELLOW, 8), ("1", C_GREY, 6)]
+    bar = '<span class="bstack">' + "".join(f'<i data-k="{k}" style="--v:{v};--c:{c}" title="Rating {k}: {v} groups"></i>' for k, c, v in cols) + "</span>"
+    leg = '<div class="bleg2" aria-hidden="true"><b>Self rated scores</b>' + blegend([(k, c) for k, c, v in cols]) + "</div>"
+    return f'{bfilter("View rating", [k for k, c, v in cols])}{leg}<div class="bstk bvul"><div class="bsrow"><span class="bslab">Knowledge rating</span>{bar}</div><div class="bsrow"><span></span>{stack_axis(45, 5)}</div><p class="baxt">Number of Groups</p></div>'
+
+
+def dots_graphic(rows):
+    out = ""
+    for lab, n, c in rows:
+        out += f'<div class="bdrow" style="--c:{c}"><span class="bdlab"><b>{lab}</b>{n} groups</span><span class="bdots">' + "<i></i>" * n + "</span></div>"
+    return f'<div class="bdgrid">{out}</div>'
+
+
+def aspire_item_b(i, row):
+    title, text, quote, who, vis = row
+    right = bfig(None, "24 groups don&rsquo;t confidently know who&rsquo;s most vulnerable", vulnerable_graphic(),
+                 "Bar chart of how groups rate their knowledge of vulnerable people in their community, from 1 to 5: 7 groups rate themselves 5, 12 rate 4, 10 rate 3, 8 rate 2 and 6 rate 1. 24 groups rate themselves 3 or lower.", "card ctr") if vis else pquote(quote, who)
+    return f'<li class="asp"><div class="asp-l"><h3>{i:02d} {title}</h3><p>{text}</p></div><div class="asp-r">{right}</div></li>'
+
+
+def progress_body_b():
+    hero = progress_body().split('<section class="sec" id="pr-who">')[0]
+    asp = "".join(aspire_item_b(i, r) for i, r in enumerate(ASPIRE, 1))
+    bubble = bfig(None, None, bubble_svg(), "Bubble chart of active volunteers per group. 33 groups run on a core team of 10 or fewer, 5 groups on 11 to 20, 1 group on 20 to 30 and 3 groups on more than 30.", "card",
+                  after='<h3 class="bafter">Small teams do the heavy lifting</h3><p class="bsub">Most of us run on a core team of 10 or less active volunteers</p><p class="bsub">A heavy load on just a few people is unsustainable. Spreading the work ensures our groups and our people survive disasters and the time between them.</p>')
+    maturity = bfig("We&rsquo;re at different stages", "Some of us are more established while others are emerging", maturity_graphic(),
+                    "Pictogram of operational maturity, number of groups that: have an online presence 49, are incorporated 40, have a document hub 27, have volunteer policies 16, have a steering committee 8.", "card ctr")
+    skills = bfig("We have the skills between us", "Across our groups, we hold a wide range of the skills community organisations need.", skills_graphic(),
+                  "Bar chart of skills held across Alliance members, by number of groups: admin and committee experience 48, trained first aid 46, grant writing 44, coordination and logistics 38, SES, RFS or fire trained 36, trades and practical skills 35, mental health first aid 30, local language and cultural skills 14.", "card ctr")
+    disaster = bfig(None, "About 3/4 of our groups have experienced disaster as a team", donut_svg(), "Donut chart: 43 groups have joint disaster experience and 15 groups did not answer.", "card ctr")
+    connected = bfig("Connectedness: within groups and beyond", "Many groups want to connect better with their communities.", connected_graphic(),
+                     "Bar chart of self-rated connection, 1 to 5, within each group and to the wider community. Within their own group: 11 groups rate 5, 26 rate 4, 1 rates 3.5, 8 rate 3 and 1 rates 1. To the wider community: 4 rate 5, 14 rate 4, 1 rates 3.5, 15 rate 3, 2 rate 2.5, 8 rate 2 and 3 rate 1.", "card")
+    council = bfig("Relationship with local council", "Most groups have a good relationship with their local council",
+                   dots_graphic([("Strong relationship", 35, C_TEAL), ("Some contact", 10, C_ORANGE), ("Little to no contact", 3, C_GREY)]),
+                   "Dot chart of relationship with local council: 35 groups have a strong relationship, 10 have some contact and 3 have little to no contact.", "card")
+    emergency = bfig("Emergency Services", "Groups that have a relationship with emergency services",
+                     dots_graphic([("RFS", 24, C_ORANGE), ("SES", 23, C_TEAL), ("Police", 3, C_GREY)]),
+                     "Dot chart of groups that have a relationship to emergency services: RFS 24 groups, SES 23 groups, Police 3 groups.", "card")
+    quote = pquote("[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it's so diverse.", "Chinderah and Surrounds Peoples Hub")
+    return f'''{hero}
+<div class="bwhite"><section class="sec" id="pr-who"><div class="wrap"><div class="bsplit"><div>{prg_head("Many groups, shared purpose", "We are a diverse alliance of community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.")}</div><div>{bubble}</div></div>
+<div class="bcards">{maturity}{skills}</div></div></section>
+<section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap"><div class="vizgrid d32 bd32"><div class="dcol">{prg_head("We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}{quote}</div>{disaster}</div></div></section>
+<section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap">{prg_head("We value social connection", "Connection is at the heart of what we do. Our groups build relationships in their own teams, across their community, with other groups in the alliance, and with emergency services and government agencies, so when disaster hits, people already know who to call.")}
+<div class="bconn">{connected}<div class="btwo">{council}{emergency}</div></div></div></section></div>
+<section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap">{prg_head("We want to be ready for the next disaster", "Taking stock also showed us where we want to grow. Seven aspirations stood out. Each one is something our groups told us they want support with, so we can look after our communities and each other for the long haul.")}
+<ol class="asplist">{asp}</ol></div></section>'''
+
+
+BFILTER_JS = """document.addEventListener('click',function(e){var b=e.target.closest('.bfil button');if(!b)return;var f=b.closest('.bchart'),k=b.getAttribute('data-k');[].forEach.call(f.querySelectorAll('.bfil button'),function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});[].forEach.call(f.querySelectorAll('.bstack i'),function(i){i.classList.toggle('dim',k!=='all'&&i.getAttribute('data-k')!==k)})});"""
+
+
+def page_b():
+    css, cls = CSS_B, "tb"
+    body = screen("journey", "Journey", progress_body(), "on")
+    nav = nav3().replace('data-nav="journey"', 'data-nav="journey" aria-current="page"')
+    html = f'''<!doctype html>
+<html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{EXTRA_NAMES["prototype-b"]}</title><meta name="robots" content="noindex">
+<meta name="description" content="Journey page with the live Flourish charts. Sample content only.">
+{FONT}<style>{BASE}{CSS1}{CSS_T}{css}{MOBILE}</style></head><body class="v1 teal {cls}">
+{nav}<main id="main">{body}</main>{tfooter()}{protobar3("prototype-b")}<script data-cfasync="false">{BFILTER_JS}</script><script data-cfasync="false">{JSX}</script><script data-cfasync="false">{JS2}</script></body></html>'''
+    # the other pages are not in this prototype: send those links to the full prototype
+    return re.sub(r'href="#(home|network|about|rack|privacy|lga-[^"]*)"', r'href="../prototype-c/#\1"', html)
+
+
+def finish_b():
+    html = page_b().replace("#6c8590", "#586c74").replace("#e0f4f3", "#f3f9f8").replace("#bfe9e7", "#beddda")
+    return weights_4_8(adjusted_teal(html))
+
+
 # ---------------------------------------------------------------- CSS
 CSS_T = """
 body.teal{--bg:#f3f6f7;--r:28px}
@@ -1053,6 +1191,50 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb #privacy .pphead{padding-bottom:0}.tb #privacy .pphead .ppdate{margin-bottom:0}
 /* Journey: 130px (Large spacing) above these three section titles, from the content above them */
 .tb #pr-faced,.tb #pr-connect,.tb #pr-aspire{padding-top:calc(var(--space-large) - 60px)!important}
+/* Prototype B: redrawn Journey charts. Titles are h3, the text under them is normal size. Cards are white with rounded corners; charts without .card sit straight on the page. */
+.tb .bchart{margin:0;min-width:0}.tb .bchart.card{background:#fff;border-radius:var(--r);padding:32px}
+.tb .bchart h3{margin:0 0 8px;font-size:clamp(1.375rem,2.4vw,1.5rem);line-height:1.2;font-weight:800;color:var(--navy)}
+.tb .bchart .bsub{margin:0 0 8px;font-size:1rem;line-height:1.6;font-weight:400;color:var(--navy)}
+.tb .bchart.ctr h3,.tb .bchart.ctr .bsub{text-align:center}
+.tb .bchart .bgraph{margin-top:20px}.tb .bchart .bgraph:first-child{margin-top:0}
+.tb .bchart .bafter{margin:24px 0 8px}.tb .bchart .bafter+.bsub{margin-bottom:8px}
+.tb .bsvg{display:block;width:100%;height:auto;max-width:100%;margin:0 auto}
+.tb .bsplit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}.tb .bsplit .prghd{margin-bottom:0}
+.tb .bcards{display:grid;gap:16px;margin-top:48px}
+.tb .bd32>.bchart{width:80%;justify-self:center;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.tb .bconn{display:grid;gap:16px}.tb .btwo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.tb .bmat{display:grid;gap:12px;container-type:inline-size;text-align:left}.tb .bmrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(140px,230px);gap:16px;align-items:center}.tb .bmleft{display:flex;align-items:center;justify-content:flex-end;gap:20px;min-width:0}
+.tb .bmn{text-align:right;font-weight:800;color:var(--muted)}.tb .bmlab{font-size:1rem;line-height:1.3}
+.tb .bmsq{--sq:clamp(14px,calc((100cqw - 400px - 150px) / 25),30px);display:grid;grid-template-columns:repeat(var(--cols),var(--sq));gap:6px;justify-content:end}.tb .bmsq i{width:var(--sq);height:var(--sq);border-radius:4px;background:var(--c);display:block}
+.tb .bbars{display:grid;gap:14px;text-align:left}.tb .bblab{display:block;font-size:.9rem;margin-bottom:4px}
+.tb .bbar{display:flex;justify-content:flex-end;align-items:center;box-sizing:border-box;width:calc(var(--v) / 48 * 100%);min-width:92px;height:28px;padding:0 10px;border-radius:4px;background:#1d5c7d;color:#fff;font-weight:800;font-size:.875rem}
+.tb .bstk{display:grid;gap:10px;text-align:left}.tb .bsrow{display:grid;grid-template-columns:minmax(120px,22%) minmax(0,1fr);gap:12px;align-items:center}
+.tb .bslab{font-size:.95rem;line-height:1.25;color:var(--navy)}.tb .bstack{display:flex;height:36px}.tb .bstack i{display:block;height:100%;width:calc(var(--v) / 50 * 100%);background:var(--c);border-right:2px solid #f3f6f7}
+.tb .bvul .bstack i{width:calc(var(--v) / 45 * 100%)}.tb .bvul .bstack{height:40px}
+.tb .card .bstack i{border-right-color:#fff}
+.tb .baxis{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.tb .baxt{margin:0;text-align:center;font-weight:800;font-size:.9rem;color:var(--muted)}
+.tb .bleg{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.85rem;color:var(--muted)}.tb .bleg li{display:flex;align-items:center;gap:6px}.tb .bleg li:before{content:"";width:14px;height:14px;border-radius:4px;background:var(--c)}
+.tb .bleg2{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}.tb .bleg2 b{font-size:.85rem;color:var(--muted)}.tb .bleg2 .bleg{margin:0}
+.tb .bdgrid{display:grid;gap:18px}.tb .bdrow{display:grid;grid-template-columns:minmax(110px,34%) minmax(0,1fr);gap:16px;align-items:center}
+.tb .bdlab{font-size:1rem;line-height:1.3;color:var(--navy)}.tb .bdlab b{display:block;font-weight:800}
+.tb .bdots{display:flex;flex-wrap:wrap;gap:6px}.tb .bdots i{width:18px;height:18px;border-radius:50%;background:var(--c);display:block}
+.tb .bfil{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:14px 0 4px;text-align:left}.tb .bfil>span{font-size:.9rem;color:var(--muted)}.tb .bfil>div{display:flex;border:1px solid #d3dce3;border-radius:6px;overflow:hidden}
+.tb .bfil button{font:inherit;font-size:.85rem;color:var(--muted);background:#fff;border:0;border-left:1px solid #d3dce3;padding:6px 11px;cursor:pointer}.tb .bfil button:first-child{border-left:0}.tb .bfil button.on{background:#586c74;color:#fff}.tb .bfil button:hover:not(.on){background:#f3f6f7}
+.tb .bstack i.dim{opacity:.15}
+.tb .bcn{display:grid;gap:10px;margin-top:20px;text-align:left}.tb .bcrow{display:grid;grid-template-columns:minmax(150px,26%) minmax(0,1fr);gap:14px;align-items:center}
+.tb .bclab{text-align:right;font-size:.95rem;line-height:1.25;color:var(--muted)}
+.tb .bctrack{display:block;padding:2px 0;background:repeating-linear-gradient(to right,#e6ebee 0,#e6ebee 1px,transparent 1px,transparent 10%)}.tb .bctrack .bstack{height:34px;opacity:.9}
+.tb .bcaxis{position:relative;display:block;height:18px;font-size:.8rem;color:var(--muted)}.tb .bcaxis span{position:absolute;top:0;transform:translateX(-50%)}
+/* the volunteers chart card is close to square on desktop: a smaller bubble graphic, text under it */
+@media(min-width:901px){.tb .bchart.card:has(.bbub){aspect-ratio:1/1;display:flex;flex-direction:column}.tb .bchart.card:has(.bbub) .bgraph{flex:1 1 auto;min-height:200px;position:relative}.tb .bsvg.bbub{position:absolute;inset:0;width:100%;height:100%}}
+/* Prototype B: large space after the header, then a white band down to the aspirations section. Cards get a fine border so they still read on white. */
+.tb .bjourney>.wrap:first-child{margin-bottom:var(--space-large)!important}
+.tb .bwhite{background:#fff;padding-top:60px}.tb .bwhite .bchart.card{border:1px solid var(--line)}
+/* the We are disaster tested section sits on grey inside the white band */
+.tb .bwhite #pr-faced{background:var(--bg)}.tb .bwhite #pr-faced .bchart.card{border:0}
+@media(max-width:900px){.tb .bsplit{grid-template-columns:1fr;gap:32px}.tb .bd32>.bchart{display:block}.tb .btwo{grid-template-columns:1fr}.tb .bcrow{grid-template-columns:1fr;gap:4px}.tb .bclab{text-align:left}.tb .bcrow>span:empty{display:none}.tb .bd32>.bchart{width:auto;justify-self:stretch}.tb .bmrow{grid-template-columns:1fr;gap:6px}.tb .bmleft{justify-content:flex-start;flex-wrap:wrap;gap:8px 16px}.tb .bmn{text-align:left}.tb .bmsq{--sq:14px;justify-content:start}.tb .bsrow{grid-template-columns:1fr;gap:4px}.tb .bsrow>span:empty{display:none}}
+@media(max-width:700px){.tb .bchart.card{padding:20px}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
@@ -1122,7 +1304,7 @@ var pg=a.getAttribute('data-page');if(location.hash==='#'+pg){document.getElemen
 
 def page(v):
     css, cls = CSS_B, "tb"
-    body = "".join([screen("home", "Home", home_body(HERO_FOR[v])), screen("about", "About", about_body()), screen("journey", "Journey", progress_body()), screen("rack", "RACK", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
+    body = "".join([screen("home", "Home", home_body(HERO_FOR[v])), screen("about", "About", about_body()), screen("journey", "Journey", progress_body_b(), "bjourney"), screen("rack", "RACK", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{NAMES[v]}</title><meta name="robots" content="noindex">
@@ -1153,3 +1335,4 @@ def finish(v):
 def main():
     for v in ("prototype-c",):
         B.write(v + "/index.html", finish(v))
+    B.write("prototype-b/index.html", finish_b())
