@@ -712,8 +712,8 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .bwhite #pr-faced{background:var(--bg)}.tb .bwhite #pr-faced .bchart.card{background:#fff;border:0}
 @media(max-width:900px){.tb .bsplit{grid-template-columns:1fr;gap:32px}.tb .bd32>.bchart{display:block}.tb .btwo{grid-template-columns:1fr}.tb .bcrow{grid-template-columns:1fr;gap:4px}.tb .bclab{text-align:left}.tb .bcrow>span:empty{display:none}.tb .bd32>.bchart{width:auto;justify-self:stretch}.tb .bmrow{grid-template-columns:1fr;gap:6px}.tb .bmleft{justify-content:flex-start;flex-wrap:wrap;gap:8px 16px}.tb .bmn{text-align:left}.tb .bmsq{--sq:14px;justify-content:start}.tb .bsrow{grid-template-columns:1fr;gap:4px}.tb .bsrow>span:empty{display:none}}
 @media(max-width:700px){.tb .bchart.card{padding:20px}}
-/* We want to be ready for the next disaster: the section content is 80% of the page width and centred as a block (text stays left aligned); rows are 40% text, 60% content */
-@media(min-width:901px){.tb #pr-aspire>.wrap{width:80%;max-width:none;margin-left:auto;margin-right:auto}}
+/* We want to be ready for the next disaster: the section content is 80% of the standard content width, centred as a block (text stays left aligned); rows are 40% text, 60% content */
+@media(min-width:901px){.tb #pr-aspire>.wrap>*{width:80%;margin-left:auto;margin-right:auto}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
