@@ -138,7 +138,7 @@ def home_body(hero="photo"):
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("home-circle-top")}{vimg("home-circle-bottom")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
-<section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead">Our Journey</h2><dl class="stats">{"".join(f"<div><dt>{n}</dt><dd>{t}</dd></div>" for n, t in PROG_STATS)}</dl><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See Journey</a></p></div></div></section>
+<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30793680"><noscript><img src="https://public.flourish.studio/visualisation/30793680/thumbnail" width="100%" alt="Pictogram of our journey in numbers: groups, funding and disaster experience."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See Journey</a></p></div></div></section>
 <section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></div></section>
 {partners_section()}'''
 
@@ -902,6 +902,7 @@ main a:not(.btn):hover{color:var(--navy);background:var(--teal-12)}
 /* Our Impact: orange top strip and bottom border, like the other sections */
 .tb .statcard.impact{border-color:var(--orange);text-align:center}
 .statcard.impact .btnrow{justify-content:center;margin:28px 0 0}
+
 .tb .site-foot .foot-top{display:flex;align-items:flex-start}.tb .site-foot .foot-logo.boxed{display:block;width:fit-content;max-width:100%;padding:10px 14px;line-height:0}.tb .site-foot .foot-logo .logo{width:200px;max-width:100%;display:block}
 /* footer, teal design: adjusted teal background, white text, white brush behind each title with adjusted teal text */
 .tb .site-foot{background:#07293b;color:#fff;border-top:1px solid var(--line);--foot-line:rgba(255,255,255,.4)}
