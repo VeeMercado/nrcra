@@ -71,7 +71,7 @@ def hl(t):
 
 def steps():
     st = [("cal", "Come to a gathering", f"{B.GATHER[0]}: {B.GATHER[1]}.", "#home", "Upcoming"),
-          ("share", "Share knowledge", "Add what works to the RACK", SIGN_IN, "RACK"), ("hand", "Partner with us", "Fund or research community-led resilience.", "#journey", "Journey")]
+          ("share", "Share knowledge", "Add what works to RACK", SIGN_IN, "RACK"), ("hand", "Partner with us", "Fund or research community-led resilience.", "#journey", "Journey")]
     return '<ol class="steps">' + "".join(f'<li><span class="ci">{icon(i)}</span><b>{E(t)}</b><p>{E(d)}</p><a href="{h}">{E(l)}</a></li>' for i, t, d, h, l in st) + "</ol>"
 
 
@@ -496,50 +496,43 @@ def rack_body():
     cards = "".join(f'<li><h3>{t}</h3><p>{d}</p></li>' for t, d in RACK_CATS)
     return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge</span><h1>RACK</h1><p class="lede">One shared place to find what you need and what is already working in resilience communities across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=RACK%20access">Request Access</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a><a class="rackrev" href="#privacy">Privacy Policy</a></p></div>
-<div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="Someone using the RACK on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
+<div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="Someone using RACK on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
 <section class="sec"><div class="wrap rackhead"><p class="lede">Find templates and guides for your group, and share your own with the network.</p><ol class="pillcards rackcats">{cards}</ol></div></section>'''
 
 
 FLAG_ICON = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false"><path d="M6 21V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M6 5h11.5l-2.8 4.2 2.8 4.2H6z" fill="currentColor"/></svg>'
 
 
-# Privacy Policy page: simple numbered items. "have" = text already on NRCRA's current Privacy Policy page (or site footer); "add" = consider adding.
+# Privacy Policy page: a simple standard policy, numbered in the titles. Every item carries the yellow "Draft" pill until NRCRA's legal adviser signs it off.
 PP = [
-    ("add", "A legal disclaimer", "Says the page is only a general explanation, is not legal advice, and recommends getting legal advice.", "Template text from the website builder. Replace it with NRCRA's own wording."),
-    ("add", "Privacy Policy: the basics", "Explains what a privacy policy is: a statement of how a website collects, uses and manages visitors' information and protects their privacy.", "Template text from the website builder. Replace it with NRCRA's own wording."),
-    ("add", "What to include in a Privacy Policy", "Lists the topics a policy usually covers: what is collected and how, why, sharing with others, how people use their rights, and information about minors.", "Advice for the website owner, not a policy for visitors. The items below cover these topics."),
-    ("add", "Who we are", "The Northern Rivers Community Resilience Alliance (NRCRA) is a community-led network of local resilience groups across the Northern Rivers of New South Wales.", ""),
-    ("add", "What personal information we collect", "Names, email addresses and phone numbers, your group and role, event registrations, messages you send us, and basic details about your visit to our website.", ""),
-    ("add", "How we collect it", "From you directly (forms, emails and events), from your group when it nominates you, and automatically through cookies and website analytics.", ""),
-    ("add", "Why we collect and use it", "To run the network and events, answer questions, send updates you ask for, manage RACK access, report to funders in summary form, and meet legal obligations.", ""),
-    ("add", "Who we share it with", "We do not sell personal information. We share it only with providers who help run our website, email, events and the RACK, with partners when you agree, or when the law requires it.", "To confirm: which providers, and whether any store information outside Australia."),
-    ("add", "Storage and security", "We keep personal information in secure systems with limited access, and delete it or remove identifying details when we no longer need it.", ""),
-    ("add", "RACK sign-in", "Signing in to the RACK is part of NRCRA's compliance process. When you sign in, the NRCRA Terms and Conditions and this Privacy Policy apply. We collect your name, email, group, role and sign-in dates and times to manage access and keep the RACK secure.", "Needs both documents: this policy and the Terms and Conditions below."),
-    ("add", "Terms and Conditions for RACK sign-in", "The rules for using the RACK that people agree to when they sign in.", "No Terms and Conditions page exists on the current website. NRCRA needs to supply one."),
-    ("add", "Cookies and website analytics", "Our website uses cookies to work and to understand how people use it. You can refuse cookies in your browser settings.", ""),
-    ("add", "Children and young people", "Whether and how NRCRA handles information about minors.", "The template text mentions minors' information. NRCRA to decide the wording and age."),
-    ("add", "Access and correction", "You can ask to see the personal information we hold about you and ask us to correct it.", ""),
-    ("add", "Complaints", "Tell us if you think we have handled your information badly. You can also contact the Office of the Australian Information Commissioner at oaic.gov.au.", ""),
-    ("add", "Changes to this policy", "We may update this policy and will show the date it was last changed.", ""),
-    ("have", "Contact us", "Email hello@nrcra.org.au.", "The contact email is already in the current website footer."),
+    ("Who we are", "The Northern Rivers Community Resilience Alliance (NRCRA) is a community-led network of local resilience groups across the Northern Rivers of New South Wales. This website is run for the Alliance by Resilient Lismore Incorporated (ABN 54 994 514 213). In this policy, &ldquo;we&rdquo; and &ldquo;us&rdquo; mean NRCRA and Resilient Lismore Incorporated."),
+    ("About this policy", "This policy explains how we collect, use, share and protect your personal information. We follow the Privacy Act 1988 (Cth) and the Australian Privacy Principles. By using this website or giving us your information, you agree to this policy."),
+    ("The information we collect", "Your name, email address, phone number, group and role. Anything you send us, such as emails, form entries, event registrations, feedback and answers in Health Checks. Resilience Alliance Community Knowledge (RACK) sign-in details, such as your name, email, group, role and sign-in times. Photos, videos and stories, with your permission. Basic technical details about your visit, such as your device, browser, IP address and the pages you view."),
+    ("How we collect it", "Directly from you, through forms, emails, events, calls and RACK. From your group, when it nominates you for a role or an event. Automatically, through cookies and website analytics."),
+    ("How we use it", "To run the network, events and training. To answer your questions and send updates you ask for. To manage RACK access. To learn and improve together, including research with the University Centre for Rural Health. To report to our funders. To keep this website working and secure. To meet our legal duties."),
+    ("Stories, photos and quotes", "We only share your photo, video, story or quote with your permission. We can show a quote without your name if you prefer. You can change your mind at any time by emailing us, and we will remove it going forward."),
+    ("Who we share it with", "We do not sell your personal information. We share it only with people and services that help us run the Alliance: our website, email, events and RACK providers, and our research partners, who must keep it confidential. We give funders summary or de-identified information. We share it with others only when you agree, or when the law requires it."),
+    ("Other services on this website", "This website uses services from other companies. Wix hosts the site and provides website analytics. Google provides the map on our Network page. Vimeo plays our videos. Flourish shows our charts. We also link to Facebook and LinkedIn. These services may collect information and set cookies under their own privacy policies. Some of them store information outside Australia."),
+    ("Cookies and analytics", "Cookies are small files saved on your device. We use them to make the website work and to see how people use it, so we can improve it. You can refuse or delete cookies in your browser settings, but some parts of the website may not work as well."),
+    ("RACK sign-in", "RACK is our shared library of tools and resources for member groups. When you sign in, we collect your name, email, group, role and sign-in times to manage access and keep RACK secure. This policy applies to your use of RACK."),
+    ("Storage and security", "We keep your information in secure systems and limit who can see it. We keep it only as long as we need it, then delete it or remove your details. No online system is completely secure. If a data breach is likely to cause you serious harm, we will tell you and the Office of the Australian Information Commissioner."),
+    ("Children and young people", "This website is for adults. We do not knowingly collect personal information from anyone under 18 without a parent or guardian&rsquo;s permission. If you think a young person has given us their details, email us and we will delete them."),
+    ("Links to other websites", "Our website links to other websites, such as those of our partners and funders. We are not responsible for their privacy practices, so please read their policies."),
+    ("Access and correction", "You can ask to see the personal information we hold about you, ask us to correct it, or ask us to delete it. You can also unsubscribe from our updates at any time. We will reply within 30 days."),
+    ("Complaints", "If you think we have handled your information badly, please tell us and we will look into it. If you are not happy with our response, you can contact the Office of the Australian Information Commissioner at oaic.gov.au or on 1300 363 992."),
+    ("Changes to this policy", "We may update this policy from time to time. When we do, we will change the date at the top of this page."),
+    ("Contact us", "Email hello@nrcra.org.au, or write to Resilient Lismore Incorporated, 172 Casino St, South Lismore NSW 2480."),
 ]
-CHECK_ICON = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-FLAG_SMALL = FLAG_ICON.replace('width="26" height="26"', 'width="14" height="14"')
+FLAG_SMALL = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M6 21V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M6 5h11.5l-2.8 4.2 2.8 4.2H6z" fill="currentColor"/></svg>'
 
 
-def pp_item(i, kind, title, text, note):
-    tag = (f'<span class="pptag tag-have">{CHECK_ICON}Already on the site</span>' if kind == "have"
-           else f'<span class="pptag tag-add">{FLAG_SMALL}Not on the site: recommend adding</span>')
-    note_html = f'<p class="ppnote">{note}</p>' if note else ""
-    return f'<li class="ppitem"><span class="ppnum">{i:02d}</span><div><div class="pprow">{tag}<h2>{title}</h2></div><p>{text}</p>{note_html}</div></li>'
+def pp_item(i, title, text):
+    return f'<li class="ppitem"><div class="pprow"><span class="pptag tag-add">{FLAG_SMALL}Draft</span><h2>{i}. {title}</h2></div><p>{text}</p></li>'
 
 
 def privacy_body():
     items = "".join(pp_item(i, *row) for i, row in enumerate(PP, 1))
-    have = f'<span class="pptag tag-have">{CHECK_ICON}Already on the site</span>'
-    add = f'<span class="pptag tag-add">{FLAG_SMALL}Not on the site: recommend adding</span>'
-    return f'''<div class="wrap"><div class="pg-head pphead"><span class="eyebrow pill-t">Legal</span><h1>Privacy Policy</h1><p class="lede">How NRCRA collects, uses and protects your personal information.</p>
-<p class="pplegend">{have} is on NRCRA&rsquo;s current Privacy Policy page or website footer. {add} means NRCRA does not have this yet, so we recommend adding it. It is new draft wording for NRCRA and its legal adviser to review before anything goes live.</p></div></div>
+    return f'''<div class="wrap"><div class="pg-head pphead"><span class="eyebrow pill-t">Legal</span><h1>Privacy Policy</h1><p class="lede">How NRCRA collects, uses and protects your personal information.</p><p class="ppdate">Draft, last updated 4 November 2026</p></div></div>
 <section class="sec" style="padding-top:0"><div class="wrap"><ol class="pplist2">{items}</ol></div></section>'''
 
 
@@ -779,18 +772,16 @@ body.teal{font-size:16px}
 .tb .site-foot .flist a.soc{display:grid;place-items:center;width:44px;height:44px;padding:0;margin:0;border-radius:var(--btn-r,12px);background:#fff;color:#07293b;text-decoration:none!important;transition:background .15s}
 .tb .site-foot .flist a.soc:hover,.tb .site-foot .flist a.soc:focus-visible{background:#beddda;color:#07293b}
 .tb .site-foot .flist a.soc:focus-visible{outline:2px solid #fff;outline-offset:3px}
-/* Privacy Policy page; small review link on the RACK page */
+/* Privacy Policy page; small review link on RACK page */
 .tb .rackrev{align-self:center;margin:0 0 0 6px;font-size:.95rem}.tb .rackrev{color:var(--teal-d);font-weight:700;text-decoration:underline;text-underline-offset:3px}.tb .rackrev:hover{text-decoration-thickness:2px}
 .tb .pphead{padding-bottom:28px}.tb .pphead .lede{margin:14px 0 0;max-width:62ch}.tb .ppdate{margin:10px 0 22px;color:var(--muted);font-size:.95rem}
-.tb .pplist2{list-style:none;margin:0;padding:8px 32px;background:#fff;border-radius:28px;border-bottom:10px solid var(--teal)}
-.tb .ppitem{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;padding:22px 0;border-top:1px solid var(--line)}.tb .ppitem:first-child{border-top:0}
-.tb .ppnum{font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800;font-style:italic;color:var(--teal-d);line-height:1.3}
+.tb .pplist2{list-style:none;margin:0;padding:8px 32px;background:#fff;border-radius:28px;border-top:8px solid var(--teal);border-bottom:8px solid var(--teal)}
+.tb .ppitem{padding:22px 0;border-top:1px solid var(--line)}.tb .ppitem:first-child{border-top:0}
 .tb .pprow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:.4em}.tb .ppitem h2{font-size:clamp(1.375rem,2.4vw,1.5rem);margin:0}
 .tb .ppitem p{margin:0;max-width:70ch}.tb .ppitem p+p{margin-top:.5em}.tb .ppnote{font-size:.92rem;color:var(--muted)}
 .tb .pptag{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:.2em .8em .2em .65em;font-size:.82rem;font-weight:800;line-height:1.3;white-space:nowrap;vertical-align:middle}
 .tb .tag-have{background:#00857c;color:#fff}.tb .tag-add{background:var(--yellow);color:var(--navy)}
-.tb .pplegend{max-width:72ch;margin:18px 0 0;line-height:2}
-@media(max-width:739px){.tb .pplist2{padding:4px 18px}.tb .ppitem{grid-template-columns:40px minmax(0,1fr);gap:8px}}
+@media(max-width:739px){.tb .pplist2{padding:4px 18px}}
 /* Footer layout: logo, Contact and Stay in Touch stacked on the left; Quick Links in the middle; RACK links and Privacy Policy on the right; copyright line centred */
 .tb .site-foot .fquick{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px;min-width:0}.tb .site-foot .fhide{visibility:hidden}
 .tb .site-foot .copy{text-align:center}
@@ -1055,6 +1046,10 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .gmap{width:100%;display:flex;flex-direction:column;gap:12px}.tb .gmap iframe{display:block;width:100%;height:auto;min-height:517px;flex:1;border:0;border-radius:var(--r);background:#e9efef}.tb .splith.net .mapnote{margin:16px 0 0;font-size:1rem;line-height:1.6;color:var(--navy)}
 @media(max-width:860px){.tb .gmap iframe{height:461px;min-height:0;flex:none}}
 .tb .splith.net .mapnote .ringico{display:inline-block;vertical-align:-3px;margin:0 2px}
+/* Privacy Policy, desktop: the heading and the policy box are centred at 80% of the page width */
+@media(min-width:861px){.tb #privacy .pphead,.tb #privacy .pplist2{width:80%;margin-left:auto;margin-right:auto}}
+/* Privacy Policy: same space between the header and the content as About (32px) */
+.tb #privacy .pphead{padding-bottom:0}.tb #privacy .pphead .ppdate{margin-bottom:0}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
