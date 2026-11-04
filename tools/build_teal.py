@@ -221,7 +221,7 @@ def meal_ring():
             '<p>Rather than only counting activities, we look for real changes in relationships, knowledge, capability and collective action, gathered through conversations at Gatherings and site visits, and turned into shared stories.</p></blockquote></div>')
 
 
-ABOUT_JUMP = [("ab-vision", "Vision &amp; Mission"), ("ab-how", "How we work"), ("ab-journey", "Our timeline"), ("ab-steering", "Steering committee"), ("ab-team", "Meet the team")]
+ABOUT_JUMP = [("ab-vision", "Vision &amp; Mission"), ("ab-how", "How we work"), ("ab-journey", "Our timeline"), ("ab-meal", "Learning Together"), ("ab-steering", "Steering committee"), ("ab-team", "Meet the team")]
 
 
 NETWORK_JUMP = [("nw-map", "Region map"), ("nw-stories", "Our stories"), ("our-network", "Explore our network")]
@@ -506,7 +506,7 @@ FLAG_ICON = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" 
 
 # Privacy Policy page: a simple standard policy, numbered in the titles. Every item carries the yellow "Draft" pill until NRCRA's legal adviser signs it off.
 PP = [
-    ("Who we are", "The Northern Rivers Community Resilience Alliance (NRCRA) is a community-led network of local resilience groups across the Northern Rivers of New South Wales. This website is run for the Alliance by Resilient Lismore Incorporated (ABN 54 994 514 213). In this policy, &ldquo;we&rdquo; and &ldquo;us&rdquo; mean NRCRA and Resilient Lismore Incorporated."),
+    ("Who we are", "The Northern Rivers Community Resilience Alliance (NRCRA) is a community-led network of local resilience groups across the Northern Rivers of New South Wales. In this policy, &ldquo;we&rdquo; and &ldquo;us&rdquo; mean NRCRA."),
     ("About this policy", "This policy explains how we collect, use, share and protect your personal information. We follow the Privacy Act 1988 (Cth) and the Australian Privacy Principles. By using this website or giving us your information, you agree to this policy."),
     ("The information we collect", "Your name, email address, phone number, group and role. Anything you send us, such as emails, form entries, event registrations, feedback and answers in Health Checks. Resilience Alliance Community Knowledge (RACK) sign-in details, such as your name, email, group, role and sign-in times. Photos, videos and stories, with your permission. Basic technical details about your visit, such as your device, browser, IP address and the pages you view."),
     ("How we collect it", "Directly from you, through forms, emails, events, calls and RACK. From your group, when it nominates you for a role or an event. Automatically, through cookies and website analytics."),
@@ -522,7 +522,7 @@ PP = [
     ("Access and correction", "You can ask to see the personal information we hold about you, ask us to correct it, or ask us to delete it. You can also unsubscribe from our updates at any time. We will reply within 30 days."),
     ("Complaints", "If you think we have handled your information badly, please tell us and we will look into it. If you are not happy with our response, you can contact the Office of the Australian Information Commissioner at oaic.gov.au or on 1300 363 992."),
     ("Changes to this policy", "We may update this policy from time to time. When we do, we will change the date at the top of this page."),
-    ("Contact us", "Email hello@nrcra.org.au, or write to Resilient Lismore Incorporated, 172 Casino St, South Lismore NSW 2480."),
+    ("Contact us", "Email hello@nrcra.org.au."),
 ]
 FLAG_SMALL = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M6 21V4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M6 5h11.5l-2.8 4.2 2.8 4.2H6z" fill="currentColor"/></svg>'
 
@@ -850,7 +850,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 /* Every page starts 36px below the funders strip (Home hero, About, Network, RACK, Impact, and the heading on each LGA page) */
 .tb .page[id^="lga-"]>.sec:first-child{padding-top:32px!important}
 /* About sections are reachable from the About menu dropdown; leave room under the sticky header when scrolling to them */
-#ab-vision,#ab-how,#ab-focus,#ab-journey,#ab-steering,#ab-team,#nw-map,#nw-stories,#our-network{scroll-margin-top:90px}
+#ab-vision,#ab-how,#ab-focus,#ab-journey,#ab-meal,#ab-steering,#ab-team,#nw-map,#nw-stories,#our-network{scroll-margin-top:90px}
 /* Main menu: About has a dropdown of its page sections. Hover on desktop, arrow button on touch and the phone menu. */
 .tb .navdrop{position:relative;display:flex;align-items:center}
 .tb .navdrop .dd-btn{display:grid;place-items:center;background:transparent;border:0;color:var(--navy);cursor:pointer;min-height:36px;min-width:26px;padding:0 .4em 0 0;margin-left:-6px;border-radius:99px}
