@@ -584,8 +584,8 @@ ASPIRE = [
 
 def aspire_item(i, row):
     title, text, quote, who, vis = row
-    right = f'<p>{text}</p>' + (viz(vis, "flat") if vis else pquote(quote, who))
-    return f'<li class="asp"><div class="asp-l"><span class="aspn">{i:02d}</span><h3>{title}</h3></div><div class="asp-r">{right}</div></li>'
+    right = viz(vis, "flat") if vis else pquote(quote, who)
+    return f'<li class="asp"><div class="asp-l"><h3>{i:02d} {title}</h3><p>{text}</p></div><div class="asp-r">{right}</div></li>'
 
 
 def progress_body():
@@ -593,8 +593,7 @@ def progress_body():
     return f'''<div class="wrap"><div class="splith net jrn"><div><span class="eyebrow">Journey</span><h1>Our journey so far</h1><p class="lede">Our story started in the 2022 floods, when local people led the response in their own communities. Since then, those groups have come together as the Northern Rivers Community Resilience Alliance. Today we are 60+ groups and growing. Between June and October 2026 we have spoken with 58 of those groups to take stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="ph"><img src="../assets/img/journey-cards.jpg" alt="Members standing in a circle on a concrete path, sorting red and green cards laid out on the ground." loading="eager" decoding="async"></div></div></div>
 <section class="sec" id="pr-who"><div class="wrap">{prg_head("Many groups, shared purpose", "We are a diverse alliance of community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.")}
 <div class="vizgrid">{viz("operational-maturity.png", "wide")}{viz("active-groups.svg", "wide")}{viz("skills.svg", "wide")}</div></div></section>
-<section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap">{prg_head("We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}
-<div class="vizgrid d32">{viz("disaster-experience.svg")}{pquote("[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it's so diverse.", "Chinderah and Surrounds Peoples Hub")}</div></div></section>
+<section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap"><div class="vizgrid d32"><div class="dcol">{prg_head("We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}{pquote("[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it's so diverse.", "Chinderah and Surrounds Peoples Hub")}</div>{viz("disaster-experience.svg")}</div></div></section>
 <section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap">{prg_head("We value social connection", "Connection is at the heart of what we do. Our groups build relationships in their own teams, across their community, with other groups in the alliance, and with emergency services and government agencies, so when disaster hits, people already know who to call.")}
 <div class="vizgrid">{viz("connectedness.png", "wide")}{viz("relationship-council.svg")}{viz("relationship-emergency-services.png")}</div></div></section>
 <section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap">{prg_head("We want to be ready for the next disaster", "Taking stock also showed us where we want to grow. Seven aspirations stood out. Each one is something our groups told us they want support with, so we can look after our communities and each other for the long haul.")}
@@ -960,21 +959,22 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .prghd{margin-bottom:32px}.tb .prghd .sechead{margin-bottom:16px}.tb .prghd .lede{margin:0}
 .tb .vizgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .tb .viz{margin:0;background:#fff;border-radius:var(--r);padding:32px;display:grid;place-items:center}.tb .viz.wide{grid-column:1/-1}.tb .viz img{display:block;width:100%;height:auto;max-width:100%}.tb .viz .flourish-embed{width:100%;min-height:200px}
-.tb .viz.flat{padding:0;background:transparent}
+.tb .viz.flat{padding:32px;background:#fff;overflow:hidden}
 /* Journey quotes: the same card as the Network stories (white, yellow base, italic quote, name below), without a photo */
 .sqc{margin:0;background:#fff;border:1px solid var(--line);border-bottom:10px solid var(--yellow);border-radius:28px;padding:24px 22px;display:flex;flex-direction:column}
 .sqc blockquote{margin:0;padding:0;display:flex;flex-direction:column;gap:14px;flex:1}.sqc blockquote p{margin:0;font-size:1.2rem;line-height:1.4;font-weight:400;font-style:italic}
 .sqc blockquote footer{margin-top:auto;color:#586c74;font-weight:800;font-size:.95rem}
-.tb .vizgrid.d32{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+.tb .vizgrid.d32{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch}.tb .vizgrid.d32>.viz{width:80%;justify-self:center}.tb .vizgrid.d32 .dcol{min-width:0}
+.tb .vizgrid.d32 .viz{position:relative;padding:0}.tb .vizgrid.d32 .viz .flourish-embed{position:absolute;top:20px;left:20px;right:20px;height:calc(100% - 60px);width:auto;min-height:0}.tb .vizgrid.d32 .viz iframe{height:100%!important}.tb .vizgrid.d32 .prghd{margin-bottom:24px}
 .tb .splith.jrn .ph img{aspect-ratio:auto;height:auto;min-height:517px;flex:1;object-fit:cover}
-.tb .vizgrid.d32 .sqc{align-self:center}
+
 .tb .asplist{list-style:none;margin:0;padding:0;display:grid}
-.tb .asp{display:grid;grid-template-columns:minmax(200px,260px) minmax(0,1fr);gap:48px;align-items:start;border-top:2px solid #d3e5e3;padding:48px 0}
-.tb .aspn{display:block;font-size:4rem;line-height:1;font-weight:800;letter-spacing:-.03em;color:var(--teal)}
-.tb .asp h3{margin:12px 0 0;font-size:clamp(1.375rem,2.4vw,1.5rem);line-height:1.2}
-.tb .asp-r{min-width:0;display:flex;flex-direction:column;gap:24px}.tb .asp-r>p{margin:0;max-width:68ch;font-size:1.1875rem;line-height:1.6}.tb .asp-r .viz{margin:0}
-@media(max-width:900px){.tb .asp{grid-template-columns:1fr;gap:24px;padding:40px 0}.tb .prgsplit{grid-template-columns:1fr;gap:24px}.tb .prgph{min-height:200px}.tb .vizgrid.d32{grid-template-columns:1fr}}
-@media(max-width:700px){.tb .vizgrid{grid-template-columns:1fr}.tb .viz,.sqc{padding:20px}}
+.tb .asp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start;border-top:2px solid #d3e5e3;padding:48px 0}
+.tb .asp h3{margin:0 0 12px;font-size:clamp(1.375rem,2.4vw,1.5rem);line-height:1.2;color:var(--navy)}
+.tb .asp-l>p{margin:0;max-width:68ch;font-size:1.1875rem;line-height:1.6}
+.tb .asp-r{min-width:0}.tb .asp-r .viz{margin:0}.tb .asp-r .sqc{align-self:start}
+@media(max-width:900px){.tb .asp{grid-template-columns:1fr;gap:24px;padding:40px 0}.tb .prgsplit{grid-template-columns:1fr;gap:24px}.tb .prgph{min-height:200px}.tb .vizgrid.d32{grid-template-columns:1fr}.tb .vizgrid.d32 .viz{padding:20px}.tb .vizgrid.d32>.viz{width:auto;justify-self:stretch}.tb .vizgrid.d32 .viz .flourish-embed{position:static;height:auto;min-height:200px;width:100%}.tb .vizgrid.d32 .viz iframe{height:auto!important}}
+@media(max-width:700px){.tb .vizgrid{grid-template-columns:1fr}.tb .viz,.sqc,.tb .viz.flat{padding:20px}}
 /* Footer headings: plain white bold h3 (no paint strip) */
 .tb .site-foot .fcol h3{color:#fff;background:none;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800;line-height:1.25;margin:0 0 14px;padding:0;white-space:nowrap}
 /* Our timeline: the section and the river run the full browser width, six columns with 2027+ */
@@ -1051,6 +1051,8 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(min-width:861px){.tb #privacy .pphead,.tb #privacy .pplist2{width:80%;margin-left:auto;margin-right:auto}}
 /* Privacy Policy: same space between the header and the content as About (32px) */
 .tb #privacy .pphead{padding-bottom:0}.tb #privacy .pphead .ppdate{margin-bottom:0}
+/* Journey: 130px (Large spacing) above these three section titles, from the content above them */
+.tb #pr-faced,.tb #pr-connect,.tb #pr-aspire{padding-top:calc(var(--space-large) - 60px)!important}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
