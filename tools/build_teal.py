@@ -1231,9 +1231,9 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(min-width:901px){.tb .bchart.card:has(.bbub){aspect-ratio:1/1;display:flex;flex-direction:column}.tb .bchart.card:has(.bbub) .bgraph{flex:1 1 auto;min-height:200px;position:relative}.tb .bsvg.bbub{position:absolute;inset:0;width:100%;height:100%}}
 /* Prototype B: large space after the header, then a white band down to the aspirations section. Cards get a fine border so they still read on white. */
 .tb .bjourney>.wrap:first-child{margin-bottom:var(--space-large)!important}
-.tb .bwhite{background:#fff;padding-top:60px}.tb .bwhite .bchart.card{border:1px solid var(--line)}
+.tb .bwhite{background:#fff;padding-top:60px}.tb .bwhite .bchart.card{background:var(--bg);border:0}
 /* the We are disaster tested section sits on grey inside the white band */
-.tb .bwhite #pr-faced{background:var(--bg)}.tb .bwhite #pr-faced .bchart.card{border:0}
+.tb .bwhite #pr-faced{background:var(--bg)}.tb .bwhite #pr-faced .bchart.card{background:#fff;border:0}
 @media(max-width:900px){.tb .bsplit{grid-template-columns:1fr;gap:32px}.tb .bd32>.bchart{display:block}.tb .btwo{grid-template-columns:1fr}.tb .bcrow{grid-template-columns:1fr;gap:4px}.tb .bclab{text-align:left}.tb .bcrow>span:empty{display:none}.tb .bd32>.bchart{width:auto;justify-self:stretch}.tb .bmrow{grid-template-columns:1fr;gap:6px}.tb .bmleft{justify-content:flex-start;flex-wrap:wrap;gap:8px 16px}.tb .bmn{text-align:left}.tb .bmsq{--sq:14px;justify-content:start}.tb .bsrow{grid-template-columns:1fr;gap:4px}.tb .bsrow>span:empty{display:none}}
 @media(max-width:700px){.tb .bchart.card{padding:20px}}
 /* We want to be ready for the next disaster: the section content is 80% of the page width and centred as a block (text stays left aligned); rows are 40% text, 60% content */
