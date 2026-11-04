@@ -583,11 +583,12 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .splith.jrn .ph img{aspect-ratio:auto;height:auto;min-height:517px;flex:1;object-fit:cover}
 
 .tb .asplist{list-style:none;margin:0;padding:0;display:grid}
-.tb .asp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start;border-top:2px solid #d3e5e3;padding:48px 0}
+.tb .asp{display:grid;grid-template-columns:minmax(0,40%) minmax(0,60%);gap:0;align-items:start;border-top:2px solid #d3e5e3;padding:48px 0}
 .tb .asp h3{margin:0 0 12px;font-size:clamp(1.375rem,2.4vw,1.5rem);line-height:1.2;color:var(--navy)}
+.tb .asp-l{padding-right:48px}
 .tb .asp-l>p{margin:0;max-width:68ch;font-size:1.1875rem;line-height:1.6}
 .tb .asp-r{min-width:0}.tb .asp-r .viz{margin:0}.tb .asp-r .sqc{align-self:start}
-@media(max-width:900px){.tb .asp{grid-template-columns:1fr;gap:24px;padding:40px 0}.tb .prgsplit{grid-template-columns:1fr;gap:24px}.tb .prgph{min-height:200px}.tb .vizgrid.d32{grid-template-columns:1fr}.tb .vizgrid.d32 .viz{padding:20px}.tb .vizgrid.d32>.viz{width:auto;justify-self:stretch}.tb .vizgrid.d32 .viz .flourish-embed{position:static;height:auto;min-height:200px;width:100%}.tb .vizgrid.d32 .viz iframe{height:auto!important}}
+@media(max-width:900px){.tb .asp{grid-template-columns:1fr;gap:24px;padding:40px 0}.tb .asp-l{padding-right:0}.tb .prgsplit{grid-template-columns:1fr;gap:24px}.tb .prgph{min-height:200px}.tb .vizgrid.d32{grid-template-columns:1fr}.tb .vizgrid.d32 .viz{padding:20px}.tb .vizgrid.d32>.viz{width:auto;justify-self:stretch}.tb .vizgrid.d32 .viz .flourish-embed{position:static;height:auto;min-height:200px;width:100%}.tb .vizgrid.d32 .viz iframe{height:auto!important}}
 @media(max-width:700px){.tb .vizgrid{grid-template-columns:1fr}.tb .viz,.sqc,.tb .viz.flat{padding:20px}}
 /* Footer headings: plain white bold h3 (no paint strip) */
 .tb .site-foot .fcol h3{color:#fff;background:none;font-size:clamp(1.375rem,2.4vw,1.5rem);font-weight:800;line-height:1.25;margin:0 0 14px;padding:0;white-space:nowrap}
@@ -711,6 +712,8 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .bwhite #pr-faced{background:var(--bg)}.tb .bwhite #pr-faced .bchart.card{border:0}
 @media(max-width:900px){.tb .bsplit{grid-template-columns:1fr;gap:32px}.tb .bd32>.bchart{display:block}.tb .btwo{grid-template-columns:1fr}.tb .bcrow{grid-template-columns:1fr;gap:4px}.tb .bclab{text-align:left}.tb .bcrow>span:empty{display:none}.tb .bd32>.bchart{width:auto;justify-self:stretch}.tb .bmrow{grid-template-columns:1fr;gap:6px}.tb .bmleft{justify-content:flex-start;flex-wrap:wrap;gap:8px 16px}.tb .bmn{text-align:left}.tb .bmsq{--sq:14px;justify-content:start}.tb .bsrow{grid-template-columns:1fr;gap:4px}.tb .bsrow>span:empty{display:none}}
 @media(max-width:700px){.tb .bchart.card{padding:20px}}
+/* We want to be ready for the next disaster: the section content is 80% of the page width and centred as a block (text stays left aligned); rows are 40% text, 60% content */
+@media(min-width:901px){.tb #pr-aspire>.wrap{width:80%;max-width:none;margin-left:auto;margin-right:auto}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
