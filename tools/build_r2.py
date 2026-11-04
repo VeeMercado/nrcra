@@ -80,7 +80,15 @@ def brand_contrast():
 {BTN_CSS}
 .topnav .n-b{{border-style:dashed}}
 .topnav .dd{{position:relative}}.topnav .cat .car{{font-size:.75em}}.topnav .menu{{display:none;position:absolute;top:100%;left:0;margin:6px 0 0;padding:6px;min-width:280px;max-width:calc(100vw - 24px);list-style:none;flex-direction:column;gap:2px;background:#fff;border:2px solid var(--navy);border-radius:12px;box-shadow:0 10px 28px rgba(7,41,59,.22);z-index:60}}.topnav .menu::before{{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}}.topnav .dd.open .menu{{display:flex}}@media(hover:hover){{.topnav .dd:hover .menu{{display:flex}}}}.topnav .menu a{{display:flex;align-items:center;min-height:44px;padding:0 .9em;border-radius:8px;color:var(--navy);font-weight:700;text-decoration:none}}.topnav .menu a:hover{{background:#f3f9f8;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:5px}}.sw{{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:14px 0}}.sw>div{{border-radius:20px;padding:22px;font-weight:800}}.sw b{{display:block;font-size:2rem}}.sw small{{display:block;font-weight:700;margin-top:6px}}.sw code{{background:#fff;color:#07293b}}.yn{{display:inline-block;font-size:.68rem;font-weight:900;letter-spacing:.08em;line-height:1;padding:.4em .75em;border-radius:6px;border:1px solid rgba(7,41,59,.3);vertical-align:middle;margin-left:4px}}.warn{{color:#8a5a00;font-weight:800}}.sr{{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}.vfail{{background:#a3201a;color:#fff;padding:.15em .6em;border-radius:6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}}.vpass{{text-decoration:underline;text-decoration-color:#07293b;text-decoration-thickness:4px;text-underline-offset:5px}}.swatch{{display:inline-block;width:34px;height:24px;border-radius:6px;border:1px solid rgba(7,41,59,.3);vertical-align:middle}}@media(max-width:700px){{.sw{{grid-template-columns:1fr}}}}
-@media(max-width:1150px){{.demo{{grid-template-columns:1fr 1fr}}}}@media(max-width:700px){{.demo{{grid-template-columns:1fr}}}}@media(max-width:760px){{table{{font-size:.85rem}}}}</style></head>
+@media(max-width:1150px){{.demo{{grid-template-columns:1fr 1fr}}}}@media(max-width:700px){{.demo{{grid-template-columns:1fr}}}}@media(max-width:760px){{table{{font-size:.85rem}}}}
+/* text follows the brand type scale: 56, 38, 24, 20, 16 and 12 (labels only); weights 400 and 800 */
+h1{{font-size:clamp(2.375rem,5vw,3.5rem);font-weight:800}}h2,h2.pagesec{{font-size:clamp(1.875rem,4vw,2.375rem);font-weight:800}}h3{{font-size:1.25rem;font-weight:800}}
+.lede{{font-size:1.25rem}}p,td,li,table code,p code,.vnote,.kl,.vpass,.vfail,table small,.blk p,.topnav .menu a{{font-size:1rem}}
+th,.yn,.flag,.topnav .cat .car,td small,table small{{font-size:.75rem;font-weight:800}}
+.topnav .cat,.topnav a,.btn,b,.kl,.vpass,.vfail,.flag,.chip{{font-weight:800}}.topnav .cat{{font-size:1rem}}
+small,figcaption,.pill,.pill2,.pill3,.pill4,.pill5{{font-size:.75rem!important;font-weight:800}}nav a,nav span,header a{{font-weight:800}}.cs b{{font-size:1rem}}.ltcard,.ltcard *{{font-size:1rem}}.demo span[class^=lo],.demo p span{{font-weight:400}}
+small,span.rt,.mnav span,.mnav a,.topnav .menu a{{font-weight:800!important}}span.rt{{font-size:.75rem!important}}.mnav span{{font-size:1rem!important}}
+@media(max-width:760px){{table{{font-size:1rem}}}}</style></head>
 <body><nav class="topnav" aria-label="On this page"><ul><li class="dd"><button type="button" class="cat n-d" aria-expanded="false" aria-controls="m-brand">Brand Colours <span class="car" aria-hidden="true">&#9662;</span></button><ul class="menu" id="m-brand"><li><a href="#colours">Brand colours</a></li><li><a href="#text">Text colours</a></li><li><a href="#contrast">Brand colour contrast</a></li></ul></li><li class="dd"><button type="button" class="cat n-d" aria-expanded="false" aria-controls="m-dos">Do&rsquo;s and Don&rsquo;ts <span class="car" aria-hidden="true">&#9662;</span></button><ul class="menu" id="m-dos"><li><a href="#dos">Do&rsquo;s and Don&rsquo;ts</a></li><li><a href="#guidelines">Type, spacing, corners</a></li></ul></li><li class="dd"><button type="button" class="cat n-t" aria-expanded="false" aria-controls="m-teal">Teal <span class="car" aria-hidden="true">&#9662;</span></button><ul class="menu" id="m-teal"><li><a href="#teal-adjust">Teal adjustment</a></li><li><a href="#teal">Teal contrast</a></li><li><a href="#lightteal">Light teal and pale teal</a></li><li><a href="#teal-orange">Does teal work with orange?</a></li><li><a href="#teal-buttons">Teal buttons</a></li></ul></li><li class="dd"><button type="button" class="cat n-r" aria-expanded="false" aria-controls="m-orange">Orange <span class="car" aria-hidden="true">&#9662;</span></button><ul class="menu" id="m-orange"><li><a href="#red">Orange contrast</a></li><li><a href="#teal-orange">Does teal work with orange?</a></li></ul></li><li class="dd"><button type="button" class="cat n-y" aria-expanded="false" aria-controls="m-yellow">Yellow <span class="car" aria-hidden="true">&#9662;</span></button><ul class="menu" id="m-yellow"><li><a href="#yellow">Yellow contrast</a></li><li><a href="#yellow-buttons">Yellow buttons</a></li></ul></li><li class="back"><a href="../">&larr; <span class="bl">Back to </span>prototypes</a></li></ul></nav><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="f-grey" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0"/></filter><filter id="f-prot" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0 0.558 0.442 0 0 0 0 0.242 0.758 0 0 0 0 0 1 0"/></filter><filter id="f-deut" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0 0.7 0.3 0 0 0 0 0.3 0.7 0 0 0 0 0 1 0"/></filter><filter id="f-trit" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.95 0.05 0 0 0 0 0.433 0.567 0 0 0 0.475 0.525 0 0 0 0 0 1 0"/></filter></defs></svg><main><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span>
 <h1>Brand guidelines</h1>
 {brand_colours()}
@@ -243,11 +251,11 @@ def guidelines():
         ("Page title (H1)", "56 (3.5rem)", "38 (2.375rem)", "800", "1.12", "-0.01em", "clamp(2.375rem, 5vw, 3.5rem)", "One per page, under the pill above it"),
         ("Section title (H2)", "38 (2.375rem)", "30 (1.875rem)", "800", "1.12", "-0.01em", "clamp(1.875rem, 4vw, 2.375rem)", "Opens each band of a page"),
         ("Card title and list item title (H3)", "24 (1.5rem)", "22 (1.375rem)", "800", "1.12", "-0.01em", "clamp(1.375rem, 2.4vw, 1.5rem)", "Titles inside cards and in long lists, such as the Privacy Policy"),
-        ("Small title", "20 (1.25rem)", "20 (1.25rem)", "800", "1.3", "none", "fixed", "RACK cards, small tiles. Same size as the lead paragraph, but bold."),
-        ("Lead paragraph", "20 (1.25rem)", "20 (1.25rem)", "400", "1.6", "none", "fixed", "Under a page title. Not bold."),
-        ("Body text", "16 (1rem)", "16 (1rem)", "400", "1.6", "none", "fixed", "All paragraphs. Same size as button text."),
-        ("Button text", "16 (1rem)", "16 (1rem)", "800", "normal (about 1.4)", "none", "fixed", "Buttons, menu items and links styled as buttons, everywhere on the site. Title Case: capital first letter on every word except a, and, the, to and that. Examples: Learn About Us, Find Out More, Back to Top. The only exception is the small buttons inside charts (View score, View rating), which follow the chart."),
-        ("Pill tag above titles (smallest text)", "12 (0.75rem)", "12 (0.75rem)", "800", "1.3", "none", "fixed, uppercase", "The only text below 16px, also used for the Thanks to our funders line and the funder chip names. Capitals on the pills, no extra letter spacing, always centred in the pill. The Draft tags on the Privacy Policy stay at 16px."),
+        ("Small title", "20 (1.25rem)", "20 (1.25rem)", "800", "1.3", "normal", "fixed", "RACK cards, small tiles. Same size as the lead paragraph, but bold."),
+        ("Lead paragraph", "20 (1.25rem)", "20 (1.25rem)", "400", "1.6", "normal", "fixed", "Under a page title. Not bold."),
+        ("Body text", "16 (1rem)", "16 (1rem)", "400", "1.6", "normal", "fixed", "All paragraphs. Same size as button text."),
+        ("Button text", "16 (1rem)", "16 (1rem)", "800", "normal (about 1.4)", "normal", "fixed", "Buttons, menu items and links styled as buttons, everywhere on the site. Title Case: capital first letter on every word except a, and, the, to and that. Examples: Learn About Us, Find Out More, Back to Top. The only exception is the small buttons inside charts (View score, View rating), which follow the chart."),
+        ("Pill tag above titles (smallest text)", "12 (0.75rem)", "12 (0.75rem)", "800", "1.3", "normal", "fixed, uppercase", "The only text below 16px, also used for the Thanks to our funders line and the funder chip names. Capitals on the pills, no extra letter spacing, always centred in the pill. The Draft tags on the Privacy Policy stay at 16px."),
     ]
     pad_rows = [
         ("Section (band)", "0 top, 60px bottom (96px on Network and Home partners, 130px on About and the pages above the footer)", "Same", "Space below a band is its bottom padding. Content sits on the 1100px wide column."),
@@ -265,15 +273,13 @@ def guidelines():
         ("Card title (H3) to text below", "11px bottom", "11px bottom", ""),
         ("Paragraph to next paragraph", "20px bottom (lead), 14px top (Privacy Policy)", "Same", "Body paragraphs are spaced by this bottom margin, not by empty lines"),
         ("Note under the map or intro", "16px top", "16px top", "Same as the card gap"),
-        ("Gap between cards, tiles and buttons", "16px (a gap, not a margin)", "16px", "Set on the grid or row, never on each card"),
-        ("Gap between text and picture", "48px (a gap)", "stacked, 16px", "Two column rows"),
     ]
     special_rows = [
-        ("Line spacing", "Titles 1.12, lead and body 1.6, small titles 1.3", "Set as a multiple of the font size, never as px"),
-        ("Letter spacing", "Page, section and card titles are tightened by 0.01em (-0.38px at H1). Everything else is normal. Uppercase pill tags have none.", "No extra spacing on capitals"),
+        ("Line spacing", "Titles 1.12, small titles and tags 1.3, lead and body text 1.6", "Set as a multiple of the font size, never in px. Each style's value is in the Title and text sizes table."),
+        ("Letter spacing", "Page, section and card titles are tightened by 0.01em. All other text is normal.", "Uppercase pill tags have none"),
         ("Quotes", "Italic, 400, 20px", "Italic is used only for quotes. Quote marks are curly: &ldquo; and &rdquo;"),
         ("Apostrophes and dashes", "Curly apostrophe (&rsquo;). No long dashes: use a full stop, comma or the word to.", "Applies to all copy"),
-        ("Special characters", "Arrow in buttons and menus is a drawn icon (12 x 8), not a typed character. Bullets are drawn dots. The up arrow on Back to Top is a drawn icon.", "Do not type arrow or bullet characters"),
+        ("Special characters", "Arrows in buttons and menus and the bullets are drawn icons, not typed characters.", "Do not type arrow or bullet characters"),
         ("Numbers and dates", "Dates written 28 November 2026. Percentages with the % sign and no space: 75%.", "Australian English"),
     ]
     corner_rows = [
@@ -290,12 +296,8 @@ def guidelines():
         ("Large bands", "96px", "White bands on About and Network, and the space under Our Focus on Home"),
         ("Partners band on Home", "96px above, 115px below", "The Thanks to our funders band"),
         ("Large spacing", "130px", "The big gap used around the green divider lines on About, between sections on About, above the footer on About, Network, RACK, Journey and the group pages, and on Journey above each section title and between the header and the white band. Use this whenever a large space is needed."),
-        ("Card padding", "32px (26px top and bottom, 20px sides on phones)", "All cards, including chart cards (20px on phones)"),
         ("Gap between cards, tiles and buttons", "16px", "Always 16px: grids and lists of cards, tiles and rows of buttons, and the chart cards on Journey"),
         ("Gap between text and picture", "48px", "Two column rows"),
-        ("Gap between rows in a list", "40px", "Our Focus rows on Home and the team rows on About (24px between wrapped team rows)"),
-        ("Gap inside a chart", "6px to 18px", "Between dots, squares, bars and labels. Set inside each chart."),
-        ("Home header text card", "60px (31px top, 40px bottom on tablet and phone)", "Same 60px as the gap between sections"),
     ]
     circle_rows = [
         ("Mini", "56", "56", "Initial circle for a committee group or a number badge when there is no logo or photo"),
@@ -313,7 +315,7 @@ def guidelines():
         ("Size 2: About and Home", "469 wide", "350 x 263", "About is 469 x 529 and sticks out 80px above and below the text beside it. The Home video card is the same 469px width but keeps its near-square shape (11 : 10, 469 x 426)."),
         ("Privacy Policy", "none", "none", "Text only"),
     ]
-    image_rows = [
+    photo_rows = header_photo_rows + [
         ("Story photos (Network)", "331 x 248", "312 x 234", "Shape 4 : 3, 16px corners, inside a 28px card"),
         ("Steering committee tiles (About)", "160 x 160", "111 x 111", "16px corners, logo 50px high"),
         ("Acknowledgement flag (footer)", "60 x 40", "60 x 40", "A picture, not an icon"),
@@ -329,21 +331,23 @@ def guidelines():
     swatches = "".join(f'<div class="cs"><span style="border-radius:{r}"></span><b>{n}</b></div>' for n, r in [("12px", "12px"), ("16px", "16px"), ("20px", "20px"), ("28px", "28px"), ("Pill", "99px")])
     return f'''<section class="blk" id="guidelines"><h2>Type, spacing and corner rules</h2>
 <p class="vnote">Use these values when setting the site up in Wix. Sizes are in px with the rem value in brackets. Desktop is 1000px and wider; phone is 390px. Only two font weights are used: 400 and 800. Checked against the NRCRA prototype on 4 November 2026, at 1280px wide and 390px wide.</p>
+<h2 id="gl-text" style="margin-top:30px">1. Text</h2>
 <h3 id="gl-type">Title and text sizes</h3>{_gl_table(["Style", "Desktop (px)", "Phone (px)", "Weight", "Line spacing", "Letter spacing", "Fluid rule", "Use"], type_rows)}
-<h3 id="gl-pad" style="margin-top:30px">Padding (space inside an element)</h3><p class="vnote">Padding is the space between an element&rsquo;s edge and what is inside it, such as the edge of a card and its text. The background colour fills the padding.</p>{_gl_table(["Element", "Desktop", "Phone", "Notes"], pad_rows)}
-<h3 id="gl-margin" style="margin-top:30px">Margin and gap (space outside an element)</h3><p class="vnote">Margin and gap are the empty space between elements. Nothing is painted in it.</p>{_gl_table(["Between", "Desktop", "Phone", "Notes"], margin_rows)}
 <h3 id="gl-special" style="margin-top:30px">Line spacing, letter spacing and special characters</h3>{_gl_table(["Rule", "Value", "Notes"], special_rows)}
-<h3 id="gl-corners" style="margin-top:30px">Corner rules</h3>{_gl_table(["Element", "Corner radius", "Use"], corner_rows)}<div class="csrow">{swatches}</div>
-<h3 id="gl-space" style="margin-top:30px">Spacing rules (sections and gaps)</h3>{_gl_table(["Where", "Value", "Use"], space_rows)}
-<h3 id="gl-circles" style="margin-top:30px">Circle photo sizes</h3>
+<h2 id="gl-visuals" style="margin-top:44px">2. Visuals</h2>
+<h3 id="gl-photos">Photos</h3><p class="vnote">There are only two header photo sizes. Header photos have 28px corners, sit beside the page title on desktop, and go full width under the title on phones.</p>{_gl_table(["Picture", "Desktop (px)", "Phone (px)", "Notes"], photo_rows)}
+<h3 id="gl-circles" style="margin-top:30px">Circle photos</h3>
 <p class="vnote">Round photos and initial circles use one of four named sizes. The diameter is the same on both axes, the photo is cropped to fill the circle (centre crop unless a focal point is set), and there is no border. Pick the size by name; do not invent in-between sizes.</p>
 {_gl_table(["Size", "Desktop (px)", "Phone (px)", "Used for"], circle_rows)}<p class="vnote">Shown at 40% of real size.</p><div class="csrow" style="align-items:flex-end">{circle_demo}</div>
-<h3 id="gl-logos" style="margin-top:30px">Logo sizes</h3>
+<h3 id="gl-logos" style="margin-top:30px">Logos</h3>
 <p class="vnote">Header, footer, partner, funder and committee logos use one of three sizes (Small, Medium and Large), set by height, with the width following the logo&rsquo;s own shape (never stretched or cropped). Logos have no border and no background box. Pick the size by name.</p>
 {_gl_table(["Size", "Height (px)", "Used for"], logo_rows)}<div class="logodemo">{logo_demo}</div>
-<h3 id="gl-header" style="margin-top:30px">Header photo sizes</h3><p class="vnote">There are only two header photo sizes. Header photos have 28px corners, sit beside the page title on desktop, and go full width under the title on phones.</p>{_gl_table(["Page", "Desktop (px)", "Phone (px)", "Notes"], header_photo_rows)}
-<h3 id="gl-images" style="margin-top:30px">Other picture sizes</h3>{_gl_table(["Picture", "Desktop (px)", "Phone (px)", "Notes"], image_rows)}
-<h3 id="gl-icons" style="margin-top:30px">Icon sizes</h3><p class="vnote">Four icon sizes, set by height and width together, used across the whole site. Charts and infographics keep their own sizes. The Acknowledgement flag in the footer (60 x 40) is a picture, not an icon.</p>{_gl_table(["Size", "Desktop (px)", "Phone (px)", "Used for"], icon_rows)}</section>'''
+<h3 id="gl-icons" style="margin-top:30px">Icons</h3><p class="vnote">Four icon sizes, set by height and width together, used across the whole site. Charts and infographics keep their own sizes. The Acknowledgement flag in the footer (60 x 40) is a picture, not an icon.</p>{_gl_table(["Size", "Desktop (px)", "Phone (px)", "Used for"], icon_rows)}
+<h3 id="gl-corners" style="margin-top:30px">Corners</h3>{_gl_table(["Element", "Corner radius", "Use"], corner_rows)}<div class="csrow">{swatches}</div>
+<h2 id="gl-spacing" style="margin-top:44px">3. Spacing</h2><p class="vnote">Read from the outside in: the space between sections, the margin and gap between elements, then the padding inside each element.</p>
+<h3 id="gl-space">Between sections</h3>{_gl_table(["Where", "Value", "Use"], space_rows)}
+<h3 id="gl-margin" style="margin-top:30px">Margin and gap (space outside an element)</h3><p class="vnote">Margin and gap are the empty space between elements. Nothing is painted in it.</p>{_gl_table(["Between", "Desktop", "Phone", "Notes"], margin_rows)}
+<h3 id="gl-pad" style="margin-top:30px">Padding (space inside an element)</h3><p class="vnote">Padding is the space between an element&rsquo;s edge and what is inside it, such as the edge of a card and its text. The background colour fills the padding.</p>{_gl_table(["Element", "Desktop", "Phone", "Notes"], pad_rows)}</section>'''
 
 
 def teal_adjust():
