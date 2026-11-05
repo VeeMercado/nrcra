@@ -1123,7 +1123,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* Our timeline: the section and the river run the full browser width, six columns with 2027+ */
 .tb #ab-journey>.wrap{max-width:none;width:calc(100% - 2*clamp(20px,4vw,56px))}
 .tb ol.river{grid-template-columns:repeat(6,minmax(0,1fr))}
-@media(max-width:1439px){.tb ol.river{grid-template-columns:1fr;gap:16px}.tb ol.river::before{left:42px;right:auto;width:12px;margin-left:-6px;top:0;bottom:0;height:auto}.tb ol.river li{padding:0 0 0 118px;min-height:44px}.tb ol.river b{left:0;width:84px;justify-content:center;padding:0}.tb ol.river .jt{max-width:70ch}.tb #ab-journey>.wrap{max-width:860px;margin-left:auto;margin-right:auto}}
+@media(max-width:999px){.tb ol.river{grid-template-columns:1fr;gap:16px}.tb ol.river::before{left:42px;right:auto;width:12px;margin-left:-6px;top:0;bottom:0;height:auto}.tb ol.river li{padding:0 0 0 118px;min-height:44px}.tb ol.river b{left:0;width:84px;justify-content:center;padding:0}.tb ol.river .jt{max-width:70ch}.tb #ab-journey>.wrap{max-width:860px;margin-left:auto;margin-right:auto}}
 /* Network page map (Leaflet + OpenStreetMap): a round teal pin for each group */
 .tb .nrmapwrap{display:flex;flex-direction:column;gap:12px;width:100%}
 .tb .nrmap{width:100%;height:520px;border-radius:var(--r);overflow:hidden;background:#e9efef;z-index:0}
