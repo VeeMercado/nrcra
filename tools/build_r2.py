@@ -287,7 +287,7 @@ def guidelines():
     corner_rows = [
         ("Buttons, menu items, drop-downs, social icon buttons, the Aboriginal flag in the footer", "12px", "Every clickable control is a rounded square. The menu highlight covers the label and its arrow. The footer flag (60 x 40) uses the same 12px."),
         ("Hero cards, cards, chart cards, tiles, header photos, the map and the Draft policy box", "28px", "One shared radius for every large surface, on desktop, tablet and phone"),
-        ("Pictures inside a padded card, steering committee tiles, the footer logo box, dropdown menus", "16px", "Smaller surfaces nested inside a card or on the page"),
+        ("Pictures inside a padded card, steering committee tiles, dropdown menus", "16px", "Smaller surfaces nested inside a card or on the page"),
         ("Funder logo chips under the timeline entries", "20px", "Small white boxes, 40px high (36px at 1100px wide and below), one logo each"),
         ("Pills", "Fully round (99px)", "Only the tag above a page title, the Draft tags and the colour bars. Never for buttons."),
         ("Round photos and initial circles", "50%", "See Circle photo sizes"),
@@ -310,7 +310,7 @@ def guidelines():
     logo_rows = [
         ("Small", "20", "Funder logos under each timeline entry on About and in the two funding cards on About (the funder strip under the menu is archived and not on any page)"),
         ("Medium", "50", "Steering committee tiles (limited to 100px wide)."),
-        ("NRCRA logo (SVG)", "37", "The header menu logo and the footer logo. This is the height of the artwork alone, the same look as before: the old picture had empty space around the logo, the SVG does not. Four files: horizontal navy, horizontal white, vertical navy, vertical white. The header uses horizontal navy. The footer uses horizontal navy inside its white box."),
+        ("NRCRA logo (SVG)", "232 wide", "The header menu logo (horizontal navy, about 44px high) and the footer logo (vertical white, about 125px high) are the same 232px width. Four files: horizontal navy, horizontal white, vertical navy, vertical white. The header uses horizontal navy on the light page. The footer uses the vertical white logo straight on the navy footer, with no white box. On narrow screens the logo shrinks to fit."),
         ("Large", "84", "Lead partner logo on Home (NEMA). Shrinks only when the column is too narrow for the logo: 64px at 1280px wide. FRRR and UCRH beside it are 45% of that height (29px). The NSW Proudly funded by logo is taller, up to 135px."),
     ]
     header_photo_rows = [
@@ -325,8 +325,8 @@ def guidelines():
     ]
     icon_rows = [
         ("Small", "16", "16", "Menu arrows, the Draft flag in each Draft tag, the yellow ring in the Network note"),
-        ("Default", "22", "22", "Menu (hamburger) icon on phones and the social icons in the footer"),
-        ("Large", "44", "44", "The tap area for icon buttons: social icon buttons in the footer (12px corners) and the menu arrow button on phones"),
+        ("Default", "22", "22", "Menu (hamburger) icon on phones"),
+        ("Large", "44", "44", "The tap area for icon buttons: social icon buttons in the footer (12px corners, white button, navy icon 28px) and the menu arrow button on phones"),
         ("Giant", "92", "92", "Watch (play) button on the Home video and on the Network story photos"),
     ]
     circle_demo = "".join(f'<div class="cs"><span style="border-radius:50%;width:{round(d*.4)}px;height:{round(d*.4)}px"></span><b>{n}</b><small>{d}px</small></div>' for n, d in [("Mini", 56), ("Small", 160), ("Medium", 190), ("Extra large", 370)])

@@ -350,9 +350,11 @@ def short_lga(official):
     return re.sub(r"\s+(Shire|Council|City)$", "", official)
 
 
-def blogo(cls="logo"):
-    """Brand logo (horizontal, supplied artwork). Width and height attributes keep the true 1000x230 ratio."""
-    return f'<img src="../assets/logo/nrcra-logo-horizontal-navy.svg" alt="Northern Rivers Community Resilience Alliance" class="{cls}" width="215" height="40">'
+def blogo(cls="logo", white=False, vertical=False):
+    """Brand logo (SVG from the brand guide). Width and height attributes keep the true ratio."""
+    if vertical:
+        return f'<img src="../assets/logo/nrcra-logo-vertical-{"white" if white else "navy"}.svg" alt="Northern Rivers Community Resilience Alliance" class="{cls} logo-v" width="148" height="80">'
+    return f'<img src="../assets/logo/nrcra-logo-horizontal-{"white" if white else "navy"}.svg" alt="Northern Rivers Community Resilience Alliance" class="{cls}" width="215" height="40">'
 
 
 def slug(t):
@@ -1259,6 +1261,12 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .site-foot .copy,.tb .site-foot .copy a,.tb .site-foot .totop{font-size:.6875rem!important}
 /* Home video: full width and centred on iPad and phone, keeping its shape (4 : 3) */
 @media(max-width:999px){.tb .hsplit .hsplit-in{grid-template-columns:minmax(0,1fr)!important;gap:16px}.tb .hsplit.hsplit-sq .hsplit-r,.tb .hsplit .hsplit-r{width:100%!important;height:auto!important;aspect-ratio:4/3!important;justify-self:center;align-self:center;margin-left:auto;margin-right:auto}}
+/* footer logo: white SVG straight on the navy footer, no white box */
+.tb .site-foot .foot-logo.boxed{background:transparent!important;padding:0!important;border-radius:0!important}
+.tb .site-foot .foot-logo .logo.logo-v{height:var(--logo-large)!important;width:auto}
+/* header and footer logos share one width: 232px (height follows each logo's shape) */
+.tb .site-head .logo,.tb .site-foot .foot-logo .logo,.tb .site-foot .foot-logo .logo.logo-v{width:232px!important;max-width:100%!important;height:auto!important}
+@media(max-width:740px){.tb .site-foot .foot-top{margin-bottom:32px}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
@@ -1287,9 +1295,11 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 
 
 SOC_ICONS = {
-    "Facebook": '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.6 21v-8.2h2.8l.5-3.3h-3.3V7.4c0-.9.4-1.7 1.8-1.7h1.6V2.9c-.3 0-1.4-.2-2.6-.2-2.6 0-4.4 1.6-4.4 4.5v2.3H7v3.3h3v8.2h3.6z"/></svg>',
-    "LinkedIn": '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.9 9.3H3.5V20h3.4V9.3zM5.2 3.9c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM20.5 13.7c0-3.2-1.7-4.7-4-4.7-1.8 0-2.6 1-3 1.7V9.3H10V20h3.4v-6c0-1.6.3-3.1 2.3-3.1s2 1.9 2 3.2V20h3.4v-6.3z"/></svg>',
+    "Facebook": '<svg viewBox="-140 -44 600 600" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/></svg>',
+    "LinkedIn": '<svg viewBox="-76 -44 600 600" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>',
 }
+
+
 
 
 def tfooter():
@@ -1301,7 +1311,7 @@ def tfooter():
     site = [("Home", "#home"), ("Our Network", "#network"), ("About us", "#about"), ("Our Progress", "#journey")]
     rackcol = [("What is RACK?", "#rack"), ("RACK Sign In", SIGN_IN), ("Privacy Policy", "#privacy")]
     untitled = '<div class="fcol"><h3 class="fb2 fhide" aria-hidden="true">Quick Links</h3><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in rackcol) + "</ul></div>"
-    top = '<div class="foot-top"><span class="foot-logo boxed">' + blogo("logo") + '</span></div>'
+    top = '<div class="foot-top"><span class="foot-logo boxed">' + blogo("logo", True, True) + '</span></div>'
     return f'''<footer class="site-foot"><div class="wrap">
 <div class="foot-cols">{top}<div class="fquick">{col(2, "Quick Links", site)}{untitled}</div><div class="fstack">{social}</div></div>
 <div class="ack">{B.ABORIGINAL_FLAG}<p>{B.ACK}</p></div>
