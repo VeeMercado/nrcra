@@ -498,7 +498,7 @@ RACK_CATS = [
 def rack_body():
     cards = "".join(f'<li><h3>{t}</h3><p>{d}</p></li>' for t, d in RACK_CATS)
     return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge</span><h1>RACK</h1><p class="lede">One shared place to find what you need and what is already working in resilience communities across the Northern Rivers.</p>
-<p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=RACK%20access">Request access</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a><a class="rackrev" href="#privacy">Privacy Policy</a></p></div>
+<p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=RACK%20access">Request access</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a><a class="rackrev" href="#privacy">Privacy policy</a></p></div>
 <div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="Someone using RACK on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
 <section class="sec"><div class="wrap rackhead"><p class="lede">Find templates and guides for your group, and share your own with the network.</p><ol class="pillcards rackcats">{cards}</ol></div></section>'''
 
@@ -1308,14 +1308,14 @@ def tfooter():
     contact = [("hello@nrcra.org.au", "mailto:hello@nrcra.org.au")]
     touch = [("Facebook", B.LINKS["fb"]), ("LinkedIn", B.LINKS["li"])]
     social = '<div class="fcol"><h3 class="fb1">Get in touch</h3><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in contact) + '</ul><ul class="flist social">' + "".join(f'<li><a class="soc" href="{u}" target="_blank" rel="noopener" aria-label="{n} (opens in a new tab)">{SOC_ICONS[n]}</a></li>' for n, u in touch) + "</ul></div>"
-    site = [("Home", "#home"), ("Our Network", "#network"), ("About us", "#about"), ("Our Progress", "#journey")]
-    rackcol = [("What is RACK?", "#rack"), ("RACK Sign In", SIGN_IN), ("Privacy Policy", "#privacy")]
+    site = [("Home", "#home"), ("Our network", "#network"), ("About us", "#about"), ("Our progress", "#journey")]
+    rackcol = [("What is RACK?", "#rack"), ("RACK sign in", SIGN_IN), ("Privacy policy", "#privacy")]
     untitled = '<div class="fcol"><h3 class="fb2 fhide" aria-hidden="true">Quick Links</h3><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in rackcol) + "</ul></div>"
     top = '<div class="foot-top"><span class="foot-logo boxed">' + blogo("logo", True, True) + '</span></div>'
     return f'''<footer class="site-foot"><div class="wrap">
 <div class="foot-cols">{top}<div class="fquick">{col(2, "Quick Links", site)}{untitled}</div><div class="fstack">{social}</div></div>
 <div class="ack">{B.ABORIGINAL_FLAG}<p>{B.ACK}</p></div>
-<div class="copyrow"><p class="copy">© Since 2024 Northern Rivers Community Resilience Alliance &middot; <a href="#privacy">Privacy Policy</a></p><button type="button" class="totop"><svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1.5 6.5L6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to top</button></div>
+<div class="copyrow"><p class="copy">© Since 2024 Northern Rivers Community Resilience Alliance &middot; <a href="#privacy">Privacy policy</a></p><button type="button" class="totop"><svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1.5 6.5L6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to top</button></div>
 </div></footer>'''
 
 
