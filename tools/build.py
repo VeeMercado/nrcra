@@ -630,8 +630,8 @@ def protobar(v):
     cur = next((f"{n}: {d}" for k, n, d in PROTOS if k == v), "Archived backup")
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {cur}</span></p>
-<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../#round-1">All Prototypes</a>{others}</nav>
-<button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to Top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
+<nav class="pb-nav" aria-label="Other prototypes"><a class="pb-btn pb-all" href="../#round-1">All prototypes</a>{others}</nav>
+<button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
 
 def page_shell(title, css, body, v, white_logo=True, slug=None, extra="", pre_footer=""):
@@ -1147,7 +1147,7 @@ def dashboard():
 <h3>Inspired by the mood board</h3><div class="ins">{ins}</div><p class="sites">{SITES[base]}</p></div></article>'''
     r2 = f'''<div class="r2grid">
 <article class="rc rc2"><a class="shot" href="prototype-c/" aria-label="Open NRCRA Prototype"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/prototype-c.jpg?v=r3a" alt="Screenshot of the NRCRA Prototype home page: a dark green card with white text on the left and a nearly square gathering photo card with a play button, centred beside it" loading="lazy"></a>
-<div class="info"><h2><a href="prototype-c/">NRCRA Prototype</a></h2><p>Prototypes for the NRCRA website. Sample only. To be built in Wix Classic.</p><ul class="rlist"><li><a href="{DOC_URL}">Round 1 feedback</a> (actioned 2 November 2026)</li><li><a href="https://docs.google.com/document/d/1XPcqlDx_uzWrXR38vlqVU0mW3wWeOUfXZ4OLKGRz3nM/edit?usp=sharing">Round 2 feedback</a> (actioned 3 November 2026)</li><li>Round 3 final confirmation (pending). All content stays sample content until it is confirmed.</li></ul><p><b>Feedback needed:</b> Please check the wording, photos, logos, links, group details and the new Privacy Policy page, and tell us what needs to change.</p>
+<div class="info"><h2><a href="prototype-c/">NRCRA Prototype</a></h2><p>Prototypes for the NRCRA website. Sample only. To be built in Wix Classic.</p><ul class="rlist"><li><a href="{DOC_URL}">Round 1 feedback</a> (actioned 2 November 2026)</li><li><a href="https://docs.google.com/document/d/1XPcqlDx_uzWrXR38vlqVU0mW3wWeOUfXZ4OLKGRz3nM/edit?usp=sharing">Round 2 feedback</a> (actioned 3 November 2026)</li><li>Round 3 Errors fixed confirmation (received and actioned 5 November 2026)</li></ul><p><b>Next step:</b> Stage 3 Wix Site Build: Pending invoice action.</p>
 <p class="btnrow"><a class="btn btn-primary" href="prototype-c/">Open Prototype</a></p></div></article></div>'''
     return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}

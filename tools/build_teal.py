@@ -49,7 +49,7 @@ def nav3():
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap head-in"><a href="#home" class="brand" aria-label="NRCRA home">{blogo()}</a>
 <button class="menu-btn" aria-expanded="false" aria-controls="nav"><svg class="hb" viewBox="0 0 20 14" width="22" height="15" aria-hidden="true" focusable="false"><path d="M1.5 1.5h17M1.5 7h17M1.5 12.5h17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Menu</button>
-<nav id="nav" aria-label="Main">{links}<a class="btn btn-cta" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a></nav></div></header>'''  # the Thanks to our funders ribbon is archived: add {funder_strip()} here to bring it back
+<nav id="nav" aria-label="Main">{links}<a class="btn btn-cta" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a></nav></div></header>'''  # the Thanks to our funders ribbon is archived: add {funder_strip()} here to bring it back
 
 
 def protobar3(cur):
@@ -57,8 +57,8 @@ def protobar3(cur):
     curname = NAMES.get(cur) or EXTRA_NAMES[cur]
     return f'''<div class="protobar" role="region" aria-label="Prototype controls"><div class="pb-in">
 <p class="pb-label"><b>MOCKUP &amp; PROTOTYPE ONLY</b> by <a href="https://veemercado.com">veemercado.com</a><span class="pb-cur"> &middot; viewing {curname}</span></p>
-<nav class="pb-nav" aria-label="Prototype pages"><a class="pb-btn pb-all" href="../#round-2">All Prototypes</a>{others}</nav>
-<button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to Top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
+<nav class="pb-nav" aria-label="Prototype pages"><a class="pb-btn pb-all" href="../#round-2">All prototypes</a>{others}</nav>
+<button type="button" class="pb-top" aria-label="Back to top" onclick="window.scrollTo({{top:0,behavior:'smooth'}})"><span class="pb-long">Back to top&nbsp;</span><span aria-hidden="true">&uarr;</span></button></div></div>'''
 
 
 def vimg(name):
@@ -87,7 +87,7 @@ def hero_card(square=False, cover=False):
     tag_in = "" if cover else tag
     return f'''<div class="hsplit{" hsplit-sq" if square else ""}{" hsplit-bg" if cover else ""}"><div class="wrap"><div class="hsplit-in">{tag_top}<div class="hsolid-text hsplit-l">{tag_in}
 <h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots community-led groups working together to build disaster resilience across the Northern Rivers.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#about">Learn About Us</a></p></div>
+<p class="btnrow"><a class="btn btn-primary" href="#about">Learn about us</a></p></div>
 <div class="hsplit-r" data-video="{VIMEO}">{img("sizzle", eager=True, alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div></div>'''
 
 
@@ -95,7 +95,7 @@ def hero_photo():
     """Prototype B: full-width photo with the teal gradient and white text."""
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots community-led groups working together to build disaster resilience across the Northern Rivers.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#about">Learn About Us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M3 3l8 5-8 5z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>Watch reel</button></p></div>
+<p class="btnrow"><a class="btn btn-primary" href="#about">Learn about us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M3 3l8 5-8 5z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>Watch reel</button></p></div>
 <div class="h1-photo" data-video="{VIMEO}">{img("sizzle", eager=True, alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>'''
 
 
@@ -137,8 +137,8 @@ def home_body(hero="photo"):
 <section class="sec hwrow" style="padding-top:0"><div class="wrap hwbg"><span class="hwd hwd-blob" aria-hidden="true"></span>{B.deco("rings", "hwd-rings")}<span class="hwd hwd-dot hwd-dt" aria-hidden="true"></span><span class="hwd hwd-dot hwd-do" aria-hidden="true"></span><ul class="hwpills" aria-label="How we work"><li><a class="hp-teal" href="#about" data-jump="ab-how" data-page="about">Connect.</a></li><li><a class="hp-yellow" href="#about" data-jump="ab-how" data-page="about">Share.</a></li><li><a class="hp-orange" href="#about" data-jump="ab-how" data-page="about">Care.</a></li></ul></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a grassroots community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("home-circle-top")}{vimg("home-circle-bottom")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
-<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30793680"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/30793680/thumbnail" width="100%" alt="Pictogram of our progress in numbers: groups, funding and disaster experience."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See Our Progress</a></p></div></div></section>
+<p class="btnrow"><a class="btn btn-primary" href="#network">Explore the network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("home-circle-top")}{vimg("home-circle-bottom")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
+<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30793680"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/30793680/thumbnail" width="100%" alt="Pictogram of our progress in numbers: groups, funding and disaster experience."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See our progress</a></p></div></div></section>
 <section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></div></section>
 {partners_section()}'''
 
@@ -220,7 +220,7 @@ def meal_ring():
             '<p>Rather than only counting activities, we look for real changes in relationships, knowledge, capability and collective action, gathered through conversations at Gatherings and site visits, and turned into shared stories.</p></blockquote></div>')
 
 
-ABOUT_JUMP = [("ab-vision", "Vision &amp; Mission"), ("ab-how", "How we work"), ("ab-journey", "Our timeline"), ("ab-meal", "Learning Together"), ("ab-steering", "Steering committee"), ("ab-team", "Meet the team")]
+ABOUT_JUMP = [("ab-vision", "Vision &amp; mission"), ("ab-how", "How we work"), ("ab-journey", "Our timeline"), ("ab-meal", "Learning together"), ("ab-steering", "Steering committee"), ("ab-team", "Meet the team")]
 
 
 NETWORK_JUMP = [("nw-map", "Region map"), ("nw-stories", "Our stories"), ("our-network", "Explore our network")]
@@ -264,13 +264,13 @@ def researchers():
 
 def meal_section():
     return f'''<section class="sec mealsec" id="ab-meal" style="padding-top:0"><div class="wrap learnwrap"><h2 class="sechead cen">Listening, reflecting and adapting as we grow</h2><div class="learngrid"><div class="mealfig">{meal_svg()}</div>
-<div class="mealtxt"><h3>MEAL: Monitoring, Evaluation, Accountability and Learning Together</h3><p>Since the Resilience Alliance formed in 2024, embedded researchers from the University Centre for Rural Health have worked alongside us to track how a new kind of regional collaboration takes shape. Through Health Checks, Outcomes Harvesting and ongoing feedback, our MEAL approach turns what groups tell us into practical changes.</p><p class="btnrow"><a class="btn btn-primary" href="https://drive.google.com/file/d/10Afb2-siINfdw66cvs3j0E5cTjttVRsL/view?usp=drive_link">Learn More</a></p></div></div>{researchers()}{funding_inner()}</div></section>'''
+<div class="mealtxt"><h3>MEAL: Monitoring, Evaluation, Accountability and Learning Together</h3><p>Since the Resilience Alliance formed in 2024, embedded researchers from the University Centre for Rural Health have worked alongside us to track how a new kind of regional collaboration takes shape. Through Health Checks, Outcomes Harvesting and ongoing feedback, our MEAL approach turns what groups tell us into practical changes.</p><p class="btnrow"><a class="btn btn-primary" href="https://drive.google.com/file/d/10Afb2-siINfdw66cvs3j0E5cTjttVRsL/view?usp=drive_link">Learn more</a></p></div></div>{researchers()}{funding_inner()}</div></section>'''
 
 
 def funding_inner():
     return f'''<div class="fundgrid" id="ab-funding">
-<div class="card abt fcard"><h2 class="sechead">Resourcing Community Resilience -<br>The Help Fund</h2><p class="lede">Grassroots community-led decisions about where funding goes</p><div class="bar bar-y" aria-hidden="true"></div><p>Groups told us that access to resources was a major barrier to keeping going, and that competitive grants can work against the collaboration resilience depends on. With support from the NRMA Help Fund, and in partnership with the Northern Rivers Community Foundation and Monash University&rsquo;s Fire to Flourish, Resilience Alliance groups co-designed a participatory grantmaking approach. Establishment Grants of $3,000 and Resilience Action Grants of up to $10,000 are now funding radio networks, community hubs, disaster plans, preparedness training and wellbeing events.</p><ul class="flogos"><li><a href="https://www.nrma.com.au/help-fund"><img src="../assets/funders/nrma-help.png" alt="NRMA Insurance HELP Fund" loading="lazy"></a></li><li><a href="https://nrcf.org.au"><img src="../assets/funders/nrcf.png" alt="Northern Rivers Community Foundation" loading="lazy"></a></li><li><a href="https://www.monash.edu"><img src="../assets/funders/fire-to-flourish.png" alt="Monash University&rsquo;s Fire to Flourish" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/1_y26o8MOgzDUdzV7PjHfpiDluUjU-FFf/view?usp=drive_link">Find Out More</a></p></div>
-<div class="card abt fcard"><h2 class="sechead">Disaster Ready Three -<br>Connected and Prepared</h2><p class="lede">Enabling regional readiness across the Northern Rivers</p><div class="bar bar-o" aria-hidden="true"></div><p>Connected and Prepared is helping the Resilience Alliance scale a proven, place-based model of grassroots community-led resilience. Over the life of the project (2026&ndash;2028), at least 60 grassroots resilience groups will receive tailored governance support, shared digital tools, capacity building and peer learning. That support is delivered by a regional team of six that reaches every LGA in the Northern Rivers.</p><p class="fsup">Supported by the Australian Government through the Disaster Ready Fund.</p><ul class="flogos"><li><a href="https://www.nema.gov.au"><img src="../assets/funders/aus-gov.png" alt="Australian Government" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/16oFTpO9T-kX2tXsOEn5Yb8iwjJk9tjry/view?usp=drive_link">Read Project Overview</a></p></div></div>'''
+<div class="card abt fcard"><h2 class="sechead">Resourcing Community Resilience -<br>The Help Fund</h2><p class="lede">Grassroots community-led decisions about where funding goes</p><div class="bar bar-y" aria-hidden="true"></div><p>Groups told us that access to resources was a major barrier to keeping going, and that competitive grants can work against the collaboration resilience depends on. With support from the NRMA Help Fund, and in partnership with the Northern Rivers Community Foundation and Monash University&rsquo;s Fire to Flourish, Resilience Alliance groups co-designed a participatory grantmaking approach. Establishment Grants of $3,000 and Resilience Action Grants of up to $10,000 are now funding radio networks, community hubs, disaster plans, preparedness training and wellbeing events.</p><ul class="flogos"><li><a href="https://www.nrma.com.au/help-fund"><img src="../assets/funders/nrma-help.png" alt="NRMA Insurance HELP Fund" loading="lazy"></a></li><li><a href="https://nrcf.org.au"><img src="../assets/funders/nrcf.png" alt="Northern Rivers Community Foundation" loading="lazy"></a></li><li><a href="https://www.monash.edu"><img src="../assets/funders/fire-to-flourish.png" alt="Monash University&rsquo;s Fire to Flourish" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/1_y26o8MOgzDUdzV7PjHfpiDluUjU-FFf/view?usp=drive_link">Find out more</a></p></div>
+<div class="card abt fcard"><h2 class="sechead">Disaster Ready Three -<br>Connected and Prepared</h2><p class="lede">Enabling regional readiness across the Northern Rivers</p><div class="bar bar-o" aria-hidden="true"></div><p>Connected and Prepared is helping the Resilience Alliance scale a proven, place-based model of grassroots community-led resilience. Over the life of the project (2026&ndash;2028), at least 60 grassroots resilience groups will receive tailored governance support, shared digital tools, capacity building and peer learning. That support is delivered by a regional team of six that reaches every LGA in the Northern Rivers.</p><p class="fsup">Supported by the Australian Government through the Disaster Ready Fund.</p><ul class="flogos"><li><a href="https://www.nema.gov.au"><img src="../assets/funders/aus-gov.png" alt="Australian Government" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/16oFTpO9T-kX2tXsOEn5Yb8iwjJk9tjry/view?usp=drive_link">Read project overview</a></p></div></div>'''
 
 
 def about_body():
@@ -376,7 +376,7 @@ def group_card(name, loc, key, lga, country, web, fb):
     place = f"{loc}, {lga}" if loc else lga
     ctry = f'<span class="ctry">{E(country)}</span>' if country else ""
     url = web or fb
-    btn = f'<a class="btn btn-ghost btn-sm" href="{E(url)}" target="_blank" rel="noopener">Visit Page<span class="sr-only"> (opens in a new tab)</span></a>' if url else ""
+    btn = f'<a class="btn btn-ghost btn-sm" href="{E(url)}" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a>' if url else ""
     return f'<li><b>{E(name)}</b><span>{E(place)}</span>{ctry}{btn}</li>'
 
 
@@ -442,7 +442,7 @@ function build(){
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
  var icon=L.divIcon({className:'nrpin',html:'<span></span>',iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-12]}),b=[];
  pts.forEach(function(g){
-  var link=g.u?'<a href="'+esc(g.u)+'" target="_blank" rel="noopener">Visit Page<span class="sr-only"> (opens in a new tab)</span></a>':'';
+  var link=g.u?'<a href="'+esc(g.u)+'" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a>':'';
   L.marker([g.lat,g.lon],{icon:icon,title:g.n,alt:g.n}).addTo(map).bindPopup('<b>'+esc(g.n)+'</b><br>'+esc(g.p)+(link?'<br>'+link:''));
   b.push([g.lat,g.lon]);
  });
@@ -498,7 +498,7 @@ RACK_CATS = [
 def rack_body():
     cards = "".join(f'<li><h3>{t}</h3><p>{d}</p></li>' for t, d in RACK_CATS)
     return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge</span><h1>RACK</h1><p class="lede">One shared place to find what you need and what is already working in resilience communities across the Northern Rivers.</p>
-<p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=RACK%20access">Request Access</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a><a class="rackrev" href="#privacy">Privacy Policy</a></p></div>
+<p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=RACK%20access">Request access</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a><a class="rackrev" href="#privacy">Privacy Policy</a></p></div>
 <div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="Someone using RACK on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
 <section class="sec"><div class="wrap rackhead"><p class="lede">Find templates and guides for your group, and share your own with the network.</p><ol class="pillcards rackcats">{cards}</ol></div></section>'''
 
@@ -1315,7 +1315,7 @@ def tfooter():
     return f'''<footer class="site-foot"><div class="wrap">
 <div class="foot-cols">{top}<div class="fquick">{col(2, "Quick Links", site)}{untitled}</div><div class="fstack">{social}</div></div>
 <div class="ack">{B.ABORIGINAL_FLAG}<p>{B.ACK}</p></div>
-<div class="copyrow"><p class="copy">© Since 2024 Northern Rivers Community Resilience Alliance &middot; <a href="#privacy">Privacy Policy</a></p><button type="button" class="totop"><svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1.5 6.5L6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to Top</button></div>
+<div class="copyrow"><p class="copy">© Since 2024 Northern Rivers Community Resilience Alliance &middot; <a href="#privacy">Privacy Policy</a></p><button type="button" class="totop"><svg viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1.5 6.5L6 2l4.5 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to top</button></div>
 </div></footer>'''
 
 
