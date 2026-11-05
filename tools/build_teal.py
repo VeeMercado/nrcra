@@ -48,7 +48,7 @@ def nav3():
     links = "".join(item(k, t) for k, t in MENU)
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap head-in"><a href="#home" class="brand" aria-label="NRCRA home">{blogo()}</a>
-<button class="menu-btn" aria-expanded="false" aria-controls="nav"><svg class="hb" viewBox="0 0 20 14" width="22" height="15" aria-hidden="true" focusable="false"><path d="M1.5 1.5h17M1.5 7h17M1.5 12.5h17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Menu</button>
+<button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav"><svg class="hb" viewBox="0 0 20 14" width="22" height="15" aria-hidden="true" focusable="false"><path d="M1.5 1.5h17M1.5 7h17M1.5 12.5h17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
 <nav id="nav" aria-label="Main">{links}<a class="btn btn-cta" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a></nav></div></header>'''  # the Thanks to our funders ribbon is archived: add {funder_strip()} here to bring it back
 
 
@@ -971,7 +971,7 @@ CSS_B = """
 
 /* B: teal as accents and tints only, navy kept for the footer */
 /* button family: teal. Primary: teal with white text and a navy outline (Sign In is primary). Secondary: white with a teal outline. Tertiary: navy. Selected menu item: the lighter teal. */
-:root{--btn-teal:#00857c;--teal-12:#f3f9f8;--teal-25:#beddda;--circle-mini:56px;--circle-small:160px;--circle-medium:190px;--circle-xl:370px;--logo-small:20px;--logo-medium:50px;--logo-brand:37px;--logo-large:84px;--space-large:130px}@media(max-width:560px){:root{--circle-small:85px;--circle-medium:150px;--circle-xl:300px}}
+:root{--btn-teal:#00857c;--teal-12:#f3f9f8;--teal-25:#beddda;--circle-mini:56px;--circle-small:160px;--circle-medium:190px;--circle-xl:370px;--logo-small:20px;--logo-medium:50px;--logo-brand:37px;--wrap:1020px;--logo-large:84px;--space-large:130px}@media(max-width:560px){:root{--circle-small:85px;--circle-medium:150px;--circle-xl:300px}}
 .btn-primary,.btn-cta{background:var(--btn-teal);color:#fff;border-color:var(--navy)}
 .btn-primary:hover,.btn-cta:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .btn-ghost{background:#fff;color:var(--navy);border-color:var(--btn-teal)}.btn-ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
@@ -1267,6 +1267,19 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* header and footer logos share one width: 232px (height follows each logo's shape) */
 .tb .site-head .logo,.tb .site-foot .foot-logo .logo,.tb .site-foot .foot-logo .logo.logo-v{width:232px!important;max-width:100%!important;height:auto!important}
 @media(max-width:740px){.tb .site-foot .foot-top{margin-bottom:32px}}
+/* full-width sections (the menu and footer stay in the 980px column): page headers, our timeline, thanks to our funders, the team */
+@media(min-width:1021px){.tb #partners-home>.wrap,.tb #ab-team>.wrap,.tb #nw-stories>.wrap,.tb .wrap.rackhead,.tb .wrap:has(>.splith),.tb .hsplit>.wrap{max-width:none;width:calc(100% - 2*clamp(20px,4vw,56px))}
+.tb .hsplit-in{max-width:none;width:calc(100% - 2*clamp(20px,4vw,56px))}}
+/* steering committee names use the smallest brand text (11px) */
+.tb .steergrid .sname{font-size:.6875rem!important}
+/* small button (same as Back to top): Visit page on the Network cards; country names use the smallest text */
+.tb .gsub .btn{font-size:.6875rem!important;padding:.5em 1.1em!important;min-height:38px;line-height:1.3!important;display:inline-flex;align-items:center;justify-content:center}
+.tb .gsub .ctry{font-size:.6875rem!important}
+/* phone menu button: hamburger icon only (the word Menu does not show in Wix), square 48px */
+.tb .menu-btn{width:48px;height:48px;min-height:0;padding:0;gap:0;justify-content:center}
+/* footer logo on phones only: centred across the footer on its own row, 200px maximum height (desktop keeps the logo in the left column) */
+@media(max-width:740px){.tb .site-foot .foot-top{grid-column:1/-1;justify-content:center;margin-bottom:32px}.tb .site-foot .foot-logo.boxed{margin:0 auto}.tb .site-foot .foot-logo .logo,.tb .site-foot .foot-logo .logo.logo-v{max-height:200px!important}}
+@media(min-width:1000px){.tb .site-foot .foot-cols{grid-template-columns:minmax(232px,1fr) minmax(0,1.7fr) minmax(max-content,1.3fr)}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
@@ -1289,7 +1302,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .gsub .ctry{font-size:.85rem;font-weight:700;color:var(--teal-d);margin-top:8px}.gsub .ctry+.btn{margin-top:6px}.gsub b{font-size:1.1rem;line-height:1.25}.gsub span{color:#586c74;font-size:.95rem}.gsub .btn{margin-top:14px}
 .gsub .sr-only,.rcards .sr-only,.steer .sr-only,.funders .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .btn-sm{font-size:1rem;padding:.5em 1.1em;min-height:38px}
-@media(max-width:860px){.tcards{grid-template-columns:1fr}.tb .splith.net .ph .mapbox{height:461px;min-height:0;flex:none}}
+@media(max-width:999px){.tcards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.tcards{grid-template-columns:1fr}}@media(max-width:860px){.tb .splith.net .ph .mapbox{height:461px;min-height:0;flex:none}}
 @media(max-width:739px){.lgasel-l,.lgasel{width:100%}.dirhead{grid-template-columns:1fr}.dirhead .sechead,.dirhead .lgasel{grid-column:1}.dirhead .sechead{grid-row:1}.dirhead .lgasel{grid-row:2}}
 """
 

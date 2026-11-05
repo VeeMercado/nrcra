@@ -254,12 +254,12 @@ def guidelines():
         ("Small title", "20 (1.25rem)", "20 (1.25rem)", "800", "1.3", "normal", "fixed", "RACK cards, small tiles. Same size as the lead paragraph, but bold."),
         ("Lead paragraph", "20 (1.25rem)", "20 (1.25rem)", "400", "1.6", "normal", "fixed", "Under a page title. Not bold."),
         ("Body text", "16 (1rem)", "16 (1rem)", "400", "1.6", "normal", "fixed", "All paragraphs. Same size as button text."),
-        ("Button text", "16 (1rem)", "16 (1rem)", "800", "normal (about 1.4)", "normal", "fixed", "Buttons, menu items, footer links and links styled as buttons, everywhere on the site. Sentence case: capital first letter on the first word only, and on names such as RACK. Examples: Learn about us, Find out more, Back to top, Sign in, Our network, Privacy policy. The only exception is the small buttons inside charts (View score, View rating), which follow the chart."),
+        ("Button text", "16 (1rem)", "16 (1rem)", "800", "normal (about 1.4)", "normal", "fixed", "Buttons, menu items, footer links and links styled as buttons, everywhere on the site. Sentence case: capital first letter on the first word only, and on names such as RACK. Examples: Learn about us, Find out more, Back to top, Sign in, Our network, Privacy policy. Exceptions: the small buttons inside charts (View score, View rating), which follow the chart, and the small buttons Back to top and Visit page, which are 11px and 38px high."),
         ("Pill tag above titles (smallest text)", "12 (0.75rem)", "12 (0.75rem)", "800", "1.3", "normal", "fixed, uppercase", "The only text between 12 and 16px, also used for the Thanks to our funders line and the funder chip names. Capitals on the pills, no extra letter spacing, always centred in the pill. The Draft tags on the Privacy Policy stay at 16px."),
-        ("Footer base line", "11 (0.6875rem)", "11 (0.6875rem)", "400 (Back to Top 800)", "1.6", "normal", "fixed", "The copyright and Privacy Policy line and the Back to Top button at the very bottom of the footer. The smallest text on the site."),
+        ("Footer base line", "11 (0.6875rem)", "11 (0.6875rem)", "400 (Back to Top 800)", "1.6", "normal", "fixed", "The copyright and Privacy Policy line and the Back to Top button at the very bottom of the footer. The smallest text on the site, the steering committee names under their logos, the country names on the Network cards, and the text of the small buttons (Back to top, Visit page)."),
     ]
     pad_rows = [
-        ("Section (band)", "0 top, 60px bottom (96px on Network and Home partners, 130px on About and the pages above the footer)", "Same", "Space below a band is its bottom padding. Content sits on the 1100px wide column."),
+        ("Section (band)", "0 top, 60px bottom (96px on Network and Home partners, 130px on About and the pages above the footer)", "Same", "Space below a band is its bottom padding. Content sits on the 980px wide column."),
         ("Content card (cards, chart cards, tiles)", "26px top and bottom, 20px left and right", "Same", "28px corners. About story cards 18px sides, 24px bottom."),
         ("Home header text card", "60px", "31px top, 40px bottom", "Matches the section gap"),
         ("Square card (steering committee)", "20px", "20px", "16px corners"),
@@ -294,6 +294,7 @@ def guidelines():
         ("Chart bars and squares", "4px", "Inside charts only. The chart's View score and View rating button group has 6px corners."),
     ]
     space_rows = [
+        ("Site content width", "980px, centred (Wix Classic maximum)", "The menu, every page and the footer sit inside one 980px column. On screens narrower than 1020px the column keeps a 20px gutter each side. Coloured bands and backgrounds run the full width of the screen behind it. Full width sections: the page headers, Our timeline (About), Thanks to our funders (Home), the team (About), the five RACK cards and Our stories (Network). Their content stretches across the screen with a gutter of 20 to 56px each side."),
         ("Between sections", "60px", "Top and bottom of every band, on every page. Same as the Home header text card padding."),
         ("Large bands", "96px", "White bands on About and Network, and the space under Our Focus on Home"),
         ("Partners band on Home", "96px above, 115px below", "The Thanks to our funders band"),
@@ -310,7 +311,7 @@ def guidelines():
     logo_rows = [
         ("Small", "20", "Funder logos under each timeline entry on About and in the two funding cards on About (the funder strip under the menu is archived and not on any page)"),
         ("Medium", "50", "Steering committee tiles (limited to 100px wide)."),
-        ("NRCRA logo (SVG)", "232 wide", "The header menu logo (horizontal navy, about 44px high) and the footer logo (vertical white, about 125px high) are the same 232px width. Four files: horizontal navy, horizontal white, vertical navy, vertical white. The header uses horizontal navy on the light page. The footer uses the vertical white logo straight on the navy footer, with no white box. On narrow screens the logo shrinks to fit."),
+        ("NRCRA logo (SVG)", "232 wide", "The header menu logo (horizontal navy, about 44px high) and the footer logo (vertical white, about 125px high) are the same 232px width. Four files: horizontal navy, horizontal white, vertical navy, vertical white. The header uses horizontal navy on the light page. The footer uses the vertical (stacked) white logo straight on the navy footer, with no white box. On desktop it sits in the left column. On phones it is centred across the footer on its own row and never more than 200px high. On narrow screens the logo shrinks to fit."),
         ("Large", "84", "Lead partner logo on Home (NEMA). Shrinks only when the column is too narrow for the logo: 64px at 1280px wide. FRRR and UCRH beside it are 45% of that height (29px). The NSW Proudly funded by logo is taller, up to 135px."),
     ]
     header_photo_rows = [
@@ -325,7 +326,7 @@ def guidelines():
     ]
     icon_rows = [
         ("Small", "16", "16", "Menu arrows, the Draft flag in each Draft tag, the yellow ring in the Network note"),
-        ("Default", "22", "22", "Menu (hamburger) icon on phones"),
+        ("Default", "22", "22", "Menu (hamburger) icon on phones. The button shows the icon only, with no word Menu, in a 48px square teal button."),
         ("Large", "44", "44", "The tap area for icon buttons: social icon buttons in the footer (12px corners, white button, navy icon 28px) and the menu arrow button on phones"),
         ("Giant", "92", "92", "Watch (play) button on the Home video and on the Network story photos"),
     ]
