@@ -264,7 +264,8 @@ def guidelines():
         ("Home header text card", "60px", "31px top, 40px bottom", "Matches the section gap"),
         ("Square card (steering committee)", "20px", "20px", "16px corners"),
         ("Button", "8px top and bottom, 17.6px left and right", "Same", "12px corners, 16px text"),
-        ("Pill tag", "3.2px top and bottom, 12.8px right, 10.4px left", "Same", "Fully round, 12px uppercase text"),
+        ("Pill tag above titles", "3.2px top and bottom, 12.8px right, 10.4px left", "Same", "28px high, fully round, 12px uppercase text"),
+        ("Funder chip (Thanks to our funders)", "0 top and bottom, about 16px left and right", "Same", "40px high (36px at 1100px wide and below), fully round, white fill, Light teal #BEDDDA border, Pale teal #F3F9F8 on hover"),
         ("Header menu bar", "0 (height set by the 50px logo and the buttons)", "Same", "Sticks to the top"),
         ("Footer", "52px top, 32px bottom", "Same", "Teal band"),
     ]
@@ -287,7 +288,7 @@ def guidelines():
         ("Buttons, menu items, drop-downs, social icon buttons", "12px", "Every clickable control is a rounded square. The menu highlight covers the label and its arrow."),
         ("Hero cards, cards, chart cards, tiles, header photos, the map and the Draft policy box", "28px", "One shared radius for every large surface, on desktop, tablet and phone"),
         ("Pictures inside a padded card, steering committee tiles, the footer logo box, dropdown menus", "16px", "Smaller surfaces nested inside a card or on the page"),
-        ("Funder logo chips under the timeline entries", "20px", "Small white boxes, 44px high, one logo each"),
+        ("Funder logo chips under the timeline entries", "20px", "Small white boxes, 40px high (36px at 1100px wide and below), one logo each"),
         ("Pills", "Fully round (99px)", "Only the tag above a page title, the Draft tags and the colour bars. Never for buttons."),
         ("Round photos and initial circles", "50%", "See Circle photo sizes"),
         ("Chart bars and squares", "4px", "Inside charts only. The chart's View score and View rating button group has 6px corners."),
