@@ -67,7 +67,7 @@ def brand_contrast():
         rows += "".join(_row(bg, b, name + " text", n) for b, n in [(WHITE, "white")])
         return f'<section class="blk" id="{name}"><h2>Brand {name} <code>{bg.upper()}</code></h2><table><thead><tr><th>Pairing</th><th>Ratio</th><th>Body text (4.5:1)</th><th>Large text (3:1)</th><th>WebAIM</th></tr></thead><tbody>{rows}</tbody></table></section>'
     para = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brand guidelines</title><meta name="robots" content="noindex">{FONT}
+    return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brand guidelines</title><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">{FONT}
 <style>{BASE}html{{scroll-padding-top:84px}}body{{background:#f3f6f7;padding-top:64px}}.topnav{{position:fixed;top:0;left:0;right:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}}.topnav>ul{{list-style:none;margin:0 auto;padding:10px 20px;max-width:1240px;display:flex;flex-wrap:wrap;gap:8px}}:root{{--btn-r:12px}}.topnav>ul>li>a,.topnav .cat{{display:inline-flex;align-items:center;gap:.45em;min-height:44px;padding:0 1.1em;border:2px solid var(--navy);border-radius:12px;color:var(--navy);font:inherit;font-weight:800;text-decoration:none;cursor:pointer;background:#fff}}.topnav>ul>li>a:hover,.topnav .cat:hover{{background:var(--navy);color:#fff}}.topnav .cat:focus-visible,.topnav .menu a:focus-visible{{outline:3px solid #07293b;outline-offset:2px}}.topnav .n-y{{background:var(--yellow)}}.topnav .n-r{{background:var(--orange);color:#fff;font-size:1.2rem}}.topnav .n-t{{background:#00857c;color:#fff}}.topnav .n-d{{background:var(--navy);color:#fff}}.topnav .n-y:hover,.topnav .n-r:hover,.topnav .n-t:hover,.topnav .n-d:hover{{background:#fff;color:var(--navy)}}.topnav .back{{margin-left:auto}}@media(max-width:900px){{.topnav>ul>li>a,.topnav .cat{{min-height:40px;padding:0 .8em;font-size:.9rem}}.topnav .bl{{display:none}}}}@media(max-width:560px){{body{{padding-top:112px}}html{{scroll-padding-top:132px}}}}main{{max-width:1240px;margin:0 auto;padding:36px 20px 56px}}
 .flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
 #colours table{{table-layout:fixed}}#colours th:nth-child(1){{width:21%}}#colours th:nth-child(2){{width:13%}}#colours th:nth-child(4),#colours th:nth-child(5){{width:13%}}#colours th:nth-child(3){{width:auto}}.logodemo{{display:flex;flex-wrap:wrap;align-items:flex-end;gap:18px 32px;margin:18px 0 0}}.logodemo .cs small,.csrow .cs small{{font-size:.8rem;color:var(--muted)}}.csrow{{display:flex;flex-wrap:wrap;gap:18px;margin:18px 0 0}}.cs{{display:grid;gap:8px;justify-items:center;font-size:.85rem}}.cs span{{display:block;width:84px;height:84px;background:var(--teal);border-radius:12px}}.pagesec{{font-size:clamp(1.9rem,4vw,2.4rem);margin:40px 0 12px}}.rule{{background:#fff;border-left:10px solid var(--orange);border-radius:20px;padding:22px 26px;margin:22px 0}}.rule p{{margin:0}}
@@ -285,7 +285,7 @@ def guidelines():
         ("Numbers and dates", "Dates written 28 November 2026. Percentages with the % sign and no space: 75%.", "Australian English"),
     ]
     corner_rows = [
-        ("Buttons, menu items, drop-downs, social icon buttons", "12px", "Every clickable control is a rounded square. The menu highlight covers the label and its arrow."),
+        ("Buttons, menu items, drop-downs, social icon buttons, the Aboriginal flag in the footer", "12px", "Every clickable control is a rounded square. The menu highlight covers the label and its arrow. The footer flag (60 x 40) uses the same 12px."),
         ("Hero cards, cards, chart cards, tiles, header photos, the map and the Draft policy box", "28px", "One shared radius for every large surface, on desktop, tablet and phone"),
         ("Pictures inside a padded card, steering committee tiles, the footer logo box, dropdown menus", "16px", "Smaller surfaces nested inside a card or on the page"),
         ("Funder logo chips under the timeline entries", "20px", "Small white boxes, 40px high (36px at 1100px wide and below), one logo each"),
@@ -309,7 +309,8 @@ def guidelines():
     ]
     logo_rows = [
         ("Small", "20", "Funder logos under each timeline entry on About and in the two funding cards on About (the funder strip under the menu is archived and not on any page)"),
-        ("Medium", "50", "The logo in the header menu and the logo in the footer. Also the steering committee tiles (limited to 100px wide)."),
+        ("Medium", "50", "Steering committee tiles (limited to 100px wide)."),
+        ("NRCRA logo (SVG)", "37", "The header menu logo and the footer logo. This is the height of the artwork alone, the same look as before: the old picture had empty space around the logo, the SVG does not. Four files: horizontal navy, horizontal white, vertical navy, vertical white. The header uses horizontal navy. The footer uses horizontal navy inside its white box."),
         ("Large", "84", "Lead partner logo on Home (NEMA). Shrinks only when the column is too narrow for the logo: 64px at 1280px wide. FRRR and UCRH beside it are 45% of that height (29px). The NSW Proudly funded by logo is taller, up to 135px."),
     ]
     header_photo_rows = [
@@ -370,7 +371,7 @@ def button_sections():
 
 
 def button_sets():
-    return '''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><title>Moved: brand colour contrast</title><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=../brand-contrast/#teal-buttons"><script data-cfasync="false">location.replace("../brand-contrast/#teal-buttons")</script></head><body style="font-family:sans-serif;padding:24px"><p>The button sets now live on the <a href="../brand-contrast/#teal-buttons">Brand colour contrast</a> page.</p></body></html>'''
+    return '''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><title>Moved: brand colour contrast</title><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai"><meta http-equiv="refresh" content="0;url=../brand-contrast/#teal-buttons"><script data-cfasync="false">location.replace("../brand-contrast/#teal-buttons")</script></head><body style="font-family:sans-serif;padding:24px"><p>The button sets now live on the <a href="../brand-contrast/#teal-buttons">Brand colour contrast</a> page.</p></body></html>'''
 
 
 HR_URL = "https://humanrights.gov.au/resource-hub/by-resource-type/guidelines-and-standards/guides-and-standards-disability-rights/chapter-3-standards-and-guidelines-digital-accessibility"

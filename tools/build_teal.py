@@ -352,7 +352,7 @@ def short_lga(official):
 
 def blogo(cls="logo"):
     """Brand logo (horizontal, supplied artwork). Width and height attributes keep the true 1000x230 ratio."""
-    return f'<img src="{B.IMG}logo-brand.png" alt="Northern Rivers Community Resilience Alliance" class="{cls}" width="1000" height="230">'
+    return f'<img src="../assets/logo/nrcra-logo-horizontal-navy.svg" alt="Northern Rivers Community Resilience Alliance" class="{cls}" width="215" height="40">'
 
 
 def slug(t):
@@ -725,7 +725,7 @@ def page_b():
     nav = nav3().replace('data-nav="journey"', 'data-nav="journey" aria-current="page"')
     html = f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{EXTRA_NAMES["prototype-b"]}</title><meta name="robots" content="noindex">
+<title>{EXTRA_NAMES["prototype-b"]}</title><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">
 <meta name="description" content="Journey page with the live Flourish charts. Sample content only.">
 {FONT}<style>{BASE}{CSS1}{CSS_T}{css}{MOBILE}</style></head><body class="v1 teal {cls}">
 {nav}<main id="main">{body}</main>{tfooter()}{protobar3("prototype-b")}<script data-cfasync="false">{BFILTER_JS}</script><script data-cfasync="false">{JSX}</script><script data-cfasync="false">{JS2}</script></body></html>'''
@@ -817,7 +817,7 @@ ol.river h3{margin:0 0 .25em;font-size:1rem}ol.river p{margin:0 0 .9em;font-size
 /* Our Stories: yellow play button; yellow bars sit exactly midway (100px each side) above Our Stories and between the last row and Our Network */
 .tb .tcards .tph .play{background:var(--yellow);color:var(--navy);border:0;box-shadow:0 6px 20px rgba(0,0,0,.25)}.tb .tcards .tph .play:hover{background:#fff;color:var(--navy)}.tb .tcards .tph .play:active{background:#ffe38a;color:var(--navy)}.tb #network>.wrap:first-child{margin-bottom:100px}.tb .sec.stories{padding-bottom:96px!important}.tb .sbar-top{margin:0 auto var(--space-large)}.tb .sbar-bot{margin:100px auto 0}.tb #network #our-network{padding-top:96px!important}.tb #network #our-network,.tb [id^="lga-"]>.sec{background:#fff}.tb #our-network .gsub li,.tb [id^="lga-"] .gsub li,.tb #our-network .lgasel,.tb [id^="lga-"] .lgasel{background-color:var(--bg)}
 /* Brand logo always keeps its true ratio (the footer logo was squashed at iPad width) */
-.tb .logo{width:auto;max-width:100%}.tb .site-foot .foot-logo .logo{height:var(--logo-medium)!important;width:auto;max-width:100%}
+.tb .logo{width:auto;max-width:100%}.tb .site-foot .foot-logo .logo{height:var(--logo-brand)!important;width:auto;max-width:100%}
 /* Funder strip above the header: label at the "Who we are" label size (not bold, not capitals), thin white pills like Prototype A's Projects pill */
 .tb .funders{background:var(--bg);border-bottom:1px solid var(--line)}.tb .funders .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 16px;padding:10px 20px}
 .tb .funders p{margin:0;font-size:1rem;font-weight:400;color:var(--navy)}.tb .funders ul{list-style:none;margin:0;padding:0;display:contents}
@@ -969,7 +969,7 @@ CSS_B = """
 
 /* B: teal as accents and tints only, navy kept for the footer */
 /* button family: teal. Primary: teal with white text and a navy outline (Sign In is primary). Secondary: white with a teal outline. Tertiary: navy. Selected menu item: the lighter teal. */
-:root{--btn-teal:#00857c;--teal-12:#f3f9f8;--teal-25:#beddda;--circle-mini:56px;--circle-small:160px;--circle-medium:190px;--circle-xl:370px;--logo-small:20px;--logo-medium:50px;--logo-large:84px;--space-large:130px}@media(max-width:560px){:root{--circle-small:85px;--circle-medium:150px;--circle-xl:300px}}
+:root{--btn-teal:#00857c;--teal-12:#f3f9f8;--teal-25:#beddda;--circle-mini:56px;--circle-small:160px;--circle-medium:190px;--circle-xl:370px;--logo-small:20px;--logo-medium:50px;--logo-brand:37px;--logo-large:84px;--space-large:130px}@media(max-width:560px){:root{--circle-small:85px;--circle-medium:150px;--circle-xl:300px}}
 .btn-primary,.btn-cta{background:var(--btn-teal);color:#fff;border-color:var(--navy)}
 .btn-primary:hover,.btn-cta:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .btn-ghost{background:#fff;color:var(--navy);border-color:var(--btn-teal)}.btn-ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
@@ -1251,7 +1251,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(min-width:741px) and (max-width:999px){.tb .hsplit .hsolid-text h1{font-size:clamp(2.375rem,5vw,3.5rem)!important}}
 @media(max-width:430px){.tb .hwpills a{font-size:1.25rem!important}}
 /* Header and footer logos use the Medium logo size; the header photos use two sizes (tall: Network map, Journey, RACK; wide: Home, About) */
-.tb .site-head .logo,.tb .logo{height:var(--logo-medium)!important;width:auto}
+.tb .site-head .logo,.tb .logo{height:var(--logo-brand)!important;width:auto}
 @media(min-width:1000px){.tb .hsplit-in{grid-template-columns:minmax(0,1fr) 469px}}
 @media(min-width:741px){.tb .hsplit-r{height:545px;align-self:center}}
 @media(min-width:741px){.tb .hsplit.hsplit-sq .hsplit-r{width:100%;height:auto;aspect-ratio:11/10;align-self:center}}
@@ -1331,7 +1331,7 @@ def page(v):
     body = "".join([screen("home", "Home", home_body(HERO_FOR[v])), screen("about", "About", about_body()), screen("journey", "Progress", progress_body_b(), "bjourney"), screen("rack", "RACK", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{NAMES[v]}</title><meta name="robots" content="noindex">
+<title>{NAMES[v]}</title><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">
 <meta name="description" content="Teal-led exploration of the NRCRA website. Sample content only.">
 {FONT}<style>{BASE}{CSS1}{CSS_T}{css}{MOBILE}</style></head><body class="v1 teal {cls}">
 {nav3()}<main id="main">{body}</main>{tfooter()}{protobar3(v)}<script data-cfasync="false">{JSX}</script><script data-cfasync="false">{JS2}</script></body></html>'''

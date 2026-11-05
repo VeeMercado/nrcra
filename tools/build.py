@@ -151,7 +151,7 @@ def img(key, cls="", eager=False, alt=None):
 
 
 def logo(cls="logo", white=False):
-    return f'<img src="{IMG}logo.png" alt="Northern Rivers Community Resilience Alliance" class="{cls}{" logo-white" if white else ""}" width="900" height="207">'
+    return f'<img src="../assets/logo/nrcra-logo-horizontal-{"white" if white else "navy"}.svg" alt="Northern Rivers Community Resilience Alliance" class="{cls}" width="215" height="40">'
 
 
 def screen(id_, label, body, cls=""):
@@ -181,7 +181,7 @@ REGION_GROUPS = [
 
 # "Connect. Share. Care." in NRCRA's three tagline colours (sampled from their email signature). Treated as a brand lockup.
 TAGLINE = '<span class="tagline"><i class="tg1">Connect.</i> <i class="tg2">Share.</i> <i class="tg3">Care.</i></span>'
-ABORIGINAL_FLAG = '<svg class="ack-flag" viewBox="0 0 60 40" role="img" aria-label="Aboriginal flag"><rect width="60" height="20" fill="#000"/><rect y="20" width="60" height="20" fill="#cc0000"/><circle cx="30" cy="20" r="8" fill="#ffcc00"/></svg>'
+ABORIGINAL_FLAG = '<svg class="ack-flag" viewBox="0 0 60 40" role="img" aria-label="Aboriginal flag"><path fill="#000000" d="M0 12A12 12 0 0 1 12 0H48A12 12 0 0 1 60 12V20H0Z"/><path fill="#CC0000" d="M0 20H60V28A12 12 0 0 1 48 40H12A12 12 0 0 1 0 28Z"/><circle cx="30" cy="20" r="8" fill="#FFCC00"/></svg>'
 
 
 def footer(white_logo=True, boxed=False):
@@ -473,7 +473,7 @@ p{margin:0 0 1em}.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}.sec{p
 .btnrow{display:flex;flex-wrap:wrap;gap:12px;margin:1.2em 0 0}
 .site-head{background:#fff;position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line)}
 .head-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:10px;padding-bottom:10px}
-.logo{height:48px;width:auto}.logo-white{filter:brightness(0) invert(1)}
+.logo{height:36px;width:auto}.logo-white{filter:brightness(0) invert(1)}
 #nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 #nav a:not(.btn){padding:.45em .9em;color:var(--navy);text-decoration:none;font-weight:700;border-radius:var(--btn-r,99px)}
 #nav a:not(.btn):hover{background:var(--hover,#eef5f5)}#nav .btn-cta[aria-current=page]{background:var(--navy);color:#fff;box-shadow:0 0 0 3px var(--yellow)}#nav a[aria-current=page]{background:var(--current,#d8f0ee)}
@@ -637,7 +637,7 @@ def protobar(v):
 def page_shell(title, css, body, v, white_logo=True, slug=None, extra="", pre_footer=""):
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{title}</title><meta name="robots" content="noindex">
+<title>{title}</title><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">
 <meta name="description" content="Prototype for the Northern Rivers Community Resilience Alliance website. Sample content only.">
 {FONT}<style>{BASE}{css}{MOBILE}</style></head><body class="{v} {extra}">
 {nav()}<main id="main">{body}</main>{pre_footer}{footer(white_logo, boxed=True)}{protobar(slug or v)}<script data-cfasync="false">{JS}</script></body></html>'''
@@ -1149,7 +1149,7 @@ def dashboard():
 <article class="rc rc2"><a class="shot" href="prototype-c/" aria-label="Open NRCRA Prototype"><span class="bar" aria-hidden="true"><i></i><i></i><i></i></span><img src="assets/shots/prototype-c.jpg?v=r3a" alt="Screenshot of the NRCRA Prototype home page: a dark green card with white text on the left and a nearly square gathering photo card with a play button, centred beside it" loading="lazy"></a>
 <div class="info"><h2><a href="prototype-c/">NRCRA Prototype</a></h2><p>Prototypes for the NRCRA website. Sample only. To be built in Wix Classic.</p><ul class="rlist"><li><a href="{DOC_URL}">Round 1 feedback</a> (actioned 2 November 2026)</li><li><a href="https://docs.google.com/document/d/1XPcqlDx_uzWrXR38vlqVU0mW3wWeOUfXZ4OLKGRz3nM/edit?usp=sharing">Round 2 feedback</a> (actioned 3 November 2026)</li><li>Round 3 final confirmation (pending). All content stays sample content until it is confirmed.</li></ul><p><b>Feedback needed:</b> Please check the wording, photos, logos, links, group details and the new Privacy Policy page, and tell us what needs to change.</p>
 <p class="btnrow"><a class="btn btn-primary" href="prototype-c/">Open Prototype</a></p></div></article></div>'''
-    return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex">{FONT}
+    return f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NRCRA.ORG.AU website prototypes</title><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">{FONT}
 <style>{BASE}body{{background:#f3f6f7;padding-bottom:0}}main{{max-width:1240px;margin:0 auto;padding:40px 20px 64px}}
 .toprow,.toolrow{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 20px}}.toprow{{margin-bottom:18px}}.toolrow{{margin-bottom:28px}}.toolrow .btnrow{{margin:0;flex-basis:auto}}.toolrow .tabs{{margin:0}}.top{{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}}.top p{{max-width:62ch;margin:0}}.toolrow .btnrow{{max-width:none;gap:8px}}.toolrow .btnrow .btn{{padding:.6em 1.05em;font-size:.95rem}}
 .flag{{display:inline-block;background:#111;color:#ffcb2a;font-weight:900;letter-spacing:.06em;border-radius:99px;padding:.35em 1em;font-size:.85rem;margin-bottom:14px}}.flag a{{color:#fff}}
@@ -1168,7 +1168,7 @@ def dashboard():
 .rc{{background:#fff;border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:18px;border-bottom:10px solid var(--teal)}}.rc2{{border-bottom-color:var(--teal)}}.rc2{{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:center;padding:28px}}@media(max-width:900px){{.rc2{{grid-template-columns:1fr;padding:20px;gap:18px}}}}.rc3{{border-bottom-color:var(--teal)}}.rc .shot img{{aspect-ratio:16/10;object-fit:cover;object-position:top}}.rc2 .shot img{{aspect-ratio:1200/975}}.grp a{{color:inherit;text-decoration:underline}}.rlist{{margin:0 0 1em;padding-left:1.25em}}.rlist li{{margin:0 0 .35em}}.rc .info h2{{font-size:1.6rem}}.rc .info p{{margin:0 0 .8em}}.rc .info .btnrow{{margin:1em 0 0}}
 .aanote{{margin:28px 0 0;display:flex;flex-wrap:wrap;gap:14px;align-items:center}}
 @media(max-width:900px){{.row{{grid-template-columns:1fr;padding:18px;border-left-width:8px}}.r2grid{{grid-template-columns:1fr}}}}</style></head>
-<body><main><div class="toprow"><img src="assets/img/logo.png" alt="Northern Rivers Community Resilience Alliance" style="height:52px;margin:0"><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span></div>
+<body><main><div class="toprow"><img src="assets/logo/nrcra-logo-horizontal-navy.svg" alt="Northern Rivers Community Resilience Alliance" style="height:40px;margin:0"><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span></div>
 <div class="top"><div><h1>NRCRA.ORG.AU Website prototypes</h1></div>
 <p><b>Scope</b> includes Home, Network, About, RACK and Variant 1 Journey page. <b>Recommendation:</b> Privacy Policy was added as required for compliance.</p></div>
 <div class="toolrow"><p class="btnrow"><a class="btn btn-primary" href="https://www.nrcra.org.au">nrcra.org.au</a><a class="btn btn-ghost" href="https://www.figma.com/design/WfNe722snmaw2CiLyebdyu/Clients.VeeMercado.com?node-id=0-1&amp;t=oGVi5hj1xToKiHe9-1">Design File (Figma)</a><a class="btn btn-ghost" href="brand-contrast/">Brand Guidelines</a></p><div class="tabs" role="tablist" aria-label="Prototype rounds"><button type="button" role="tab" id="tab-round-2" aria-controls="round-2" aria-selected="true">Round 2 &amp; 3</button><button type="button" role="tab" id="tab-round-1" aria-controls="round-1" aria-selected="false" tabindex="-1">Round 1</button></div></div>
@@ -1197,5 +1197,6 @@ if __name__ == "__main__":
     build_r2.main()
     build_teal.main()
     write("index.html", dashboard())
-    write("robots.txt", "User-agent: *\nDisallow: /\n")
+    write("robots.txt", 'User-agent: GPTBot\nUser-agent: ChatGPT-User\nUser-agent: OAI-SearchBot\nUser-agent: ClaudeBot\nUser-agent: Claude-Web\nUser-agent: Claude-User\nUser-agent: Claude-SearchBot\nUser-agent: anthropic-ai\nUser-agent: Google-Extended\nUser-agent: GoogleOther\nUser-agent: Googlebot\nUser-agent: Bingbot\nUser-agent: PerplexityBot\nUser-agent: Perplexity-User\nUser-agent: CCBot\nUser-agent: Bytespider\nUser-agent: Amazonbot\nUser-agent: Applebot\nUser-agent: Applebot-Extended\nUser-agent: FacebookBot\nUser-agent: meta-externalagent\nUser-agent: Meta-ExternalFetcher\nUser-agent: cohere-ai\nUser-agent: cohere-training-data-crawler\nUser-agent: Diffbot\nUser-agent: ImagesiftBot\nUser-agent: omgili\nUser-agent: omgilibot\nUser-agent: YouBot\nUser-agent: DuckAssistBot\nUser-agent: MistralAI-User\nUser-agent: AI2Bot\nUser-agent: Ai2Bot-Dolma\nUser-agent: Timpibot\nUser-agent: PetalBot\nUser-agent: Scrapy\nUser-agent: SemrushBot\nUser-agent: AhrefsBot\nUser-agent: DataForSeoBot\nUser-agent: img2dataset\nUser-agent: Kangaroo Bot\nUser-agent: PanguBot\nUser-agent: Webzio\nUser-agent: webzio-extended\nDisallow: /\n\nUser-agent: *\nDisallow: /\n')
+    write("_headers", "/*\n  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noai, noimageai\n  Referrer-Policy: no-referrer\n")
     print("built")
