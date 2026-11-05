@@ -16,7 +16,7 @@ import build as B
 from build import E, img, logo, screen, icon, BASE, MOBILE, JS, FONT, CSS1, VIMEO, CONTACT
 
 SIGN_IN = "https://rack.nrcra.org.au"  # the RACK address NRCRA gave us (not live yet)
-MENU = [("home", "Home"), ("network", "Network"), ("about", "About"), ("journey", "Journey"), ("rack", "RACK")]
+MENU = [("home", "Home"), ("network", "Network"), ("about", "About"), ("journey", "Progress"), ("rack", "RACK")]
 # Only Prototype C is published. A (two cards) and B (one green card) are archived: their headers stay available as hero variants below, and snapshots are kept in the git-ignored _archive-* folders.
 NAMES = {"prototype-c": "NRCRA Prototype"}
 SHORT = {"prototype-c": "C"}
@@ -49,8 +49,7 @@ def nav3():
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap head-in"><a href="#home" class="brand" aria-label="NRCRA home">{blogo()}</a>
 <button class="menu-btn" aria-expanded="false" aria-controls="nav"><svg class="hb" viewBox="0 0 20 14" width="22" height="15" aria-hidden="true" focusable="false"><path d="M1.5 1.5h17M1.5 7h17M1.5 12.5h17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Menu</button>
-<nav id="nav" aria-label="Main">{links}<a class="btn btn-cta" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a></nav></div></header>
-{funder_strip()}'''
+<nav id="nav" aria-label="Main">{links}<a class="btn btn-cta" href="{SIGN_IN}" target="_blank" rel="noopener">Sign In</a></nav></div></header>'''  # the Thanks to our funders ribbon is archived: add {funder_strip()} here to bring it back
 
 
 def protobar3(cur):
@@ -72,7 +71,7 @@ def hl(t):
 
 def steps():
     st = [("cal", "Come to a gathering", f"{B.GATHER[0]}: {B.GATHER[1]}.", "#home", "Upcoming"),
-          ("share", "Share knowledge", "Add what works to RACK", SIGN_IN, "RACK"), ("hand", "Partner with us", "Fund or research community-led resilience.", "#journey", "Journey")]
+          ("share", "Share knowledge", "Add what works to RACK", SIGN_IN, "RACK"), ("hand", "Partner with us", "Fund or research grassroots community-led resilience.", "#journey", "Progress")]
     return '<ol class="steps">' + "".join(f'<li><span class="ci">{icon(i)}</span><b>{E(t)}</b><p>{E(d)}</p><a href="{h}">{E(l)}</a></li>' for i, t, d, h, l in st) + "</ol>"
 
 
@@ -87,7 +86,7 @@ def hero_card(square=False, cover=False):
     tag_top = tag.replace('class="eyebrow"', 'class="eyebrow hsplit-tag"') if cover else ""
     tag_in = "" if cover else tag
     return f'''<div class="hsplit{" hsplit-sq" if square else ""}{" hsplit-bg" if cover else ""}"><div class="wrap"><div class="hsplit-in">{tag_top}<div class="hsolid-text hsplit-l">{tag_in}
-<h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
+<h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots community-led groups working together to build disaster resilience across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn About Us</a></p></div>
 <div class="hsplit-r" data-video="{VIMEO}">{img("sizzle", eager=True, alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div></div>'''
 
@@ -95,7 +94,7 @@ def hero_card(square=False, cover=False):
 def hero_photo():
     """Prototype B: full-width photo with the teal gradient and white text."""
     return f'''<div class="hero1 herobg"><div class="wrap"><div class="h1-panel tpanel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
-<h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots, community-led groups working together to build disaster resilience across the Northern Rivers.</p>
+<h1>We believe when climate disasters hit, it&rsquo;s the <span class="mark">community{B.SQUIGGLE}</span> that steps up first.</h1><p class="lede">We are a network of grassroots community-led groups working together to build disaster resilience across the Northern Rivers.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#about">Learn About Us</a><button type="button" class="btn btn-ghost hvid watchbtn" data-video="{VIMEO}" aria-label="Watch the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 14 16" width="14" height="16" aria-hidden="true" focusable="false"><path d="M3 3l8 5-8 5z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>Watch reel</button></p></div>
 <div class="h1-photo" data-video="{VIMEO}">{img("sizzle", eager=True, alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path id="wp" d="M13 44A31 31 0 0 0 75 44" fill="none"/><text font-size="8.5" font-weight="800" letter-spacing="1.8" fill="currentColor" text-anchor="middle" style="font-family:inherit"><textPath href="#wp" startOffset="50%">WATCH</textPath></text></svg></button></div></div></div>'''
 
@@ -137,9 +136,9 @@ def home_body(hero="photo"):
     return f'''{HEROES[hero]()}
 <section class="sec hwrow" style="padding-top:0"><div class="wrap hwbg"><span class="hwd hwd-blob" aria-hidden="true"></span>{B.deco("rings", "hwd-rings")}<span class="hwd hwd-dot hwd-dt" aria-hidden="true"></span><span class="hwd hwd-dot hwd-do" aria-hidden="true"></span><ul class="hwpills" aria-label="How we work"><li><a class="hp-teal" href="#about" data-jump="ab-how" data-page="about">Connect.</a></li><li><a class="hp-yellow" href="#about" data-jump="ab-how" data-page="about">Share.</a></li><li><a class="hp-orange" href="#about" data-jump="ab-how" data-page="about">Care.</a></li></ul></div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a grassroots community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the Network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("home-circle-top")}{vimg("home-circle-bottom")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
-<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30793680"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/30793680/thumbnail" width="100%" alt="Pictogram of our journey in numbers: groups, funding and disaster experience."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">Review Our Progress</a></p></div></div></section>
+<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30793680"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/30793680/thumbnail" width="100%" alt="Pictogram of our progress in numbers: groups, funding and disaster experience."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">Review Our Progress</a></p></div></div></section>
 <section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></div></section>
 {partners_section()}'''
 
@@ -217,7 +216,7 @@ def meal_ring():
         pts.append(f"{x:.1f},{y:.1f}")
         dots += f'<li style="left:{x:.1f}%;top:{y:.1f}%;background:{bg};color:{fg}">{n}</li>'
     return (f'<div class="mealwrap"><div class="mealring"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="{" ".join(pts)}" fill="none" stroke="#beddda" stroke-width="1.2"/></svg><ol>{dots}</ol></div>'
-            '<blockquote class="mealq"><p class="mq">&ldquo;What is your group doing differently as a result of being part of the Alliance?&rdquo;</p>'
+            '<blockquote class="mealq"><p class="mq">&ldquo;What is your group doing differently as a result of being part of the Resilience Alliance?&rdquo;</p>'
             '<p>Rather than only counting activities, we look for real changes in relationships, knowledge, capability and collective action, gathered through conversations at Gatherings and site visits, and turned into shared stories.</p></blockquote></div>')
 
 
@@ -265,21 +264,21 @@ def researchers():
 
 def meal_section():
     return f'''<section class="sec mealsec" id="ab-meal" style="padding-top:0"><div class="wrap learnwrap"><h2 class="sechead cen">Listening, reflecting and adapting as we grow</h2><div class="learngrid"><div class="mealfig">{meal_svg()}</div>
-<div class="mealtxt"><h3>MEAL: Monitoring, Evaluation, Accountability and Learning Together</h3><p>Since the Alliance formed in 2024, embedded researchers from the University Centre for Rural Health have worked alongside us to track how a new kind of regional collaboration takes shape. Through Health Checks, Outcomes Harvesting and ongoing feedback, our MEAL approach turns what groups tell us into practical changes.</p><p>One example is more informal Gatherings, with staff now visiting groups directly.</p><p class="btnrow"><a class="btn btn-primary" href="https://drive.google.com/file/d/10Afb2-siINfdw66cvs3j0E5cTjttVRsL/view?usp=drive_link">Learn More</a></p></div></div>{researchers()}{funding_inner()}</div></section>'''
+<div class="mealtxt"><h3>MEAL: Monitoring, Evaluation, Accountability and Learning Together</h3><p>Since the Resilience Alliance formed in 2024, embedded researchers from the University Centre for Rural Health have worked alongside us to track how a new kind of regional collaboration takes shape. Through Health Checks, Outcomes Harvesting and ongoing feedback, our MEAL approach turns what groups tell us into practical changes.</p><p class="btnrow"><a class="btn btn-primary" href="https://drive.google.com/file/d/10Afb2-siINfdw66cvs3j0E5cTjttVRsL/view?usp=drive_link">Learn More</a></p></div></div>{researchers()}{funding_inner()}</div></section>'''
 
 
 def funding_inner():
     return f'''<div class="fundgrid" id="ab-funding">
-<div class="card abt fcard"><h2 class="sechead">Resourcing Community Resilience -<br>The Help Fund</h2><p class="lede">Community-led decisions about where funding goes</p><div class="bar bar-y" aria-hidden="true"></div><p>Groups told us that access to resources was a major barrier to keeping going, and that competitive grants can work against the collaboration resilience depends on. With support from the NRMA Help Fund, and in partnership with the Northern Rivers Community Foundation and Monash University&rsquo;s Fire to Flourish, Alliance groups co-designed a participatory grantmaking approach. Establishment Grants of $3,000 and Resilience Action Grants of up to $10,000 are now funding radio networks, community hubs, disaster plans, preparedness training and wellbeing events.</p><ul class="flogos"><li><a href="https://www.nrma.com.au/help-fund"><img src="../assets/funders/nrma-help.png" alt="NRMA Insurance HELP Fund" loading="lazy"></a></li><li><a href="https://nrcf.org.au"><img src="../assets/funders/nrcf.png" alt="Northern Rivers Community Foundation" loading="lazy"></a></li><li><a href="https://www.monash.edu"><img src="../assets/funders/fire-to-flourish.png" alt="Monash University&rsquo;s Fire to Flourish" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/1_y26o8MOgzDUdzV7PjHfpiDluUjU-FFf/view?usp=drive_link">Find Out More</a></p></div>
-<div class="card abt fcard"><h2 class="sechead">Disaster Ready Three -<br>Connected and Prepared</h2><p class="lede">Enabling regional readiness across the Northern Rivers</p><div class="bar bar-o" aria-hidden="true"></div><p>Connected and Prepared is helping the Resilience Alliance scale a proven, place-based model of community-led resilience. Over the life of the project (2026&ndash;2028), at least 60 grassroots resilience groups will receive tailored governance support, shared digital tools, capacity building and peer learning. That support is delivered by a regional team of six that reaches every LGA in the Northern Rivers.</p><p class="fsup">Supported by the Australian Government through the Disaster Ready Fund.</p><ul class="flogos"><li><a href="https://www.nema.gov.au"><img src="../assets/funders/aus-gov.png" alt="Australian Government" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/16oFTpO9T-kX2tXsOEn5Yb8iwjJk9tjry/view?usp=drive_link">Read Project Overview</a></p></div></div>'''
+<div class="card abt fcard"><h2 class="sechead">Resourcing Community Resilience -<br>The Help Fund</h2><p class="lede">Grassroots community-led decisions about where funding goes</p><div class="bar bar-y" aria-hidden="true"></div><p>Groups told us that access to resources was a major barrier to keeping going, and that competitive grants can work against the collaboration resilience depends on. With support from the NRMA Help Fund, and in partnership with the Northern Rivers Community Foundation and Monash University&rsquo;s Fire to Flourish, Resilience Alliance groups co-designed a participatory grantmaking approach. Establishment Grants of $3,000 and Resilience Action Grants of up to $10,000 are now funding radio networks, community hubs, disaster plans, preparedness training and wellbeing events.</p><ul class="flogos"><li><a href="https://www.nrma.com.au/help-fund"><img src="../assets/funders/nrma-help.png" alt="NRMA Insurance HELP Fund" loading="lazy"></a></li><li><a href="https://nrcf.org.au"><img src="../assets/funders/nrcf.png" alt="Northern Rivers Community Foundation" loading="lazy"></a></li><li><a href="https://www.monash.edu"><img src="../assets/funders/fire-to-flourish.png" alt="Monash University&rsquo;s Fire to Flourish" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/1_y26o8MOgzDUdzV7PjHfpiDluUjU-FFf/view?usp=drive_link">Find Out More</a></p></div>
+<div class="card abt fcard"><h2 class="sechead">Disaster Ready Three -<br>Connected and Prepared</h2><p class="lede">Enabling regional readiness across the Northern Rivers</p><div class="bar bar-o" aria-hidden="true"></div><p>Connected and Prepared is helping the Resilience Alliance scale a proven, place-based model of grassroots community-led resilience. Over the life of the project (2026&ndash;2028), at least 60 grassroots resilience groups will receive tailored governance support, shared digital tools, capacity building and peer learning. That support is delivered by a regional team of six that reaches every LGA in the Northern Rivers.</p><p class="fsup">Supported by the Australian Government through the Disaster Ready Fund.</p><ul class="flogos"><li><a href="https://www.nema.gov.au"><img src="../assets/funders/aus-gov.png" alt="Australian Government" loading="lazy"></a></li></ul><p class="btnrow"><a class="btn btn-ghost" href="https://drive.google.com/file/d/16oFTpO9T-kX2tXsOEn5Yb8iwjJk9tjry/view?usp=drive_link">Read Project Overview</a></p></div></div>'''
 
 
 def about_body():
     return f'''    <div class="wrap"><div class="splith ab rev"><div class="ph">{img("yarn", eager=True)}</div><div><span class="eyebrow pill-t">About us</span><h1>We know communities are stronger when they&rsquo;ve built trusted relationships <span class="mark">together.{B.SQUIGGLE}</span></h1></div></div></div>
-<section class="sec" id="ab-vision" style="padding-top:0"><div class="wrap"><div class="aboutgrid"><div class="card abt"><h2>The Resilience Alliance</h2><p>Established in November 2023. Its roots lie in a run of compounding disasters: the 2017 floods, the 2019 bushfires, and the catastrophic floods and landslides of 2022. In each, local community organisers played a vital role in response, recovery and adaptation. Research in the years that followed found that these grassroots groups wanted stronger connections with each other for peer-to-peer support. That showed the need for regional collaboration in disaster resilience.</p><p>We support a network of place-based resilience groups to develop their own local approaches to risk reduction, preparedness and recovery, for fire, flood, landslides and whatever comes next.</p><p>The Resilience Alliance helps government agencies, councils and emergency services deliver on the commitments of the NSW State Emergency Management Plan, State Disaster Mitigation Plan and regional resilience priorities by connecting formal systems with trusted, community-led action.</p><div class="bar bar-t" aria-hidden="true"></div></div>
+<section class="sec" id="ab-vision" style="padding-top:0"><div class="wrap"><div class="aboutgrid"><div class="card abt"><h2>The Resilience Alliance</h2><p>Established in November 2023. Its roots lie in a run of compounding disasters: the 2017 floods, the 2019 bushfires, and the catastrophic floods and landslides of 2022. In each, local community organisers played a vital role in response, recovery and adaptation. Research in the years that followed found that these grassroots groups wanted stronger connections with each other for peer-to-peer support. That showed the need for regional collaboration in disaster resilience.</p><p>We support a network of place-based resilience groups to develop their own local approaches to risk reduction, preparedness and recovery, for fire, flood, landslides and whatever comes next.</p><p>The Resilience Alliance helps government agencies, councils and emergency services deliver on the commitments of the NSW State Emergency Management Plan, State Disaster Mitigation Plan and regional resilience priorities by connecting formal systems with trusted, grassroots community-led action.</p><div class="bar bar-t" aria-hidden="true"></div></div>
 <div class="vpcol"><div class="card vpc"><h2>Vision</h2><p>Connected, collaborative Northern Rivers communities that are empowered to care for themselves and each other before, during and after disasters.</p><div class="bar bar-y" aria-hidden="true"></div></div>
-<div class="card vpc"><h2>Purpose</h2><p>To develop a self-sustaining, trusted Resilience Alliance of place-based, community-led resilience groups and organisations. The Resilience Alliance shares knowledge and resources, provides mutual support and wellbeing, takes collective action and advocates for identified community needs.</p><div class="bar bar-o" aria-hidden="true"></div></div></div></div></div></section>
-<section class="sec" id="ab-how" style="padding-top:0"><div class="wrap"><h2 class="sechead">How we work</h2><p class="lede">Through regular gatherings, deep conversations and shared experiences, the Resilience Alliance is building a community-led network focused on collective care, preparedness and regional strength.</p>{how_cards()}</div></section>
+<div class="card vpc"><h2>Purpose</h2><p>To develop a self-sustaining, trusted Resilience Alliance of place-based, grassroots community-led resilience groups and organisations. The Resilience Alliance shares knowledge and resources, provides mutual support and wellbeing, takes collective action and advocates for identified community needs.</p><div class="bar bar-o" aria-hidden="true"></div></div></div></div></div></section>
+<section class="sec" id="ab-how" style="padding-top:0"><div class="wrap"><h2 class="sechead">How we work</h2><p class="lede">Through regular gatherings, deep conversations and shared experiences, the Resilience Alliance is building a grassroots community-led network focused on collective care, preparedness and regional strength.</p>{how_cards()}</div></section>
 <section class="sec journey" id="ab-journey"><div class="wrap"><h2 class="sechead">Our timeline</h2>{journey_b()}</div></section>
 {meal_section()}
 <section class="sec steersec" id="ab-steering" style="padding-top:0"><div class="wrap"><div class="bar bar-t sbar-top" aria-hidden="true"></div><div class="steergrid"><div class="steertxt"><h2 class="sechead">The Steering Committee:</h2><p class="lede">Is the coordinating body for the Resilience Alliance. It is made up of representatives from resilience-related groups and organisations across the region, and operates by agreement among groups and organisations rather than by reporting to a separate incorporated parent body. The steering committee actively aims to maintain a network that reflects the geographic and community diversity of the region.</p></div><div class="steerlist"><p class="lede">The Steering Committee comprises the following groups and organisations.</p>{steer_tiles()}</div></div></div></section>
@@ -287,7 +286,7 @@ def about_body():
 
 
 # ---------------------------------------------------------------- Network
-HOW = [("Connect", "60+ grassroots, community-led groups are connected together across the region so they can build trusting relationships with each other so they know who to contact when the next climate disaster hits.", "teal"),
+HOW = [("Connect", "60+ grassroots community-led groups are connected together across the region so they can build trusting relationships with each other so they know who to contact when the next climate disaster hits.", "teal"),
        ("Share", "Sharing knowledge, experience, practical tools and resources across the network so everyone can benefit from what others have learned.", "yellow"),
        ("Care", "Peer to peer support, reducing the load, removing duplication and placing a real value on the efforts of all.", "orange")]
 
@@ -304,8 +303,9 @@ JOURNEY_B = [
               ("Co-designing the future:", "Groups develop the Resilience Alliance&rsquo;s distributed governance model and strategic priorities.", "Funded by the University of Centre of Rural Health.")]),
     ("2025", [("Capability in action:", "The Resilience Alliance trains 20 groups on spontaneous volunteer management systems, supporting groups post Cyclone Alfred.", "Funded by the NSW Government&rsquo;s Spontaneous Volunteering Program and Foundation for Regional and Rural Renewal.")]),
     ("2026", [("Connected, Prepared Communities:", "Disaster Ready Fund 3 investment supports the next stage of capability and resilience-building with 60 groups throughout the Northern Rivers.", "Funded by the Australian Government and NSW Government."),
-              ("Participatory granting project:", "17 groups receive up to $10,000 in funding as part of the first round of a newly developed participation funding process.", "Funding by The NRMA Help Fund, Monash University and Northern Rivers Community Foundation.")]),
-    ("2027+", [("Onwards:", 'Our research and MEAL process<span class="fund-i">Monitoring, Evaluation, Accountability and Learning</span>continues alongside the Resilience Alliance as it supports and resources groups in the network.', "")]),
+              ("Participatory granting project round 1:", "17 groups receive up to $10,000 in funding as part of the first round of a newly developed participation funding process.", "Funding by The NRMA Help Fund, Monash University and Northern Rivers Community Foundation.")]),
+    ("2027+", [("MEAL:", "Monitoring, Evaluation, Accountability and Learning progresses alongside the Resilience Alliance.", ""),
+               ("Participatory granting project round 2:", "Groups will share over $200,000 in funding as part of the second round starting in April 2027.", "")]),
 ]
 
 
@@ -315,7 +315,7 @@ LOGO = {"ucrh": ("University Centre for Rural Health", "ucrh-trim.png", "https:/
         "help": ("NRMA Insurance HELP Fund", "nrma-help.png", "https://www.nrma.com.au/help-fund"), "monash": ("Monash University", "monash.png" if os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "funders", "monash.png")) else "", "https://www.monash.edu"),  # save the logo as assets/funders/monash.png and it is used automatically; text link until then
        
         "nrcf": ("Northern Rivers Community Foundation", "nrcf.png", "https://nrcf.org.au")}
-FUND_LOGOS = {"Co-designing the future:": ["ucrh"], "Capability in action:": ["nsw", "frrr"], "Connected, Prepared Communities:": ["aus", "nsw"], "Participatory granting project:": ["help", "monash", "nrcf"]}
+FUND_LOGOS = {"Co-designing the future:": ["ucrh"], "Capability in action:": ["nsw", "frrr"], "Connected, Prepared Communities:": ["aus", "nsw", "ucrh"], "Participatory granting project round 1:": ["help", "monash", "nrcf"], "MEAL:": ["ucrh"]}
 
 
 def fund_logos(head):
@@ -332,7 +332,7 @@ def fund_logos(head):
 
 def journey_b():
     return '<ol class="river">' + "".join(
-        f'<li><b>{y}</b><div class="jt">' + "".join(f'<h3>{h}</h3><p>{t}</p>' + (f'<p class="fund">{f}</p>{fund_logos(h)}' if f else "") for h, t, f in es) + '</div></li>'
+        f'<li><b>{y}</b><div class="jt">' + "".join(f'<h3>{h}</h3><p>{t}</p>' + (f'<p class="fund">{f}</p>' if f else "") + fund_logos(h) for h, t, f in es) + '</div></li>'
         for y, es in JOURNEY_B) + "</ol>"
 
 
@@ -342,8 +342,8 @@ def pillar_cards(nums=False):
     return '<ol class="pillcards">' + "".join(f'<li><span class="pi">{icon(k)}</span><span class="pn">{i:02d}</span><h3>{E(t)}</h3><p>{E(d)}</p></li>' for i, (t, d, k) in enumerate(B.PILLARS, 1)) + "</ol>"
 
 
-# Real group list from the Alliance spreadsheet, cleaned by tools/clean_groups.py (visible rows, duplicates removed, LGA and Aboriginal Country split,
-# links matched to groups). Membership of the Alliance to be confirmed by NRCRA. A group links to its website, or to Facebook when it has no website.
+# Real group list from the Resilience Alliance spreadsheet, cleaned by tools/clean_groups.py (visible rows, duplicates removed, LGA and Aboriginal Country split,
+# links matched to groups). Membership of the Resilience Alliance to be confirmed by NRCRA. A group links to its website, or to Facebook when it has no website.
 
 
 def short_lga(official):
@@ -389,7 +389,7 @@ def dir_head(title, cur="", tag="h2"):
     return f'<div class="dirhead"><{tag} class="sechead">{title}</{tag}>{lga_select(cur)}</div>'
 
 
-# Quotes are sample content. Names are real Alliance groups from the network list; the 2nd and 6th stories are videos (both the sizzle reel for now).
+# Quotes are sample content. Names are real Resilience Alliance groups from the network list; the 2nd and 6th stories are videos (both the sizzle reel for now).
 STORIES = [
     ("laughing", "Like a whole region of neighbours in your corner.", "Resilient Lismore Inc", False),
     ("circle", "Like a family we did not know we had.", "Together Pottsville Inc", True),
@@ -506,13 +506,13 @@ FLAG_ICON = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" 
 
 # Privacy Policy page: a simple standard policy, numbered in the titles. Every item carries the yellow "Draft" pill until NRCRA's legal adviser signs it off.
 PP = [
-    ("Who we are", "The Northern Rivers Community Resilience Alliance (NRCRA) is a community-led network of local resilience groups across the Northern Rivers of New South Wales. In this policy, &ldquo;we&rdquo; and &ldquo;us&rdquo; mean NRCRA."),
+    ("Who we are", "The Northern Rivers Community Resilience Alliance (NRCRA) is a grassroots community-led network of local resilience groups across the Northern Rivers of New South Wales. In this policy, &ldquo;we&rdquo; and &ldquo;us&rdquo; mean NRCRA."),
     ("About this policy", "This policy explains how we collect, use, share and protect your personal information. We follow the Privacy Act 1988 (Cth) and the Australian Privacy Principles. By using this website or giving us your information, you agree to this policy."),
     ("The information we collect", "Your name, email address, phone number, group and role. Anything you send us, such as emails, form entries, event registrations, feedback and answers in Health Checks. Resilience Alliance Community Knowledge (RACK) sign-in details, such as your name, email, group, role and sign-in times. Photos, videos and stories, with your permission. Basic technical details about your visit, such as your device, browser, IP address and the pages you view."),
     ("How we collect it", "Directly from you, through forms, emails, events, calls and RACK. From your group, when it nominates you for a role or an event. Automatically, through cookies and website analytics."),
     ("How we use it", "To run the network, events and training. To answer your questions and send updates you ask for. To manage RACK access. To learn and improve together, including research with the University Centre for Rural Health. To report to our funders. To keep this website working and secure. To meet our legal duties."),
     ("Stories, photos and quotes", "We only share your photo, video, story or quote with your permission. We can show a quote without your name if you prefer. You can change your mind at any time by emailing us, and we will remove it going forward."),
-    ("Who we share it with", "We do not sell your personal information. We share it only with people and services that help us run the Alliance: our website, email, events and RACK providers, and our research partners, who must keep it confidential. We give funders summary or de-identified information. We share it with others only when you agree, or when the law requires it."),
+    ("Who we share it with", "We do not sell your personal information. We share it only with people and services that help us run the Resilience Alliance: our website, email, events and RACK providers, and our research partners, who must keep it confidential. We give funders summary or de-identified information. We share it with others only when you agree, or when the law requires it."),
     ("Other services on this website", "This website uses services from other companies. Wix hosts the site and provides website analytics. Google provides the map on our Network page. Vimeo plays our videos. Flourish shows our charts. We also link to Facebook and LinkedIn. These services may collect information and set cookies under their own privacy policies. Some of them store information outside Australia."),
     ("Cookies and analytics", "Cookies are small files saved on your device. We use them to make the website work and to see how people use it, so we can improve it. You can refuse or delete cookies in your browser settings, but some parts of the website may not work as well."),
     ("RACK sign-in", "RACK is our shared library of tools and resources for member groups. When you sign in, we collect your name, email, group, role and sign-in times to manage access and keep RACK secure. This policy applies to your use of RACK."),
@@ -591,8 +591,8 @@ def aspire_item(i, row):
 
 def progress_body():
     asp = "".join(aspire_item(i, r) for i, r in enumerate(ASPIRE, 1))
-    return f'''<div class="wrap"><div class="splith net jrn"><div><span class="eyebrow">Journey</span><h1>Our journey so far</h1><p class="lede">Our story started in the 2022 floods, when local people led the response in their own communities. Since then, those groups have come together as the Northern Rivers Community Resilience Alliance. Today we are 60+ groups and growing. Between June and October 2026 we have spoken with 58 of those groups to take stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="ph"><img src="../assets/img/journey-cards.jpg" alt="Members standing in a circle on a concrete path, sorting red and green cards laid out on the ground." loading="eager" decoding="async"></div></div></div>
-<section class="sec" id="pr-who"><div class="wrap">{prg_head("Many groups, shared purpose", "We are a diverse alliance of community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.")}
+    return f'''<div class="wrap"><div class="splith net jrn"><div><span class="eyebrow">Progress</span><h1>Our progress so far</h1><p class="lede">Our story started in the 2022 floods, when local people led the response in their own communities. Since then, those groups have come together as the Northern Rivers Community Resilience Alliance. Today we are 60+ groups and growing. Between June and October 2026 we have spoken with 58 of those groups to take stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="ph"><img src="../assets/img/journey-header.jpg" alt="A group of people laughing and waving outdoors, holding up a tangled web of coloured yarn between them" loading="eager" decoding="async"></div></div></div>
+<section class="sec" id="pr-who"><div class="wrap">{prg_head("Many groups, shared purpose", "We are a diverse alliance of grassroots community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.")}
 <div class="vizgrid">{viz("operational-maturity.png", "wide")}{viz("active-groups.svg", "wide")}{viz("skills.svg", "wide")}</div></div></section>
 <section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap"><div class="vizgrid d32"><div class="dcol">{prg_head("We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}{pquote("[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it's so diverse.", "Chinderah and Surrounds Peoples Hub")}</div>{viz("disaster-experience.svg")}</div></div></section>
 <section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap">{prg_head("We value social connection", "Connection is at the heart of what we do. Our groups build relationships in their own teams, across their community, with other groups in the alliance, and with emergency services and government agencies, so when disaster hits, people already know who to call.")}
@@ -603,7 +603,7 @@ def progress_body():
 
 
 # ---------------------------------------------------------------- Prototype B: the Journey page only, with the charts redrawn in plain HTML and SVG (visual study)
-EXTRA_NAMES = {"prototype-b": "Prototype B: Journey Page With Flourish Charts"}
+EXTRA_NAMES = {"prototype-b": "Prototype B: Progress Page With Flourish Charts"}
 C_NAVY, C_ORANGE, C_TEAL, C_YELLOW, C_GREY, C_MIST, C_PALE = "#07293b", "#f05a28", "#00a79d", "#ffcb2a", "#586c74", "#9fb0b8", "#d3dce3"
 
 
@@ -695,7 +695,7 @@ def progress_body_b():
     maturity = bfig("We&rsquo;re at different stages", "Some of us are more established while others are emerging", maturity_graphic(),
                     "Pictogram of operational maturity, number of groups that: have an online presence 49, are incorporated 40, have a document hub 27, have volunteer policies 16, have a steering committee 8.", "card ctr")
     skills = bfig("We have the skills between us", "Across our groups, we hold a wide range of the skills community organisations need.", skills_graphic(),
-                  "Bar chart of skills held across Alliance members, by number of groups: admin and committee experience 48, trained first aid 46, grant writing 44, coordination and logistics 38, SES, RFS or fire trained 36, trades and practical skills 35, mental health first aid 30, local language and cultural skills 14.", "card ctr")
+                  "Bar chart of skills held across Resilience Alliance members, by number of groups: admin and committee experience 48, trained first aid 46, grant writing 44, coordination and logistics 38, SES, RFS or fire trained 36, trades and practical skills 35, mental health first aid 30, local language and cultural skills 14.", "card ctr")
     disaster = bfig(None, "About 3/4 of our groups have experienced disaster as a team", donut_svg(), "Donut chart: 43 groups have joint disaster experience and 15 groups did not answer.", "card ctr")
     connected = bfig("Connectedness: within groups and beyond", "Many groups want to connect better with their communities.", connected_graphic(),
                      "Bar chart of self-rated connection, 1 to 5, within each group and to the wider community. Within their own group: 11 groups rate 5, 26 rate 4, 1 rates 3.5, 8 rate 3 and 1 rates 1. To the wider community: 4 rate 5, 14 rate 4, 1 rates 3.5, 15 rate 3, 2 rate 2.5, 8 rate 2 and 3 rate 1.", "card")
@@ -707,7 +707,7 @@ def progress_body_b():
                      "Dot chart of groups that have a relationship to emergency services: RFS 24 groups, SES 23 groups, Police 3 groups.", "card")
     quote = pquote("[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it's so diverse.", "Chinderah and Surrounds Peoples Hub")
     return f'''{hero}
-<div class="bwhite"><section class="sec" id="pr-who"><div class="wrap"><div class="bsplit"><div>{prg_head("Many groups, shared purpose", "We are a diverse alliance of community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.")}</div><div>{bubble}</div></div>
+<div class="bwhite"><section class="sec" id="pr-who"><div class="wrap"><div class="bsplit"><div>{prg_head("Many groups, shared purpose", "We are a diverse alliance of grassroots community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.")}</div><div>{bubble}</div></div>
 <div class="bcards">{maturity}{skills}</div></div></section>
 <section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap"><div class="vizgrid d32 bd32"><div class="dcol">{prg_head("We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}{quote}</div>{disaster}</div></div></section>
 <section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap">{prg_head("We value social connection", "Connection is at the heart of what we do. Our groups build relationships in their own teams, across their community, with other groups in the alliance, and with emergency services and government agencies, so when disaster hits, people already know who to call.")}
@@ -721,7 +721,7 @@ BFILTER_JS = """document.addEventListener('click',function(e){var b=e.target.clo
 
 def page_b():
     css, cls = CSS_B, "tb"
-    body = screen("journey", "Journey", progress_body(), "on")
+    body = screen("journey", "Progress", progress_body(), "on")
     nav = nav3().replace('data-nav="journey"', 'data-nav="journey" aria-current="page"')
     html = f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -1257,6 +1257,8 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(min-width:741px){.tb .hsplit.hsplit-sq .hsplit-r{width:100%;height:auto;aspect-ratio:11/10;align-self:center}}
 .tb .funders p,.tb .funders li a{font-size:.75rem!important}
 .tb .site-foot .copy,.tb .site-foot .copy a,.tb .site-foot .totop{font-size:.6875rem!important}
+/* Home video: full width and centred on iPad and phone, keeping its shape (4 : 3) */
+@media(max-width:999px){.tb .hsplit .hsplit-in{grid-template-columns:minmax(0,1fr)!important;gap:16px}.tb .hsplit.hsplit-sq .hsplit-r,.tb .hsplit .hsplit-r{width:100%!important;height:auto!important;aspect-ratio:4/3!important;justify-self:center;align-self:center;margin-left:auto;margin-right:auto}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
@@ -1296,7 +1298,7 @@ def tfooter():
     contact = [("hello@nrcra.org.au", "mailto:hello@nrcra.org.au")]
     touch = [("Facebook", B.LINKS["fb"]), ("LinkedIn", B.LINKS["li"])]
     social = '<div class="fcol"><h3 class="fb1">Get in touch</h3><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in contact) + '</ul><ul class="flist social">' + "".join(f'<li><a class="soc" href="{u}" target="_blank" rel="noopener" aria-label="{n} (opens in a new tab)">{SOC_ICONS[n]}</a></li>' for n, u in touch) + "</ul></div>"
-    site = [("Home", "#home"), ("Our Network", "#network"), ("About us", "#about"), ("Our Journey", "#journey")]
+    site = [("Home", "#home"), ("Our Network", "#network"), ("About us", "#about"), ("Our Progress", "#journey")]
     rackcol = [("What is RACK?", "#rack"), ("RACK Sign In", SIGN_IN), ("Privacy Policy", "#privacy")]
     untitled = '<div class="fcol"><h3 class="fb2 fhide" aria-hidden="true">Quick Links</h3><ul class="flist">' + "".join(f'<li><a href="{u}">{E(t)}</a></li>' for t, u in rackcol) + "</ul></div>"
     top = '<div class="foot-top"><span class="foot-logo boxed">' + blogo("logo") + '</span></div>'
@@ -1326,7 +1328,7 @@ var pg=a.getAttribute('data-page');if(location.hash==='#'+pg){document.getElemen
 
 def page(v):
     css, cls = CSS_B, "tb"
-    body = "".join([screen("home", "Home", home_body(HERO_FOR[v])), screen("about", "About", about_body()), screen("journey", "Journey", progress_body_b(), "bjourney"), screen("rack", "RACK", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
+    body = "".join([screen("home", "Home", home_body(HERO_FOR[v])), screen("about", "About", about_body()), screen("journey", "Progress", progress_body_b(), "bjourney"), screen("rack", "RACK", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{NAMES[v]}</title><meta name="robots" content="noindex">

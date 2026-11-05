@@ -27,21 +27,21 @@ LINKS = dict(
 PAGES = [("home", "Home"), ("about", "About"), ("partners", "Partners"), ("network", "Network"), ("rack", "R.A.C.K")]
 
 H1 = "A growing movement of grassroots community groups building disaster resilience across the Northern Rivers"
-WHO = "Since early 2024, more than 60 groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a community-led network focused on collective care, preparedness and regional strength."
-MORE = "Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster. The Alliance connects prepared communities to each other, sharing knowledge, reducing duplication and making sure no group is doing it alone."
+WHO = "Since early 2024, more than 60 groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a grassroots community-led network focused on collective care, preparedness and regional strength."
+MORE = "Neighbours became first responders in 2022. Today, those neighbours are building the systems that will protect communities before the next disaster. The Resilience Alliance connects prepared communities to each other, sharing knowledge, reducing duplication and making sure no group is doing it alone."
 CALLOUT = "Communities know their people, places and strengths. We connect them."
 VISION = "Connected, collaborative Northern Rivers communities that are empowered to care for themselves and each other before, during and after disasters."
-PURPOSE = "To develop a self-sustaining, trusted Alliance of place-based, community-led resilience groups and organisations. The Alliance shares knowledge and resources, provides mutual support and wellbeing, takes collective action and advocates for identified community needs."
+PURPOSE = "To develop a self-sustaining, trusted Resilience Alliance of place-based, grassroots community-led resilience groups and organisations. The Resilience Alliance shares knowledge and resources, provides mutual support and wellbeing, takes collective action and advocates for identified community needs."
 ACK = "The Northern Rivers Community Resilience Alliance acknowledges the Traditional Custodians of the lands and waters on which we live and work: the Bundjalung, Arakwal, Githabul, Yaegl and Gumbaynggirr peoples. We recognise their enduring connection to Country, and their continuing cultures and communities. We pay our respects to Elders past and present."
 VALUES = [
     ("Connect", "We connect 60+ community resilience groups across the region so local leaders can find each other, share resources and act together.", "teal"),
     ("Share", "We share knowledge, training and practical tools across the network so every community benefits from what others have learned.", "yellow"),
-    ("Care", "We care for the people doing this work: reducing the load on volunteers, removing duplication and supporting community-led resilience.", "orange"),
+    ("Care", "We care for the people doing this work: reducing the load on volunteers, removing duplication and supporting grassroots community-led resilience.", "orange"),
 ]
 FROM_TO = (["Dependence", "Fragmented organisations", "Competition for funding", "Isolated communities"],
            ["Cooperation", "Shared knowledge", "Local leadership", "Connected communities"])
 PILLARS = [
-    ("Grow the Alliance", "Welcoming more place-based groups so no group works alone.", "grow"),
+    ("Grow the Resilience Alliance", "Welcoming more place-based groups so no group works alone.", "grow"),
     ("Training and resource sharing", "Practical tools, templates and learning passed group to group.", "book"),
     ("Peer support and self care", "Looking after the people who look after their communities.", "heart"),
     ("Funding and collective projects", "Participatory grants and shared projects, decided locally.", "seed"),
@@ -53,19 +53,19 @@ PROJECTS = [
     ("Resourcing Community Resilience", "Participatory grantmaking, decided by locals.", "NRMA Insurance HELP Fund with partners, 2026 to 2027"),
     ("Learning Together (MEAL)", "Monitoring, Evaluation and Learning with embedded researchers.", "University Centre for Rural Health"),
 ]
-GATHER = ("27 Nov", "Alliance Gathering, Phase 1", "Location to be confirmed")
+GATHER = ("27 Nov", "Resilience Alliance Gathering, Phase 1", "Location to be confirmed")
 JOURNEY = [
     ("2022", "After the floods and landslides, groups across the Northern Rivers organised locally and connections began to grow. Research found that grassroots groups wanted peer-to-peer support."),
     ("2024", "The Resilience Alliance took shape, with the University Centre for Rural Health (UCRH) as embedded researchers documenting progress along the way."),
     ("2025", "UCRH completed the first Resilience Alliance Health Check and shared findings with groups in the network."),
     ("2026", "Connected and Prepared brings a Monitoring, Evaluation and Learning Framework and Implementation Plan."),
-    ("2027 to 2028", "Research and MEAL continue alongside the Alliance as it supports and resources groups in the network."),
+    ("2027 to 2028", "Research and MEAL continue alongside the Resilience Alliance as it supports and resources groups in the network."),
 ]
 MEAL = ["Connect", "Listen", "Reflect", "Improve", "Share", "Strengthen"]
-QUOTE = ("It's cutting edge. I don't really know whether this sort of thing has been tried before, certainly for community disaster response groups.", "Alliance participant")
+QUOTE = ("It's cutting edge. I don't really know whether this sort of thing has been tried before, certainly for community disaster response groups.", "Resilience Alliance participant")
 FAQ = [
-    ("How is the Alliance different from Community Resilience Networks?", "Community Resilience Networks are hosted by councils in each local government area. The Alliance is a region-wide network that sits outside formal structures, a flexible space for independent grassroots groups to share practical solutions and build capacity."),
-    ("How is the Alliance different from Plan C?", "Plan C trains people directly and is one of our valued member organisations. The Alliance is a network of networks: it connects groups, helps them share what they know and gives them a stronger collective voice."),
+    ("How is the Resilience Alliance different from Community Resilience Networks?", "Community Resilience Networks are hosted by councils in each local government area. The Resilience Alliance is a region-wide network that sits outside formal structures, a flexible space for independent grassroots groups to share practical solutions and build capacity."),
+    ("How is the Resilience Alliance different from Plan C?", "Plan C trains people directly and is one of our valued member organisations. The Resilience Alliance is a network of networks: it connects groups, helps them share what they know and gives them a stronger collective voice."),
 ]
 # The R.A.C.K, from NRCRA's own R.A.C.K app (mood board screenshots, Oct 2026)
 RACK_NAME = "Resilience Alliance Community Knowledge"
@@ -78,7 +78,7 @@ RACKS = [("Get Ready", 3, "Plans and checklists for before a disaster."), ("Emer
          ("Training & Workshops", 6, "Workshops and learning for group leaders.")]
 # Sample directory rows: names are placeholders, not real groups.
 DIR = [("Sample group A", "Lismore", "Peer support and self care"), ("Sample group B", "Byron", "Training and resource sharing"),
-       ("Sample group C", "Tweed", "Funding and collective projects"), ("Sample group D", "Ballina", "Grow the Alliance"),
+       ("Sample group C", "Tweed", "Funding and collective projects"), ("Sample group D", "Ballina", "Grow the Resilience Alliance"),
        ("Sample group E", "Kyogle", "Advocacy"), ("Sample group F", "Richmond Valley", "Peer support and self care")]
 LGAS = ["Tweed", "Byron", "Ballina", "Lismore", "Kyogle", "Richmond Valley", "Clarence Valley"]
 MAP_SRC = "https://maps.google.com/maps?q=Northern%20Rivers%20NSW&z=8&output=embed"
@@ -94,7 +94,7 @@ PLACES = [
     ("Kyogle", [("Kyogle", -28.620, 153.003, "r")]),
     ("Clarence Valley", [("Grafton", -29.690, 152.933, "r")]),
 ]
-PLACES_SRC = "Towns named in 2022 flood reports by AIDR, Lismore City Council and Risk Frontiers. NRCRA's member list will add every place where Alliance groups work."
+PLACES_SRC = "Towns named in 2022 flood reports by AIDR, Lismore City Council and Risk Frontiers. NRCRA's member list will add every place where Resilience Alliance groups work."
 
 # PLACEHOLDER ONLY: logos borrowed from worldnomads.com "Who we fund" to show the layout. Not NRCRA partners.
 SAMPLE = [
@@ -106,16 +106,16 @@ SAMPLE = [
     ("savethechildren-logo-600x390.png", "Save the Children"), ("ahf-logo.png", "The Australian Himalayan Foundation"),
 ]
 SAMPLE_GROUPS = [("Funders", "Whose funding makes this work possible.", SAMPLE[0:4]), ("Delivery partners", "Who we build and deliver programs with.", SAMPLE[4:8]), ("Research partners", "Who listens, reflects and tracks change alongside us.", SAMPLE[8:12])]
-PARTNER_LINE = "Our partners have helped the Alliance grow from one part-time coordinator to a regional team of six, fund Connected and Prepared, bring $800,000 in participatory grants to local groups and keep learning with researchers from the University Centre for Rural Health."
+PARTNER_LINE = "Our partners have helped the Resilience Alliance grow from one part-time coordinator to a regional team of six, fund Connected and Prepared, bring $800,000 in participatory grants to local groups and keep learning with researchers from the University Centre for Rural Health."
 # Waves for Water style section: what each kind of partner made possible (logos are placeholders)
-WFW = [("Funding for Connected and Prepared, 2026 to 2027", 0), ("Helped establish and grow the Alliance", 1), ("$800,000 for participatory grants over two years", 2), ("Embedded research and Health Checks", 3)]
+WFW = [("Funding for Connected and Prepared, 2026 to 2027", 0), ("Helped establish and grow the Resilience Alliance", 1), ("$800,000 for participatory grants over two years", 2), ("Embedded research and Health Checks", 3)]
 REAL = "Disaster Ready Fund, FRRR, NRMA Insurance HELP Fund, NSW Government, Northern Rivers Community Foundation, Resilient Lismore, Plan C, University Centre for Rural Health, Monash University"
 
 ALT = dict(
-    cheer="Alliance members cheering with raised arms in front of a school building.",
-    sizzle="Alliance members gathered and laughing together under paperbark trees.",
+    cheer="Resilience Alliance members cheering with raised arms in front of a school building.",
+    sizzle="Resilience Alliance members gathered and laughing together under paperbark trees.",
     yarn="Members standing in a ring on the lawn, holding balls of wool and a web of coloured yarn stretched between them.",
-    group="A large group of Alliance members posing together on the lawn.",
+    group="A large group of Resilience Alliance members posing together on the lawn.",
     crowd="People gathered outdoors listening beneath trees at a gathering.",
     laughing="Members laughing together around a workshop table.",
     listening="Participants listening closely at a long table.",
@@ -168,7 +168,7 @@ def nav():
 </div></header>'''
 
 
-# Websites checked 27 Oct 2026. Membership of the Alliance to be confirmed by NRCRA.
+# Websites checked 27 Oct 2026. Membership of the Resilience Alliance to be confirmed by NRCRA.
 REGION_GROUPS = [
     ("Resilient Lismore", "Lismore", "https://resilientlismore.org.au"),
     ("Resilient Uki", "Uki", "https://resilientuki.org"),
@@ -201,7 +201,7 @@ def footer(white_logo=True, boxed=False):
 
 def video(poster="group", cls="video"):
     return f'''<div class="{cls}" data-video="{VIMEO}">{img(poster, alt="")}
-<button class="play" aria-label="Play the Alliance sizzle reel video"><span aria-hidden="true">&#9654;</span></button></div>
+<button class="play" aria-label="Play the Resilience Alliance sizzle reel video"><span aria-hidden="true">&#9654;</span></button></div>
 <p class="vnote"><a href="{VIMEO_PAGE}">Watch on Vimeo</a></p>'''
 
 
@@ -346,9 +346,9 @@ def rack_list(cls="racks"):
     return f'<ol class="{cls}">' + "".join(f'<li><span class="rn">{i}</span><div><h3>{E(t)}</h3><p>{E(d)}</p></div><span class="rc">{c} resources</span></li>' for i, (t, c, d) in enumerate(RACKS, 1)) + "</ol>"
 
 
-# Sample groups per pillar (placeholders, real names come from the Alliance member list)
+# Sample groups per pillar (placeholders, real names come from the Resilience Alliance member list)
 PILLAR_GROUPS = {
-    "Grow the Alliance": [("Sample group A", "Murwillumbah", "Tweed"), ("Sample group B", "Kyogle", "Kyogle"), ("Sample group C", "Grafton", "Clarence Valley")],
+    "Grow the Resilience Alliance": [("Sample group A", "Murwillumbah", "Tweed"), ("Sample group B", "Kyogle", "Kyogle"), ("Sample group C", "Grafton", "Clarence Valley")],
     "Training and resource sharing": [("Sample group D", "Mullumbimby", "Byron"), ("Sample group E", "Lismore", "Lismore"), ("Sample group F", "Casino", "Richmond Valley")],
     "Peer support and self care": [("Sample group G", "Wardell", "Ballina"), ("Sample group H", "Uki", "Tweed"), ("Sample group I", "North Lismore", "Lismore")],
     "Funding and collective projects": [("Sample group J", "Woodburn", "Richmond Valley"), ("Sample group K", "Ballina", "Ballina"), ("Sample group L", "Billinudgel", "Byron")],
@@ -375,7 +375,7 @@ def logo_grid():
 
 def map_embed():
     return f'''<div class="mapbox"><iframe title="Map of resilience groups across the Northern Rivers" src="{MAP_SRC}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-<p class="vnote">Placeholder map of the region. In the build this is the Alliance's own Google Map, with a pin for each member group.</p>'''
+<p class="vnote">Placeholder map of the region. In the build this is the Resilience Alliance's own Google Map, with a pin for each member group.</p>'''
 
 
 def directory():
@@ -386,7 +386,7 @@ def directory():
 <label>Location <select data-f="lga"><option value="">All locations</option>{lopts}</select></label>
 <label>Pillar <select data-f="pillar"><option value="">All pillars</option>{popts}</select></label>
 <label class="dq">Search <input type="search" data-f="q" placeholder="Group name or town"></label></div>
-<ul class="gdir">{items}</ul><p class="empty" hidden>No groups match those filters.</p><p class="vnote">Sample groups. Real names and areas come from the Alliance member list.</p></div>'''
+<ul class="gdir">{items}</ul><p class="empty" hidden>No groups match those filters.</p><p class="vnote">Sample groups. Real names and areas come from the Resilience Alliance member list.</p></div>'''
 
 
 # ---------------------------------------------------------------- places map (drawn, Wix: upload as SVG vector art or use Google Maps pins)
@@ -444,7 +444,7 @@ def places_list(cls="places"):
     return out + f'<p class="vnote">{PLACES_SRC}</p></div>'
 
 
-def places_block(title="Where we are", intro="Alliance groups work in the towns the 2022 floods hit hardest. Tap a town to find it on the map."):
+def places_block(title="Where we are", intro="Resilience Alliance groups work in the towns the 2022 floods hit hardest. Tap a town to find it on the map."):
     return f'<div class="placesblk"><div class="pb-text"><h2>{title}</h2><p>{intro}</p>{places_list()}</div><div class="pb-map">{places_map()}</div></div>'
 
 
@@ -785,7 +785,7 @@ def v1(full=False):
     home = f'''<div class="hero1"><div class="wrap"><div class="h1-panel"><span class="eyebrow">Northern Rivers Community Resilience Alliance</span>
 <h1>When disaster strikes, local people are always first to respond.</h1><p class="lede">{H1}.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#rack">Explore the R.A.C.K</a><a class="btn btn-ghost" href="#about">What we do</a></p></div>
-<div class="h1-photo hvid" data-video="{VIMEO}">{img("speaker", eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div></div>
+<div class="h1-photo hvid" data-video="{VIMEO}">{img("speaker", eager=True, alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div></div>
 {latest_in_hero}</div>
 
 {ticker_then_latest}<section class="sec bk-white"><div class="wrap intro1"><div><span class="eyebrow">Who we are</span><h2>This is about more than disaster.</h2><p>{WHO}</p><p>{MORE}</p></div><figure class="callcard"><div class="cc-ph">{img("circle")}</div><blockquote>{CALLOUT}</blockquote><figcaption>{TAGLINE}</figcaption></figure></div></section>
@@ -803,7 +803,7 @@ def v1(full=False):
 <li>{img("board")}<h3>The R.A.C.K</h3><p>{RACK_LINE} <a href="#rack">Explore</a></p></li></ul></div></section>
 
 <section class="sec bk-teal" style="padding-top:0"><div class="wrap"><div class="card">{v1_partners()}</div></div></section>
-<section class="sec" style="padding-top:0"><div class="wrap"><div class="ready">{img("aerial", alt="")}<div><h2>Ready to connect?</h2><p class="lede" style="margin:0 auto">Whether you are a community group, a local council, a funder or someone who cares about your community, there is a place for you in this Alliance.</p>{cta_band()}</div></div></div></section>'''
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="ready">{img("aerial", alt="")}<div><h2>Ready to connect?</h2><p class="lede" style="margin:0 auto">Whether you are a community group, a local council, a funder or someone who cares about your community, there is a place for you in this Resilience Alliance.</p>{cta_band()}</div></div></div></section>'''
 
     about = f'''<div class="pg1"><div class="wrap"><div class="ph">{img("line", eager=True)}</div><div><span class="eyebrow">About us</span><h1>We're changing the Northern Rivers' resilience culture</h1><p class="lede">{MORE}</p></div></div></div>
 <section class="sec bk-navy"><div class="wrap"><div class="split" style="align-items:stretch"><div class="vp vp-t">{horizon_art()}<h2>Vision</h2><p>{VISION}</p></div><div class="vp vp-y">{connect_art()}<h2>Purpose</h2><p>{PURPOSE}</p></div></div></div></section>
@@ -816,13 +816,13 @@ def v1(full=False):
     partners = f'''<div class="pgs bk-yellow"><div class="wrap"><span class="eyebrow">Impact</span><h1>Our partners</h1><p class="lede">{PARTNER_LINE}</p></div></div>
 <section class="sec" style="padding-top:24px"><div class="wrap">{logo_grid()}<p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></section>'''
 
-    network = f'''<div class="pg1"><div class="wrap"><div><span class="eyebrow">Network</span><h1>{NET_H1}</h1><p class="lede">Find the resilience groups connected to the Alliance, by place and by focus.</p></div><div class="ph">{img("web", eager=True)}</div></div></div>
+    network = f'''<div class="pg1"><div class="wrap"><div><span class="eyebrow">Network</span><h1>{NET_H1}</h1><p class="lede">Find the resilience groups connected to the Resilience Alliance, by place and by focus.</p></div><div class="ph">{img("web", eager=True)}</div></div></div>
 {network_body("card", sec_alt="bk-navy" if full else "", dir_alt="bk-teal" if full else "")}'''
 
     rack = f'''<div class="pg1"><div class="wrap"><div><span class="eyebrow">Resources</span><h1>The R.A.C.K</h1><p class="lede"><b>{RACK_NAME}.</b> {RACK_LINE} {RACK_INTRO}</p>{rack_buttons()}</div><div class="ph">{img("table", eager=True)}</div></div></div>
 <section class="sec bk-yellow"><div class="wrap"><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
 <section class="sec bk-navy" style="padding-top:0"><div class="wrap"><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>NRMA Insurance's participatory grants program for the region.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul></div></section>
-<section class="sec bk-orange" style="padding-top:0"><div class="wrap card"><h2>Need help getting in?</h2><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
+<section class="sec bk-orange" style="padding-top:0"><div class="wrap card"><h2>Need help getting in?</h2><p>Access is for Resilience Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
     if full:
         return page_shell("NRCRA prototype 1.2: Colour block sections, full-width images", CSS1, assemble(home, about, partners, network, rack), "v1", slug="v1.2", extra="full")
     return page_shell("NRCRA prototype 1: Colour block sections", CSS1, assemble(home, about, partners, network, rack), "v1", pre_footer=TICKER)
@@ -852,7 +852,7 @@ ARC = '<svg class="arc-acc" viewBox="0 0 160 110" aria-hidden="true"><path d="M2
 def photo_art(key, cls="h2-art", sticker="", video=False):
     st = f'<span class="sticker">{sticker}</span>' if sticker else ""
     if video:
-        return f'<div class="{cls}"><div class="ph hvid" data-video="{VIMEO}">{img(key, eager=True, alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div>{ARC}{st}</div>'
+        return f'<div class="{cls}"><div class="ph hvid" data-video="{VIMEO}">{img(key, eager=True, alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video, full screen"><span aria-hidden="true">&#9654;</span></button><span class="vtag">Watch the sizzle reel</span></div>{ARC}{st}</div>'
     return f'<div class="{cls}"><div class="ph">{img(key, eager=True)}</div>{ARC}{st}</div>'
 
 
@@ -938,7 +938,7 @@ def v2():
 
 <section class="sec sky" id="home-focus"><div class="wrap"><span class="eyebrow">In focus</span><h2>Upcoming, projects and the R.A.C.K</h2>
 <ul class="fcards"><li>{img("crowd")}<div class="top"></div><div class="in"><h3>{GATHER[0]}: {GATHER[1]}</h3><p>{GATHER[2]}.</p></div></li>
-<li>{img("meeting")}<div class="top"></div><div class="in"><h3>Projects</h3><p>Three projects growing the Alliance, funding local ideas and learning together. <a href="#partners">See partners</a></p></div></li>
+<li>{img("meeting")}<div class="top"></div><div class="in"><h3>Projects</h3><p>Three projects growing the Resilience Alliance, funding local ideas and learning together. <a href="#partners">See partners</a></p></div></li>
 <li>{img("table")}<div class="top"></div><div class="in"><h3>The R.A.C.K</h3><p>{RACK_LINE} <a href="#rack">Explore</a></p></div></li></ul></div></section>
 
 <section class="sec"><div class="wrap"><h2>Thanks to our partners</h2><p class="lede">{PARTNER_LINE}</p>{partner_strip()}<p class="btnrow"><a class="btn btn-ghost" href="#partners">All partners</a></p></div></section>
@@ -958,12 +958,12 @@ def v2():
     partners = f'''<div class="pg2 plain2"><div class="wrap"><div><span class="chip">Impact</span><h1>Our partners</h1><p class="lede">{PARTNER_LINE}</p></div></div></div>
 <section class="sec mint"><div class="wrap">{logo_grid()}<p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></section>'''
 
-    network = pg("Network", NET_H1, "Find the resilience groups connected to the Alliance, by place and by focus.", pic="web") + network_body("whitecard", sec_alt="mint")
+    network = pg("Network", NET_H1, "Find the resilience groups connected to the Resilience Alliance, by place and by focus.", pic="web") + network_body("whitecard", sec_alt="mint")
 
     rack = pg("Resources", "The R.A.C.K", f"<b>{RACK_NAME}.</b> {RACK_LINE}", rack_buttons(), pic="workshop") + f'''
 <section class="sec mint"><div class="wrap"><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
 <section class="sec"><div class="wrap"><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>Participatory grants for local groups.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul></div></section>
-<section class="sec butter"><div class="wrap"><h2>Need help getting in?</h2><p>Access is for Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
+<section class="sec butter"><div class="wrap"><h2>Need help getting in?</h2><p>Access is for Resilience Alliance groups. Contact the Network Lead to get set up.</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></section>'''
     return page_shell("NRCRA prototype 2: Light and fresh", CSS2, assemble(home, about, partners, network, rack), "v2", white_logo=False)
 
 
@@ -1063,13 +1063,13 @@ body{--btn-r:4px;--bg:#fbf6ec;--foot:#00615a;--foot-line:rgba(255,255,255,.3);--
 def v3(full=False):
     home = f'''<div class="hero3"><div class="wrap rel">{deco("sprig", "d-tr")}{deco("dots", "d-bl")}<div class="h3-box">{img("cheer", eager=True)}<div class="in"><span class="eyebrow" style="color:var(--yellow)">Northern Rivers Community Resilience Alliance</span>
 <h1>Neighbours looking after neighbours, across the <span class="mark">Northern Rivers{SQUIGGLE}</span></h1><p class="lede">{H1}.</p>
-<p class="btnrow"><a class="btn btn-primary" href="#rack">Explore the R.A.C.K</a><a class="btn btn-ghost" href="#about">Meet the Alliance</a></p></div></div></div></div>
+<p class="btnrow"><a class="btn btn-primary" href="#rack">Explore the R.A.C.K</a><a class="btn btn-ghost" href="#about">Meet the Resilience Alliance</a></p></div></div></div></div>
 
 <section class="sec"><div class="wrap split"><div><p class="hand">Who we are</p><p class="big">The group made up of groups.</p><p>{WHO}</p><p class="btnrow"><a class="btn btn-ghost" href="#about">Our story</a></p></div>
 <div class="circles">{deco("rings", "")}{img("laughing")}{img("talk")}{img("circle")}<span class="blob" aria-hidden="true"></span></div></div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap rel">{deco("arcs", "d-tr")}{deco("sprig", "d-bl")}<p class="hand">Community in action</p><div class="collage">
-<figure class="w2 h2 cvid"><div class="video" data-video="{VIMEO}">{img("crowd", alt="")}<button class="play" aria-label="Play the Alliance sizzle reel video"><span aria-hidden="true">&#9654;</span></button></div><figcaption><b>Watch the sizzle reel</b><span>See the Alliance in action.</span><a href="{VIMEO_PAGE}">Watch on Vimeo</a></figcaption></figure>
+<figure class="w2 h2 cvid"><div class="video" data-video="{VIMEO}">{img("crowd", alt="")}<button class="play" aria-label="Play the Resilience Alliance sizzle reel video"><span aria-hidden="true">&#9654;</span></button></div><figcaption><b>Watch the sizzle reel</b><span>See the Resilience Alliance in action.</span><a href="{VIMEO_PAGE}">Watch on Vimeo</a></figcaption></figure>
 <figure>{img("board")}<figcaption><b>Planning together</b><span>A look inside a Gathering, where groups plan side by side.</span><a href="#about">Read more</a></figcaption></figure>
 <figure>{img("hug")}<figcaption><b>Peer support</b><span>Looking after the people who look after their communities.</span><a href="#network">Read more</a></figcaption></figure>
 <figure class="w2">{img("web")}<figcaption><b>Connected</b><span>60+ groups across seven council areas, joined into one network.</span><a href="#network">Meet the network</a></figcaption></figure></div></div></section>
@@ -1083,10 +1083,10 @@ def v3(full=False):
 <section class="sec"><div class="wrap"><div class="warmcard">{places_block("Where we are")}</div></div></section>
 
 <section class="sec yellow rel" id="home-focus">{deco("rings", "d-tl")}{deco("arcs", "d-br")}<div class="wrap"><h2 style="text-align:center">How you can be part of it</h2>{ARROW}
-<ul class="help"><li><div class="hico">{icon("people")}</div><h3>Join the network</h3><p>Bring your group into the Alliance.</p><a href="#network">Find out how</a></li>
+<ul class="help"><li><div class="hico">{icon("people")}</div><h3>Join the network</h3><p>Bring your group into the Resilience Alliance.</p><a href="#network">Find out how</a></li>
 <li><div class="hico">{icon("cal")}</div><h3>Come to a gathering</h3><p>{GATHER[0]}: {GATHER[1]}.</p><a href="#home-focus">Upcoming</a></li>
 <li><div class="hico">{icon("share")}</div><h3>Share knowledge</h3><p>Add what works to the R.A.C.K.</p><a href="#rack">The R.A.C.K</a></li>
-<li><div class="hico">{icon("hand")}</div><h3>Partner with us</h3><p>Fund or research community-led resilience.</p><a href="#partners">Our partners</a></li></ul></div></section>'''
+<li><div class="hico">{icon("hand")}</div><h3>Partner with us</h3><p>Fund or research grassroots community-led resilience.</p><a href="#partners">Our partners</a></li></ul></div></section>'''
 
     def pg(eyebrow, title, text, pic, extra=""):
         return f'<div class="pg3"><div class="wrap rel">{deco("sprig", "d-tr")}{deco("dots", "d-bl")}<div class="box">{img(pic, eager=True)}<div class="in"><span class="eyebrow" style="color:var(--yellow)">{eyebrow}</span><h1>{title}</h1><p class="lede">{text}</p>{extra}</div></div></div></div>'
@@ -1104,12 +1104,12 @@ def v3(full=False):
     partners = f'''<div class="pgs3"><div class="wrap rel">{deco("arcs", "d-tr")}<p class="hand">Thank you</p><h1>Our partners</h1><p class="lede">{PARTNER_LINE}</p></div></div>
 <section class="sec" style="padding-top:24px"><div class="wrap">{logo_grid()}<p class="btnrow"><a class="btn btn-primary" href="mailto:{CONTACT["email"]}">Become a partner</a></p></div></section>'''
 
-    network = pg("Network", NET_H1, "Find the resilience groups connected to the Alliance, by place and by focus.", "cards") + network_body("warmcard", plain_nums=True)
+    network = pg("Network", NET_H1, "Find the resilience groups connected to the Resilience Alliance, by place and by focus.", "cards") + network_body("warmcard", plain_nums=True)
 
     rack = pg("Resources", "The R.A.C.K", f"<b>{RACK_NAME}.</b> {RACK_LINE}", "table", rack_buttons()) + f'''
 <section class="sec"><div class="wrap"><p class="hand">What's inside</p><h2>The 5 RACKs</h2>{rack_list()}<p class="vnote">Counts from the R.A.C.K, October 2026.</p></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="oblock orange"><span class="shape" aria-hidden="true"></span><h2>Funding and grants</h2><ul class="cards"><li class="pcard"><h3>The HELP Fund</h3><p>Participatory grants for local groups.</p></li><li class="pcard"><h3>Establishment grants</h3><p>$3,000</p></li><li class="pcard"><h3>Resilience action grants</h3><p>Up to $10,000</p></li></ul>
-<p class="big-b" style="margin-top:28px">Access is for Alliance groups. Need help getting in?</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></div></section>'''
+<p class="big-b" style="margin-top:28px">Access is for Resilience Alliance groups. Need help getting in?</p><p class="btnrow"><a class="btn btn-ghost" href="mailto:{CONTACT["email"]}">Contact the Network Lead</a></p></div></div></section>'''
     if full:
         return page_shell("NRCRA prototype 3.2: Illustrated visuals, full-width images", CSS3, assemble(home, about, partners, network, rack), "v3", slug="v3.2", extra="full")
     return page_shell("NRCRA prototype 3: Illustrated visuals", CSS3, assemble(home, about, partners, network, rack), "v3")

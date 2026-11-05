@@ -180,7 +180,7 @@ def _set(name, c, tx, tint, link, note, dark):
     mfg = "#ffffff" if dark else NAVY_
     rows += f'<div class="krow"><span class="kl">Menu item {_chip(mfg, bg)}</span><div class="sts">' + "".join(f'<div class="st"><a href="#" onclick="return false" class="mn{" is-hover" if i == 1 else " is-active" if i == 2 else ""}" style="--mc:{mfg};--mt:{tint}">Network</a><small>{n}</small></div>' for i, n in enumerate(("Default", "Hover", "Active"))) + "</div></div>"
     nav_cur = f"background:{tint};color:{NAVY_}"
-    nav = (f'<div class="mnav" style="background:{bg};color:{fg}"><span style="{nav_cur}">Home</span><span>Network</span><span>About</span><span>Journey</span>'
+    nav = (f'<div class="mnav" style="background:{bg};color:{fg}"><span style="{nav_cur}">Home</span><span>Network</span><span>About</span><span>Progress</span>'
            f'<span class="push">{_b("Sign In", K["Primary"], None, big)}</span></div>')
     return f'''<div class="set {"dark" if dark else "light"}" style="background:{bg};color:{fg}"><h3 style="color:{fg}">{name} on {"navy" if dark else "white"}</h3>{rows}{nav}</div>'''
 
@@ -193,7 +193,7 @@ def light_teal():
         return f"hue {round(a * 360)}, saturation {round(sat * 100)}%"
     pale, mid = "#f3f9f8", "#beddda"
     demo = f'''<div class="lteal"><h3>In the NRCRA Prototype</h3>
-<div class="mnav" style="background:#fff;color:{NAVY_}"><span style="background:{mid};color:{NAVY_}">Home</span><span>Network</span><span>About</span><span>Journey</span></div>
+<div class="mnav" style="background:#fff;color:{NAVY_}"><span style="background:{mid};color:{NAVY_}">Home</span><span>Network</span><span>About</span><span>Progress</span></div>
 <div class="ltcard" style="background:{pale};border-bottom:10px solid #00a79d"><b>Pale teal <code>{pale.upper()}</code></b><br>{hue(pale)}. Navy text {_ratio(NAVY_, pale):.2f}:1</div>
 <div class="ltcard" style="background:{mid};border-bottom:10px solid #00a79d"><b>Light teal <code>{mid.upper()}</code></b><br>{hue(mid)}. Navy text {_ratio(NAVY_, mid):.2f}:1</div></div>'''
     return f'''<section class="blk" id="lightteal"><h2>Light teal and pale teal</h2><p>The three project PDFs use two light teals. <b>Pale teal</b>, <code>#F3F9F8</code>, is for large pale panels and for hover on the menu and links. <b>Light teal</b>, <code>#BEDDDA</code>, is for the selected menu item, pressed buttons and tinted panels. Both are soft, slightly grey greens, so they sit comfortably next to yellow and red.</p>{demo}</section>'''
@@ -297,8 +297,8 @@ def guidelines():
         ("Between sections", "60px", "Top and bottom of every band, on every page. Same as the Home header text card padding."),
         ("Large bands", "96px", "White bands on About and Network, and the space under Our Focus on Home"),
         ("Partners band on Home", "96px above, 115px below", "The Thanks to our funders band"),
-        ("Large spacing", "130px", "The big gap used around the green divider lines on About, between sections on About, above the footer on About, Network, RACK, Journey and the group pages, and on Journey above each section title and between the header and the white band. Use this whenever a large space is needed."),
-        ("Gap between cards, tiles and buttons", "16px", "Always 16px: grids and lists of cards, tiles and rows of buttons, and the chart cards on Journey"),
+        ("Large spacing", "130px", "The big gap used around the green divider lines on About, between sections on About, above the footer on About, Network, RACK, Progress and the group pages, and on Progress above each section title and between the header and the white band. Use this whenever a large space is needed."),
+        ("Gap between cards, tiles and buttons", "16px", "Always 16px: grids and lists of cards, tiles and rows of buttons, and the chart cards on Progress"),
         ("Gap between text and picture", "48px", "Two column rows"),
     ]
     circle_rows = [
@@ -308,13 +308,13 @@ def guidelines():
         ("Extra large", "370", "300", "Home header photo circles (they overlap, so the real size follows the card width up to this limit: 305 and 278 at 1280px wide)"),
     ]
     logo_rows = [
-        ("Small", "20", "Funder chips in the strip under the menu (14px on phones), funder logos under each timeline entry on About, and funder logos in the two funding cards on About"),
+        ("Small", "20", "Funder logos under each timeline entry on About and in the two funding cards on About (the funder strip under the menu is archived and not on any page)"),
         ("Medium", "50", "The logo in the header menu and the logo in the footer. Also the steering committee tiles (limited to 100px wide)."),
         ("Large", "84", "Lead partner logo on Home (NEMA). Shrinks only when the column is too narrow for the logo: 64px at 1280px wide. FRRR and UCRH beside it are 45% of that height (29px). The NSW Proudly funded by logo is taller, up to 135px."),
     ]
     header_photo_rows = [
-        ("Size 1: Network (map), Journey, RACK", "546 x 517", "350 x 461", "Cropped to fill. The Google map on Network is the same size."),
-        ("Size 2: About and Home", "469 wide", "350 x 263", "About is 469 x 529 and sticks out 80px above and below the text beside it. The Home video card is the same 469px width but keeps its near-square shape (11 : 10, 469 x 426)."),
+        ("Size 1: Network (map), Progress, RACK", "546 x 517", "350 x 461", "Cropped to fill. The Google map on Network is the same size."),
+        ("Size 2: About and Home", "469 wide", "350 x 263", "About is 469 x 529 and sticks out 80px above and below the text beside it. The Home video card is the same 469px width but keeps its near-square shape (11 : 10, 469 x 426). On iPad and phone the Home video is full width and centred in a 4 : 3 shape."),
         ("Privacy Policy", "none", "none", "Text only"),
     ]
     photo_rows = header_photo_rows + [
