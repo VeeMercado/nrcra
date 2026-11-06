@@ -599,7 +599,7 @@ def progress_body():
 <section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap"><div class="vizgrid d32"><div class="dcol">{prg_head("We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}{pquote("[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it's so diverse.", "Chinderah and Surrounds Peoples Hub")}</div>{viz("disaster-experience.svg")}</div></div></section>
 <section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap">{prg_head("We value social connection", "Connection is at the heart of what we do. Our groups build relationships in their own teams, across their community, with other groups in the alliance, and with emergency services and government agencies, so when disaster hits, people already know who to call.")}
 <div class="vizgrid">{viz("connectedness.png", "wide")}{viz("relationship-council.svg")}{viz("relationship-emergency-services.png")}</div></div></section>
-<section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap">{prg_head("We want to be ready for the next disaster", "Taking stock also showed us where we want to grow. Seven aspirations stood out. Each one is something our groups told us they want support with, so we can look after our communities and each other for the long haul.")}
+<section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap">{prg_head("We&rsquo;re getting better prepared, together", "Taking stock showed us how far we&rsquo;ve come, and where we want to grow next. Seven aspirations stood out. Each is something our groups told us they want support with, so we can keep looking after our communities and each other for the long haul.</p><p class='lede'>Here is what we heard:")}
 <ol class="asplist">{asp}</ol></div></section><script src="https://public.flourish.studio/resources/embed.js" async></script>'''
 
 
@@ -710,7 +710,7 @@ def progress_body_b():
 <section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap"><div class="vizgrid d32 bd32"><div class="dcol">{prg_head("We are disaster tested", "Many of our groups have experienced disaster as a team, and local knowledge runs deep.")}{quote}</div>{disaster}</div></div></section>
 <section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap">{prg_head("We value social connection", "Connection is at the heart of what we do. Our groups build relationships in their own teams, across their community, with other groups in the alliance, and with emergency services and government agencies, so when disaster hits, people already know who to call.")}
 <div class="bconn">{connected}<div class="btwo">{council}{emergency}</div></div></div></section></div>
-<section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap">{prg_head("We want to be ready for the next disaster", "Taking stock also showed us where we want to grow. Seven aspirations stood out. Each one is something our groups told us they want support with, so we can look after our communities and each other for the long haul.")}
+<section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap">{prg_head("We&rsquo;re getting better prepared, together", "Taking stock showed us how far we&rsquo;ve come, and where we want to grow next. Seven aspirations stood out. Each is something our groups told us they want support with, so we can keep looking after our communities and each other for the long haul.</p><p class='lede'>Here is what we heard:")}
 <ol class="asplist">{asp}</ol></div></section>'''
 
 
@@ -1093,7 +1093,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* Progress page: Flourish chart placeholders sit in white cards (Eunice's SVG/PNG files); aspirations are a numbered list of cards */
 .tb .prgsplit{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:center}.tb .prgsplit>*{min-width:0}.tb .prghead{padding-bottom:0}
 .tb .prgph{position:relative;min-height:340px;border-radius:var(--r);overflow:hidden;background:var(--teal-25)}.tb .prgph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.tb .prghd{margin-bottom:32px}.tb .prghd .sechead{margin-bottom:16px}.tb .prghd .lede{margin:0}
+.tb .prghd{margin-bottom:32px}.tb .prghd .sechead{margin-bottom:16px}.tb .prghd .lede{margin:0}.tb .prghd .lede+.lede{margin-top:16px}
 .tb .vizgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .tb .viz{margin:0;background:#fff;border-radius:var(--r);padding:32px;display:grid;place-items:center}.tb .viz.wide{grid-column:1/-1}.tb .viz img{display:block;width:100%;height:auto;max-width:100%}.tb .viz .flourish-embed{width:100%;min-height:200px}
 .tb .viz.flat{padding:32px;background:#fff;overflow:hidden}
