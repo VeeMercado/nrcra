@@ -139,7 +139,7 @@ def home_body(hero="photo"):
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a grassroots community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("home-circle-top")}{vimg("home-circle-bottom")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
 <section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30793680"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/30793680/thumbnail" width="100%" alt="Pictogram of our progress in numbers: groups, funding and disaster experience."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See our progress</a></p></div></div></section>
-<section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}</div></div></section>
+<section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}<p class="btnrow focusbtn"><a class="btn btn-tertiary" href="#about" data-jump="ab-how" data-page="about">Learn how we work</a></p></div></div></section>
 {partners_section()}'''
 
 
@@ -1280,6 +1280,7 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* footer logo on phones only: centred across the footer on its own row, 200px maximum height (desktop keeps the logo in the left column) */
 @media(max-width:740px){.tb .site-foot .foot-top{grid-column:1/-1;justify-content:center;margin-bottom:32px}.tb .site-foot .foot-logo.boxed{margin:0 auto}.tb .site-foot .foot-logo .logo,.tb .site-foot .foot-logo .logo.logo-v{max-height:200px!important}}
 @media(min-width:1000px){.tb .site-foot .foot-cols{grid-template-columns:minmax(232px,1fr) minmax(0,1.7fr) minmax(max-content,1.3fr)}}
+.tb .focuscard .focusbtn{display:flex;justify-content:center;margin:40px 0 0}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
