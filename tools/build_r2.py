@@ -312,7 +312,7 @@ def guidelines():
         ("Small", "20", "Funder logos under each timeline entry on About and in the two funding cards on About (the funder strip under the menu is archived and not on any page)"),
         ("Medium", "50", "Steering committee tiles (limited to 100px wide)."),
         ("NRCRA logo (SVG)", "232 wide", "The header menu logo (horizontal navy, about 44px high) and the footer logo (vertical white, about 125px high) are the same 232px width. Four files: horizontal navy, horizontal white, vertical navy, vertical white. The header uses horizontal navy on the light page. The footer uses the vertical (stacked) white logo straight on the navy footer, with no white box. On desktop it sits in the left column. On phones it is centred across the footer on its own row and never more than 200px high. On narrow screens the logo shrinks to fit."),
-        ("Large", "84", "Lead partner logo on Home (NEMA). Shrinks only when the column is too narrow for the logo: 64px at 1280px wide. FRRR and UCRH beside it are 45% of that height (29px). The NSW Proudly funded by logo is taller, up to 135px."),
+        ("Large", "84", "Lead partner logo on Home (NEMA). Shrinks only when the column is too narrow for the logo: 64px at 1280px wide. FRRR and UCRH beside it are 45% of that height (29px). The NSW Proudly co-funded by logo (an SVG, interim version made from the public NSW Government logo until NSW supplies the approved file) is taller, up to 135px."),
     ]
     header_photo_rows = [
         ("Size 1: Network (map), Progress, RACK", "546 x 517", "350 x 461", "Cropped to fill. The Google map on Network is the same size."),

@@ -126,7 +126,7 @@ def partners_section():
     nema = "nema.png"
     return f'''<section class="sec partners" id="partners-home"><div class="wrap"><h3 class="ptitle">Thanks to our funders</h3><div class="pgrid">
 <div class="pcol ptl"><p>Supported by:</p><a class="plg" href="https://www.nema.gov.au">{_flogo(nema, "National Emergency Management Agency, Australian Government")}</a></div>
-<div class="pcol ptc"><a class="plg plg-nsw" href="https://www.nsw.gov.au">{_flogo("nsw-proudly.png", "Proudly funded by NSW Government")}</a></div>
+<div class="pcol ptc"><a class="plg plg-nsw" href="https://www.nsw.gov.au">{_flogo("nsw-proudly-cofunded.svg", "Proudly co-funded by NSW Government")}</a></div>
 <div class="pcol ptr"><p>2024 - 2025 Funding Partners:</p><div class="pstack"><a class="plg" href="https://frrr.org.au">{_flogo("frrr-transparent.png", "Foundation for Rural and Regional Renewal")}</a><a class="plg" href="https://ucrh.edu.au">{_flogo("ucrh-trim.png", "University Centre for Rural Health")}</a></div></div>
 </div></div></section>'''
 
