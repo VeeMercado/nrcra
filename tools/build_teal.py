@@ -138,7 +138,7 @@ def home_body(hero="photo"):
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a grassroots community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("home-circle-top")}{vimg("home-circle-bottom")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
-<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30793680"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/30793680/thumbnail" width="100%" alt="Pictogram of our progress in numbers: groups, funding and disaster experience."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See our progress</a></p></div></div></section>
+<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30822485"><noscript><img src="https://public.flourish.studio/visualisation/30822485/thumbnail" width="100%" alt="Pictogram of $2M+ in funding since inception: 60+ grassroots groups and organisations to prepare, 43 groups that have experienced disasters as a team to continue to thrive, 35 groups have built strong relationships with local government."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See our progress</a></p></div></div></section>
 <section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}<p class="btnrow focusbtn"><a class="btn btn-primary" href="#about" data-jump="ab-how" data-page="about">Learn about our work</a></p></div></div></section>
 {partners_section()}'''
 
@@ -545,13 +545,13 @@ PROG_VIZ = {
     'skills.svg': (756, 518, '30730890', 'Bar chart of skills held across Resilience Alliance groups, by number of groups: admin and committee experience 48, trained first aid 46, grant writing 44, coordination and logistics 38, SES, RFS or fire trained 36, trades and practical skills 35, mental health first aid 30, local language and cultural skills 14.'),
     'disaster-experience.svg': (756, 540, '30731208', 'Donut chart: 43 groups have joint disaster experience and 15 groups did not answer.'),
     'connectedness.png': (1588, 592, '30743797', 'Bar chart of self-rated connection, 1 to 5, within each group and to the wider community. Within their own group: 11 groups rate 5, 26 rate 4, 1 rates 3.5, 8 rate 3 and 1 rates 1. To the wider community: 4 rate 5, 14 rate 4, 1 rates 3.5, 15 rate 3, 2 rate 2.5, 8 rate 2 and 3 rate 1.'),
-    'relationship-council.svg': (794, 540, '30744442', 'Donut chart of relationship with local council: 35 groups have a strong relationship, 10 have some contact and 3 have little to no contact.'),
+    'relationship-council.svg': (794, 540, '30821586', 'Donut chart of relationship with local council: 35 groups have a strong relationship, 10 have some contact and 3 have little to no contact.'),
     'relationship-emergency-services.png': (1588, 1068, '30744547', 'Dot chart of groups that have a relationship to emergency services: RFS 24 groups, SES 23 groups, Police 3 groups.'),
-    'vulnerable-people.png': (1588, 600, '30767737', 'Bar chart of how groups rate their knowledge of vulnerable people in their community, from 1 to 5: 7 groups rate themselves 5, 12 rate 4, 10 rate 3, 8 rate 2 and 6 rate 1. 24 groups rate themselves 3 or lower.'),
+    'vulnerable-people.png': (1588, 600, '30822194', 'Bar chart of how groups rate their knowledge of vulnerable people in their community, from 1 to 5: 7 groups rate themselves 5, 12 rate 4, 10 rate 3, 8 rate 2 and 6 rate 1. 24 groups rate themselves 3 or lower.'),
 }
 
 
-FLOURISH_TYPE = {"operational-maturity.png": "pictogram", "active-groups.svg": "bubble-chart", "relationship-emergency-services.png": "pictogram"}
+FLOURISH_TYPE = {"operational-maturity.png": "pictogram", "active-groups.svg": "bubble-chart", "relationship-emergency-services.png": "pictogram", "relationship-council.svg": "pictogram"}
 
 
 def viz(name, cls=""):
@@ -614,6 +614,11 @@ def bfig(title, sub, graphic, label, cls="", after=""):
     h = f"<h3>{title}</h3>" if title else ""
     t = f'<p class="bsub">{sub}</p>' if sub else ""
     return f'<figure class="bchart {cls}">{h}{t}<div class="bgraph" role="img" aria-label="{E(label)}">{graphic}</div>{after}</figure>'
+
+
+def bembed(fid, kind, label, cls=""):
+    """Flourish chart inside our card. The chart carries its own title and note, so the card adds none."""
+    return f'<figure class="bchart {cls}"><div class="bgraph"><div class="flourish-embed flourish-{kind}" data-src="visualisation/{fid}"><noscript><img src="https://public.flourish.studio/visualisation/{fid}/thumbnail" width="100%" alt="{E(label)}"></noscript></div></div></figure>'
 
 
 def blegend(items):
@@ -684,29 +689,20 @@ def dots_graphic(rows):
 
 def aspire_item_b(i, row):
     title, text, quote, who, vis = row
-    right = bfig(None, "24 groups don&rsquo;t confidently know who&rsquo;s most vulnerable", vulnerable_graphic(),
-                 "Bar chart of how groups rate their knowledge of vulnerable people in their community, from 1 to 5: 7 groups rate themselves 5, 12 rate 4, 10 rate 3, 8 rate 2 and 6 rate 1. 24 groups rate themselves 3 or lower.", "card ctr") if vis else pquote(quote, who)
+    right = bembed("30822194", "chart", "Bar chart of how groups rate their knowledge of vulnerable people in their community, from 1 to 5: 7 groups rate themselves 5, 12 rate 4, 10 rate 3, 8 rate 2 and 6 rate 1. 24 groups rate themselves 3 or lower.", "card ctr") if vis else pquote(quote, who)
     return f'<li class="asp"><div class="asp-l"><h3>{i:02d} {title}</h3><p>{text}</p></div><div class="asp-r">{right}</div></li>'
 
 
 def progress_body_b():
     hero = progress_body().split('<section class="sec" id="pr-who">')[0]
     asp = "".join(aspire_item_b(i, r) for i, r in enumerate(ASPIRE, 1))
-    bubble = bfig(None, None, bubble_svg(), "Bubble chart of active volunteers per group. 33 groups run on a core team of 10 or fewer, 5 groups on 11 to 20, 1 group on 20 to 30 and 3 groups on more than 30.", "card",
-                  after='<h3 class="bafter">Small teams do the heavy lifting</h3><p class="bsub">Most of us run on a core team of 10 or less active volunteers</p><p class="bsub">This weighs heavily on our groups, who would welcome more hands to prepare for, and recover from, disasters.</p>')
-    maturity = bfig("We&rsquo;re at different stages", "Some of us are more established while others are emerging", maturity_graphic(),
-                    "Pictogram of operational maturity, number of groups that: have an online presence 49, are incorporated 40, have a document hub 27, have volunteer policies 16, have a steering committee 8.", "card ctr")
-    skills = bfig("We have the skills between us", "Across our groups, we hold a wide range of the skills community organisations need.", skills_graphic(),
-                  "Bar chart of skills held across Resilience Alliance members, by number of groups: admin and committee experience 48, trained first aid 46, grant writing 44, coordination and logistics 38, SES, RFS or fire trained 36, trades and practical skills 35, mental health first aid 30, local language and cultural skills 14.", "card ctr")
-    disaster = bfig(None, "About 3/4 of our groups have experienced disaster as a team", donut_svg(), "Donut chart: 43 groups have joint disaster experience and 15 groups did not answer.", "card ctr")
-    connected = bfig("Connectedness: within groups and beyond", "Many groups want to connect better with their communities.", connected_graphic(),
-                     "Bar chart of self-rated connection, 1 to 5, within each group and to the wider community. Within their own group: 11 groups rate 5, 26 rate 4, 1 rates 3.5, 8 rate 3 and 1 rates 1. To the wider community: 4 rate 5, 14 rate 4, 1 rates 3.5, 15 rate 3, 2 rate 2.5, 8 rate 2 and 3 rate 1.", "card")
-    council = bfig("Relationship with local council", "Most groups have a good relationship with their local council",
-                   dots_graphic([("Strong relationship", 35, C_TEAL), ("Some contact", 10, C_ORANGE), ("Little to no contact", 3, C_GREY)]),
-                   "Dot chart of relationship with local council: 35 groups have a strong relationship, 10 have some contact and 3 have little to no contact.", "card")
-    emergency = bfig("Emergency Services", "Groups that have a relationship with emergency services",
-                     dots_graphic([("RFS", 24, C_ORANGE), ("SES", 23, C_TEAL), ("Police", 3, C_GREY)]),
-                     "Dot chart of groups that have a relationship to emergency services: RFS 24 groups, SES 23 groups, Police 3 groups.", "card")
+    bubble = bembed("30730526", "chart", "Bubble chart of active volunteers per group. 33 groups run on a core team of 10 or fewer, 5 groups on 11 to 20, 1 group on 20 to 30 and 3 groups on more than 30.", "card")
+    maturity = bembed("30769372", "pictogram", "Pictogram of operational maturity, number of groups that: have an online presence 49, are incorporated 40, have a document hub 27, have volunteer policies 16, have a steering committee 8.", "card ctr")
+    skills = bembed("30730890", "chart", "Bar chart of skills held across Resilience Alliance members, by number of groups: admin and committee experience 48, trained first aid 46, grant writing 44, coordination and logistics 38, SES, RFS or fire trained 36, trades and practical skills 35, mental health first aid 30, local language and cultural skills 14.", "card ctr")
+    disaster = bembed("30731208", "chart", "Donut chart: 43 groups have joint disaster experience and 15 groups did not answer.", "card ctr")
+    connected = bembed("30743797", "chart", "Bar chart of self-rated connection, 1 to 5, within each group and to the wider community. Within their own group: 11 groups rate 5, 26 rate 4, 1 rates 3.5, 8 rate 3 and 1 rates 1. To the wider community: 4 rate 5, 14 rate 4, 1 rates 3.5, 15 rate 3, 2 rate 2.5, 8 rate 2 and 3 rate 1.", "card")
+    council = bembed("30821586", "pictogram", "Dot chart of relationship with local council: 35 groups have a strong relationship, 10 have some contact and 3 have little to no contact.", "card")
+    emergency = bembed("30744547", "pictogram", "Dot chart of groups that have a relationship to emergency services: RFS 24 groups, SES 23 groups, Police 3 groups.", "card")
     quote = pquote("[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it's so diverse.", "Chinderah and Surrounds Peoples Hub")
     return f'''{hero}
 <div class="bwhite"><section class="sec" id="pr-who"><div class="wrap"><div class="bsplit"><div>{prg_head("Many groups, shared purpose", "We are a diverse alliance of grassroots community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.")}</div><div>{bubble}</div></div>
@@ -1281,6 +1277,8 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(max-width:740px){.tb .site-foot .foot-top{grid-column:1/-1;justify-content:center;margin-bottom:32px}.tb .site-foot .foot-logo.boxed{margin:0 auto}.tb .site-foot .foot-logo .logo,.tb .site-foot .foot-logo .logo.logo-v{max-height:200px!important}}
 @media(min-width:1000px){.tb .site-foot .foot-cols{grid-template-columns:minmax(232px,1fr) minmax(0,1.7fr) minmax(max-content,1.3fr)}}
 .tb .focuscard .focusbtn{display:flex;justify-content:center;margin:40px 0 0}
+/* Flourish charts sit inside the cards and carry their own titles */
+.tb .bchart .flourish-embed{width:100%;min-height:150px}.tb .bchart .bgraph iframe{display:block}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
@@ -1358,7 +1356,7 @@ def page(v):
 <title>{NAMES[v]}</title><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">
 <meta name="description" content="Teal-led exploration of the NRCRA website. Sample content only.">
 {FONT}<style>{BASE}{CSS1}{CSS_T}{css}{MOBILE}</style></head><body class="v1 teal {cls}">
-{nav3()}<main id="main">{body}</main>{tfooter()}{protobar3(v)}<script data-cfasync="false">{JSX}</script><script data-cfasync="false">{JS2}</script></body></html>'''
+{nav3()}<main id="main">{body}</main>{tfooter()}{protobar3(v)}<script src="https://public.flourish.studio/resources/embed.js" async></script><script data-cfasync="false">{JSX}</script><script data-cfasync="false">{JS2}</script></body></html>'''
 
 
 # Prototypes A, B and C are the same site; they differ only in the Home hero (card, photo, solid). The old hand-kept Prototype A is archived in prototype-a-archive/.
