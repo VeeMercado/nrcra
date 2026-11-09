@@ -294,7 +294,7 @@ def guidelines():
         ("Chart bars and squares", "4px", "Inside charts only. The chart's View score and View rating button group has 6px corners."),
     ]
     space_rows = [
-        ("Site content width", "980px, centred (Wix Classic maximum)", "The menu, every page and the footer sit inside one 980px column. On screens narrower than 1020px the column keeps a 20px gutter each side. Coloured bands and backgrounds run the full width of the screen behind it. Full width sections: the page headers, Our timeline (About), Thanks to our funders (Home), the team (About), the five RACK cards and Our stories (Network). Their content stretches across the screen with a gutter of 20 to 56px each side."),
+        ("Site content width", "980px, centred (Wix Classic maximum)", "The menu, every page and the footer sit inside one 980px column. On screens narrower than 1020px the column keeps a 20px gutter each side. Coloured bands and backgrounds run the full width of the screen behind it. Full width sections: Our timeline (About), Thanks to our funders (Home), the team (About) and Our stories (Network). Page headers and the five RACK cards stay in the 980px column. The full width sections' content stretches across the screen with a gutter of 20 to 56px each side."),
         ("Between sections", "60px", "Top and bottom of every band, on every page. Same as the Home header text card padding."),
         ("Large bands", "96px", "White bands on About and Network, and the space under Our Focus on Home"),
         ("Partners band on Home", "96px above, 115px below", "The Thanks to our funders band"),

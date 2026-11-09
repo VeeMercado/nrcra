@@ -1260,9 +1260,8 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 /* header and footer logos share one width: 232px (height follows each logo's shape) */
 .tb .site-head .logo,.tb .site-foot .foot-logo .logo,.tb .site-foot .foot-logo .logo.logo-v{width:232px!important;max-width:100%!important;height:auto!important}
 @media(max-width:740px){.tb .site-foot .foot-top{margin-bottom:32px}}
-/* full-width sections (the menu and footer stay in the 980px column): page headers, our timeline, thanks to our funders, the team */
-@media(min-width:1021px){.tb #partners-home>.wrap,.tb #ab-team>.wrap,.tb #nw-stories>.wrap,.tb .wrap.rackhead,.tb .wrap:has(>.splith),.tb .hsplit>.wrap{max-width:none;width:calc(100% - 2*clamp(20px,4vw,56px))}
-.tb .hsplit-in{max-width:none;width:calc(100% - 2*clamp(20px,4vw,56px))}}
+/* full-width sections on desktop (the menu, footer, page headers and RACK cards stay in the 980px column): our timeline, thanks to our funders, the team, our stories */
+@media(min-width:1021px){.tb #partners-home>.wrap,.tb #ab-team>.wrap,.tb #nw-stories>.wrap{max-width:none;width:calc(100% - 2*clamp(20px,4vw,56px))}}
 /* steering committee names use the smallest brand text (11px) */
 .tb .steergrid .sname{font-size:.6875rem!important}
 /* small button (same as Back to top): Visit page on the Network cards; country names use the smallest text */
