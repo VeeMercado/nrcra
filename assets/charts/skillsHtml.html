@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#07293B; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:transparent}
+  body{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+  .rows{display:flex;flex-direction:column;gap:12px}
+  .name{font-weight:600;font-size:14px;line-height:1.2;margin:0 0 4px}
+  .track{position:relative;height:24px}
+  .bar{position:relative;height:100%;background:var(--navy);border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding:0 10px;color:#fff;font-weight:900;font-size:14px;white-space:nowrap;min-width:3px}
+  /* a very short bar puts its number outside, in navy */
+  .bar.short{color:var(--navy);justify-content:flex-start}
+  .bar.short span{position:absolute;left:calc(100% + 8px);top:50%;transform:translateY(-50%)}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .rows{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:600 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style>
+</head>
+<body>
+<div class="stage grey" id="stage">
+  <div class="rows" id="rows"></div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+<script>
+  // Each skill: the key the page code sends its count under, the CMS field (its column name becomes the label),
+  // and a typed label used only if the column name is not available
+  var SKILLS = [
+    { key: "admin",    field: "adminCommitteeExperience",         label: "Admin and committee" },
+    { key: "firstAid", field: "trainedFirstAidMembers",           label: "Trained first aid" },
+    { key: "grant",    field: "grantWritingExperience",           label: "Grant writing" },
+    { key: "coord",    field: "coordinationLogisticsExperience",  label: "Coordination and logistics" },
+    { key: "ses",      field: "sesRfsFireTrainedMembers",         label: "SES, RFS and fire trained" },
+    { key: "trades",   field: "tradesPracticalSkills",            label: "Trades and practical skills" },
+    { key: "mental",   field: "mentalHealthFirstAid",             label: "Mental health first aid" }
+  ];
+  var stage = document.getElementById("stage");
+  var data = { admin: 48, firstAid: 46, grant: 44, coord: 38, ses: 36, trades: 35, mental: 30 };   // grey static preview numbers
+
+  function draw() {
+    var host = document.getElementById("rows");
+    host.innerHTML = "";
+    if (!data) { return; }
+
+    var names = data.labels || {};
+    // Biggest first, as in Flourish
+    var list = SKILLS.map(function (s) { return { label: names[s.field] || s.label, n: Number(data[s.key]) || 0 }; })
+                     .sort(function (a, b) { return b.n - a.n; });
+    var max = Math.max(1, list[0].n);
+
+    list.forEach(function (s) {
+      var row = document.createElement("div");
+      row.setAttribute("role", "img");
+      row.setAttribute("aria-label", s.label + ": " + s.n + " groups");
+
+      var name = document.createElement("p");
+      name.className = "name";
+      name.textContent = s.label;
+
+      var track = document.createElement("div");
+      track.className = "track";
+      var bar = document.createElement("div");
+      var pct = (s.n / max) * 97;                       // longest bar fills 97% of the width
+      bar.className = "bar";
+      bar.style.width = pct + "%";
+      var num = document.createElement("span");
+      num.textContent = s.n + (s.n === 1 ? " group" : " groups");
+      bar.appendChild(num);
+      track.appendChild(bar);
+
+      row.appendChild(name);
+      row.appendChild(track);
+      host.appendChild(row);
+
+      // If the bar is too short to hold its number, move the number outside
+      if (bar.offsetWidth < num.offsetWidth + 24) { bar.classList.add("short"); }
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "skills") {                                         // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+</script>
+</body>
+</html>

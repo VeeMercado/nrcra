@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#07293B; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:transparent}
+  body{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+
+  /* score buttons: each one wears the colour of its score */
+  .filters{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 22px}
+  .filters button{font:600 15px "Nunito Sans",Arial,sans-serif;color:var(--navy);border:2px solid transparent;border-radius:6px;padding:7px 14px;min-width:54px;cursor:pointer}
+  .filters button[aria-pressed="true"]{font-weight:900;border-color:var(--navy)}
+  .filters button.all{background:#fff;border-color:#B9C7CD}
+  .filters button.all[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .filters button:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+
+  .title{font-weight:400;font-size:15px;line-height:1.3;margin:0 0 6px}
+  .title b{font-weight:900}
+  .bar{display:flex;height:40px;border-radius:4px;overflow:hidden;background:#EEF1F3;margin-bottom:22px}
+  .seg{display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;overflow:hidden;white-space:nowrap;color:var(--navy);transition:opacity .15s}
+  .seg.dim{opacity:.22}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .content{filter:grayscale(1);opacity:.5;pointer-events:none}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:600 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style>
+</head>
+<body>
+<div class="stage grey" id="stage">
+  <div class="content">
+    <div class="filters" id="filters"></div>
+    <div id="bars"></div>
+  </div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+<script>
+  // Score colours: dark yellow for 5/5 down to light grey for 1/5
+  var COLOURS = { "5": "#D9A500", "4": "#EDB914", "3": "#FFCB2A", "2": "#FFEAAA", "1": "#D6E2E4" };
+  var WORDS   = { "5": "extremely", "4": "very", "3": "moderately", "2": "somewhat", "1": "slightly" };
+  var SCORES  = ["5", "4", "3", "2", "1"];
+  // Each bar: which counts it uses, the CMS field (its column name becomes the title), and a typed name used only if the column name is not available
+  var ROWS = [
+    { key: "within", field: "connectednessWithinGroup",       name: "Connectedness within their group" },
+    { key: "wider",  field: "connectednessToWiderCommunity",  name: "Connectedness with the wider community" }
+  ];
+  var stage = document.getElementById("stage");
+  var data = { within: { "5": 6, "4": 15, "3": 8, "2": 1 }, wider: { "5": 5, "4": 13, "3": 15, "2": 9, "1": 5 } };   // grey static preview numbers
+  var selected = "all";
+
+  function total(counts) { return SCORES.reduce(function (t, s) { return t + (counts[s] || 0); }, 0); }
+
+  function draw() {
+    var filters = document.getElementById("filters"), bars = document.getElementById("bars");
+    filters.innerHTML = ""; bars.innerHTML = "";
+    if (!data) { return; }
+    var names = data.labels || {};
+
+    ["all"].concat(SCORES).forEach(function (s) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = s === "all" ? "View all scores" : s + "/5";
+      if (s === "all") { b.className = "all"; } else { b.style.background = COLOURS[s]; b.title = WORDS[s]; }
+      b.setAttribute("aria-pressed", String(selected === s));
+      b.onclick = function () { selected = s; draw(); };
+      filters.appendChild(b);
+    });
+
+    ROWS.forEach(function (r) {
+      var counts = data[r.key] || {}, sum = total(counts);
+      var columnName = names[r.field] || r.name;                              // e.g. "Connectedness within their group"
+      var feel = columnName.replace(/^connectedness/i, "connected");          // e.g. "connected within their group"
+
+      var title = document.createElement("p");
+      title.className = "title";
+      if (selected === "all") {
+        title.innerHTML = "<b>" + sum + " groups</b> " + columnName;
+      } else {
+        title.innerHTML = "<b>" + (counts[selected] || 0) + "/" + sum + "</b> groups feel <b>" + WORDS[selected] + "</b> " + feel;
+      }
+
+      var bar = document.createElement("div");
+      bar.className = "bar";
+      bar.setAttribute("role", "img");
+      bar.setAttribute("aria-label", title.textContent);
+
+      SCORES.forEach(function (s) {
+        var n = counts[s] || 0;
+        if (!n) { return; }
+        var seg = document.createElement("div");
+        seg.className = "seg" + (selected !== "all" && selected !== s ? " dim" : "");
+        seg.style.flex = n + " 1 0";
+        seg.style.background = COLOURS[s];
+        seg.title = s + "/5 (" + WORDS[s] + "): " + n + (n === 1 ? " group" : " groups");
+        seg.textContent = n;
+        bar.appendChild(seg);
+      });
+
+      bars.appendChild(title); bars.appendChild(bar);
+
+      // Hide numbers in segments too narrow to hold them
+      Array.prototype.forEach.call(bar.children, function (seg) {
+        if (seg.scrollWidth > seg.clientWidth + 1 || seg.clientWidth < 22) { seg.style.fontSize = "0"; }
+      });
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "connect") {                                        // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+</script>
+</body>
+</html>

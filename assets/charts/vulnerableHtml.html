@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#07293B; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:transparent}
+  body{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+  .title{font-weight:400;font-size:16px;line-height:1.3;margin:0 0 4px;text-align:center}
+  .title b{font-weight:900}
+  .sub{font-size:13px;font-weight:400;margin:0 0 12px;text-align:center}
+  .sub b{font-weight:900}
+  .bar{display:flex;height:96px;border-radius:4px;overflow:hidden;background:#EEF1F3}
+  .seg{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px 3px;text-align:center;overflow:hidden;color:var(--navy);min-width:0}
+  .seg .n{font-weight:900;font-size:20px;line-height:1}
+  .seg .mid{font-weight:400;font-size:12px;line-height:1.1}
+  .seg .sc{font-weight:900;font-size:15px;line-height:1}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .content{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:600 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style>
+</head>
+<body>
+<div class="stage grey" id="stage">
+  <div class="content">
+    <p class="title" id="title"></p>
+    <p class="sub"><b>Group count</b> / by knowledge score</p>
+    <div class="bar" id="bar" role="img"></div>
+  </div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+<script>
+  // Same score colours as the connectedness chart: dark yellow for 5/5 down to light grey for 1/5
+  var COLOURS = { "5": "#D9A500", "4": "#EDB914", "3": "#FFCB2A", "2": "#FFEAAA", "1": "#D6E2E4" };
+  var SCORES  = ["5", "4", "3", "2", "1"];
+  var FIELD = "knowledgeOfVulnerableCommunityMembers";   // the CMS column this chart counts
+  var stage = document.getElementById("stage");
+  var data = { counts: { "5": 7, "4": 12, "3": 10, "2": 8, "1": 6 } };   // grey static preview numbers
+
+  function draw() {
+    var title = document.getElementById("title"), bar = document.getElementById("bar");
+    bar.innerHTML = "";
+    if (!data) { title.innerHTML = ""; return; }
+    var counts = data.counts || {};
+
+    // Groups scoring 3/5 or lower do not confidently know who is most vulnerable
+    var low = (counts["3"] || 0) + (counts["2"] || 0) + (counts["1"] || 0);
+    title.innerHTML = "<b>" + low + " groups</b> don’t confidently know who’s most vulnerable";
+    bar.setAttribute("aria-label", ((data.labels && data.labels[FIELD]) || "Knowledge of vulnerable community members") + ": " + title.textContent);
+
+    SCORES.forEach(function (s) {
+      var n = counts[s] || 0;
+      if (!n) { return; }
+      var seg = document.createElement("div");
+      seg.className = "seg";
+      seg.style.flex = n + " 1 0";
+      seg.style.background = COLOURS[s];
+      seg.title = s + "/5: " + n + (n === 1 ? " group" : " groups");
+      seg.innerHTML = "<span class='n'>" + n + "</span><span class='mid'>" + (n === 1 ? "group" : "groups") + "<br>scored</span><span class='sc'>" + s + "/5</span>";
+      bar.appendChild(seg);
+    });
+    // In a segment too narrow for "groups scored", leave out the middle words (the number and score stay)
+    Array.prototype.forEach.call(bar.children, function (seg) {
+      var mid = seg.querySelector(".mid");
+      if (mid.scrollWidth > seg.clientWidth - 2) { mid.style.display = "none"; }
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "vulnerable") {                                     // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+</script>
+</body>
+</html>

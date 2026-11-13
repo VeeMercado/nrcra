@@ -138,7 +138,7 @@ def home_body(hero="photo"):
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.{B.SQUIGGLE}</span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a grassroots community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the network</a></p></div><div class="wwa-cluster"><div class="circles">{B.deco("rings", "")}{vimg("home-circle-top")}{vimg("home-circle-bottom")}<span class="blob" aria-hidden="true"></span></div><ul class="lgapills">{lgas}</ul></div></div></div></section>
-<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30822485"><noscript><img src="https://public.flourish.studio/visualisation/30822485/thumbnail" width="100%" alt="Pictogram of $2M+ in funding since inception: 60+ grassroots groups and organisations to prepare, 43 groups that have experienced disasters as a team to continue to thrive, 35 groups have built strong relationships with local government."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See our progress</a></p></div></div></section>
+<section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead cen">At a glance</h2>{chart_inline("impactHtml", "At a glance: 60+ grassroots groups and organisations, groups that have experienced disasters as a team, groups with strong relationships with local government", "glance")}<p class="btnrow"><a class="btn btn-tertiary" href="#journey">See our progress</a></p></div></div></section>
 <section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead">{hl("Our Focus")}</h2>{focus_cards()}<p class="btnrow focusbtn"><a class="btn btn-primary" href="#about" data-jump="ab-how" data-page="about">Learn about our work</a></p></div></div></section>
 {partners_section()}'''
 
@@ -498,7 +498,7 @@ RACK_CATS = [
 def rack_body():
     cards = "".join(f'<li><h3>{t}</h3><p>{d}</p></li>' for t, d in RACK_CATS)
     return f'''<div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge</span><h1>RACK</h1><p class="lede">One shared place to find what you need and what is already working in resilience communities across the Northern Rivers.</p>
-<p class="rackterms">By signing in to RACK, you agree to our <a href="#privacy">Website Privacy Policy</a> and the <a href="#privacy" data-jump="pp-rack" data-page="privacy">RACK Terms of Use</a>.</p>
+<p class="rackterms">By signing in to RACK, you agree to our <a href="#privacy">Website Privacy Policy</a> and the <a href="#rack-terms">RACK Terms of Use</a>.</p>
 <p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=RACK%20access">Request access</a><a class="btn btn-primary" href="{SIGN_IN}" target="_blank" rel="noopener">Sign in</a><a class="rackrev" href="#privacy">Privacy policy</a></p></div>
 <div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="Someone using RACK on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
 <section class="sec"><div class="wrap rackhead"><p class="lede">Find templates and guides for your group, and share your own with the network.</p><ol class="pillcards rackcats">{cards}</ol></div></section>'''
@@ -511,14 +511,14 @@ FLAG_ICON = '<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" 
 PP = [
     ('Why this matters', '<p>The Northern Rivers Community Resilience Alliance exists because communities look after each other, before, during and after disasters. That only works when people trust us with their information. This policy explains what we collect through our website, events, newsletter and network, why we collect it and how we look after it.</p><p>We follow the Australian Privacy Principles in the Privacy Act 1988 as our standard for handling personal information.</p>'),
     ('Who we are', '<p>The Northern Rivers Community Resilience Alliance (the Alliance) is a grassroots network formed after the 2022 floods. We connect local resilience groups across the Northern Rivers of New South Wales so they can share knowledge, support each other and prepare together. You can reach us any time at <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p>'),
-    ('What we collect', '<ul class="pplist"><li>Your name, email, phone number, community group, role and town, when you contact us, join the network or sign up for updates.</li><li>Event and training registrations: your details, whether you attended, and any dietary or access needs you choose to tell us. We use those needs only to look after you at that event.</li><li>Messages you send us through the website, email, phone or social media.</li><li>Photos, stories and quotes from you or your community, only with your consent.</li><li>Basic details about your visit to our website, through cookies and analytics.</li><li>If your group uses RACK, the details listed in the Resilience Alliance Community Knowledge (RACK) Terms of Use section below.</li></ul>'),
+    ('What we collect', '<ul class="pplist"><li>Your name, email, phone number, community group, role and town, when you contact us, join the network or sign up for updates.</li><li>Event and training registrations: your details, whether you attended, and any dietary or access needs you choose to tell us. We use those needs only to look after you at that event.</li><li>Messages you send us through the website, email, phone or social media.</li><li>Photos, stories and quotes from you or your community, only with your consent.</li><li>Basic details about your visit to our website, through cookies and analytics.</li><li>If your group uses RACK, the details listed in the <a href="#privacy" data-jump="pp-rack" data-page="privacy">How RACK handles your information</a> section below.</li></ul>'),
     ('How we collect it', '<ul class="pplist"><li>From you directly: website forms, emails, phone calls, events and social media.</li><li>From your community group, when it names you as a contact for the network.</li><li>Automatically, through cookies and website analytics.</li></ul>'),
     ('How we use it', '<ul class="pplist"><li>To connect communities across the network and keep your group&rsquo;s contact details up to date.</li><li>To run events and training, and let you know about ones you might want to join.</li><li>To send our Resilience Roundup newsletter and other updates you signed up for. Every email has an unsubscribe link.</li><li>To answer your questions and follow up on what you asked us.</li><li>To share stories from the network, only with your consent.</li><li>To report to our funders. We share numbers and summaries, never your personal details, unless you agree.</li><li>To manage access to RACK.</li><li>To meet our legal obligations.</li></ul><p>We never sell your information or use it for advertising.</p>'),
     ('Who we share it with', '<p>We share personal information only with the services that help us run the Alliance, with partners when you agree, or when the law requires it. The services we use are:</p><ul class="pplist"><li>Wix, which hosts our website.</li><li>Google Workspace and Google Cloud, for email, documents, forms, online meetings and trainings, and RACK (including Google&rsquo;s Gemini service).</li><li>Zoho CRM, for our network and member records.</li><li>Zoho Campaigns, for our Resilience Roundup newsletter and email updates.</li><li>Zoho, for event and training bookings.</li></ul><p>Some of these services store or process information outside Australia. We choose well known providers with strong security.</p>'),
     ('Storage and security', '<p>We keep personal information in secure systems with limited access. Only the Alliance team members who need it for their work can see it. When we no longer need information, we delete it or remove the details that identify you. If a data breach is likely to cause serious harm, we will tell the people affected and the Office of the Australian Information Commissioner as soon as we can.</p>'),
     ('Photos and stories', '<p>Stories from the network are at the heart of what we do. We only share your photo, name, story or quote with your consent, and you can ask us to take it down at any time by emailing <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p>'),
     ('Cookies and website analytics', '<p>Our website uses cookies to work properly and to show us how people use it, such as which pages are visited most. We look at this information in summary form only. You can refuse or delete cookies in your browser settings, and the website will still work.</p>'),
-    ('Resilience Alliance Community Knowledge (RACK) Terms of Use', '<p>RACK (Resilience Alliance Community Knowledge) is the shared library where member communities share what they know. It is open to community groups in the Alliance network only. When you log in or share knowledge, we collect:</p><ul class="pplist"><li>Your community group email, community name and town, so we can check your group has access.</li><li>When you share knowledge: your name, email, community and town, the file or link you share, your answers in the form, whether other communities may contact you, and your privacy confirmation.</li><li>Questions you type into Ask RACK.</li><li>Basic details that keep RACK running, like when you log in.</li></ul><p>Resource cards show only the community group, town and date. We never show your name. Your email is shown to other RACK users only if you ticked &ldquo;Other communities can get in touch with me by email&rdquo;. Ask RACK and Listen run on Google&rsquo;s Gemini service. By logging in to RACK you agree to this policy and the RACK Terms of Use.</p>'),
+    ('How RACK handles your information', '<p>RACK (Resilience Alliance Community Knowledge) is the shared library where member communities share what they know. It is open to community groups in the Alliance network only. When you log in or share knowledge, we collect:</p><ul class="pplist"><li>Your community group email, community name and town, so we can check your group has access.</li><li>When you share knowledge: your name, email, community and town, the file or link you share, your answers in the form, whether other communities may contact you, and your privacy confirmation.</li><li>Questions you type into Ask RACK.</li><li>Basic details that keep RACK running, like when you log in.</li></ul><p>Resource cards show only the community group, town and date. We never show your name. Your email is shown to other RACK users only if you ticked &ldquo;Other communities can get in touch with me by email&rdquo;. Ask RACK and Listen run on Google&rsquo;s Gemini service. By logging in to RACK you agree to this policy and the <a href="#rack-terms">RACK Terms of Use</a>.</p>'),
     ('How long we keep it', '<p>We keep contact details while you or your group are part of the network, or until you ask us to remove them. Event records are kept for as long as we need them for reporting to funders.</p>'),
     ('Your choices', '<ul class="pplist"><li>Ask to see or correct the information we hold about you.</li><li>Unsubscribe from our emails at any time.</li><li>Ask us to remove your photo, story or quote.</li><li>Ask us to remove your details from our records.</li></ul><p>Email <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a> and we will get back to you within 5 working days.</p>'),
     ('If you have a concern', '<p>Talk to us first at <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>. We take every concern seriously. You can also contact the Office of the Australian Information Commissioner at <a href="https://www.oaic.gov.au">oaic.gov.au</a>.</p>'),
@@ -535,6 +535,25 @@ def pp_item(i, title, html):
 def privacy_body():
     items = "".join(pp_item(i, *row) for i, row in enumerate(PP, 1))
     return f'''<div class="wrap"><div class="pg-head pphead"><span class="eyebrow pill-t">Privacy Policy</span><h1>Website Privacy Policy</h1><p class="lede">How NRCRA collects, uses and protects your personal information.</p><p class="ppdate">Last updated 9 November 2026</p></div></div>
+<section class="sec" style="padding-top:0"><div class="wrap"><ol class="pplist2">{items}</ol></div></section>'''
+
+
+RT = [
+    ('Why these terms exist', '<p>RACK works because communities share what they know in good faith. These terms keep it useful, safe and fair for everyone in the network.</p>'),
+    ('Who can use RACK', '<p>RACK is for community groups that are part of the Northern Rivers Community Resilience Alliance. Access is by approved email. Please keep your login within your group. No login yet? Email <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p>'),
+    ('Sharing knowledge', '<p>When you share a resource, you confirm that:</p><ul class="pplist"><li>you or your group made it, or you have permission to share it. If it comes from another organisation, their terms allow it to be shared and you name them.</li><li>it contains no personal information about anyone.</li><li>it is accurate to the best of your knowledge.</li><li>it is not offensive, discriminatory, political campaigning or advertising.</li></ul><p>You keep ownership of what you share. By sharing, you give the Alliance permission to store it, show it in RACK, file it and turn it into other formats, like audio for Listen and podcasts, so more communities can use it. We review every resource before it goes live, and we can decline or remove anything that doesn&rsquo;t fit these terms.</p>'),
+    ('Using resources', '<p>You are welcome to use and adapt RACK resources for your community&rsquo;s preparedness and recovery work. Please credit the community that made them. Before you sell a resource or share it outside the network, ask the community that made it. We are happy to connect you through <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p><p>Every resource is a starting point. Change the words, names and steps so they fit how your group works. Some resources are samples from other organisations. They are free for community groups to use, but not to sell, and their own terms apply. Where a resource comes from another organisation, we name them on the card. For anything about safety, check it matches the latest advice from the NSW SES or your council.</p>'),
+    ('Ask RACK, Listen and podcasts', '<p>Ask RACK answers, audio and podcasts are created automatically from the resources in RACK. They can be incomplete or wrong. Always check important information against the original resource.</p>'),
+    ('In an emergency', '<p>RACK is a knowledge and preparedness tool, not an emergency service. In a life threatening emergency call Triple Zero (000). For flood and storm help call the NSW SES on 132 500. For current warnings use Hazards Near Me NSW.</p>'),
+    ('Our responsibility', '<p>Resources are shared by communities and are general information only. We review them, but we can&rsquo;t guarantee they are complete, current or right for your situation. To the extent the law allows, the Alliance is not responsible for any loss that comes from using RACK. Nothing in these terms limits your rights under Australian Consumer Law.</p>'),
+    ('Changes and access', '<p>We will keep improving RACK and may update these terms. We can pause or remove access if these terms are not followed.</p>'),
+    ('Contact', '<p>Questions about RACK, our <a href="#privacy">Privacy Policy</a> or these terms: <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p>'),
+]
+
+
+def rack_terms_body():
+    items = "".join(f'<li class="ppitem" id="rt-{slug(t)}"><h2>{i}. {t}</h2>{h}</li>' for i, (t, h) in enumerate(RT, 1))
+    return f'''<div class="wrap"><div class="pg-head pphead"><span class="eyebrow pill-t">Terms of Use</span><h1>Resilience Alliance Community Knowledge - RACK<br>Our shared Library</h1><p class="ppdate">Last updated 30 October 2026</p></div></div>
 <section class="sec" style="padding-top:0"><div class="wrap"><ol class="pplist2">{items}</ol></div></section>'''
 
 
@@ -620,6 +639,34 @@ def bembed(fid, kind, label, cls=""):
     return f'<figure class="bchart {cls}"><div class="bgraph"><div class="flourish-embed flourish-{kind}" data-src="visualisation/{fid}"><noscript><img src="https://public.flourish.studio/visualisation/{fid}/thumbnail" width="100%" alt="{E(label)}"></noscript></div></div></figure>'
 
 
+
+_CH_HELPER = False
+def chart_inline(file, label, cls="", style=""):
+    """A chart embed placed straight into the page (a shadow-DOM host, no iframe). Same code as the Wix embed, sample numbers shown."""
+    global _CH_HELPER
+    src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "charts", file + ".html"), encoding="utf-8").read()
+    css = re.search(r"<style>(.*?)</style>", src, re.S).group(1)
+    body = re.search(r"<body>(.*?)<script>", src, re.S).group(1)
+    js = re.search(r"<script>(.*?)</script>", src, re.S).group(1)
+    css = css.replace(":root", ":host").replace("html,body", ":host,.pbody")
+    css = re.sub(r"(^|[\s,}])body(?=[\s.{,:#\[])", r"\1.pbody", css)
+    helper = ""
+    if not _CH_HELPER:
+        _CH_HELPER = True
+        helper = ("<script>window.__chartHost=function(h){var r=h.shadowRoot,rs=[],w={innerWidth:0,addEventListener:function(t,f){if(t==='resize')rs.push(f)},parent:null};"
+                  "w.parent=w;Object.defineProperty(w,'innerWidth',{get:function(){return h.clientWidth}});"
+                  "var d={getElementById:function(i){return r.getElementById(i)},body:(function(b){return{get className(){return b.className.replace(/^pbody ?/,'')},set className(v){b.className=('pbody '+v).trim()}}})(r.querySelector('.pbody')),documentElement:h,createElement:function(t){return document.createElement(t)},createElementNS:function(n,t){return document.createElementNS(n,t)}};"
+                  "if(window.ResizeObserver){new ResizeObserver(function(){rs.forEach(function(f){f()})}).observe(h)}return{w:w,d:d,l:{search:'?demo=1'}}};</script>")
+    return (f'{helper}<div class="chartframe {cls}" role="img" aria-label="{E(label)}" style="{style}"><template shadowrootmode="open"><style>{css}</style><div class="pbody">{body}</div></template></div>'
+            f'<script>(function(c){{(function(window,document,location){{{js}}})(c.w,c.d,c.l)}})(window.__chartHost(document.currentScript.previousElementSibling));</script>')
+
+def bframe(file, w, h, mh, label, title="", subs=(), cls="card", align=""):
+    """A chart from the Wix build: the same HTML embed, in a card sized like the Wix page. The numbers on show are the embed's sample numbers."""
+    t = f"<h3>{title}</h3>" if title else ""
+    sub = "".join(f'<p class="bsub">{x}</p>' for x in subs)
+    return (f'<figure class="bchart {cls}{align}">{t}{sub}' + chart_inline(file, label, "", f"--w:{w}px;--h:{h}px;--mh:{mh}px") + '</figure>')
+
+
 def blegend(items):
     return '<ul class="bleg" aria-hidden="true">' + "".join(f'<li style="--c:{c}">{n}</li>' for n, c in items) + "</ul>"
 
@@ -688,20 +735,20 @@ def dots_graphic(rows):
 
 def aspire_item_b(i, row):
     title, text, quote, who, vis = row
-    right = bembed("30822194", "chart", "Bar chart of how groups rate their knowledge of vulnerable people in their community, from 1 to 5: 7 groups rate themselves 5, 12 rate 4, 10 rate 3, 8 rate 2 and 6 rate 1. 24 groups rate themselves 3 or lower.", "card ctr") if vis else pquote(quote, who)
+    right = bframe("vulnerableHtml", 400, 180, 190, "Bar chart of how groups rate their knowledge of vulnerable people in their community, from 1 to 5.", cls="card ctr") if vis else pquote(quote, who)
     return f'<li class="asp"><div class="asp-l"><h3>{i:02d} {title}</h3><p>{text}</p></div><div class="asp-r">{right}</div></li>'
 
 
 def progress_body_b():
     hero = progress_body().split('<section class="sec" id="pr-who">')[0]
     asp = "".join(aspire_item_b(i, r) for i, r in enumerate(ASPIRE, 1))
-    bubble = bembed("30730526", "chart", "Bubble chart of active volunteers per group. 33 groups run on a core team of 10 or fewer, 5 groups on 11 to 20, 1 group on 20 to 30 and 3 groups on more than 30.", "card")
-    maturity = bembed("30769372", "pictogram", "Pictogram of operational maturity, number of groups that: have an online presence 49, are incorporated 40, have a document hub 27, have volunteer policies 16, have a steering committee 8.", "card ctr")
-    skills = bembed("30730890", "chart", "Bar chart of skills held across Resilience Alliance members, by number of groups: admin and committee experience 48, trained first aid 46, grant writing 44, coordination and logistics 38, SES, RFS or fire trained 36, trades and practical skills 35, mental health first aid 30, local language and cultural skills 14.", "card ctr")
-    disaster = bembed("30731208", "chart", "Donut chart: 43 groups have joint disaster experience and 15 groups did not answer.", "card ctr")
-    connected = bembed("30743797", "chart", "Bar chart of self-rated connection, 1 to 5, within each group and to the wider community. Within their own group: 11 groups rate 5, 26 rate 4, 1 rates 3.5, 8 rate 3 and 1 rates 1. To the wider community: 4 rate 5, 14 rate 4, 1 rates 3.5, 15 rate 3, 2 rate 2.5, 8 rate 2 and 3 rate 1.", "card")
-    council = bembed("30821586", "pictogram", "Dot chart of relationship with local council: 35 groups have a strong relationship, 10 have some contact and 3 have little to no contact.", "card")
-    emergency = bembed("30744547", "pictogram", "Dot chart of groups that have a relationship to emergency services: RFS 24 groups, SES 23 groups, Police 3 groups.", "card")
+    bubble = bframe("bubbleHtml", 498, 340, 280, "Bubble chart of active volunteers per group: groups by size of volunteer team.", "Small teams do the heavy lifting", ("Most of us run on a core team of 10 or less active volunteers. This weighs heavily on our groups, who would welcome more hands to prepare for, and recover from, disasters.",))
+    maturity = bframe("stagesHtml", 880, 240, 300, "Pictogram of how many groups have an online presence, are incorporated, have a document hub and have volunteer policies.", "We're at different stages", ("Some of our groups are more established while others are emerging",), "card", " ctr")
+    skills = bframe("skillsHtml", 880, 380, 380, "Bar chart of skills held across Resilience Alliance members, by number of groups.", "We have the skills between us", ("Across our groups, we hold a wide range of the skills community organisations need.",), "card", " ctr")
+    disaster = bframe("disasterHtml", 498, 350, 430, "Donut chart of groups that have experienced a disaster as a team.", cls="card ctr")
+    connected = bframe("connectHtml", 880, 250, 340, "Bar chart of how connected groups feel within their group and to the wider community, by score from 1 to 5.", "Connectedness: within groups and beyond", ("Many groups want to connect better with their communities.", "Each group scored how connected they feel, from 1 (slightly) to 5 (extremely).", "Select a score to see the groups sentiment:"), "card")
+    council = bframe("councilHtml", 400, 215, 270, "Dot chart of groups' relationship with their local council: strong, some contact, little to no contact.", "Relationship with local council", ("Most groups have a good relationship with their local council",), "card")
+    emergency = bframe("emergencyHtml", 400, 215, 270, "Dot chart of groups that have a relationship with the RFS, SES and Police.", "Emergency Services", ("Groups that have a relationship with emergency services",), "card")
     quote = pquote("[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it's so diverse.", "Chinderah and Surrounds Peoples Hub")
     return f'''{hero}
 <div class="bwhite"><section class="sec" id="pr-who"><div class="wrap"><div class="bsplit"><div>{prg_head("Many groups, shared purpose", "We are a diverse alliance of grassroots community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.")}</div><div>{bubble}</div></div>
@@ -727,7 +774,7 @@ def page_b():
 {FONT}<style>{BASE}{CSS1}{CSS_T}{css}{MOBILE}</style></head><body class="v1 teal {cls}">
 {nav}<main id="main">{body}</main>{tfooter()}{protobar3("prototype-b")}<script data-cfasync="false">{BFILTER_JS}</script><script data-cfasync="false">{JSX}</script><script data-cfasync="false">{JS2}</script></body></html>'''
     # the other pages are not in this prototype: send those links to the full prototype
-    return re.sub(r'href="#(home|network|about|rack|privacy|lga-[^"]*)"', r'href="../prototype-c/#\1"', html)
+    return re.sub(r'href="#(home|network|about|rack-terms|rack|privacy|lga-[^"]*)"', r'href="../prototype-c/#\1"', html)
 
 
 def finish_b():
@@ -1186,9 +1233,9 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(max-width:860px){.tb .gmap iframe{height:461px;min-height:0;flex:none}}
 .tb .splith.net .mapnote .ringico{display:inline-block;vertical-align:-3px;margin:0 2px}
 /* Privacy Policy, desktop: the heading and the policy box are centred at 80% of the page width */
-@media(min-width:861px){.tb #privacy .pphead,.tb #privacy .pplist2{width:80%;margin-left:auto;margin-right:auto}}
+@media(min-width:861px){.tb :is(#privacy,#rack-terms) .pphead,.tb :is(#privacy,#rack-terms) .pplist2{width:80%;margin-left:auto;margin-right:auto}}
 /* Privacy Policy: same space between the header and the content as About (32px) */
-.tb #privacy .pphead{padding-bottom:0}.tb #privacy .pphead .ppdate{margin-bottom:0}
+.tb :is(#privacy,#rack-terms) .pphead{padding-bottom:0}.tb :is(#privacy,#rack-terms) .pphead .ppdate{margin-bottom:0}
 /* Journey: 130px (Large spacing) above these three section titles, from the content above them */
 .tb #pr-faced,.tb #pr-connect,.tb #pr-aspire{padding-top:calc(var(--space-large) - 60px)!important}
 /* Prototype B: redrawn Journey charts. Titles are h3, the text under them is normal size. Cards are white with rounded corners; charts without .card sit straight on the page. */
@@ -1279,10 +1326,159 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .bchart .flourish-embed{width:100%;min-height:150px}.tb .bchart .bgraph iframe{display:block}
 .tb .ppitem .pplist{list-style:disc;margin:.4em 0 0;padding-left:1.25em;max-width:70ch}.tb .ppitem .pplist li+li{margin-top:.35em}.tb .ppitem .pplist+p{margin-top:.6em}.tb .ppitem h2{margin-bottom:.4em}
 .tb .rackterms{margin:20px 0 14px;max-width:48ch}
+/* ===== Wix alignment (desktop): sizes and column widths measured from the live Wix pages, 980px column ===== */
+@media(min-width:1200px){
+/* Home hero: text card 578, video 386, 16px between, both 566 tall */
+.tb .hsplit-in{width:100%;max-width:980px;grid-template-columns:minmax(0,1fr) 386px;gap:16px;min-height:566px;align-items:stretch}
+.tb .hsplit.hsplit-sq .hsplit-r,.tb .hsplit .hsplit-r{width:100%;height:auto;aspect-ratio:auto;align-self:stretch}
+.tb .hsplit .hsolid-text{padding:40px 26px}
+.tb .hsplit .hsolid-text .eyebrow{margin:0 0 27px 3px;width:350px;min-height:30px;padding:0!important;display:inline-flex;align-items:center;justify-content:center;line-height:1.25}
+.tb .hsplit .hsolid-text h1{font-size:3.5rem;line-height:1.18;margin:0 0 3px}
+.tb .hsplit .hsolid-text .lede{font-size:1.25rem;line-height:1.5;max-width:490px;margin:0 0 30px 3px}
+.tb .hsplit .hsolid-text .btnrow{margin:0 0 0 3px}
+.tb .hsplit .hsolid-text .btn{min-height:40px;padding:0 1.25em;font-size:1rem;display:inline-flex;align-items:center}
+/* Home: Connect / Share / Care, each 186 wide and 40 tall, 10px apart */
+.tb .hwpills{gap:10px}
+.tb .hwpills a{width:186px;box-sizing:border-box;min-height:40px;display:flex;align-items:center;justify-content:center;padding:0 .4em;font-size:1.25rem}
+}
+@media(min-width:1200px){
+/* Home "60+ groups" card: two 480 columns, text 410 wide, photos 280 */
+.tb .wwa{grid-template-columns:480px 480px;gap:20px;padding:62px 0 0;height:681px;box-sizing:border-box;align-items:start}
+.tb .wwa>div:not(.wwa-cluster){padding:0 63px 0 7px;grid-column:2;grid-row:1}
+.tb .wwa>.wwa-cluster{grid-column:1;grid-row:1;order:0;padding:0;width:480px;margin-top:-35px}
+.tb .wwa .circles{width:480px;max-width:480px;height:520px;aspect-ratio:auto;margin:0;transform:none}
+.tb .wwa .circles img:nth-of-type(1){width:280px;left:58px;top:27px;z-index:1}
+.tb .wwa .circles img:nth-of-type(2){width:280px;left:142px;top:204px;bottom:auto;translate:none;z-index:2}
+.tb .wwa .circles .blob{width:84px;left:36px;top:10px;z-index:0}
+.tb .wwa .circles .deco-rings{width:188px;height:188px;right:44px;left:auto;top:0}
+/* every button is 40 tall on the Wix pages */
+.tb .btn{min-height:40px;padding-top:.45em;padding-bottom:.45em;display:inline-flex;align-items:center;justify-content:center}
+/* Home "At a glance": card 980 wide, title, the 880 x 300 graph, button */
+.tb .statcard.impact{padding:32px 50px 46px}
+.tb .statcard.impact .sechead{margin:0 0 18px}
+.tb .chartframe{display:block;border:0;margin:0 auto;max-width:100%}
+.tb .chartframe.glance{width:880px;height:300px}
+.tb .statcard.impact .btnrow{margin:18px 0 0}
+.tb .statcard.impact .btn{min-height:40px;padding:0 1.4em;display:inline-flex;align-items:center}
+/* Home "Our focus": rows 730 wide (16px apart), 190 round photo, text column 496 */
+.tb .focusrows{--circle-small:190px;gap:16px;justify-items:center}
+.tb .focusrows li{width:730px;grid-template-columns:190px 496px;justify-content:start;gap:35px;padding:18px 0 19px;box-sizing:border-box}
+.tb .focusrows .fbody h3{font-size:1.25rem!important}
+.tb .focusrows .fbody p{font-size:1rem;max-width:496px}
+}
+/* ===== Wix alignment (mobile): the Wix mobile layout is a 320 canvas with 20px sides, cards edge to edge, 280 of content ===== */
+@media(max-width:740px){
+.tb .wrap>.card,.tb .wrap>.statcard{margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px}
+.tb .bchart.card{margin-left:-20px;margin-right:-20px;padding:24px 20px}
+/* Home hero: text card then a 265 tall video, 16px apart, both edge to edge */
+.tb .hsplit-in{width:auto;max-width:none;margin:0 -20px;gap:16px}
+.tb .hsplit .hsolid-text{padding:20px 20px 24px}
+.tb .hsplit .hsolid-text .eyebrow{margin-bottom:16px}
+.tb .hsplit .hsolid-text h1{font-size:2rem;line-height:1.12}
+.tb .hsplit .hsolid-text .lede{font-size:1.0625rem;line-height:1.6;margin-bottom:18px}
+.tb .hsplit .hsplit-r,.tb .hsplit.hsplit-sq .hsplit-r{height:265px!important;aspect-ratio:auto!important}
+/* Home: Connect / Share / Care stacked, each 280 x 44 */
+.tb .hwpills{grid-template-columns:1fr;gap:0;width:280px}
+.tb .hwpills a{width:280px;min-height:44px}
+/* Home "60+ groups": photos 160, two columns of LGA names, text 280 wide */
+.tb .wwa{padding-top:32px}
+.tb .wwa .circles{width:100%;max-width:none;height:230px;aspect-ratio:auto;margin:0;transform:none}
+.tb .wwa .circles img:nth-of-type(1){width:160px;left:-13px;top:0}
+.tb .wwa .circles img:nth-of-type(2){width:160px;left:120px;top:50px;bottom:auto;translate:none}
+/* Home "At a glance": the graph takes the full 280 and is 480 tall */
+.tb .statcard.impact{padding:32px 20px 40px}
+.tb .chartframe.glance{width:100%;height:480px}
+/* Home "Our focus": 110 round photo, then title and text 280 wide */
+.tb .focusrows{--circle-small:110px}
+.tb .focusrows li{grid-template-columns:1fr;justify-items:start;gap:12px;width:100%}
+.tb .focusrows li .fcirc{justify-self:center;width:110px;height:110px}
+.tb .page .wwa h2,.tb .page .statcard.impact h2{font-size:2rem!important}
+.tb .page .focuscard .sechead{font-size:1.75rem!important}
+.tb .focusrows .fbody h3{font-size:1.0625rem!important}
+.tb .focusrows .fbody p{font-size:1rem}
+}
+/* charts from the Wix build (HTML embeds shown in their Wix sizes) */
+.tb .chartframe{display:block;border:0;width:var(--w,100%);max-width:100%;height:var(--h,300px);margin:0 auto}
+@media(max-width:740px){.tb .chartframe{width:100%;height:var(--mh,300px)}}
+.tb .bchart.card h3{font-size:1.5rem!important;margin:0 0 8px}
+.tb .bchart.card .bgraph{margin-top:0}
+@media(min-width:1200px){
+.tb .bchart.card{padding:40px 40px 40px}
+.tb .bchart.card.ctr{padding:40px 50px}
+.tb .bchart.card.ctr h3,.tb .bchart.card.ctr .bsub{text-align:center;max-width:640px;margin-left:auto;margin-right:auto}
+.tb .bchart.card .bsub{margin:0 0 6px}
+.tb .bchart.card .chartframe{margin-top:20px}
+}
+@media(min-width:1200px){
+/* Progress: column widths from the Wix page */
+.tb .bsplit{grid-template-columns:minmax(0,1fr) 578px;gap:22px}
+.tb .bd32,.tb .vizgrid.d32.bd32{grid-template-columns:minmax(0,1fr) 482px;gap:16px}
+.tb .bd32>.bchart{width:100%}
+.tb .asplist .asp{grid-template-columns:441px 442px;gap:16px;justify-content:space-between}
+}
+/* Network: column widths from the Wix page */
+@media(min-width:1200px){
+.tb #network .splith.net{grid-template-columns:480px 480px;justify-content:space-between;gap:0}
+.tb #network .splith.net .ph .mapbox,.tb #network .gmap iframe{height:480px;min-height:480px;flex:none}
+.tb #nw-stories>.wrap{max-width:1020px;width:100%}
+.tb #nw-stories .tcards{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.tb #our-network .gsub{grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.tb #our-network .gsub li{padding:20px 15px}
+.tb #our-network .dirhead .lgasel{width:304px;min-height:53px}
+.tb #network #our-network{padding-top:80px!important}
+.tb #our-network .dirhead{margin-bottom:42px}
+}
+@media(max-width:740px){
+.tb #network .splith.net h1{font-size:1.75rem}
+.tb #network .splith.net .ph{margin:0 -20px}
+.tb #network .splith.net .ph .mapbox,.tb #network .gmap iframe{height:322px;min-height:322px;border-radius:0}
+.tb #nw-stories>.wrap{width:100%;padding-left:16px;padding-right:16px}
+.tb #nw-stories .tcards{grid-template-columns:1fr}
+.tb #our-network .gsub{grid-template-columns:1fr}
+}
+/* About: column widths from the Wix page */
+@media(min-width:1200px){
+.tb #about .splith.ab{grid-template-columns:386px 576px;column-gap:0;justify-content:space-between;align-items:center}
+.tb #about .splith.ab>div:not(.ph){padding-left:0}
+.tb #about .splith.ab .ph{margin:0;width:386px;height:480px;display:block}
+.tb #about .splith.ab .ph img{width:386px;height:480px;min-height:0;flex:none}
+.tb .aboutgrid{grid-template-columns:minmax(0,1fr) 386px}
+.tb #about .howcards{grid-template-columns:repeat(3,305px);gap:16px;justify-content:center}
+.tb #about .howcards li{min-height:312px;padding:43px 23px 24px}
+.tb #ab-team>.wrap{max-width:1208px;width:100%}
+.tb #ab-team .team2:not(.rsch){display:grid;grid-template-columns:repeat(4,192px);column-gap:146px;row-gap:24px;justify-content:center}
+.tb #ab-team .team2:not(.rsch) li{width:192px;max-width:none}
+.tb #ab-team .team2:not(.rsch) .tc{width:160px;max-width:160px}
+.tb .learngrid{grid-template-columns:441px 489px;column-gap:0;justify-content:start}
+.tb .team2.rsch{display:grid;grid-template-columns:repeat(3,305px);gap:24px 16px;justify-content:center}
+.tb .steergrid{grid-template-columns:458px minmax(0,1fr);gap:56px}
+.tb .steergrid .steer{grid-template-columns:repeat(3,145px);gap:14px;justify-content:start}
+}
+@media(max-width:740px){
+.tb #about .splith.ab h1{font-size:1.75rem}
+.tb #about .splith.ab .ph{margin:0 -20px;width:auto;height:auto}
+.tb #about .splith.ab .ph img{width:100%;height:auto;aspect-ratio:320/211;border-radius:0}
+.tb #about .aboutgrid>.card,.tb #about .fundgrid>.card,.tb #about .howcards>li{margin-left:-20px;margin-right:-20px;border-radius:0}
+.tb #about .steergrid .steer{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tb #ab-team .team2 .tc{width:140px;max-width:140px}
+}
+/* Privacy: column widths from the Wix page */
+@media(min-width:1200px){
+.tb :is(#privacy,#rack-terms) .pphead{width:901px;margin-left:41px;margin-right:0}
+.tb :is(#privacy,#rack-terms) .pphead .lede{max-width:none}
+.tb :is(#privacy,#rack-terms) .pplist2{width:678px;margin-left:146px;margin-right:0;padding-left:0;padding-right:0}
+.tb :is(#privacy,#rack-terms) .ppitem{padding-left:0;padding-right:0}
+.tb :is(#privacy,#rack-terms) .ppitem p,.tb :is(#privacy,#rack-terms) .ppitem .pplist{max-width:none}
+.tb :is(#privacy,#rack-terms) .ppitem .pplist{padding-left:24px}
+}
+@media(max-width:740px){
+.tb :is(#privacy,#rack-terms) .pphead h1{font-size:1.75rem}
+.tb :is(#privacy,#rack-terms) .pplist2{padding-left:0;padding-right:0}
+}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
-.tb #about>.wrap:first-child{margin-bottom:32px}.tb #privacy>.wrap:first-child{margin-bottom:32px}.tb #about>.sec{padding-bottom:var(--space-large)!important}
+.tb #about>.wrap:first-child{margin-bottom:32px}.tb :is(#privacy,#rack-terms)>.wrap:first-child{margin-bottom:32px}.tb #about>.sec{padding-bottom:var(--space-large)!important}
 
 /* Network page: map as tall as the text, testimonials, suburb directory */
 .tb .splith.net{align-items:stretch}.tb .splith.net>div:first-child{align-self:center}.tb .splith.net .ph{display:flex}.tb .splith.net .ph .mapbox{height:auto;min-height:517px;flex:1}
@@ -1350,7 +1546,7 @@ var pg=a.getAttribute('data-page');if(location.hash==='#'+pg){document.getElemen
 
 def page(v):
     css, cls = CSS_B, "tb"
-    body = "".join([screen("home", "Home", home_body(HERO_FOR[v])), screen("about", "About", about_body()), screen("journey", "Progress", progress_body_b(), "bjourney"), screen("rack", "RACK", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
+    body = "".join([screen("home", "Home", home_body(HERO_FOR[v])), screen("about", "About", about_body()), screen("journey", "Progress", progress_body_b(), "bjourney"), screen("rack", "RACK", rack_body()), screen("privacy", "Privacy Policy", privacy_body()), screen("rack-terms", "RACK Terms of Use", rack_terms_body()), screen("network", "Network", network_body())] + [screen("lga-" + slug(l), l, lga_body(l)) for l in LGA_ORDER])
     return f'''<!doctype html>
 <html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{NAMES[v]}</title><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noai, noimageai">

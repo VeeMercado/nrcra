@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#07293B; --teal:#00A79D; --yellow:#FFCB2A; --orange:#F05A28; --off:#D6E2E4; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:transparent}
+  body{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+  .rows{display:flex;flex-direction:column;gap:26px}
+  .row{display:grid;column-gap:40px;align-items:center}
+  .label{text-align:right;font-weight:600;font-size:18px;line-height:1.35}
+  .label b{font-weight:900}
+  .dots{display:grid;gap:4px}
+  .dot{width:var(--d);height:var(--d);border-radius:50%;background:var(--off)}
+  .dot.on{background:var(--c)}
+
+  /* phones: label above the dots, centred */
+  .narrow .row{grid-template-columns:1fr;row-gap:10px}
+  .narrow .label{text-align:center;font-size:16px}
+  .narrow .dots{justify-content:center}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .rows{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:600 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style>
+</head>
+<body>
+<div class="stage grey" id="stage">
+  <div class="rows" id="rows"></div>
+  <div class="note"><div>
+    <p>Graph design and copy can be updated in the embed code by double clicking this graph.</p>
+    <p>The graph dots and numbers can be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;.</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor) to see the graph populated.</p>
+  </div></div>
+</div>
+
+<script>
+  var TOTAL = 60;      // dots drawn in every row (the numbers in the text can be higher)
+
+  // Each row: the key the Wix page code sends its count under, its dot colour, and its wording.
+  // {n} becomes the number. Row 1 shows the group total rounded DOWN to the nearest 10 with a "+" (68 shows 60+).
+  var ROWS = [
+    { key: "groups",   colour: "#00A79D", text: "{n} grassroots groups and organisations" },
+    { key: "disaster", colour: "#FFCB2A", text: "{n} groups have experienced disasters as a team and continued to thrive" },
+    { key: "council",  colour: "#F05A28", text: "{n} groups have built strong relationships with local government" }
+  ];
+  var stage = document.getElementById("stage");
+  var data = { groups: 68, disaster: 43, council: 35 };      // grey static preview numbers
+
+  function draw() {
+    var host = document.getElementById("rows");
+    var W = window.innerWidth;
+    var narrow = W < 560;
+    document.body.className = narrow ? "narrow" : "";
+    host.innerHTML = "";
+
+    // 20 dots per line on desktop, 15 on phones (3 and 4 lines of 60)
+    var cols = narrow ? 15 : 20, gap = 4;
+    var area = narrow ? W - 8 : Math.floor(W * 0.6);     // on desktop the dots take up 60% of the box
+    var d = Math.max(6, Math.min(26, Math.floor(((area - (cols - 1) * gap) / cols) * 10) / 10));
+    var dotsW = cols * d + (cols - 1) * gap;
+    document.documentElement.style.setProperty("--d", d + "px");
+
+    ROWS.forEach(function (r) {
+      var count = Math.max(0, Number(data[r.key]) || 0);
+      var shown, dotsOn;
+      if (r.key === "groups") {                       // total row: rounded text, every dot on
+        shown = (Math.floor(count / 10) * 10) + "+";
+        dotsOn = TOTAL;
+      } else {
+        shown = String(count);
+        dotsOn = Math.min(TOTAL, count);
+      }
+      var text = r.text.replace("{n}", "<b>" + shown + "</b>");
+
+      var row = document.createElement("div");
+      row.className = "row";
+      if (!narrow) { row.style.gridTemplateColumns = "1fr " + dotsW + "px"; }
+      row.setAttribute("role", "img");
+      row.setAttribute("aria-label", r.text.replace("{n}", shown));
+
+      var label = document.createElement("div");
+      label.className = "label"; label.innerHTML = text;
+
+      var dots = document.createElement("div");
+      dots.className = "dots";
+      dots.style.gridTemplateColumns = "repeat(" + cols + "," + d + "px)";
+      for (var i = 0; i < TOTAL; i++) {
+        var dot = document.createElement("span");
+        dot.className = "dot" + (i < dotsOn ? " on" : "");
+        dot.style.setProperty("--c", r.colour);
+        dots.appendChild(dot);
+      }
+
+      row.appendChild(label); row.appendChild(dots);
+      host.appendChild(row);
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "impact") {                                         // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+</script>
+</body>
+</html>

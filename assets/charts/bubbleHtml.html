@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#07293B; --yellow:#FFCB2A; --off:#D6E2E4; }
+  html,body{margin:0;padding:0;height:100%;background:transparent}
+  body{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy)}
+  .stage{position:relative;height:100%}
+  svg{display:block;width:100%;height:100%}
+  text{font-family:"Nunito Sans",Arial,sans-serif;font-weight:900;fill:var(--navy);text-anchor:middle;dominant-baseline:central}
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage.grey svg{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:600 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style>
+</head>
+<body>
+<div class="stage grey" id="stage">
+  <svg id="chart" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" role="img"></svg>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+<script>
+  var LABELS = ["≤10", "11-20", "21-30", ">30"];   // the four team sizes
+  var NS = "http://www.w3.org/2000/svg";
+  var stage = document.getElementById("stage");
+
+  // Works out circle positions so they touch but do not overlap (simple push-apart packing)
+  function pack(radii) {
+    var n = radii.length, pts = [];
+    for (var i = 0; i < n; i++) {
+      var a = (i / n) * Math.PI * 2 + 0.6;
+      pts.push({ x: Math.cos(a) * 60, y: Math.sin(a) * 60, r: radii[i] });
+    }
+    for (var step = 0; step < 600; step++) {
+      for (var i2 = 0; i2 < n; i2++) { pts[i2].x *= 0.985; pts[i2].y *= 0.985; }
+      for (var p = 0; p < n; p++) {
+        for (var q = p + 1; q < n; q++) {
+          var dx = pts[q].x - pts[p].x, dy = pts[q].y - pts[p].y;
+          var dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
+          var min = pts[p].r + pts[q].r + 4;
+          if (dist < min) {
+            var push = (min - dist) / 2, ux = dx / dist, uy = dy / dist;
+            pts[p].x -= ux * push; pts[p].y -= uy * push;
+            pts[q].x += ux * push; pts[q].y += uy * push;
+          }
+        }
+      }
+    }
+    return pts;
+  }
+
+  function draw(counts, columnName) {
+    var svg = document.getElementById("chart");
+    svg.innerHTML = "";
+    var max = Math.max.apply(null, counts);
+    if (!max) { return; }
+    svg.setAttribute("aria-label", (columnName || "Active Volunteers") + ": number of groups in each size of volunteer team");
+
+    // Area is proportional to the count, so the radius follows the square root
+    var maxR = 130;
+    var radii = counts.map(function (c) { return c > 0 ? Math.max(14, maxR * Math.sqrt(c / max)) : 0; });
+    var pts = pack(radii);
+
+    var minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+    pts.forEach(function (p) {
+      if (!p.r) return;
+      minX = Math.min(minX, p.x - p.r); maxX = Math.max(maxX, p.x + p.r);
+      minY = Math.min(minY, p.y - p.r); maxY = Math.max(maxY, p.y + p.r);
+    });
+    var pad = 12;
+    svg.setAttribute("viewBox", [minX - pad, minY - pad, (maxX - minX) + pad * 2, (maxY - minY) + pad * 2].join(" "));
+
+    pts.forEach(function (p, i) {
+      if (!p.r) return;
+      var g = document.createElementNS(NS, "g");
+      var title = document.createElementNS(NS, "title");
+      title.textContent = LABELS[i] + " volunteers: " + counts[i] + (counts[i] === 1 ? " group" : " groups");
+      var c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", p.x); c.setAttribute("cy", p.y); c.setAttribute("r", p.r);
+      c.setAttribute("fill", counts[i] === max ? "#FFCB2A" : "#D6E2E4");
+      var t = document.createElementNS(NS, "text");
+      t.setAttribute("x", p.x); t.setAttribute("y", p.y);
+      t.setAttribute("font-size", Math.max(9, p.r * 0.42));
+      t.textContent = LABELS[i];
+      g.appendChild(title); g.appendChild(c); g.appendChild(t);
+      svg.appendChild(g);
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw([38, 14, 6, 4]);
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") {                      // real page: hide the editor note, keep the grey placeholder while loading
+      stage.classList.add("live");
+    }
+    if (m.type === "bubbles") {                   // real numbers: replace the grey preview
+      stage.classList.remove("grey");
+      stage.classList.add("live");
+      draw(m.counts, (m.labels || {}).activeVolunteers);
+    }
+  });
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart, ?live=1 to see the loading state
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw([38, 14, 6, 4]); }
+</script>
+</body>
+</html>

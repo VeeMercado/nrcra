@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#07293B; --teal:#00A79D; --yellow:#FFCB2A; --orange:#F05A28; --gap:3px; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:transparent}
+  body{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+  .rows{display:flex;flex-direction:column;gap:14px;margin:0 auto}
+  .row{display:grid;grid-template-columns:1fr 104px;column-gap:12px;align-items:center}
+  .area{display:flex;justify-content:flex-end;align-items:center;gap:8px;min-width:0}
+  .count{font-weight:900;font-size:14px;white-space:nowrap}
+  .block{display:grid;gap:var(--gap);grid-template-rows:repeat(2,var(--sq))}
+  .sq{width:var(--sq);height:var(--sq);border-radius:2px;background:var(--c)}
+  .label{font-weight:600;font-size:14px;line-height:1.25}
+
+  /* narrow (phones): count and label sit above the squares */
+  .narrow .row{grid-template-columns:1fr;row-gap:6px}
+  .narrow .label{order:-1}
+  .narrow .label{font-size:14px}
+  .narrow .area{justify-content:flex-start}
+  .narrow .count{display:none}
+  .narrow .label b{font-weight:900}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .rows{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:600 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style>
+</head>
+<body>
+<div class="stage grey" id="stage">
+  <div class="rows" id="rows"></div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+<script>
+  // Each row: its colour, the CMS field it counts (its column name becomes the label), and a typed label used if the column name is not available
+  var ROWS = [
+    { key: "online",     field: "onlinePresence",                                                   colour: "#07293B", label: "Have an online presence" },
+    { key: "incorp",     field: "incorporated",                                                     colour: "#F05A28", label: "Are incorporated" },
+    { key: "hub",        field: "doTheyHaveAHubForStoringAndAccessingKeyDocumentsAndTemplates",     colour: "#00A79D", label: "Have a document hub" },
+    { key: "volunteers", field: "doTheyHaveVolunteerPolicyProceduresRiskDocumentationOrTemplates",  colour: "#FFCB2A", label: "Have volunteer policies" }
+  ];
+  var stage = document.getElementById("stage");
+  var data = { online: 49, incorp: 40, hub: 27, volunteers: 16 };   // grey static preview numbers
+
+  function draw() {
+    var host = document.getElementById("rows");
+    var narrow = window.innerWidth < 460;
+    document.body.className = narrow ? "narrow" : "";
+    host.innerHTML = "";
+    if (!data) { return; }
+
+    var names = data.labels || {};
+    ROWS.forEach(function (r) { r.text = names[r.field] || r.label; });     // column name from the CMS, else the typed label
+    var counts = ROWS.map(function (r) { return Number(data[r.key]) || 0; });
+    var maxCols = Math.max(1, Math.ceil(Math.max.apply(null, counts) / 2));   // 2 lines of squares, as in Flourish
+
+    // Width left for the squares, then the size of one square so the biggest row just fits
+    var gap = 3;
+    var usable = narrow ? window.innerWidth - 8 : window.innerWidth - 104 - 12 - 8 - 84;
+    var sq = Math.max(5, Math.min(18, Math.floor(((usable - (maxCols - 1) * gap) / maxCols) * 10) / 10));
+    document.documentElement.style.setProperty("--sq", sq + "px");
+
+    // Centre the whole chart in the box: its width is count + biggest block + label
+    var blockW = maxCols * sq + (maxCols - 1) * gap;
+    host.style.width = narrow ? "100%" : Math.min(window.innerWidth, 84 + 8 + blockW + 12 + 104) + "px";
+
+    ROWS.forEach(function (r, i) {
+      var n = counts[i], cols = Math.ceil(n / 2);
+
+      var row = document.createElement("div");
+      row.className = "row";
+      row.setAttribute("role", "img");
+      row.setAttribute("aria-label", n + " groups " + r.text.toLowerCase());
+
+      var area = document.createElement("div");
+      area.className = "area";
+      var count = document.createElement("span");
+      count.className = "count";
+      count.textContent = n + " groups";
+      var block = document.createElement("div");
+      block.className = "block";
+      block.style.gridTemplateColumns = "repeat(" + cols + "," + sq + "px)";
+      block.style.gridAutoFlow = "column";
+      for (var k = 0; k < n; k++) {
+        var s = document.createElement("span");
+        s.className = "sq";
+        s.style.setProperty("--c", r.colour);
+        block.appendChild(s);
+      }
+      area.appendChild(count);
+      area.appendChild(block);
+
+      var label = document.createElement("div");
+      label.className = "label";
+      label.innerHTML = narrow ? "<b>" + n + " groups</b> " + r.text.toLowerCase() : r.text;
+
+      row.appendChild(area);
+      row.appendChild(label);
+      host.appendChild(row);
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "stages") {                                         // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart with example labels
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+</script>
+</body>
+</html>

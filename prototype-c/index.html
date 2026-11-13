@@ -665,9 +665,9 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(max-width:860px){.tb .gmap iframe{height:461px;min-height:0;flex:none}}
 .tb .splith.net .mapnote .ringico{display:inline-block;vertical-align:-3px;margin:0 2px}
 /* Privacy Policy, desktop: the heading and the policy box are centred at 80% of the page width */
-@media(min-width:861px){.tb #privacy .pphead,.tb #privacy .pplist2{width:80%;margin-left:auto;margin-right:auto}}
+@media(min-width:861px){.tb :is(#privacy,#rack-terms) .pphead,.tb :is(#privacy,#rack-terms) .pplist2{width:80%;margin-left:auto;margin-right:auto}}
 /* Privacy Policy: same space between the header and the content as About (32px) */
-.tb #privacy .pphead{padding-bottom:0}.tb #privacy .pphead .ppdate{margin-bottom:0}
+.tb :is(#privacy,#rack-terms) .pphead{padding-bottom:0}.tb :is(#privacy,#rack-terms) .pphead .ppdate{margin-bottom:0}
 /* Journey: 130px (Large spacing) above these three section titles, from the content above them */
 .tb #pr-faced,.tb #pr-connect,.tb #pr-aspire{padding-top:calc(var(--space-large) - 60px)!important}
 /* Prototype B: redrawn Journey charts. Titles are h3, the text under them is normal size. Cards are white with rounded corners; charts without .card sit straight on the page. */
@@ -758,10 +758,159 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 .tb .bchart .flourish-embed{width:100%;min-height:150px}.tb .bchart .bgraph iframe{display:block}
 .tb .ppitem .pplist{list-style:disc;margin:.4em 0 0;padding-left:1.25em;max-width:70ch}.tb .ppitem .pplist li+li{margin-top:.35em}.tb .ppitem .pplist+p{margin-top:.6em}.tb .ppitem h2{margin-bottom:.4em}
 .tb .rackterms{margin:20px 0 14px;max-width:48ch}
+/* ===== Wix alignment (desktop): sizes and column widths measured from the live Wix pages, 980px column ===== */
+@media(min-width:1200px){
+/* Home hero: text card 578, video 386, 16px between, both 566 tall */
+.tb .hsplit-in{width:100%;max-width:980px;grid-template-columns:minmax(0,1fr) 386px;gap:16px;min-height:566px;align-items:stretch}
+.tb .hsplit.hsplit-sq .hsplit-r,.tb .hsplit .hsplit-r{width:100%;height:auto;aspect-ratio:auto;align-self:stretch}
+.tb .hsplit .hsolid-text{padding:40px 26px}
+.tb .hsplit .hsolid-text .eyebrow{margin:0 0 27px 3px;width:350px;min-height:30px;padding:0!important;display:inline-flex;align-items:center;justify-content:center;line-height:1.25}
+.tb .hsplit .hsolid-text h1{font-size:3.5rem;line-height:1.18;margin:0 0 3px}
+.tb .hsplit .hsolid-text .lede{font-size:1.25rem;line-height:1.5;max-width:490px;margin:0 0 30px 3px}
+.tb .hsplit .hsolid-text .btnrow{margin:0 0 0 3px}
+.tb .hsplit .hsolid-text .btn{min-height:40px;padding:0 1.25em;font-size:1rem;display:inline-flex;align-items:center}
+/* Home: Connect / Share / Care, each 186 wide and 40 tall, 10px apart */
+.tb .hwpills{gap:10px}
+.tb .hwpills a{width:186px;box-sizing:border-box;min-height:40px;display:flex;align-items:center;justify-content:center;padding:0 .4em;font-size:1.25rem}
+}
+@media(min-width:1200px){
+/* Home "60+ groups" card: two 480 columns, text 410 wide, photos 280 */
+.tb .wwa{grid-template-columns:480px 480px;gap:20px;padding:62px 0 0;height:681px;box-sizing:border-box;align-items:start}
+.tb .wwa>div:not(.wwa-cluster){padding:0 63px 0 7px;grid-column:2;grid-row:1}
+.tb .wwa>.wwa-cluster{grid-column:1;grid-row:1;order:0;padding:0;width:480px;margin-top:-35px}
+.tb .wwa .circles{width:480px;max-width:480px;height:520px;aspect-ratio:auto;margin:0;transform:none}
+.tb .wwa .circles img:nth-of-type(1){width:280px;left:58px;top:27px;z-index:1}
+.tb .wwa .circles img:nth-of-type(2){width:280px;left:142px;top:204px;bottom:auto;translate:none;z-index:2}
+.tb .wwa .circles .blob{width:84px;left:36px;top:10px;z-index:0}
+.tb .wwa .circles .deco-rings{width:188px;height:188px;right:44px;left:auto;top:0}
+/* every button is 40 tall on the Wix pages */
+.tb .btn{min-height:40px;padding-top:.45em;padding-bottom:.45em;display:inline-flex;align-items:center;justify-content:center}
+/* Home "At a glance": card 980 wide, title, the 880 x 300 graph, button */
+.tb .statcard.impact{padding:32px 50px 46px}
+.tb .statcard.impact .sechead{margin:0 0 18px}
+.tb .chartframe{display:block;border:0;margin:0 auto;max-width:100%}
+.tb .chartframe.glance{width:880px;height:300px}
+.tb .statcard.impact .btnrow{margin:18px 0 0}
+.tb .statcard.impact .btn{min-height:40px;padding:0 1.4em;display:inline-flex;align-items:center}
+/* Home "Our focus": rows 730 wide (16px apart), 190 round photo, text column 496 */
+.tb .focusrows{--circle-small:190px;gap:16px;justify-items:center}
+.tb .focusrows li{width:730px;grid-template-columns:190px 496px;justify-content:start;gap:35px;padding:18px 0 19px;box-sizing:border-box}
+.tb .focusrows .fbody h3{font-size:1.25rem!important}
+.tb .focusrows .fbody p{font-size:1rem;max-width:496px}
+}
+/* ===== Wix alignment (mobile): the Wix mobile layout is a 320 canvas with 20px sides, cards edge to edge, 280 of content ===== */
+@media(max-width:740px){
+.tb .wrap>.card,.tb .wrap>.statcard{margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px}
+.tb .bchart.card{margin-left:-20px;margin-right:-20px;padding:24px 20px}
+/* Home hero: text card then a 265 tall video, 16px apart, both edge to edge */
+.tb .hsplit-in{width:auto;max-width:none;margin:0 -20px;gap:16px}
+.tb .hsplit .hsolid-text{padding:20px 20px 24px}
+.tb .hsplit .hsolid-text .eyebrow{margin-bottom:16px}
+.tb .hsplit .hsolid-text h1{font-size:2rem;line-height:1.12}
+.tb .hsplit .hsolid-text .lede{font-size:1.0625rem;line-height:1.6;margin-bottom:18px}
+.tb .hsplit .hsplit-r,.tb .hsplit.hsplit-sq .hsplit-r{height:265px!important;aspect-ratio:auto!important}
+/* Home: Connect / Share / Care stacked, each 280 x 44 */
+.tb .hwpills{grid-template-columns:1fr;gap:0;width:280px}
+.tb .hwpills a{width:280px;min-height:44px}
+/* Home "60+ groups": photos 160, two columns of LGA names, text 280 wide */
+.tb .wwa{padding-top:32px}
+.tb .wwa .circles{width:100%;max-width:none;height:230px;aspect-ratio:auto;margin:0;transform:none}
+.tb .wwa .circles img:nth-of-type(1){width:160px;left:-13px;top:0}
+.tb .wwa .circles img:nth-of-type(2){width:160px;left:120px;top:50px;bottom:auto;translate:none}
+/* Home "At a glance": the graph takes the full 280 and is 480 tall */
+.tb .statcard.impact{padding:32px 20px 40px}
+.tb .chartframe.glance{width:100%;height:480px}
+/* Home "Our focus": 110 round photo, then title and text 280 wide */
+.tb .focusrows{--circle-small:110px}
+.tb .focusrows li{grid-template-columns:1fr;justify-items:start;gap:12px;width:100%}
+.tb .focusrows li .fcirc{justify-self:center;width:110px;height:110px}
+.tb .page .wwa h2,.tb .page .statcard.impact h2{font-size:2rem!important}
+.tb .page .focuscard .sechead{font-size:1.75rem!important}
+.tb .focusrows .fbody h3{font-size:1.0625rem!important}
+.tb .focusrows .fbody p{font-size:1rem}
+}
+/* charts from the Wix build (HTML embeds shown in their Wix sizes) */
+.tb .chartframe{display:block;border:0;width:var(--w,100%);max-width:100%;height:var(--h,300px);margin:0 auto}
+@media(max-width:740px){.tb .chartframe{width:100%;height:var(--mh,300px)}}
+.tb .bchart.card h3{font-size:1.5rem!important;margin:0 0 8px}
+.tb .bchart.card .bgraph{margin-top:0}
+@media(min-width:1200px){
+.tb .bchart.card{padding:40px 40px 40px}
+.tb .bchart.card.ctr{padding:40px 50px}
+.tb .bchart.card.ctr h3,.tb .bchart.card.ctr .bsub{text-align:center;max-width:640px;margin-left:auto;margin-right:auto}
+.tb .bchart.card .bsub{margin:0 0 6px}
+.tb .bchart.card .chartframe{margin-top:20px}
+}
+@media(min-width:1200px){
+/* Progress: column widths from the Wix page */
+.tb .bsplit{grid-template-columns:minmax(0,1fr) 578px;gap:22px}
+.tb .bd32,.tb .vizgrid.d32.bd32{grid-template-columns:minmax(0,1fr) 482px;gap:16px}
+.tb .bd32>.bchart{width:100%}
+.tb .asplist .asp{grid-template-columns:441px 442px;gap:16px;justify-content:space-between}
+}
+/* Network: column widths from the Wix page */
+@media(min-width:1200px){
+.tb #network .splith.net{grid-template-columns:480px 480px;justify-content:space-between;gap:0}
+.tb #network .splith.net .ph .mapbox,.tb #network .gmap iframe{height:480px;min-height:480px;flex:none}
+.tb #nw-stories>.wrap{max-width:1020px;width:100%}
+.tb #nw-stories .tcards{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.tb #our-network .gsub{grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.tb #our-network .gsub li{padding:20px 15px}
+.tb #our-network .dirhead .lgasel{width:304px;min-height:53px}
+.tb #network #our-network{padding-top:80px!important}
+.tb #our-network .dirhead{margin-bottom:42px}
+}
+@media(max-width:740px){
+.tb #network .splith.net h1{font-size:1.75rem}
+.tb #network .splith.net .ph{margin:0 -20px}
+.tb #network .splith.net .ph .mapbox,.tb #network .gmap iframe{height:322px;min-height:322px;border-radius:0}
+.tb #nw-stories>.wrap{width:100%;padding-left:16px;padding-right:16px}
+.tb #nw-stories .tcards{grid-template-columns:1fr}
+.tb #our-network .gsub{grid-template-columns:1fr}
+}
+/* About: column widths from the Wix page */
+@media(min-width:1200px){
+.tb #about .splith.ab{grid-template-columns:386px 576px;column-gap:0;justify-content:space-between;align-items:center}
+.tb #about .splith.ab>div:not(.ph){padding-left:0}
+.tb #about .splith.ab .ph{margin:0;width:386px;height:480px;display:block}
+.tb #about .splith.ab .ph img{width:386px;height:480px;min-height:0;flex:none}
+.tb .aboutgrid{grid-template-columns:minmax(0,1fr) 386px}
+.tb #about .howcards{grid-template-columns:repeat(3,305px);gap:16px;justify-content:center}
+.tb #about .howcards li{min-height:312px;padding:43px 23px 24px}
+.tb #ab-team>.wrap{max-width:1208px;width:100%}
+.tb #ab-team .team2:not(.rsch){display:grid;grid-template-columns:repeat(4,192px);column-gap:146px;row-gap:24px;justify-content:center}
+.tb #ab-team .team2:not(.rsch) li{width:192px;max-width:none}
+.tb #ab-team .team2:not(.rsch) .tc{width:160px;max-width:160px}
+.tb .learngrid{grid-template-columns:441px 489px;column-gap:0;justify-content:start}
+.tb .team2.rsch{display:grid;grid-template-columns:repeat(3,305px);gap:24px 16px;justify-content:center}
+.tb .steergrid{grid-template-columns:458px minmax(0,1fr);gap:56px}
+.tb .steergrid .steer{grid-template-columns:repeat(3,145px);gap:14px;justify-content:start}
+}
+@media(max-width:740px){
+.tb #about .splith.ab h1{font-size:1.75rem}
+.tb #about .splith.ab .ph{margin:0 -20px;width:auto;height:auto}
+.tb #about .splith.ab .ph img{width:100%;height:auto;aspect-ratio:320/211;border-radius:0}
+.tb #about .aboutgrid>.card,.tb #about .fundgrid>.card,.tb #about .howcards>li{margin-left:-20px;margin-right:-20px;border-radius:0}
+.tb #about .steergrid .steer{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tb #ab-team .team2 .tc{width:140px;max-width:140px}
+}
+/* Privacy: column widths from the Wix page */
+@media(min-width:1200px){
+.tb :is(#privacy,#rack-terms) .pphead{width:901px;margin-left:41px;margin-right:0}
+.tb :is(#privacy,#rack-terms) .pphead .lede{max-width:none}
+.tb :is(#privacy,#rack-terms) .pplist2{width:678px;margin-left:146px;margin-right:0;padding-left:0;padding-right:0}
+.tb :is(#privacy,#rack-terms) .ppitem{padding-left:0;padding-right:0}
+.tb :is(#privacy,#rack-terms) .ppitem p,.tb :is(#privacy,#rack-terms) .ppitem .pplist{max-width:none}
+.tb :is(#privacy,#rack-terms) .ppitem .pplist{padding-left:24px}
+}
+@media(max-width:740px){
+.tb :is(#privacy,#rack-terms) .pphead h1{font-size:1.75rem}
+.tb :is(#privacy,#rack-terms) .pplist2{padding-left:0;padding-right:0}
+}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
-.tb #about>.wrap:first-child{margin-bottom:32px}.tb #privacy>.wrap:first-child{margin-bottom:32px}.tb #about>.sec{padding-bottom:var(--space-large)!important}
+.tb #about>.wrap:first-child{margin-bottom:32px}.tb :is(#privacy,#rack-terms)>.wrap:first-child{margin-bottom:32px}.tb #about>.sec{padding-bottom:var(--space-large)!important}
 
 /* Network page: map as tall as the text, testimonials, suburb directory */
 .tb .splith.net{align-items:stretch}.tb .splith.net>div:first-child{align-self:center}.tb .splith.net .ph{display:flex}.tb .splith.net .ph .mapbox{height:auto;min-height:517px;flex:1}
@@ -809,7 +958,122 @@ body .lgrid>*,body .team>*{flex-basis:calc(50% - 8px)}
 
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="card wwa surface"><div><h2>60+ groups,<br>one region, <span class="mark">one network.<svg class="squig" viewBox="0 0 300 24" aria-hidden="true"><path d="M4 16c40-12 80-12 120-2s90 8 172-6" fill="none" stroke="#ffcb2a" stroke-width="8" stroke-linecap="round"/></svg></span></h2><p class="subline">Community knowledge, lived experience and shared learning.</p><p>Since early 2024, groups and organisations across the Northern Rivers have joined together to form the Resilience Alliance, a grassroots community-led network focused on collective care, preparedness and regional strength.</p><p>No community should have to build disaster resilience alone. The Resilience Alliance connects prepared communities so they can share knowledge and work together, not in parallel.</p>
 <p class="btnrow"><a class="btn btn-primary" href="#network">Explore the network</a></p></div><div class="wwa-cluster"><div class="circles"><svg class="deco deco-rings " viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="70" fill="none" stroke="#ffcb2a" stroke-width="6"/><circle cx="80" cy="80" r="48" fill="none" stroke="#00857c" stroke-width="5" stroke-dasharray="4 10" stroke-linecap="round"/><circle cx="80" cy="80" r="26" fill="#f05a28" opacity=".85"/></svg><img src="../assets/img/home-circle-top.jpg" alt="" loading="lazy" decoding="async"><img src="../assets/img/home-circle-bottom.jpg" alt="" loading="lazy" decoding="async"><span class="blob" aria-hidden="true"></span></div><ul class="lgapills"><li><a href="#lga-tweed">Tweed LGA</a></li><li><a href="#lga-byron">Byron LGA</a></li><li><a href="#lga-kyogle">Kyogle LGA</a></li><li><a href="#lga-lismore">Lismore LGA</a></li><li><a href="#lga-richmond-valley">Richmond Valley LGA</a></li><li><a href="#lga-ballina">Ballina LGA</a></li><li><a href="#lga-tenterfield">Tenterfield LGA</a></li><li><a href="#lga-clarence-valley">Clarence Valley LGA</a></li></ul></div></div></div></section>
-<section class="sec"><div class="wrap"><div class="statcard impact"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30822485"><noscript><img src="https://public.flourish.studio/visualisation/30822485/thumbnail" width="100%" alt="Pictogram of $2M+ in funding since inception: 60+ grassroots groups and organisations to prepare, 43 groups that have experienced disasters as a team to continue to thrive, 35 groups have built strong relationships with local government."></noscript></div><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See our progress</a></p></div></div></section>
+<section class="sec"><div class="wrap"><div class="statcard impact"><h2 class="sechead cen">At a glance</h2><script>window.__chartHost=function(h){var r=h.shadowRoot,rs=[],w={innerWidth:0,addEventListener:function(t,f){if(t==='resize')rs.push(f)},parent:null};w.parent=w;Object.defineProperty(w,'innerWidth',{get:function(){return h.clientWidth}});var d={getElementById:function(i){return r.getElementById(i)},body:(function(b){return{get className(){return b.className.replace(/^pbody ?/,'')},set className(v){b.className=('pbody '+v).trim()}}})(r.querySelector('.pbody')),documentElement:h,createElement:function(t){return document.createElement(t)},createElementNS:function(n,t){return document.createElementNS(n,t)}};if(window.ResizeObserver){new ResizeObserver(function(){rs.forEach(function(f){f()})}).observe(h)}return{w:w,d:d,l:{search:'?demo=1'}}};</script><div class="chartframe glance" role="img" aria-label="At a glance: 60+ grassroots groups and organisations, groups that have experienced disasters as a team, groups with strong relationships with local government" style=""><template shadowrootmode="open"><style>
+  :host{ --navy:#07293B; --teal:#00857c; --yellow:#FFCB2A; --orange:#F05A28; --off:#D6E2E4; }
+  *{box-sizing:border-box}
+  :host,.pbody{margin:0;padding:0;background:transparent}
+  .pbody{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+  .rows{display:flex;flex-direction:column;gap:26px}
+  .row{display:grid;column-gap:40px;align-items:center}
+  .label{text-align:right;font-weight:800;font-size:18px;line-height:1.35}
+  .label b{font-weight:800}
+  .dots{display:grid;gap:4px}
+  .dot{width:var(--d);height:var(--d);border-radius:50%;background:var(--off)}
+  .dot.on{background:var(--c)}
+
+  /* phones: label above the dots, centred */
+  .narrow .row{grid-template-columns:1fr;row-gap:10px}
+  .narrow .label{text-align:center;font-size:16px}
+  .narrow .dots{justify-content:center}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .rows{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:800 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style><div class="pbody">
+<div class="stage grey" id="stage">
+  <div class="rows" id="rows"></div>
+  <div class="note"><div>
+    <p>Graph design and copy can be updated in the embed code by double clicking this graph.</p>
+    <p>The graph dots and numbers can be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;.</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor) to see the graph populated.</p>
+  </div></div>
+</div>
+
+</div></template></div><script>(function(c){(function(window,document,location){
+  var TOTAL = 60;      // dots drawn in every row (the numbers in the text can be higher)
+
+  // Each row: the key the Wix page code sends its count under, its dot colour, and its wording.
+  // {n} becomes the number. Row 1 shows the group total rounded DOWN to the nearest 10 with a "+" (68 shows 60+).
+  var ROWS = [
+    { key: "groups",   colour: "#00857c", text: "{n} grassroots groups and organisations" },
+    { key: "disaster", colour: "#FFCB2A", text: "{n} groups have experienced disasters as a team and continued to thrive" },
+    { key: "council",  colour: "#F05A28", text: "{n} groups have built strong relationships with local government" }
+  ];
+  var stage = document.getElementById("stage");
+  var data = { groups: 68, disaster: 43, council: 35 };      // grey static preview numbers
+
+  function draw() {
+    var host = document.getElementById("rows");
+    var W = window.innerWidth;
+    var narrow = W < 560;
+    document.body.className = narrow ? "narrow" : "";
+    host.innerHTML = "";
+
+    // 20 dots per line on desktop, 15 on phones (3 and 4 lines of 60)
+    var cols = narrow ? 15 : 20, gap = 4;
+    var area = narrow ? W - 8 : Math.floor(W * 0.6);     // on desktop the dots take up 60% of the box
+    var d = Math.max(6, Math.min(26, Math.floor(((area - (cols - 1) * gap) / cols) * 10) / 10));
+    var dotsW = cols * d + (cols - 1) * gap;
+    document.documentElement.style.setProperty("--d", d + "px");
+
+    ROWS.forEach(function (r) {
+      var count = Math.max(0, Number(data[r.key]) || 0);
+      var shown, dotsOn;
+      if (r.key === "groups") {                       // total row: rounded text, every dot on
+        shown = (Math.floor(count / 10) * 10) + "+";
+        dotsOn = TOTAL;
+      } else {
+        shown = String(count);
+        dotsOn = Math.min(TOTAL, count);
+      }
+      var text = r.text.replace("{n}", "<b>" + shown + "</b>");
+
+      var row = document.createElement("div");
+      row.className = "row";
+      if (!narrow) { row.style.gridTemplateColumns = "1fr " + dotsW + "px"; }
+      row.setAttribute("role", "img");
+      row.setAttribute("aria-label", r.text.replace("{n}", shown));
+
+      var label = document.createElement("div");
+      label.className = "label"; label.innerHTML = text;
+
+      var dots = document.createElement("div");
+      dots.className = "dots";
+      dots.style.gridTemplateColumns = "repeat(" + cols + "," + d + "px)";
+      for (var i = 0; i < TOTAL; i++) {
+        var dot = document.createElement("span");
+        dot.className = "dot" + (i < dotsOn ? " on" : "");
+        dot.style.setProperty("--c", r.colour);
+        dots.appendChild(dot);
+      }
+
+      row.appendChild(label); row.appendChild(dots);
+      host.appendChild(row);
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "impact") {                                         // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+})(c.w,c.d,c.l)})(window.__chartHost(document.currentScript.previousElementSibling));</script><p class="btnrow"><a class="btn btn-tertiary" href="#journey">See our progress</a></p></div></div></section>
 <section class="sec" id="focus"><div class="wrap"><div class="statcard focuscard"><h2 class="sechead"><span class="hl">Our Focus</span></h2><ol class="focusrows"><li><span class="fcirc"><img src="../assets/img/group-photo.jpg" alt="" class="" loading="lazy" decoding="async"></span><div class="fbody"><h3>01 Growing the Resilience Alliance</h3><p>We are strengthening our network by clarifying who we are, why we come together and how we work. Through regular gatherings we are building a clearer picture of who is involved and how we connect.</p></div></li><li><span class="fcirc"><img src="../assets/img/focus-2.jpg?v=2" alt="" loading="lazy" decoding="async"></span><div class="fbody"><h3>02 Training and Resource Sharing</h3><p>We are making knowledge, practical tools and training easier to find through our Resilience Alliance Community Knowledge Hub. Our training is led by experienced locals, with the aim of strengthening our network from within the community.</p></div></li><li><span class="fcirc"><img src="../assets/img/focus-3.jpg?v=2" alt="" loading="lazy" decoding="async"></span><div class="fbody"><h3>03 Peer Support and Self Care</h3><p>Resilience work asks a lot of the people who do it, so we are committed to balanced wellbeing and collective care across our region. We are mapping the support already available, identifying good practice, with the aim to develop an adaptable wellbeing framework that groups can use to look after themselves and each other.</p></div></li><li><span class="fcirc"><img src="../assets/img/focus-4.jpg?v=2" alt="" loading="lazy" decoding="async"></span><div class="fbody"><h3>04 Funding and Collaborative Projects</h3><p>We are working towards a more sustainable and collaborative approach to funding for resilience work across the region. Identifying shared opportunities we aim to reduce competition and increase collective impact.</p></div></li><li><span class="fcirc"><img src="../assets/img/focus-5.jpg?v=2" alt="" style="object-position:75% 55%" loading="lazy" decoding="async"></span><div class="fbody"><h3>05 Advocacy</h3><p>We believe our collective voice is stronger than any single group&rsquo;s. By understanding our own network, identifying key stakeholders and building advocacy skills among groups and organisations, we are developing a collaborative approach to advocating for resilient communities across the region.</p></div></li></ol><p class="btnrow focusbtn"><a class="btn btn-primary" href="#about" data-jump="ab-how" data-page="about">Learn about our work</a></p></div></div></section>
 <section class="sec partners" id="partners-home"><div class="wrap"><h3 class="ptitle">Thanks to our funders</h3><div class="pgrid">
 <div class="pcol ptl"><p>Supported by:</p><a class="plg" href="https://www.nema.gov.au"><img class="" src="../assets/funders/nema.png" alt="National Emergency Management Agency, Australian Government" loading="lazy"></a></div>
@@ -828,18 +1092,947 @@ body .lgrid>*,body .team>*{flex-basis:calc(50% - 8px)}
 <section class="sec steersec" id="ab-steering" style="padding-top:0"><div class="wrap"><div class="bar bar-t sbar-top" aria-hidden="true"></div><div class="steergrid"><div class="steertxt"><h2 class="sechead">The Steering Committee:</h2><p class="lede">Is the coordinating body for the Resilience Alliance. It is made up of representatives from resilience-related groups and organisations across the region, and operates by agreement among groups and organisations rather than by reporting to a separate incorporated parent body. The steering committee actively aims to maintain a network that reflects the geographic and community diversity of the region.</p></div><div class="steerlist"><p class="lede">The Steering Committee comprises the following groups and organisations.</p><ul class="steer"><li><a href="https://www.togetherpottsville.org" target="_blank" rel="noopener"><span class="slogo"><img src="../assets/img/steer/together-pottsville.png" alt="" loading="lazy"></span><span class="sname">Together Pottsville</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="https://resilientuki.org" target="_blank" rel="noopener"><span class="slogo"><img src="../assets/img/steer/resilient-uki.png" alt="" loading="lazy"></span><span class="sname">Resilient Uki</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="https://www.mcore2484.org" target="_blank" rel="noopener"><span class="slogo"><img src="../assets/img/steer/murwillumbah-core.webp" alt="" loading="lazy"></span><span class="sname">Murwillumbah CORE</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="https://www.facebook.com/groups/431100262102216/" target="_blank" rel="noopener"><span class="slogo"><img src="../assets/img/steer/sgb-nb-os-crt-stacked.png" alt="" loading="lazy"></span><span class="sname">South Golden Beach, New Brighton, Ocean Shores</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="https://www.madr.org.au/" target="_blank" rel="noopener"><span class="slogo"><img src="../assets/img/steer/madr.png" alt="" loading="lazy"></span><span class="sname">Main Arm Disaster Response</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="https://www.planc.org.au" target="_blank" rel="noopener"><span class="slogo"><img src="../assets/img/steer/plan-c-black.png" alt="" loading="lazy"></span><span class="sname">Plan C</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="https://resilientlismore.org.au" target="_blank" rel="noopener"><span class="slogo"><img src="../assets/img/steer/resilient-lismore.png" alt="" loading="lazy"></span><span class="sname">Resilient Lismore</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="https://nrcf.org.au" target="_blank" rel="noopener"><span class="slogo"><img src="../assets/img/steer/nrcf.png" alt="" loading="lazy"></span><span class="sname">Northern Rivers Community Foundation</span><span class="sr-only"> (opens in a new tab)</span></a></li><li><a href="https://ucrh.edu.au" target="_blank" rel="noopener"><span class="slogo"><img src="../assets/img/steer/ucrh.svg" alt="" loading="lazy"></span><span class="sname">University Centre for Rural Health</span><span class="sr-only"> (opens in a new tab)</span></a></li></ul></div></div></div></section>
 <section class="sec teamsec" id="ab-team" style="padding-top:0"><div class="wrap"><div class="bar bar-t sbar-top" aria-hidden="true"></div><h2 class="sechead cen teamhead">Resilience Alliance Team:</h2><ul class="team2"><li><span class="tc" aria-hidden="true">KH</span><b>Kathie Heyman</b><span>Network Lead</span></li><li><span class="tc" aria-hidden="true">MM</span><b>Milou Muiser</b><span>Communications, Events and Engagement</span></li><li class="brk" aria-hidden="true"></li><li><span class="tc" aria-hidden="true">MS</span><b>Marlena Sue Basser</b><span>Capacity Building Coordinator</span></li><li><span class="tc" aria-hidden="true">CM</span><b>Claire McLisky</b><span>Capacity Building Coordinator</span></li><li><span class="tc" aria-hidden="true">BW</span><b>Barbara Winters</b><span>Capacity Building Coordinator</span></li></ul></div></section></section><section id="journey" data-screen data-label="Progress" class="page bjourney" tabindex="-1" aria-label="Progress"><div class="wrap"><div class="splith net jrn"><div><span class="eyebrow">Progress</span><h1>Our progress so far</h1><p class="lede">Our story started in the 2022 floods, when local people led the response in their own communities. Since then, those groups have come together as the Northern Rivers Community Resilience Alliance. Today we are 60+ groups and growing. Between June and October 2026 we have spoken with 58 of those groups to take stock: where we are now, and where we&rsquo;d like to be.</p></div><div class="ph"><img src="../assets/img/journey-header.jpg" alt="A group of people laughing and waving outdoors, holding up a tangled web of coloured yarn between them" loading="eager" decoding="async"></div></div></div>
 
-<div class="bwhite"><section class="sec" id="pr-who"><div class="wrap"><div class="bsplit"><div><div class="prghd"><h2 class="sechead">Many groups, shared purpose</h2><p class="lede">We are a diverse alliance of grassroots community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.</p></div></div><div><figure class="bchart card"><div class="bgraph"><div class="flourish-embed flourish-chart" data-src="visualisation/30730526"><noscript><img src="https://public.flourish.studio/visualisation/30730526/thumbnail" width="100%" alt="Bubble chart of active volunteers per group. 33 groups run on a core team of 10 or fewer, 5 groups on 11 to 20, 1 group on 20 to 30 and 3 groups on more than 30."></noscript></div></div></figure></div></div>
-<div class="bcards"><figure class="bchart card ctr"><div class="bgraph"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30769372"><noscript><img src="https://public.flourish.studio/visualisation/30769372/thumbnail" width="100%" alt="Pictogram of operational maturity, number of groups that: have an online presence 49, are incorporated 40, have a document hub 27, have volunteer policies 16, have a steering committee 8."></noscript></div></div></figure><figure class="bchart card ctr"><div class="bgraph"><div class="flourish-embed flourish-chart" data-src="visualisation/30730890"><noscript><img src="https://public.flourish.studio/visualisation/30730890/thumbnail" width="100%" alt="Bar chart of skills held across Resilience Alliance members, by number of groups: admin and committee experience 48, trained first aid 46, grant writing 44, coordination and logistics 38, SES, RFS or fire trained 36, trades and practical skills 35, mental health first aid 30, local language and cultural skills 14."></noscript></div></div></figure></div></div></section>
-<section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap"><div class="vizgrid d32 bd32"><div class="dcol"><div class="prghd"><h2 class="sechead">We are disaster tested</h2><p class="lede">Many of our groups have experienced disaster as a team, and local knowledge runs deep.</p></div><figure class="sqc "><blockquote><p>&ldquo;[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it&#x27;s so diverse.&rdquo;</p><footer>&mdash; Chinderah and Surrounds Peoples Hub</footer></blockquote></figure></div><figure class="bchart card ctr"><div class="bgraph"><div class="flourish-embed flourish-chart" data-src="visualisation/30731208"><noscript><img src="https://public.flourish.studio/visualisation/30731208/thumbnail" width="100%" alt="Donut chart: 43 groups have joint disaster experience and 15 groups did not answer."></noscript></div></div></figure></div></div></section>
+<div class="bwhite"><section class="sec" id="pr-who"><div class="wrap"><div class="bsplit"><div><div class="prghd"><h2 class="sechead">Many groups, shared purpose</h2><p class="lede">We are a diverse alliance of grassroots community-led groups and organisations: skilled by experience, varied by structure, and united in helping our communities care for themselves and each other before, during and after disasters.</p></div></div><div><figure class="bchart card"><h3>Small teams do the heavy lifting</h3><p class="bsub">Most of us run on a core team of 10 or less active volunteers. This weighs heavily on our groups, who would welcome more hands to prepare for, and recover from, disasters.</p><div class="chartframe " role="img" aria-label="Bubble chart of active volunteers per group: groups by size of volunteer team." style="--w:498px;--h:340px;--mh:280px"><template shadowrootmode="open"><style>
+  :host{ --navy:#07293B; --yellow:#FFCB2A; --off:#D6E2E4; }
+  :host,.pbody{margin:0;padding:0;height:100%;background:transparent}
+  .pbody{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy)}
+  .stage{position:relative;height:100%}
+  svg{display:block;width:100%;height:100%}
+  text{font-family:"Nunito Sans",Arial,sans-serif;font-weight:800;fill:var(--navy);text-anchor:middle;dominant-baseline:central}
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage.grey svg{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:800 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style><div class="pbody">
+<div class="stage grey" id="stage">
+  <svg id="chart" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" role="img"></svg>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+</div></template></div><script>(function(c){(function(window,document,location){
+  var LABELS = ["≤10", "11-20", "21-30", ">30"];   // the four team sizes
+  var NS = "http://www.w3.org/2000/svg";
+  var stage = document.getElementById("stage");
+
+  // Works out circle positions so they touch but do not overlap (simple push-apart packing)
+  function pack(radii) {
+    var n = radii.length, pts = [];
+    for (var i = 0; i < n; i++) {
+      var a = (i / n) * Math.PI * 2 + 0.6;
+      pts.push({ x: Math.cos(a) * 60, y: Math.sin(a) * 60, r: radii[i] });
+    }
+    for (var step = 0; step < 600; step++) {
+      for (var i2 = 0; i2 < n; i2++) { pts[i2].x *= 0.985; pts[i2].y *= 0.985; }
+      for (var p = 0; p < n; p++) {
+        for (var q = p + 1; q < n; q++) {
+          var dx = pts[q].x - pts[p].x, dy = pts[q].y - pts[p].y;
+          var dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
+          var min = pts[p].r + pts[q].r + 4;
+          if (dist < min) {
+            var push = (min - dist) / 2, ux = dx / dist, uy = dy / dist;
+            pts[p].x -= ux * push; pts[p].y -= uy * push;
+            pts[q].x += ux * push; pts[q].y += uy * push;
+          }
+        }
+      }
+    }
+    return pts;
+  }
+
+  function draw(counts, columnName) {
+    var svg = document.getElementById("chart");
+    svg.innerHTML = "";
+    var max = Math.max.apply(null, counts);
+    if (!max) { return; }
+    svg.setAttribute("aria-label", (columnName || "Active Volunteers") + ": number of groups in each size of volunteer team");
+
+    // Area is proportional to the count, so the radius follows the square root
+    var maxR = 130;
+    var radii = counts.map(function (c) { return c > 0 ? Math.max(14, maxR * Math.sqrt(c / max)) : 0; });
+    var pts = pack(radii);
+
+    var minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+    pts.forEach(function (p) {
+      if (!p.r) return;
+      minX = Math.min(minX, p.x - p.r); maxX = Math.max(maxX, p.x + p.r);
+      minY = Math.min(minY, p.y - p.r); maxY = Math.max(maxY, p.y + p.r);
+    });
+    var pad = 12;
+    svg.setAttribute("viewBox", [minX - pad, minY - pad, (maxX - minX) + pad * 2, (maxY - minY) + pad * 2].join(" "));
+
+    pts.forEach(function (p, i) {
+      if (!p.r) return;
+      var g = document.createElementNS(NS, "g");
+      var title = document.createElementNS(NS, "title");
+      title.textContent = LABELS[i] + " volunteers: " + counts[i] + (counts[i] === 1 ? " group" : " groups");
+      var c = document.createElementNS(NS, "circle");
+      c.setAttribute("cx", p.x); c.setAttribute("cy", p.y); c.setAttribute("r", p.r);
+      c.setAttribute("fill", counts[i] === max ? "#FFCB2A" : "#D6E2E4");
+      var t = document.createElementNS(NS, "text");
+      t.setAttribute("x", p.x); t.setAttribute("y", p.y);
+      t.setAttribute("font-size", Math.max(9, p.r * 0.42));
+      t.textContent = LABELS[i];
+      g.appendChild(title); g.appendChild(c); g.appendChild(t);
+      svg.appendChild(g);
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw([38, 14, 6, 4]);
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") {                      // real page: hide the editor note, keep the grey placeholder while loading
+      stage.classList.add("live");
+    }
+    if (m.type === "bubbles") {                   // real numbers: replace the grey preview
+      stage.classList.remove("grey");
+      stage.classList.add("live");
+      draw(m.counts, (m.labels || {}).activeVolunteers);
+    }
+  });
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart, ?live=1 to see the loading state
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw([38, 14, 6, 4]); }
+})(c.w,c.d,c.l)})(window.__chartHost(document.currentScript.previousElementSibling));</script></figure></div></div>
+<div class="bcards"><figure class="bchart card ctr"><h3>We're at different stages</h3><p class="bsub">Some of our groups are more established while others are emerging</p><div class="chartframe " role="img" aria-label="Pictogram of how many groups have an online presence, are incorporated, have a document hub and have volunteer policies." style="--w:880px;--h:240px;--mh:300px"><template shadowrootmode="open"><style>
+  :host{ --navy:#07293B; --teal:#00857c; --yellow:#FFCB2A; --orange:#F05A28; --gap:3px; }
+  *{box-sizing:border-box}
+  :host,.pbody{margin:0;padding:0;background:transparent}
+  .pbody{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+  .rows{display:flex;flex-direction:column;gap:14px;margin:0 auto}
+  .row{display:grid;grid-template-columns:1fr 104px;column-gap:12px;align-items:center}
+  .area{display:flex;justify-content:flex-end;align-items:center;gap:8px;min-width:0}
+  .count{font-weight:800;font-size:14px;white-space:nowrap}
+  .block{display:grid;gap:var(--gap);grid-template-rows:repeat(2,var(--sq))}
+  .sq{width:var(--sq);height:var(--sq);border-radius:2px;background:var(--c)}
+  .label{font-weight:800;font-size:14px;line-height:1.25}
+
+  /* narrow (phones): count and label sit above the squares */
+  .narrow .row{grid-template-columns:1fr;row-gap:6px}
+  .narrow .label{order:-1}
+  .narrow .label{font-size:14px}
+  .narrow .area{justify-content:flex-start}
+  .narrow .count{display:none}
+  .narrow .label b{font-weight:800}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .rows{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:800 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style><div class="pbody">
+<div class="stage grey" id="stage">
+  <div class="rows" id="rows"></div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+</div></template></div><script>(function(c){(function(window,document,location){
+  // Each row: its colour, the CMS field it counts (its column name becomes the label), and a typed label used if the column name is not available
+  var ROWS = [
+    { key: "online",     field: "onlinePresence",                                                   colour: "#07293B", label: "Have an online presence" },
+    { key: "incorp",     field: "incorporated",                                                     colour: "#F05A28", label: "Are incorporated" },
+    { key: "hub",        field: "doTheyHaveAHubForStoringAndAccessingKeyDocumentsAndTemplates",     colour: "#00857c", label: "Have a document hub" },
+    { key: "volunteers", field: "doTheyHaveVolunteerPolicyProceduresRiskDocumentationOrTemplates",  colour: "#FFCB2A", label: "Have volunteer policies" }
+  ];
+  var stage = document.getElementById("stage");
+  var data = { online: 49, incorp: 40, hub: 27, volunteers: 16 };   // grey static preview numbers
+
+  function draw() {
+    var host = document.getElementById("rows");
+    var narrow = window.innerWidth < 460;
+    document.body.className = narrow ? "narrow" : "";
+    host.innerHTML = "";
+    if (!data) { return; }
+
+    var names = data.labels || {};
+    ROWS.forEach(function (r) { r.text = names[r.field] || r.label; });     // column name from the CMS, else the typed label
+    var counts = ROWS.map(function (r) { return Number(data[r.key]) || 0; });
+    var maxCols = Math.max(1, Math.ceil(Math.max.apply(null, counts) / 2));   // 2 lines of squares, as in Flourish
+
+    // Width left for the squares, then the size of one square so the biggest row just fits
+    var gap = 3;
+    var usable = narrow ? window.innerWidth - 8 : window.innerWidth - 104 - 12 - 8 - 84;
+    var sq = Math.max(5, Math.min(18, Math.floor(((usable - (maxCols - 1) * gap) / maxCols) * 10) / 10));
+    document.documentElement.style.setProperty("--sq", sq + "px");
+
+    // Centre the whole chart in the box: its width is count + biggest block + label
+    var blockW = maxCols * sq + (maxCols - 1) * gap;
+    host.style.width = narrow ? "100%" : Math.min(window.innerWidth, 84 + 8 + blockW + 12 + 104) + "px";
+
+    ROWS.forEach(function (r, i) {
+      var n = counts[i], cols = Math.ceil(n / 2);
+
+      var row = document.createElement("div");
+      row.className = "row";
+      row.setAttribute("role", "img");
+      row.setAttribute("aria-label", n + " groups " + r.text.toLowerCase());
+
+      var area = document.createElement("div");
+      area.className = "area";
+      var count = document.createElement("span");
+      count.className = "count";
+      count.textContent = n + " groups";
+      var block = document.createElement("div");
+      block.className = "block";
+      block.style.gridTemplateColumns = "repeat(" + cols + "," + sq + "px)";
+      block.style.gridAutoFlow = "column";
+      for (var k = 0; k < n; k++) {
+        var s = document.createElement("span");
+        s.className = "sq";
+        s.style.setProperty("--c", r.colour);
+        block.appendChild(s);
+      }
+      area.appendChild(count);
+      area.appendChild(block);
+
+      var label = document.createElement("div");
+      label.className = "label";
+      label.innerHTML = narrow ? "<b>" + n + " groups</b> " + r.text.toLowerCase() : r.text;
+
+      row.appendChild(area);
+      row.appendChild(label);
+      host.appendChild(row);
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "stages") {                                         // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart with example labels
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+})(c.w,c.d,c.l)})(window.__chartHost(document.currentScript.previousElementSibling));</script></figure><figure class="bchart card ctr"><h3>We have the skills between us</h3><p class="bsub">Across our groups, we hold a wide range of the skills community organisations need.</p><div class="chartframe " role="img" aria-label="Bar chart of skills held across Resilience Alliance members, by number of groups." style="--w:880px;--h:380px;--mh:380px"><template shadowrootmode="open"><style>
+  :host{ --navy:#07293B; }
+  *{box-sizing:border-box}
+  :host,.pbody{margin:0;padding:0;background:transparent}
+  .pbody{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+  .rows{display:flex;flex-direction:column;gap:12px}
+  .name{font-weight:800;font-size:14px;line-height:1.2;margin:0 0 4px}
+  .track{position:relative;height:24px}
+  .bar{position:relative;height:100%;background:var(--navy);border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding:0 10px;color:#fff;font-weight:800;font-size:14px;white-space:nowrap;min-width:3px}
+  /* a very short bar puts its number outside, in navy */
+  .bar.short{color:var(--navy);justify-content:flex-start}
+  .bar.short span{position:absolute;left:calc(100% + 8px);top:50%;transform:translateY(-50%)}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .rows{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:800 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style><div class="pbody">
+<div class="stage grey" id="stage">
+  <div class="rows" id="rows"></div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+</div></template></div><script>(function(c){(function(window,document,location){
+  // Each skill: the key the page code sends its count under, the CMS field (its column name becomes the label),
+  // and a typed label used only if the column name is not available
+  var SKILLS = [
+    { key: "admin",    field: "adminCommitteeExperience",         label: "Admin and committee" },
+    { key: "firstAid", field: "trainedFirstAidMembers",           label: "Trained first aid" },
+    { key: "grant",    field: "grantWritingExperience",           label: "Grant writing" },
+    { key: "coord",    field: "coordinationLogisticsExperience",  label: "Coordination and logistics" },
+    { key: "ses",      field: "sesRfsFireTrainedMembers",         label: "SES, RFS and fire trained" },
+    { key: "trades",   field: "tradesPracticalSkills",            label: "Trades and practical skills" },
+    { key: "mental",   field: "mentalHealthFirstAid",             label: "Mental health first aid" }
+  ];
+  var stage = document.getElementById("stage");
+  var data = { admin: 48, firstAid: 46, grant: 44, coord: 38, ses: 36, trades: 35, mental: 30 };   // grey static preview numbers
+
+  function draw() {
+    var host = document.getElementById("rows");
+    host.innerHTML = "";
+    if (!data) { return; }
+
+    var names = data.labels || {};
+    // Biggest first, as in Flourish
+    var list = SKILLS.map(function (s) { return { label: names[s.field] || s.label, n: Number(data[s.key]) || 0 }; })
+                     .sort(function (a, b) { return b.n - a.n; });
+    var max = Math.max(1, list[0].n);
+
+    list.forEach(function (s) {
+      var row = document.createElement("div");
+      row.setAttribute("role", "img");
+      row.setAttribute("aria-label", s.label + ": " + s.n + " groups");
+
+      var name = document.createElement("p");
+      name.className = "name";
+      name.textContent = s.label;
+
+      var track = document.createElement("div");
+      track.className = "track";
+      var bar = document.createElement("div");
+      var pct = (s.n / max) * 97;                       // longest bar fills 97% of the width
+      bar.className = "bar";
+      bar.style.width = pct + "%";
+      var num = document.createElement("span");
+      num.textContent = s.n + (s.n === 1 ? " group" : " groups");
+      bar.appendChild(num);
+      track.appendChild(bar);
+
+      row.appendChild(name);
+      row.appendChild(track);
+      host.appendChild(row);
+
+      // If the bar is too short to hold its number, move the number outside
+      if (bar.offsetWidth < num.offsetWidth + 24) { bar.classList.add("short"); }
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "skills") {                                         // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+})(c.w,c.d,c.l)})(window.__chartHost(document.currentScript.previousElementSibling));</script></figure></div></div></section>
+<section class="sec" id="pr-faced" style="padding-top:0"><div class="wrap"><div class="vizgrid d32 bd32"><div class="dcol"><div class="prghd"><h2 class="sechead">We are disaster tested</h2><p class="lede">Many of our groups have experienced disaster as a team, and local knowledge runs deep.</p></div><figure class="sqc "><blockquote><p>&ldquo;[We] learned a lot from the floods and put everything in place afterwards. It proved to be spot on in Alfred. One learning was how well the community came together, even though it&#x27;s so diverse.&rdquo;</p><footer>&mdash; Chinderah and Surrounds Peoples Hub</footer></blockquote></figure></div><figure class="bchart card ctr"><div class="chartframe " role="img" aria-label="Donut chart of groups that have experienced a disaster as a team." style="--w:498px;--h:350px;--mh:430px"><template shadowrootmode="open"><style>
+  :host{ --navy:#07293B; }
+  *{box-sizing:border-box}
+  :host,.pbody{margin:0;padding:0;height:100%;background:transparent}
+  .pbody{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy)}
+  .stage{position:relative;height:100%;display:flex;flex-direction:column}
+  .title{font-weight:400;font-size:17px;line-height:1.3;margin:4px 0 0;text-align:center}
+  .title b{font-weight:800}
+  svg{display:block;width:100%;flex:1 1 auto;min-height:0}
+  text{font-family:"Nunito Sans",Arial,sans-serif;font-weight:800;fill:var(--navy)}
+  .legend{display:flex;justify-content:center;gap:22px;padding:6px 0 4px;font-weight:800;font-size:18px}
+  .legend span{display:inline-flex;align-items:center;gap:8px}
+  .legend i{width:14px;height:14px;border-radius:50%;display:inline-block}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage.grey .title,.stage.grey svg,.stage.grey .legend{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:800 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style><div class="pbody">
+<div class="stage grey" id="stage">
+  <p class="title" id="title"></p>
+  <svg id="chart" role="img" preserveAspectRatio="xMidYMid meet"></svg>
+  <div class="legend" id="legend" hidden></div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+</div></template></div><script>(function(c){(function(window,document,location){
+  var TEAL = "#00857c", GREY = "#D6E2E4", NS = "http://www.w3.org/2000/svg";
+  var FIELD = "hasTheGroupBeenThroughADisasterEventTogether";   // the CMS column this chart counts
+  var stage = document.getElementById("stage");
+  var data = { yes: 43, rest: 17 };                              // grey static preview numbers
+
+  // The friendly fractions the title can use: it picks the one closest to the real share
+  var FRACTIONS = [[1,10],[1,5],[1,4],[1,3],[2,5],[1,2],[3,5],[2,3],[3,4],[4,5],[9,10]];
+  function fractionFor(share) {
+    var best = FRACTIONS[0], diff = 9;
+    FRACTIONS.forEach(function (f) {
+      var d = Math.abs(share - f[0] / f[1]);
+      if (d < diff) { diff = d; best = f; }
+    });
+    return best[0] + "/" + best[1];
+  }
+
+  function el(name, attrs) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) { e.setAttribute(k, attrs[k]); }
+    return e;
+  }
+  function pt(cx, cy, r, a) { return [cx + Math.sin(a) * r, cy - Math.cos(a) * r]; }   // a: 0 = top, clockwise
+
+  // A ring segment from angle a0 to a1 (radians, clockwise from the top)
+  function ring(cx, cy, r0, r1, a0, a1, fill) {
+    if (a1 - a0 >= Math.PI * 2 - 0.0001) {
+      return el("circle", { cx: cx, cy: cy, r: (r0 + r1) / 2, fill: "none", stroke: fill, "stroke-width": r1 - r0 });
+    }
+    var p1 = pt(cx, cy, r1, a0), p2 = pt(cx, cy, r1, a1), p3 = pt(cx, cy, r0, a1), p4 = pt(cx, cy, r0, a0);
+    var big = (a1 - a0) > Math.PI ? 1 : 0;
+    var d = "M" + p1 + " A" + r1 + "," + r1 + " 0 " + big + " 1 " + p2 +
+            " L" + p3 + " A" + r0 + "," + r0 + " 0 " + big + " 0 " + p4 + " Z";
+    return el("path", { d: d, fill: fill, stroke: "#fff", "stroke-width": 1.5 });
+  }
+
+  function draw() {
+    var svg = document.getElementById("chart");
+    var legend = document.getElementById("legend");
+    var title = document.getElementById("title");
+    svg.innerHTML = "";
+    var yes = Number(data.yes) || 0, rest = Number(data.rest) || 0, total = yes + rest;
+    if (!total) { title.textContent = ""; return; }
+    var narrow = window.innerWidth < 460;
+
+    // Title with the real share of groups, as a fraction
+    title.innerHTML = "About <b>" + fractionFor(yes / total) + "</b> of our groups have experienced disaster as a team";
+
+    // Like Flourish: the grey slice starts at the top and runs clockwise, then the teal slice
+    var aRest = (rest / total) * Math.PI * 2;
+    var slices = [
+      { n: rest, a0: 0, a1: aRest, fill: GREY },
+      { n: yes, a0: aRest, a1: Math.PI * 2, fill: TEAL }
+    ];
+
+    var cx = 320, cy = 170, R = 140, r = 72;
+    svg.setAttribute("viewBox", narrow ? "0 0 340 340" : "0 0 640 340");
+    if (narrow) { cx = 170; R = 150; r = 78; cy = 170; }
+    svg.setAttribute("aria-label", (data.labels && data.labels[FIELD] ? data.labels[FIELD] + " " : "") + yes + " groups yes, " + rest + " groups no");
+
+    slices.forEach(function (s) {
+      if (s.n > 0) { svg.appendChild(ring(cx, cy, r, R, s.a0, s.a1, s.fill)); }
+    });
+
+    if (narrow) {
+      legend.hidden = false;
+      legend.innerHTML = "<span><i style='background:" + TEAL + "'></i>" + yes + " groups</span>" +
+                         "<span><i style='background:" + GREY + "'></i>" + rest + " groups</span>";
+      return;
+    }
+    legend.hidden = true;
+
+    // Wide: labels sit beside the donut with a short leader line, as in Flourish
+    slices.forEach(function (s) {
+      if (s.n <= 0) { return; }
+      var am = (s.a0 + s.a1) / 2;
+      var p1 = pt(cx, cy, R + 4, am), p2 = pt(cx, cy, R + 26, am);
+      var right = Math.sin(am) >= 0;
+      var p3 = [p2[0] + (right ? 28 : -28), p2[1]];
+      svg.appendChild(el("polyline", { points: p1 + " " + p2 + " " + p3, fill: "none", stroke: "#9FB0B8", "stroke-width": 1.2 }));
+      var t = el("text", { x: p3[0] + (right ? 8 : -8), y: p3[1], "font-size": 26, "text-anchor": right ? "start" : "end", "dominant-baseline": "central" });
+      t.textContent = s.n + (s.n === 1 ? " group" : " groups");
+      svg.appendChild(t);
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "disaster") {                                       // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+})(c.w,c.d,c.l)})(window.__chartHost(document.currentScript.previousElementSibling));</script></figure></div></div></section>
 <section class="sec" id="pr-connect" style="padding-top:0"><div class="wrap"><div class="prghd"><h2 class="sechead">We value social connection</h2><p class="lede">Connection is at the heart of what we do. Our groups build relationships in their own teams, across their community, with other groups in the alliance, and with emergency services and government agencies, so when disaster hits, people already know who to call.</p></div>
-<div class="bconn"><figure class="bchart card"><div class="bgraph"><div class="flourish-embed flourish-chart" data-src="visualisation/30743797"><noscript><img src="https://public.flourish.studio/visualisation/30743797/thumbnail" width="100%" alt="Bar chart of self-rated connection, 1 to 5, within each group and to the wider community. Within their own group: 11 groups rate 5, 26 rate 4, 1 rates 3.5, 8 rate 3 and 1 rates 1. To the wider community: 4 rate 5, 14 rate 4, 1 rates 3.5, 15 rate 3, 2 rate 2.5, 8 rate 2 and 3 rate 1."></noscript></div></div></figure><div class="btwo"><figure class="bchart card"><div class="bgraph"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30821586"><noscript><img src="https://public.flourish.studio/visualisation/30821586/thumbnail" width="100%" alt="Dot chart of relationship with local council: 35 groups have a strong relationship, 10 have some contact and 3 have little to no contact."></noscript></div></div></figure><figure class="bchart card"><div class="bgraph"><div class="flourish-embed flourish-pictogram" data-src="visualisation/30744547"><noscript><img src="https://public.flourish.studio/visualisation/30744547/thumbnail" width="100%" alt="Dot chart of groups that have a relationship to emergency services: RFS 24 groups, SES 23 groups, Police 3 groups."></noscript></div></div></figure></div></div></div></section></div>
+<div class="bconn"><figure class="bchart card"><h3>Connectedness: within groups and beyond</h3><p class="bsub">Many groups want to connect better with their communities.</p><p class="bsub">Each group scored how connected they feel, from 1 (slightly) to 5 (extremely).</p><p class="bsub">Select a score to see the groups sentiment:</p><div class="chartframe " role="img" aria-label="Bar chart of how connected groups feel within their group and to the wider community, by score from 1 to 5." style="--w:880px;--h:250px;--mh:340px"><template shadowrootmode="open"><style>
+  :host{ --navy:#07293B; }
+  *{box-sizing:border-box}
+  :host,.pbody{margin:0;padding:0;background:transparent}
+  .pbody{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+
+  /* score buttons: each one wears the colour of its score */
+  .filters{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 22px}
+  .filters button{font:800 15px "Nunito Sans",Arial,sans-serif;color:var(--navy);border:2px solid transparent;border-radius:6px;padding:7px 14px;min-width:54px;cursor:pointer}
+  .filters button[aria-pressed="true"]{font-weight:800;border-color:var(--navy)}
+  .filters button.all{background:#fff;border-color:#B9C7CD}
+  .filters button.all[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .filters button:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+
+  .title{font-weight:400;font-size:15px;line-height:1.3;margin:0 0 6px}
+  .title b{font-weight:800}
+  .bar{display:flex;height:40px;border-radius:4px;overflow:hidden;background:#EEF1F3;margin-bottom:22px}
+  .seg{display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;overflow:hidden;white-space:nowrap;color:var(--navy);transition:opacity .15s}
+  .seg.dim{opacity:.22}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .content{filter:grayscale(1);opacity:.5;pointer-events:none}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:800 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style><div class="pbody">
+<div class="stage grey" id="stage">
+  <div class="content">
+    <div class="filters" id="filters"></div>
+    <div id="bars"></div>
+  </div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+</div></template></div><script>(function(c){(function(window,document,location){
+  // Score colours: dark yellow for 5/5 down to light grey for 1/5
+  var COLOURS = { "5": "#D9A500", "4": "#EDB914", "3": "#FFCB2A", "2": "#FFEAAA", "1": "#D6E2E4" };
+  var WORDS   = { "5": "extremely", "4": "very", "3": "moderately", "2": "somewhat", "1": "slightly" };
+  var SCORES  = ["5", "4", "3", "2", "1"];
+  // Each bar: which counts it uses, the CMS field (its column name becomes the title), and a typed name used only if the column name is not available
+  var ROWS = [
+    { key: "within", field: "connectednessWithinGroup",       name: "Connectedness within their group" },
+    { key: "wider",  field: "connectednessToWiderCommunity",  name: "Connectedness with the wider community" }
+  ];
+  var stage = document.getElementById("stage");
+  var data = { within: { "5": 6, "4": 15, "3": 8, "2": 1 }, wider: { "5": 5, "4": 13, "3": 15, "2": 9, "1": 5 } };   // grey static preview numbers
+  var selected = "all";
+
+  function total(counts) { return SCORES.reduce(function (t, s) { return t + (counts[s] || 0); }, 0); }
+
+  function draw() {
+    var filters = document.getElementById("filters"), bars = document.getElementById("bars");
+    filters.innerHTML = ""; bars.innerHTML = "";
+    if (!data) { return; }
+    var names = data.labels || {};
+
+    ["all"].concat(SCORES).forEach(function (s) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = s === "all" ? "View all scores" : s + "/5";
+      if (s === "all") { b.className = "all"; } else { b.style.background = COLOURS[s]; b.title = WORDS[s]; }
+      b.setAttribute("aria-pressed", String(selected === s));
+      b.onclick = function () { selected = s; draw(); };
+      filters.appendChild(b);
+    });
+
+    ROWS.forEach(function (r) {
+      var counts = data[r.key] || {}, sum = total(counts);
+      var columnName = names[r.field] || r.name;                              // e.g. "Connectedness within their group"
+      var feel = columnName.replace(/^connectedness/i, "connected");          // e.g. "connected within their group"
+
+      var title = document.createElement("p");
+      title.className = "title";
+      if (selected === "all") {
+        title.innerHTML = "<b>" + sum + " groups</b> " + columnName;
+      } else {
+        title.innerHTML = "<b>" + (counts[selected] || 0) + "/" + sum + "</b> groups feel <b>" + WORDS[selected] + "</b> " + feel;
+      }
+
+      var bar = document.createElement("div");
+      bar.className = "bar";
+      bar.setAttribute("role", "img");
+      bar.setAttribute("aria-label", title.textContent);
+
+      SCORES.forEach(function (s) {
+        var n = counts[s] || 0;
+        if (!n) { return; }
+        var seg = document.createElement("div");
+        seg.className = "seg" + (selected !== "all" && selected !== s ? " dim" : "");
+        seg.style.flex = n + " 1 0";
+        seg.style.background = COLOURS[s];
+        seg.title = s + "/5 (" + WORDS[s] + "): " + n + (n === 1 ? " group" : " groups");
+        seg.textContent = n;
+        bar.appendChild(seg);
+      });
+
+      bars.appendChild(title); bars.appendChild(bar);
+
+      // Hide numbers in segments too narrow to hold them
+      Array.prototype.forEach.call(bar.children, function (seg) {
+        if (seg.scrollWidth > seg.clientWidth + 1 || seg.clientWidth < 22) { seg.style.fontSize = "0"; }
+      });
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "connect") {                                        // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+})(c.w,c.d,c.l)})(window.__chartHost(document.currentScript.previousElementSibling));</script></figure><div class="btwo"><figure class="bchart card"><h3>Relationship with local council</h3><p class="bsub">Most groups have a good relationship with their local council</p><div class="chartframe " role="img" aria-label="Dot chart of groups&#x27; relationship with their local council: strong, some contact, little to no contact." style="--w:400px;--h:215px;--mh:270px"><template shadowrootmode="open"><style>
+  :host{ --navy:#07293B; --gap:3px; }
+  *{box-sizing:border-box}
+  :host,.pbody{margin:0;padding:0;background:transparent}
+  .pbody{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+  .rows{display:flex;flex-direction:column;gap:16px}
+  .label{font-weight:800;font-size:14px;line-height:1.25;margin:0 0 5px}
+  .line{display:flex;align-items:center;gap:8px}
+  .dots{display:grid;gap:var(--gap);min-width:0}
+  .dot{width:var(--d);height:var(--d);border-radius:50%;background:var(--c)}
+  .count{font-weight:800;font-size:14px;white-space:nowrap;min-width:58px}
+  /* inline layout: label sits on the left of its dots */
+  .inline .row{display:flex;align-items:center;gap:8px}
+  .inline .label{margin:0;width:44px;flex:none}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .rows{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:800 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style><div class="pbody">
+<div class="stage grey" id="stage">
+  <div class="rows" id="rows"></div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+</div></template></div><script>(function(c){(function(window,document,location){
+  // ---- Settings for this chart ----
+  var FIELD = "relationshipWithLocalCouncil";   // the CMS column this chart counts
+  var TYPE = "council";            // the message type the Wix page code sends
+  var INLINE = false;          // true: label beside the dots, false: label above them
+  var MIN_LINES = 2;     // fewest lines of dots in a row
+  var MIN_DOT = 12;                // smallest circle (px) before another line of dots is added
+  var SORT = false;              // true: biggest row first
+  var ROWS = [
+    { key: "strong", label: "Strong relationship",  colour: "#00857c" },
+    { key: "some",   label: "Some contact",         colour: "#F05A28" },
+    { key: "little", label: "Little to no contact", colour: "#07293B" }
+  ];
+  // ---------------------------------
+  var stage = document.getElementById("stage");
+  var data = { strong: 35, some: 10, little: 3 };      // grey static preview numbers
+
+  function draw() {
+    var host = document.getElementById("rows");
+    host.innerHTML = "";
+    document.body.className = INLINE ? "inline" : "";
+    host.setAttribute("aria-label", (data.labels && data.labels[FIELD]) || "Relationship with local council");
+    if (!data) { return; }
+
+    var names = data.labels || {};
+    // The label is the CMS column name where there is one, otherwise the typed label
+    var list = ROWS.map(function (r) { return { label: (r.field && names[r.field]) || r.label, colour: r.colour, n: Number(data[r.key]) || 0 }; });
+    if (SORT) { list.sort(function (a, b) { return b.n - a.n; }); }
+    var maxN = Math.max(1, Math.max.apply(null, list.map(function (r) { return r.n; })));
+
+    // Work out one circle size that fits the biggest row, adding another line of dots if they would be too small
+    var gap = 3, countW = 58 + 8, labelW = INLINE ? 44 + 8 : 0;
+    var avail = window.innerWidth - 8 - countW - labelW;
+    var lines = MIN_LINES, cols, d;
+    for (;;) {
+      cols = Math.ceil(maxN / lines);
+      d = (avail - (cols - 1) * gap) / cols;
+      if (d >= MIN_DOT || lines >= 8) { break; }
+      lines++;
+    }
+    d = Math.max(5, Math.min(16, Math.floor(d * 10) / 10));
+    document.documentElement.style.setProperty("--d", d + "px");
+
+    list.forEach(function (r) {
+      var row = document.createElement("div");
+      row.className = "row";
+      row.setAttribute("role", "img");
+      row.setAttribute("aria-label", r.label + ": " + r.n + (r.n === 1 ? " group" : " groups"));
+
+      var label = document.createElement("p");
+      label.className = "label"; label.textContent = r.label;
+
+      var line = document.createElement("div");
+      line.className = "line";
+      var dots = document.createElement("div");
+      dots.className = "dots";
+      dots.style.gridTemplateColumns = "repeat(" + Math.max(1, Math.ceil(r.n / lines)) + "," + d + "px)";
+      for (var i = 0; i < r.n; i++) {
+        var dot = document.createElement("span");
+        dot.className = "dot"; dot.style.setProperty("--c", r.colour);
+        dots.appendChild(dot);
+      }
+      var count = document.createElement("span");
+      count.className = "count"; count.textContent = r.n + (r.n === 1 ? " group" : " groups");
+      line.appendChild(dots); line.appendChild(count);
+
+      row.appendChild(label); row.appendChild(line);
+      host.appendChild(row);
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === TYPE) {                                             // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+})(c.w,c.d,c.l)})(window.__chartHost(document.currentScript.previousElementSibling));</script></figure><figure class="bchart card"><h3>Emergency Services</h3><p class="bsub">Groups that have a relationship with emergency services</p><div class="chartframe " role="img" aria-label="Dot chart of groups that have a relationship with the RFS, SES and Police." style="--w:400px;--h:215px;--mh:270px"><template shadowrootmode="open"><style>
+  :host{ --navy:#07293B; --gap:3px; }
+  *{box-sizing:border-box}
+  :host,.pbody{margin:0;padding:0;background:transparent}
+  .pbody{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+  .rows{display:flex;flex-direction:column;gap:16px}
+  .label{font-weight:800;font-size:14px;line-height:1.25;margin:0 0 5px}
+  .line{display:flex;align-items:center;gap:8px}
+  .dots{display:grid;gap:var(--gap);min-width:0}
+  .dot{width:var(--d);height:var(--d);border-radius:50%;background:var(--c)}
+  .count{font-weight:800;font-size:14px;white-space:nowrap;min-width:58px}
+  /* inline layout: label sits on the left of its dots */
+  .inline .row{display:flex;align-items:center;gap:8px}
+  .inline .label{margin:0;width:44px;flex:none}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .rows{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:800 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style><div class="pbody">
+<div class="stage grey" id="stage">
+  <div class="rows" id="rows"></div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+</div></template></div><script>(function(c){(function(window,document,location){
+  // ---- Settings for this chart ----
+  var TYPE = "emergency";            // the message type the Wix page code sends
+  var INLINE = false;          // true: label beside the dots, false: label above them
+  var MIN_LINES = 2;     // fewest lines of dots in a row
+  var MIN_DOT = 12;                // smallest circle (px) before another line of dots is added
+  var SORT = true;              // true: biggest row first
+  var ROWS = [
+    { key: "rfs", field: "rSWithRfs",    label: "RFS",    colour: "#F05A28" },
+    { key: "ses", field: "rSWithSes",    label: "SES",    colour: "#00857c" },
+    { key: "police", field: "rSWithPolice", label: "Police", colour: "#07293B" }
+  ];
+  // ---------------------------------
+  var stage = document.getElementById("stage");
+  var data = { rfs: 24, ses: 23, police: 3 };      // grey static preview numbers
+
+  function draw() {
+    var host = document.getElementById("rows");
+    host.innerHTML = "";
+    document.body.className = INLINE ? "inline" : "";
+    if (!data) { return; }
+
+    var names = data.labels || {};
+    // The label is the CMS column name where there is one, otherwise the typed label
+    var list = ROWS.map(function (r) { return { label: (r.field && names[r.field]) || r.label, colour: r.colour, n: Number(data[r.key]) || 0 }; });
+    if (SORT) { list.sort(function (a, b) { return b.n - a.n; }); }
+    var maxN = Math.max(1, Math.max.apply(null, list.map(function (r) { return r.n; })));
+
+    // Work out one circle size that fits the biggest row, adding another line of dots if they would be too small
+    var gap = 3, countW = 58 + 8, labelW = INLINE ? 44 + 8 : 0;
+    var avail = window.innerWidth - 8 - countW - labelW;
+    var lines = MIN_LINES, cols, d;
+    for (;;) {
+      cols = Math.ceil(maxN / lines);
+      d = (avail - (cols - 1) * gap) / cols;
+      if (d >= MIN_DOT || lines >= 8) { break; }
+      lines++;
+    }
+    d = Math.max(5, Math.min(16, Math.floor(d * 10) / 10));
+    document.documentElement.style.setProperty("--d", d + "px");
+
+    list.forEach(function (r) {
+      var row = document.createElement("div");
+      row.className = "row";
+      row.setAttribute("role", "img");
+      row.setAttribute("aria-label", r.label + ": " + r.n + (r.n === 1 ? " group" : " groups"));
+
+      var label = document.createElement("p");
+      label.className = "label"; label.textContent = r.label;
+
+      var line = document.createElement("div");
+      line.className = "line";
+      var dots = document.createElement("div");
+      dots.className = "dots";
+      dots.style.gridTemplateColumns = "repeat(" + Math.max(1, Math.ceil(r.n / lines)) + "," + d + "px)";
+      for (var i = 0; i < r.n; i++) {
+        var dot = document.createElement("span");
+        dot.className = "dot"; dot.style.setProperty("--c", r.colour);
+        dots.appendChild(dot);
+      }
+      var count = document.createElement("span");
+      count.className = "count"; count.textContent = r.n + (r.n === 1 ? " group" : " groups");
+      line.appendChild(dots); line.appendChild(count);
+
+      row.appendChild(label); row.appendChild(line);
+      host.appendChild(row);
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === TYPE) {                                             // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+})(c.w,c.d,c.l)})(window.__chartHost(document.currentScript.previousElementSibling));</script></figure></div></div></div></section></div>
 <section class="sec" id="pr-aspire" style="padding-top:0"><div class="wrap"><div class="prghd"><h2 class="sechead">We&rsquo;re getting better prepared, together</h2><p class="lede">Taking stock showed us how far we&rsquo;ve come, and where we want to grow next. Seven aspirations stood out. Each is something our groups told us they want support with, so we can keep looking after our communities and each other for the long haul.</p><p class='lede'>Here is what we heard:</p></div>
-<ol class="asplist"><li class="asp"><div class="asp-l"><h3>01 Create or update an action plan</h3><p>Only <strong>13/58 groups</strong> say they have an up to date action plan for resilience.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;[We want] to get some direction on how to move forward in developing our preparedness program&rdquo;</p><footer>&mdash; Woodburn CRT</footer></blockquote></figure></div></li><li class="asp"><div class="asp-l"><h3>02 Reduce key-people dependency</h3><p><strong>38 groups</strong> noted that leadership/succession planning is a key priority for them.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;Young blood [makes a big difference]. A couple of more really engaged people in the core group.&rdquo;</p><footer>&mdash; Evans Area Resilience Network</footer></blockquote></figure></div></li><li class="asp"><div class="asp-l"><h3>03 Maintain engagement between disasters</h3><p>Community engagement, morale and the drive to stay prepared fade outside of disasters. Groups see this as a big gap.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;People come out during a disaster but not in peacetime. How do we leverage that?&rdquo;</p><footer>&mdash; Mount Burrell Community Resilience Neighbourhood</footer></blockquote></figure></div></li><li class="asp"><div class="asp-l"><h3>04 Improve our knowledge of vulnerable residents</h3><p><strong>About half of our groups</strong> told us they need help identifying vulnerable people in their community.</p></div><div class="asp-r"><figure class="bchart card ctr"><div class="bgraph"><div class="flourish-embed flourish-chart" data-src="visualisation/30822194"><noscript><img src="https://public.flourish.studio/visualisation/30822194/thumbnail" width="100%" alt="Bar chart of how groups rate their knowledge of vulnerable people in their community, from 1 to 5: 7 groups rate themselves 5, 12 rate 4, 10 rate 3, 8 rate 2 and 6 rate 1. 24 groups rate themselves 3 or lower."></noscript></div></div></figure></div></li><li class="asp"><div class="asp-l"><h3>05 Grow our capacity to meet demands</h3><p>Groups lack time, people and steady money leading to volunteer burn out and good projects stalling before they finish.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;[We need] recurrent baseline funding to cover ongoing costs of running the hall, insurance, internet, radio/repeater maintenance and to hold some events to connect the community.&rdquo;</p><footer>&mdash; Minyon Resilience Network</footer></blockquote></figure></div></li><li class="asp"><div class="asp-l"><h3>06 Improve our backup communication systems</h3><p><strong>At least 10 groups</strong> have specifically called this out as a gap. Without a backup, a community may be unable to communicate and coordinate during a disaster.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;[We have] difficulty engaging more community members with radios.&rdquo;</p><footer>&mdash; Larnook CRT</footer></blockquote></figure></div></li><li class="asp"><div class="asp-l"><h3>07 Manage our volunteer surges</h3><p><strong>30 groups</strong> do not have volunteer policy, procedures, risk documentation or templates.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;[What would make a big difference is] for people to realise that they can&#x27;t just turn up when a disaster happens. They need training, police checks, induction etc&rdquo;</p><footer>&mdash; Iluka Community Organisation Planning for Emergencies (ICOPE)</footer></blockquote></figure></div></li></ol></div></section></section><section id="rack" data-screen data-label="RACK" class="page " tabindex="-1" aria-label="RACK"><div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge</span><h1>RACK</h1><p class="lede">One shared place to find what you need and what is already working in resilience communities across the Northern Rivers.</p>
-<p class="rackterms">By signing in to RACK, you agree to our <a href="#privacy">Website Privacy Policy</a> and the <a href="#privacy" data-jump="pp-rack" data-page="privacy">RACK Terms of Use</a>.</p>
+<ol class="asplist"><li class="asp"><div class="asp-l"><h3>01 Create or update an action plan</h3><p>Only <strong>13/58 groups</strong> say they have an up to date action plan for resilience.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;[We want] to get some direction on how to move forward in developing our preparedness program&rdquo;</p><footer>&mdash; Woodburn CRT</footer></blockquote></figure></div></li><li class="asp"><div class="asp-l"><h3>02 Reduce key-people dependency</h3><p><strong>38 groups</strong> noted that leadership/succession planning is a key priority for them.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;Young blood [makes a big difference]. A couple of more really engaged people in the core group.&rdquo;</p><footer>&mdash; Evans Area Resilience Network</footer></blockquote></figure></div></li><li class="asp"><div class="asp-l"><h3>03 Maintain engagement between disasters</h3><p>Community engagement, morale and the drive to stay prepared fade outside of disasters. Groups see this as a big gap.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;People come out during a disaster but not in peacetime. How do we leverage that?&rdquo;</p><footer>&mdash; Mount Burrell Community Resilience Neighbourhood</footer></blockquote></figure></div></li><li class="asp"><div class="asp-l"><h3>04 Improve our knowledge of vulnerable residents</h3><p><strong>About half of our groups</strong> told us they need help identifying vulnerable people in their community.</p></div><div class="asp-r"><figure class="bchart card ctr"><div class="chartframe " role="img" aria-label="Bar chart of how groups rate their knowledge of vulnerable people in their community, from 1 to 5." style="--w:400px;--h:180px;--mh:190px"><template shadowrootmode="open"><style>
+  :host{ --navy:#07293B; }
+  *{box-sizing:border-box}
+  :host,.pbody{margin:0;padding:0;background:transparent}
+  .pbody{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy);padding:4px 0}
+  .title{font-weight:400;font-size:16px;line-height:1.3;margin:0 0 4px;text-align:center}
+  .title b{font-weight:800}
+  .sub{font-size:13px;font-weight:400;margin:0 0 12px;text-align:center}
+  .sub b{font-weight:800}
+  .bar{display:flex;height:96px;border-radius:4px;overflow:hidden;background:#EEF1F3}
+  .seg{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px 3px;text-align:center;overflow:hidden;color:var(--navy);min-width:0}
+  .seg .n{font-weight:800;font-size:20px;line-height:1}
+  .seg .mid{font-weight:400;font-size:12px;line-height:1.1}
+  .seg .sc{font-weight:800;font-size:15px;line-height:1}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage{position:relative;min-height:100vh}
+  .stage.grey .content{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:800 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style><div class="pbody">
+<div class="stage grey" id="stage">
+  <div class="content">
+    <p class="title" id="title"></p>
+    <p class="sub"><b>Group count</b> / by knowledge score</p>
+    <div class="bar" id="bar" role="img"></div>
+  </div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+</div></template></div><script>(function(c){(function(window,document,location){
+  // Same score colours as the connectedness chart: dark yellow for 5/5 down to light grey for 1/5
+  var COLOURS = { "5": "#D9A500", "4": "#EDB914", "3": "#FFCB2A", "2": "#FFEAAA", "1": "#D6E2E4" };
+  var SCORES  = ["5", "4", "3", "2", "1"];
+  var FIELD = "knowledgeOfVulnerableCommunityMembers";   // the CMS column this chart counts
+  var stage = document.getElementById("stage");
+  var data = { counts: { "5": 7, "4": 12, "3": 10, "2": 8, "1": 6 } };   // grey static preview numbers
+
+  function draw() {
+    var title = document.getElementById("title"), bar = document.getElementById("bar");
+    bar.innerHTML = "";
+    if (!data) { title.innerHTML = ""; return; }
+    var counts = data.counts || {};
+
+    // Groups scoring 3/5 or lower do not confidently know who is most vulnerable
+    var low = (counts["3"] || 0) + (counts["2"] || 0) + (counts["1"] || 0);
+    title.innerHTML = "<b>" + low + " groups</b> don’t confidently know who’s most vulnerable";
+    bar.setAttribute("aria-label", ((data.labels && data.labels[FIELD]) || "Knowledge of vulnerable community members") + ": " + title.textContent);
+
+    SCORES.forEach(function (s) {
+      var n = counts[s] || 0;
+      if (!n) { return; }
+      var seg = document.createElement("div");
+      seg.className = "seg";
+      seg.style.flex = n + " 1 0";
+      seg.style.background = COLOURS[s];
+      seg.title = s + "/5: " + n + (n === 1 ? " group" : " groups");
+      seg.innerHTML = "<span class='n'>" + n + "</span><span class='mid'>" + (n === 1 ? "group" : "groups") + "<br>scored</span><span class='sc'>" + s + "/5</span>";
+      bar.appendChild(seg);
+    });
+    // In a segment too narrow for "groups scored", leave out the middle words (the number and score stay)
+    Array.prototype.forEach.call(bar.children, function (seg) {
+      var mid = seg.querySelector(".mid");
+      if (mid.scrollWidth > seg.clientWidth - 2) { mid.style.display = "none"; }
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "vulnerable") {                                     // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+})(c.w,c.d,c.l)})(window.__chartHost(document.currentScript.previousElementSibling));</script></figure></div></li><li class="asp"><div class="asp-l"><h3>05 Grow our capacity to meet demands</h3><p>Groups lack time, people and steady money leading to volunteer burn out and good projects stalling before they finish.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;[We need] recurrent baseline funding to cover ongoing costs of running the hall, insurance, internet, radio/repeater maintenance and to hold some events to connect the community.&rdquo;</p><footer>&mdash; Minyon Resilience Network</footer></blockquote></figure></div></li><li class="asp"><div class="asp-l"><h3>06 Improve our backup communication systems</h3><p><strong>At least 10 groups</strong> have specifically called this out as a gap. Without a backup, a community may be unable to communicate and coordinate during a disaster.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;[We have] difficulty engaging more community members with radios.&rdquo;</p><footer>&mdash; Larnook CRT</footer></blockquote></figure></div></li><li class="asp"><div class="asp-l"><h3>07 Manage our volunteer surges</h3><p><strong>30 groups</strong> do not have volunteer policy, procedures, risk documentation or templates.</p></div><div class="asp-r"><figure class="sqc "><blockquote><p>&ldquo;[What would make a big difference is] for people to realise that they can&#x27;t just turn up when a disaster happens. They need training, police checks, induction etc&rdquo;</p><footer>&mdash; Iluka Community Organisation Planning for Emergencies (ICOPE)</footer></blockquote></figure></div></li></ol></div></section></section><section id="rack" data-screen data-label="RACK" class="page " tabindex="-1" aria-label="RACK"><div class="wrap"><div class="splith"><div><span class="eyebrow pill-t">Resilience Alliance Community Knowledge</span><h1>RACK</h1><p class="lede">One shared place to find what you need and what is already working in resilience communities across the Northern Rivers.</p>
+<p class="rackterms">By signing in to RACK, you agree to our <a href="#privacy">Website Privacy Policy</a> and the <a href="#rack-terms">RACK Terms of Use</a>.</p>
 <p class="btnrow"><a class="btn btn-ghost" href="mailto:hello@nrcra.org.au?subject=RACK%20access">Request access</a><a class="btn btn-primary" href="https://rack.nrcra.org.au" target="_blank" rel="noopener">Sign in</a><a class="rackrev" href="#privacy">Privacy policy</a></p></div>
 <div class="ph rackph"><img src="../assets/img/rack-hero.webp" alt="Someone using RACK on a desktop computer, searching the shared resource library." width="1024" height="799" loading="eager" decoding="async"></div></div></div>
 <section class="sec"><div class="wrap rackhead"><p class="lede">Find templates and guides for your group, and share your own with the network.</p><ol class="pillcards rackcats"><li><h3>Get Ready</h3><p>Plans and checklists for before a disaster.</p></li><li><h3>Volunteers</h3><p>Registering, inducting and looking after volunteers.</p></li><li><h3>Run Your Group</h3><p>Governance, templates and running a healthy group.</p></li><li><h3>Emergencies</h3><p>What to do and who to call during an emergency.</p></li><li><h3>Training</h3><p>Learning opportunities for your group.</p></li></ol></div></section></section><section id="privacy" data-screen data-label="Privacy Policy" class="page " tabindex="-1" aria-label="Privacy Policy"><div class="wrap"><div class="pg-head pphead"><span class="eyebrow pill-t">Privacy Policy</span><h1>Website Privacy Policy</h1><p class="lede">How NRCRA collects, uses and protects your personal information.</p><p class="ppdate">Last updated 9 November 2026</p></div></div>
-<section class="sec" style="padding-top:0"><div class="wrap"><ol class="pplist2"><li class="ppitem" id="pp-why-this-matters"><h2>1. Why this matters</h2><p>The Northern Rivers Community Resilience Alliance exists because communities look after each other, before, during and after disasters. That only works when people trust us with their information. This policy explains what we collect through our website, events, newsletter and network, why we collect it and how we look after it.</p><p>We follow the Australian Privacy Principles in the Privacy Act 1988 as our standard for handling personal information.</p></li><li class="ppitem" id="pp-who-we-are"><h2>2. Who we are</h2><p>The Northern Rivers Community Resilience Alliance (the Alliance) is a grassroots network formed after the 2022 floods. We connect local resilience groups across the Northern Rivers of New South Wales so they can share knowledge, support each other and prepare together. You can reach us any time at <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p></li><li class="ppitem" id="pp-what-we-collect"><h2>3. What we collect</h2><ul class="pplist"><li>Your name, email, phone number, community group, role and town, when you contact us, join the network or sign up for updates.</li><li>Event and training registrations: your details, whether you attended, and any dietary or access needs you choose to tell us. We use those needs only to look after you at that event.</li><li>Messages you send us through the website, email, phone or social media.</li><li>Photos, stories and quotes from you or your community, only with your consent.</li><li>Basic details about your visit to our website, through cookies and analytics.</li><li>If your group uses RACK, the details listed in the Resilience Alliance Community Knowledge (RACK) Terms of Use section below.</li></ul></li><li class="ppitem" id="pp-how-we-collect-it"><h2>4. How we collect it</h2><ul class="pplist"><li>From you directly: website forms, emails, phone calls, events and social media.</li><li>From your community group, when it names you as a contact for the network.</li><li>Automatically, through cookies and website analytics.</li></ul></li><li class="ppitem" id="pp-how-we-use-it"><h2>5. How we use it</h2><ul class="pplist"><li>To connect communities across the network and keep your group&rsquo;s contact details up to date.</li><li>To run events and training, and let you know about ones you might want to join.</li><li>To send our Resilience Roundup newsletter and other updates you signed up for. Every email has an unsubscribe link.</li><li>To answer your questions and follow up on what you asked us.</li><li>To share stories from the network, only with your consent.</li><li>To report to our funders. We share numbers and summaries, never your personal details, unless you agree.</li><li>To manage access to RACK.</li><li>To meet our legal obligations.</li></ul><p>We never sell your information or use it for advertising.</p></li><li class="ppitem" id="pp-who-we-share-it-with"><h2>6. Who we share it with</h2><p>We share personal information only with the services that help us run the Alliance, with partners when you agree, or when the law requires it. The services we use are:</p><ul class="pplist"><li>Wix, which hosts our website.</li><li>Google Workspace and Google Cloud, for email, documents, forms, online meetings and trainings, and RACK (including Google&rsquo;s Gemini service).</li><li>Zoho CRM, for our network and member records.</li><li>Zoho Campaigns, for our Resilience Roundup newsletter and email updates.</li><li>Zoho, for event and training bookings.</li></ul><p>Some of these services store or process information outside Australia. We choose well known providers with strong security.</p></li><li class="ppitem" id="pp-storage-and-security"><h2>7. Storage and security</h2><p>We keep personal information in secure systems with limited access. Only the Alliance team members who need it for their work can see it. When we no longer need information, we delete it or remove the details that identify you. If a data breach is likely to cause serious harm, we will tell the people affected and the Office of the Australian Information Commissioner as soon as we can.</p></li><li class="ppitem" id="pp-photos-and-stories"><h2>8. Photos and stories</h2><p>Stories from the network are at the heart of what we do. We only share your photo, name, story or quote with your consent, and you can ask us to take it down at any time by emailing <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p></li><li class="ppitem" id="pp-cookies-and-website-analytics"><h2>9. Cookies and website analytics</h2><p>Our website uses cookies to work properly and to show us how people use it, such as which pages are visited most. We look at this information in summary form only. You can refuse or delete cookies in your browser settings, and the website will still work.</p></li><li class="ppitem" id="pp-rack"><h2>10. Resilience Alliance Community Knowledge (RACK) Terms of Use</h2><p>RACK (Resilience Alliance Community Knowledge) is the shared library where member communities share what they know. It is open to community groups in the Alliance network only. When you log in or share knowledge, we collect:</p><ul class="pplist"><li>Your community group email, community name and town, so we can check your group has access.</li><li>When you share knowledge: your name, email, community and town, the file or link you share, your answers in the form, whether other communities may contact you, and your privacy confirmation.</li><li>Questions you type into Ask RACK.</li><li>Basic details that keep RACK running, like when you log in.</li></ul><p>Resource cards show only the community group, town and date. We never show your name. Your email is shown to other RACK users only if you ticked &ldquo;Other communities can get in touch with me by email&rdquo;. Ask RACK and Listen run on Google&rsquo;s Gemini service. By logging in to RACK you agree to this policy and the RACK Terms of Use.</p></li><li class="ppitem" id="pp-how-long-we-keep-it"><h2>11. How long we keep it</h2><p>We keep contact details while you or your group are part of the network, or until you ask us to remove them. Event records are kept for as long as we need them for reporting to funders.</p></li><li class="ppitem" id="pp-your-choices"><h2>12. Your choices</h2><ul class="pplist"><li>Ask to see or correct the information we hold about you.</li><li>Unsubscribe from our emails at any time.</li><li>Ask us to remove your photo, story or quote.</li><li>Ask us to remove your details from our records.</li></ul><p>Email <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a> and we will get back to you within 5 working days.</p></li><li class="ppitem" id="pp-if-you-have-a-concern"><h2>13. If you have a concern</h2><p>Talk to us first at <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>. We take every concern seriously. You can also contact the Office of the Australian Information Commissioner at <a href="https://www.oaic.gov.au">oaic.gov.au</a>.</p></li><li class="ppitem" id="pp-changes-to-this-policy"><h2>14. Changes to this policy</h2><p>As the Alliance grows we will update this policy and post the new version here with the date it changed.</p></li><li class="ppitem" id="pp-contact-us"><h2>15. Contact us</h2><p>Questions about this policy or how we handle your information: <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p></li></ol></div></section></section><section id="network" data-screen data-label="Network" class="page " tabindex="-1" aria-label="Network"><div class="wrap" id="nw-map"><div class="splith net"><div><span class="eyebrow">Network</span><h1>60+ groups,<br>one region,<br><span class="mark">one network.<svg class="squig" viewBox="0 0 300 24" aria-hidden="true"><path d="M4 16c40-12 80-12 120-2s90 8 172-6" fill="none" stroke="#ffcb2a" stroke-width="8" stroke-linecap="round"/></svg></span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p><p class="mapnote">Select a yellow ring <svg class="ringico" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7" fill="none" stroke="#ffcb2a" stroke-width="3.5"/></svg> on the map to see a group&rsquo;s details.</p></div><div class="ph"><div class="gmap"><iframe src="https://www.google.com/maps/d/u/0/embed?mid=1KTtTtCTzO9IvlprDHbXwylLWKAU7dw4&ehbc=2E312F&noprof=1" width="640" height="480" title="Map of Northern Rivers community resilience groups" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></div></div></div>
+<section class="sec" style="padding-top:0"><div class="wrap"><ol class="pplist2"><li class="ppitem" id="pp-why-this-matters"><h2>1. Why this matters</h2><p>The Northern Rivers Community Resilience Alliance exists because communities look after each other, before, during and after disasters. That only works when people trust us with their information. This policy explains what we collect through our website, events, newsletter and network, why we collect it and how we look after it.</p><p>We follow the Australian Privacy Principles in the Privacy Act 1988 as our standard for handling personal information.</p></li><li class="ppitem" id="pp-who-we-are"><h2>2. Who we are</h2><p>The Northern Rivers Community Resilience Alliance (the Alliance) is a grassroots network formed after the 2022 floods. We connect local resilience groups across the Northern Rivers of New South Wales so they can share knowledge, support each other and prepare together. You can reach us any time at <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p></li><li class="ppitem" id="pp-what-we-collect"><h2>3. What we collect</h2><ul class="pplist"><li>Your name, email, phone number, community group, role and town, when you contact us, join the network or sign up for updates.</li><li>Event and training registrations: your details, whether you attended, and any dietary or access needs you choose to tell us. We use those needs only to look after you at that event.</li><li>Messages you send us through the website, email, phone or social media.</li><li>Photos, stories and quotes from you or your community, only with your consent.</li><li>Basic details about your visit to our website, through cookies and analytics.</li><li>If your group uses RACK, the details listed in the <a href="#privacy" data-jump="pp-rack" data-page="privacy">How RACK handles your information</a> section below.</li></ul></li><li class="ppitem" id="pp-how-we-collect-it"><h2>4. How we collect it</h2><ul class="pplist"><li>From you directly: website forms, emails, phone calls, events and social media.</li><li>From your community group, when it names you as a contact for the network.</li><li>Automatically, through cookies and website analytics.</li></ul></li><li class="ppitem" id="pp-how-we-use-it"><h2>5. How we use it</h2><ul class="pplist"><li>To connect communities across the network and keep your group&rsquo;s contact details up to date.</li><li>To run events and training, and let you know about ones you might want to join.</li><li>To send our Resilience Roundup newsletter and other updates you signed up for. Every email has an unsubscribe link.</li><li>To answer your questions and follow up on what you asked us.</li><li>To share stories from the network, only with your consent.</li><li>To report to our funders. We share numbers and summaries, never your personal details, unless you agree.</li><li>To manage access to RACK.</li><li>To meet our legal obligations.</li></ul><p>We never sell your information or use it for advertising.</p></li><li class="ppitem" id="pp-who-we-share-it-with"><h2>6. Who we share it with</h2><p>We share personal information only with the services that help us run the Alliance, with partners when you agree, or when the law requires it. The services we use are:</p><ul class="pplist"><li>Wix, which hosts our website.</li><li>Google Workspace and Google Cloud, for email, documents, forms, online meetings and trainings, and RACK (including Google&rsquo;s Gemini service).</li><li>Zoho CRM, for our network and member records.</li><li>Zoho Campaigns, for our Resilience Roundup newsletter and email updates.</li><li>Zoho, for event and training bookings.</li></ul><p>Some of these services store or process information outside Australia. We choose well known providers with strong security.</p></li><li class="ppitem" id="pp-storage-and-security"><h2>7. Storage and security</h2><p>We keep personal information in secure systems with limited access. Only the Alliance team members who need it for their work can see it. When we no longer need information, we delete it or remove the details that identify you. If a data breach is likely to cause serious harm, we will tell the people affected and the Office of the Australian Information Commissioner as soon as we can.</p></li><li class="ppitem" id="pp-photos-and-stories"><h2>8. Photos and stories</h2><p>Stories from the network are at the heart of what we do. We only share your photo, name, story or quote with your consent, and you can ask us to take it down at any time by emailing <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p></li><li class="ppitem" id="pp-cookies-and-website-analytics"><h2>9. Cookies and website analytics</h2><p>Our website uses cookies to work properly and to show us how people use it, such as which pages are visited most. We look at this information in summary form only. You can refuse or delete cookies in your browser settings, and the website will still work.</p></li><li class="ppitem" id="pp-rack"><h2>10. How RACK handles your information</h2><p>RACK (Resilience Alliance Community Knowledge) is the shared library where member communities share what they know. It is open to community groups in the Alliance network only. When you log in or share knowledge, we collect:</p><ul class="pplist"><li>Your community group email, community name and town, so we can check your group has access.</li><li>When you share knowledge: your name, email, community and town, the file or link you share, your answers in the form, whether other communities may contact you, and your privacy confirmation.</li><li>Questions you type into Ask RACK.</li><li>Basic details that keep RACK running, like when you log in.</li></ul><p>Resource cards show only the community group, town and date. We never show your name. Your email is shown to other RACK users only if you ticked &ldquo;Other communities can get in touch with me by email&rdquo;. Ask RACK and Listen run on Google&rsquo;s Gemini service. By logging in to RACK you agree to this policy and the <a href="#rack-terms">RACK Terms of Use</a>.</p></li><li class="ppitem" id="pp-how-long-we-keep-it"><h2>11. How long we keep it</h2><p>We keep contact details while you or your group are part of the network, or until you ask us to remove them. Event records are kept for as long as we need them for reporting to funders.</p></li><li class="ppitem" id="pp-your-choices"><h2>12. Your choices</h2><ul class="pplist"><li>Ask to see or correct the information we hold about you.</li><li>Unsubscribe from our emails at any time.</li><li>Ask us to remove your photo, story or quote.</li><li>Ask us to remove your details from our records.</li></ul><p>Email <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a> and we will get back to you within 5 working days.</p></li><li class="ppitem" id="pp-if-you-have-a-concern"><h2>13. If you have a concern</h2><p>Talk to us first at <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>. We take every concern seriously. You can also contact the Office of the Australian Information Commissioner at <a href="https://www.oaic.gov.au">oaic.gov.au</a>.</p></li><li class="ppitem" id="pp-changes-to-this-policy"><h2>14. Changes to this policy</h2><p>As the Alliance grows we will update this policy and post the new version here with the date it changed.</p></li><li class="ppitem" id="pp-contact-us"><h2>15. Contact us</h2><p>Questions about this policy or how we handle your information: <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p></li></ol></div></section></section><section id="rack-terms" data-screen data-label="RACK Terms of Use" class="page " tabindex="-1" aria-label="RACK Terms of Use"><div class="wrap"><div class="pg-head pphead"><span class="eyebrow pill-t">Terms of Use</span><h1>Resilience Alliance Community Knowledge - RACK<br>Our shared Library</h1><p class="ppdate">Last updated 30 October 2026</p></div></div>
+<section class="sec" style="padding-top:0"><div class="wrap"><ol class="pplist2"><li class="ppitem" id="rt-why-these-terms-exist"><h2>1. Why these terms exist</h2><p>RACK works because communities share what they know in good faith. These terms keep it useful, safe and fair for everyone in the network.</p></li><li class="ppitem" id="rt-who-can-use-rack"><h2>2. Who can use RACK</h2><p>RACK is for community groups that are part of the Northern Rivers Community Resilience Alliance. Access is by approved email. Please keep your login within your group. No login yet? Email <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p></li><li class="ppitem" id="rt-sharing-knowledge"><h2>3. Sharing knowledge</h2><p>When you share a resource, you confirm that:</p><ul class="pplist"><li>you or your group made it, or you have permission to share it. If it comes from another organisation, their terms allow it to be shared and you name them.</li><li>it contains no personal information about anyone.</li><li>it is accurate to the best of your knowledge.</li><li>it is not offensive, discriminatory, political campaigning or advertising.</li></ul><p>You keep ownership of what you share. By sharing, you give the Alliance permission to store it, show it in RACK, file it and turn it into other formats, like audio for Listen and podcasts, so more communities can use it. We review every resource before it goes live, and we can decline or remove anything that doesn&rsquo;t fit these terms.</p></li><li class="ppitem" id="rt-using-resources"><h2>4. Using resources</h2><p>You are welcome to use and adapt RACK resources for your community&rsquo;s preparedness and recovery work. Please credit the community that made them. Before you sell a resource or share it outside the network, ask the community that made it. We are happy to connect you through <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p><p>Every resource is a starting point. Change the words, names and steps so they fit how your group works. Some resources are samples from other organisations. They are free for community groups to use, but not to sell, and their own terms apply. Where a resource comes from another organisation, we name them on the card. For anything about safety, check it matches the latest advice from the NSW SES or your council.</p></li><li class="ppitem" id="rt-ask-rack-listen-and-podcasts"><h2>5. Ask RACK, Listen and podcasts</h2><p>Ask RACK answers, audio and podcasts are created automatically from the resources in RACK. They can be incomplete or wrong. Always check important information against the original resource.</p></li><li class="ppitem" id="rt-in-an-emergency"><h2>6. In an emergency</h2><p>RACK is a knowledge and preparedness tool, not an emergency service. In a life threatening emergency call Triple Zero (000). For flood and storm help call the NSW SES on 132 500. For current warnings use Hazards Near Me NSW.</p></li><li class="ppitem" id="rt-our-responsibility"><h2>7. Our responsibility</h2><p>Resources are shared by communities and are general information only. We review them, but we can&rsquo;t guarantee they are complete, current or right for your situation. To the extent the law allows, the Alliance is not responsible for any loss that comes from using RACK. Nothing in these terms limits your rights under Australian Consumer Law.</p></li><li class="ppitem" id="rt-changes-and-access"><h2>8. Changes and access</h2><p>We will keep improving RACK and may update these terms. We can pause or remove access if these terms are not followed.</p></li><li class="ppitem" id="rt-contact"><h2>9. Contact</h2><p>Questions about RACK, our <a href="#privacy">Privacy Policy</a> or these terms: <a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a>.</p></li></ol></div></section></section><section id="network" data-screen data-label="Network" class="page " tabindex="-1" aria-label="Network"><div class="wrap" id="nw-map"><div class="splith net"><div><span class="eyebrow">Network</span><h1>60+ groups,<br>one region,<br><span class="mark">one network.<svg class="squig" viewBox="0 0 300 24" aria-hidden="true"><path d="M4 16c40-12 80-12 120-2s90 8 172-6" fill="none" stroke="#ffcb2a" stroke-width="8" stroke-linecap="round"/></svg></span></h1><p class="lede">8 Local Government Areas (LGAs) across the Northern Rivers region of New South Wales, Australia.</p><p class="mapnote">Select a yellow ring <svg class="ringico" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="7" fill="none" stroke="#ffcb2a" stroke-width="3.5"/></svg> on the map to see a group&rsquo;s details.</p></div><div class="ph"><div class="gmap"><iframe src="https://www.google.com/maps/d/u/0/embed?mid=1KTtTtCTzO9IvlprDHbXwylLWKAU7dw4&ehbc=2E312F&noprof=1" width="640" height="480" title="Map of Northern Rivers community resilience groups" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></div></div></div>
 <section class="sec stories" id="nw-stories" style="padding-top:0"><div class="wrap"><div class="bar bar-y sbar-top" aria-hidden="true"></div><h2 class="sechead cen">Our Stories</h2><ul class="tcards"><li><div class="tph"><img src="../assets/img/laughing.jpg" alt="" class="" loading="lazy" decoding="async"></div><blockquote><p>&ldquo;Like a whole region of neighbours in your corner.&rdquo;</p><footer>&mdash; Resilient Lismore Inc</footer></blockquote></li><li><div class="tph vid" data-video="https://player.vimeo.com/video/1238627190?h=85714a045a&autoplay=1"><img src="../assets/img/circle.jpg" alt="" class="" loading="lazy" decoding="async"><button class="play" aria-label="Play the video: Together Pottsville Inc, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg></button></div><blockquote><p>&ldquo;Like a family we did not know we had.&rdquo;</p><footer>&mdash; Together Pottsville Inc</footer></blockquote></li><li><div class="tph"><img src="../assets/img/hug.jpg" alt="" class="" loading="lazy" decoding="async"></div><blockquote><p>&ldquo;Like finally being heard by people who have been through it too.&rdquo;</p><footer>&mdash; Wardell Community Organised Resilience Effort (CORE)</footer></blockquote></li><li><div class="tph"><img src="../assets/img/listening.jpg" alt="" class="" loading="lazy" decoding="async"></div><blockquote><p>&ldquo;We learned more in one afternoon than in a year on our own.&rdquo;</p><footer>&mdash; Resilient Uki</footer></blockquote></li><li><div class="tph"><img src="../assets/img/talk.jpg" alt="" class="" loading="lazy" decoding="async"></div><blockquote><p>&ldquo;We went from a few people on a phone tree to a whole street that checks in.&rdquo;</p><footer>&mdash; Main Arm Disaster Recovery Inc</footer></blockquote></li><li><div class="tph vid" data-video="https://player.vimeo.com/video/1238627190?h=85714a045a&autoplay=1"><img src="../assets/img/crowd.jpg" alt="" class="" loading="lazy" decoding="async"><button class="play" aria-label="Play the video: Nimbin Disaster Resilience Group, full screen"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true" focusable="false"><path d="M37 34L55 44L37 54Z" fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/></svg></button></div><blockquote><p>&ldquo;Seeing what other groups had done gave us the courage to start.&rdquo;</p><footer>&mdash; Nimbin Disaster Resilience Group</footer></blockquote></li></ul><div class="bar bar-y sbar-bot" aria-hidden="true"></div></div></section>
 <section class="sec" id="our-network"><div class="wrap"><div class="dirhead"><h2 class="sechead">Our Network</h2><select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur=""><option value="">Browse the region</option><option value="lga-ballina">Ballina LGA</option><option value="lga-byron">Byron LGA</option><option value="lga-clarence-valley">Clarence Valley LGA</option><option value="lga-kyogle">Kyogle LGA</option><option value="lga-lismore">Lismore LGA</option><option value="lga-richmond-valley">Richmond Valley LGA</option><option value="lga-tenterfield">Tenterfield LGA</option><option value="lga-tweed">Tweed LGA</option></select></div><ul class="gsub"><li><b>Bangalow Resilience Network</b><span>Bangalow, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/p/Bangalow-Resilience-Network-61553292841772/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Billy&#x27;s Creek</b><span>Billys Creek, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span></li><li><b>Blicks Community Inc</b><span>Dundurrabin, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.blickscommunityinc.org/about-1" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Broadwater Community Resilience Team (CRT)</b><span>Evans Head, Richmond Valley</span><span class="ctry">Bundjalung Country</span></li><li><b>Broken Head Society</b><span>Broken Head, Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Brunswick Action Community Collective</b><span>Mullumbimby, Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Burringbar Community Association</b><span>Burringbar, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://burringbar.wixsite.com/community/local-associations" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Burringbar Resilience Network Community Resilience Team (CRT)</b><span>Burringbar, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://burringbar.wixsite.com/community/resillence" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Byrill Creek Community Resilience Team (CRT)</b><span>Byrrill Creek, Tweed Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Chinderah and Surrounds Peoples Hub</b><span>Chinderah, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/chinderah.donations.hub" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Chinderah Community Resilience Team (CRT)</b><span>Chinderah, Tweed Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Clarence Valley Wellbeing Collective</b><span>Woombah, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span></li><li><b>Clunes Coronation Hall</b><span>Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.clunescoronationhall.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Clunes Old School Assoc.</b><span>Clunes, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://clunesoldschool.org/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Coorabell Community Resilience Team (CRT)</b><span>Coorabell, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.coorabellhall.net/coorabell-resilience" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Coraki Community Resilience Team (CRT)</b><span>Evans Head, Richmond Valley</span><span class="ctry">Bundjalung Country</span></li><li><b>Creative Communities Connect / Wadeville Emergency Response Team</b><span>Wadeville, Kyogle Council</span><span class="ctry">Githabul &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.creativecommunitiesconnect.org/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Evans Area Resilience Network</b><span>Evans Head, Richmond Valley</span><span class="ctry">Bundjalung Country</span></li><li><b>Fingal Head Community Resilience Team (CRT)</b><span>Fingal Head, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://fingalhead.com/index.php/category/floodcrt/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Gurehlgam Grafton</b><span>Grafton, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://gurehlgam.com.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Hinterland Community Resilience Team (CRT) / Federal, Eureka and Goonengerry Community Resilience Team</b><span>Federal, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/HinterlandCRT" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Iluka Community Organisation Planning for Emergencies (ICOPE)</b><span>Iluka, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://icope.net.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Keerrong Hall</b><span>Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span></li><li><b>Kunghur and Surrounds Community Resilience Team (CRT)</b><span>Kunghur, Tweed Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Kyogle Together Inc</b><span>Kyogle, Kyogle Council</span><span class="ctry">Githabul &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://kyogletogether.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Larnook Community-led Resilience Team (CRT)</b><span>Larnook, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span></li><li><b>Main Arm Disaster Recovery Inc</b><span>Main Arm, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.madr.org.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Mid Richmond Neighbourhood Centre (Evans Head)</b><span>Evans Head, Richmond Valley</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.mrnc.com.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Minnie Water Resilience</b><span>Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span></li><li><b>Minyon Resilience Network</b><span>Minyon, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.minyonresiliencenetwork.com" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Mount Burrell Community Resilience Neighbourhood</b><span>Uki, Tweed Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Mudyala Aboriginal Corporation</b><span>Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://mudyala.org.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Mullum Cares Incorporated</b><span>Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Mullumbimby &amp; District Neighbourhood Centre</b><span>Mullumbimby, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.mdnc.org.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Mullumbimby Residents Association</b><span>Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Murwillumbah Community Centre</b><span>Murwillumbah, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.mccentre.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Nimbin Community Care Team (CCT)</b><span>Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span></li><li><b>Nimbin Disaster Resilience Group</b><span>Nimbin, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://nnic.org.au/pub/index.php/disasters" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Nimbin Neighbourhood &amp; Information Centre</b><span>Nimbin, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://nnic.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Nymboida Community Groups Inc (NCGI)</b><span>Nymboida, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span></li><li><b>Ocean Shores Community Association</b><span>Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Our Neighbourhood Heritage Park</b><span>Mullumbimby, Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Pottsville Beach Neighbourhood Centre</b><span>Pottsville Beach, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.pbnc.org.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Pumpenbil Community Resilience Team (CRT)</b><span>Tyalgum, Tweed Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Repentance Creek Public Hall Inc</b><span>Repentance Creek, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://repentancecreekhall.com/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Resilience Tyalgum</b><span>Tyalgum, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.tyalgum.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Resilient Lismore Inc</b><span>Lismore, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://resilientlismore.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Resilient Suffolk</b><span>Suffolk Park, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/groups/suffolkparkbyronresilientcommunities" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Resilient Uki</b><span>Uki, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://resilientuki.org/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Rock Valley Community Resilience Team (CRT)</b><span>Rock Valley, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/rockvalleycommunitynswaustralia" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Tabulum Hub</b><span>Tabulam, Tenterfield Shire</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/tabulamcommunityhub" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>The Channon Resilience Inc</b><span>The Channon, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://thechannonhub.org" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>The New School of Arts Neighbourhood House</b><span>South Grafton, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.nsoa.org.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Together Pottsville Inc</b><span>Pottsville, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.togetherpottsville.org/about" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Tumbulgum Community Association</b><span>Tumbulgum, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://tumbulgum.wordpress.com/tumbulgum-community-assoc-communications/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Wardell Community Organised Resilience Effort (CORE)</b><span>Wardell, Ballina Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.wardellcore.community" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Whian Whian Emergency Hub</b><span>Whian Whian, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/whianwhianhallpublicpage/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Woodburn Community Resilience Team (CRT)</b><span>Evans Head, Richmond Valley</span><span class="ctry">Bundjalung Country</span></li><li><b>Woombah Residents Association (Woombah&amp;Mororo)</b><span>Woombah, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/groups/woombahresidentspage/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li></ul></div></section></section><section id="lga-ballina" data-screen data-label="Ballina" class="page " tabindex="-1" aria-label="Ballina"><section class="sec"><div class="wrap"><div class="dirhead"><h1 class="sechead">Our Network</h1><select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="lga-ballina"><option value="network">Browse the region</option><option value="lga-ballina" selected>Ballina LGA</option><option value="lga-byron">Byron LGA</option><option value="lga-clarence-valley">Clarence Valley LGA</option><option value="lga-kyogle">Kyogle LGA</option><option value="lga-lismore">Lismore LGA</option><option value="lga-richmond-valley">Richmond Valley LGA</option><option value="lga-tenterfield">Tenterfield LGA</option><option value="lga-tweed">Tweed LGA</option></select></div><ul class="gsub"><li><b>Wardell Community Organised Resilience Effort (CORE)</b><span>Wardell, Ballina Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.wardellcore.community" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li></ul></div></section></section><section id="lga-byron" data-screen data-label="Byron" class="page " tabindex="-1" aria-label="Byron"><section class="sec"><div class="wrap"><div class="dirhead"><h1 class="sechead">Our Network</h1><select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="lga-byron"><option value="network">Browse the region</option><option value="lga-ballina">Ballina LGA</option><option value="lga-byron" selected>Byron LGA</option><option value="lga-clarence-valley">Clarence Valley LGA</option><option value="lga-kyogle">Kyogle LGA</option><option value="lga-lismore">Lismore LGA</option><option value="lga-richmond-valley">Richmond Valley LGA</option><option value="lga-tenterfield">Tenterfield LGA</option><option value="lga-tweed">Tweed LGA</option></select></div><ul class="gsub"><li><b>Bangalow Resilience Network</b><span>Bangalow, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/p/Bangalow-Resilience-Network-61553292841772/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Broken Head Society</b><span>Broken Head, Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Brunswick Action Community Collective</b><span>Mullumbimby, Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Coorabell Community Resilience Team (CRT)</b><span>Coorabell, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.coorabellhall.net/coorabell-resilience" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Hinterland Community Resilience Team (CRT) / Federal, Eureka and Goonengerry Community Resilience Team</b><span>Federal, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/HinterlandCRT" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Main Arm Disaster Recovery Inc</b><span>Main Arm, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.madr.org.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Mullum Cares Incorporated</b><span>Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Mullumbimby &amp; District Neighbourhood Centre</b><span>Mullumbimby, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.mdnc.org.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Mullumbimby Residents Association</b><span>Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Ocean Shores Community Association</b><span>Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Our Neighbourhood Heritage Park</b><span>Mullumbimby, Byron Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Resilient Suffolk</b><span>Suffolk Park, Byron Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/groups/suffolkparkbyronresilientcommunities" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li></ul></div></section></section><section id="lga-clarence-valley" data-screen data-label="Clarence Valley" class="page " tabindex="-1" aria-label="Clarence Valley"><section class="sec"><div class="wrap"><div class="dirhead"><h1 class="sechead">Our Network</h1><select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="lga-clarence-valley"><option value="network">Browse the region</option><option value="lga-ballina">Ballina LGA</option><option value="lga-byron">Byron LGA</option><option value="lga-clarence-valley" selected>Clarence Valley LGA</option><option value="lga-kyogle">Kyogle LGA</option><option value="lga-lismore">Lismore LGA</option><option value="lga-richmond-valley">Richmond Valley LGA</option><option value="lga-tenterfield">Tenterfield LGA</option><option value="lga-tweed">Tweed LGA</option></select></div><ul class="gsub"><li><b>Billy&#x27;s Creek</b><span>Billys Creek, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span></li><li><b>Blicks Community Inc</b><span>Dundurrabin, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.blickscommunityinc.org/about-1" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Clarence Valley Wellbeing Collective</b><span>Woombah, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span></li><li><b>Gurehlgam Grafton</b><span>Grafton, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://gurehlgam.com.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Iluka Community Organisation Planning for Emergencies (ICOPE)</b><span>Iluka, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://icope.net.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Minnie Water Resilience</b><span>Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span></li><li><b>Mudyala Aboriginal Corporation</b><span>Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://mudyala.org.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Nymboida Community Groups Inc (NCGI)</b><span>Nymboida, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span></li><li><b>The New School of Arts Neighbourhood House</b><span>South Grafton, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.nsoa.org.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Woombah Residents Association (Woombah&amp;Mororo)</b><span>Woombah, Clarence Valley</span><span class="ctry">Yaegl, Gumbaynggirr &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/groups/woombahresidentspage/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li></ul></div></section></section><section id="lga-kyogle" data-screen data-label="Kyogle" class="page " tabindex="-1" aria-label="Kyogle"><section class="sec"><div class="wrap"><div class="dirhead"><h1 class="sechead">Our Network</h1><select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="lga-kyogle"><option value="network">Browse the region</option><option value="lga-ballina">Ballina LGA</option><option value="lga-byron">Byron LGA</option><option value="lga-clarence-valley">Clarence Valley LGA</option><option value="lga-kyogle" selected>Kyogle LGA</option><option value="lga-lismore">Lismore LGA</option><option value="lga-richmond-valley">Richmond Valley LGA</option><option value="lga-tenterfield">Tenterfield LGA</option><option value="lga-tweed">Tweed LGA</option></select></div><ul class="gsub"><li><b>Creative Communities Connect / Wadeville Emergency Response Team</b><span>Wadeville, Kyogle Council</span><span class="ctry">Githabul &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.creativecommunitiesconnect.org/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Kyogle Together Inc</b><span>Kyogle, Kyogle Council</span><span class="ctry">Githabul &amp; Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://kyogletogether.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li></ul></div></section></section><section id="lga-lismore" data-screen data-label="Lismore" class="page " tabindex="-1" aria-label="Lismore"><section class="sec"><div class="wrap"><div class="dirhead"><h1 class="sechead">Our Network</h1><select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="lga-lismore"><option value="network">Browse the region</option><option value="lga-ballina">Ballina LGA</option><option value="lga-byron">Byron LGA</option><option value="lga-clarence-valley">Clarence Valley LGA</option><option value="lga-kyogle">Kyogle LGA</option><option value="lga-lismore" selected>Lismore LGA</option><option value="lga-richmond-valley">Richmond Valley LGA</option><option value="lga-tenterfield">Tenterfield LGA</option><option value="lga-tweed">Tweed LGA</option></select></div><ul class="gsub"><li><b>Clunes Coronation Hall</b><span>Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.clunescoronationhall.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Clunes Old School Assoc.</b><span>Clunes, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://clunesoldschool.org/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Keerrong Hall</b><span>Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span></li><li><b>Larnook Community-led Resilience Team (CRT)</b><span>Larnook, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span></li><li><b>Minyon Resilience Network</b><span>Minyon, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.minyonresiliencenetwork.com" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Nimbin Community Care Team (CCT)</b><span>Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span></li><li><b>Nimbin Disaster Resilience Group</b><span>Nimbin, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://nnic.org.au/pub/index.php/disasters" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Nimbin Neighbourhood &amp; Information Centre</b><span>Nimbin, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://nnic.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Repentance Creek Public Hall Inc</b><span>Repentance Creek, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://repentancecreekhall.com/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Resilient Lismore Inc</b><span>Lismore, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://resilientlismore.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Rock Valley Community Resilience Team (CRT)</b><span>Rock Valley, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/rockvalleycommunitynswaustralia" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>The Channon Resilience Inc</b><span>The Channon, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://thechannonhub.org" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Whian Whian Emergency Hub</b><span>Whian Whian, Lismore City</span><span class="ctry">Widjabul Wia-bal, Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/whianwhianhallpublicpage/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li></ul></div></section></section><section id="lga-richmond-valley" data-screen data-label="Richmond Valley" class="page " tabindex="-1" aria-label="Richmond Valley"><section class="sec"><div class="wrap"><div class="dirhead"><h1 class="sechead">Our Network</h1><select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="lga-richmond-valley"><option value="network">Browse the region</option><option value="lga-ballina">Ballina LGA</option><option value="lga-byron">Byron LGA</option><option value="lga-clarence-valley">Clarence Valley LGA</option><option value="lga-kyogle">Kyogle LGA</option><option value="lga-lismore">Lismore LGA</option><option value="lga-richmond-valley" selected>Richmond Valley LGA</option><option value="lga-tenterfield">Tenterfield LGA</option><option value="lga-tweed">Tweed LGA</option></select></div><ul class="gsub"><li><b>Broadwater Community Resilience Team (CRT)</b><span>Evans Head, Richmond Valley</span><span class="ctry">Bundjalung Country</span></li><li><b>Coraki Community Resilience Team (CRT)</b><span>Evans Head, Richmond Valley</span><span class="ctry">Bundjalung Country</span></li><li><b>Evans Area Resilience Network</b><span>Evans Head, Richmond Valley</span><span class="ctry">Bundjalung Country</span></li><li><b>Mid Richmond Neighbourhood Centre (Evans Head)</b><span>Evans Head, Richmond Valley</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.mrnc.com.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Woodburn Community Resilience Team (CRT)</b><span>Evans Head, Richmond Valley</span><span class="ctry">Bundjalung Country</span></li></ul></div></section></section><section id="lga-tenterfield" data-screen data-label="Tenterfield" class="page " tabindex="-1" aria-label="Tenterfield"><section class="sec"><div class="wrap"><div class="dirhead"><h1 class="sechead">Our Network</h1><select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="lga-tenterfield"><option value="network">Browse the region</option><option value="lga-ballina">Ballina LGA</option><option value="lga-byron">Byron LGA</option><option value="lga-clarence-valley">Clarence Valley LGA</option><option value="lga-kyogle">Kyogle LGA</option><option value="lga-lismore">Lismore LGA</option><option value="lga-richmond-valley">Richmond Valley LGA</option><option value="lga-tenterfield" selected>Tenterfield LGA</option><option value="lga-tweed">Tweed LGA</option></select></div><ul class="gsub"><li><b>Tabulum Hub</b><span>Tabulam, Tenterfield Shire</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/tabulamcommunityhub" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li></ul></div></section></section><section id="lga-tweed" data-screen data-label="Tweed" class="page " tabindex="-1" aria-label="Tweed"><section class="sec"><div class="wrap"><div class="dirhead"><h1 class="sechead">Our Network</h1><select class="lgasel" aria-label="Filter the network by Local Government Area (LGA)" data-cur="lga-tweed"><option value="network">Browse the region</option><option value="lga-ballina">Ballina LGA</option><option value="lga-byron">Byron LGA</option><option value="lga-clarence-valley">Clarence Valley LGA</option><option value="lga-kyogle">Kyogle LGA</option><option value="lga-lismore">Lismore LGA</option><option value="lga-richmond-valley">Richmond Valley LGA</option><option value="lga-tenterfield">Tenterfield LGA</option><option value="lga-tweed" selected>Tweed LGA</option></select></div><ul class="gsub"><li><b>Burringbar Community Association</b><span>Burringbar, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://burringbar.wixsite.com/community/local-associations" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Burringbar Resilience Network Community Resilience Team (CRT)</b><span>Burringbar, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://burringbar.wixsite.com/community/resillence" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Byrill Creek Community Resilience Team (CRT)</b><span>Byrrill Creek, Tweed Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Chinderah and Surrounds Peoples Hub</b><span>Chinderah, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.facebook.com/chinderah.donations.hub" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Chinderah Community Resilience Team (CRT)</b><span>Chinderah, Tweed Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Fingal Head Community Resilience Team (CRT)</b><span>Fingal Head, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://fingalhead.com/index.php/category/floodcrt/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Kunghur and Surrounds Community Resilience Team (CRT)</b><span>Kunghur, Tweed Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Mount Burrell Community Resilience Neighbourhood</b><span>Uki, Tweed Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Murwillumbah Community Centre</b><span>Murwillumbah, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.mccentre.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Pottsville Beach Neighbourhood Centre</b><span>Pottsville Beach, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.pbnc.org.au/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Pumpenbil Community Resilience Team (CRT)</b><span>Tyalgum, Tweed Shire</span><span class="ctry">Bundjalung Country</span></li><li><b>Resilience Tyalgum</b><span>Tyalgum, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.tyalgum.org.au" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Resilient Uki</b><span>Uki, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://resilientuki.org/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Together Pottsville Inc</b><span>Pottsville, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://www.togetherpottsville.org/about" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li><li><b>Tumbulgum Community Association</b><span>Tumbulgum, Tweed Shire</span><span class="ctry">Bundjalung Country</span><a class="btn btn-ghost btn-sm" href="https://tumbulgum.wordpress.com/tumbulgum-community-assoc-communications/" target="_blank" rel="noopener">Visit page<span class="sr-only"> (opens in a new tab)</span></a></li></ul></div></section></section></main><footer class="site-foot"><div class="wrap">
 <div class="foot-cols"><div class="foot-top"><span class="foot-logo boxed"><img src="../assets/logo/nrcra-logo-vertical-white.svg" alt="Northern Rivers Community Resilience Alliance" class="logo logo-v" width="148" height="80"></span></div><div class="fquick"><div class="fcol"><h3 class="fb2">Quick Links</h3><ul class="flist"><li><a href="#home">Home</a></li><li><a href="#network">Our network</a></li><li><a href="#about">About us</a></li><li><a href="#journey">Our progress</a></li></ul></div><div class="fcol"><h3 class="fb2 fhide" aria-hidden="true">Quick Links</h3><ul class="flist"><li><a href="#rack">What is RACK?</a></li><li><a href="https://rack.nrcra.org.au">RACK sign in</a></li><li><a href="#privacy">Privacy policy</a></li></ul></div></div><div class="fstack"><div class="fcol"><h3 class="fb1">Get in touch</h3><ul class="flist"><li><a href="mailto:hello@nrcra.org.au">hello@nrcra.org.au</a></li></ul><ul class="flist social"><li><a class="soc" href="https://www.facebook.com/profile.php?id=61585141283356" target="_blank" rel="noopener" aria-label="Facebook (opens in a new tab)"><svg viewBox="-140 -44 600 600" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/></svg></a></li><li><a class="soc" href="https://www.linkedin.com/company/northern-rivers-community-resilience-alliance/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn (opens in a new tab)"><svg viewBox="-76 -44 600 600" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg></a></li></ul></div></div></div>

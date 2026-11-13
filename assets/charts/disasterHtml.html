@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --navy:#07293B; }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;height:100%;background:transparent}
+  body{font-family:"Nunito Sans",Arial,sans-serif;color:var(--navy)}
+  .stage{position:relative;height:100%;display:flex;flex-direction:column}
+  .title{font-weight:400;font-size:17px;line-height:1.3;margin:4px 0 0;text-align:center}
+  .title b{font-weight:900}
+  svg{display:block;width:100%;flex:1 1 auto;min-height:0}
+  text{font-family:"Nunito Sans",Arial,sans-serif;font-weight:900;fill:var(--navy)}
+  .legend{display:flex;justify-content:center;gap:22px;padding:6px 0 4px;font-weight:900;font-size:18px}
+  .legend span{display:inline-flex;align-items:center;gap:8px}
+  .legend i{width:14px;height:14px;border-radius:50%;display:inline-block}
+
+  /* grey static preview, shown in the Wix editor and while the real data loads */
+  .stage.grey .title,.stage.grey svg,.stage.grey .legend{filter:grayscale(1);opacity:.5}
+  .note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .note div{background:rgba(255,255,255,.93);border:1px solid #B9C7CD;border-radius:8px;padding:10px 14px;max-width:92%;font:600 12px/1.45 "Nunito Sans",Arial,sans-serif;text-align:center;color:var(--navy)}
+  .note p{margin:0 0 4px}.note p:last-child{margin:0}
+  .stage:not(.grey) .note,.stage.live .note{display:none}
+</style>
+</head>
+<body>
+<div class="stage grey" id="stage">
+  <p class="title" id="title"></p>
+  <svg id="chart" role="img" preserveAspectRatio="xMidYMid meet"></svg>
+  <div class="legend" id="legend" hidden></div>
+  <div class="note"><div>
+    <p>Graph content must be updated in the Wix CMS data collection named &lsquo;Our Networks Progress Master Sheet&rsquo;</p>
+    <p>Click Test or Publish the page (top right buttons in Wix Editor)</p>
+    <p>to see the graph populated</p>
+  </div></div>
+</div>
+
+<script>
+  var TEAL = "#00A79D", GREY = "#D6E2E4", NS = "http://www.w3.org/2000/svg";
+  var FIELD = "hasTheGroupBeenThroughADisasterEventTogether";   // the CMS column this chart counts
+  var stage = document.getElementById("stage");
+  var data = { yes: 43, rest: 17 };                              // grey static preview numbers
+
+  // The friendly fractions the title can use: it picks the one closest to the real share
+  var FRACTIONS = [[1,10],[1,5],[1,4],[1,3],[2,5],[1,2],[3,5],[2,3],[3,4],[4,5],[9,10]];
+  function fractionFor(share) {
+    var best = FRACTIONS[0], diff = 9;
+    FRACTIONS.forEach(function (f) {
+      var d = Math.abs(share - f[0] / f[1]);
+      if (d < diff) { diff = d; best = f; }
+    });
+    return best[0] + "/" + best[1];
+  }
+
+  function el(name, attrs) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) { e.setAttribute(k, attrs[k]); }
+    return e;
+  }
+  function pt(cx, cy, r, a) { return [cx + Math.sin(a) * r, cy - Math.cos(a) * r]; }   // a: 0 = top, clockwise
+
+  // A ring segment from angle a0 to a1 (radians, clockwise from the top)
+  function ring(cx, cy, r0, r1, a0, a1, fill) {
+    if (a1 - a0 >= Math.PI * 2 - 0.0001) {
+      return el("circle", { cx: cx, cy: cy, r: (r0 + r1) / 2, fill: "none", stroke: fill, "stroke-width": r1 - r0 });
+    }
+    var p1 = pt(cx, cy, r1, a0), p2 = pt(cx, cy, r1, a1), p3 = pt(cx, cy, r0, a1), p4 = pt(cx, cy, r0, a0);
+    var big = (a1 - a0) > Math.PI ? 1 : 0;
+    var d = "M" + p1 + " A" + r1 + "," + r1 + " 0 " + big + " 1 " + p2 +
+            " L" + p3 + " A" + r0 + "," + r0 + " 0 " + big + " 0 " + p4 + " Z";
+    return el("path", { d: d, fill: fill, stroke: "#fff", "stroke-width": 1.5 });
+  }
+
+  function draw() {
+    var svg = document.getElementById("chart");
+    var legend = document.getElementById("legend");
+    var title = document.getElementById("title");
+    svg.innerHTML = "";
+    var yes = Number(data.yes) || 0, rest = Number(data.rest) || 0, total = yes + rest;
+    if (!total) { title.textContent = ""; return; }
+    var narrow = window.innerWidth < 460;
+
+    // Title with the real share of groups, as a fraction
+    title.innerHTML = "About <b>" + fractionFor(yes / total) + "</b> of our groups have experienced disaster as a team";
+
+    // Like Flourish: the grey slice starts at the top and runs clockwise, then the teal slice
+    var aRest = (rest / total) * Math.PI * 2;
+    var slices = [
+      { n: rest, a0: 0, a1: aRest, fill: GREY },
+      { n: yes, a0: aRest, a1: Math.PI * 2, fill: TEAL }
+    ];
+
+    var cx = 320, cy = 170, R = 140, r = 72;
+    svg.setAttribute("viewBox", narrow ? "0 0 340 340" : "0 0 640 340");
+    if (narrow) { cx = 170; R = 150; r = 78; cy = 170; }
+    svg.setAttribute("aria-label", (data.labels && data.labels[FIELD] ? data.labels[FIELD] + " " : "") + yes + " groups yes, " + rest + " groups no");
+
+    slices.forEach(function (s) {
+      if (s.n > 0) { svg.appendChild(ring(cx, cy, r, R, s.a0, s.a1, s.fill)); }
+    });
+
+    if (narrow) {
+      legend.hidden = false;
+      legend.innerHTML = "<span><i style='background:" + TEAL + "'></i>" + yes + " groups</span>" +
+                         "<span><i style='background:" + GREY + "'></i>" + rest + " groups</span>";
+      return;
+    }
+    legend.hidden = true;
+
+    // Wide: labels sit beside the donut with a short leader line, as in Flourish
+    slices.forEach(function (s) {
+      if (s.n <= 0) { return; }
+      var am = (s.a0 + s.a1) / 2;
+      var p1 = pt(cx, cy, R + 4, am), p2 = pt(cx, cy, R + 26, am);
+      var right = Math.sin(am) >= 0;
+      var p3 = [p2[0] + (right ? 28 : -28), p2[1]];
+      svg.appendChild(el("polyline", { points: p1 + " " + p2 + " " + p3, fill: "none", stroke: "#9FB0B8", "stroke-width": 1.2 }));
+      var t = el("text", { x: p3[0] + (right ? 8 : -8), y: p3[1], "font-size": 26, "text-anchor": right ? "start" : "end", "dominant-baseline": "central" });
+      t.textContent = s.n + (s.n === 1 ? " group" : " groups");
+      svg.appendChild(t);
+    });
+  }
+
+  // 1. Grey static preview straight away (what the Wix editor shows)
+  draw();
+
+  // 2. Messages from the Wix page code
+  window.addEventListener("message", function (e) {
+    var m = e.data || {};
+    if (m.type === "live") { stage.classList.add("live"); }            // real page: hide the editor note
+    if (m.type === "disaster") {                                       // real numbers: replace the grey preview
+      data = m; stage.classList.remove("grey"); stage.classList.add("live"); draw();
+    }
+  });
+  window.addEventListener("resize", draw);
+  if (window.parent && window.parent !== window) {
+    window.parent.postMessage({ type: "ready" }, "*");
+  }
+  // Preview outside Wix: add ?demo=1 to see the real chart
+  if (location.search.indexOf("demo=1") > -1) { stage.classList.remove("grey"); stage.classList.add("live"); draw(); }
+</script>
+</body>
+</html>

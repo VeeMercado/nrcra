@@ -86,7 +86,7 @@ h1{{font-size:clamp(2.375rem,5vw,3.5rem);font-weight:800}}h2,h2.pagesec{{font-si
 .lede{{font-size:1.25rem}}p,td,li,table code,p code,.vnote,.kl,.vpass,.vfail,table small,.blk p,.topnav .menu a{{font-size:1rem}}
 th,.yn,.flag,.topnav .cat .car,td small,table small{{font-size:.75rem;font-weight:800}}
 .topnav .cat,.topnav a,.btn,b,.kl,.vpass,.vfail,.flag,.chip{{font-weight:800}}.topnav .cat{{font-size:1rem}}
-small,figcaption,.pill,.pill2,.pill3,.pill4,.pill5{{font-size:.75rem!important;font-weight:800}}nav a,nav span,header a{{font-weight:800}}.cs b{{font-size:1rem}}.ltcard,.ltcard *{{font-size:1rem}}.demo span[class^=lo],.demo p span{{font-weight:400}}
+small,figcaption,.pill,.pill2,.pill3,.pill4,.pill5{{font-size:.75rem!important;font-weight:800}}nav a,nav span,header a{{font-weight:800}}.cs b{{font-size:1rem}}.ltcard,.ltcard *{{font-size:1rem}}.demo span[class^=lo],.demo p span{{font-weight:400}}.do .pill,.do .pill2,.do .pill4{{font-size:1.25rem!important;font-weight:800!important;line-height:1.3}}
 small,span.rt,.mnav span,.mnav a,.topnav .menu a{{font-weight:800!important}}span.rt{{font-size:.75rem!important}}.mnav span{{font-size:1rem!important}}
 @media(max-width:760px){{table{{font-size:1rem}}}}</style></head>
 <body><nav class="topnav" aria-label="On this page"><ul><li class="dd"><button type="button" class="cat n-d" aria-expanded="false" aria-controls="m-brand">Brand Colours <span class="car" aria-hidden="true">&#9662;</span></button><ul class="menu" id="m-brand"><li><a href="#colours">Brand colours</a></li><li><a href="#text">Text colours</a></li><li><a href="#contrast">Brand colour contrast</a></li></ul></li><li class="dd"><button type="button" class="cat n-d" aria-expanded="false" aria-controls="m-dos">Do&rsquo;s and Don&rsquo;ts <span class="car" aria-hidden="true">&#9662;</span></button><ul class="menu" id="m-dos"><li><a href="#dos">Do&rsquo;s and Don&rsquo;ts</a></li><li><a href="#guidelines">Type, spacing, corners</a></li></ul></li><li class="dd"><button type="button" class="cat n-t" aria-expanded="false" aria-controls="m-teal">Teal <span class="car" aria-hidden="true">&#9662;</span></button><ul class="menu" id="m-teal"><li><a href="#teal-adjust">Teal adjustment</a></li><li><a href="#teal">Teal contrast</a></li><li><a href="#lightteal">Light teal and pale teal</a></li><li><a href="#teal-orange">Does teal work with orange?</a></li><li><a href="#teal-buttons">Teal buttons</a></li></ul></li><li class="dd"><button type="button" class="cat n-r" aria-expanded="false" aria-controls="m-orange">Orange <span class="car" aria-hidden="true">&#9662;</span></button><ul class="menu" id="m-orange"><li><a href="#red">Orange contrast</a></li><li><a href="#teal-orange">Does teal work with orange?</a></li></ul></li><li class="dd"><button type="button" class="cat n-y" aria-expanded="false" aria-controls="m-yellow">Yellow <span class="car" aria-hidden="true">&#9662;</span></button><ul class="menu" id="m-yellow"><li><a href="#yellow">Yellow contrast</a></li><li><a href="#yellow-buttons">Yellow buttons</a></li></ul></li><li class="back"><a href="../">&larr; <span class="bl">Back to </span>prototypes</a></li></ul></nav><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="f-grey" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0"/></filter><filter id="f-prot" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.567 0.433 0 0 0 0.558 0.442 0 0 0 0 0.242 0.758 0 0 0 0 0 1 0"/></filter><filter id="f-deut" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0 0.7 0.3 0 0 0 0 0.3 0.7 0 0 0 0 0 1 0"/></filter><filter id="f-trit" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0.95 0.05 0 0 0 0 0.433 0.567 0 0 0 0.475 0.525 0 0 0 0 0 1 0"/></filter></defs></svg><main><span class="flag">MOCKUP &amp; PROTOTYPE ONLY &middot; by <a href="https://veemercado.com">veemercado.com</a></span>
@@ -106,7 +106,7 @@ small,span.rt,.mnav span,.mnav a,.topnav .menu a{{font-weight:800!important}}spa
 <li><b>Adjusted teal:</b> because brand teal fails with white text, the prototypes use a slightly darker teal, <code>#00857C</code> (white text {_ratio(WHITE, "#00857c"):.2f}:1), for buttons and any area with white text. Brand teal stays for borders, dots and text on navy. See <a href="#teal-adjust">Recommended colour adjustments</a>.</li></ul></section>
 <section class="card2" id="dos"><h2>Don&rsquo;t and do</h2><div class="demo"><div class="dont"><h3>Don&rsquo;t: large blocks of text</h3><p class="big by">{para}</p><p class="big br">{para}</p><p class="big bt">{para}</p></div>
 <div class="do tints"><h3>Do: large blocks of text</h3><p class="tint t-y"><span>{para}</span><small>Navy on light yellow: {_ratio(NAVY, "#ffeaaa"):.2f}:1</small></p><p class="tint t-r"><span>{para}</span><small>Navy on light red: {_ratio(NAVY, "#fbd6c9"):.2f}:1</small></p><p class="tint t-t"><span>{para}</span><small>Navy on light teal: {_ratio(NAVY, "#beddda"):.2f}:1</small></p><p class="vnote">Lighter tint of the brand colour as the background, navy text, and the solid brand colour as a top or bottom border.</p></div>
-<div class="do ex"><h3>Do: small accents</h3><p class="opt"><small>Option 1</small><span class="hl" style="font-weight:900;font-size:1.5rem">Navy title with a yellow highlight</span></p><p class="opt"><small>Option 2</small><span class="hl hlt" style="font-weight:900;font-size:1.5rem">Navy title with a teal highlight</span></p><p class="opt"><small>Option 3</small><span class="hl hlr" style="font-weight:900;font-size:1.5rem">Navy title with a red highlight</span></p><p><a class="btn btn-primary" href="#">Yellow button, navy text</a></p><p><span class="pill">Red pill, white bold large text</span></p><p><span class="pill2">Navy background, yellow text</span></p><p><span class="pill4">Darker teal background, white text</span><small class="vnote" style="display:block">Darker teal #00857C, white text {_ratio("#ffffff", "#00857c"):.2f}:1</small></p><div class="bar" aria-hidden="true"></div><p style="margin:0">Body copy stays navy on white or on a light tint. Red and yellow stay as the accent.</p></div>
+<div class="do ex"><h3>Do: small accents</h3><p><a class="btn btn-primary" href="#">Yellow button, navy text</a></p><p><span class="pill">Red pill, white bold large text</span></p><p><span class="pill2">Navy background, yellow text</span></p><p><span class="pill4">Darker teal background, white text</span><small class="vnote" style="display:block">Darker teal #00857C, white text {_ratio("#ffffff", "#00857c"):.2f}:1</small></p><div class="bar" aria-hidden="true"></div><p style="margin:0">Body copy stays navy on white or on a light tint. Red and yellow stay as the accent.</p></div>
 <div class="do lights"><h3>Do: large blocks of text on a light background</h3><p class="lt l-w"><span>{para}</span><small>Navy on white <code>#FFFFFF</code>: {_ratio(NAVY, "#ffffff"):.2f}:1</small></p><p class="lt l-g"><span>{para}</span><small>Navy on light grey <code>#F3F6F7</code>: {_ratio(NAVY, "#f3f6f7"):.2f}:1</small></p><p class="vnote">The white and light grey used for the page and cards in Prototype 1. Navy body text, and the brand colours only as small accents.</p></div></div></section>
 {text_colours()}
 {button_sections()}
@@ -259,12 +259,12 @@ def guidelines():
         ("Footer base line", "11 (0.6875rem)", "11 (0.6875rem)", "400 (Back to Top 800)", "1.6", "normal", "fixed", "The copyright and Privacy Policy line and the Back to Top button at the very bottom of the footer. The smallest text on the site, the steering committee names under their logos, the country names on the Network cards, and the text of the small buttons (Back to top, Visit page)."),
     ]
     pad_rows = [
-        ("Section (band)", "0 top, 60px bottom (96px on Network and Home partners, 130px on About and the pages above the footer)", "Same", "Space below a band is its bottom padding. Content sits on the 980px wide column."),
-        ("Content card (cards, chart cards, tiles)", "26px top and bottom, 20px left and right", "Same", "28px corners. About story cards 18px sides, 24px bottom."),
-        ("Home header text card", "60px", "31px top, 40px bottom", "Matches the section gap"),
-        ("Square card (steering committee)", "20px", "20px", "16px corners"),
-        ("Button", "8px top and bottom, 17.6px left and right", "Same", "12px corners, 16px text"),
-        ("Pill tag above titles", "3.2px top and bottom, 12.8px right, 10.4px left", "Same", "28px high, fully round, 12px uppercase text"),
+        ("Section (band)", "40px top and bottom", "Same", "Two bands that follow each other are 80px apart, as set in Between sections. Content sits on the 980px wide column."),
+        ("Content card (cards, chart cards, tiles)", "24px on every side", "Same", "24px corners. Small cards inside a grid (the Network cards) use 16px on every side, with 16px corners."),
+        ("Home header text card", "40px top and bottom, 26px left and right", "31px top, 40px bottom", "Matches the card padding steps"),
+        ("Square card (steering committee)", "16px", "16px", "16px corners"),
+        ("Button", "8px top and bottom, 17.6px left and right", "Same", "40px high, 10px corners, 16px text"),
+        ("Pill tag above titles", "6px top and bottom, 12.8px left and right", "Same", "30px high, fully round, 12px uppercase text"),
         ("Funder chip (Thanks to our funders)", "0 top and bottom, about 16px left and right", "Same", "40px high (36px at 1100px wide and below), fully round, white fill, Light teal #BEDDDA border, Pale teal #F3F9F8 on hover"),
         ("Header menu bar", "0 (height set by the 50px logo and the buttons)", "Same", "Sticks to the top"),
         ("Footer", "52px top, 32px bottom", "Same", "Teal band"),
@@ -285,22 +285,19 @@ def guidelines():
         ("Numbers and dates", "Dates written 28 November 2026. Percentages with the % sign and no space: 75%.", "Australian English"),
     ]
     corner_rows = [
-        ("Buttons, menu items, drop-downs, social icon buttons, the Aboriginal flag in the footer", "12px", "Every clickable control is a rounded square. The menu highlight covers the label and its arrow. The footer flag (60 x 40) uses the same 12px."),
-        ("Hero cards, cards, chart cards, tiles, header photos, the map and the Draft policy box", "28px", "One shared radius for every large surface, on desktop, tablet and phone"),
-        ("Pictures inside a padded card, steering committee tiles, dropdown menus", "16px", "Smaller surfaces nested inside a card or on the page"),
-        ("Funder logo chips under the timeline entries", "20px", "Small white boxes, 40px high (36px at 1100px wide and below), one logo each"),
-        ("Pills", "Fully round (99px)", "Only the tag above a page title, the Draft tags and the colour bars. Never for buttons."),
+        ("Buttons, menu items, drop-downs, social icon buttons, the Aboriginal flag in the footer", "10px", "Every clickable control is a rounded square (the live Wix buttons and the Network drop-down use 10px). The menu highlight covers the label and its arrow."),
+        ("Hero cards, content cards, chart cards, tiles, header photos, the map", "24px", "One radius for every large surface, on desktop, tablet and phone. The live Wix page uses 24px almost everywhere (the Home cards that were 28px move to 24px)."),
+        ("Pictures and small cards sitting inside or beside a card: story photos, Network cards, steering committee tiles, the photos beside text on About, Progress and RACK", "16px", "The only smaller surface radius"),
+        ("Pills", "Fully round (100px)", "The tag above a page title, funder chips, the Draft tags and the colour bars. Never for buttons."),
         ("Round photos and initial circles", "50%", "See Circle photo sizes"),
         ("Chart bars and squares", "4px", "Inside charts only. The chart's View score and View rating button group has 6px corners."),
     ]
     space_rows = [
         ("Site content width", "980px, centred (Wix Classic maximum)", "The menu, every page and the footer sit inside one 980px column. On screens narrower than 1020px the column keeps a 20px gutter each side. Coloured bands and backgrounds run the full width of the screen behind it. Full width sections: Our timeline (About), Thanks to our funders (Home), the team (About) and Our stories (Network). Page headers and the five RACK cards stay in the 980px column. The full width sections' content stretches across the screen with a gutter of 20 to 56px each side."),
-        ("Between sections", "60px", "Top and bottom of every band, on every page. Same as the Home header text card padding."),
-        ("Large bands", "96px", "White bands on About and Network, and the space under Our Focus on Home"),
-        ("Partners band on Home", "96px above, 115px below", "The Thanks to our funders band"),
-        ("Large spacing", "130px", "The big gap used around the green divider lines on About, between sections on About, above the footer on About, Network, RACK, Progress and the group pages, and on Progress above each section title and between the header and the white band. Use this whenever a large space is needed."),
-        ("Gap between cards, tiles and buttons", "16px", "Always 16px: grids and lists of cards, tiles and rows of buttons, and the chart cards on Progress"),
-        ("Gap between text and picture", "48px", "Two column rows"),
+        ("Between sections", "80px", "The one gap between sections on every page: from the bottom of one block to the title of the next, and from the top of a coloured band to its title. Replaces the old 60, 96, 115 and 130px gaps. The live Wix pages are 80px (81 and 82 measured)."),
+        ("Between a title and its content, and between blocks inside a section", "40px", "Section title to the cards or text below it, and one row of cards to the next row, for example the stacked chart cards on Progress. The live Wix pages are 40px (41 measured)."),
+        ("Gap between cards, tiles and buttons", "16px", "Always 16px: grids and lists of cards, tiles and rows of buttons, and the chart cards on Progress. On Wix the Home and Progress cards are 16px apart (the dense Network card grid is 13px and the story cards are 15px, so use 16px for both)."),
+        ("Gap between a text column and a picture", "16px", "Two column rows. Wix hero text cards and their picture sit 16px apart."),
     ]
     circle_rows = [
         ("Mini", "56", "56", "Initial circle for a committee group or a number badge when there is no logo or photo"),
@@ -320,26 +317,26 @@ def guidelines():
         ("Privacy Policy", "none", "none", "Text only"),
     ]
     photo_rows = header_photo_rows + [
-        ("Story photos (Network)", "331 x 248", "312 x 234", "Shape 4 : 3, 16px corners, inside a 28px card"),
+        ("Story photos (Network)", "331 x 248", "312 x 234", "Shape 4 : 3, 16px corners, inside a 24px card"),
         ("Steering committee tiles (About)", "160 x 160", "111 x 111", "16px corners, logo 50px high"),
         ("Acknowledgement flag (footer)", "60 x 40", "60 x 40", "A picture, not an icon"),
     ]
     icon_rows = [
         ("Small", "16", "16", "Menu arrows, the Draft flag in each Draft tag, the yellow ring in the Network note"),
         ("Default", "22", "22", "Menu (hamburger) icon on phones. The button shows the icon only, with no word Menu, in a 48px square teal button."),
-        ("Large", "44", "44", "The tap area for icon buttons: social icon buttons in the footer (12px corners, white button, navy icon 28px) and the menu arrow button on phones"),
+        ("Large", "44", "44", "The tap area for icon buttons: social icon buttons in the footer (10px corners, white button, navy icon 28px) and the menu arrow button on phones"),
         ("Giant", "92", "92", "Watch (play) button on the Home video and on the Network story photos"),
     ]
     circle_demo = "".join(f'<div class="cs"><span style="border-radius:50%;width:{round(d*.4)}px;height:{round(d*.4)}px"></span><b>{n}</b><small>{d}px</small></div>' for n, d in [("Mini", 56), ("Small", 160), ("Medium", 190), ("Extra large", 370)])
     logo_demo = "".join(f'<div class="cs"><img src="../assets/funders/nsw.png" alt="" style="height:{h}px;width:auto"><b>{n}</b><small>{h}px</small></div>' for n, h in [("Small", 20), ("Medium", 50), ("Large", 84)])
-    swatches = "".join(f'<div class="cs"><span style="border-radius:{r}"></span><b>{n}</b></div>' for n, r in [("12px", "12px"), ("16px", "16px"), ("20px", "20px"), ("28px", "28px"), ("Pill", "99px")])
+    swatches = "".join(f'<div class="cs"><span style="border-radius:{r}"></span><b>{n}</b></div>' for n, r in [("10px", "10px"), ("16px", "16px"), ("24px", "24px"), ("Pill", "99px")])
     return f'''<section class="blk" id="guidelines"><h2>Type, spacing and corner rules</h2>
-<p class="vnote">Use these values when setting the site up in Wix. Sizes are in px with the rem value in brackets. Desktop is 1000px and wider; phone is 390px. Only two font weights are used: 400 and 800. Checked against the NRCRA prototype on 4 November 2026, at 1280px wide and 390px wide.</p>
+<p class="vnote">Use these values when setting the site up in Wix. Sizes are in px with the rem value in brackets. Desktop is 1000px and wider; phone is 390px. Only two font weights are used: 400 and 800. Spacing and corner values were read from the live Wix site (veemmercado.wixsite.com/nrcra) on 12 November 2026, at 1280px wide, and reduced to a short list: corners 10, 16 and 24px (plus pills and circles), gaps 16, 40 and 80px, card padding 24px.</p>
 <h2 id="gl-text" style="margin-top:30px">1. Text</h2>
 <h3 id="gl-type">Title and text sizes</h3>{_gl_table(["Style", "Desktop (px)", "Phone (px)", "Weight", "Line spacing", "Letter spacing", "Fluid rule", "Use"], type_rows)}
 <h3 id="gl-special" style="margin-top:30px">Line spacing, letter spacing and special characters</h3>{_gl_table(["Rule", "Value", "Notes"], special_rows)}
 <h2 id="gl-visuals" style="margin-top:44px">2. Visuals</h2>
-<h3 id="gl-photos">Photos</h3><p class="vnote">There are only two header photo sizes. Header photos have 28px corners, sit beside the page title on desktop, and go full width under the title on phones.</p>{_gl_table(["Picture", "Desktop (px)", "Phone (px)", "Notes"], photo_rows)}
+<h3 id="gl-photos">Photos</h3><p class="vnote">There are only two header photo sizes. Header photos have 24px corners, sit beside the page title on desktop, and go full width under the title on phones.</p>{_gl_table(["Picture", "Desktop (px)", "Phone (px)", "Notes"], photo_rows)}
 <h3 id="gl-circles" style="margin-top:30px">Circle photos</h3>
 <p class="vnote">Round photos and initial circles use one of four named sizes. The diameter is the same on both axes, the photo is cropped to fill the circle (centre crop unless a focal point is set), and there is no border. Pick the size by name; do not invent in-between sizes.</p>
 {_gl_table(["Size", "Desktop (px)", "Phone (px)", "Used for"], circle_rows)}<p class="vnote">Shown at 40% of real size.</p><div class="csrow" style="align-items:flex-end">{circle_demo}</div>
