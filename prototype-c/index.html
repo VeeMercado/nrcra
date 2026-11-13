@@ -898,15 +898,17 @@ main a.btn-tertiary:hover{background:#00857c;color:#fff}
 @media(min-width:1200px){
 .tb :is(#privacy,#rack-terms) .pphead{width:901px;margin-left:41px;margin-right:0}
 .tb :is(#privacy,#rack-terms) .pphead .lede{max-width:none}
-.tb :is(#privacy,#rack-terms) .pplist2{width:678px;margin-left:146px;margin-right:0;padding-left:0;padding-right:0}
+.tb :is(#privacy,#rack-terms) .pplist2{width:774px;margin-left:98px;margin-right:0;padding:16px 48px}
 .tb :is(#privacy,#rack-terms) .ppitem{padding-left:0;padding-right:0}
 .tb :is(#privacy,#rack-terms) .ppitem p,.tb :is(#privacy,#rack-terms) .ppitem .pplist{max-width:none}
 .tb :is(#privacy,#rack-terms) .ppitem .pplist{padding-left:24px}
 }
 @media(max-width:740px){
 .tb :is(#privacy,#rack-terms) .pphead h1{font-size:1.75rem}
-.tb :is(#privacy,#rack-terms) .pplist2{padding-left:0;padding-right:0}
+.tb :is(#privacy,#rack-terms) .pplist2{padding:8px 24px}
 }
+/* Privacy and RACK Terms: room inside the white box (tablet) */
+@media(min-width:741px) and (max-width:1199px){.tb :is(#privacy,#rack-terms) .pplist2{padding:16px 48px}}
 /* every page ends with the same 128px above the footer */
 .tb .page>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #about>.sec:last-child{padding-bottom:var(--space-large)!important}.tb #journey>.sec:last-child{padding-bottom:var(--space-large)!important}
 /* About: same 128px rhythm as Network */
